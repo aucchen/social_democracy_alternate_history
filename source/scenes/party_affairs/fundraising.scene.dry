@@ -1,0 +1,37 @@
+title: Fundraising
+new-page: true
+view-if: fundraising_timer <= 0
+on-arrival: fundraising_timer = 6; month_actions += 1
+is-card: true
+card-image: img/poster_2.jpg
+tags: party_affairs
+
+= Fundraising
+
+For better or for worse, the party cannot exist without money.
+
+- @maintain: Maintain our current dues.
+- @reduce: Reduce dues.
+- @increase: Increase dues.
+
+@maintain
+subtitle: [+ dues +] resources gained.
+on-arrival: resources += dues;
+
+We maintain our current dues.
+
+@reduce
+subtitle: [+ dues - 1 +] resources gained.
+choose-if: dues > 1
+on-arrival: dues -= 1; resources += dues; left_dissent -= 5; center_dissent -= 5; reformist_dissent -= 5; labor_dissent -= 5
+
+Our current members appreciate this, but no one decides to join a party because of the low dues.
+
+@increase
+subtitle: [+ dues + 1 +] resources gained. [? if unemployed >= 15 : Given the present economic situation, this may be painful. ?]
+on-arrival: dues += 1; resources += dues; workers_spd -= 3; unemployed_spd -= 3; workers_spd -= 3 if unemployed >= 15; unemployed_spd -= 5 if unemployed >= 15;
+
+Our members grumble at this, and some of the less committed members leave. But now, we have access to additional resources. 
+
+[? if unemployed >= 15 : Because of the presently high unemployment, our members are feeling the extra burden hard. ?]
+

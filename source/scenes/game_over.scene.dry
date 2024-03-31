@@ -1,0 +1,17 @@
+title: Game Over
+
+= End
+
+Game over!
+
+# TODO: achievements
+
+@hitler_wins
+view-if: chancellor = "Hitler"
+
+@civil_war_lost
+view-if: civil_war_seen = 1
+
+
+@end_game
+game-over: true

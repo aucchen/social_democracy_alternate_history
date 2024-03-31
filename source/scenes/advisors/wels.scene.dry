@@ -1,0 +1,34 @@
+title: Otto Wels
+is-pinned-card: true
+tags: advisor, centrist
+card-image: img/portraits/WelsOtto.jpg
+view-if: wels_advisor = 1
+new-page: true
+
+= Otto Wels
+
+Wels is the long-time chairman of the SPD. He is a gifted organizer and a member of the centrist faction.
+
+- @clear_agenda
+- @emergency_fundraising
+- @root: Return to main
+
+@clear_agenda
+title: Clear the agenda
+subtitle: Removes all cards from the hand.
+view-if: advisor_action_timer = 0
+on-arrival: {!
+Q.advisor_action_timer = 5;
+window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+!}
+
+All items from our agenda have been cleared.
+
+
+@emergency_fundraising
+title: Emergency Fundraising
+subtitle: An emergency infusion of resources.
+view-if: advisor_action_timer = 0
+on-arrival: advisor_action_timer = 5; resources += 2
+
+We have gained +2 resources.

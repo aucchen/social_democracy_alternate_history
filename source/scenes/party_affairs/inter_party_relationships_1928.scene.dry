@@ -1,0 +1,85 @@
+title: Inter-Party Relationships
+new-page: true
+view-if: year < 1932 and inter_party_relationships_timer <= 0
+tags: party_affairs
+is-card: true
+on-arrival: month_actions += 1; inter_party_relationships_timer = 6;
+card-image: img/weimar_coalition_2.jpg
+max-visits: 5
+
+= Inter-Party Relationships
+
+The SPD cannot govern by itself yet. Because we do not have an electoral majority, we need the support of other parties. Recently, our governments have consisted of the Weimar Coalition of the SPD, Center, and Democratic parties. We can reach out and build additional connections with these parties, or perhaps we can stand alone.
+
+- @liberals: Strengthen our bonds with the left-liberal German Democratic Party and conservative-liberal German People's Party.
+- @center: Strengthen our bonds with the Catholic Center Party.
+- @kpd: Work towards repairing relationships with the Communist Party.
+- @spd_alone: The SPD can stand alone for now.
+
+
+@kpd
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1;
+go-to: kpd_blutmai if blutmai = 1; kpd_1 if blutmai = 0
+
+@kpd_1
+on-arrival: kpd_relation += 8*(1 - dissent);
+
+The communists are suspicious of our overtures, especially the Stalinist leadership, who persist in calling us "social fascists". However, connections are made at the grassroots and local levels.
+
+@kpd_blutmai
+on-arrival: kpd_relation += 3*(1 - dissent)
+
+After the events of Blütmai, reconciling with the Communists is difficult, if not impossible. Nevertheless, we must try.
+
+@center
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1;
+go-to: center_op if z_in_government = 1 and spd_in_government = 0 and chancellor != "Brüning"; center_coalition if spd_in_government = 1 and z_in_government = 1; center_bruning if chancellor = "Brüning"
+
+@center_op
+on-arrival: z_relation += 5*(1 - dissent)
+
+We are currently in opposition to the Center-led government, but that does not preclude the general building of feelings of good will.
+
+@center_coalition
+on-arrival: z_relation += 10*(1 - dissent)
+
+We are currently coalition partners with them, so improving relations comes naturally.
+
+@center_bruning
+on-arrival: z_relation += 5*(1 - dissent)
+
+The Brüning semi-autocratic regime makes building friendly relations difficult, but not impossible.
+
+@liberals
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1; ddp_relation += 5*(1 - dissent)
+go-to: dvp_stresemann if stresemann_dead = 0; dvp_loss if stresemann_dead = 1 and year <= 1930; dvp_moribound if year > 1930
+
+The DDP has been one of our closest allies through the course of the Republic.
+
+@dvp_stresemann
+on-arrival: dvp_relation += 8*(1 - dissent)
+
+Gustav Stresemann, the leader of the DVP is the best foreign policy leaders of the republic, and while he has previously expressed monarchist tendencies, he has been friendly towards us.
+
+@dvp_loss
+on-arrival: dvp_relation += 3*(1 - dissent)
+
+With the death of Gustav Stresemann, the DVP is much less likely to be accommodating of us. In addition, the liberal parties are electorally in decline, so perhaps our efforts are best spent elsewhere.
+
+@dvp_moribound
+on-arrival: dvp_relation += 3*(1 - dissent)
+
+The liberal parties (both the DDP and DVP) are electorally moribund, so perhaps our efforts are best spent elsewhere.
+
+@spd_alone
+
+Whether it is because we *cannot* or *will not*, we do not make ties with other parties at this moment.

@@ -1,0 +1,34 @@
+title: Hjalmar Schacht against Hilferding
+new-page: true
+view-if: year = 1929 and month >= 11 and spd_in_government = 1 and finance_minister = "Hilferding"
+tags: event
+max-visits: 1
+card-image: img/portraits/SchachtHjalmar.jpg
+
+= Schacht against Hilferding
+
+Reichsbank president Hjalmar Schacht has criticized Finance Minister Hilferding of the SPD for his budget, which he claims is unbalanced and contains too much social welfare and not enough tax cuts for top earners and businesses. More importantly, he is refusing to release loans necessary for the functioning of the government unless Hilferding either massively changes his budget or resigns.
+
+Of course, this criticism is unfounded, but the bourgeois media does not care.
+
+- @expose_him: Expose his reactionary dealings!
+- @work_with: Work with him to shape the budget.
+- @hilferding_resign: Hilferding must resign.
+
+@expose_him
+
+TODO
+
+# TODO: this requires funding interior ministry to study fascists.
+
+@work_with
+
+After a second budget proposal, Schacht still considers Hilferding's budget to be unacceptable, despite more regressive taxes and expenditure cuts.
+
+- @hilferding_resign: Hilferding must resign.
+
+
+@hilferding_resign
+on-arrival: finance_minister_party = "DVP"; finance_minister = "Moldenhauer"
+
+Hilferding resigns.

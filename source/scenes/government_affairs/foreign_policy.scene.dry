@@ -1,0 +1,22 @@
+title: Foreign Policy
+new-page: true
+is-card: true
+tags: govt_affairs
+on-arrival: month_actions += 1; foreign_policy_timer = 6
+view-if: spd_in_government = 1 and foreign_minister_party = "SPD" and  foreign_policy_timer = 0
+card-image: img/portraits/BreitscheidRudolf.jpg
+
+= Foreign Policy
+
+What should our foreign policy priority be?
+
+@improve_west
+title: Improving our relations with France and Britain.
+
+@improve_soviet
+title: Improving our relations with the Soviet Union.
+
+@negotiate
+title: Negotiating regarding our remaining obligations from the Great War - the reparations issue, and the occupation of the Rhineland.
+
+# Young plan...

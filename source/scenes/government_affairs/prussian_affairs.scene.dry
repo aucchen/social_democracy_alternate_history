@@ -1,0 +1,77 @@
+title: The Prussian Bulwark
+new-page: true
+is-card: true
+view-if: spd_prussia = 1 and prussian_affairs_timer <= 0
+on-arrival: prussian_affairs_timer = 6; month_actions += 1
+tags: govt_affairs
+card-image: img/braun.jpg
+
+= Prussian Affairs
+
+Prussia, by far the largest and most important state in Germany, is governed by our party, in a coalition with the Center and Democratic parties. It is the most stable and democratic state government in Germany, led by the able Otto Braun.
+
+We can enact policies in Prussia.
+
+- @police_loyalty: Bolster the loyalty of the police.
+- @police_strength: Recruit additional police.
+- @bureaucracy: Purge the bureaucracy of reactionary elements.
+- @ban_sa: Ban the SA, the Nazi paramilitary group.
+- @unban_sa: Reverse the SA ban.
+- @ban_rfb: Ban the RFB, the Communist paramilitary.
+- @unban_rfb: Reverse the RFB ban.
+- @ban_sh: Ban the Stahlhelm, the Nationalist paramilitary.
+- @unban_sh: Reverse the Stahlhelm ban.
+- @root: No new policies are needed.
+
+@police_loyalty
+view-if: prussian_police_loyalty < 1
+on-arrival: prussian_police_loyalty += 0.1
+
+# increase police loyalty
+The police have historically been overrun with reactionaries, and we are trying to change this, little by little. We have improved the training and recruitment process to select for a broader demographic than the traditional conservatives, and to put a tighter leash on their political activity. In addition, we set up committees to investigate the ranks of the police and remove those with far-right sympathies. It is a slow and arduous work.
+
+@police_strength
+on-arrival: prussian_police_strength += 15
+
+We have increased the size of the Prussian police.
+
+@bureaucracy
+on-arrival: prussian_police_loyalty += 0.05; nationalism -= 5; pacifism += 1; democratization += 1
+
+The bureaucracy is deeply reactionary, and many abuse their power to favor the political right. By removing the pro-monarchy and pro-dictatorship elements, we can democratize it. Some of our opponents claim that we are infringing on individual freedoms, but perhaps the security of the republic requires it.
+
+@ban_sa
+view-if: nazi_urgency >= 3 and sa_banned = 0
+on-arrival: sa_strength -= 50; sa_strength -= 100 if prussian_police_loyalty >= 0.75; sa_banned = 1; dvp_relation -= 3; prussian_police_loyalty -= 0.05
+
+As it turns out, the Nazi SA has many allies in the police and bureaucracy. Our relationship with the police weakens, and the SA can still organize illegally, right under the police's noses. [? if prussian_police_loyalty >= 0.7 : Nevertheless, the SA is substantially weakend by our ban. ?] 
+
+@unban_sa
+view-if: sa_banned = 1
+on-arrival: sa_banned = 0; sa_strength += 100
+
+The SA is no longer banned. They immediately go on a recruiting spree.
+
+@ban_sh
+on-arrival: sh_strength -= 100; sh_banned = 1; dvp_relation -= 5; prussian_police_loyalty -= 0.1; coalition_dissent += 1 if spd_in_government = 1 and in_grand_coalition = 1 and president = "Hindenburg";
+
+Banning the Stahlhelm weakens our relationship with President Hindenburg, as well as the politlcal right and the police. [? if spd_in_government = 1 and in_grand_coalition = 1 : It also weakens our coalition due to the influence of Hindenburg on the right wing of our coalition. ?]
+
+@unban_sh
+view-if: sh_banned = 1
+on-arrival: sh_banned = 0; sh_strength += 50
+
+The Stahlhelm is no longer banned.
+
+
+@ban_rfb
+view-if: communist_coalition <= 3 and rfb_banned = 0
+on-arrival: kpd_relation -= 15; rfb_strength -= 50; rfb_banned = 1; communist_coalition -= 1; z_relation += 5; dvp_relation += 5
+
+The ban is enthusiastically carried out by the police, perhaps too enthusiastically. The Communists take this as one more reason why the Socialists are traitors to the left. However, the moderate and center-right parties approve.
+
+@unban_rfb
+view-if: rfb_banned = 1
+on-arrival: rfb_banned = 0; rfb_strength += 50; police_loyalty -= 0.05
+
+The Communist RFB is no longer banned.

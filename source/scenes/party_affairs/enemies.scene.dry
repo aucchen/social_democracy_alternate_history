@@ -1,0 +1,45 @@
+title: Choosing Our Enemies
+new-page: true
+view-if: year <= 1930 and enemies_timer <= 0
+on-arrival: month_actions += 1; enemies_timer = 6
+max-visits: 2
+is-card: true
+card-image: img/poster_1.png
+tags: party_affairs
+
+= Choosing our enemies
+
+In our media and campaign materials, who should we consider as our main opponents?
+
+[? if enemies != 0 : Previously, we had considered the [+ enemies +] as our prior enemies. Is a change of direction necessary? ?]
+
+- @anti_dem: The anti-democratic parties of the far right and left, the KPD, NSDAP, and DNVP.
+- @far_right: The far right - the NSDAP and DNVP.
+- @nsdap: The NSDAP alone.
+- @kpd: The KPD.
+- @bourgeois: The bourgeois parties - the Center and DVP.
+
+@anti_dem
+on-arrival: enemies = "anti-democratic parties"; center_strength += 0.05; reformist_strength += 0.04; left_dissent += 0.04
+
+Attacking the far right and left is popular among all but the left wing of our party, who would prefer to be fighting the bourgeois parties.
+
+@far_right
+on-arrival: enemies = "far right"; left_strength += 0.03; left_dissent -= 0.03
+
+Attacking the far right is popular among the entire party, although the left considers the bourgeois parties to be just as dangerous, while the right is critical of our lack of response to the KPD. Our bourgeois coalition partners are also skeptical of our lack of commitment to anti-communism.
+
+@nsdap
+on-arrival: enemies = "NSDAP"; neorevisionist_strength += 0.03
+
+The NSDAP is a tiny party right now, with more bark than bite. Many in our party are questioning our choices.
+
+@kpd
+on-arrival: enemies = "KPD"; reformist_strength += 0.05; left_dissent += 0.05; reformist_dissent -= 0.05
+
+Attacking the KPD is supported by all but the most left-wing socialists. However, If we are to reconcile with the KPD, this may not be the best choice.
+
+@bourgeois
+on-arrival: enemies = "bourgeois parties"; left_strength += 0.05; left_dissent -= 0.05;
+
+Our anti-bourgeois rhetoric is popular among the left, but may make it harder to build the coalitions that are necessary for government in the future.

@@ -1,0 +1,19 @@
+title: Pinned Cards
+
+@pc1
+title: Pinned Card 1
+subtitle: Description of Pinned Card 1
+is-pinned-card: true
+new-page: true
+tags: pinnedCard
+
+(Pinned Card 1 - something happens here)
+
+@pc2
+title: Pinned Card 2
+subtitle: Description of Pinned Card 2
+is-pinned-card: true
+new-page: true
+tags: pinnedCard
+
+(Pinned Card 2 - something happens here)

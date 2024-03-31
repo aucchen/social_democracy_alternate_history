@@ -1,0 +1,9 @@
+title: Theodor Leipart
+is-pinned-card: true
+tags: advisor, labor
+card-image: img/portraits/LeipartTheodor.jpg
+view-if: leipart_advisor = 1
+new-page: true 
+
+= Theodor Leipart
+

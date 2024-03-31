@@ -1,0 +1,21 @@
+title: Coup in Prussia
+subtitle: The Chancellor attempts to overthrow the Prussian government.
+view-if: (chancellor = "Papen" or chancellor = "Schleicher") and year >= 1932 and month >= 8 and spd_r + z_r + ddp_r + dvp_r < 48 and emergency_rule = 1 and sa_banned = 0
+new-page: true
+tags: event
+
+= Coup in Prussia
+
+A crisis! Chancellor [+ chancellor +] has ordered the dismissal of the Prussian government in a procedure known as the *Reichsexecution*. His argument is that the Prussian state government is unable to maintain order due to the battles on the streets between the SA and other paramilitaries. Nevermind the fact that his administration legalized the SA in the first place.
+
+The legality of the action is questionable. This is the last demo
+
+
+@defend
+title: Fight against the overthrow attempt!
+subtitle: Labor will call a general strike. The Reichsbanner and the loyal elements of the Prussian police will resist the coup.
+choose-if: radicalization >= 3 and rb_strength*rb_militancy >= 200
+
+The Reichswehr and Stahlhelm are already surrounding the cities. This will be civil war. We do realize that, correct?
+
+- @civil_war: Civil war it is.

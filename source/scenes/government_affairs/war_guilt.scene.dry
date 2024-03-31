@@ -1,0 +1,8 @@
+title: War Guilt Inquiry
+new-page: true
+is-card: true
+tags: govt_affairs
+on-arrival: war_guilt_timer = 6
+view-if: spd_in_government = 1 and war_guilt_timer = 0
+card-image: img/reichstag_1.jpg
+

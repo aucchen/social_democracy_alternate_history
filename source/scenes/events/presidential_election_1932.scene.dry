@@ -1,0 +1,76 @@
+title: Presidential Election
+subtitle: Hindenburg runs for re-election...
+view-if: year = 1932 and month = 4
+frequency: 1000
+max-visits: 1
+new-page: true
+tags: event
+
+The presidential election is coming up soon. [? if spd_in_government = 0 : While the position of Chancellor is typically more important, recent governments have depended on the president's emergency decree powers, making the office vital. ?] The Nazis will run Hitler, while the KPD will run Thälmann. A victory for Hitler would mean the end of parliamentary democracy, and the beginning of an era of unspeakable horrors.
+
+Many are calling for us to support the incumbent Hindenburg, despite his well-known reactionary tendencies. Is he truly the best bulwark against Hitler's ascension? On the other hand, many in our party are calling for Otto Braun to run again, but he is reluctant.
+
+[? if kpd_relation >= 50 : Another strange possibilty is an united front with the Communists, either to support Thalmann or our own candidate. ?]
+
+- @support_hindenburg: Support Hindenburg.
+- @support_braun: Run Otto Braun of the SPD.
+- @support_thalmann: Support Ernst Thalmann of the KPD.
+
+@support_hindenburg
+subtitle: This is the default option.
+
+@support_braun
+subtitle: This will cost us 2 resources.
+choose-if: resources >= 2
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 2
+go-to: braun_campaign
+
+It takes effort to run a somewhat unexpected campaign. First, Braun has to be convinced to run. He himself had supported voting for Hindenburg, and it takes a good deal of prodding to convince him of his destiny.
+
+The miniscule remnants of the Democratic Party (now called the German State Party) will likely support us. Who else will? Can we convince the Center to support Braun? What about the Communists?
+
+
+@support_thalmann
+choose-if: kpd_relation >= 50
+unavailable-subtitle: We do not have good enough relations with the Communists.
+
+
+@braun_campaign
+
+- @convince_z: Convince the Center party.
+- @convince_kpd: Convince the Communists.
+- @convince_liberals: Convince the remaining liberals, wherever they are.
+
+@convince_z
+on-arrival: {!
+Q.z_braun_convince = 0;
+if (Q.z_relation >= 52) {
+    Q.z_braun_convince = 1;
+} else if (Q.z_relation <= 30) {
+    Q.z_braun_convince = 0;
+} else {
+    Q.z_braun_convince = 2;
+}
+!}
+go-to: z_failed if z_braun_convince = 0; z_success if z_braun_convince = 1; z_partial if z_braun_convince = 2
+
+We remind the Center leaders of Hindenburg's anti-Catholicism, and try to convince them that Hindenburg's path will eventually lead to Hitler. We also remind them of the successes they've had as part of the Weimar coalition in Prussia with Otto Braun.
+
+@z_success
+
+The Center are convinced! They will be part of the Braun coalition.
+
+@z_partial
+
+The Center are not satisfied with our arguments, but they are open to being convinced. They are willing to run a joint campaign if we front the resources.
+
+@z_failed
+
+Unfortunately, we fail to turn them away from Hindenburg.
+
+@convince_kpd
+
+The KPD is supporting their own candidate, Ernst Thalmann. [? if kpd_relation >= 50 : However, they are willing to be convinced; how do we convince them? ?][? if kpd_relation < 50 : ?]
+
+@convince_liberals

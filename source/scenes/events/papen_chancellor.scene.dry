@@ -1,0 +1,10 @@
+title: Chancellor replaced by Franz von Papen
+subtitle: President Hindenburg dismisses the government.
+view-if: chancellor = "Bruning" and year >= 1932 and month >= 5 and president = "Hindenburg" and minority_government = 1 
+on-arrival: chancellor = "Papen"; chancellor_party = "I"
+new-page: true
+tags: event
+max-visits: 1
+
+President Hindenburg's camarilla has turned against Brüning, and Hindenburg his dismissed the Chancellor, replacing him with the more reactionary Franz von Papen, an independent formerly of the Center Party. Brüning's final straw was his "agricultural settlement" policy, sending unemployed workers to homestead in underutilized lands (that happen to be owned by aristocrats). 
+Papen

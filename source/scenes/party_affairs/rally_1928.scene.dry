@@ -1,0 +1,48 @@
+title: Political Rally
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: rally_timer <= 0
+on-arrival: month_actions += 1; rally_timer = 6
+card-image: img/protest.jpg
+max-visits: 8
+
+Mass rallies are a common feature of social democratic life, especially in the lead-up to an election. What is the primary theme of this rally?
+
+- @class_struggle: The class struggle of the proletariat against the bourgeoisie.
+- @welfare: Sozialpolitik - the maintenance and expansion of social welfare programs.
+- @democracy: Expanding our nascent democracy and defending it against dictatorship and fascism.
+- @pacifism: Opposing war, nationalism, and militarism at all costs.
+- @local: A mixture of various local and national concerns that resonate most with the audience.
+
+@class_struggle
+on-arrival: workers_spd += 3*(1-dissent); left_strength += 5; left_dissent -= 5; old_middle_spd -= 3; new_middle_spd -= 2;
+
+Our message of class struggle appeals to the left wing of the working class, while potentially alienating the middle class.
+
+@welfare
+on-arrival: workers_spd += 3*(1-dissent); reformist_strength += 3; labor_strength += 4; reformist_dissent -= 3; labor_dissent -= 3;
+
+The reformist message appeals to the organized workers, whose benefits are the accomplishments of social democracy.
+
+@democracy
+on-arrival: democratization += 1; pro_republic += 4*(1 - dissent); workers_spd += 3 if democratization >= 3
+
+Our speakers defend the republican system and rail against the monarchists and authoritarians who threaten it.
+
+[? if democratization < 3 : Talk of democracy does not excite the workers as much as more practical issues. But that may change; part of our job is to provide political education to the proletariat. ?]
+[? if democratization >= 3 : Since we have consistently made democratization a theme of our campaign, the workers are enthusiastic about our message. ?]
+
+@pacifism
+on-arrival: pacifism += 1; nationalism -= 4*(1 - dissent); workers_spd += 3*(1 - dissent) if pacifism >= 3; nationalism -= 2 if pacifism >= 3
+
+Our speakers denounce the military establishment and all the spending entering that black hole. Some adventurous speakers question the responsibility of the military elites in organizing the Great War.
+
+[? if pacifism < 3 : Given the volume of nationalist indoctrination in our society, it is difficult to argue so vehemently against the military. ?]
+[? if pacifism >= 3 : Since we have consistently made pacifism a theme of our campaign, the workers are enthusiastic about our message. ?]
+
+
+@local
+on-arrival: workers_spd += 3*(1-dissent);
+
+Our speakers have gauged the mood and are speaking to the issues that seem to most affect the workers in this moment.

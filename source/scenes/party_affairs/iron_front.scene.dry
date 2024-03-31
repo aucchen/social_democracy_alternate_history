@@ -1,0 +1,8 @@
+title: Forming the Iron Front
+new-page: true
+is-card: true
+view-if: confronting_nazis_seen = 1 and nazi_urgency > 2 and iron_front_formed = 0
+tags: party_affairs, antifascism
+max-visits: 1
+
+= Forming the Iron Front

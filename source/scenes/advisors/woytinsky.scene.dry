@@ -1,0 +1,9 @@
+title: Wladimir Woytinsky
+is-pinned-card: true
+tags: advisor, labor
+card-image: img/portraits/WoytinskyWladimir.jpg
+view-if: woytinsky_advisor = 1
+new-page: true 
+
+= Wladimir Woytinsky
+

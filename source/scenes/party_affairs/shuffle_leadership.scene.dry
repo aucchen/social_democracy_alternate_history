@@ -1,0 +1,481 @@
+title: Shuffle Leadership
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: shuffle_leadership_timer = 0
+on-arrival: month_activities += 1; shuffle_leadership_timer = 6;
+card-image: img/vorwarts_2.jpg
+go-to: rm_main
+
+Changing the leadership of the party is painful, but perhaps it is necessary to adapt to changing circumstances.
+
+Removing advisors will increase dissent from their faction of the party, while selecting advisors will increase a faction's strength and reduce their dissent.
+
+TODO: make add and remove advisor choices for every advisor
+
+- @rm_main: Remove advisors
+- @add_advisors: Add advisors
+- @remove_none: Don't change advisors.
+
+
+###################### removing leaders
+
+@rm_main
+title: Remove advisors.
+tags: centrist_advisor, left_advisor, reformist_advisor, labor_advisor, neorevisionist_advisor
+frequency: 1
+
+- #remove_advisor
+
+@remove_none
+title: Stop changing advisors.
+go-to: root
+tags: remove_advisor
+
+
+@remove_hilferding
+title: Remove Hilferding
+view-if: hilferding_advisor = 1
+on-arrival: hilferding_advisor = 0; centrist_dissent += 5; n_advisors -= 1
+tags: remove_advisor
+go-to: rm_main
+
+Hilferding has been removed as an advisor. The Centrist faction disapproves.
+
+@remove_wels
+title: Remove Wels
+view-if: wels_advisor = 1
+tags: remove_advisor
+on-arrival: wels_advisor = 0; centrist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Wels has been removed as an advisor. The Centrist faction disapproves.
+
+@remove_muller
+title: Remove Müller
+view-if: muller_advisor = 1
+tags: remove_advisor
+on-arrival: muller_advisor = 0; centrist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Müller has been removed as an advisor. The Centrist faction disapproves.
+
+
+@remove_breitscheid
+title: Remove Breitscheid
+view-if: breitscheid_advisor = 1
+tags: remove_advisor
+on-arrival: breitscheid_advisor = 0; centrist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Breitscheid has been removed as an advisor. The Centrist faction disapproves.
+
+@remove_pfulf
+title: Remove Pfülf
+view-if: pfulf_advisor = 1
+tags: remove_advisor
+on-arrival: pfulf_advisor = 0; centrist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Pfülf has been removed as an advisor. The Centrist faction disapproves.
+
+
+# reformists
+
+@remove_severing
+title: Remove Severing
+view-if: severing_advisor = 1
+tags: remove_advisor
+on-arrival: severing_advisor = 0; reformist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Severing has been removed as an advisor. The Reformist faction disapproves.
+
+@remove_baade
+title: Remove Baade
+view-if: baade_advisor = 1
+tags: remove_advisor
+on-arrival: baade_advisor = 0; reformist_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Baade has been removed as an advisor. The Reformist faction disapproves.
+
+@remove_braun
+title: Remove Braun
+view-if: braun_advisor = 1
+tags: remove_advisor
+on-arrival: braun_advisor = 0; reformist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Braun has been removed as an advisor. The Reformist faction disapproves.
+
+@remove_juchacz
+title: Remove Juchacz
+view-if: juchacz_advisor = 1
+tags: remove_advisor
+on-arrival: juchacz_advisor = 0; reformist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Juchacz has been removed as an advisor. The Reformist faction disapproves.
+
+# labor
+
+@remove_leipart
+title: Remove Leipart
+view-if: leipart_advisor = 1
+tags: remove_advisor
+on-arrival: leipart_advisor = 0; labor_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Leipart has been removed as an advisor. The Labor faction disapproves.
+
+@remove_aufhauser
+title: Remove Leipart
+view-if: aufhauser_advisor = 1
+tags: remove_advisor
+on-arrival: aufhauser_advisor = 0; labor_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Aufhäuser has been removed as an advisor. The Labor faction disapproves.
+
+@remove_woytinsky
+title: Remove Woytinsky
+view-if: woytinsky_advisor = 1
+tags: remove_advisor
+on-arrival: woytinsky_advisor = 0; labor_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Woytinsky has been removed as an advisor. The Labor faction disapproves.
+
+# left
+
+@remove_levi
+title: Remove Levi
+view-if: levi_advisor = 1
+tags: remove_advisor
+on-arrival: levi_advisor = 0; leftist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Levi has been removed as an advisor. The Leftist faction disapproves.
+
+@remove_sender
+title: Remove Sender
+view-if: sender_advisor = 1
+tags: remove_advisor
+on-arrival: sender_advisor = 0; leftist_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Sender has been removed as an advisor. The Leftist faction disapproves.
+
+@remove_rosenfeld
+title: Remove Rosenfeld
+view-if: rosenfeld_advisor = 1
+tags: remove_advisor
+on-arrival: rosenfeld_advisor = 0; leftist_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Rosenfeld has been removed as an advisor. The Leftist faction disapproves.
+
+
+# neorevisionists
+
+@remove_mierendorff
+title: Remove Mierendorff
+view-if: mierendorff_advisor = 1
+tags: remove_advisor
+on-arrival: mierendorff_advisor = 0; neorevisionist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Mierendorff has been removed as an advisor. The Neorevisionist faction disapproves.
+
+@remove_leber
+title: Remove Leber
+view-if: leber_advisor = 1
+tags: remove_advisor
+on-arrival: leber_advisor = 0; neorevisionist_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Leber has been removed as an advisor. The Neorevisionist faction disapproves.
+
+@remove_schumacher
+title: Remove Schumacher
+view-if: schumacher_advisor = 1
+tags: remove_advisor
+on-arrival: schumacher_advisor = 0; neorevisionist_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Schumacher has been removed as an advisor. The Neorevisionist faction disapproves.
+
+
+
+####################### adding advisors
+
+@add_advisors
+title: Add advisors
+choose-if: n_advisors < 3
+unavailable-subtitle: Maximum of 3 advisors.
+go-to: advisor_menu
+
+@advisor_menu
+title: Add other advisors.
+tags: centrist_advisor, left_advisor, reformist_advisor, labor_advisor, neorev_advisor
+frequency: 1
+
+
+- @centrist: Add Centrists
+- @left: Add Leftists
+- @reformist: Add Reformists
+- @labor: Add Labor
+- @neorev: Add Neorevisionists
+- @rm_main: Remove advisors instead.
+- @remove_none: Stop changing advisors.
+
+@centrist
+
+- #centrist_advisor
+
+@reformist
+
+- #reformist_advisor
+
+@left
+
+- #left_advisor
+
+@labor
+
+- #labor_advisor
+
+@neorev
+view-if: neorevisionism > 0
+
+- #neorev_advisor
+
+@add_hilferding
+title: Rudolf Hilferding
+subtitle: Rudolf Hilferding is an economist and one of our chief Marxist theoreticians.
+is-card: true
+card-image: img/portraits/HilferdingRudolf.jpg
+tags: centrist_advisor
+view-if: hilferding_advisor = 0
+on-arrival: hilferding_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+
+Rudolf Hilferding is now an advisor.
+
+@add_wels
+title: Otto Wels
+subtitle: Otto Wels is a long-time party organizer and member of the leadership, serving under Friedrich Ebert.
+is-card: true
+card-image: img/portraits/WelsRudolf.jpg
+tags: centrist_advisor
+view-if: wels_advisor = 0
+on-arrival: wels_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+
+Otto Wels is now an advisor.
+
+@add_muller
+title: Hermann Müller
+subtitle: Hermann Müller is the last Social Democratic Chancellor.
+is-card: true
+card-image: img/portraits/MüllerHermann.jpg
+tags: centrist_advisor
+view-if: muller_advisor = 0 and muller_dead = 0
+on-arrival: muller_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+
+Hermann Müller is now an advisor.
+
+@add_breitscheid
+title: Rudolf Breitscheid
+subtitle: Rudolf Breitscheid comes from a well-educated background and is one of our foreign policy leaders.
+is-card: true
+card-image: img/portraits/BreitscheidRudolf.jpg
+tags: centrist_advisor
+view-if: breitscheid_advisor = 0
+on-arrival: breitscheid_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+
+Rudolf Breitscheid is now an advisor.
+
+@add_pfulf
+title: Antonie Pfülf
+subtitle: Antonie Pfülf is a leader in social policy and women's rights.
+is-card: true
+card-image: img/portraits/PfülfAntonie.jpg
+tags: centrist_advisor
+view-if: pfulf_advisor = 0
+on-arrival: pfulf_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+
+Antonie Pfülf is now an advisor.
+
+# reformist
+
+@add_severing
+title: Carl Severing
+subtitle: Carl Severing is a one-time Prussian interior minister and police reformer.
+is-card: true
+card-image: img/portraits/SeveringCarl.jpg
+tags: reformist_advisor
+view-if: severing_advisor = 0
+on-arrival: severing_advisor = 1; n_advisors += 1; reformist_strength += 5
+go-to: advisor_menu
+
+Carl Severing is now an advisor.
+
+@add_braun
+title: Otto Braun
+subtitle: Otto Braun is the Minister-President of Prussia, and one of the most recognizable and well-known Social Democratic leaders.
+is-card: true
+card-image: img/portraits/BraunOtto.jpg
+tags: reformist_advisor
+view-if: braun_advisor = 0
+on-arrival: braun_advisor = 1; n_advisors += 1; reformist_strength += 5
+go-to: advisor_menu
+
+Otto Braun is now an advisor.
+
+@add_juchacz
+title: Marie Juchacz
+subtitle: Marie Juchacz is the founder of Worker's Welfare, a mutual-aid organization.
+is-card: true
+card-image: img/portraits/JuchaczMarie.jpg
+tags: reformist_advisor
+view-if: juchacz_advisor = 0
+on-arrival: juchacz_advisor = 1; n_advisors += 1; reformist_strength += 5
+go-to: advisor_menu
+
+Marie Juchacz is now an advisor.
+
+@add_baade
+title: Fritz Baade
+subtitle: Fritz Baade is a member of the Reichstag and our one expert in agricultural issues.
+is-card: true
+card-image: img/portraits/BaadeFritz.jpg
+tags: reformist_advisor
+view-if: baade_advisor = 0
+on-arrival: baade_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+
+Fritz Baade is now an advisor.
+
+# left
+
+@add_levi
+title: Paul Levi
+subtitle: Paul Levi is a former KPD leader who was purged for criticizing Communist policies.
+is-card: true
+card-image: img/portraits/LeviPaul.jpg
+tags: left_advisor
+view-if: levi_advisor = 0 and levi_dead = 0
+on-arrival: levi_advisor = 1; n_advisors += 1; left_strength += 5
+go-to: advisor_menu
+
+Paul Levi is now an advisor.
+
+@add_sender
+title: Toni Sender
+subtitle: Toni Sender is an anti-war and womens' rights advocate, and Reichstag member.
+is-card: true
+card-image: img/portraits/SenderToni.jpg
+tags: left_advisor
+view-if: sender_advisor = 0
+on-arrival: sender_advisor = 1; n_advisors += 1; left_strength += 5
+go-to: advisor_menu
+
+Toni Sender is now an advisor.
+
+@add_rosenfeld
+title: Kurt Rosenfeld
+subtitle: Kurt Rosenfeld is a lawyer, anti-militarist activist, and Reichstag member.
+is-card: true
+card-image: img/portraits/RosenfeldKurt.jpg
+tags: left_advisor
+view-if: rosenfeld_advisor = 0
+on-arrival: rosenfeld_advisor = 1; n_advisors += 1; left_strength += 5
+go-to: advisor_menu
+
+Kurt Rosenfeld is now an advisor.
+
+# labor
+
+@add_leipart
+title: Theodor Leipart
+subtitle: Theodor Leipart is the leader of the ADGB, the German Trade Union Federation.
+is-card: true
+card-image: img/portraits/LeipartTheodor.jpg
+tags: labor_advisor
+view-if: leipart_advisor = 0
+on-arrival: leipart_advisor = 1; n_advisors += 1; labor_strength += 5
+go-to: advisor_menu
+
+Theodor Leipart is now an advisor.
+
+@add_aufhauser
+title: Siegfried Aufhäuser
+subtitle: Siegfried Aufhäuser is the leader of the AfA-Bund, the white-collar trade union federation.
+is-card: true
+card-image: img/portraits/AufhäuserSiegfried.jpg
+tags: labor_advisor
+view-if: aufhauser_advisor = 0
+on-arrival: aufhauser_advisor = 1; n_advisors += 1; labor_strength += 5
+go-to: advisor_menu
+
+Siegfried Aufhäuser is now an advisor.
+
+@add_woytinsky
+title: Wladimir Woytinsky
+subtitle: Wladimir Woytinsky is a former Russian Menshevik who is now the lead trade union economist.
+is-card: true
+card-image: img/portraits/WoytinskyWladimir.jpg
+tags: labor_advisor
+view-if: woytinsky_advisor = 0
+on-arrival: woytinsky_advisor = 1; n_advisors += 1; labor_strength += 3
+go-to: advisor_menu
+
+Wladimir Woytinsky is now an advisor.
+
+
+# neorevisionist leaders
+
+@add_mierendorff
+title: Carlo Mierendorff
+subtitle: Carlo Mierendorff is one of the youngest members of the Reichstag, and the originator of the "Neo-Revisionist" movement. He is an anti-Nazi strategist.
+is-card: true
+card-image: img/portraits/MierendorffCarlo.jpg
+tags: neorev_advisor
+view-if: mierendorff_advisor = 0
+on-arrival: mierendorff_advisor = 1; n_advisors += 1; neorevisionist_strength += 5
+go-to: advisor_menu
+
+Carlo Mierendorff is now an advisor.
+
+@add_schumacher
+title: Kurt Schumacher
+subtitle: Kurt Schumacher is a leading neo-revisionist.
+is-card: true
+card-image: img/portraits/SchumacherKurt.jpg
+tags: neorev_advisor
+view-if: schumacher_advisor = 0
+on-arrival: schumacher_advisor = 1; n_advisors += 1; neorevisionist_strength += 5
+go-to: advisor_menu
+
+Kurt Schumacher is now an advisor.
+
+@add_leber
+title: Julius Leber
+subtitle: Julius Leber is a former Reichswehr officer who resigned in opposition to the coup attempt.
+is-card: true
+card-image: img/portraits/LeberJulius.jpg
+tags: neorev_advisor
+view-if: leber_advisor = 0
+on-arrival: leber_advisor = 1; n_advisors += 1; neorevisionist_strength += 5
+go-to: advisor_menu
+
+Julius Leber is now an advisor.
+
+
+
+

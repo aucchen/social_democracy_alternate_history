@@ -1,0 +1,13 @@
+title: National Police
+new-page: true
+is-card: true
+tags: govt_affairs
+on-arrival: police_timer = 6; month_actions += 1
+view-if: spd_in_government = 1 and interior_minister_party = "SPD" and police_timer = 0
+card-image: img/portraits/SeveringCarl.jpg
+
+= The National Police
+
+As we have control over the Interior Ministry, we can change policy for the national police forces. While less reactionary than the Reichswehr, they still have a deep reactionary streak, often 
+
+# form a special unit to investigate corruption in big businesses!!! anti-corruption police lol

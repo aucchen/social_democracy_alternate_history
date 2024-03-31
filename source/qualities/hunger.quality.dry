@@ -1,0 +1,6 @@
+name: Hunger
+initial: 0
+min: 0
+max: 20
+
+An indication of how hungry you are.

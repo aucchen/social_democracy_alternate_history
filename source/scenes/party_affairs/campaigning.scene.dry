@@ -1,0 +1,59 @@
+title: Campaigning
+new-page: true
+view-if: in_election = 1 
+on-arrival: month_actions += 1
+max-visits: 10
+is-card: true
+card-image: img/flags.jpg
+frequency: 200
+tags: party_affairs
+
+= Campaigning
+
+Whether or not we are in an electoral campaign, the party is always trying to broaden its voter base. Who should we focus our campaign efforts on?
+
+- @workers: The urban working class, our traditional support base.
+- @new_middle: The "new middle class" of government employees and white-collar workers.
+- @old_middle: The "old middle class" of small independent businessmen and artisans.
+- @rural: Rural workers and small farmers, who have felt neglected by us in the past.
+- @unemployed: The unemployed.
+
+@workers
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: workers_spd += 5*(1-dissent); resources -= 1
+
+We have increased our campaigning among the workers.
+
+@new_middle
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: new_middle_spd += 3*(1-dissent); resources -= 1
+
+We have increased our campaigning among the new middle class.
+
+@old_middle
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: old_middle_spd += 3*(1-dissent); resources -= 1
+
+We have increased our campaigning among the old middle class.
+
+@rural
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: rural_spd += 3*(1-dissent); resources -= 1
+
+We have increased our campaigning among farmers.
+
+@unemployed
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: unemployed_spd += 3*(1-dissent); resources -= 1
+
+We have increased our campaigning among the unemployed.

@@ -1,0 +1,21 @@
+title: Carl Severing
+is-pinned-card: true
+tags: advisor, reformist
+card-image: img/portraits/SeveringCarl.jpg
+view-if: severing_advisor = 1
+new-page: true 
+
+= Carl Severing
+
+Severing has been Interior Minister for both the German Republic and for the state of Prussia, and his priority is using the security services to target the enemies of the republic.
+
+- @prussian_bulwark
+- @root: Return to main
+
+@prussian_bulwark
+title: Prussian Bulwark
+subtitle: Severing has influence over Prussian politics.
+view-if: advisor_action_timer <= 0 and spd_prussia = 1
+on-arrival: advisor_action_timer = 0; prussian_affairs_timer = 0
+go-to: prussian_affairs
+

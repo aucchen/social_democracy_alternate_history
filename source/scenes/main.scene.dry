@@ -1,0 +1,30 @@
+title: Next month
+set-bg: img/map_2.jpg
+is-hand: true
+max-cards: 3
+
+# TODO: should this really be a new page?
+
+#Here, the main deck will be displayed. Clicking on the deck draws a card into your hand. Clicking on a card activates that card.
+
+[? if year = 1928 and month = 2 : The current bourgeois-right government has fallen. The next elections are slated for May of this year. ?]
+
+- @party
+- @govt
+- #advisor
+
+
+@party
+title: Party Affairs
+card-image: img/Vorwaerts_nr_1.png
+is-deck: true
+
+- #party_affairs
+
+@govt
+title: Government Affairs
+view-if: time >= 6
+card-image: img/reichstag_2.jpg
+is-deck: true
+
+- #govt_affairs

@@ -1,0 +1,11 @@
+title: Coalition Affairs
+new-page: true
+is-card: true
+tags: govt_affairs
+on-arrival: month_actions += 1; coalition_affairs_timer = 5
+view-if: spd_in_government = 1 and coalition_dissent >= 1 and coalition_affairs_timer = 0
+card-image: img/muller_cabinet.jpg
+
+= Coalition Affairs
+
+There is some trouble in our coalition. The right-leaning members of the Center and DVP are 

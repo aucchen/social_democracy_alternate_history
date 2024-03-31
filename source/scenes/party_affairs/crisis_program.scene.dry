@@ -1,0 +1,14 @@
+title: The Economic Crisis
+new-page: true
+is-card: true
+view-if: year >= 1930 and crisis_urgency >= 1
+on-arrival: month_actions += 1
+card-image: img/bankrun.jpg
+tags: party_affairs, political_affairs
+max-visits: 1
+
+= Addressing the Economic Crisis
+
+Our party is wracked as to how to deal with the economic crisis. From the centrist faction, Hilferding argues that the economic crisis must be allowed to play out.
+
+From Labor, the economist Wladimir Woytinsky argues that...

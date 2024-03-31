@@ -1,0 +1,20 @@
+title: 1929
+subtitle: A new year
+on-arrival: {!
+Q.unemployed += 3;
+// increase NSDAP vote share
+Q.rural_nsdap += 10;
+Q.new_middle_nsdap += 10;
+Q.old_middle_nsdap += 10;
+Q.new_middle_ddp -= 5;
+Q.workers_kpd += 5;
+Q.sa_strength += 20;
+!}
+tags: event
+view-if: year = 1929 and month = 1
+max-visits: 1
+go-to: main
+
+= 1929
+
+A new year begins. The economy appears to be slackening; unemployment is increasing throughout the republic, although for the most part, people are still doing well.

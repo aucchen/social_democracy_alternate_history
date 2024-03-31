@@ -1,0 +1,129 @@
+title: Civil War
+on-arrival: {!
+Q.civil_war_seen = 1;
+
+// our allies
+Q.total_power = 0;
+Q.rb_power = Q.rb_strength*Q.rb_militancy;
+Q.total_power += Q.rb_power;
+Q.prussian_police_power = Q.prussian_police_strength*Q.prussian_police_militancy*Q.prussian_police_loyalty;
+if (Q.spd_prussia) {
+    Q.total_power += Q.prussian_police_power;
+}
+Q.loyal_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*Q.reichswehr_loyalty;
+if (Q.spd_in_government) {
+    Q.total_power += Q.loyal_reichswehr_power;
+} else {
+    Q.total_power += Q.loyal_reichswehr_power/4;
+}
+Q.rkb_power = Q.rkb_strength*Q.rkb_militancy;
+if (Q.kpd_relation >= 60) {
+    Q.total_power += Q.rkb_power;
+} else if (Q.kpd_relation >= 45) {
+    Q.total_power += Q.rkb_power*0.5;
+}
+// general strike strength
+// maximum (given 25 labor strength) is 400
+Q.total_power += (2 - Q.labor_dissent/100)*Q.labor_strength*(2 - Q.unemployed/100)*4;
+console.log("Supporter strength:", Q.total_power);
+
+// our enemies
+Q.enemy_power = 0;
+Q.sa_power = Q.sa_strength*Q.sa_militancy;
+Q.enemy_power += Q.sa_power;
+Q.sh_power = Q.sh_strength*Q.sh_militancy;
+Q.enemy_power += Q.sh_power;
+Q.hostile_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*(1-Q.reichswehr_loyalty);
+Q.enemy_power += Q.hostile_reichswehr_power;
+console.log("Enemy strength:", Q.total_power);
+
+if (total_power > enemy_power) {
+    Q.republic_victory = 1;
+} else if (total_power/enemy_power >= 0.5) {
+    Q.long_war = 1;
+} else {
+    Q.total_defeat = 1;
+}
+!}
+go-to: war_menu
+
+= The Array of Forces
+
+On our side, we have the Reichsbanner, at [+ rb_strength +] thousand members. [? if rb_militancy < 0.5 : Unfortunately, they are poorly trained and equipped, and will not be able to stand against our more militarized opponents. ?][? if rb_militancy >= 0.5 : We have spent quite a great deal of resources on turning the Reichsbanner into a fighting force. Let us hope that they survive. ?]
+
+What else do we have?
+
+# note: many scenarios lead to civil war. This calculates the array of forces, and the possible outcomes.
+
+@war_menu
+
+- @rw_help: Appeal to the Reichswehr to stand down.
+- @kpd_help: Call for support from the Communists.
+- @general_strike: Call a general strike!
+- @loyal_police: Call up the loyal portions of the police.
+- @war_outcome: Now, the battle...
+
+@rw_help
+max-visits: 1
+go-to: war_menu
+on-arrival: war_choices += 1
+
+We have urged the Reichswehr to stand down, to avoid killing their countrymen. [? if reichswehr_loyalty < 0.2 : Unfortunately, few heed our calls; the Reichswhere detest us. ?][? if reichswehr_loyalty >= 0.2 and reichswehr_loyalty < 0.4 : Some officers and troops heed our calls to not fight against us. Some even join us. ?][? if reichswehr_loyalty >= 0.4 and reichswehr_loyalty < 0.6 : The Reichswehr is split. Many avoid taking a side, or join our side. ?][? if reichswehr_loyalty >= 0.6 : Surprisingly, the majority of the Reichswehr is on our side! Our preparations have worked. ?]
+
+@kpd_help
+max-visits: 1
+go-to: war_menu
+on-arrival: war_choices += 1
+
+@general_strike
+max-visits: 1
+go-to: war_menu
+on-arrival: war_choices += 1
+
+A general strike stopped the Kapp Putsch in 1920, and it can stop fascism today.
+
+
+@loyal_police
+max-visits: 1
+go-to: war_menu
+on-arrival: war_choices += 1
+view-if: spd_prussia = 1
+
+Since we still control the Prussian government, we can call upon the Prussian police. [? if prussian_police_loyalty < 0.4 : Unfortunately, the police are politically unreliable at best. ?][? if prussian_police_loyalty >= 0.4 and prussian_police_loyalty < 0.65 : In this crucial hour, the Prussian police are split, with about half actively supporting our efforts. ?][? if prussian_police_loyalty >= 0.65 : Most join in supporting our efforts. Our efforts in cultivating republican loyalties in the police have proven their worth. ?]
+
+
+
+
+@foreign_intervention
+max-visits: 1
+go-to: war_menu
+on-arrival: war_choices += 1; 
+
+# note: the Prussian coup should not trigger foreign intervention...
+
+@war_outcome
+view-if: war_choices > 2
+go-to: defeat if total_defeat = 1; long_war if long_war = 1; republic_victory if republic_victory = 1
+
+@defeat
+
+= Total Defeat
+
+Our forces are no match for those of the reactionaries. Reichsbanner fighters are quickly overpowered by the forces of the Stahlhelm, SA, and Reichswehr. Thousands are killed before the rest surrender. Our remaining leaders flee the country, as the reactionaries .
+
+But let it not be said that the socialists did not fight.
+
+
+@long_war
+
+= Long War
+
+The initial phase of the action ends, and somehow, both sides remain standing.
+
+The war settles into fixed battle lines. This will not be a coup, but a long war.
+
+@republic_victory
+
+= Victory for the Republic
+
+The battle lines

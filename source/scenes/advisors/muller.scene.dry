@@ -1,0 +1,34 @@
+title: Hermann Müller
+is-pinned-card: true 
+tags: advisor, centrist
+card-image: img/portraits/MüllerHermann.jpg
+new-page: true
+view-if: muller_advisor = 1
+
+= Herman Müller
+
+
+Müller is a former [? if chancellor = "Müller": and current ?] Chancellor, and is a long-time Social Democratic leader.
+
+- @coalition
+- @toleration
+- @root: Return to main
+
+@coalition
+title: Negotiating with the Coalition
+subtitle: Müller can improve our relationships with our coalition partners.
+view-if: advisor_action_timer <= 0 and spd_in_government = 1
+on-arrival: advisor_action_timer = 5; coalition_dissent -= 1 if spd_in_government = 1; z_relation += 5; ddp_relation += 5; dvp_relation += 3
+
+We have improved our relations with the Z, DDP, and DVP, and reduced tensions with the coalition..
+
+
+@toleration
+title: Defending Toleration
+subtitle: Müller supports cooperation with the bourgeois parties.
+view-if: year >= 1930 and spd_in_government = 0 and spd_toleration = 1 and advisor_action_timer = 0
+on-arrival: advisor_action_timer = 5; left_dissent -= 5; neorevisionist_dissent -= 5;
+
+We have reduced dissent among the anti-toleration factions. 
+
+

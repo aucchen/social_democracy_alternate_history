@@ -1,0 +1,36 @@
+title: Status
+new-page: true
+is-special: true
+
+= Status
+
+[+ month : month +] [+ year +]
+
+Resources available: [+ resources +]
+
+= Government
+
+Chancellor: [+ chancellor +] ([+ chancellor_party +])
+
+Reichstag composition:
+
+# 1928: 30, 1930: 25, 1932: 22
+SPD: [+ spd_r +]%
+# 1928: 15, 1930: 15, 1932: 
+Z + BVP: [+ z_r +]%
+# 1928: 10, 1930: 13
+KPD: [+ kpd_r +]%
+# 1928: 5, 1930: 4 (as DstP)
+DDP: [+ ddp_r +]%
+# 1928: 9, 1930: 5
+DVP: [+ dvp_r +]%
+# 1928: 14, 1930: 7
+DNVP: [+ dnvp_r +]%
+# 1928: 3, 1930: 18
+NSDAP: [+ nsdap_r +]%
+# 1928: 9, 1930: 10
+Others: [+ other_r +]%
+
+[? if spd_in_government = 1 : Budget: [+ budget +] ?]
+
+[? if black_thursday_seen = 1 : Unemployment: [+ unemployed +]% ?]

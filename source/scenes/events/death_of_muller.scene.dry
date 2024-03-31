@@ -1,0 +1,39 @@
+title: The Death of Hermann Müller
+view-if: year = 1931 and month >= 3
+frequency: 1000
+max-visits: 1
+tags: event
+go-to: pm if chancellor = "Müller"; not_pm if chancellor != "Müller"
+on-arrival: muller_dead = 1; muller_advisor = 0
+
+@pm
+
+Chancellor Hermann Müller has died while in office. He will be greatly missed. But now, we must select a new Chancellor.
+
+# TODO: elect chancellor...
+# options: Braun (???), Bruning (Z), Wels?
+
+- @braun_chancellor: Otto Braun for Chancellor.
+- @wels_chancellor: Otto Wels for Chancellor.
+- @bruning_chancellor: Let Heinrich Bruning of the Center Party become Chancellor.
+
+@braun_chancellor
+on-arrival: chancellor = "Braun"; chancellor_party = "SPD"; z_relation -= 5; dvp_relation -= 5
+
+Our coalition partners are reluctant to accept the new Chancellor, but they do not make loud objections.
+
+
+@wels_chancellor
+on-arrival: chancellor = "Wels"; chancellor_party = "SPD"; z_relation -= 5; dvp_relation -= 5
+
+Our coalition partners are reluctant to accept the new Chancellor, but they do not make loud objections.
+
+@bruning_chancellor
+on-arrival: chancellor = "Brüning"; chancellor_party = "Z"; z_relation += 5; dvp_relation += 3
+
+The Center Party is grateful that we have supported Brüning for Chancellor..
+
+
+@not_pm
+
+Herman Müller, one of the SPD's long-time leaders, has died. He will be greatly missed.

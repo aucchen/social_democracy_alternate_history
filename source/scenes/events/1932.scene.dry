@@ -1,0 +1,21 @@
+title: 1932
+subtitle: A new year 
+on-arrival: {!
+// increase NSDAP vote share 
+// TODO: if a public works program has started, unemployment is not so bad.
+Q.unemployed += 8; 
+Q.workers -= 5;
+Q.rural_nsdap += 10; 
+Q.new_middle_nsdap += 10; 
+Q.old_middle_nsdap += 15;
+Q.workers_nsdap += 5;
+Q.workers_kpd += 5;
+!}
+tags: event
+view-if: year = 1932 and month = 1 
+max-visits: 1
+go-to: main 
+
+= 1932
+
+A new year begins. 

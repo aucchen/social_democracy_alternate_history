@@ -1,0 +1,14 @@
+title: The Right calls a vote of no confidence against us!
+subtitle: We have angered our coalition partners too much...
+new-page: true
+view-if: spd_in_government = 1 and coalition_dissent >= 3 and in_grand_coalition = 1 and chancellor_party = "SPD"
+tags: event
+
+# Options: spend relations to reduce coalition_dissent, ask for kpd to abstain
+# (lmao KPD toleration arc...)
+
+= Vote of No Confidence
+
+The DVP has called for a vote of no confidence against us, owning to our 
+
+If this succeeds, there will be an election in a few months.

@@ -1,0 +1,9 @@
+title: Toni Sender
+is-pinned-card: true
+tags: advisor, left
+card-image: img/portraits/ToniSender.jpg
+view-if: sender_advisor = 1
+new-page: true 
+
+= Toni Sender
+

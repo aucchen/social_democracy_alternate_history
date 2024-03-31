@@ -1,0 +1,25 @@
+title: Military Policy
+new-page: true
+is-card: true
+tags: govt_affairs
+on-arrival: military_policy_timer = 6; month_actions += 1
+view-if: spd_in_government = 1 and reichswehr_minister_party = "SPD" and military_policy_timer = 0
+card-image: img/portraits/LeberJulius.jpg
+
+= Military Policy
+
+The military is a deeply reactionary institution that has been generally hostile to any notion of socialism or democracy. However, we now control the military as part of the government. What should we do to reform it?
+
+- @increase_funding: Increase funding for the military to purchase its loyalty.
+- @decrease_funding: Reduce funding for the military so we have more for social spending.
+- @reform: Conduct a thorough reform of the ranks, reducing the influence of reactionaries and making it more hospitable to us.
+
+@increase_funding
+on-arrival: budget -= 1;
+
+The military and the center-right parties are surprised that we would increase military funding. Our membership tends to be anti-military, and is less enthused.
+
+@decrease_funding
+on-arrival: budget += 1;
+
+@reform

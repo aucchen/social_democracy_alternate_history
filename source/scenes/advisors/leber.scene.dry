@@ -1,0 +1,9 @@
+title: Julius Leber
+is-pinned-card: true
+tags: advisor, neorevisionist
+card-image: img/portraits/LeberJulius.jpg
+view-if: leber_advisor = 1
+new-page: true 
+
+= Julius Leber
+

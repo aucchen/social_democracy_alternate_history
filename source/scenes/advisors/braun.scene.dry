@@ -1,0 +1,29 @@
+title: Otto Braun
+is-pinned-card: true
+tags: advisor, reformist
+card-image: img/portraits/BraunOtto.jpg
+view-if: braun_advisor = 1
+new-page: true 
+
+= Otto Braun
+
+Braun [? if spd_prussia = 1 : is ?][? if spd_prussia = 0 : was ?] the Minister-President of Prussia, the largest state in Germany. He is a reformist leader who seeks to work with the bourgeois parties.
+
+- @coalition
+- @prussian_bulwark
+- @root: Return to main
+
+@coalition
+title: Negotiating with the Coalition
+subtitle: Braun can improve our relationships with our coalition partners.
+view-if: advisor_action_timer <= 0 and spd_in_government = 1
+on-arrival: advisor_action_timer = 5; coalition_dissent -= 1 if spd_in_government = 1; z_relation += 5; ddp_relation += 5; dvp_relation += 5
+
+We have improved our relations with the Z, DDP, and DVP, and reduced tensions with the coalition..
+
+@prussian_bulwark
+title: Prussian Bulwark
+subtitle: As the Minister-President of Prussia, Braun has power over the Prussian bureaucracy and security services.
+view-if: advisor_action_timer <= 0 and spd_prussia = 1
+on-arrival: advisor_action_timer = 0; prussian_affairs_timer = 0
+go-to: prussian_affairs

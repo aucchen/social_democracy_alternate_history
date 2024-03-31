@@ -1,0 +1,11 @@
+title: Banking Crisis
+subtitle: The great stock market crash...
+new-page: true
+on-arrival: black_thursday_seen = 1; workers_kpd += 10; workers_nsdap += 5; unemployed += 2
+tags: event
+view-if: year = 1931 and month >= 3 and chancellor = "Brüning" and foreign_minister_party != "SPD"
+max-visits: 1
+
+= Banking Crisis
+
+The Darmstadt und National Bank, or Danat Bank, has collapsed!

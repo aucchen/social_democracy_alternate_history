@@ -1,0 +1,6 @@
+title: Streetfighting
+new-page: true
+is-card: true
+view-if: year >= 1930 and sa_strength >= 100
+card-image: img/blutmai_2.jpg
+tags: party_affairs
