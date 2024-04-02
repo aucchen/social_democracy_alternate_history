@@ -1,4 +1,5 @@
 title: Civil War
+audio: music/communist/A_las_barricadas.ogg
 on-arrival: {!
 Q.civil_war_seen = 1;
 
@@ -11,20 +12,20 @@ if (Q.spd_prussia) {
     Q.total_power += Q.prussian_police_power;
 }
 Q.loyal_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*Q.reichswehr_loyalty;
-if (Q.spd_in_government) {
+if (Q.spd_in_government && Q.chancellor_party == "SPD") {
     Q.total_power += Q.loyal_reichswehr_power;
 } else {
     Q.total_power += Q.loyal_reichswehr_power/4;
 }
-Q.rkb_power = Q.rkb_strength*Q.rkb_militancy;
+Q.rfb_power = Q.rfb_strength*Q.rfb_militancy;
 if (Q.kpd_relation >= 60) {
-    Q.total_power += Q.rkb_power;
+    Q.total_power += Q.rfb_power;
 } else if (Q.kpd_relation >= 45) {
-    Q.total_power += Q.rkb_power*0.5;
+    Q.total_power += Q.rfb_power*0.5;
 }
 // general strike strength
 // maximum (given 25 labor strength) is 400
-Q.total_power += (2 - Q.labor_dissent/100)*Q.labor_strength*(2 - Q.unemployed/100)*4;
+Q.total_power += (2 - Q.labor_dissent/100)*Q.labor_strength*(2 - Q.unemployed/100)*3;
 console.log("Supporter strength:", Q.total_power);
 
 // our enemies
@@ -35,11 +36,11 @@ Q.sh_power = Q.sh_strength*Q.sh_militancy;
 Q.enemy_power += Q.sh_power;
 Q.hostile_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*(1-Q.reichswehr_loyalty);
 Q.enemy_power += Q.hostile_reichswehr_power;
-console.log("Enemy strength:", Q.total_power);
+console.log("Enemy strength:", Q.enemy_power);
 
-if (total_power > enemy_power) {
+if (Q.total_power > Q.enemy_power*1.1) {
     Q.republic_victory = 1;
-} else if (total_power/enemy_power >= 0.5) {
+} else if (Q.total_power/Q.enemy_power >= 0.5) {
     Q.long_war = 1;
 } else {
     Q.total_defeat = 1;
@@ -49,7 +50,10 @@ go-to: war_menu
 
 = The Array of Forces
 
+[? if chancellor_party == "KPD" or president == "Thälmann" : The KPD's paramilitary, the RFB, is leading the battle, and we are their co-combatants. ?]
+
 On our side, we have the Reichsbanner, at [+ rb_strength +] thousand members. [? if rb_militancy < 0.5 : Unfortunately, they are poorly trained and equipped, and will not be able to stand against our more militarized opponents. ?][? if rb_militancy >= 0.5 : We have spent quite a great deal of resources on turning the Reichsbanner into a fighting force. Let us hope that they survive. ?]
+
 
 What else do we have?
 
@@ -72,15 +76,18 @@ We have urged the Reichswehr to stand down, to avoid killing their countrymen. [
 
 @kpd_help
 max-visits: 1
+view-if: chancellor_party != "KPD" and president != "Thälmann" 
 go-to: war_menu
 on-arrival: war_choices += 1
+
+[? if kpd_relation >= 60 : The KPD is entirely on our side, owing to our good relations.. ?][? if kpd_relation < 60 and kpd_relation >= 45 : Most of the KPD is on our side, due to their good relations with us. ?][? if kpd_relation < 45 : The KPD does not support us. ?]
 
 @general_strike
 max-visits: 1
 go-to: war_menu
 on-arrival: war_choices += 1
 
-A general strike stopped the Kapp Putsch in 1920, and it can stop fascism today.
+A general strike stopped the Kapp Putsch in 1920, and it can stop fascism today. [? if labor_dissent <= 20 : The workers are largely united with us. ?][? if labor_dissent > 20 and labor_disent <= 50 : There is substantial dissent within labor, but the bulk supports the general strike. ?][? if labor_dissent > 50 : Labor is deeply divided, and most workers do not heed the call. ?]
 
 
 @loyal_police
@@ -109,10 +116,11 @@ go-to: defeat if total_defeat = 1; long_war if long_war = 1; republic_victory if
 
 = Total Defeat
 
-Our forces are no match for those of the reactionaries. Reichsbanner fighters are quickly overpowered by the forces of the Stahlhelm, SA, and Reichswehr. Thousands are killed before the rest surrender. Our remaining leaders flee the country, as the reactionaries .
+Our forces are no match for those of the reactionaries. Reichsbanner fighters are quickly overpowered by the forces of the Stahlhelm, SA, and Reichswehr. Thousands are killed before the rest surrender. Our remaining leaders flee the country, as the reactionaries take absolute power over Germany.
 
-But let it not be said that the socialists did not fight.
+Our resistance will be recorded in the history books, and in the future, our names will be honored. But for now, all is lost.
 
+- @game_over: Game over.
 
 @long_war
 
@@ -120,10 +128,15 @@ But let it not be said that the socialists did not fight.
 
 The initial phase of the action ends, and somehow, both sides remain standing.
 
-The war settles into fixed battle lines. This will not be a coup, but a long war.
+The war settles into fixed battle lines. This will not be a quick coup, but a long civil war. The nation will destroy itself before it can be rebuilt again.
+
+- @game_over: Game over.
 
 @republic_victory
 
 = Victory for the Republic
 
-The battle lines
+The battle lines hold, and the SA, Stahlhelm, and pro-coup Reichswehr forces are defeated. Today, the forces of the republic prevail over the fascists and the reactionaries. There is a new revolution in Germany. Let us hope it produces a longer-lasting peace than the previous one.
+
+- @game_over: Game over.
+

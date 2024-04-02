@@ -1,0 +1,32 @@
+title: Siegfried Aufhäuser
+is-pinned-card: true
+tags: advisor, reformist
+card-image: img/portraits/AufhäuserSiegfried.jpg
+view-if: aufhauser_advisor = 1
+new-page: true 
+
+= Siegfried Aufhäuser
+
+Aufhäuser is a leader of the AfA-Bund, the federation of socialist white-collar trade unions.
+
+- @white_collar
+- @union_unity
+- @root: Return to main
+
+@white_collar
+title: Organizing white-collar workers
+subtitle: Improve our standing among the new middle class.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 6; new_middle_spd += 6*(1-dissent);
+
+We have increased our organizing among white-collar workers.
+
+@union_unity
+title: Union-party coordination
+subtitle: Reduce dissent among the unions.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 6; labor_dissent -= 5;
+
+We have reduced tensions with the Labor faction.

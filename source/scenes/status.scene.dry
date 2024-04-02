@@ -10,6 +10,8 @@ Resources available: [+ resources +]
 
 = Government
 
+President: [+ president +]
+
 Chancellor: [+ chancellor +] ([+ chancellor_party +])
 
 Reichstag composition:
@@ -34,3 +36,7 @@ Others: [+ other_r +]%
 [? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed +]% ?]
+
+Next election: [+ next_election_month : month +] [+ next_election_year +]
+
+# = Public Opinion

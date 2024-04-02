@@ -1,0 +1,467 @@
+body {
+  font-family: "Minion Pro", Georgia, serif;
+  /*font-size: 1.125em;*/
+  background-color: #f3f3e3;
+  padding: 0;
+  line-height: 155%;
+}
+header, #content, footer {
+  color: #431;
+  max-width: 540px;
+  margin: 0 auto;
+  overflow: auto;
+}
+footer {
+  margin-top: 1em;
+  font-size: 0.8em;
+  position: relative;
+}
+footer a {
+  padding-right: 1em;
+}
+header {
+  text-align: right
+}
+#header-links {
+  text-align: left;
+  float: left;
+  display: inline-block;
+  margin-bottom: 0.5em;
+  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
+               rgba(0, 0, 0, 0.1) -1px -1px 2px; 
+  background-color: #f3f3e3;
+}
+#header-links a {
+  padding-right: 1em;
+}
+
+/* This is mostly copied from undum. */
+#mid_panel {
+  margin: 0 16rem;
+}
+#page {
+  margin: 0 auto;
+  position: relative;
+}
+#tools_wrapper {
+  position: absolute;
+  width: 100%;
+  max-width: 69em;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.tools {
+  padding: 0.6em;
+  width: 14rem;
+  color: #431;
+  background-color: #f3f3f3;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+}
+.tools.left {
+  float: left;
+  left: 0.4em;
+}
+.tools.right {
+  float: right;
+  right: 0.4em;
+}
+#qualities {
+  text-indent: 0;
+  line-height: 1.3em;
+}
+#qualities p {
+  text-indent: 0;
+}
+#qualities h1 {
+  font-size: 1.1em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
+               rgba(0, 0, 0, 0.1) -1px -1px 2px;
+}
+#qualities h1 + p:first-line {
+  font-weight: normal;
+}
+/* smaller screens: hide left margin */
+@media screen and (max-width: 1000px) {
+  .tools {
+      margin-right: 0.4em;
+      margin-left: 0.4em;
+  }
+  #mid_panel {
+      margin-right: 0.4em;
+  }
+}
+/* mobile: move the stat box to the top if the screen is too small,
+ * and reduce font size slightly. */
+@media screen and (max-width: 560px) {
+  #page {
+      position: static;
+  }
+  #content {
+      position: static;
+      font-size: 1.05em;
+      line-height: 160%;
+      padding: 1em 1em 1.5em 1em;
+  }
+  #qualities {
+      font-size: 1em;
+  }
+  #tools_wrapper {
+    position: static;
+  }
+  .tools {
+      width: 90%;
+      margin: 2em 0 1em 0;
+      margin: 0.4em;
+  }
+  .tools.left {
+      float: none;
+      left: 0;
+  }
+  .tools.right {
+      float: none;
+      right: 0;
+  }
+  #mid_panel {
+      margin: 0 auto;
+  }
+}
+
+
+
+header h1, header h2 {
+  display: inline-block;
+  font-weight: normal;
+  margin: 0;
+  font-size: 1em;
+}
+header h1 {
+  font-weight: bold;
+}
+header h2:before {
+  content: "by";
+  font-style: italic;
+  padding: 0 0.3em 0 0;
+}
+#content {
+  position: relative;
+  background-color: #f3f3f3;
+  font-size: 1.1em;
+  padding: 1em 1.5em 1.5em 1.5em;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+}
+#content #read-marker {
+  border: none;
+  border-top: 1px solid #000;
+  height: 1px;
+  width: 20%;
+  position: center;
+}
+#content h1:first-child {
+  margin-top: 0.5em;
+}
+#content h1 {
+  margin: 2em 0 1em 0;
+  font-size: 1.35em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
+               rgba(0, 0, 0, 0.1) -1px -1px 2px;
+}
+a {
+  color: #900;
+  text-decoration: none;
+}
+p {
+  margin: 0;
+  margin-bottom: 1em;
+  text-indent: 1em;
+}
+#content h1 + p {
+  text-indent: 0;
+}
+#content h1 + p:first-line {
+  font-weight: bold;
+}
+#content h1 + p:first-letter {
+  position: relative;
+  padding-top: 0.16em;
+  display: block;
+  float: left;
+  font-weight: normal;
+  font-size: 3.2em;
+  line-height: 0.75em;
+}
+p.game-over {
+  border: 2px solid #bbb;
+  padding: 0.5em;
+  margin: 0.5em 0 0 0;
+  border-radius: 4px;
+  color: #999;
+}
+ul.choices {
+  border: 2px solid #876;
+  padding: 0;
+  margin: 0.25em 0 0 0;
+  list-style-type: none;
+  border-radius: 4px;
+}
+ul.choices li {
+  border-bottom: 1px solid #876;
+  padding: 0.5em;
+}
+ul.choices li div.subtitle {
+  margin-left: 2em;
+  font-style: italic;
+}
+ul.choices li.unavailable {
+  color: #999;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  cursor: default !important;
+}
+ul.choices li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+ul.choices li:last-child {
+  border-bottom: none;
+}
+ul.choices a {
+  text-decoration: none;
+}
+blockquote {
+  margin: 1em 2em;
+}
+blockquote.attribution {
+  margin-left: 4em;
+}
+blockquote + blockquote.attribution {
+  margin-top: -1em;
+}
+#save {
+    background: rgba(0,0,0,0.7);
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+#saves_table {
+    position: relative;
+    max-width: 540px;
+    margin: 100px auto;
+    background: rgba(50,50,50,0.7);
+    border: 2px solid;
+    color: white;
+}
+.overlay {
+    background: rgba(0,0,0,0.7);
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    overflow: scroll;
+}
+.overlay_top {
+    position: relative;
+    max-width: 540px;
+    margin: 100px auto;
+    background: rgba(50,50,50,0.7);
+    border: 2px solid;
+    color: white;
+}
+.save_info {
+    min-width: 10em;
+}
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #f3f3e3;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+/*
+ * This is used for overlaying transparencies
+ * only transition on fade-in
+ * */
+#bg2 {
+    z-index: -100;
+}
+#bg1 {
+    z-index: -99;
+}
+.b {
+}
+.save_button {
+}
+.delete_button {
+}
+
+/*
+ * Card stuff for dendrynexus
+ * 
+ */
+
+ul.decks, ul.hand, ul.pinned-cards {
+  list-style: none;
+  padding-left: 0;
+}
+
+.hand {
+
+}
+
+.pinned-cards {
+
+}
+
+.deck {
+
+}
+
+a.card {
+  display: inline-block;
+  width: 120px;
+  height: 150px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  border: 10px solid #ccc;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+a.card:hover {
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  left: -5px;
+  top: -5px;
+}
+div.blank-card {
+  display: inline-block;
+  width: 120px;
+  height: 150px;
+  background-color: #ddd;
+  border: 10px solid #ccc;
+  margin-bottom: 0.5em;
+}
+
+.card-in-hand, .pinned-card, .deck {
+  display: inline-block;
+  position: relative;
+  max-width: 150px;
+  margin-right: 1em;
+  vertical-align: top;
+}
+
+/* TODO: unavailable card */
+.unavailable-card {
+  color: #999;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  cursor: default !important;
+}
+
+.card-caption {
+  text-align: center;
+  display: block;
+  font-size: 1em;
+}
+
+.card-tooltip {
+  position: absolute;
+  visibility: hidden;
+  width: 150px;
+  max-width: 200px;
+  font-size: 0.9em;
+  z-index: 2;
+  padding: 0.2em;
+  border: 1px solid;
+  background-color: #eee;
+  left: 105%;
+}
+
+.card-img {
+  height: 150px;
+  width: 120px;
+  object-fit: cover;
+}
+
+a.card:focus .card-tooltip, a.card:hover .card-tooltip {
+  visibility: visible;
+  position: absolute;
+}
+
+/* Unlike cards, face images can have different sizes. */
+.face-figure {
+  display: inline-block;
+  border: 5px solid #ccc;
+  float: right;
+  max-width: 150px;
+  max-height: 180px;
+  margin: 1em;
+}
+.face-image {
+  width: 140px;
+  object-fit: cover;
+}
+
+/*
+ * sprite stuff- feel free to comment out/remove if not using
+ */
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+#contentSpriteContainer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  max-width: 62em;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: -97;
+}
+.sprite {
+    position: absolute;
+    width: 180px;
+}
+#topLeftSprite {
+    float: left;
+    top: -1em;
+    left: 0.4em;
+}
+#topRightSprite {
+    float: right;
+    top: -1em;
+    right: 0.4em;
+}
+#bottomLeftSprite {
+    float: left;
+    left: 0.4em;
+    top: 50%;
+}
+#bottomRightSprite {
+    float: right;
+    right: 0.4em;
+    top: 50%;
+}
+

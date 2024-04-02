@@ -2,7 +2,7 @@ title: The Death of Paul Levi
 view-if: year = 1930 and month >= 2
 frequency: 1000
 max-visits: 1
-tags: event
-on-arrival: levi_dead = 1; levi_advisor = 0
+on-arrival: levi_dead = 1; n_advisors -= 1 if levi_advisor == 1; levi_advisor = 0
+#tags: event
 
 Paul Levi, a leader of the left wing of our party, has died.

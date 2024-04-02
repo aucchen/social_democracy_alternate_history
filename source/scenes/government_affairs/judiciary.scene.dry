@@ -8,7 +8,7 @@ tags: govt_affairs
 
 = Judiciary Reform
 
-The Judiciary is one of the most reactionary components of the government, along with the military. Many jurists have held office since the days of the Emperor. They give violent fascists laughably light sentences, while ruthlessly persecuting leftists and pacifists for lesser crimes.
+The Judiciary is one of the most reactionary components of the government, along with the military. Many jurists have held office since the days of the Emperor. They give violent fascists like Adolf Hitler laughably light sentences, while ruthlessly persecuting leftists and pacifists for lesser crimes.
 
 There is great demand in our membership for reforming the judiciary, although this may bring us into a collision course with our coalition allies.
 
@@ -17,9 +17,17 @@ There is great demand in our membership for reforming the judiciary, although th
 - @as_is: Leave the judiciary as it is.
 
 @reform
-on-arrival: democratization += 2; coalition_dissent += 1 if in_grand_coalition == 1;
+subtitle: -= budget
+unavailable-subtitle: Not enough budget.
+choose-if: budget >= 1
+on-arrival: budget -= 1; democratization += 2; coalition_dissent += 1 if in_grand_coalition == 1; workers_spd += 5*(1-dissent) if democratization >= 3; judicial_reform += 2
+
+We investigate jurists who have shown themselves to have biased or corrupt behavior, and try to remove them, replacing them with more democratically-oriented jurists. This obviously raises quite a great deal of ire in conservative circles, including within our coalition. 
 
 @minor_reforms
-on-arrival: democratization += 1;
+on-arrival: democratization += 1; workers_spd += 3*(1-dissent) if democratization >= 3; judicial_reform += 1
+
+We try to remove the most obviously biased and corrupt jurists.
 
 @as_is
+go-to: root

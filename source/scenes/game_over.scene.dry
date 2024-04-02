@@ -1,16 +1,74 @@
 title: Game Over
+new-page: true
+go-to: eg_menu
 
 = End
 
-Game over!
+
+@eg_menu
+
+- #endings
+- @end_game: End game.
 
 # TODO: achievements
 
 @hitler_wins
-view-if: chancellor = "Hitler"
+view-if: chancellor == "Hitler" or president == "Hitler"
+title: Adolf Hitler is in undisputed control over Germany.
+tags: endings
+go-to: eg_menu
+
+Adolf Hitler is in undisputed control over Germany. The SPD, along with all of the democratic forces, have failed.
+
+[? if civil_war_seen == 1 : At the very least, we fought back. Perhaps our resistance will be celebrated in an impossible-to-forsee future. ?]
+
+@no_hitler
+view-if: chancellor != "Hitler" and president != "Hitler"
+title: Hitler does not yet control Germany...
+tags: endings
+go-to: eg_menu
+
+Hitler does not yet control Germany. [? if chancellor == "Papen" or chancellor == "Schleicher" : However, Chancellor [+ chancellor +] is not much better. ?][? if resist_coup == 1 and republic_victory == 0 : Given our defeat in the Prussian coup, the far-right appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
+
+[? if hitler_deported == 1 : We have deported Hitler back to Austria. Hopefully he will never return. ?]
 
 @civil_war_lost
-view-if: civil_war_seen = 1
+title: We lost the civil war.
+view-if: total_defeat == 1
+tags: endings
+go-to: eg_menu
+
+We have lost the civil war.
+
+@long_war
+title: Germany is gripped by civil war.
+view-if: long_war == 1
+tags: endings
+go-to: eg_menu
+
+Germany is currently in the grip of a civil war. It is quite possible that the outcome will only be determined by foreign intervention.
+
+@braun_victorious
+title: Otto Braun victorious
+view-if: president == "Braun"
+tags: endings
+go-to: eg_menu
+
+Otto Braun has been elected as President of Germany. As the most powerful man in Germany, he is 
+
+@spd_victorious
+title: SPD still in government
+view-if: spd_in_government == 1 and chancellor_party == "SPD" and total_defeat == 0 and long_war == 0
+tags: endings
+go-to: eg_menu
+
+The SPD is still in government, under Chancellor [+ chancellor +]. Given the circumstances, this is a substantial accomplishment.
+
+@communist_victory
+title: Communist victory
+view-if: chancellor_party == "KPD" or president == "Thälmann" and total_defeat == 0 and long_war == 0
+tags: endings
+go-to: eg_menu
 
 
 @end_game

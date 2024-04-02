@@ -16,7 +16,8 @@ Braun [? if spd_prussia = 1 : is ?][? if spd_prussia = 0 : was ?] the Minister-P
 @coalition
 title: Negotiating with the Coalition
 subtitle: Braun can improve our relationships with our coalition partners.
-view-if: advisor_action_timer <= 0 and spd_in_government = 1
+choose-if: advisor_action_timer <= 0 and spd_in_government = 1
+unavailable-subtitle: Not available right now.
 on-arrival: advisor_action_timer = 5; coalition_dissent -= 1 if spd_in_government = 1; z_relation += 5; ddp_relation += 5; dvp_relation += 5
 
 We have improved our relations with the Z, DDP, and DVP, and reduced tensions with the coalition..
@@ -24,6 +25,7 @@ We have improved our relations with the Z, DDP, and DVP, and reduced tensions wi
 @prussian_bulwark
 title: Prussian Bulwark
 subtitle: As the Minister-President of Prussia, Braun has power over the Prussian bureaucracy and security services.
-view-if: advisor_action_timer <= 0 and spd_prussia = 1
-on-arrival: advisor_action_timer = 0; prussian_affairs_timer = 0
+choose-if: advisor_action_timer <= 0 and spd_prussia = 1
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 5; prussian_affairs_timer = 0
 go-to: prussian_affairs

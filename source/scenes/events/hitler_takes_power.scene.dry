@@ -4,7 +4,7 @@ view-if: chancellor == "Hitler"
 tags: event
 new-page: true
 
-Adolf Hitler of the NSDAP has been appointed Chancellor of Germany. He has promised a campaign of revenge against the socialists, and the Nazis have already spilled blood. In his published manifesto, he promises a campaign of unspeakable horror against our Jews, and endless wars of violent expansion that will ruin all of Europe.
+Hitler has promised a campaign of revenge against the socialists, and the Nazis have already spilled much blood on the streets. In his published manifesto, he promises a campaign of unspeakable horror against our Jews, and endless wars of violent expansion that will ruin all of Europe.
 
 What are we to do now?
 
@@ -24,3 +24,7 @@ Do we realize that this means civil war, against the full force of the state?
 Speeches are made. Votes are held. Bullets fly in the streets. Some socialists are killed or jailed. Others flee the country. What can votes even do at this juncture?
 
 The Reichstag is burned, ostensibly by a foreign communist. In the wake, the Nazis pass decrees giving them unlimited power. They, combined with the DNVP, will win a majority at the next elections.
+
+Germany is lost.
+
+- @game_over: Game over.

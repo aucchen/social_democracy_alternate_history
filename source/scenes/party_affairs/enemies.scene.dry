@@ -1,7 +1,7 @@
 title: Choosing Our Enemies
 new-page: true
 view-if: year <= 1930 and enemies_timer <= 0
-on-arrival: month_actions += 1; enemies_timer = 6
+on-arrival: month_actions += 1; enemies_timer = 12
 max-visits: 2
 is-card: true
 card-image: img/poster_1.png
@@ -20,26 +20,26 @@ In our media and campaign materials, who should we consider as our main opponent
 - @bourgeois: The bourgeois parties - the Center and DVP.
 
 @anti_dem
-on-arrival: enemies = "anti-democratic parties"; center_strength += 0.05; reformist_strength += 0.04; left_dissent += 0.04
+on-arrival: enemies = "anti-democratic parties"; center_strength += 5; reformist_strength += 5; left_dissent += 5
 
 Attacking the far right and left is popular among all but the left wing of our party, who would prefer to be fighting the bourgeois parties.
 
 @far_right
-on-arrival: enemies = "far right"; left_strength += 0.03; left_dissent -= 0.03
+on-arrival: enemies = "far right"; left_strength += 5; left_dissent -= 5
 
 Attacking the far right is popular among the entire party, although the left considers the bourgeois parties to be just as dangerous, while the right is critical of our lack of response to the KPD. Our bourgeois coalition partners are also skeptical of our lack of commitment to anti-communism.
 
 @nsdap
-on-arrival: enemies = "NSDAP"; neorevisionist_strength += 0.03
+on-arrival: enemies = "NSDAP"; neorevisionist_strength += 5; nazi_urgency += 1
 
-The NSDAP is a tiny party right now, with more bark than bite. Many in our party are questioning our choices.
+[? if nazi_urgency == 0 or nsdap_r < 10 : The NSDAP is a tiny party right now, with more bark than bite. Many in our party are questioning our choices. ?][? if nazi_urgency > 0 and nsdap_r >= 10 : The Nazis are the most urgent problem for us to deal with. ?]
 
 @kpd
-on-arrival: enemies = "KPD"; reformist_strength += 0.05; left_dissent += 0.05; reformist_dissent -= 0.05
+on-arrival: enemies = "KPD"; reformist_strength += 5; left_dissent += 5; reformist_dissent -= 5; kpd_relation -= 5; dvp_relation += 3; z_relation += 3
 
-Attacking the KPD is supported by all but the most left-wing socialists. However, If we are to reconcile with the KPD, this may not be the best choice.
+Attacking the KPD is supported by all but the most left-wing socialists, and wins us some measure of approval among the bourgeois parties. However, If we are to reconcile with the KPD, this may not be the best choice.
 
 @bourgeois
-on-arrival: enemies = "bourgeois parties"; left_strength += 0.05; left_dissent -= 0.05;
+on-arrival: enemies = "bourgeois parties"; left_strength += 5; left_dissent -= 5; dvp_relation -= 3; z_relation -= 3
 
 Our anti-bourgeois rhetoric is popular among the left, but may make it harder to build the coalitions that are necessary for government in the future.

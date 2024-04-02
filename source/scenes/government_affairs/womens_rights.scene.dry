@@ -5,3 +5,37 @@ tags: govt_affairs
 view-if: spd_in_government = 1 and womens_rights_timer = 0
 on-arrival: womens_rights_timer = 6; month_actions += 1
 card-image: img/portraits/PfülfAntonie.jpg
+max-visits: 2
+
+= Women's Rights
+
+According to the Constitution, women are equal to men, but this is not followed in practice. Women in the workforce are not paid equally for the same work, in addition to often being pushed out of employment after marriage. Men are still favored in marriage and family policy, and there are restrictions on women's rights in many other domains. And that is not to mention the overwhelming patriarchal culture present in Germany.
+
+For better or for worse, the Socialists stand virtually alone in supporting increased rights for women, and even within the party, the leadership does not consider it a priority.
+
+- @labor: Institute policies that help women in the workforce.
+- @welfare: Improve welfare for single mothers and children.
+- @liberalize: Attempt to liberalize abortion laws.
+- @root: Do not enact any policies for now.
+
+@labor
+subtitle: Paid maternal leave policies, equal pay policies, and so on.
+on-arrival: womens_rights += 1; workers_spd -= 4 if unemployment > 15; new_middle_spd += 4*(1-dissent); workers_spd += 3*(1 - dissent);
+
+These policies mean that our party is increasing in popularity among the "new women" who work outside the home. [? if unemployment > 15 : However, many male workers develop a backlash towards women in the workplace, especially given the rising unemployment. ?]
+
+
+@welfare
+subtitle: -1 budget
+on-arrival: welfare += 1; workers_spd += 5*(1-dissent); budget -= 1; womens_rights += 1; coalition_dissent += 1 if welfare >= 1 and unemployment >= 15
+
+We have increased welfare spending on women and children. [? if welfare >= 1 : Some of our coalition partners consider increased welfare spending profligate at this time. ?]
+
+
+@liberalize
+max-visits: 1
+subtitle: This is unlikely to succeed; we do not have majority support.
+on-arrival: womens_rights += 1; z_relation -= 5; coalition_dissent += 1; workers_spd += 3*(1-dissent); catholics_spd -= 5;
+
+Unfortunately, our proposal is voted down in the Reichstag, with the Catholic Center party (our long-time partners) speaking in particularly vehement opposition. The activists within our party, feeling demoralized from this attempt, have decided to bide their time.
+

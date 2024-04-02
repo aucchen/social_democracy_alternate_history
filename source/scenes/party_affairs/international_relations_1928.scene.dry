@@ -3,8 +3,8 @@ new-page: true
 is-card: true
 tags: party_affairs
 view-if: international_relations_timer <= 0
-on-arrival: month_actions += 1; international_relations_timer = 6;
-card-image: img/international.png
+on-arrival: month_actions += 1; international_relations_timer = 12;
+card-image: img/international.jpg
 max-visits: 3
 
 At the Labor and Socialist International, we can forge contacts with our fraternal socialistparties in Europe and across the world.
@@ -28,6 +28,7 @@ The socialists of France and Britain can influence their governments to be frien
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
+audio: shuffle music/communist/workers_of_vienna_normalized.mp3
 on-arrival: left_strength += 5; radicalization += 1; rb_militancy += 0.05; resources -= 1
 
 Our Reichsbanner can learn much in paramilitary organization and training from the Austrian Republican Protection Units.
@@ -36,7 +37,7 @@ Our Reichsbanner can learn much in paramilitary organization and training from t
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: reformist_strength += 8; wtb_support += 10; resources -= 1
+on-arrival: reformist_strength += 8; wtb_support += 1; resources -= 1
 
 The programs of the Nordic socialists involve active government intervention in the economy. We can learn from their economic strategies, and how they moved beyond their working-class base to attract a broader set of constituents.
 
@@ -46,7 +47,7 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1; kpd_relation += 5*(1-dissent);
 
-TODO
+The Stalinists of the KPD insists on calling us "social fascists", suggesting that we social democrats are as bad or worse than actual fascists. Needless to say, this is not good for our relationship with the Communists. By observing the Comintern, we can develop strategies to counter Stalinist rhetoric, at least on a local level.
 
 @america
 subtitle: -1 resources

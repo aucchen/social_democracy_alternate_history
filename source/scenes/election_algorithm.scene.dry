@@ -44,7 +44,6 @@ Q.dnvp_votes = Math.round(Q.dnvp_normalized*100);
 Q.nsdap_votes = Math.round(Q.nsdap_normalized*100);
 Q.other_votes = Math.round(Q.other_normalized*100);
 
-// TODO: separate votes from congress-setting, so that we can run simulations.
 !}
 go-to: jumpScene
 

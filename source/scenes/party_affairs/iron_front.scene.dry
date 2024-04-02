@@ -1,8 +1,38 @@
-title: Forming the Iron Front
+title: The Iron Front
 new-page: true
 is-card: true
-view-if: confronting_nazis_seen = 1 and nazi_urgency > 2 and iron_front_formed = 0
+view-if: iron_front_formed == 1 and iron_front_timer = 0
+on-arrival: iron_front_timer = 7; month_actions += 1
+card-image: img/iron_front.png
+frequency: 200
 tags: party_affairs, antifascism
-max-visits: 1
 
-= Forming the Iron Front
+= The Iron Front
+
+The Iron Front is our new antifascist coordination front, consisting of the SPD, the trade unions, and the Reichsbanner. How should we use the Iron Front?
+
+- @defense: Rally for defense against the fascists with the Reichsbanner.
+- @pacifism: Rally for pacifism, against nationalism and war.
+- @republic: Rally to save the democratic republic against dictatorship.
+- @wtb: Rally for economic change and the WTB-Plan.
+
+@defense
+on-arrival: rb_strength += 50; rb_militancy += 0.05
+
+The Iron Front rallies for the militant defense of the republic against the fascist paramilitaries, strengthening the Reichsbanner.
+
+@pacifism
+on-arrival: pacifism += 1; nationalism -= 5 if pacifism >= 3; workers_spd += 5*(1-dissent) if pacifism >= 4
+
+The Iron Front rallies against nationalism and war.
+
+@republic
+on-arrival: pro_republic += 5*(1-dissent); democratization += 1; workers_spd += 5*(1-dissent) if democratization >= 4;
+
+The Iron Front rallies for the democratic republic and against dictatorship.
+
+@wtb
+view-if: wtb_adopted == 1
+on-arrival: workers_spd += 8*(1-dissent); unemployed_spd += 6*(1-dissent); new_middle_spd += 5*(1-dissent); old_middle_spd += 3*(1-dissent);
+
+The WTB-Plan is the rallying point for the entire SPD and its affiliated organizations, including the Iron Front.

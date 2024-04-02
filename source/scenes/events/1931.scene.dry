@@ -4,23 +4,31 @@ on-arrival: {!
 // increase NSDAP vote share 
 // TODO: if a public works program has started, unemployment is not so bad.
 Q.unemployed += 8; 
+if (Q.works_program) {
+    Q.unemployed -= 5;
+}
 Q.workers -= 5;
 Q.rural_dvp -= 5;
 Q.old_middle_dvp -= 5;
 Q.new_middle_dvp -= 5;
 Q.old_middle_ddp -= 5;
 Q.new_middle_ddp -= 5;
-Q.rural_nsdap += 10; 
-Q.new_middle_nsdap += 10; 
-Q.old_middle_nsdap += 15;
-Q.workers_nsdap += 5;
-Q.workers_kpd += 5;
+Q.sa_strength += 50;
+Q.sh_strength += 50;
+Q.sa_militancy += 0.1;
+if (!Q.works_program) {
+    Q.rural_nsdap += 10; 
+    Q.new_middle_nsdap += 10; 
+    Q.old_middle_nsdap += 15;
+    Q.workers_nsdap += 5;
+    Q.workers_kpd += 5;
+    Q.sa_strength += 100;
+    Q.sh_strength += 50;
+}
 !}
 tags: event
 view-if: year = 1931 and month = 1 
 max-visits: 1
 go-to: main 
-
-= 1931
 
 A new year begins. [? if works_program = 0 : Unemployment continues to spiral upwards. ?]

@@ -9,17 +9,17 @@ card-image: img/portraits/SchachtHjalmar.jpg
 
 Reichsbank president Hjalmar Schacht has criticized Finance Minister Hilferding of the SPD for his budget, which he claims is unbalanced and contains too much social welfare and not enough tax cuts for top earners and businesses. More importantly, he is refusing to release loans necessary for the functioning of the government unless Hilferding either massively changes his budget or resigns.
 
-Of course, this criticism is unfounded, but the bourgeois media does not care.
+Of course, this criticism is unfounded, but the bourgeois establishment does not care.
 
 - @expose_him: Expose his reactionary dealings!
 - @work_with: Work with him to shape the budget.
 - @hilferding_resign: Hilferding must resign.
 
 @expose_him
+view-if: investigate_far_right >= 1
 
-TODO
+We expose to the public Schacht's dealings with the Nazis. For better or worse, he is cowed, and refrains from taking further actions against us.
 
-# TODO: this requires funding interior ministry to study fascists.
 
 @work_with
 
@@ -31,4 +31,4 @@ After a second budget proposal, Schacht still considers Hilferding's budget to b
 @hilferding_resign
 on-arrival: finance_minister_party = "DVP"; finance_minister = "Moldenhauer"
 
-Hilferding resigns.
+Hilferding resigns as Finance Minister.

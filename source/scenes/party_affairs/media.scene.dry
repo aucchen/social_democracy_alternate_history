@@ -34,7 +34,7 @@ Our campaign media is mostly reaching the workers who are already saturated with
 @ideological
 title: We will have vibrant ideological debate within our newspapers.
 subtitle: There will be space for all factions to air their views.
-on-arrival: left_dissent -= 8; labor_dissent -= 8; centrist_dissent -= 8; reformist_dissent -= 8; neorevisionist_dissent -= 8
+on-arrival: left_dissent -= 8; labor_dissent -= 8; center_dissent -= 8; reformist_dissent -= 8; neorevisionist_dissent -= 8
 
 This has been our media course historically, and it has successfully paved over the many tensions in our party.
 

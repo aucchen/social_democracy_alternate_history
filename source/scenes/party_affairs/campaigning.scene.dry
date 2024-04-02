@@ -1,11 +1,10 @@
 title: Campaigning
 new-page: true
-view-if: in_election = 1 
 on-arrival: month_actions += 1
 max-visits: 10
 is-card: true
 card-image: img/flags.jpg
-frequency: 200
+frequency: 100
 tags: party_affairs
 
 = Campaigning
@@ -22,25 +21,25 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: workers_spd += 5*(1-dissent); resources -= 1
+on-arrival: workers_spd += 5*(1-dissent); workers_spd -= 2 if unemployed >= 15; workers_spd -= 2 if unemployed >= 25; workers_spd += 6*(1-dissent) if wtb_adopted = 1; resources -= 1
 
-We have increased our campaigning among the workers.
+We have increased our campaigning among the workers. [? if unemployed >= 15: The high levels of unemployment make our campaign more difficult. ?][? if wtb_adppted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract workers. ?]
 
 @new_middle
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: new_middle_spd += 3*(1-dissent); resources -= 1
+on-arrival: new_middle_spd += 5*(1-dissent); new_middle_spd -= 2 if socialism <= 49; resources -= 1
 
-We have increased our campaigning among the new middle class.
+We have increased our campaigning among the new middle class. [? if socialism <= 49: The popular antipathy towards socialism among this group makes our campaign more difficult. ?]
 
 @old_middle
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: old_middle_spd += 3*(1-dissent); resources -= 1
+on-arrival: old_middle_spd += 6*(1-dissent); resources -= 1; old_middle_spd -= 3 if nationalism >= 51;
 
-We have increased our campaigning among the old middle class.
+We have increased our campaigning among the old middle class. [? if nationalism >= 51: The high levels of nationalism among this group make our campaign more difficult. ?]
 
 @rural
 subtitle: -1 resources
@@ -48,12 +47,12 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: rural_spd += 3*(1-dissent); resources -= 1
 
-We have increased our campaigning among farmers.
+We have increased our campaigning among farmers. [? if unemployed >= 15: The high levels of unemployment make our campaign more difficult. ?]
 
 @unemployed
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: unemployed_spd += 3*(1-dissent); resources -= 1
+on-arrival: unemployed_spd += 5*(1-dissent); resources -= 1; unemployed_spd -= 2 if welfare <= 0; unemployed_spd -= 2 if welfare < 0; unemployed_spd += 6*(1-dissent) if wtb_adopted = 1
 
-We have increased our campaigning among the unemployed.
+We have increased our campaigning among the unemployed. [? if welfare < 0: The welfare cuts and resultant poverty make our campaign more difficult, since we are associated with the government that enacted these cuts, and it may even backfire. ?][? if wtb_adppted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract support from the unemployed. ?]

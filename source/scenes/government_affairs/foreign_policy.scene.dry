@@ -4,7 +4,10 @@ is-card: true
 tags: govt_affairs
 on-arrival: month_actions += 1; foreign_policy_timer = 6
 view-if: spd_in_government = 1 and foreign_minister_party = "SPD" and  foreign_policy_timer = 0
+frequency: 1
 card-image: img/portraits/BreitscheidRudolf.jpg
+
+# TODO: implement this later
 
 = Foreign Policy
 

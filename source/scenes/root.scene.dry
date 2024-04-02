@@ -1,10 +1,11 @@
 title: Root Scene
 new-page: true
-go-to: post_event if started = 1 and post_event_seen = 0; main if started = 1 and post_event_seen = 1; start_menu if started = 0
-on-departure: post_event_seen = 0
+go-to: post_event if started = 1; start_menu if started = 0
 
+# TODO: do that thing that we did before...
 
 @start_menu
+new-page: true
 
 = Social Democracy: An Alternate History
 
@@ -26,7 +27,7 @@ Q.month_actions = 0;
 // party resources
 Q.resources = 2;
 // party dues
-Q.dues = 3;
+Q.dues = 2;
 
 // the state of the party
 // overall dissent reduces every increase in party support.
@@ -46,6 +47,10 @@ Q.reformist_dissent = 5;
 Q.neorevisionist_strength = 5;
 Q.neorevisionist_dissent = 10;
 
+// secret events...
+Q.unions_independent = 0;
+Q.center_resigned = 0;
+
 // have we discovered neorevisionism?
 Q.neorevisionism = 0;
 
@@ -54,7 +59,7 @@ Q.crisis_urgency = 0;
 // nazi_urgency indicates how seriously the SPD takes the nazis - scale from 0 to 10.
 Q.nazi_urgency = 0;
 // radicalization indicates how radical the SPD's rhetoric is - scale from 0 to 10.
-Q.radicalization = 2;
+Q.radicalization = 0;
 // Support for the WTB plan and proto-Keynesian works creation plans in general
 Q.wtb_support = 0;
 // Support for Pacifism within the SPD relative to 1928
@@ -63,6 +68,13 @@ Q.pacifism = 0;
 Q.democratization = 0;
 // Support for a communist coalition relative to 1928
 Q.communist_coalition = 0;
+// economic_plan: have we adopted *any* economic plan?
+// 1 - WTB plan, 2 - AfA-bund plan, 3 - radical plan (mass nationalization of industries)
+Q.economic_plan = 0;
+// have we officially adopted the WTB plan?
+Q.wtb_adopted = 0;
+// have we formed the iron front?
+Q.iron_front_formed = 0;
 
 // organizations
 
@@ -75,11 +87,14 @@ Q.dvp_relation = 35;
 Q.DNVP_relation = 10;
 Q.NSDAP_relation = 0;
 
+// hmm... maybe we can play nice with Hindenburg???
+Q.hindenburg_relation = 25;
+
 
 // Does the SPD lead in Prussia?
 Q.spd_prussia = 1;
 // Options: spd, z, dnvp, papen, nsdap
-Q.prussian_government = "spd";
+Q.prussian_government = "SPD";
 
 // The array of forces - paramilitary groups
 // Number of members in 1928 (in thousands)
@@ -90,12 +105,19 @@ Q.rb_banned = 0;
 Q.sh_strength = 500;
 Q.sh_militancy = 0.5;
 Q.sh_banned = 0;
+Q.sh_banned_prussia = 0;
 Q.sa_strength = 80;
 Q.sa_militancy = 0.5;
 Q.sa_banned = 0;
+Q.sa_banned_prussia = 0;
 Q.rfb_strength = 130;
 Q.rfb_militancy = 0.5;
 Q.rfb_banned = 0;
+Q.rfb_banned_prussia = 0;
+
+Q.interior_police_strength = 50;
+Q.interior_police_militancy = 1;
+Q.interior_police_loyalty = 0.4;
 
 Q.prussian_police_strength = 90;
 Q.prussian_police_militancy = 1;
@@ -227,6 +249,7 @@ Q.nsdap_in_government = 0;
 // Weimar coalition = SPD + Z + DDP
 Q.in_weimar_coalition = 0;
 // Grand coalition = SPD + Z + BVP + DDP + DVP
+// also includes the "new grand coalition" of SPD + Z + BVP + DDP + DVP + Others
 Q.in_grand_coalition = 0;
 // United front = SPD + KPD + Z + DDP
 Q.in_united_front = 0;
@@ -299,26 +322,35 @@ Q.n_advisors = 3;
 // timer - this decrements by 1 every turn, and is set to 5 whenever an advisor action is used, so that you can only use one advisor action every 5 months.
 // let's just put all of the timers here...
 // most party affairs and government affairs cards are on a timer.
-Q.timers = ['advisor_action', 'fundraising', 'ideology',
-            'inter_party_relationships', 'international_relations', 'media',
+Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
+            'fundraising', 'ideology',
+            'inter_party_relationships', 'international_relations',
+            'iron_front', 'media',
             'party_organizations', 'rally', 'reichsbanner',
-            'shuffle_leadership',
+            'shuffle_leadership', 'streetfighting',// govt
             'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
             'foreign_policy', 'judiciary', 'labor_affairs', 'military',
-            'police', 'prussian_affairs', 'social_welfare', 'womens_rights'];
+            'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
+            'war_guilt', 'womens_rights'];
 Q.advisor_action_timer = 0;
 // party affairs timers
+Q.confronting_nazis_timer = 0;
+Q.crisis_program_timer = 0;
 Q.fundraising_timer = 0;
 Q.ideology_timer = 0;
 Q.inter_party_relationships_timer = 0;
 Q.international_relations_timer = 0;
+Q.iron_front_timer = 0;
 Q.media_timer = 0;
 Q.party_organizations_timer =  0;
 Q.rally_timer = 0;
 Q.reichsbanner_timer = 0;
 Q.shuffle_leadership_timer = 0;
+Q.streetfighting_timer = 0;
 // n_elections is the number of elections that have happened since the start of the game.
 Q.n_elections = 0;
+// number of elections without a clear majority.
+Q.no_majority_elections = 0;
 // elections are not on a timer, but rather there is an indicator for whether you're in an electoral cycle.
 Q.in_election = 1;
 Q.next_election_year = 1928;
@@ -333,7 +365,9 @@ Q.labor_affairs_timer = 0;
 Q.military_policy_timer = 0;
 Q.police_timer = 0;
 Q.prussian_affairs_timer = 0;
+Q.shuffle_cabinet_timer = 0;
 Q.social_welfare_timer = 0;
+Q.war_guilt_timer = 0;
 Q.womens_rights_timer = 0;
 
 
@@ -381,11 +415,12 @@ new-page: true
 
 This is a game of alternate history. While historical accuracy is a major concern, keep in mind that this is a *game*, and that any divergence from actual events will necessarily have to involve some element of make-believe. Nevertheless, please let the author know if there are any glaring historical mistakes.
 
-For more information on the politics and government of the German Republic, see the "Library" page on the top left.
+For more information on the politics and government of the German Republic, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
 
 - @1928_main: Begin
 
 @1928_main
+audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_HOHEN_BERGEN_noise_reduced.mp3 music/1928_1930/MarekWeber.mp3 music/1928_1930/BAUERNKAPELLE.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3
 new-page: true
 go-to: main
 

@@ -1,21 +1,39 @@
 title: Coup in Prussia
 subtitle: The Chancellor attempts to overthrow the Prussian government.
-view-if: (chancellor = "Papen" or chancellor = "Schleicher") and year >= 1932 and month >= 8 and spd_r + z_r + ddp_r + dvp_r < 48 and emergency_rule = 1 and sa_banned = 0
+view-if: (chancellor = "Papen" or chancellor = "Schleicher") and year >= 1932 and month >= 8 and spd_in_government == 0 and spd_prussia = 1
+on-arrival: prussian_coup_seen = 1
 new-page: true
 tags: event
+max-visits: 1
 
 = Coup in Prussia
 
-A crisis! Chancellor [+ chancellor +] has ordered the dismissal of the Prussian government in a procedure known as the *Reichsexecution*. His argument is that the Prussian state government is unable to maintain order due to the battles on the streets between the SA and other paramilitaries. Nevermind the fact that his administration legalized the SA in the first place.
+A crisis! Chancellor [+ chancellor +] has ordered the dismissal of the Prussian government in a procedure known as the *Reichsexecution*. His argument is that the Prussian state government is unable to maintain order due to the battles on the streets between the SA, Reichsbanner, and other paramilitaries. This is despite his own government legalizing them.
 
-The legality of the action is questionable. This is the last demo
+The legality of the action is questionable. Many of our members are ready to resist.
+
+- @defend
+- @surrender
 
 
 @defend
 title: Fight against the overthrow attempt!
 subtitle: Labor will call a general strike. The Reichsbanner and the loyal elements of the Prussian police will resist the coup.
-choose-if: radicalization >= 3 and rb_strength*rb_militancy >= 200
+unavailable-subtitle: We do not have the forces to resist.
+choose-if: rb_strength*rb_militancy >= 200
 
-The Reichswehr and Stahlhelm are already surrounding the cities. This will be civil war. We do realize that, correct?
+The Reichswehr and Stahlhelm are already surrounding the left-leaning cities, and the SA is supporting them. This will be civil war. We do realize that, correct?
 
-- @civil_war: Civil war it is.
+- @defend_2: Civil war it is.
+- @surrender
+
+@defend_2
+go-to: civil_war
+on-arrival: resist_coup = 1
+
+
+@surrender
+title: Give up on the Prussian government.
+on-arrival: spd_prussia = 0; workers_spd -= 5; left_dissent += 10; labor_dissent += 10; rb_militancy = rb_militancy/2; rb_strength -= 1000;
+
+A pall of hopelessness and despair descends over social democracy. We have failed. Many in the Reichsbanner simply quit, demoralized by their leaders' lack of a call to action.

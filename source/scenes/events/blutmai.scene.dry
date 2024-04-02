@@ -1,4 +1,5 @@
 title: May Day, 1929
+new-page: true
 subtitle: A Communist demonstration
 tags: event
 view-if: year = 1929 and month = 5

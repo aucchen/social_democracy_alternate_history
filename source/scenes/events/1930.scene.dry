@@ -1,14 +1,25 @@
 title: 1930
 subtitle: A new year 
+audio: clear shuffle music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1930_1933/Internationale-de_normalized.ogg music/1930_1933/ironfront_normalized.mp3 music/1930_1933/KommSusserTod.mp3 music/1930_1933/Warszawianka.mp3
 on-arrival: {!
 // increase NSDAP vote share 
 Q.unemployed += 8; 
 Q.rural_nsdap += 15; 
-Q.rural_dnvp -= 5;
+Q.rural_dnvp -= 15;
+Q.new_middle_dvp -= 5;
+Q.old_middle_dvp -= 5;
+Q.new_middle_ddp -= 10;
+Q.old_middle_ddp -= 10;
 Q.new_middle_nsdap += 10; 
 Q.old_middle_nsdap += 15;
-Q.workers_kpd += 5;
+Q.new_middle_other += 5;
+Q.old_middle_other += 5;
+Q.rural_other += 5;
+Q.workers_other += 5;
+Q.workers_kpd += 3;
+Q.workers_nsdap += 3;
 Q.sa_strength += 50;
+Q.sh_strength += 100;
 if (Q.budget > 0) {
     Q.budget -= 1;
 }
@@ -17,7 +28,5 @@ tags: event
 view-if: year = 1930 and month = 1 
 max-visits: 1
 go-to: main 
-
-= 1930
 
 A new year begins. The economic crisis is worsening throughout the world, with no end in sight. The NSDAP seems to be strengthening in local elections. All very worrisome trends.

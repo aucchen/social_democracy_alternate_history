@@ -50,11 +50,27 @@ if (Q.month_actions >= 1) {
         }
     }
 }
-Q.post_event_seen = 1;
-// TODO: check if there are any cards in #event, and then go to main if not.
+Q.has_event = 0;
+// check if there are any cards in #event, and then go to main if not.
+if (typeof window !== "undefined") {
+    var scene = window.dendryUI.dendryEngine.game.scenes['post_event.events_choice'];
+    var choices = window.dendryUI.dendryEngine._compileChoices(scene);
+    if (choices && choices[0].title != "Continue...") {
+        Q.has_event = 1;
+    } else {
+        has_event = 0;
+    }
+} else {
+    has_event = 0;
+}
+if (typeof window !== "undefined" && window.generateBar) {
+}
 !}
+go-to: events_choice if has_event = 1; main if has_event = 0
 
-= Events
+= [+ month : month +] [+ year +]
+
+@events_choice
 
 - #event
 

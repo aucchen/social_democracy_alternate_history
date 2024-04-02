@@ -1,12 +1,12 @@
 title: Hitler appointed Chancellor!
 subtitle: The beginning of the end...
-view-if: year = 1933 and president = "Hindenburg" and (chancellor = "Papen" or chancellor = "Schleicher") and largest_party = "NSDAP"
+view-if: year = 1933 and president = "Hindenburg" and (chancellor = "Papen" or chancellor = "Schleicher" or chancellor = "Brüning") and in_grand_coalition = 0 and spd_in_government = 0 and largest_party = "NSDAP" and hitler_deported = 0
 tags: event
 new-page: true
 
 = Hitler Appointed Chancellor!
 
-Internal scheming has caused President Hindenburg to appoint Hitler as chancellor, replacing [+ chancellor +]. He has promised a campaign of revenge against the socialists, and the Nazis have already spilled blood. In his published manifesto, he promises a campaign of unspeakable horror against our Jews, and endless wars of violent expansion that will ruin all of Europe.
+Internal scheming by the camarilla surrounding the president has caused President Hindenburg to appoint Hitler as chancellor, replacing the unpopular [+ chancellor +]. He has promised a campaign of revenge against the socialists, and the Nazis have already spilled blood. In his published manifesto, he promises a campaign of unspeakable horror against our Jews, and endless wars of violent expansion that will ruin all of Europe.
 
 What are we to do now?
 

@@ -1,11 +1,34 @@
 title: Investigating Domestic Enemies
 new-page: true
 is-card: true
-tags: govt_affairs
 on-arrival: domestic_enemies_timer = 6; month_actions += 1
 view-if: spd_in_government = 1 and interior_minister_party = "SPD" and domestic_enemies_timer = 0
 card-image: img/portraits/SeveringCarl.jpg
+# tags: govt_affairs
+
+# TODO: abandoning this scene for now... work something out here.
 
 = Investigating Domestic Enemies
 
-As we have control over the Interior Ministry, we can direct police and intelligence services to investigate internal enemies.
+As we have control over the Interior Ministry, we can direct police and intelligence services to investigate internal enemies. We can proscribe various organizations.
+
+- @deport_hitler
+- @ban_sa: Ban the SA nationally.
+- @unban_sa: Unban the SA.
+- @ban_sh: Ban the Stahlhelm nationally.
+- @unban_sh: Unban the Stahlhelm.
+- @ban_rfb: Ban the Communist RFB nationally.
+- @unban_rfb: Unban the RFB.
+- @root: Take no action for now.
+
+@ban_sa
+
+@unban_sa
+
+@ban_sh
+
+@unban_sh
+
+@ban_rfb
+
+@unban_rfb

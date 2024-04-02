@@ -1,11 +1,29 @@
 title: Banking Crisis
-subtitle: The great stock market crash...
+subtitle: The collapse of the German banking system...
 new-page: true
-on-arrival: black_thursday_seen = 1; workers_kpd += 10; workers_nsdap += 5; unemployed += 2
+on-arrival: banking_crisis_seen = 1; workers_kpd += 6; workers_nsdap += 5; unemployed += 3
 tags: event
-view-if: year = 1931 and month >= 3 and chancellor = "Brüning" and foreign_minister_party != "SPD"
+view-if: year = 1931 and month >= 6 and chancellor = "Brüning" and spd_in_government == 0
 max-visits: 1
 
 = Banking Crisis
 
-The Darmstadt und National Bank, or Danat Bank, has collapsed!
+The Darmstädter und Nationalbank, or Danat Bank, has collapsed! Along with it goes much of the German banking system. The cause seemed to be due to the government's pursuit of a customs union with Austria, which led to de facto international sanctions.
+
+This is a bourgeois dispute, but the costs will be borne by the proletariat. The people are facing ever-increasing hunger and poverty, and perhaps we are partly to blame.
+
+- @austerity: Chancellor [+ chancellor +]'s response is, as always, more austerity.
+- @end_toleration: We are tired of austerity. End the toleration arrangement!
+
+@austerity
+on-arrival: welfare -= 1; workers_spd -= 3; unemployed_spd -= 3;
+
+Chancellor [+ chancellor +] responds to the banking crisis with more cuts to welfare.
+
+@end_toleration
+view-if: spd_toleration = 1
+on-arrival: next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0;
+
+We are tired of [+ chancellor +]'s policy of austerity. After [+ chancellor +]'s attempt to use emergency powers to pass another welfare cut, we have worked with the other parties to reverse this policy. In response, the Reichstag has been dissolved, and new elections called.
+
+New elections have been set for [+ next_election_month : month +] [+ next_election_year +].

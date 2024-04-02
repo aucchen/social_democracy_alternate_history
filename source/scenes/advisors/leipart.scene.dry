@@ -7,3 +7,38 @@ new-page: true
 
 = Theodor Leipart
 
+Leipart is a leader of the ADGB, the largest federation of socialist trade unions.
+
+- @organizing
+- @depression
+- @root: Return to main
+
+# leipart was one of the people who argued for union independence
+#- @union_unity
+
+@organizing
+title: Organizing workers
+subtitle: Improve our standing among the workers.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 6; workers_spd += 4*(1-dissent); workers_spd += 3*(1-dissent) if wtb_adopted == 1;
+
+We have increased our organizing among the workers.
+
+@depression
+title: Addressing the economic crisis
+subtitle: Formulate a plan to get us out of this mess.
+choose-if: advisor_action_timer <= 0 and wtb_adopted = 0
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 6; wtb_support += 1;
+
+The WTB-plan, standing for its primary supporters Woytinsky, Tarnow, and Baade, has been adopted as the unions' plan for getting us out of the depression.
+
+@union_unity
+title: Union-party coordination
+subtitle: Reduce dissent among the unions.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 6; labor_dissent -= 5;
+
+We have reduced tensions with the Labor faction.

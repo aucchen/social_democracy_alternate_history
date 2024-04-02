@@ -1,0 +1,13 @@
+title: Unions Declare Independence
+new-page: true 
+subtitle: Labor's disagreements with our policies have grown too severe.
+tags: event
+view-if: labor_dissent >= 60
+on-arrival: unions_independent = 1; labor_strength = labor_strength/2; workers_spd -= 20; unemployed_spd -= 10; workers_other += 5; workers_kpd += 5; workers_nsdap += 5; woytinsky_advisor = 0; leipart_advisor = 0; rb_strength -= 600; 
+max-visits: 1
+
+= Unions Declare Independence
+
+Our policy choices have greatly offended the labor movement. Union leaders have declared that they are independent of any political party, and some have been seen seeking accomodation with the KPD and NSDAP.
+
+Much of our working-class base has defected, and labor's influence in our party has greatly diminished.

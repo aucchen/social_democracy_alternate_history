@@ -8,4 +8,28 @@ card-image: img/muller_cabinet.jpg
 
 = Coalition Affairs
 
-There is some trouble in our coalition. The right-leaning members of the Center and DVP are 
+Our coalition is in trouble. The right-leaning members of the Center and DVP are constantly criticizing us for our policies, and are threatening to call a vote of no confidence to collapse this government, or to do the same for our government in the state of Prussia.
+
+How do we reduce tensions with the coalition?
+
+- @promise_cuts: Agree to the bourgeois plans to cut welfare.
+- @resources: Use our party resources to support our allies.
+- @no_change: Take none of these actions.
+
+
+@promise_cuts
+on-arrival: workers_spd -= 5; unemployed_spd -= 6; workers_kpd += 5; unemployed_kpd += 3; unemployed_nsdap += 3; left_dissent += 10; labor_dissent += 5; welfare -= 1; budget += 1; coalition_dissent = 0
+
+Fine. By cutting welfare, we have reduced dissent within the coalition.
+
+@resources
+subtitle: -2 resources
+unavailable-subtitle: Not enough resources (need 2).
+choose-if: resources >= 2
+on-arrival: resources -= 2; coalition_dissent -= 1
+
+By transferring campaign funds to our coalition partners, we can make our policies more acceptable to them. Some would call this corruption, but perhaps it is necessary to save democracy.
+
+@no_change
+
+No. We will not do this.

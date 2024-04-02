@@ -2,6 +2,7 @@ title: Fundraising
 new-page: true
 view-if: fundraising_timer <= 0
 on-arrival: fundraising_timer = 6; month_actions += 1
+frequency: 200
 is-card: true
 card-image: img/poster_2.jpg
 tags: party_affairs

@@ -12,6 +12,7 @@ Herein contains relevant information about the government and politics of the Ge
 - @government: Government
 - @demographics: Demographics
 - @parties: Parties
+- @public_opinion: Public opinion (and projected election results)
 - @paramilitaries: Paramilitary groups
 - @factions: Internal Factions
 - @backSpecialScene: Exit library.
@@ -46,25 +47,70 @@ go-to: menu
 
 
 @public_opinion
+go-to: election_algorithm
+set-jump: election_projections
 
-TODO: include capitalism vs socialism, nationalism vs internationalism, democracy vs dictatorship, as bars.
+**Public Opinion**
 
-TODO: include current election projections, votes from all demos.
+#Support for Socialism: [+ socialism +]%
+
+#Support for Nationalism: [+ nationalism +]%
+
+Support for the Republic: [+ pro_republic +]%
+
 
 @election_projections
+go-to: menu
 
-# TODO
+**Projected election results** (if the election were to be held now):
 
+# 1928: 30, 1930: 25, 1932: 22
+SPD: [+ spd_votes +]%
+
+# 1928: 15, 1930: 15, 1932: 
+Z + BVP: [+ z_votes +]%
+
+# 1928: 10, 1930: 13
+KPD: [+ kpd_votes +]%
+
+# 1928: 5, 1930: 4 (as DstP)
+DDP: [+ ddp_votes +]%
+
+# 1928: 9, 1930: 5
+DVP: [+ dvp_votes +]%
+
+# 1928: 14, 1930: 7
+DNVP: [+ dnvp_votes +]%
+
+# 1928: 3, 1930: 18
+NSDAP: [+ nsdap_votes +]%
+
+# 1928: 9, 1930: 10
+Others: [+ other_votes +]%
+
+**Detailed results for each demographic**
+
+Workers: SPD: [+ workers_spd_normalized +]%, Z: [+ workers_z_normalized +]%, KPD: [+ workers_kpd_normalized +]%, DDP: [+ workers_ddp_normalized +]%, DVP: [+ workers_dvp_normalized +]%; DNVP: [+ workers_dnvp_normalized +]%, NSDAP: [+ workers_nsdap_normalized +]%, Others: [+ workers_other_normalized +]%
+
+New Middle Class: SPD: [+ new_middle_spd_normalized +]%, Z: [+ new_middle_z_normalized +]%, KPD: [+ new_middle_kpd_normalized +]%, DDP: [+ new_middle_ddp_normalized +]%, DVP: [+ new_middle_dvp_normalized +]%; DNVP: [+ new_middle_dnvp_normalized +]%, NSDAP: [+ new_middle_nsdap_normalized +]%, Others: [+ new_middle_other_normalized +]%
+
+Old Middle Class: SPD: [+ old_middle_spd_normalized +]%, Z: [+ old_middle_z_normalized +]%, KPD: [+ old_middle_kpd_normalized +]%, DDP: [+ old_middle_ddp_normalized +]%, DVP: [+ old_middle_dvp_normalized +]%; DNVP: [+ old_middle_dnvp_normalized +]%, NSDAP: [+ old_middle_nsdap_normalized +]%, Others: [+ old_middle_other_normalized +]%
+
+Rural: SPD: [+ rural_spd_normalized +]%, Z: [+ rural_z_normalized +]%, KPD: [+ rural_kpd_normalized +]%, DDP: [+ rural_ddp_normalized +]%, DVP: [+ rural_dvp_normalized +]%; DNVP: [+ rural_dnvp_normalized +]%, NSDAP: [+ rural_nsdap_normalized +]%, Others: [+ rural_other_normalized +]%
+
+Unemployed: SPD: [+ unemployed_spd_normalized +]%, Z: [+ unemployed_z_normalized +]%, KPD: [+ unemployed_kpd_normalized +]%, DDP: [+ unemployed_ddp_normalized +]%, DVP: [+ unemployed_dvp_normalized +]%; DNVP: [+ unemployed_dnvp_normalized +]%, NSDAP: [+ unemployed_nsdap_normalized +]%, Others: [+ unemployed_other_normalized +]%
+
+Catholics: SPD: [+ catholics_spd_normalized +]%, Z: [+ catholics_z_normalized +]%, KPD: [+ catholics_kpd_normalized +]%, DDP: [+ catholics_ddp_normalized +]%, DVP: [+ catholics_dvp_normalized +]%; DNVP: [+ catholics_dnvp_normalized +]%, NSDAP: [+ catholics_nsdap_normalized +]%, Others: [+ catholics_other_normalized +]%
 
 @parties
 go-to: menu
 
 **SPD** - *Sozialdemokratische Partei Deutschlands* (Social Democratic Party of Germany) - this is us. We are a socialist and democratic party of the working class. We are the heirs of the legacy of Marx and Engels, Lassalle and Bebel. We are the foremost defenders of the Republic. The modern SPD was formed from a merger of the "Majority" SPD, which supported the Great War, and the "Independent" SPD or USPD, which opposed the war.
 
-**Z** - *Zentrumspartei* (Center Party) - a centrist to center-right Catholic party that supports the Republic. They have often been in coalitions with us. They are often associated with the **BVP** (Bavarian People's Party), which represents Catholics in Bavaria.
+**Z** - *Zentrumspartei* (Center Party) - a centrist to center-right Catholic party that supports the Republic, and has historically supported many of our labor, welfare, and anti-militarist priorities. They have often been in coalitions with us. They are often associated with the **BVP** (Bavarian People's Party), which represents Catholics in Bavaria. [? if year >= 1930 or chancellor = "Brüning" : They have appeared to take a more conservative turn recently, with the rise of Brüning and the party leader, Ludwig Kaas. ?]
 
 # TODO: replace this with the german state party after 1930
-**DDP** - *Deutsche Demokratische Partei* (German Democratic Party) - a center-left liberal party, popular among the intelligensia. They have often been in coalitions with us.
+**DDP** - *Deutsche Demokratische Partei* (German Democratic Party) - a center-left liberal party, popular among the intelligensia and educated middle class. They have often been in coalitions with us. [? if year >= 1930 : They have recently renamed themselves the German State Party. ?]
 
 **DVP** - *Deutsche Volkspartei* (German People's Party) - a conservative-liberal party, supported by the middle classes and bourgeoisie. We have occasionally been in coalitions.
 
@@ -85,7 +131,7 @@ Strength: [+ rb_strength +] thousand
 
 Militarization: [+ rb_militancy : militancy +]
 
-**Rotfrontkämpferbund**: The "Red Front Fighter's League" is associated with the KPD.
+**Rotfrontkämpferbund (RFB)**: The "Red Front Fighter's League" is associated with the KPD.
 
 Strength: [+ rfb_strength +] thousand
 

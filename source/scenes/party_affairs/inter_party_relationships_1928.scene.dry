@@ -71,14 +71,18 @@ on-arrival: dvp_relation += 8*(1 - dissent)
 Gustav Stresemann, the leader of the DVP is the best foreign policy leaders of the republic, and while he has previously expressed monarchist tendencies, he has been friendly towards us.
 
 @dvp_loss
-on-arrival: dvp_relation += 3*(1 - dissent)
+on-arrival: dvp_relation += 5*(1 - dissent)
 
 With the death of Gustav Stresemann, the DVP is much less likely to be accommodating of us. In addition, the liberal parties are electorally in decline, so perhaps our efforts are best spent elsewhere.
 
+However, given the influence of the DVP among the other right-leaning parties[? if president == "Hindenburg": and with President Hindenburg ?], it can still be helpful to influence them.
+
 @dvp_moribound
-on-arrival: dvp_relation += 3*(1 - dissent)
+on-arrival: dvp_relation += 5*(1 - dissent)
 
 The liberal parties (both the DDP and DVP) are electorally moribund, so perhaps our efforts are best spent elsewhere.
+
+However, given the influence of the DVP among the other right-leaning parties[? if president == "Hindenburg": and with President Hindenburg ?], it can still be helpful to influence them.
 
 @spd_alone
 

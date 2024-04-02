@@ -7,3 +7,23 @@ new-page: true
 
 = Wladimir Woytinsky
 
+- @depression
+- @root: Return to main
+
+@plan
+title: Debating the economic plan
+subtitle: Convincing the rest of the party to support the WTB-plan.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 6; workers_spd += 4*(1-dissent);
+
+We have increased our organizing among the workers.
+
+@depression
+title: Addressing the economic crisis
+subtitle: Formulate a plan to get us out of this mess.
+choose-if: advisor_action_timer <= 0 and wtb_adopted = 0
+unavailable-subtitle: Not available right now.
+on-arrival: advisor_action_timer = 6; wtb_support += 1;
+
+The WTB-plan, standing for its primary supporters Woytinsky, Tarnow, and Baade, has been adopted as the unions' plan for getting us out of the depression.

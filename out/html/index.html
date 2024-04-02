@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta prefix="ifiction: http://babel.ifarchive.org/protocol/iFiction/"
+        property="ifiction:ifid" content="7FCDF039-2B77-4179-B795-CBAFA65253AA">
+    <title>Social Democracy: An Alternate History - Autumn Chen</title>
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="core.js"></script>
+    <script src="game.js"></script>
+  </head>
+  <body>
+    <div class="background" id="bg2">
+    </div>
+
+    <div class="background" id="bg1">
+    </div>
+
+    <div id="options" class="overlay" style="display: none;">
+        <div class="overlay_top">
+            <table>
+                <tr>
+                    <td>
+                        <label for="backgrounds_yes">Enable backgrounds</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="backgrounds_yes" name="backgrounds" value="1" onclick="window.enableBg();">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="backgrounds_no">Disable backgrounds</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="backgrounds_no" name="backgrounds" value="0" onclick="window.disableBg();">
+                    </td>
+                </tr>
+                <tr>
+                    <td> <hr> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="animate_yes">Enable animation</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="animate_yes" name="animate" value="1" onclick="window.enableAnimate();">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="animate_no">Disable animation</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="animate_no" name="animate" value="0" onclick="window.disableAnimate();">
+                    </td>
+                </tr>
+                <tr>
+                    <td> <hr> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="animate_bg_yes">Enable background animation</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="animate_bg_yes" name="animate_bg" value="1" onclick="window.enableAnimateBg();">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="animate_bg_no">Disable background animation</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="animate_bg_no" name="animate_bg" value="0" onclick="window.disableAnimateBg();">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="window.hideOptions();">Close</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="save" style="display: none;">
+        <table id="saves_table">
+            <tr>
+                <td>Auto-0</td>
+                <td>
+                    <button class="b save_button" id="save_button_a0">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_a0">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_a0"></td>
+            </tr>
+            <tr>
+                <td>Auto-1</td>
+                <td>
+                    <button class="b save_button" id="save_button_a1">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_a1">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_a1"></td>
+            </tr>
+            
+            <tr>
+                <td>0</td>
+                <td>
+                    <button class="b save_button" id="save_button_0">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_0">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_0"></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>
+                    <button class="b save_button" id="save_button_1">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_1">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_1"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>
+                    <button class="b save_button" id="save_button_2">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_2">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_2"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>
+                    <button class="b save_button" id="save_button_3">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_3">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_3"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>
+                    <button class="b save_button" id="save_button_4">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_4">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_4"></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>
+                    <button class="b save_button" id="save_button_5">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_5">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_5"></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>
+                    <button class="b save_button" id="save_button_6">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_6">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_6"></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>
+                    <button class="b save_button" id="save_button_7">Save</button>
+                </td>
+                <td>
+                    <button class="b delete_button" id="delete_button_7">Delete</button>
+                </td>
+                <td class="save_info" id="save_info_7"></td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="dendryUI.hideSaveSlots();">Close</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Sprite stuff - feel free to comment out/remove if not using -->
+    <div id="contentSpriteContainer">
+        <div class="sprite" id="topLeftSprite"></div>
+        <div class="sprite" id="topRightSprite"></div>
+
+        <div class="sprite" id="bottomLeftSprite"></div>
+        <div class="sprite" id="bottomRightSprite"></div>
+    </div>
+
+    <div id='page'>
+        <div id="mid_panel">
+            <header>
+                <h1>Social Democracy: An Alternate History</h1>
+                <h2>Autumn Chen</h2>
+
+                <div id="header-links">
+                    <a id="stats-link" onclick="window.showStats();" href="#">Library</a>
+                    <a onclick="dendryUI.showSaveSlots();" href="#">Save/Load</a>
+                    <a onclick="dendryUI.showOptions();" href="#">Options</a>
+                </div>
+            </header>
+            <div id="tools_wrapper">
+                <div id='stats_sidebar' class='tools left'>
+                    <div id="qualities">
+                    </div>
+                </div>
+            </div>
+
+            <div id='content'>
+
+            </div>
+
+            <footer>
+      <!--
+      <p>
+        <a onclick="window.showSaveSlots();" href="#">Save/Load</a>
+        <a onclick="window.quickSave();" href="#">Quick Save</a>
+        <a onclick="window.quickLoad();" href="#">Quick Load</a>
+      </p>
+
+      &copy; 2021 Autumn Chen.
+      Made with <a href="https://github.com/aucchen/dendry">Dendry</a>.
+      -->
+            </footer>
+        </div>
+    </div>
+  </body>
+</html>

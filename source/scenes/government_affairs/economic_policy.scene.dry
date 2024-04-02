@@ -1,0 +1,43 @@
+title: Economic Policy
+new-page: true
+is-card: true
+tags: govt_affairs
+on-arrival: economic_policy_timer = 6; month_actions += 1
+view-if: spd_in_government = 1 and (economic_minister_party = "SPD" or finance_minister_party == "SPD") and economic_policy_timer = 0 and economic_plan > 0
+card-image: img/portraits/SchmidtRobert.jpg
+
+= Economic Policy
+
+We have already formulated an economic plan. Now we have to implement it.
+
+- @wtb_continuation
+- @implement_wtb_no_deficit
+- @implement_wtb_deficit
+- @root: Do not implement the economic plan.
+
+@wtb_continuation
+title: Look back on our results, and continue our implementation...
+view-if: works_program >= 1
+on-arrival: budget += 1 if works_program <= 2; welfare += 1; unemployed -= 6; workers_spd += 6*(1-dissent); unemployed_spd += 5*(1-dissent); workers_kpd -= 3; workers_nsdap -= 5; works_program += 1; z_relation += 5; dvp_relation += 5; coalition_dissent -= 1 if coalition_dissent >= 1
+
+Our spending on public works has resulted in a lower need for unemployment insurance and welfare, and increased tax receipts through the multiplier effect as the new money courses through the economy, recuperating some of our spending. We continue to invest most of the new revenue into the program.
+
+The economy is doing better, finally. Even our coalition partners begin to see the light.
+
+
+@implement_wtb_no_deficit
+title: Implement the WTB plan.
+subtitle: -3 budget
+view-if: budget >= 3 and works_program = 0
+on-arrival: budget -= 3; works_program += 1; unemployed -= 3; workers_spd += 5*(1-dissent);
+# TODO: only do this when we have the WTB-plan?
+
+We have started to enact the WTB plan. Money is beginning to flow through the economy.
+
+@implement_wtb_deficit
+title: Implement the WTB plan.
+subtitle: -3 budget - we will enter deficit spending.
+view-if: budget < 3 and works_program = 0
+on-arrival: coalition_dissent += 1 if in_grand_coalition; works_program += 1; budget -= 3; unemployed -= 3; workers_spd += 5*(1-dissent);
+
+We have entered the realm of deficit spending. Our coalition partners are disgusted, but the works plan is enacted anyway. Money is beginning to flow through the economy.
