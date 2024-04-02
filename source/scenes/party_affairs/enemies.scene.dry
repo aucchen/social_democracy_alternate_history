@@ -2,7 +2,7 @@ title: Choosing Our Enemies
 new-page: true
 view-if: year <= 1930 and enemies_timer <= 0
 on-arrival: month_actions += 1; enemies_timer = 12
-max-visits: 2
+max-visits: 3
 is-card: true
 card-image: img/poster_1.png
 tags: party_affairs
@@ -35,11 +35,11 @@ on-arrival: enemies = "NSDAP"; neorevisionist_strength += 5; nazi_urgency += 1
 [? if nazi_urgency == 0 or nsdap_r < 10 : The NSDAP is a tiny party right now, with more bark than bite. Many in our party are questioning our choices. ?][? if nazi_urgency > 0 and nsdap_r >= 10 : The Nazis are the most urgent problem for us to deal with. ?]
 
 @kpd
-on-arrival: enemies = "KPD"; reformist_strength += 5; left_dissent += 5; reformist_dissent -= 5; kpd_relation -= 5; dvp_relation += 3; z_relation += 3
+on-arrival: enemies = "KPD"; reformist_strength += 5; left_dissent += 8; reformist_dissent -= 5; kpd_relation -= 5; dvp_relation += 3; z_relation += 3
 
 Attacking the KPD is supported by all but the most left-wing socialists, and wins us some measure of approval among the bourgeois parties. However, If we are to reconcile with the KPD, this may not be the best choice.
 
 @bourgeois
-on-arrival: enemies = "bourgeois parties"; left_strength += 5; left_dissent -= 5; dvp_relation -= 3; z_relation -= 3
+on-arrival: enemies = "bourgeois parties"; left_strength += 5; left_dissent -= 5; dvp_relation -= 3; z_relation -= 3; reformist_dissent += 8
 
 Our anti-bourgeois rhetoric is popular among the left, but may make it harder to build the coalitions that are necessary for government in the future.

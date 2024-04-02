@@ -23,7 +23,7 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: workers_spd += 5*(1-dissent); workers_spd -= 2 if unemployed >= 15; workers_spd -= 2 if unemployed >= 25; workers_spd += 6*(1-dissent) if wtb_adopted = 1; resources -= 1
 
-We have increased our campaigning among the workers. [? if unemployed >= 15: The high levels of unemployment make our campaign more difficult. ?][? if wtb_adppted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract workers. ?]
+We have increased our campaigning among the workers. [? if unemployed >= 15: The high levels of unemployment make our campaign more difficult. ?][? if wtb_adopted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract workers. ?]
 
 @new_middle
 subtitle: -1 resources

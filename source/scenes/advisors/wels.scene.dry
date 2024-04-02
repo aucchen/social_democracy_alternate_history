@@ -40,6 +40,6 @@ title: Emergency Fundraising
 subtitle: An emergency infusion of resources.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: Not available right now.
-on-arrival: advisor_action_timer = 5; resources += 2
+on-arrival: advisor_action_timer = 5; resources += dues
 
-We have gained +2 resources.
+We have gained +[+ dues +] resources.

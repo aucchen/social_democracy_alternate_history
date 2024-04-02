@@ -50,7 +50,7 @@ It is not enough for the SPD to solely be a political party. The Worker Singer's
 choose-if: resources > 0
 unavailable-subtitle: Not enough resources.
 subtitle: -1 resources
-on-arrival: resources -= 1; rb_strength  += 200; rb_militancy += 0.01; reichsbanner_timer = 0; funded_reichsbanner += 1
+on-arrival: resources -= 1; rb_strength  += 100; rb_militancy += 0.01; reichsbanner_timer = 0; funded_reichsbanner += 1
 
 We have increased recruiting to the Reichsbanner.
 

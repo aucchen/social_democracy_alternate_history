@@ -2,7 +2,7 @@ title: The Iron Front
 new-page: true
 is-card: true
 view-if: iron_front_formed == 1 and iron_front_timer = 0
-on-arrival: iron_front_timer = 7; month_actions += 1
+on-arrival: iron_front_timer = 7; month_actions += 1; reichsbanner_strenth -= 200 if workers_spd < 45 or workers_spd < workers_nsdap or workers_spd < workers_kpd; rb_militarization_cost = 2 if rb_militancy > 0.1 else rb_militarization_cost = 1; rb_militarization_cost = 3 if rb_militancy > 0.25
 card-image: img/iron_front.png
 frequency: 200
 tags: party_affairs, antifascism
@@ -11,13 +11,17 @@ tags: party_affairs, antifascism
 
 The Iron Front is our new antifascist coordination front, consisting of the SPD, the trade unions, and the Reichsbanner. How should we use the Iron Front?
 
+[? if workers_spd < 45 or workers_spd < workers_nsdap or workers_spd < workers_kpd : Unfortunately, the Iron Front's effectiveness is dragged down by the SPD's unpopularity, as the SPD is no longer the dominant party among the workers. Many Reichsbanner members have left, and many workers are not interested. ?]
+
 - @defense: Rally for defense against the fascists with the Reichsbanner.
 - @pacifism: Rally for pacifism, against nationalism and war.
 - @republic: Rally to save the democratic republic against dictatorship.
 - @wtb: Rally for economic change and the WTB-Plan.
 
 @defense
-on-arrival: rb_strength += 50; rb_militancy += 0.05
+subtitle: -[+ rb_militarization_cost +] resources
+choose-if: resources >= rb_militarization_cost
+on-arrival: resources -= rb_militarization_cost; rb_strength += 50; rb_militancy += 0.05
 
 The Iron Front rallies for the militant defense of the republic against the fascist paramilitaries, strengthening the Reichsbanner.
 

@@ -4,18 +4,18 @@ view-if: year = 1932 and month = 4
 frequency: 1000
 max-visits: 1
 new-page: true
-on-arrival: braun_campaign = 0
+on-arrival: braun_campaign = 0; hitler_support_hindenburg = 0;
 tags: event
 
 The presidential election is coming up soon. [? if spd_in_government = 0 : While the position of Chancellor is typically more important, recent governments have depended on the president's emergency decree powers, making the office vital. ?] The Nazis will run Hitler, while the KPD will run Thälmann. A victory for Hitler would mean the end of parliamentary democracy, and the beginning of an era of unspeakable horrors.
 
 Many are calling for us to support the incumbent Hindenburg, despite his well-known reactionary tendencies. Is he truly the best bulwark against Hitler's ascension? On the other hand, many in our party are calling for Otto Braun to run again, but he is reluctant.
 
-[? if kpd_relation >= 50 : Another strange possibilty is an united front with the Communists, either to support Thalmann or our own candidate. ?]
+[? if kpd_relation >= 50 : Another strange possibilty is an united front with the Communists, either to support Thälmann or our own candidate. ?]
 
 - @support_hindenburg: Support Hindenburg.
 - @support_braun: Run Otto Braun of the SPD.
-- @support_thalmann: Support Ernst Thalmann of the KPD.
+- @support_thalmann: Support Ernst Thälmann of the KPD.
 
 @support_hindenburg
 subtitle: This is the default option.
@@ -74,7 +74,7 @@ if (Q.z_relation >= 55) {
 go-to: z_failed if z_support_braun = 0; z_success if z_support_braun = 1; z_partial if z_support_braun = 2
 max-visits: 1
 
-We remind the Center leaders of Hindenburg's anti-Catholicism, and try to convince them that Hindenburg's path will eventually lead to Hitler. We also remind them of the successes they've had as part of the Weimar coalition in Prussia with Otto Braun.
+We remind the Center leaders of Hindenburg's anti-Catholicism, and try to convince them that Hindenburg's path will eventually lead to Hitler. We also remind them of the successes they've had as part of the Weimar coalition in Prussia with Otto Braun, and our support for the Center candidate Wilhelm Marx in the 1925 presidential election.
 
 @z_success
 go-to: braun_campaign
@@ -119,7 +119,7 @@ unavailable-subtitle: Not enough resources (need 3).
 on-arrival: resources -= 3; kpd_support_braun = 1
 go-to: braun_campaign
 
-The KPD now endorses Braun in the presidential election!
+The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
 
 @kpd_relations
 view-if: kpd_relation >= 60
@@ -127,7 +127,7 @@ unavailable-subtitle: Our relations are not good enough.
 on-arrival: kpd_support_braun = 1
 go-to: braun_campaign
 
-The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the 
+The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
 
 
 
@@ -189,6 +189,7 @@ if (Q.braun_campaign) {
         Q.hindenburg_votes += Q.dvp_votes;
     }
 } else if (Q.spd_endorses_kpd) {
+    Q.thalmann_votes += Q.kpd_votes;
     Q.thalmann_votes += Q.spd_votes;
     Q.hindenburg_votes += Q.z_votes;
     Q.hindenburg_votes += Q.ddp_votes;
@@ -198,6 +199,20 @@ if (Q.braun_campaign) {
     Q.hindenburg_votes += Q.z_votes;
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
+    Q.thalmann_votes += Q.kpd_votes;
+}
+if (Q.hitler_support_hindenburg) {
+    Q.hitler_votes -= Q.nsdap_votes;
+    Q.hindenburg_votes += Q.nsdap_votes;
+}
+
+if (Q.hindenburg_to_braun_bonus) {
+    Q.hindenburg_votes -= Q.hindenburg_to_braun_bonus;
+    Q.braun_votes += Q.hindenburg_to_braun_bonus;
+}
+if (Q.thalmann_to_braun_bonus) {
+    Q.thalmann_votes -= Q.thalmann_to_braun_bonus;
+    Q.braun_votes += Q.thalmann_to_braun_bonus;
 }
 
 // check for majority
@@ -215,7 +230,7 @@ Q.braun_plurality = (Q.braun_votes >= Q.hindenburg_votes && Q.braun_votes >= Q.h
 // If no candidate gets above 50%, then there's a second round. In the second round, a plurality wins. 
 Q.election_round += 1;
 !}
-go-to: hindenburg_wins if hidenburg_majority == 1; thalmann_wins if thalmann_majority == 1; hitler_wins if hitler_majority == 1; braun_wins if braun_majority == 1; no_majority_round1 if any_majority == 0 and election_round == 1; round2_results if round >= 2
+go-to: hindenburg_wins if hidenburg_majority == 1; thalmann_wins if thalmann_majority == 1; hitler_wins if hitler_majority == 1; braun_wins if braun_majority == 1; no_majority_round1 if any_majority == 0 and election_round == 1; round2_results if election_round >= 2
 
 Results:
 
@@ -228,11 +243,99 @@ Hitler - [+ hitler_votes +]%
 [? if braun_campaign > 0 : Braun - [+ braun_votes +]% ?]
 
 @no_majority_round1
+on-arrival: hitler_support_hindenburg = 1 if braun_plurality 
+go-to: round2_menu
 
 There is no majority in this round. In the second round, any candidate who wins a plurality will win overall. What should we do?
 
+[? if braun_plurality or thalmann_plurality : In order to consolidate the vote for the Right, and to prevent a socialist from becoming president, Hitler is no longer running in the second round, and has switched his endorsement to Hindenburg. ?]
+
+# TODO: 
+
+@round2_menu
+
+- @round2_convince_z: Convince the Center to switch their support to us.
+- @round2_convince_kpd: Convince the KPD to switch their support to us, or at least get them to 
 - @round2_hindenburg: Switch our support to Hindenburg.
 - @round2_vote: Let the second round voting begin.
+
+@round2_convince_z
+view-if: braun_campaign > 0 and z_support_braun != 1 
+on-arrival: {!
+Q.z_support_braun = 0;
+
+if (Q.z_relation >= 55) {
+    Q.z_support_braun = 1;
+    Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
+} else if (Q.z_relation >= 45 && Q.hitler_support_hindenburg) {
+    Q.z_support_braun = 1;
+    Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
+} else if (Q.z_relation <= 35) {
+    Q.z_support_braun = 0;
+} else {
+    Q.z_support_braun = 2;
+}
+!}
+go-to: r2_z_failed if z_support_braun = 0; r2_z_success if z_support_braun = 1; r2_z_partial if z_support_braun = 2
+max-visits: 1
+
+@r2_z_success
+go-to: round2_menu
+
+[? if hitler_support_hindenburg : The Center's opinion is affected by Hitler's support of Hindenburg, and is eager to turn away from him. ?] The Center are convinced! They will be part of the Braun coalition. [? if hitler_support_hindenburg : In addition, they will also bring in some minor parties who will support us. ?]
+
+@r2_z_partial
+
+The Center are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given Hitler's support for Hindenburg. ?]. They are willing to run a joint campaign if we front the resources.
+
+- @r2_pay_z: Give them the resources they need.
+- @round2_menu: Forget about the Center.
+
+@r2_pay_z
+choose-if: resources >= 2
+subtitle: -2 resources
+unavailable-subtitle: Not enough resources (need 2)
+on-arrival: resources -= 2; z_support_braun = 1
+go-to: round2_menu
+
+With our resources, the Center are convinced to support Braun over Hindenburg.
+
+@r2_z_failed
+go-to: round2_menu
+
+Unfortunately, we fail to turn them away from Hindenburg.
+
+
+
+
+@round2_convince_kpd
+view-if: braun_campaign > 0 and kpd_support_braun == 0 
+max-visits: 1
+
+The KPD is committed to supporting Ernst Thälmann. [? if kpd_relation >= 45 : However, the Hitler-Hindenburg coalition worries them enough that they are willing to be convinced to drop their campaign and support Braun. ?][? if kpd_relation < 45 : They do not seem willing to be convinced. ?]
+
+- @r2_kpd_resources: Use our resources.
+- @r2_kpd_relations: Use our good relations.
+- @round2_menu: Forget about the KPD.
+
+@r2_kpd_resources
+view-if: kpd_relation >= 45
+choose-if: resources >= 3
+subtitle: -3 resources
+unavailable-subtitle: Not enough resources (need 3).
+on-arrival: resources -= 3; kpd_support_braun = 1
+go-to: round2_menu
+
+The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
+
+@r2_kpd_relations
+view-if: kpd_relation >= 60
+unavailable-subtitle: Our relations are not good enough.
+on-arrival: kpd_support_braun = 1
+go-to: round2_menu
+
+The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters. 
+
 
 @round2_hindenburg
 view-if: braun_campaign > 0 or spd_support_thalmann > 0

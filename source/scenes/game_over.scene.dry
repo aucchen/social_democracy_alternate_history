@@ -32,6 +32,16 @@ Hitler does not yet control Germany. [? if chancellor == "Papen" or chancellor =
 
 [? if hitler_deported == 1 : We have deported Hitler back to Austria. Hopefully he will never return. ?]
 
+@civil_war_won
+title: We have won the civil war.
+view-if: republic_victory == 1
+tags: endings
+go-to: eg_menu
+
+We have won the civil war.
+
+
+
 @civil_war_lost
 title: We lost the civil war.
 view-if: total_defeat == 1
@@ -54,7 +64,7 @@ view-if: president == "Braun"
 tags: endings
 go-to: eg_menu
 
-Otto Braun has been elected as President of Germany. As the most powerful man in Germany, he is 
+Otto Braun has been elected as President of Germany. He had never desired to be the most powerful man in Germany, but now he is. 
 
 @spd_victorious
 title: SPD still in government
@@ -69,6 +79,14 @@ title: Communist victory
 view-if: chancellor_party == "KPD" or president == "Thälmann" and total_defeat == 0 and long_war == 0
 tags: endings
 go-to: eg_menu
+
+@works_program
+title: Works program enacted!
+view-if: works_program > 0
+tags: endings
+go-to: eg_menu
+
+Our government has enacted a public works program!
 
 
 @end_game

@@ -4,6 +4,7 @@ audio: clear shuffle music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/DERL
 on-arrival: {!
 // increase NSDAP vote share 
 Q.unemployed += 8; 
+Q.catholics += 3;
 Q.rural_nsdap += 15; 
 Q.rural_dnvp -= 15;
 Q.new_middle_dvp -= 5;
@@ -14,11 +15,15 @@ Q.new_middle_nsdap += 10;
 Q.old_middle_nsdap += 15;
 Q.new_middle_other += 5;
 Q.old_middle_other += 5;
+Q.unemployed_nsdap += 8;
 Q.rural_other += 5;
 Q.workers_other += 5;
 Q.workers_kpd += 3;
+Q.workers_z += 3;
+Q.old_middle_z += 2;
+Q.new_middle_z += 2;
 Q.workers_nsdap += 3;
-Q.sa_strength += 50;
+Q.sa_strength += 100;
 Q.sh_strength += 100;
 if (Q.budget > 0) {
     Q.budget -= 1;

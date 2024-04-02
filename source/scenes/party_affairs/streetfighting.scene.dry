@@ -12,7 +12,7 @@ Battles rage on the streets between the Nazi SA, nationalist Stahlhelm, communis
 
 We must do something to protect the workers against these predations.
 
-- @battle: Test our defense units in battle against the fascists!
+# - @battle: Test our defense units in battle against the fascists!
 - @arm_rb: Increase training and armaments for the Reichsbanner.
 - @if_training: Train union members to fight as part of the Iron Front.
 - @prussian_police_training: Use the Prussian police to help train the Reichsbanner.
@@ -22,6 +22,7 @@ We must do something to protect the workers against these predations.
 @battle
 view-if: rb_militancy > 0.1 and rb_militancy < 0.5
 on-arrival: rb_militancy += 0.1; sa_strength += 40; rb_strength -= 100
+max-visits: 1
 
 Many Reichsbanner members are not ready for actual fighting, and thus quit. However, the remainder are toughened as a result. Our confrontations also provide ample recruiting material for the Nazi SA.
 

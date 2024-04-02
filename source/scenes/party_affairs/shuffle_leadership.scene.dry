@@ -345,10 +345,10 @@ title: Marie Juchacz
 subtitle: Marie Juchacz is the founder of Worker's Welfare, a mutual-aid organization.
 is-card: true
 card-image: img/portraits/JuchaczMarie.jpg
-tags: reformist_advisor
 view-if: juchacz_advisor = 0 and n_advisors < 3
 on-arrival: juchacz_advisor = 1; n_advisors += 1; reformist_strength += 5
 go-to: advisor_menu
+#tags: reformist_advisor
 
 Marie Juchacz is now an advisor.
 

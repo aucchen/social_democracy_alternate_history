@@ -310,6 +310,9 @@ Q.west_relation = 0;
 Q.soviet_relation = 0;
 // How much have we exposed the secret rearmament programs?
 Q.rearmament_exposed = 0;
+// reparations vs baseline: young plan is -1.
+Q.reparations = 0;
+Q.reparations_negotiation = 0;
 
 // our conduct in the government, and the conduct of our coalition opponents.
 // did the SPD vote against the previous government in a vote of no confidence?
@@ -331,7 +334,8 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
             'foreign_policy', 'judiciary', 'labor_affairs', 'military',
             'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
-            'war_guilt', 'womens_rights'];
+            'war_guilt', 'womens_rights', // events
+            'emergency_cuts', 'unemployment_insurance'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
@@ -369,6 +373,9 @@ Q.shuffle_cabinet_timer = 0;
 Q.social_welfare_timer = 0;
 Q.war_guilt_timer = 0;
 Q.womens_rights_timer = 0;
+// event timers
+Q.emergency_cuts_timer = 0;
+Q.unemployment_insurance_timer = 0;
 
 
 // all the initial advisors are centrists.

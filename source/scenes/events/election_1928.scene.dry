@@ -487,7 +487,7 @@ if (Q.next_election_month > 12) {
     Q.next_election_year = Q.year;
 }
 Q.pro_republic -= 8;
-Q.workers_spd -= 3;
+Q.workers_spd -= 5;
 Q.new_middle_spd -= 5;
 Q.old_middle_spd -= 5;
 Q.rural_spd -= 5;
@@ -502,9 +502,8 @@ Q.old_middle_nsdap += 6;
 Q.new_middle_nsdap += 6;
 Q.rural_nsdap += 6;
 Q.unemployed_nsdap += 5;
-if (Q.no_majority_elections > 2) {
-    Q.pro_republic -= 10;
-    Q.workers_spd -= 6;
+if (Q.pro_republic < 45) {
+    Q.workers_spd -= 0.2*Q.workers_spd;
     Q.new_middle_spd -= 5;
     Q.old_middle_spd -= 5;
     Q.rural_spd -= 5;

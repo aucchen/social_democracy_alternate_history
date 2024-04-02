@@ -30,9 +30,9 @@ title: Addressing the economic crisis
 subtitle: Formulate a plan to get us out of this mess.
 choose-if: advisor_action_timer <= 0 and wtb_adopted = 0
 unavailable-subtitle: Not available right now.
-on-arrival: advisor_action_timer = 6; wtb_support += 1;
+on-arrival: advisor_action_timer = 6; wtb_support += 2; center_dissent += 10;
 
-The WTB-plan, standing for its primary supporters Woytinsky, Tarnow, and Baade, has been adopted as the unions' plan for getting us out of the depression.
+The WTB-plan, standing for its primary supporters Woytinsky, Tarnow, and Baade, has been adopted as the unions' plan for getting us out of the depression. Leipart canvasses in favor of this policy throughout the party and the unions.
 
 @union_unity
 title: Union-party coordination

@@ -25,7 +25,9 @@ if (Q.kpd_relation >= 60) {
 }
 // general strike strength
 // maximum (given 25 labor strength) is 400
-Q.total_power += (2 - Q.labor_dissent/100)*Q.labor_strength*(2 - Q.unemployed/100)*3;
+// use normalized workers_spd instead of labor_strength?
+Q.normalized_workers_spd = 100*Q.workers_spd/(Q.workers_spd + Q.workers_kpd + Q.workers_nsdap);
+Q.total_power += (2 - Q.labor_dissent/100)*Q.normalized_workers_spd*(2 - Q.unemployed/100)*3;
 console.log("Supporter strength:", Q.total_power);
 
 // our enemies

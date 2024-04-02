@@ -8,6 +8,8 @@ is-special: true
 
 Resources available: [+ resources +]
 
+SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 : opposition ?]
+
 = Government
 
 President: [+ president +]
@@ -38,5 +40,6 @@ Others: [+ other_r +]%
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed +]% ?]
 
 Next election: [+ next_election_month : month +] [+ next_election_year +]
+
 
 # = Public Opinion

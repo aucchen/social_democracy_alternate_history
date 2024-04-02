@@ -1,8 +1,8 @@
 title: The Hunger Chancellor
 subtitle: Popular discontent with Chancellor [+ chancellor +] rises.
 new-page: true
-view-if: year >= 1931 and month >= 2 and unemployment >= 18 and welfare < 0 and works_program = 0
-on-arrival: workers_spd -= 8 if chancellor_party == "SPD"; workers_spd -= 8 if spd_in_government == 1; workers_nsdap += 5 if spd_in_government; workers_kpd += 5 if spd_in_government; unemployed_nsdap += 5 if spd_in_government
+view-if: year >= 1931 and month >= 2 and unemployed >= 18 and welfare < 0 and works_program == 0
+on-arrival: workers_spd *= 0.9 if chancellor_party == "SPD"; workers_spd *= 0.9 if spd_in_government == 1; workers_nsdap += 5 if spd_in_government; workers_kpd += 5 if spd_in_government; unemployed_nsdap += 5 if spd_in_government
 tags: event
 max-visits: 1
 
@@ -10,7 +10,7 @@ People are calling Chancellor [+ chancellor +] the Hunger Chancellor because of 
 
 [? if spd_toleration == 1 : As we are currently tolerating the [+ chancellor +] government, this could very well reflect badly on us. ?]
 
-- @maintain_toleration: Maintain toleration.
+- @maintain_toleration: Maintain the current governing arrangement.
 - @break_toleration: Break toleration; vote against this government.
 
 @maintain_toleration

@@ -2,24 +2,69 @@ title: Foreign Policy
 new-page: true
 is-card: true
 tags: govt_affairs
-on-arrival: month_actions += 1; foreign_policy_timer = 6
+on-arrival: month_actions += 1; foreign_policy_timer = 8
 view-if: spd_in_government = 1 and foreign_minister_party = "SPD" and  foreign_policy_timer = 0
-frequency: 1
 card-image: img/portraits/BreitscheidRudolf.jpg
-
-# TODO: implement this later
 
 = Foreign Policy
 
 What should our foreign policy priority be?
 
+- @improve_west
+- @improve_soviet
+- @negotiate
+- @reduce_reparations
+- @expose
+
 @improve_west
-title: Improving our relations with France and Britain.
+title: Improve our relations with all of our neighbors.
+on-arrival: west_relation += 2; east_relation += 2; reparations_negotiation += 1
+
+The key to peace in Europe is a rapproachment between France and Germany. We are taking steps towards that rapproachment. [? if young_plan_seen == 0 : This is difficult to do when France is occupying a major portion of Germany's territory, but we are working on that part. ?]
+
+We also aim to improve relations with our eastern neighbors, Poland and Czechoslovakia, who are righfully terrified of German aggression.
 
 @improve_soviet
-title: Improving our relations with the Soviet Union.
+title: Improve our relations with the Soviet Union.
+subtitle: We could also broach the question of the KPD...
+on-arrival: soviet_relation += 1;
+
+The Soviet Union also suffered from the international order created by the Treaty of Versailles; they have been participating in our secret rearmament program. The Treaty of Rapallo in 1922 affirmed our friendly relations
+
+- @kpd: Ask if Moscow could help repair our relations with the KPD.
+- @root: Do not mention the KPD.
+
+@kpd
+on-arrival: kpd_relation += 8*(1-dissent);
+
+We also mention the KPD in our conversations with the Russian ambassador. They claim that the KPD is entirely independent of the Soviet government, and that the conflict is Thälmann's doing. But, we notice a slight improvement in attitudes from the KPD.
+
 
 @negotiate
-title: Negotiating regarding our remaining obligations from the Great War - the reparations issue, and the occupation of the Rhineland.
+title: Negotiate regarding our remaining obligations from the Treaty of Versailles.
+subtitle: [? if young_plan_seen == 1 : After passing the Young Plan, France has committed to withdrawing from the Rhineland. Now, we must see if they can reduce our reparations further, given the economic depression. ?]
+view-if: reparations > -2
+on-arrival: west_relation += 1; reparations_negotiation += 1; reparations_negotiation += 1 if pacifism >= 3; reparations_negotiations += 1 if nationalism <= 50;
 
-# Young plan...
+Negotiations procede smoothly for the most part. The Western powers are convinced of Germany's sincerity and goodwill. [? if nationalism <= 50 or pacifism >= 3 : They are pleased to see that we are renouncing militarism. ?]
+
+
+@reduce_reparations
+title: The Western Allies are finally willing to pause our reparations payments!
+subtitle: Our negotiations have been successful.
+view-if: reparations_negotiation >= 3 and black_thursday_seen == 1
+on-arrival: west_relation += 1; reparations = -2; budget += 2; coalition_dissent -= 1; workers_spd += 8*(1-dissent); old_middle_spd += 4*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 4*(1-dissent);
+max-visits: 1
+
+Finally, given both the economic circumstances and our continued negotiations, the Western Allies are willing to pause our reparations payments! Much of the credit must go to American president Hoover, who has been friendlier towards us than the Europeans.
+
+This has reduced tensions within our government, and our party has gotten credit for the achievement.
+
+@expose
+title: Expose the secret rearmament plans of the previous foreign ministry!
+view-if: rearmament_exposed == 0
+on-arrival: west_relation += 1; nationalism -= 5*(1-dissent); pro_republic += 5*(1-dissent); coalition_dissent += 1; rearmament_exposed += 1; reparations_negotiation += 3
+
+The previous foreign ministry, despite its benevolent and peaceful face, was secretly helping the Reichswehr to build up its forces, in contravention of the Treaty of Versailles.
+
+The Allies are grateful of our exposure and repudiation of militarism. Our partners in the coalition are less supportive.

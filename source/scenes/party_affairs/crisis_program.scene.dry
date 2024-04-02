@@ -1,7 +1,7 @@
 title: The Economic Crisis
 new-page: true
 is-card: true
-view-if: year >= 1930 and crisis_urgency >= 1 and crisis_program_timer = 0 and economic_plan = 0
+view-if: crisis_urgency >= 1 and crisis_program_timer = 0 and economic_plan = 0
 frequency: 200
 on-arrival: month_actions += 1; crisis_program_timer = 5
 card-image: img/bankrun.jpg
@@ -39,7 +39,7 @@ Our support of the WTB plan alienates the orthodox Marxists of the Centrist fact
 We have not yet convinced the party to formally adopt the plan. More work needs to be done.
 
 @plan_adopted
-on-arrival: wtb_adopted = 1; labor_dissent -= 15; reformist_dissent -= 10; labor_strength += 10; center_strength -= 10; center_dissent += 15; economic_plan = 1
+on-arrival: wtb_adopted = 1; labor_dissent -= 15; reformist_dissent -= 10; labor_strength += 10; center_strength -= 10; center_dissent += 20; economic_plan = 1
 
 With our hard work, we have finally convinced the majority of the party to adopt the WTB plan! [? if spd_in_government == 1 : We can begin implementing the plan as soon as possible, as long as we have the Economic or Finance ministries. ?][? if spd_in_government = 0 : We should emphasize the plan in our electoral propaganda. ?]
 

@@ -27,6 +27,6 @@ title: Union-party coordination
 subtitle: Reduce dissent among the unions.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Not available right now.
-on-arrival: advisor_action_timer = 6; labor_dissent -= 5;
+on-arrival: advisor_action_timer = 6; labor_dissent -= 10;
 
 We have reduced tensions with the Labor faction.
