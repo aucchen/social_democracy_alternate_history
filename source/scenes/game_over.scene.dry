@@ -13,7 +13,7 @@ go-to: eg_menu
 # TODO: achievements
 
 @hitler_wins
-view-if: chancellor == "Hitler" or president == "Hitler"
+view-if: (chancellor == "Hitler" or president == "Hitler") and (total_defeat==1 or civil_war_seen == 0)
 title: Adolf Hitler is in undisputed control over Germany.
 tags: endings
 go-to: eg_menu
@@ -22,13 +22,22 @@ Adolf Hitler is in undisputed control over Germany. The SPD, along with all of t
 
 [? if civil_war_seen == 1 : At the very least, we fought back. Perhaps our resistance will be celebrated in an impossible-to-forsee future. ?]
 
+@war_against_hitler
+view-if: (chancellor == "Hitler" or president == "Hitler") and (long_war == 1)
+title: Adolf Hitler is in power, but we are fighting to stop him.
+tags: endings
+go-to: eg_menu
+
+Adolf Hitler has taken power in Germany. However, we have rallied the democratic forces of the country against him, and are fighting back. The outcome of this war is uncertain.
+
+
 @no_hitler
 view-if: chancellor != "Hitler" and president != "Hitler"
 title: Hitler does not yet control Germany...
 tags: endings
 go-to: eg_menu
 
-Hitler does not yet control Germany. [? if chancellor == "Papen" or chancellor == "Schleicher" : However, Chancellor [+ chancellor +] is not much better. ?][? if resist_coup == 1 and republic_victory == 0 : Given our defeat in the Prussian coup, the far-right appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
+Hitler does not yet control Germany. [? if chancellor == "Papen" or chancellor == "Schleicher" : However, Chancellor [+ chancellor +] is not much better. ?][? if resist_coup == 1 and republic_victory == 0 and long_war == 0 : Given our defeat in the Prussian coup, the far-right appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
 
 [? if hitler_deported == 1 : We have deported Hitler back to Austria. Hopefully he will never return. ?]
 
@@ -38,7 +47,7 @@ view-if: republic_victory == 1
 tags: endings
 go-to: eg_menu
 
-We have won the civil war.
+We have won the civil war against the reactionary forces. Germany will be changed forever, but it is too early to know how.
 
 
 
@@ -80,6 +89,8 @@ view-if: chancellor_party == "KPD" or president == "Thälmann" and total_defeat 
 tags: endings
 go-to: eg_menu
 
+The KPD has won power in Germany, with our assistance. They will try to remake Germany in the Soviet image. How much they succeed is yet to be determined.
+
 @works_program
 title: Works program enacted!
 view-if: works_program > 0
@@ -87,6 +98,31 @@ tags: endings
 go-to: eg_menu
 
 Our government has enacted a public works program!
+
+@unemployment_reduced
+title: Unemployment has been successfully reduced!
+view-if: unemployed <= 20
+tags: endings
+go-to: eg_menu
+
+While still uncomfortably high, unemployment levels are nowhere near their peak. This is a success of our economic policy.
+
+
+@unemployment_high
+title: Unemployment is still too high.
+view-if: unemployed >= 30 and (chancellor != "Hitler" and president != "Hitler") and (civil_war_seen == 0)
+tags: endings
+go-to: eg_menu
+
+Unemployment is still at dangerously high levels. Even though Hitler is not in power, the situation is ripe for instability and extremism.
+
+
+@emergency_government
+title: SPD ruling in an emergency government.
+view-if: in_emergency_government == 1
+
+The SPD is ruling as part of an emergency minority government, led by President [+ president +] and Chancellor [+ chancellor +]. This is a temporary and unstable arrangement, leaving the door open to further authoritarianism.
+
 
 
 @end_game

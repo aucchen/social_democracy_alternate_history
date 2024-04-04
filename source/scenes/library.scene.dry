@@ -109,16 +109,28 @@ go-to: menu
 
 **Z** - *Zentrumspartei* (Center Party) - a centrist to center-right Catholic party that supports the Republic, and has historically supported many of our labor, welfare, and anti-militarist priorities. They have often been in coalitions with us. They are often associated with the **BVP** (Bavarian People's Party), which represents Catholics in Bavaria. [? if year >= 1930 or chancellor = "Brüning" : They have appeared to take a more conservative turn recently, with the rise of Brüning and the party leader, Ludwig Kaas. ?]
 
+Current relations: [+ z_relation : relationships +]
+
 # TODO: replace this with the german state party after 1930
 **DDP** - *Deutsche Demokratische Partei* (German Democratic Party) - a center-left liberal party, popular among the intelligensia and educated middle class. They have often been in coalitions with us. [? if year >= 1930 : They have recently renamed themselves the German State Party. ?]
 
+Current relations: [+ ddp_relation : relationships +]
+
 **DVP** - *Deutsche Volkspartei* (German People's Party) - a conservative-liberal party, supported by the middle classes and bourgeoisie. We have occasionally been in coalitions.
+
+Current relations: [+ dvp_relation : relationships +]
 
 **DNVP** - *Deutschnationale Volkspartei* (German National People's Party) - a right-wing nationalist-conservative party, with authoritarian, monarchist, and racist elements. It is supported by the former aristocracy, rural landowners, and conservative Lutherans.
 
+Current relations: [+ dnvp_relation : relationships +]
+
 **KPD** - *Kommunistische Partei Deutschlands* (German Communist Party) - an offshoot of the SPD that emerged in the aftermath of the Revolution, they follow the path of Moscow.
 
+Current relations: [+ kpd_relation : relationships +]
+
 **NSDAP** - *Nationalsozialistische Deutsche Arbeiterpartei* - (National Socialist German Worker's Party, or Nazis) - a far-right nationalist and antisemitic party.
+
+Current relations: [+ nsdap_relation : relationships +]
 
 @paramilitaries
 go-to: menu

@@ -188,7 +188,7 @@ if (Q.braun_campaign) {
     } else {
         Q.hindenburg_votes += Q.dvp_votes;
     }
-} else if (Q.spd_endorses_kpd) {
+} else if (Q.spd_support_thalmann) {
     Q.thalmann_votes += Q.kpd_votes;
     Q.thalmann_votes += Q.spd_votes;
     Q.hindenburg_votes += Q.z_votes;

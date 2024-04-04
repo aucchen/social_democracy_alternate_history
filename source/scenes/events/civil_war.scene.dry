@@ -11,6 +11,9 @@ Q.prussian_police_power = Q.prussian_police_strength*Q.prussian_police_militancy
 if (Q.spd_prussia) {
     Q.total_power += Q.prussian_police_power;
 }
+if (Q.reichswehr_loyalty < 0) {
+    Q.reichswehr_loyalty = 0;
+}
 Q.loyal_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*Q.reichswehr_loyalty;
 if (Q.spd_in_government && Q.chancellor_party == "SPD") {
     Q.total_power += Q.loyal_reichswehr_power;

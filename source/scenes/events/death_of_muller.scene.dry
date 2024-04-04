@@ -7,29 +7,38 @@ go-to: pm if chancellor = "Müller"; not_pm if chancellor != "Müller"
 on-arrival: muller_dead = 1; n_advisors -= 1 if muller_advisor == 1; muller_advisor = 0;
 
 @pm
+on-arrival: muller_died_in_office = 1
+# TODO: achievement for muller dying in office
 
 Chancellor Hermann Müller has died while in office. He will be greatly missed. But now, we must select a new Chancellor.
 
-# TODO: elect chancellor...
-# options: Braun (???), Bruning (Z), Wels?
-
-- @braun_chancellor: Otto Braun for Chancellor.
-- @wels_chancellor: Otto Wels for Chancellor.
+- @braun_chancellor: Otto Braun (SPD) for Chancellor.
+- @wels_chancellor: Otto Wels (SPD) for Chancellor.
+- @breitscheid_chancellor: Rudolf Breitscheid (SPD) for Chancellor.
 - @bruning_chancellor: Let Heinrich Bruning of the Center Party become Chancellor.
 
 @braun_chancellor
 on-arrival: chancellor = "Braun"; chancellor_party = "SPD"; z_relation -= 5; dvp_relation -= 5
+subtitle: The Center Party is worried about having so much power in one man.
 
 Our coalition partners are reluctant to accept the new Chancellor, but they do not make loud objections.
 
 
 @wels_chancellor
-on-arrival: chancellor = "Wels"; chancellor_party = "SPD"; z_relation -= 5; dvp_relation -= 5
+on-arrival: chancellor = "Wels"; chancellor_party = "SPD"; z_relation -= 3; dvp_relation -= 3
+subtitle: He is a good organizer, but is he also a good chancellor?
+
+Our coalition partners are reluctant to accept the new Chancellor, but they do not make loud objections.
+
+@breitscheid_chancellor
+on-arrival: chancellor = "Breitscheid"; chancellor_party = "SPD"; z_relation -= 5; dvp_relation -= 5; kpd_relation += 1
+subtitle: The Center Party is worried about his left-leaning tendencies.
 
 Our coalition partners are reluctant to accept the new Chancellor, but they do not make loud objections.
 
 @bruning_chancellor
-on-arrival: chancellor = "Brüning"; chancellor_party = "Z"; z_relation += 5; dvp_relation += 3
+on-arrival: chancellor = "Brüning"; chancellor_party = "Z"; z_relation += 5; dvp_relation += 5
+subtitle: The Center Party claims it is their turn...
 
 The Center Party is grateful that we have supported Brüning for Chancellor..
 

@@ -1,7 +1,7 @@
 title: Judiciary Reform
 new-page: true
 is-card: true
-view-if: spd_in_government = 1 and justice_minister_party = "spd" and judiciary_timer = 0
+view-if: spd_in_government = 1 and justice_minister_party = "SPD" and judiciary_timer = 0
 on-arrival: month_actions += 1; judiciary_timer = 6
 card-image: img/portraits/RadbruchGustav.jpg
 tags: govt_affairs
@@ -17,7 +17,7 @@ There is great demand in our membership for reforming the judiciary, although th
 - @as_is: Leave the judiciary as it is.
 
 @reform
-subtitle: -= budget
+subtitle: -1 budget
 unavailable-subtitle: Not enough budget.
 choose-if: budget >= 1
 on-arrival: budget -= 1; democratization += 2; coalition_dissent += 1 if in_grand_coalition == 1; workers_spd += 5*(1-dissent) if democratization >= 3; judicial_reform += 2

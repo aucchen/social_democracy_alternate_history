@@ -35,7 +35,7 @@ if (total_allied_strength > enemy_strength) {
 go-to: force_fail if deportation_success == 0; force_success if deportation_success = 1
 
 @force_fail
-on-arrival: sa_strength += 20; workers_nsdap += 5; unemployed_nsdap += 5; new_middle_nsdap += 5; old_middle_nsdap += 5
+on-arrival: sa_strength += 50; workers_nsdap += 5; unemployed_nsdap += 5; new_middle_nsdap += 5; old_middle_nsdap += 5
 
 Unfortunately, our forces fail to disloge the SA from their positions surrounding Hitler. He is seen as both a strong and powerful leader and a victim, further reinforcing his image. The Nazis are left stronger than ever.
 
