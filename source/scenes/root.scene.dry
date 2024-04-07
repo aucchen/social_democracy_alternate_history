@@ -24,6 +24,9 @@ Q.month = 1;
 // how many actions have been taken this month?
 Q.month_actions = 0;
 
+// 0 = normal difficulty, 1 = hard mode, 2 = hard mode no saves
+Q.difficulty = 0;
+
 // party resources
 Q.resources = 2;
 // party dues
@@ -32,6 +35,7 @@ Q.dues = 2;
 // the state of the party
 // overall dissent reduces every increase in party support.
 Q.dissent = 0.05;
+Q.dissent_percent = 5;
 
 // factions
 Q.factions = ['left', 'center', 'labor', 'reformist', 'neorevisionist'];
@@ -101,6 +105,7 @@ Q.prussian_government = "SPD";
 // Reichsbanner, stahlhelm, SA, rotfrontkämpferbund
 Q.rb_strength = 2000;
 Q.rb_militancy = 0.01;
+Q.women_in_rb = 0;
 Q.rb_banned = 0;
 Q.sh_strength = 500;
 Q.sh_militancy = 0.5;
@@ -251,12 +256,13 @@ Q.in_weimar_coalition = 0;
 // Grand coalition = SPD + Z + BVP + DDP + DVP
 // also includes the "new grand coalition" of SPD + Z + BVP + DDP + DVP + Others
 Q.in_grand_coalition = 0;
-// United front = SPD + KPD + Z + DDP
-Q.in_united_front = 0;
+// Popular front = SPD + KPD + Z + DDP
+Q.in_popular_front = 0;
 // left coalition = SPD + KPD + left-splinters
 Q.in_left_coalition = 0;
 // emergency government containing the SPD: only president Braun can do this.
 Q.in_emergency_government = 0;
+Q.in_spd_majority = 0;
 
 // if you're in a coalition, this is an incremental counter for how many times dissent has happened from the right.
 Q.coalition_dissent = 0;
@@ -306,8 +312,10 @@ Q.agricultural_support = 0;
 Q.land_reform = 0;
 // works-creation programs (i.e. WTB-plan) - how much have they implemented?
 Q.works_program = 0;
-// Relations with the Western countries.
+// Relations with the Western countries (France, UK).
 Q.west_relation = 0;
+// Relations with the Eastern countries (Poland, Czechoslovakia)
+Q.east_relation = 0;
 // Relations with the Soviet Union
 Q.soviet_relation = 0;
 // How much have we exposed the secret rearmament programs?
@@ -337,7 +345,8 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'foreign_policy', 'judiciary', 'labor_affairs', 'military',
             'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
             'war_guilt', 'womens_rights', // events
-            'emergency_cuts', 'unemployment_insurance'];
+            'emergency_cuts', 'unemployment_insurance',
+            'sa_ban', 'sh_ban'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
@@ -378,6 +387,8 @@ Q.womens_rights_timer = 0;
 // event timers
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;
+Q.sa_ban_timer = 0;
+Q.sh_ban_timer = 0;
 
 
 // all the initial advisors are centrists.
@@ -422,11 +433,21 @@ new-page: true
 
  - Karl Kautsky, *Hitlerism and Social Democracy*, 1934
 
-This is a game of alternate history. While historical accuracy is a major concern, keep in mind that this is a *game*, and that any divergence from actual events will necessarily have to involve some element of make-believe. Nevertheless, please let the author know if there are any glaring historical mistakes.
+This is a game of alternate history. While historical accuracy is a major concern, keep in mind that this is a *game*, and that any divergence from actual events will necessarily have to involve some element of make-believe. Nevertheless, please let the author know if there are any glaring mistakes.
 
 For more information on the politics and government of the German Republic, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
 
-- @1928_main: Begin
+- @1928_easy: Begin (easy difficulty)
+- @1928_main: Begin (normal difficulty)
+- @1928_hard: Begin (hard difficulty)
+
+@1928_easy
+on-arrival: difficulty = -1; resources = 4; dues = 3; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49;
+go-to: 1928_main
+
+@1928_hard
+on-arrival: difficulty = 1; resources = 0; dues = 1; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31;
+go-to: 1928_main
 
 @1928_main
 audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_HOHEN_BERGEN_noise_reduced.mp3 music/1928_1930/MarekWeber.mp3 music/1928_1930/BAUERNKAPELLE.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3

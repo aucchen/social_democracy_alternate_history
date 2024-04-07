@@ -39,7 +39,7 @@ But the crux of the matter is, what can we do?
 - @compromise: Surely there is some compromise to be had?
 
 @destroy
-on-arrival: spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agricultural_minister_party = "Z"; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_no_confidence = 1;
+on-arrival: spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agricultural_minister_party = "Z"; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_no_confidence = 1; pro_republic -= 3;
 
 Fine. If the bourgeoisie wish to blow up the government, let them do so. Socialists will not be complicit in the destruction of the working class.
 
@@ -48,7 +48,7 @@ Fine. If the bourgeoisie wish to blow up the government, let them do so. Sociali
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
 
 @accept
-on-arrival: workers_spd -= 0.15*workers_spd; umemployed_spd -= 0.3*unemployed_spd; workers_kpd += 7; workers_nsdap += 7; unemployed_kpd += 5; unemployed_nsdap += 5; left_dissent += 15; center_dissent += 10; labor_dissent += 15; reformist_dissent += 5; welfare -= 2; budget += 1; unemployed += 3; month += 1
+on-arrival: workers_spd -= 0.15*workers_spd; umemployed_spd -= 0.3*unemployed_spd; workers_kpd += 7; workers_nsdap += 7; unemployed_kpd += 5; unemployed_nsdap += 5; left_dissent += 15; center_dissent += 10; labor_dissent += 15; reformist_dissent += 5; welfare -= 2; budget += 1; unemployed += 3; month += 1; pro_republic -= 4;
 
 Unfortunately, we must accept this ultimatum if we are to maintain this coalition. The Nazis and Communists are waiting in the wings for us to fail, ready to pounce upon the instability that would result from a breakup of the governing coalition.
 

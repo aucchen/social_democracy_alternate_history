@@ -18,4 +18,4 @@ The far-right parties and paramilitaries - the NSDAP (and its paramilitary the S
 view-if: nazi_urgency < 3
 on-arrival: nazi_urgency += 1
 
-We do not yet have a coherent strategy for combatting the fascists.
+We do not yet have a coherent strategy for combatting the fascists. We must develop one as soon as possible.

@@ -16,7 +16,7 @@ This is a bourgeois dispute, but the costs will be borne by the proletariat. The
 - @end_toleration: We are tired of austerity. End the toleration arrangement!
 
 @austerity
-on-arrival: welfare -= 1; workers_spd -= 3; unemployed_spd -= 3;
+on-arrival: welfare -= 1; workers_spd -= 3; unemployed_spd -= 3; pro_republic -= 3
 
 Chancellor [+ chancellor +] responds to the banking crisis with more cuts to welfare.
 

@@ -17,7 +17,7 @@ Aufhäuser is a leader of the AfA-Bund, the federation of socialist white-collar
 title: Organizing white-collar workers
 subtitle: Improve our standing among the new middle class.
 choose-if: advisor_action_timer <= 0
-unavailable-subtitle: Not available right now.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] 
 on-arrival: advisor_action_timer = 6; new_middle_spd += 6*(1-dissent);
 
 We have increased our organizing among white-collar workers.
@@ -26,7 +26,7 @@ We have increased our organizing among white-collar workers.
 title: Union-party coordination
 subtitle: Reduce dissent among the unions.
 choose-if: advisor_action_timer <= 0
-unavailable-subtitle: Not available right now.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6; labor_dissent -= 10;
 
 We have reduced tensions with the Labor faction.

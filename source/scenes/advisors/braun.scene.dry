@@ -11,13 +11,14 @@ Braun [? if spd_prussia = 1 : is ?][? if spd_prussia = 0 : was ?] the Minister-P
 
 - @coalition
 - @prussian_bulwark
+- @snap_election
 - @root: Return to main
 
 @coalition
 title: Negotiating with the Coalition
 subtitle: Braun can improve our relationships with our centrist and center-right coalition partners.
 choose-if: advisor_action_timer <= 0
-unavailable-subtitle: Not available right now.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 5; coalition_dissent -= 1 if spd_in_government = 1; z_relation += 5; ddp_relation += 5; dvp_relation += 5
 
 We have improved our relations with the Z, DDP, and DVP, and reduced tensions with the coalition.
@@ -26,6 +27,15 @@ We have improved our relations with the Z, DDP, and DVP, and reduced tensions wi
 title: The Prussian Bulwark
 subtitle: As the Minister-President of Prussia, Braun has power over the Prussian bureaucracy and security services.
 choose-if: advisor_action_timer <= 0 and spd_prussia = 1
-unavailable-subtitle: Not available right now.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if spd_prussia == 0 : The SPD does not control Prussia. ?]
 on-arrival: advisor_action_timer = 5; prussian_affairs_timer = 0
 go-to: prussian_affairs
+
+@snap_election
+title: Snap Election
+subtitle: Call a snap election.
+unavailable-subtitle: [? if chancellor != "Braun" : Braun must be Chancellor. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and chancellor == "Braun"
+on-arrival: advisor_action_timer = 6; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; 
+
+We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].

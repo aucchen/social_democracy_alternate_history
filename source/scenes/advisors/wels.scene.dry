@@ -18,7 +18,7 @@ Wels is the long-time chairman of the SPD. He is a gifted organizer and a member
 title: Clear the agenda
 subtitle: Removes all cards from the hand.
 choose-if: advisor_action_timer = 0
-unavailable-subtitle: Not available right now.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: {!
 Q.advisor_action_timer = 5;
 window.dendryUI.dendryEngine.state.currentHands['main'] = [];
@@ -30,16 +30,17 @@ All items from our agenda have been cleared.
 title: Party Discipline
 subtitle: Reduce dissent across the party.
 choose-if: advisor_action_timer = 0
-unavailable-subtitle: Not available right now.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6; left_dissent -= 5; labor_dissent -= 10; center_dissent -= 10; reformist_dissent -= 10; neorevisionist_dissent -= 5
 
 We have enforced party discipline to reduce dissent across all factions.
 
 @emergency_fundraising
 title: Emergency Fundraising
+view-if: difficulty < 1
 subtitle: An emergency infusion of resources.
 choose-if: advisor_action_timer = 0
-unavailable-subtitle: Not available right now.
-on-arrival: advisor_action_timer = 5; resources += dues
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; resources += dues
 
 We have gained +[+ dues +] resources.

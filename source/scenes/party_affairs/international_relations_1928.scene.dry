@@ -29,7 +29,7 @@ subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 audio: shuffle music/communist/workers_of_vienna_normalized.mp3
-on-arrival: left_strength += 5; radicalization += 1; rb_militancy += 0.05; resources -= 1
+on-arrival: left_strength += 5; radicalization += 1; rb_militancy += 0.03; resources -= 1
 
 Our Reichsbanner can learn much in paramilitary organization and training from the Austrian Republican Protection Units.
 
@@ -45,7 +45,7 @@ The programs of the Nordic socialists involve active government intervention in 
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1; kpd_relation += 5*(1-dissent);
+on-arrival: resources -= 1; kpd_relation += 5*(1-dissent); communist_coalition += 1 if comintern_seen == 0; comintern_seen += 1
 
 The Stalinists of the KPD insists on calling us "social fascists", suggesting that we social democrats are as bad or worse than actual fascists. Needless to say, this is not good for our relationship with the Communists. By observing the Comintern, we can develop strategies to counter Stalinist rhetoric, at least on a local level.
 

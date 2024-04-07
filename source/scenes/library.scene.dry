@@ -47,6 +47,11 @@ go-to: menu
 
 
 @public_opinion
+on-arrival: {!
+Q.pro_republic = Math.round(Q.pro_republic);
+Q.nationalism = Math.round(Q.nationalism);
+Q.socialism = Math.round(Q.socialism);
+!}
 go-to: election_algorithm
 set-jump: election_projections
 
@@ -133,6 +138,11 @@ Current relations: [+ kpd_relation : relationships +]
 Current relations: [+ nsdap_relation : relationships +]
 
 @paramilitaries
+on-arrival: {!
+Q.rb_strength = Math.round(Q.rb_strength);
+Q.sh_strength = Math.round(Q.sh_strength);
+Q.sa_strength = Math.round(Q.sa_strength); 
+!}
 go-to: menu
 
 **Paramilitary groups:**
@@ -170,9 +180,11 @@ Militarization: [+ sa_militancy : militancy +]
 
 
 @factions
-go-to: menu
+go-to: neorevisionists if neorevisionism > 0; menu if neorevisionism <= 0
 
 **Internal factions of the SPD**
+
+Overall dissent: [+ dissent_percent : dissent +]
 
 **Left**
 
@@ -197,4 +209,14 @@ Dissent: [+ labor_dissent : dissent +]
 Strength: [+ reformist_strength : strength +]
 
 Dissent: [+ reformist_dissent : dissent +]
+
+@neorevisionists
+go-to: menu
+
+**Neorevisionists**
+
+Strength: [+ neorevisionist_strength : strength +]
+
+Dissent: [+ neorevisionist_dissent : dissent +]
+
 

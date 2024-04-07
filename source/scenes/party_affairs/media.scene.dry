@@ -16,6 +16,7 @@ The SPD runs a veritable media empire, with many newspapers throughout every Ger
 - @ideological
 - @radio
 - @radio_2
+- @radio_3
 
 @commercial
 title: Make our newspapers more commercialized by broadening their appeal beyond party supporters.
@@ -53,7 +54,7 @@ title: We must keep on building up our radio network.
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-view-if: radio > 0 and radio < 3
+view-if: radio > 0 and radio <= 3
 on-arrival: radio += 1; resources -= 1; new_middle_spd += 4*(1 - dissent); old_middle_spd += 3*(1 - dissent); workers_spd += 3*(1 - dissent); socialism += 3*(1 - dissent); nationalism -= 3*(1 - dissent)*(pacifism-2) if pacifism > 2; pro_republic += 3*(1-dissent)*(democratization-2) if democratization > 2
 
 Our new radio network has a mix of popular and political programming, and is proving a success.
@@ -61,7 +62,7 @@ Our new radio network has a mix of popular and political programming, and is pro
 @radio_3
 title: We must keep on building up our radio network.
 subtitle: It is now financially self-sufficient, and does not require any more resources.
-view-if: radio >= 3
-on-arrival: radio += 1; resources -= 1; new_middle_spd += 5*(1 - dissent); old_middle_spd += 4*(1 - dissent); workers_spd += 5*(1 - dissent); rural_spd += 3*(1 - dissent); socialism += 3*(1 - dissent); nationalism -= 3*(1 - dissent)*(pacifism-2) if pacifism > 2; pro_republic += 3*(1-dissent)*(democratization-2) if democratization > 2
+view-if: radio > 3
+on-arrival: radio += 1; new_middle_spd += 5*(1 - dissent); old_middle_spd += 4*(1 - dissent); workers_spd += 4*(1 - dissent); rural_spd += 3*(1 - dissent); socialism += 3*(1 - dissent); nationalism -= 3*(1 - dissent)*(pacifism-2) if pacifism > 2; pro_republic += 3*(1-dissent)*(democratization-2) if democratization > 2
 
-Our radio network is a successful tool for spreading our message, as well as.
+Our radio network has become a successful tool for spreading our message.

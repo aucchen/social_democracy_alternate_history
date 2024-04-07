@@ -1,0 +1,9 @@
+title: Shuffle Leadership
+view-if: difficulty < 0
+new-page: true
+is-card: true
+is-pinned-card: true
+on-arrival: month_activities += 1; shuffle_leadership_timer = 6;
+card-image: img/vorwarts_2.jpg
+go-to: shuffle_leadership.rm_main
+

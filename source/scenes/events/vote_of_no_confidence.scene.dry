@@ -59,14 +59,14 @@ on-arrival: communist_coalition += 1; workers_kpd += 3
 
 The KPD is not interested in a "toleration" arrangement; they will only support us if they can participate in the government as part of a coalition.
 
-- @election_1928.united_front_coalition: Form a "united front" coalition?
+- @election_1928.popular_front_coalition: Form a "Popular Front" coalition?
 - @election_1928.left_coalition
 - @try_assuage: Never mind. We must deal with this some other way.
 
 
 
 @let_it_happen
-on-arrival: next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agricultural_minister_party = "Z"; coalition_dissent = 0; welfare -= 2  
+on-arrival: next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agricultural_minister_party = "Z"; coalition_dissent = 0; welfare -= 2; pro_republic -= 4  
 
 The vote succeeds, and our government has resigned. Chancellor Brüning now leads an all-bourgeois cabinet. He immediately proceeds to cut welfare spending substantially.
 

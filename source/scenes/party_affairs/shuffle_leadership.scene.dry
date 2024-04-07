@@ -298,7 +298,7 @@ card-image: img/portraits/BreitscheidRudolf.jpg
 view-if: breitscheid_advisor = 0 and n_advisors < 3
 on-arrival: breitscheid_advisor = 1; n_advisors += 1
 go-to: advisor_menu
-#tags: center_advisor
+tags: center_advisor
 
 Rudolf Breitscheid is now an advisor.
 
@@ -348,7 +348,7 @@ card-image: img/portraits/JuchaczMarie.jpg
 view-if: juchacz_advisor = 0 and n_advisors < 3
 on-arrival: juchacz_advisor = 1; n_advisors += 1; reformist_strength += 5
 go-to: advisor_menu
-#tags: reformist_advisor
+tags: reformist_advisor
 
 Marie Juchacz is now an advisor.
 
@@ -362,7 +362,7 @@ card-image: img/portraits/LeviPaul.jpg
 view-if: levi_advisor = 0 and levi_dead = 0 and n_advisors < 3
 on-arrival: levi_advisor = 1; n_advisors += 1; left_strength += 5
 go-to: advisor_menu
-#tags: left_advisor
+tags: left_advisor
 
 Paul Levi is now an advisor.
 
@@ -374,7 +374,7 @@ card-image: img/portraits/SenderToni.jpg
 view-if: sender_advisor = 0 and n_advisors < 3
 on-arrival: sender_advisor = 1; n_advisors += 1; left_strength += 5
 go-to: advisor_menu
-#tags: left_advisor
+tags: left_advisor
 
 Toni Sender is now an advisor.
 
@@ -439,7 +439,7 @@ card-image: img/portraits/MierendorffCarlo.jpg
 view-if: mierendorff_advisor = 0 and n_advisors < 3
 on-arrival: mierendorff_advisor = 1; n_advisors += 1; neorevisionist_strength += 5
 go-to: advisor_menu
-#tags: neorev_advisor
+tags: neorev_advisor
 
 Carlo Mierendorff is now an advisor.
 

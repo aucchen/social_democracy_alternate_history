@@ -1,0 +1,42 @@
+title: Rudolf Breitscheid
+is-pinned-card: true 
+tags: advisor, centrist
+card-image: img/portraits/BreitscheidRudolf.jpg
+new-page: true
+view-if: breitscheid_advisor = 1
+
+= Rudolf Breitscheid
+
+Breitscheid is a long-time SPD leader, who was at one time part of the anti-war USPD. He came from a working-class family, but has a doctorate degree and started his political career as a liberal.
+
+- @breitscheid_international
+- @party_discipline
+- @snap_election
+- @root: Return to main
+
+@breitscheid_international
+title: International Relations
+subtitle: Breitscheid is one of our contacts with international socialist parties.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0
+on-arrival: advisor_action_timer = 6;
+go-to: international_relations_1928
+
+@party_discipline
+title: Party Discipline
+subtitle: Reduce dissent across the party.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; left_dissent -= 5; labor_dissent -= 10; center_dissent -= 10; reformist_dissent -= 10; neorevisionist_dissent -= 5
+
+We have enforced party discipline to reduce dissent across all factions.
+
+
+@snap_election
+title: Snap Election
+subtitle: Call a snap election.
+unavailable-subtitle: [? if chancellor != "Breitscheid" : Breitscheid must be Chancellor. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and chancellor == "Breitscheid"
+on-arrival: advisor_action_timer = 6; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
+
+We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].

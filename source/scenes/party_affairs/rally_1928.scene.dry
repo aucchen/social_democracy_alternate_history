@@ -62,17 +62,17 @@ Mass rallies are a common feature of social democratic life, especially in the l
 - @local: A mixture of various local and national concerns that resonate most with the audience.
 
 @class_struggle
-on-arrival: workers_spd += 3*(1-dissent); left_strength += 5; left_dissent -= 5; old_middle_spd -= 3; new_middle_spd -= 2;
+on-arrival: workers_spd += 4*(1-dissent); left_strength += 5; left_dissent -= 5; old_middle_spd -= 3; new_middle_spd -= 2;
 
 Our message of class struggle appeals to the left wing of the working class, while potentially alienating the middle class.
 
 @welfare
-on-arrival: workers_spd += 3*(1-dissent); reformist_strength += 3; labor_strength += 4; reformist_dissent -= 3; labor_dissent -= 3;
+on-arrival: workers_spd += 4*(1-dissent); reformist_strength += 3; labor_strength += 4; reformist_dissent -= 3; labor_dissent -= 3;
 
 The reformist message appeals to the organized workers, whose benefits are the accomplishments of social democracy.
 
 @democracy
-on-arrival: democratization += 1; pro_republic += 2*(1 - dissent); workers_spd += 3 if democratization >= 3; pro_republic += 3*(1 - dissent) if democratization >= 4
+on-arrival: democratization += 1; pro_republic += 2*(1 - dissent); workers_spd += 4*(1-dissent) if democratization >= 3; pro_republic += 4*(1 - dissent) if democratization >= 3; new_middle_spd += 4*(1-dissent) if democratization >= 3 
 
 Our speakers defend the republican system and rail against the monarchists and authoritarians who threaten it.
 
@@ -80,7 +80,7 @@ Our speakers defend the republican system and rail against the monarchists and a
 [? if democratization >= 3 : Since we have consistently made democratization a theme of our campaign, the workers are enthusiastic about our message. ?]
 
 @pacifism
-on-arrival: pacifism += 1; nationalism -= 2*(1 - dissent); workers_spd += 3*(1 - dissent) if pacifism >= 3; nationalism -= 3*(1-dissent) if pacifism >= 3
+on-arrival: pacifism += 1; nationalism -= 2*(1 - dissent); workers_spd += 4*(1 - dissent) if pacifism >= 3; nationalism -= 3*(1-dissent) if pacifism >= 3; new_middle_spd += 4*(1-dissent) if pacifism >= 3
 
 Our speakers denounce the military establishment and all the spending entering that black hole. Some adventurous speakers question the responsibility of the military elites in organizing the Great War.
 
@@ -95,6 +95,6 @@ The WTB plan has become a popular rallying cry for our party. The workers are ea
 
 
 @local
-on-arrival: workers_spd += 3*(1-dissent);
+on-arrival: workers_spd += 3*(1-dissent); old_middle_spd += 1*(1-dissent); new_middle_spd += 2*(1-dissent);
 
 Our speakers have gauged the mood and are speaking to the issues that seem to most affect the workers in this moment.

@@ -10,6 +10,8 @@ Resources available: [+ resources +]
 
 SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 : opposition ?]
 
+Internal dissent: [+ dissent_percent : dissent +]
+
 = Government
 
 President: [+ president +]

@@ -1,8 +1,7 @@
 title: Post Event
 new-page: true
 on-arrival: {!
-Q.event_queue = ['main'];
-// TODO: make sure no stat is below 0.
+// make sure no stat is below 0.
 for (var c of Q.classes) {
     for (var party of Q.parties) {
         if (Q[c+'_'+party] < 0) {
@@ -26,6 +25,7 @@ var total_strength = Q.left_strength + Q.center_strength + Q.labor_strength + Q.
 var total_dissent = Q.left_strength*Q.left_dissent + Q.center_strength*Q.center_dissent + Q.labor_strength*Q.labor_dissent + Q.reformist_strength*Q.reformist_dissent + Q.neorevisionist_strength*Q.neorevisionist_dissent;
 
 Q.dissent = 0.01*total_dissent/total_strength;
+Q.dissent_percent = Q.dissent*100;
 console.log('new dissent: ' + Q.dissent);
 
 if (Q.dissent < 0) {
@@ -52,17 +52,14 @@ if (Q.month_actions >= 1) {
 }
 Q.has_event = 0;
 // check if there are any cards in #event, and then go to main if not.
-if (typeof window !== "undefined") {
-    var scene = window.dendryUI.dendryEngine.game.scenes['post_event.events_choice'];
-    var choices = window.dendryUI.dendryEngine._compileChoices(scene);
-    if (choices && choices[0].title != "Continue...") {
-        Q.has_event = 1;
-    } else {
-        has_event = 0;
-    }
+var scene = this.game.scenes['post_event.events_choice'];
+var choices = this._compileChoices(scene);
+if (choices && choices[0].title != "Continue...") {
+    Q.has_event = 1;
 } else {
     has_event = 0;
 }
+
 if (typeof window !== "undefined" && window.generateBar) {
 }
 !}

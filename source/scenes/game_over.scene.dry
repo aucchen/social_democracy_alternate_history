@@ -1,6 +1,8 @@
-title: Game Over
+title: Game Over.
 new-page: true
 go-to: eg_menu
+on-arrival: {!
+!}
 
 = End
 
@@ -49,15 +51,13 @@ go-to: eg_menu
 
 We have won the civil war against the reactionary forces. Germany will be changed forever, but it is too early to know how.
 
-
-
 @civil_war_lost
 title: We lost the civil war.
 view-if: total_defeat == 1
 tags: endings
 go-to: eg_menu
 
-We have lost the civil war.
+We have lost the civil war. At least it was a quick coup, with *only* hundreds of lives lost before our remaining fighters surrendered.
 
 @long_war
 title: Germany is gripped by civil war.
@@ -65,7 +65,10 @@ view-if: long_war == 1
 tags: endings
 go-to: eg_menu
 
-Germany is currently in the grip of a civil war. It is quite possible that the outcome will only be determined by foreign intervention.
+Germany is currently in the grip of a civil war, a brutal affair that has no obvious end. Thousands of lives have already been extinguished, and it is likely that the war will not stop until Germany's cities are reduced to ruins. 
+
+[? if is_favorable == 0 : The current conditions are not favorable for us. ?][? if west_relation >= 2: Our cause is popular in the West, but their sclerotic governments are reluctant to send us aid. ?][? if soviet_aid >= 1 : The Soviet Union has aided the Communists, but not the socialists and democrats, in an attempt to shape Germany's future government. ?][? if east_aid >= 1 : Poland and Czechoslovakia have sent some assistance against the fascists. ?]
+
 
 @braun_victorious
 title: Otto Braun victorious
@@ -110,7 +113,7 @@ While still uncomfortably high, unemployment levels are nowhere near their peak.
 
 @unemployment_high
 title: Unemployment is still too high.
-view-if: unemployed >= 30 and (chancellor != "Hitler" and president != "Hitler") and (civil_war_seen == 0)
+view-if: unemployed >= 30 and (chancellor != "Hitler" and president != "Hitler") and (total_defeat == 0) and long_war == 0
 tags: endings
 go-to: eg_menu
 
@@ -120,9 +123,29 @@ Unemployment is still at dangerously high levels. Even though Hitler is not in p
 @emergency_government
 title: SPD ruling in an emergency government.
 view-if: in_emergency_government == 1
+tags: endings
+go-to: eg_menu
 
 The SPD is ruling as part of an emergency minority government, led by President [+ president +] and Chancellor [+ chancellor +]. This is a temporary and unstable arrangement, leaving the door open to further authoritarianism.
 
+
+
+@achievements
+go-to: eg_menu
+
+= Completed Achievements
+
+[? if achievement_no_hitler : Hitler not yet in power ?]
+
+[? if achievement_deport_hitler : Deport Hitler ?]
+
+[? if achievement_otto_braun_victorious : Otto Braun Victorious - Otto Braun is President, Chancellor, and Minister-President. ?]
+
+= Incomplete Achievements
+
+[? if not achievement_no_hitler : Hitler not yet in power ?]
+
+# Muller dies in office.
 
 
 @end_game
