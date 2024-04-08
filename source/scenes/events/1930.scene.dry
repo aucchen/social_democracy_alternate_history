@@ -31,6 +31,7 @@ if (Q.budget > 0) {
 !}
 tags: event
 view-if: year = 1930 and month = 1 
+priority: 2
 max-visits: 1
 
 A new year begins. The economic crisis is worsening throughout the world, with no end in sight. The NSDAP seems to be strengthening in local elections. All very worrisome trends.

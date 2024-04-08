@@ -263,7 +263,7 @@ There is no majority in this round. In the second round, any candidate who wins 
 @round2_menu
 
 - @round2_convince_z: Convince the Center to switch their support to us.
-- @round2_convince_kpd: Convince the KPD to switch their support to us, or at least get them to 
+- @round2_convince_kpd: Convince the KPD to switch their support to us. 
 - @round2_hindenburg: Switch our support to Hindenburg.
 - @round2_thalmann: Switch our support to Thälmann of the KPD.
 - @round2_vote: Let the second round voting begin.

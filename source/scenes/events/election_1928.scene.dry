@@ -301,6 +301,8 @@ view-if: weimar_coalition < 50 and (grand_coalition < 50 or grand_coalition_fail
 on-arrival: no_majority_elections += 1
 go-to: no_majority_bruning if chancellor = "Brüning"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
 
+# TODO: if there is an anti-democratic coalition majority, you should appoint Papen.
+
 # either new elections, or Hindenburg appoints either Brüning, Papen, Schleicher, or Hitler.
 
 @no_majority_spd
@@ -315,7 +317,7 @@ There is no path to an obviously workable majority. Since President Hindenburg i
 # - if NSDAP is the largest party and the 
 
 @no_majority_bruning
-go-to: no_majority_bruning_toleration if no_majority_elections <= 3; hindenburg_appoints_papen if no_majority_elections >= 3
+go-to: no_majority_bruning_toleration if no_majority_elections <= 3; hindenburg_appoints_papen if no_majority_elections > 3 or anti_democratic_coalition >= 50
 
 
 @hindenburg_appoints_papen

@@ -4,6 +4,7 @@ on-arrival: {!
 // increase NSDAP vote share 
 // TODO: if a public works program has started, unemployment is not so bad.
 Q.unemployed += 8; 
+Q.catholics += 2;
 Q.catholics_z += 5;
 if (Q.works_program) {
     Q.unemployed -= 5;
@@ -30,6 +31,7 @@ if (!Q.works_program) {
 !}
 tags: event
 view-if: year = 1931 and month = 1 
+priority: 2
 max-visits: 1
 
 A new year begins. [? if works_program = 0 : Unemployment continues to spiral upwards. ?]

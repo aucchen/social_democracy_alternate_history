@@ -57,7 +57,7 @@ The workers are furious at our betrayal, as are a good portion of our membership
 
 @compromise
 unavailable-subtitle: We do not have good enough relations with the right-wing parties.
-choose-if: dvp_relation >= 42
+choose-if: dvp_relation >= 40
 
 Thanks to our good relations, the DVP have offered a compromise that raises some taxes on the wealthy, along with lesser welfare cuts. Our members have mixed opinions on accepting this compromise. Reformists and Centrists support maintaining our government to keep the fascists and communists out, while Labor generally opposes any cuts, and the Left is opposed to compromises with the bourgeoisie.
 

@@ -16,7 +16,7 @@ Q.unemployed_nsdap += 8;
 !}
 tags: event
 view-if: year = 1929 and month = 1
+priority: 2
 max-visits: 1
-go-to: main
 
 A new year begins. The economy appears to be slackening; unemployment is increasing throughout the republic, although for the most part, people are still doing well.

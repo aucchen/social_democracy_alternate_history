@@ -46,8 +46,8 @@ on-arrival: resources -= 3; coalition_dissent -= 1;
 By transferring resources to our coalition partners, we can reduce their dissent against our policies. This is a crude, but effective solution.
 
 @support_kpd
-choose-if: communist_coalition >= 2 and kpd_relation >= 50 and kpd_r >= dvp_r
-unavailable-subtitle: They would never support us...
+choose-if: communist_coalition >= 3 and kpd_relation >= 50 and kpd_r >= dvp_r
+unavailable-subtitle: [? if communist_coalition < 3 : The KPD won't take part in parliamentary government. ?] [? if kpd_relation < 50 : The KPD is not friendly enough with us. ?] [? if kpd_r < dvp_r: The KPD does not have enough votes. ?]
 
 If the Communists abstain, then we essentially can maintain a minority government[? if president=="Hindenburg":, although it would be very difficult to make policy without the support of President Hindenburg, which we do not have ?]. If this happens, then we will own a massive debt to the KPD. This could lead to broader cooperation in the future, for better or for worse.
 
@@ -55,9 +55,9 @@ If the Communists abstain, then we essentially can maintain a minority governmen
 - @let_it_happen: Never mind. Let the vote happen.
 
 @support_kpd_2
-on-arrival: communist_coalition += 1; workers_kpd += 3
+on-arrival: communist_coalition += 1; workers_kpd += 3; kpd_relation += 5
 
-The KPD is not interested in a "toleration" arrangement; they will only support us if they can participate in the government as part of a coalition.
+The KPD is not interested in a "toleration" arrangement; they will only support us if they can participate in the government as part of a coalition. And, if this toleration agreement happens, the right-wing parties will not be inclined to support us. 
 
 - @election_1928.popular_front_coalition: Form a "Popular Front" coalition?
 - @election_1928.left_coalition
