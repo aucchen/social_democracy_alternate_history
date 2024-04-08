@@ -29,7 +29,7 @@ This may end any attempt at reconciliation with the KPD, but the Center and Peop
 - @no_fault: It is an unfortunate incident that should not have happened, but is no one's fault at all.
 
 @corrupt_police
-on-arrival: kpd_relation += 10; z_relation -= 3; dvp_relation -= 3
+on-arrival: kpd_relation += 10; z_relation -= 2; dvp_relation -= 2; prussian_police_loyalty += 0.05
 
 We arrested the police responsible for the killings, and put them on trial. [? if judicial_reform = 0 : Unfortunately, the reactionary judiciary let them go free with barely any punishment at all. ?]
 

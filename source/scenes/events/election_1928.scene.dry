@@ -49,6 +49,7 @@ Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
 
 Q.leverage = Q.spd_r;
 
+Q.grand_coalition_failed = 0;
 // TODO: Reset government and ministers... Based on Brüning's 1930 govt
 Q.coalition_dissent = 0;
 Q.spd_in_government = 0;
@@ -273,10 +274,10 @@ In response to the KPD's entrance into the government, the right-wing immediatel
 
 @right_coalition
 title: A right-wing coalition may be formed.
-subtitle: Z + BVP + DVP + DNVP + Others
+subtitle: Z + BVP + DVP + DNVP + Others ([+ right_coalition +]%)
 unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
 view-if: right_coalition >= 50
-choose-if: year <= 1929
+choose-if: year < 1928
 go-to: no_right_coalition if year >= 1930; right_coalition_2 if year <= 1929
 
 There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties.
@@ -297,15 +298,16 @@ Even though the DNVP is very reluctant to participate in such a coalition, given
 
 @no_majority
 title: There is no clear governing majority.
-view-if: weimar_coalition < 50 and grand_coalition < 50 and president = "Hindenburg" and far_right_coalition < 50
+view-if: weimar_coalition < 50 and (grand_coalition < 50 or grand_coalition_failed == 1) and president = "Hindenburg" and far_right_coalition < 50
 on-arrival: no_majority_elections += 1
-go-to: no_majority_bruning if chancellor = "Brüning"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD"
+go-to: no_majority_bruning if chancellor = "Brüning"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
 
 # TODO: either new elections, or Hindenburg appoints either Brüning, Papen, Schleicher, or Hitler.
 
 @no_majority_spd
+on-arrival: chancellor = "Brüning"; chancellor_party = "Z"
 
-There is no path to an obviously workable majority. Since President Hindenburg is unwilling to work with a minority SPD government, his preferred chancellor is Heinrich Brüning of the Center Party, who could lead a "Presidential" government.
+There is no path to an obviously workable majority. Since President Hindenburg is unwilling to work with a minority or caretaker SPD government, his preferred chancellor is Heinrich Brüning of the Center Party, who could lead a "presidential" government.
 
 - @toleration_bruning: We will tolerate Brüning.
 - @new_grand_coalition: We will try to form a new grand coalition.
@@ -445,7 +447,7 @@ Hermann Müller has become chancellor of the SPD majority.
 @brauns_dilemma
 title: There is no clear governing majority.
 subtitle: President Braun faces a dilemma.
-view-if: president == "Braun" and grand_coalition < 50
+view-if: president == "Braun" and (grand_coalition < 50 or grand_coalition_failed == 1)
 
 # if Otto Braun is president and there is no workable majority... then you're fucked.
 
@@ -595,7 +597,7 @@ Rudolf Breitscheid has been appointed chancellor.
 
 @grand_coalition
 title: We can form a Grand Coalition.
-view-if: grand_coalition >= 50
+view-if: grand_coalition >= 50 and grand_coalition_failed == 0
 subtitle: SPD + Z + BVP + DDP + DVP
 on-arrival: in_grand_coalition = 1
 go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 29); grand_coalition_z_lead if (n_elections > 1 and spd_r < 29) or (n_elections <= 1 and largest_party != "SPD")
@@ -612,7 +614,7 @@ There are enough votes to form a majority coalition consisting of the SPD, Cente
 
 @grand_coalition_z_lead_2
 
-The Center chancellor is likely to be Heinrich Brüning of the Center Party[? if chancellor = "Brüning" :again ?]. He is known for his conservatism and sympathy for monarchism, being on the right wing of the Center. [? if austerity >= 2 : Due to the government's austerity policies, many of our members are reluctant to participate in this coalition again. Some support a "toleration" arrangement in which we will provide outside support to prevent the far-right from either entering government or calling a successful no-confidence vote. Others support entering into pure opposition, and letting the right do what it wishes. ?]
+The Center chancellor is likely to be Heinrich Brüning of the Center Party[? if chancellor = "Brüning" : again ?]. He is known for his conservatism and sympathy for monarchism, being on the right wing of the Center. [? if austerity >= 2 : Due to the government's austerity policies, many of our members are reluctant to participate in this coalition again. Some support a "toleration" arrangement in which we will provide outside support to prevent the far-right from either entering government or calling a successful no-confidence vote. Others support entering into pure opposition, and letting the right do what it wishes. ?]
 
 Brüning is not opposed to a coalition with us. Alternatively, we could enter a "toleration" agreement.
 
@@ -689,6 +691,7 @@ on-arrival: spd_in_government = 0; spd_toleration = 1; minority_government = 1; 
 We have decided to tolerate Brüning's government. This means that we will vote against no-confidence votes to make sure they fail, but also that we will not be directly participating as ministers in the government. Thus, we can prevent a new election and stop the far right from entering government.
 
 @grand_coalition_fail
+on-arrival: grand_coalition_failed = 1
 
 Unfortunately, the DVP and BVP are unwilling to enter into another coalition with the SPD, so the grand coalition is unable to be formed.
 
@@ -778,7 +781,7 @@ We have promised to let the Center have more influence in the government in resp
 @z_chancellor
 title: Let the Center party have their chancellor.
 subtitle: This is unexpected and will cause internal dissent, but may give us a better position in negotiating for other cabinet positions.
-on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; z_relation += 10; dvp_relation += 5; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0
+on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; z_relation += 10; dvp_relation += 5; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0; chancellor = "Brüning"; spd_in_government = 1
 go-to: ministries
 
 This is highly unexpected, and many in the left and center of our party are criticizing this decision.
@@ -822,16 +825,14 @@ go-to: no_govt_2
 on-arrival: reformist_dissent += 25; center_dissent += 10; labor_dissent += 25; neorevisionist_dissent += 25; in_weimar_coalition = 0; in_grand_coalition = 0; chancellor = "Brüning" if chancellor == "Marx"; spd_in_government = 0
 go-to: right_coalition_post_spd if right_coalition >= 50; new_elections_spd if right_coalition < 50
 
-# right_coalition_post_spd is what you get if you reject a grand coalition. Or, TODO:
 
 @right_coalition_post_spd
-on-arrival: chancellor = "Brüning"; new_middle_spd -= 3; old_middle_spd -= 2; workers_spd -= 2; catholics_spd -= 4;
+on-arrival: chancellor = "Brüning"; new_middle_spd -= 3; old_middle_spd -= 2; workers_spd -= 2; catholics_spd -= 4; next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; 
 
-# TODO: Brüning eventually becomes chancellor!!!
+There are enough votes to form a right-wing coalition of the Z, DVP, DNVP, and various minor parties, essentially replicating the previous Marx government. However, the DNVP is very reluctant to join the government, as its leader, Alfred Hugenberg, is against the very existence of parliamentary democracy, and is unwilling to join such a coalition anymore.
 
-There are enough votes to form a right-wing coalition of the Z, DVP, DNVP, and various minor parties, essentially replicating the previous Marx government. However, the DNVP is very reluctant to join the government, as its leader, Alfred Hugenberg, is against the very existence of parliamentary democracy. Eventually, under President Hindenburg's pressure, a right-wing coalition is formed, with Heinrich Brüning of the Center Party as the new chancellor.
+Chancellor Heinrich Brüning of the Center Party currently rules on an emergency basis. New elections have been called for [+ next_election_month : month +] [+ next_election_year +]
 
-We are seen as responsible for the rise of a new right-wing government, and many of our middle-class and even some working-class supporters have deserted the party.
 
 @new_elections_spd
 on-arrival: next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; new_middle_spd -= 5; old_middle_spd -= 5; workers_spd -= 3; catholics_spd -= 3; in_election = 1
