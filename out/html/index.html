@@ -61,20 +61,21 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="animate_bg_yes">Enable background animation</label>
+                        <label for="audio_yes">Music on</label>
                     </td>
                     <td>
-                        <input type="radio" id="animate_bg_yes" name="animate_bg" value="1" onclick="window.enableAnimateBg();">
+                        <input type="radio" id="audio_yes" name="audio" value="1" onclick="window.enableAudio();">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="animate_bg_no">Disable background animation</label>
+                        <label for="audio_no">Music off</label>
                     </td>
                     <td>
-                        <input type="radio" id="animate_bg_no" name="animate_bg" value="0" onclick="window.disableAnimateBg();">
+                        <input type="radio" id="audio_no" name="audio" value="0" onclick="window.disableAudio();">
                     </td>
                 </tr>
+
                 <tr>
                     <td>
                         <button onclick="window.hideOptions();">Close</button>
@@ -213,7 +214,7 @@
                 <div id="header-links">
                     <a id="stats-link" onclick="window.showStats();" href="#">Library</a>
                     <a onclick="dendryUI.showSaveSlots();" href="#">Save/Load</a>
-                    <a onclick="dendryUI.showOptions();" href="#">Options</a>
+                    <a onclick="window.showOptions();" href="#">Options</a>
                 </div>
             </header>
             <div id="tools_wrapper">

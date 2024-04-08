@@ -186,17 +186,21 @@ p {
 #content h1 + p {
   text-indent: 0;
 }
+/*
 #content h1 + p:first-line {
   font-weight: bold;
 }
+*/
 #content h1 + p:first-letter {
-  position: relative;
+/*
   padding-top: 0.16em;
+  position: relative;
   display: block;
   float: left;
   font-weight: normal;
   font-size: 3.2em;
   line-height: 0.75em;
+*/
 }
 p.game-over {
   border: 2px solid #bbb;

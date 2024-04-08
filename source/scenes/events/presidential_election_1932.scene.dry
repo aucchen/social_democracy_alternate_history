@@ -251,7 +251,7 @@ Hitler - [+ hitler_votes +]%
 [? if braun_campaign > 0 : Braun - [+ braun_votes +]% ?]
 
 @no_majority_round1
-on-arrival: hitler_support_hindenburg = 1 if braun_plurality or thalmann_plurality
+on-arrival: hitler_support_hindenburg = 1 if (braun_plurality or thalmann_plurality)
 go-to: round2_menu
 
 There is no majority in this round. In the second round, any candidate who wins a plurality will win overall. What should we do?
@@ -278,8 +278,10 @@ Q.z_support_braun = 0;
 
 if (Q.z_relation >= 55) {
     Q.z_support_braun = 1;
-    Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
-} else if (Q.z_relation >= 45 && Q.hitler_support_hindenburg) {
+    if (Q.hitler_support_hindenburg) {
+        Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
+    }
+} else if (Q.z_relation >= 50 && Q.hitler_support_hindenburg) {
     Q.z_support_braun = 1;
     Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
 } else if (Q.z_relation <= 35) {

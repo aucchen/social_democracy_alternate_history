@@ -51,10 +51,10 @@ Cutting resources to the Reichsbanner causes a drop in the membership, and leads
 @women_rb
 title: Allow women to join the Reichsbanner.
 subtitle: This might cause a backlash from existing members.
-view-if: womens_rights >= 3 and sender_advisor == 1 and iron_front_formed == 1
+view-if: womens_rights >= 4 and sender_advisor == 1 and iron_front_formed == 1
 on-arrival: rb_militancy *= 0.85; rb_strength += 400; women_in_rb = 1
 max-visits: 1
 
-The suggestion to allow women into the Reichsbanner is ridiculed by most, except for Toni Sender. But this is an exceptional time, and we need anyone who is willing to join. Thus, we organize specialized units for women, and even some covert units for transvestites and inverts.
+The suggestion to allow women into the Reichsbanner is ridiculed by most, except for Toni Sender. But this is an exceptional time, and we need anyone who is willing to join. Thus, we organize specialized units for women, and even some covert units for transsexuals and inverts.
 
 After allowing women to join, the number of comrades who leave is more than balanced out by the number of radicalized women and others who join. However, many of our departed members were veterans, and many of the new members have no experience with military-style training.
