@@ -46,11 +46,13 @@ Q.popular_front_coalition = Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3;
 Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r;
 // aka everyone except nazi, kpd, dnvp
 Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
+// Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
+Q.hitler_right_coalition = Q.z_r + Q.dnvp_r + Q.nsdap_r;
 
 Q.leverage = Q.spd_r;
 
 Q.grand_coalition_failed = 0;
-// TODO: Reset government and ministers... Based on Brüning's 1930 govt
+// Reset government and ministers... Based on Brüning's 1930 govt
 Q.coalition_dissent = 0;
 Q.spd_in_government = 0;
 Q.in_weimar_coalition = 0;
@@ -98,8 +100,6 @@ Grand Coalition (SPD + Z + BVP + DDP + DVP): [+ grand_coalition +]%
 Bourgeois Coalition (Z + BVP + DDP + DVP + Others): [+ bourgeois_coalition +]%
 
 Right-wing Coalition (Z + BVP + DVP + Others + DNVP): [+ right_coalition +]%
-
-# TODO: detailed election results breakdown by class (maybe put it in the library?)
 
 [? if nazi_urgency <= 1 and nsdap_r >= 15 : The rapid rise in NSDAP votes is extremely worrying. Many had believed that the party was moribound; now, some of us consider it to be the greatest threat to democracy in Germany. ?]
 
@@ -178,7 +178,7 @@ The Center manages to diffuse some of the hostility from the Reichswehr and the 
 title: Far-right coalition
 subtitle: NSDAP + DNVP ([+ far_right_coalition +]%)
 view-if: far_right_coalition >= 50
-go-to: far_right_win if year >= 1932; far_right_fail if year < 1932
+go-to: far_right_win if year >= 1932 or nsdap_r > 44; far_right_fail if year < 1932
 
 There are enough votes for the Nazis and the DNVP to form a coalition. Hitler has made his participation in government contingent on being appointed chancellor, while Hugenberg of the DNVP does not support his and would rather he be made chancellor. It is up to President [+ president +] to decide.
 
@@ -269,7 +269,6 @@ In response to the KPD's entrance into the government, the right-wing immediatel
 - @civil_war: A civil war, then.
 
 
-# TODO: you need to pay resources to make it work.
 
 
 @right_coalition
@@ -302,7 +301,7 @@ view-if: weimar_coalition < 50 and (grand_coalition < 50 or grand_coalition_fail
 on-arrival: no_majority_elections += 1
 go-to: no_majority_bruning if chancellor = "Brüning"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
 
-# TODO: either new elections, or Hindenburg appoints either Brüning, Papen, Schleicher, or Hitler.
+# either new elections, or Hindenburg appoints either Brüning, Papen, Schleicher, or Hitler.
 
 @no_majority_spd
 on-arrival: chancellor = "Brüning"; chancellor_party = "Z"
@@ -316,7 +315,7 @@ There is no path to an obviously workable majority. Since President Hindenburg i
 # - if NSDAP is the largest party and the 
 
 @no_majority_bruning
-go-to: no_majority_bruning_toleration if no_majority_bruning_elections <= 3; hindenburg_appoints_papen if no_majority_bruning_elections >= 3
+go-to: no_majority_bruning_toleration if no_majority_elections <= 3; hindenburg_appoints_papen if no_majority_elections >= 3
 
 
 @hindenburg_appoints_papen
@@ -341,7 +340,6 @@ The third option is to have new elections.
 - @new_grand_coalition: We will try to form a new grand coalition.
 - @new_elections: We will have new elections.
 
-# TODO: maybe remove this option?
 
 @new_grand_coalition
 title: A "New Grand Coalition" of all the constitutional parties?
@@ -650,6 +648,10 @@ if (Q.next_election_month > 12) {
 } else {
     Q.next_election_year = Q.year;
 }
+if (Q.chancellor == "Brüning") {
+    Q.z_relation -= 5;
+    Q.dvp_relation -= 5;
+}
 Q.pro_republic -= 8;
 Q.workers_spd -= 5;
 Q.new_middle_spd -= 5;
@@ -667,7 +669,11 @@ Q.new_middle_nsdap += 6;
 Q.rural_nsdap += 6;
 Q.unemployed_nsdap += 5;
 if (Q.pro_republic < 45) {
-    Q.workers_spd -= 0.2*Q.workers_spd;
+    // TODO: if you pursue a consistently revolutionary course, you might avoid this? But you might also cause a coalition between Hitler and the Center.
+    Q.z_relation -= 5;
+    Q.dvp_relation -= 5;
+    Q.workers_spd *= 0.85;
+    Q.unemployed_spd -= 2;
     Q.new_middle_spd -= 5;
     Q.old_middle_spd -= 5;
     Q.rural_spd -= 5;
@@ -829,15 +835,15 @@ go-to: right_coalition_post_spd if right_coalition >= 50; new_elections_spd if r
 @right_coalition_post_spd
 on-arrival: chancellor = "Brüning"; new_middle_spd -= 3; old_middle_spd -= 2; workers_spd -= 2; catholics_spd -= 4; next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; 
 
-There are enough votes to form a right-wing coalition of the Z, DVP, DNVP, and various minor parties, essentially replicating the previous Marx government. However, the DNVP is very reluctant to join the government, as its leader, Alfred Hugenberg, is against the very existence of parliamentary democracy, and is unwilling to join such a coalition anymore.
+There are enough votes to form a right-wing coalition of the Z, DVP, DNVP, and various minor parties, essentially replicating the previous Marx government. However, the DNVP is very reluctant to join the government[? if year <= 1928 : , as it had just exited from a coalition with the Center. ?][? if year > 1928 : , as its leader, Alfred Hugenberg, is against the very existence of parliamentary democracy, and is unwilling to join such a coalition anymore. ?]
 
-Chancellor Heinrich Brüning of the Center Party currently rules on an emergency basis. New elections have been called for [+ next_election_month : month +] [+ next_election_year +]
+Chancellor Heinrich Brüning of the Center Party currently rules on an emergency basis, as part of a "presidential government". New elections have been called for [+ next_election_month : month +] [+ next_election_year +]
 
 
 @new_elections_spd
 on-arrival: next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; new_middle_spd -= 5; old_middle_spd -= 5; workers_spd -= 3; catholics_spd -= 3; in_election = 1
 
-Since the remaining bourgeois and right-wing parties cannot form a tolerable governing agreement, new elections have been called for [+ next_election_month : month +] [+ next_election_year +]. Wilhelm Marx has resigned, and has been replaced by Heinrich Brüning. 
+Since the remaining bourgeois and right-wing parties cannot form a tolerable governing agreement, new elections have been called for [+ next_election_month : month +] [+ next_election_year +]. Wilhelm Marx has resigned, and has been replaced by Heinrich Brüning, also of the Center Party, ruling as part of a presidential cabinet. 
 
 We are seen as responsible for the failure to form a government, and many of our middle-class and even some working-class supporters have deserted the party.
 
