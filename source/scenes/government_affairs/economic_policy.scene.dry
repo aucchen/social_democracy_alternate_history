@@ -37,6 +37,6 @@ We have started to enact the WTB plan. Money is beginning to flow through the ec
 title: Implement the WTB plan.
 subtitle: -3 budget - we will enter deficit spending.
 view-if: budget < 3 and works_program = 0 and wtb_adopted == 1
-on-arrival: coalition_dissent += 1 if in_grand_coalition; works_program += 1; budget -= 3; unemployed -= 3; workers += 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent);
+on-arrival: coalition_dissent += 1; works_program += 1; budget -= 3; unemployed -= 3; workers += 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent);
 
 We have entered the realm of deficit spending. Our coalition partners are disgusted, but the works plan is enacted anyway. Money is beginning to flow through the economy.

@@ -17,7 +17,7 @@ We campaigned on food for children instead of battlecruisers. Will we really bet
 - @abstain: Abstain from the vote.
 
 @vote_yes
-on-arrival: left_dissent += 10; labor_dissent += 10; center_dissent += 5; reformist_dissent += 5; neorevisionist_dissent += 5; panzerkreuzer_funded = 1
+on-arrival: left_dissent += 10; labor_dissent += 5; center_dissent += 5; reformist_dissent += 5; neorevisionist_dissent += 5; panzerkreuzer_funded = 1
 
 Our grassroots party members are shocked by our intransigence! Many party branches have begun agitating against the cabinet, and our Reichstag members even plan a full vote on the proposal. The vote against the battlecruiser fails, with only the SPD and KPD members voting against. The ship will be built.
 

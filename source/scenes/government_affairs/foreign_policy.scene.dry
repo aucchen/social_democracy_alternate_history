@@ -27,12 +27,36 @@ We also aim to improve relations with our eastern neighbors, Poland and Czechosl
 @improve_soviet
 title: Improve our relations with the Soviet Union.
 subtitle: We could also broach the question of the KPD...
-on-arrival: soviet_relation += 1;
 
-The Soviet Union also suffered from the international order created by the Treaty of Versailles; they have been participating in our secret rearmament program. The Treaty of Rapallo in 1922 affirmed our friendly relations
+The Soviet Union also suffered from the international order created by the Treaty of Versailles; they have been participating in our secret rearmament program. The Treaty of Rapallo in 1922 affirmed our friendly relations.
+
+The Soviets are asking for economic and developmental assistance. They are still a poor country on the whole, and are desperately trying to catch up to the western powers. There is a chance that our anti-communist coalition partners would be upset, but we could assuage them by asking the Soviets for secret assistance in training and equiping the Reichswehr.
+
+- @soviet_economic_aid_yes_mil: Provide aid, in exchange for Reichswehr assistance.
+- @soviet_economic_aid_yes: Provide aid, in exchange for only good relations.
+- @soviet_economic_aid_no: Don't provide aid.
+
+@soviet_economic_aid_yes_mil
+choose-if: budget >= 1
+subtitle: -1 budget
+on-arrival: budget -= 1; soviet_relation += 1; reichswehr_strength += 20; reichswehr_loyalty += 0.05;
+
+The Soviets are pleased that we have sent them aid, and have agreed to help train our military. The Reichswehr appreciates our support.
+
+@soviet_economic_aid_yes
+choose-if: budget >= 1
+subtitle: -1 budget
+on-arrival: budget -= 1; soviet_relation += 2; coalition_dissent += 1
+
+The Soviets are pleased that we have sent them aid, and have not asked for anything specific in exchange. Our coalition partners are less pleased.
 
 - @kpd: Ask if Moscow could help repair our relations with the KPD.
 - @root: Do not mention the KPD.
+
+@soviet_economic_aid_no
+
+The Soviets are slightly upset, but they seemed to expect this answer.
+
 
 @kpd
 on-arrival: kpd_relation += 8*(1-dissent); communist_coalition += 1 if kpd_foreign_seen == 0; kpd_foreign_seen = 1

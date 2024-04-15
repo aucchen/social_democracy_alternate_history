@@ -57,7 +57,7 @@ view-if: total_defeat == 1
 tags: endings
 go-to: eg_menu
 
-We have lost the civil war. At least it was a quick coup, with *only* hundreds of lives lost before our remaining fighters surrendered.
+We have lost the civil war. At least it was a quick coup, and ended before Germany could be plunged into total war.
 
 @long_war
 title: Germany is gripped by civil war.
@@ -140,6 +140,8 @@ go-to: eg_menu
 [? if achievement_deport_hitler : Deport Hitler ?]
 
 [? if achievement_otto_braun_victorious : Otto Braun Victorious - Otto Braun is President, Chancellor, and Minister-President. ?]
+
+[? if achievement_popular_front: Popular Front - Form a government consisting of the SPD, KPD, Z, and DDP. ?]
 
 = Incomplete Achievements
 
