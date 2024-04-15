@@ -1,0 +1,11 @@
+title: Left-wing Split
+new-page: true 
+subtitle: The Left's disagreements with our policies have grown too severe.
+tags: event
+view-if: left_dissent >= 60
+on-arrival: sapd_formed = 1; left_strength = left_strength/2; workers_spd -= 5; unemployed_spd -= 5; workers_other += 5; workers_kpd += 3; n_advisors -= 1 if levi_advisor == 1; levi_advisor = 0; rb_strength -= 300; kpd_relation -= 5; rb_militancy -= 0.05 if rb_militancy >= 0.1
+max-visits: 1
+
+= Left-wing members split
+
+Our policy choices have greatly offended the left, and many of their leaders have split to form a new party, the SAPD, or Socialist Worker's Party. They do not count a huge section of our membership, so this should be survivable.
