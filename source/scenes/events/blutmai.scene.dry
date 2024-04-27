@@ -61,5 +61,6 @@ The demonstration proceeds peacefully, with a minimal police presence. Onlookers
 choose-if: kpd_relation >= 45
 unavailable-subtitle: The Communists do not trust us enough.
 on-arrival: kpd_relation += 15; workers_kpd += 5; unemployed_kpd += 5; workers_spd += 5; unemployed_spd += 5; new_middle_spd -= 5; old_middle_spd -= 5; z_relation -= 10; dvp_relation -= 10; coalition_dissent += 2; communist_coalition += 2; rfb_strength += 100; rfb_militancy += 0.1; sa_strength += 50; sh_strength += 50
+achievement: die_rote_fahne
 
 It is difficult to persuade the Communists to let us march with them, given the histories of their party and ours. However, they eventually relent. The display of proletarian unity inspires the workers and terrifies the bourgeoisie and middle class. [? if in_grand_coalition : Our coalition partners in the government are outraged at our display with the communists, and are threatening to break up the government. ?] The far-right paramilitaries increase their recruitment to counter us.

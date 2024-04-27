@@ -42,7 +42,7 @@ Q.far_right_coalition = Q.dnvp_r + Q.nsdap_r;
 Q.left_coalition = Q.spd_r + Q.kpd_r;
 // this is an absurd concept lol
 Q.popular_front_coalition = Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3;
-Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r;
+Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r + Q.dnvp_r;
 // aka everyone except nazi, kpd, dnvp
 Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
 // Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
@@ -104,7 +104,7 @@ Right-wing Coalition (Z + BVP + DVP + Others + DNVP): [+ right_coalition +]%
 
 [? if nazi_urgency <= 1 and nsdap_r >= 15 : The rapid rise in NSDAP votes is extremely worrying. Many had believed that the party was moribound; now, some of us consider it to be the greatest threat to democracy in Germany. ?]
 
-[? if anti_democratic_coalition >= 50 : Together, the anti-democratic KPD and NSDAP have a majority in the Reichstag. A stable governing majority will be almost impossible. ?]
+[? if anti_democratic_coalition >= 50 : Together, the anti-democratic KPD, DNVP, and NSDAP have a majority in the Reichstag. A stable governing majority will be almost impossible. ?]
 
 There are some potential coalition arrangements.
 
@@ -232,9 +232,9 @@ The KPD is still very reluctant to join a coalition, despite grassroots friendli
 - @coalition_menu: Try a different governing arrangement.
 
 @thalmann_chancellor
-choose-if: president == "Braun"
-unavailable-subtitle: President [+ president +] would never allow such a thing.
-on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; 
+choose-if: president == "Braun" and reformist_strength < left_strength
+unavailable-subtitle: [? if president != "Braun": President [+ president +] would never allow such a thing. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
+on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_coalition = 1; spd_in_government = 1 
 
 With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
 
@@ -261,7 +261,7 @@ go-to: left_coalition_success
 
 
 @left_coalition_success
-on-arrival: spd_in_government = 1; in_left_coalition = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; reichswehr_loyalty += 0.1; 
+on-arrival: spd_in_government = 1; in_left_coalition = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; reichswehr_loyalty += 0.1;
 
 Somehow, surprisingly, the left coalition is successfully formed, without appointing Thälmann as chancellor. The consensus choice for chancellor, accepted by the SPD, KPD, and President [+ president +], is Rudolf Breitscheid, who belongs to the centrist faction of the SPD, but was acceptable to the left due to his previous membership in the left-wing anti-war USPD.
 
@@ -318,7 +318,7 @@ There is no path to an obviously workable majority. Since President Hindenburg i
 # - if NSDAP is the largest party and the 
 
 @no_majority_bruning
-go-to: no_majority_bruning_toleration if no_majority_elections <= 3; hindenburg_appoints_papen if no_majority_elections > 3 or anti_democratic_coalition >= 50
+go-to: no_majority_bruning_toleration if (no_majority_elections <= 3 and anti_democratic_coalition <= 50); hindenburg_appoints_papen if no_majority_elections > 3 or anti_democratic_coalition > 50
 
 
 @hindenburg_appoints_papen
@@ -363,6 +363,7 @@ subtitle: -2 resources
 unavailable-subtitle: Not enough resources (need 2).
 choose-if: resources >= 2
 on-arrival: resources -= 2; spd_in_government = 1; in_grand_coalition = 1
+achievement: constitutional_coalition
 
 We transfer some of our campaign funds to our putative coalition partners. Some would call this corruption, but perhaps it is necessary to save our democracy.
 
@@ -417,6 +418,7 @@ title: SPD majority alone
 subtitle: SPD: [+ spd_r +]%
 view-if: spd_r >= 50
 on-arrival: chancellor = "Empty"; chancellor_party = "SPD"; spd_in_government = 1; in_spd_majority = 1; pro_republic += 5; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; reichswehr_loyalty -= 0.05; 
+achievement: majority_party
 
 Finally, the SPD can govern alone! Our long campaign of electioneering has paid off. We do not need to worry about coalition government; anything is possible. 
 
@@ -579,6 +581,7 @@ title: We can form a Weimar Coalition.
 subtitle: SPD + Z + DDP ([+ weimar_coalition +]%)
 view-if: weimar_coalition >= 50
 on-arrival: leverage += 15; in_weimar_coalition = 1; spd_in_government = 1
+achievement: weimar_coalition
 
 We have enough votes to form a "Weimar Coalition" government consisting of the SPD, Center (Z) and Democratic (DDP) parties! This has been our preferred governing coalition.
 

@@ -22,7 +22,7 @@ For better or for worse, the Socialists stand virtually alone in supporting incr
 
 @labor
 subtitle: Paid maternal leave policies, equal pay policies, and so on.
-on-arrival: womens_rights += 1; workers_spd -= 4 if unemployed > 15; new_middle_spd += 4*(1-dissent); workers_spd += 3*(1 - dissent);
+on-arrival: womens_work = 1; womens_rights += 1; workers_spd -= 4 if unemployed > 15; new_middle_spd += 4*(1-dissent); workers_spd += 3*(1 - dissent);
 
 These policies mean that our party is increasing in popularity among the "new women" who work outside the home. [? if unemployed > 15 : However, many male workers develop a backlash towards women in the workplace, especially given the rising unemployment. ?]
 
@@ -41,7 +41,7 @@ subtitle: [? if progressive_coalition < 50 : This is unlikely to succeed; we do 
 go-to: liberalize_fail if progressive_coalition < 50; liberalize_success if progressive_coalition >= 50
 
 @liberalize_fail
-on-arrival: womens_rights += 1; z_relation -= 5; coalition_dissent += 1; workers_spd += 3*(1-dissent); catholics_spd -= 5;
+on-arrival: z_relation -= 5; coalition_dissent += 1; workers_spd += 3*(1-dissent); catholics_spd -= 5;
 
 Unfortunately, our proposal is voted down in the Reichstag, with the Catholic Center party (our long-time partners) speaking in particularly vehement opposition, and some of our own members breaking party discipline. The activists, feeling demoralized from this attempt, have decided to bide their time.
 

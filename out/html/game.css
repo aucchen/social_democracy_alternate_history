@@ -191,8 +191,8 @@ p {
   font-weight: bold;
 }
 */
-#content h1 + p:first-letter {
 /*
+#content h1 + p:first-letter {
   padding-top: 0.16em;
   position: relative;
   display: block;
@@ -200,8 +200,8 @@ p {
   font-weight: normal;
   font-size: 3.2em;
   line-height: 0.75em;
-*/
 }
+*/
 p.game-over {
   border: 2px solid #bbb;
   padding: 0.5em;
