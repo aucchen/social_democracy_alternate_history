@@ -129,11 +129,20 @@ Our government has enacted a public works program!
 
 @unemployment_reduced
 title: Unemployment has been successfully reduced!
-view-if: unemployed <= 20
+view-if: unemployed <= 20 and unemployed >= 10
 tags: endings
 go-to: eg_menu
 
 While still uncomfortably high, unemployment levels are nowhere near their peak. This is a success of our economic policy.
+
+@unemployment_reduced_2
+title: Unemployment has been successfully reduced!
+view-if: unemployed < 10
+tags: endings
+go-to: eg_menu
+
+Unemployment levels have fallen substantially! This is a success of our economic policy.
+
 
 
 @unemployment_high

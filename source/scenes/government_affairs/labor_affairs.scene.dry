@@ -7,7 +7,7 @@ view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_affair
 card-image: img/portraits/WissellRudolf.jpg
 max-visits: 3
 
-// TODO: separate labor affairs and labor policy into two cards - implement Economic Democracy
+# TODO: separate labor affairs and labor policy into two cards - implement Economic Democracy
 
 = Labor Affairs
 

@@ -192,7 +192,7 @@ on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"
 
 
 @far_right_fail
-on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; next_election_time = time+5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
 
 The reactionary establishment is still very skeptical of Hitler, so instead, [+ president +] appoints Kurt von Schleicher, a former general, as chancellor.
 
@@ -322,7 +322,7 @@ go-to: no_majority_bruning_toleration if no_majority_elections <= 3; hindenburg_
 
 
 @hindenburg_appoints_papen
-on-arrival: chancellor = "Papen"; chancellor_party = "I"; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; sa_banned = 0
+on-arrival: chancellor = "Papen"; chancellor_party = "I"; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; sa_banned = 0
 
 There is no path to a majority government. President Hindenburg is tired of the chaos, and appoints Franz von Papen as chancellor instead of Brüning. Papen is a indenpendent formerly from the Center Party, and is significantly to the right of the majority of the Center Party.
 
@@ -382,7 +382,7 @@ We have assembled a new coalition under Otto Braun.
 
 
 @no_majority_papen
-on-arrival: pro_republic -= 5; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 5; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 5; no_majority_papen_elections += 1; pro_republic -= 5; workers_spd -= 6 if pro_republic < 45; workers_spd *= 0.9 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40;
+on-arrival: pro_republic -= 5; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 5; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 5; no_majority_papen_elections += 1; pro_republic -= 5; workers_spd -= 6 if pro_republic < 45; workers_spd *= 0.9 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40;
 
 After the elections, Papen is still deeply unpopular, without any hint of coalition support, and there is a vote of no confidence called against him almost immediately. No matter how we vote, the measure would pass. The Reichstag is dissolved once more.
 
@@ -390,7 +390,7 @@ New elections have been set for [+ next_election_month : month +] [+ next_electi
 
 
 @no_majority_papen_2
-on-arrival: chancellor = "Schleicher"; pro_republic -= 5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 10; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 10; pro_republic -= 5; workers_spd -= 6 if pro_republic < 45; workers_spd *= 0.9 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40;
+on-arrival: chancellor = "Schleicher"; pro_republic -= 5; next_election_time = time+5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 10; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 10; pro_republic -= 5; workers_spd -= 6 if pro_republic < 45; workers_spd *= 0.9 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40;
 
 There is no path to a majority government. Hindenburg is displeased with Papen, and calls on him to resign. Now, former army general Kurt von Schleicher has been appointed chancellor, again as part of a presidential government.
 
@@ -531,6 +531,7 @@ In total, [+ no_confidence_votes +]% of the Reichstag is against us. [? if no_co
 on-arrival: {!
 Q.no_majority_elections += 1;
 Q.next_election_month = Q.month + 6;
+Q.next_election_time = Q.time + 6;
 if (Q.next_election_month > 12) {
     Q.next_election_month -= 12;
     Q.next_election_year = Q.year + 1;
@@ -649,6 +650,7 @@ If we do not at least "tolerate" the government, there will be new elections in 
 @new_elections
 on-arrival: {!
 Q.next_election_month = Q.month + 3;
+Q.next_election_time = Q.time + 3;
 if (Q.next_election_month > 12) {
     Q.next_election_month -= 12;
     Q.next_election_year = Q.year + 1;
@@ -843,7 +845,7 @@ go-to: right_coalition_post_spd if right_coalition >= 50; new_elections_spd if r
 
 
 @right_coalition_post_spd
-on-arrival: chancellor = "Brüning"; new_middle_spd -= 3; old_middle_spd -= 2; workers_spd -= 2; catholics_spd -= 4; next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; 
+on-arrival: chancellor = "Brüning"; new_middle_spd -= 3; old_middle_spd -= 2; workers_spd -= 2; catholics_spd -= 4; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; 
 
 There are enough votes to form a right-wing coalition of the Z, DVP, DNVP, and various minor parties, essentially replicating the previous Marx government. However, the DNVP is very reluctant to join the government[? if year <= 1928 : , as it had just exited from a coalition with the Center. ?][? if year > 1928 : , as its leader, Alfred Hugenberg, is against the very existence of parliamentary democracy, and is unwilling to join such a coalition anymore. ?]
 
@@ -851,7 +853,7 @@ Chancellor Heinrich Brüning of the Center Party currently rules on an emergency
 
 
 @new_elections_spd
-on-arrival: next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; new_middle_spd -= 5; old_middle_spd -= 5; workers_spd -= 3; catholics_spd -= 3; in_election = 1
+on-arrival: next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; new_middle_spd -= 5; old_middle_spd -= 5; workers_spd -= 3; catholics_spd -= 3; in_election = 1
 
 Since the remaining bourgeois and right-wing parties cannot form a tolerable governing agreement, new elections have been called for [+ next_election_month : month +] [+ next_election_year +]. Wilhelm Marx has resigned, and has been replaced by Heinrich Brüning, also of the Center Party, ruling as part of a presidential cabinet. 
 

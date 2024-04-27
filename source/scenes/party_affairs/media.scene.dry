@@ -17,7 +17,7 @@ The SPD runs a veritable media empire, with many newspapers throughout every Ger
 - @radio
 - @radio_2
 - @radio_3
-- @return: We should not do anything with media at the moment.
+- @root: We should not do anything with media at the moment.
 - @easy_discard
 
 @commercial

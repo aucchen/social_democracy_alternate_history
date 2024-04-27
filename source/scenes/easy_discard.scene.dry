@@ -3,14 +3,13 @@ view-if: difficulty <= 0
 go-to: root
 on-arrival: {!
 Q.month_actions -= 1;
-// TODO: return card to hand
+// return card to hand
 var card = this.state.lastPlayedCard;
 card.image = card.cardImage;
 this.state.currentHands['main'].push(card);
 console.log('returning card to hand:', card);
-// TODO: reset the timer...
+// reset the timer...
 if (Q[card.id + "_timer"]) {
     Q[card.id + "_timer"] = 0;
 }
 !}
-#TODO: if the difficulty is easy, have something to return the card to the hand.
