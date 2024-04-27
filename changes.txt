@@ -1,0 +1,35 @@
+v0.5:
+
+
+v0.6:
+
+
+v0.7:
+
+Major changes:
+
+- New advisors: Antonie Pfülf (reformist), Julius Leber (neorevisionist), Kurt Rosenfeld (left)
+- New events: All Quiet on the Western Front, Altona Clashes
+- New party affairs card: Building a People's Party
+- New government affairs cards: Homosexual Rights, Agricultural Policy (plus an Agriculture Minister position).
+
+Minor changes:
+
+- Can return cards to the hand on easy/normal difficulties.
+- If a vote of no confidence is held when new elections are happening in less 3 months, don't delay the elections.
+- New advisor actions: End toleration (for some left advisors)
+- Added descriptions of the internal party factions.
+- Some more tax options.
+- Abortion rights and homosexual rights can be passed with a "progressive coalition" of the SPD, KPD, and DDP.
+- Can only use the Shuffle Cabinet and Women's Rights cards if the chancellor is SPD.
+- Low relations with the DVP results in less leverage in a grand coalition.
+- Papen being appointed as chancellor reduces judicial reform.
+- Changed frequencies of some cards.
+
+Future changes:
+
+- Move end date to later in 1933.
+- Government Affairs: Economic Democracy (labor + economy ministries), Left-wing economic crisis response (pursue nationalizations), Further investigate SA/SH/RFB after banning.
+- More tax/tariff policy options
+- A history page, showing a history of your actions.
+- Increase hand size to 4 (at least for easy difficulty)
