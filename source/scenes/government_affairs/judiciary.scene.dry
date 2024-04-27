@@ -15,6 +15,7 @@ There is great demand in our membership for reforming the judiciary, although th
 - @reform: Carry out substantial judicial reforms,
 - @minor_reforms: Carry out minor judicial reforms.
 - @as_is: Leave the judiciary as it is.
+- @easy_discard
 
 @reform
 subtitle: -1 budget

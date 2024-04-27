@@ -1,8 +1,8 @@
 title: We can deport Hitler.
 subtitle: He is a foreign citizen and a criminal, after all.
-unavailable-subtitle: [? if judicial_reform < 2 : Unfortunately, the reactionary judiciary will not cooperate. ?] [? if presidential_election_seen == 1 : Hitler has already been made a citizen of Germany, in the run-up to the presidential election. ?]
-view-if: spd_prussia == 1 and nazi_urgency >= 3 and hitler_deported = 0 and chancellor != "Papen" and chancellor != "Schleicher" and investigate_far_right >= 2
-choose-if: judicial_reform >= 2 and presidential_election_seen == 0
+unavailable-subtitle: [? if judicial_reform < 2 : Unfortunately, the reactionary judiciary will not cooperate. ?] [? if presidential_election_seen == 1 : Hitler has already been made a citizen of Germany, in the run-up to the presidential election. ?] [? if not spd_prussia : We cannot do this without the cooperation of the Prussian police, who are not currently in our control. ?]
+view-if: nazi_urgency >= 3 and hitler_deported = 0 and chancellor != "Papen" and chancellor != "Schleicher" and investigate_far_right >= 2
+choose-if: judicial_reform >= 2 and presidential_election_seen == 0 and spd_prussia == 1
 
 Is it really that simple? Won't his supporters react violently to this suggestion? And even if the deportation does succeed, won't he just re-enter the country, or perhaps organize from Austria? And, some people consider this to be an anti-democratic abuse of power, using the law in order to target a political opponent.
 

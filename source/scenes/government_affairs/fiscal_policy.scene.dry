@@ -12,23 +12,32 @@ Fiscal policy involves issues of taxation and budget.
 
 - @raise_progressive: Make the tax system more progressive by raising taxes on the rich and cutting them for the poor.
 - @raise_rich: Increase taxes on the rich.
+- @raise_overall: Increase overall taxes.
 - @cut_overall: Cut overall taxes.
 - @root: Do not change the tax system.
+- @easy_discard
 
 @raise_progressive
 subtitle: This does not change overall revenue.
-on-arrival: workers_spd += 6*(1-dissent); old_middle_spd -= 3; new_middle_spd -= 3; coalition_dissent += 1; dvp_relation -= 4
+on-arrival: workers_spd += 6*(1-dissent); old_middle_spd -= 3; new_middle_spd -= 3; coalition_dissent += 1 if in_grand_coalition; dvp_relation -= 4
 
 Making the tax system more progressive is popular among our base, but it upsets our bourgeois coalition partners, as well as our minimal number of bourgeois voters.
 
 @raise_rich
-subtitle: +1 budget
-on-arrival: workers_spd += 3*(1-dissent); old_middle_spd -= 3; new_middle_spd -= 3; coalition_dissent += 1 if is_grand_coalition = 1; budget += 1; dvp_relation -= 4
+subtitle: +2 budget
+on-arrival: workers_spd += 4*(1-dissent); old_middle_spd -= 4; new_middle_spd -= 4; coalition_dissent += 1 if in_grand_coalition = 1; budget += 2; dvp_relation -= 4; unemployed += 1
 
-Raising taxes on the rich is popular among our base, but it alienates the bourgeoisie.
+Raising taxes on the rich is popular among our base, but it alienates the bourgeoisie. Increasing taxes also decreases economic demand, which may lead to more unemployment.
 
 @cut_overall
-subtitle: -1 budget
-on-arrival: budget -= 1; new_middle_spd += 5*(1-dissent); dvp_relation += 5*(1-dissent); z_relation += 5*(1-dissent);
+subtitle: -2 budget
+choose-if: budget >= 2
+on-arrival: budget -= 2; new_middle_spd += 5*(1-dissent); old_middle_spd += 4*(1-dissent); workers_spd += 3*(1-dissent); dvp_relation += 5*(1-dissent); z_relation += 5*(1-dissent); unemployed -= 1
 
 Cutting taxes benefits most the rich and middle-class, who pay more taxes than the working class. Our coalition partners are happy at our orthodox economic course.
+
+@raise_overall
+subtitle: +3 budget
+on-arrival: budget += 3; new_middle_spd -= 4; old_middle_spd -= 4; workers_spd -= 3; rural_spd -= 3; unemployed += 2
+
+Raising taxes hurts our support among all those who pay taxes. [? if in_grand_coalition or in_weimar_coalition : However, our coalition partners are more supportive of the idea of "shared sacrifice" than simply taxing the rich. ?] Increasing taxes also decreases economic demand, which may lead to more unemployment.

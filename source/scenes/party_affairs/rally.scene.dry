@@ -60,6 +60,7 @@ Mass rallies are a common feature of social democratic life, especially in the l
 - @pacifism: Opposing war, nationalism, and militarism at all costs.
 - @wtb: Support the WTB plan!
 - @local: A mixture of various local and national concerns that resonate most with the audience.
+- @easy_discard
 
 @class_struggle
 on-arrival: workers_spd += 4*(1-dissent); left_strength += 5; left_dissent -= 5; old_middle_spd -= 3; new_middle_spd -= 2;

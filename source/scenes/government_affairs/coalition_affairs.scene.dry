@@ -3,18 +3,20 @@ new-page: true
 is-card: true
 tags: govt_affairs
 on-arrival: month_actions += 1; coalition_affairs_timer = 5
-view-if: spd_in_government = 1 and coalition_dissent >= 1 and coalition_affairs_timer = 0
+view-if: spd_in_government = 1 and coalition_dissent >= 1 and coalition_affairs_timer = 0 and (in_grand_coalition or in_weimar_coalition)
 card-image: img/muller_cabinet.jpg
 
 = Coalition Affairs
 
-Our coalition is in trouble. The right-leaning members of the Center and DVP are constantly criticizing us for our policies, and are threatening to call a vote of no confidence to collapse this government, or to do the same for our government in the state of Prussia.
+Our coalition is in trouble. The right-leaning members of the Center [? if in_grand_coalition: and DVP ?] are constantly criticizing us for our policies, and are threatening to call a vote of no confidence to collapse this government[? if spd_prussia :, or to do the same for our government in the state of Prussia ?].
 
 How do we reduce tensions with the coalition?
 
 - @promise_cuts: Agree to the bourgeois plans to cut welfare.
 - @resources: Use our party resources to support our allies.
+- @bring_down: Instead, we will bring down the government with a no-confidence vote, and call for new elections.
 - @no_change: Take none of these actions.
+- @easy_discard
 
 
 @promise_cuts
@@ -33,3 +35,12 @@ By transferring campaign funds to our coalition partners, we can make our polici
 @no_change
 
 No. We will not do this.
+
+@bring_down
+subtitle: Bring down this government before our opponents do.
+on-arrival: spd_in_government = 0; in_grand_coalition = 0; in_weimar_coalition = 0; chancellor = "Brüning"; chancellor_party = "Z"; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_toleration = 0; left_strength += 8; pro_republic -= 4; new_middle_spd -= 2; rural_spd -= 2; old_middle_spd -= 3; catholics_spd -= 2; reformist_dissent += 5
+
+We have called for a vote of no confidence in ourselves, and have brought down this government. Chancellor [+ chancellor +] currently rules as acting chancellor.
+
+New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
+

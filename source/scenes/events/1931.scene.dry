@@ -9,6 +9,9 @@ Q.catholics_z += 5;
 if (Q.works_program) {
     Q.unemployed -= 5;
 }
+if (Q.works_program > 1) {
+    Q.unemployed -= 2;
+}
 Q.workers -= 5;
 Q.rural_dvp -= 5;
 Q.old_middle_dvp -= 5;
@@ -27,6 +30,10 @@ if (!Q.works_program) {
     Q.workers_kpd += 5;
     Q.sa_strength += 100;
     Q.sh_strength += 50;
+} else if (Q.unemployed > 15) {
+    Q.old_middle_nsdap += 4;
+    Q.new_middle_nsdap += 3;
+    Q.rural_nsdap += 4;
 }
 !}
 tags: event
@@ -34,4 +41,4 @@ view-if: year = 1931 and month = 1
 priority: 2
 max-visits: 1
 
-A new year begins. [? if works_program = 0 : Unemployment continues to spiral upwards. ?]
+A new year begins. [? if works_program = 0 : Unemployment continues to spiral upwards. The strength of the NSDAP continues to rise. ?][? if works_program > 0 : A works program has been enacted in order to reduce unemployment. ?] [? if works_program > 0 and unemployment > 15 : However, unemployment remains too high for comfort. ?]

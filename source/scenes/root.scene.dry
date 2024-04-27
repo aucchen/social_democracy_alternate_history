@@ -54,6 +54,8 @@ Q.neorevisionist_dissent = 10;
 // secret events...
 Q.unions_independent = 0;
 Q.center_resigned = 0;
+Q.left_split = 0;
+Q.reformists_resigned = 0;
 
 // have we discovered neorevisionism?
 Q.neorevisionism = 0;
@@ -79,6 +81,10 @@ Q.economic_plan = 0;
 Q.wtb_adopted = 0;
 // have we formed the iron front?
 Q.iron_front_formed = 0;
+// people's party support
+Q.peoples_party_support = 0;
+// support for nationalizations
+Q.nationalization_support = 0;
 
 // organizations
 
@@ -159,9 +165,18 @@ Q.rural = 25; // agriculture and forestry employment... but many of those are pr
 Q.unemployed = 8.6;
 Q.catholics = 30;
 
-// unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8
+// unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
 
-Q.income = 1000;
+// income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year; 1931 = 1440 Reichsmarks/year; 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
+Q.income = 1600;
+// what about incomes for different classes? rural workers? middle-class workers?
+
+// inflation (in %; 1928: 2.9; 1929: 0; 1930: -5%; 1931: -10%; 1932: -10%) - source: https://en.wikipedia.org/wiki/File:BSPDRWeltkriseEngl.PNG, derived from https://www.destatis.de/DE/Methoden/WISTA-Wirtschaft-und-Statistik/2009/03/rezession-betrachtung-032009.pdf?__blob=publicationFile
+Q.inflation = 2.9;
+
+// standard of living (as % of 1928 - currently unused - should be welfare-adjusted.)
+Q.workers_sol = 100;
+Q.rural_sol = 100;
 
 Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
 Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
@@ -309,7 +324,7 @@ Q.womens_rights = 0;
 // level of welfare relative to 1928 (can go negative)
 Q.welfare = 0;
 // level of support for farmers
-Q.agricultural_support = 0;
+Q.agricultural_policy = 0;
 Q.land_reform = 0;
 // works-creation programs (i.e. WTB-plan) - how much have they implemented?
 Q.works_program = 0;
@@ -341,10 +356,11 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'inter_party_relationships', 'international_relations',
             'iron_front', 'media',
             'party_organizations', 'rally', 'reichsbanner',
-            'shuffle_leadership', 'streetfighting',// govt
+            'shuffle_leadership', 'streetfighting', 'peoples_party',// govt
             'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
             'foreign_policy', 'judiciary', 'labor_affairs', 'military',
             'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
+            'homosexual_rights', 'economic_policy',
             'war_guilt', 'womens_rights', // events
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban'];
@@ -363,6 +379,7 @@ Q.rally_timer = 0;
 Q.reichsbanner_timer = 0;
 Q.shuffle_leadership_timer = 0;
 Q.streetfighting_timer = 0;
+Q.peoples_party_timer = 0;
 // n_elections is the number of elections that have happened since the start of the game.
 Q.n_elections = 0;
 // number of elections without a clear majority.
@@ -371,9 +388,11 @@ Q.no_majority_elections = 0;
 Q.in_election = 1;
 Q.next_election_year = 1928;
 Q.next_election_month = 5;
+Q.next_election_time = 5;
 // government affairs timers
 Q.agricultural_policy_timer = 0;
 Q.domestic_enemies_timer = 0;
+Q.economic_policy_timer = 0;
 Q.fiscal_policy_timer = 0;
 Q.foreign_policy_timer = 0;
 Q.judiciary_timer = 0;
@@ -385,6 +404,7 @@ Q.shuffle_cabinet_timer = 0;
 Q.social_welfare_timer = 0;
 Q.war_guilt_timer = 0;
 Q.womens_rights_timer = 0;
+Q.homosexual_rights_timer = 0;
 // event timers
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;
@@ -451,7 +471,7 @@ on-arrival: difficulty = 1; resources = 0; dues = 1; rb_strength = 1000; reformi
 go-to: 1928_main
 
 @1928_main
-audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_HOHEN_BERGEN_noise_reduced.mp3 music/1928_1930/MarekWeber.mp3 music/1928_1930/BAUERNKAPELLE.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3
+audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_HOHEN_BERGEN_noise_reduced.mp3 music/1928_1930/MarekWeber.mp3 music/1928_1930/BAUERNKAPELLE.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3 music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1930_1933/Internationale-de_normalized.ogg
 new-page: true
 go-to: main
 

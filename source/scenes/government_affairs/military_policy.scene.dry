@@ -14,6 +14,7 @@ The Reichswehr is a deeply reactionary institution that has been generally hosti
 - @decrease_funding: Reduce funding for the military so we have more for social spending.
 - @reform: Conduct a thorough reform of the ranks, reducing the influence of reactionaries and making it more hospitable to us.
 - @root: No change to military policy.
+- @easy_discard
 
 @increase_funding
 subtitle: -1 budget

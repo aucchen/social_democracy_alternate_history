@@ -16,7 +16,8 @@ The SPD is torn between many different ideological currents. What should be our 
 - @class_struggle: Class struggle and preparing the proletariat for the revolution are our primary goals.
 - @centrist: The Center Marxism of Karl Kautsky remains the best way to resolve our internal contradictions.
 - @labor: We should work with the trade unions to improve the lives of workers.
-- @reform: Following Eduard Bernstein, we should work for ethical socialism, strengthen democracy, and build a people's party.
+- @reform: Following Eduard Bernstein, we should work for ethical socialism, strengthen democracy, and expand the party's electorate.
+- @easy_discard
 
 @class_struggle
 on-arrival: {!

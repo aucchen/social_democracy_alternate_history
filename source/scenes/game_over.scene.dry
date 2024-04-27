@@ -2,6 +2,31 @@ title: Game Over.
 new-page: true
 go-to: eg_menu
 on-arrival: {!
+// Achievements:
+// Große Koalition - form a grand coalition
+// Eiserne Front - Form the Iron Front.
+// Roter Zar von Preußen - At the end of the game, Otto Braun is president, chancellor, and minister-president of prussia at the same time.
+// Bürgerkrieg - enter a long civil war.
+// Sieg für die Republik - victory for the republic
+// Einigkeit - survive on easy without a civil war.
+// Einigkeit und Recht - survive on medium without a civil war.
+// Einigkeit und Recht und Freiheit - survive on hard without a civil war.
+// Einheitsfront - form a united front with the KPD, and win the civil war.
+// Volksfront - form a popular front government, and win the civil war.
+// Verfassungskoalition - form a Constitutional Coalition.
+// Wirtschaftspolitik - enact an economic plan.
+// Wirschaftswunder - reduce unemployment below 10% by 1933.
+// Bollwerk der Demokratie - resist the Prussian Coup, and win.
+// Der österreichische Gefreiter - deport hitler
+// Volkspartei - form a people's party
+// Hirschfeld - legalize homosexual rights and trans rights.
+// Mädchen und Uniform - a woman's place is in the Reichsbanner.
+// Die Gleichheit - Enact multiple reforms for women's rights.
+// Brüder, zur Sonne, zur Freiheit - reduce unemployment, pause reparations, increase women's rights, elect Otto Braun president, and deport Hitler in one playthrough on at least normal difficulty.
+// Sohn seiner Klasse - elect Ernst Thälmann as president or chancellor.
+// Die Rote Fahne - join the KPD in the May Day march.
+// Mehrheitspartei - form an SPD majority government in the Reichstag.
+// Panik im Mittlestand - win over 50% of New Middle Class votes.
 !}
 
 = End
@@ -127,6 +152,14 @@ tags: endings
 go-to: eg_menu
 
 The SPD is ruling as part of an emergency minority government, led by President [+ president +] and Chancellor [+ chancellor +]. This is a temporary and unstable arrangement, leaving the door open to further authoritarianism.
+
+@peoples_party_achieved
+title: The SPD is a "People's Party".
+view-if: peoples_party == 1
+tags: endings
+go-to: eg_menu
+
+The SPD has been declared a "People's Party", representing all of the people, not just the working class. This policy has many supporters and detractors, and what will become of the party is still unclear.
 
 
 

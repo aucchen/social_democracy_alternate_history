@@ -1,0 +1,44 @@
+title: All Quiet on the Western Front
+subtitle: Censorship and violence over a movie...
+view-if: year = 1930 and month = 12 and spd_prussia
+max-visits: 1
+tags: event
+new-page: true
+
+= All Quiet on the Western Front
+
+The American film *All Quiet on the Western Front*, based on the German novel *Im Westen nichts Neues* by Erich Maria Remarque, is a film about the experiences of German soldiers in the Great War, and how they gradually became disillusioned with the ideas of patriotism and nationalism. 
+
+As an anti-war film, it is the target of major protest by far-right actors, especially the Nazis and the Stahlhelm. They are calling for the government to ban the film. If we do not ban it, the SA threatens to violently stop the film from being shown or watched.
+
+- @ban: Ban the film, to prevent Nazi violence.
+- @allow: Allow the film to be shown.
+- @allow_protect: Allow the film to be shown, and use the Prussian police to prevent Nazi disruptions.
+- @everyone: In fact, everyone needs to learn the lessons of this film. Give free tickets to students and government employees.
+
+@ban
+on-arrival: old_middle_nsdap += 5; new_middle_nsdap += 4; workers_nsdap += 2; unemployed_nsdap += 2; sa_strength += 50; nationalism += 6; pro_republic -= 5
+
+When we ban the film, the Nazis immediately celebrate it as a major victory; they claim that even the red Marxists agree with them! It is a major boost to their morale.
+
+
+@allow
+on-arrival: nationalism += 3; old_middle_nsdap += 4; new_middle_nsdap += 3; workers_nsdap += 1; sa_strength += 15; pro_republic -= 3
+
+While we allow the film, showings are marred by violence. Showings of the film eventually stop, and the Nazis claim victory.
+
+
+@allow_protect
+choose-if: prussian_police_loyalty >= 0.65
+unavailable-subtitle: The police are not willing to protect the film.
+on-arrival: nationalism -= 4; pro_republic += 3
+
+Under the protection of the police, the people are allowed to watch the film in peace. Nazi disturbances are kept to a minimum.
+
+@everyone
+choose-if: prussian_police_loyalty >= 0.75
+unavailable-subtitle: The police are unable to guarantee the safety of all the attendees.
+on-arrival: nationalism -= 3; pro_republic += 3; workers_nsdap -= 3; unemployed_nsdap -= 3; new_middle_nsdap -= 3
+
+Under police protection, crowds throng the film's showings. The reception is mixed, but a new national conversation develops, reexamining the right-wing histories of the war. Quietly, many minds are changed, or at least affected in subtle ways.
+

@@ -7,6 +7,8 @@ view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_affair
 card-image: img/portraits/WissellRudolf.jpg
 max-visits: 3
 
+// TODO: separate labor affairs and labor policy into two cards - implement Economic Democracy
+
 = Labor Affairs
 
 The industrial Ruhr region is aflame with labor unrest. The employers have started a major lockout to force the workers to take more cuts to wages and benefits.  There is a need for the Labor Ministry to arbitrate in conflicts between employers and workers.
@@ -14,6 +16,7 @@ The industrial Ruhr region is aflame with labor unrest. The employers have start
 - @support_labor: Support labor in their demands.
 - @support_employers: Support the employers in their demands.
 - @balance: Try to strike a compromise between the sides.
+- @easy_discard
 
 @support_labor
 subtitle: Popular among the workers, this will alienate the bourgeoisie.

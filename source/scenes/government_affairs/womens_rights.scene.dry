@@ -2,11 +2,11 @@ title: Women's Rights
 new-page: true
 is-card: true
 tags: govt_affairs
-view-if: spd_in_government = 1 and womens_rights_timer = 0
+view-if: spd_in_government = 1 and womens_rights_timer = 0 and chancellor_party == "SPD"
 on-arrival: womens_rights_timer = 10; month_actions += 1
 card-image: img/portraits/PfülfAntonie.jpg
 frequency: 50
-max-visits: 3
+max-visits: 4
 
 = Women's Rights
 
@@ -18,6 +18,7 @@ For better or for worse, the Socialists stand virtually alone in supporting incr
 - @welfare: Improve welfare for single mothers and children.
 - @liberalize: Attempt to liberalize abortion laws.
 - @root: Do not enact any policies for now.
+- @easy_discard
 
 @labor
 subtitle: Paid maternal leave policies, equal pay policies, and so on.
@@ -28,6 +29,7 @@ These policies mean that our party is increasing in popularity among the "new wo
 
 @welfare
 subtitle: -1 budget
+choose-if: budget > 0
 on-arrival: welfare += 1; workers_spd += 5*(1-dissent); unemployed_spd += 3*(1-dissent); budget -= 1; womens_rights += 1; coalition_dissent += 1 if welfare >= 1 and unemployed >= 15
 
 We have increased welfare spending on women and children. [? if welfare >= 1 : Some of our coalition partners consider increased welfare spending profligate at this time. ?]
@@ -35,8 +37,8 @@ We have increased welfare spending on women and children. [? if welfare >= 1 : S
 
 @liberalize
 max-visits: 1
-subtitle: [? if not in_spd_majority : This is unlikely to succeed; we do not have majority support. ?]
-go-to: liberalize_fail if not in_spd_majority; liberalize_success if in_spd_majority
+subtitle: [? if progressive_coalition < 50 : This is unlikely to succeed; we do not have majority support. ?]
+go-to: liberalize_fail if progressive_coalition < 50; liberalize_success if progressive_coalition >= 50
 
 @liberalize_fail
 on-arrival: womens_rights += 1; z_relation -= 5; coalition_dissent += 1; workers_spd += 3*(1-dissent); catholics_spd -= 5;
@@ -46,4 +48,4 @@ Unfortunately, our proposal is voted down in the Reichstag, with the Catholic Ce
 @liberalize_success
 on-arrival: abortion_rights += 1; womens_rights += 1; coalition_dissent += 1; z_relation -= 8; catholics_spd -= 5; dvp_relation -= 5; workers_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent); workers_z += 3; new_middle_z += 3; old_middle_z += 3; old_middle_dnvp += 3; rural_dnvp += 3; workers_nsdap -= 5; new_middle_nsdap -= 5; old_middle_nsdap -= 5; rural_nsdap -= 5; unemployed_nsdap -= 5; unemployed_z += 3; unemployed_spd += 3*(1-dissent)
 
-We have successfully passed a bill to legalize abortion in Germany! This has heartened our more progressive supporters, while hurting our relations with the Center Party. With the increasing political discourse around abortion, the religiously-oriented Center Party and DNVP have gained conservative votes at the expense of the NSDAP.
+With the support of a "progressive coalition" including the KPD and DDP, we have successfully passed a bill to legalize abortion in Germany! This has heartened our more progressive supporters, while hurting our relations with the Center Party. With the increasing political discourse around abortion, the religiously-oriented Center Party and DNVP have gained conservative votes at the expense of the NSDAP.

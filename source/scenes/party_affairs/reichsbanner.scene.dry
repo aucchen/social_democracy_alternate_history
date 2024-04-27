@@ -17,6 +17,7 @@ The *Reichsbanner Schwarz-Rot-Gold* is a mass organization for the defense of th
 - @militant_2: Use our existing resources to support more training for the Reichsbanner.
 - @same: Keep the Reichsbanner as it is.
 - @cut_rb: Cut funding for the Reichsbanner.
+- @easy_discard
 
 #- Orient reichsbanner towards anti-fascism (only available if we have prioritized anti fascism)
 
@@ -50,11 +51,12 @@ Cutting resources to the Reichsbanner causes a drop in the membership, and leads
 
 @women_rb
 title: Allow women to join the Reichsbanner.
-subtitle: This might cause a backlash from existing members.
+subtitle: -1 resources - This might cause a backlash from existing members.
+choose-if: resources > 0
 view-if: womens_rights >= 4 and sender_advisor == 1 and iron_front_formed == 1
-on-arrival: rb_militancy *= 0.85; rb_strength += 400; women_in_rb = 1
+on-arrival: resources -= 1; rb_militancy *= 0.85; rb_strength += 400; women_in_rb = 1; rb_militancy += 0.05 if repealed_175; rb_militancy += 0.04 if trans_rights
 max-visits: 1
 
-The suggestion to allow women into the Reichsbanner is ridiculed by most, except for Toni Sender. But this is an exceptional time, and we need anyone who is willing to join. Thus, we organize specialized units for women, and even some covert units for transsexuals and inverts.
+The suggestion to allow women into the Reichsbanner is ridiculed by most, except for Toni Sender. But this is an exceptional time, and we need anyone who is willing to join. Thus, we organize specialized units for women, [? if homosexual_rights > 0: and even some covert units for transsexuals and inverts ?].
 
 After allowing women to join, the number of comrades who leave is more than balanced out by the number of radicalized women and others who join. However, many of our departed members were veterans, and many of the new members have no experience with military-style training.

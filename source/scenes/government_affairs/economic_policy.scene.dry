@@ -2,23 +2,46 @@ title: Economic Policy
 new-page: true
 is-card: true
 tags: govt_affairs
-on-arrival: economic_policy_timer = 6; month_actions += 1
-view-if: spd_in_government = 1 and (economic_minister_party = "SPD" or finance_minister_party == "SPD") and economic_policy_timer = 0 and economic_plan > 0
+on-arrival: economic_policy_timer = 10; month_actions += 1
+view-if: spd_in_government = 1 and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and economic_policy_timer == 0 and economic_plan > 0
 card-image: img/portraits/SchmidtRobert.jpg
 
 = Economic Policy
 
 We have already formulated an economic plan. Now we have to implement it.
 
+- @wtb_2
+- @wtb_2_deficit
 - @wtb_continuation
 - @implement_wtb_no_deficit
 - @implement_wtb_deficit
 - @root: Do not implement the economic plan.
+- @easy_discard
+
+# TODO: WTB-2
+
+@wtb_2
+title: Continue the implementation of the WTB-Plan.
+subtitle: -2 budget
+view-if: works_program > 2 and budget >= 2
+on-arrival: works_program += 1; budget -= 2; workers_spd += 6*(1-dissent); workers += 2; unemployed -= 3; unemployed_spd += 5*(1-dissent); workers_kpd -= 3; workers_nsdap -= 3;
+
+[? if works_program == 4 : We have commenced Phase 2 of the WTB-Plan. ?][? if works_program > 4 :  We have continued our implementation of the WTB-Plan. ?] In addition to public works, we are now focusing on rebuilding our industries.
+
+
+@wtb_2_deficit
+title: Continue the implementation of the WTB-Plan.
+subtitle: -2 budget - we will enter deficit spending.
+view-if: works_program > 2 and budget < 2 and budget >= -2
+on-arrival: works_program += 1; budget -= 2; workers_spd += 5*(1-dissent); workers += 1; unemployed -= 2; unemployed_spd += 5*(1-dissent); workers_kpd -= 2; workers_nsdap -= 2; coalition_dissent += 1
+
+We have continued our implementation of the WTB-Plan, despite the continued deficit spending. In addition to public works, we are now focusing on rebuilding our industries.
+
 
 @wtb_continuation
 title: Look back on our results, and continue our implementation...
-view-if: works_program >= 1
-on-arrival: budget += 1 if works_program <= 2; welfare += 1; unemployed -= 6 if works_program <= 2 else unemployed -= 3; workers += 4 if works_program <= 2 else workers += 2; workers_spd += 10*(1-dissent); unemployed_spd += 8*(1-dissent); workers_kpd -= 3; workers_nsdap -= 5; works_program += 1; z_relation += 5; dvp_relation += 5; coalition_dissent -= 1 if coalition_dissent >= 1
+view-if: works_program >= 1 and works_program <= 2
+on-arrival: budget += 1 if works_program <= 2; welfare += 1; unemployed -= 6 if works_program <= 2 else unemployed -= 3; workers += 4 if works_program <= 2 else workers += 2; workers_spd += 10*(1-dissent); unemployed_spd += 8*(1-dissent); workers_kpd -= 3; workers_nsdap -= 5; works_program += 1; z_relation += 3; dvp_relation += 3; coalition_dissent -= 1 if coalition_dissent >= 1
 
 Our spending on public works has resulted in a lower need for unemployment insurance and welfare, and increased tax receipts through the multiplier effect as the new money courses through the economy, recuperating some of our spending. We continue to invest most of the new revenue into the program.
 

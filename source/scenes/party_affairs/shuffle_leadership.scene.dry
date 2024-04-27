@@ -2,7 +2,7 @@ title: Shuffle Leadership
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: shuffle_leadership_timer = 0
+view-if: shuffle_leadership_timer = 0 and difficulty >= 0
 on-arrival: month_activities += 1; shuffle_leadership_timer = 8;
 card-image: img/vorwarts_2.jpg
 go-to: rm_main
@@ -14,6 +14,7 @@ Removing advisors will increase dissent from their faction of the party, while s
 - @rm_main: Remove advisors
 - @add_advisors: Add advisors
 - @remove_none: Don't change advisors.
+- @easy_discard
 
 
 ###################### removing leaders
@@ -69,17 +70,8 @@ go-to: rm_main
 
 Breitscheid has been removed as an advisor. The Centrist faction disapproves.
 
-@remove_pfulf
-title: Remove Pfülf
-view-if: pfulf_advisor = 1
-tags: remove_advisor
-on-arrival: pfulf_advisor = 0; center_dissent += 5; n_advisors -= 1
-go-to: rm_main
-
-Pfülf has been removed as an advisor. The Centrist faction disapproves.
-
-
 # reformists
+
 
 @remove_severing
 title: Remove Severing
@@ -116,6 +108,16 @@ on-arrival: juchacz_advisor = 0; reformist_dissent += 5; n_advisors -= 1
 go-to: rm_main
 
 Juchacz has been removed as an advisor. The Reformist faction disapproves.
+
+@remove_pfulf
+title: Remove Pfülf
+view-if: pfulf_advisor = 1
+tags: remove_advisor
+on-arrival: pfulf_advisor = 0; reformist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Pfülf has been removed as an advisor. The Reformist faction disapproves.
+
 
 # labor
 
@@ -302,19 +304,8 @@ tags: center_advisor
 
 Rudolf Breitscheid is now an advisor.
 
-@add_pfulf
-title: Antonie Pfülf
-subtitle: Antonie Pfülf is a leader in social policy and women's rights.
-is-card: true
-card-image: img/portraits/PfülfAntonie.jpg
-view-if: pfulf_advisor = 0 and n_advisors < 3
-on-arrival: pfulf_advisor = 1; n_advisors += 1
-go-to: advisor_menu
-#tags: center_advisor
-
-Antonie Pfülf is now an advisor.
-
 # reformist
+
 
 @add_severing
 title: Carl Severing
@@ -352,6 +343,20 @@ tags: reformist_advisor
 
 Marie Juchacz is now an advisor.
 
+@add_pfulf
+title: Antonie Pfülf
+subtitle: Antonie Pfülf is a leader in social policy and women's rights.
+is-card: true
+card-image: img/portraits/PfülfAntonie.jpg
+view-if: pfulf_advisor = 0 and n_advisors < 3
+on-arrival: pfulf_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: reformist_advisor
+
+Antonie Pfülf is now an advisor.
+
+
+
 # left
 
 @add_levi
@@ -386,7 +391,7 @@ card-image: img/portraits/RosenfeldKurt.jpg
 view-if: rosenfeld_advisor = 0 and n_advisors < 3
 on-arrival: rosenfeld_advisor = 1; n_advisors += 1; left_strength += 5
 go-to: advisor_menu
-#tags: left_advisor
+tags: left_advisor
 
 Kurt Rosenfeld is now an advisor.
 
@@ -463,7 +468,7 @@ card-image: img/portraits/LeberJulius.jpg
 view-if: leber_advisor = 0 and n_advisors < 3
 on-arrival: leber_advisor = 1; n_advisors += 1; neorevisionist_strength += 5
 go-to: advisor_menu
-#tags: neorev_advisor
+tags: neorev_advisor
 
 Julius Leber is now an advisor.
 

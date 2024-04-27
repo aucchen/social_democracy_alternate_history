@@ -29,7 +29,7 @@ title: Support Workers' Welfare, our mutual aid organization.
 subtitle: -1 resources
 choose-if: resources > 0 and advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if resources < 0: Not enough resources. ?]
-on-arrival: resources -= 1; workers_aid += 1; unemployed_spd += 5*(1 - dissent); workers_spd += 3*(1-dissent); advisor_action_timer = 6;
+on-arrival: resources -= 1; workers_aid += 1; unemployed_spd += 5*(1 - dissent); workers_spd += 3*(1-dissent); workers_spd += 2*(1-dissent) if black_thursday_seen; advisor_action_timer = 6;
 
 We have increased funding to Workers' Welfare. [? if black_thursday_seen > 0 : In an age of economic crisis, this will be helpful for improving our standing among the unemployed. ?]
 

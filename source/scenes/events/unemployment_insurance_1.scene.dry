@@ -39,7 +39,7 @@ But the crux of the matter is, what can we do?
 - @compromise: Surely there is some compromise to be had?
 
 @destroy
-on-arrival: spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agricultural_minister_party = "Z"; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_no_confidence = 1; pro_republic -= 3;
+on-arrival: spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agricultural_minister_party = "Z"; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time == time+3; next_election_year = year if next_election_time == time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_no_confidence = 1; pro_republic -= 4; old_middle_spd -= 3; new_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 2
 
 Fine. If the bourgeoisie wish to blow up the government, let them do so. Socialists will not be complicit in the destruction of the working class.
 
@@ -57,7 +57,7 @@ The workers are furious at our betrayal, as are a good portion of our membership
 
 @compromise
 unavailable-subtitle: We do not have good enough relations with the right-wing parties.
-choose-if: dvp_relation >= 40
+choose-if: dvp_relation >= 35
 
 Thanks to our good relations, the DVP have offered a compromise that raises some taxes on the wealthy, along with lesser welfare cuts. Our members have mixed opinions on accepting this compromise. Reformists and Centrists support maintaining our government to keep the fascists and communists out, while Labor generally opposes any cuts, and the Left is opposed to compromises with the bourgeoisie.
 

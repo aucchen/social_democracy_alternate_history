@@ -18,6 +18,7 @@ In our media and campaign materials, who should we consider as our main opponent
 - @nsdap: The NSDAP alone.
 - @kpd: The KPD.
 - @bourgeois: The bourgeois parties - the Center and DVP.
+- @easy_discard
 
 @anti_dem
 on-arrival: enemies = "anti-democratic parties"; center_strength += 5; reformist_strength += 5; left_dissent += 5; workers_kpd -= 2; workers_nsdap -= 2; workers_dnvp -= 2;

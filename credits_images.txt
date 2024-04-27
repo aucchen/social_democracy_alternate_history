@@ -66,6 +66,8 @@ redfront.jpg: author, Unknown authorUnknown. Berlin, Pfingstreffen Der Rot-Front
 
 generalstrike.jpg: ---. Vorwärts1918. photo, 26 Mar. 2013. Flickr, https://www.flickr.com/photos/s-t-r-e-e-t-l-i-v-e/8593159825/. CC-BY-ND 2.0 https://creativecommons.org/licenses/by-nd/2.0/
 
+hirschfeld.jpg: author, Unknown. From Left, Bernhardt (Bernard) Schapiro, Magnus Hirschfeld, Tao Lee. Location Berlin, Germany. circa 1920. https://collections.ushmm.org/search/catalog/pa1136956, Wikimedia Commons, https://commons.wikimedia.org/wiki/File:Bernhard_Schapiro,_Magnus_Hirschfeld,_Tao_Lee.jpg. Public Domain
+
 
 = Images (posters):
 

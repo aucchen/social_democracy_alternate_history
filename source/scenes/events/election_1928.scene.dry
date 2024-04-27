@@ -1,9 +1,8 @@
 title: Reichstag Elections
-audio: shuffle music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1930_1933/Internationale-de_normalized.ogg
 new-page: true
 tags: event
 view-if: year = next_election_year and month = next_election_month
-on-departure: month_actions += 1; in_election = 0; next_election_year = next_election_year + 4; n_elections += 1;
+on-departure: month_actions += 1; in_election = 0; next_election_year = next_election_year + 4; n_elections += 1; next_election_time = time + 48;
 set-jump: post_election_1928
 
 = Elections, [+ month : month +] [+ year +]
@@ -48,6 +47,8 @@ Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r;
 Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
 // Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
 Q.hitler_right_coalition = Q.z_r + Q.dnvp_r + Q.nsdap_r;
+// Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
+Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.ddp_r;
 
 Q.leverage = Q.spd_r;
 
@@ -381,7 +382,7 @@ We have assembled a new coalition under Otto Braun.
 
 
 @no_majority_papen
-on-arrival: pro_republic -= 5; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 5; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 5; no_majority_papen_elections += 1;
+on-arrival: pro_republic -= 5; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 5; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 5; no_majority_papen_elections += 1; pro_republic -= 5; workers_spd -= 6 if pro_republic < 45; workers_spd *= 0.9 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40;
 
 After the elections, Papen is still deeply unpopular, without any hint of coalition support, and there is a vote of no confidence called against him almost immediately. No matter how we vote, the measure would pass. The Reichstag is dissolved once more.
 
@@ -389,7 +390,7 @@ New elections have been set for [+ next_election_month : month +] [+ next_electi
 
 
 @no_majority_papen_2
-on-arrival: chancellor = "Schleicher"; pro_republic -= 5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 10; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 10;
+on-arrival: chancellor = "Schleicher"; pro_republic -= 5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 10; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 10; pro_republic -= 5; workers_spd -= 6 if pro_republic < 45; workers_spd *= 0.9 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40;
 
 There is no path to a majority government. Hindenburg is displeased with Papen, and calls on him to resign. Now, former army general Kurt von Schleicher has been appointed chancellor, again as part of a presidential government.
 
@@ -548,6 +549,7 @@ Q.new_middle_nsdap += 3;
 Q.rural_nsdap += 3;
 Q.unemployed_nsdap += 5;
 if (pro_republic < 45 && pro_republic >= 40) {
+    Q.workers_spd -= 5;
 }
 if (Q.pro_republic < 40) {
     Q.workers_spd *= 0.9;
@@ -588,6 +590,7 @@ Who should be the chancellor?
 
 @breitscheid_coalition_chancellor
 title: Rudolf Breitscheid for Chancellor
+subtitle: Breitscheid is viewed as friendlier towards the left of the SPD.
 view-if: year >= 1930
 on-arrival: chancellor = "Breitscheid"; chancellor_party = "SPD";
 go-to: ministries
@@ -600,10 +603,12 @@ title: We can form a Grand Coalition.
 view-if: grand_coalition >= 50 and grand_coalition_failed == 0
 subtitle: SPD + Z + BVP + DDP + DVP
 on-arrival: in_grand_coalition = 1
-go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 29); grand_coalition_z_lead if (n_elections > 1 and spd_r < 29) or (n_elections <= 1 and largest_party != "SPD")
+go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 30); grand_coalition_z_lead if (n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD")
 
 # TODO: if there are enough votes to form a grand coalition, who leads? Does the SPD lead or does Brüning (Z) lead? In reality this depended on Hindenburg's will, basically, which in turn depended on what his camarilla supported.
 # In the first election, SPD always leads. In subsequent elections, if spd_r >= 29 then SPD leads, otherwise Z leads?
+
+# TODO:
 
 @grand_coalition_z_lead
 go-to: grand_coalition_z_lead_2 if dvp_relation >= 30; grand_coalition_fail if dvp_relation < 30
@@ -749,8 +754,11 @@ As expected, the DVP is too set in their anti-democratic ways.
 
 
 @grand_coalition_spd_lead
+on-arrival: leverage -= 15 if dvp_relation < 20
 
 As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President Hindenburg has asked us to form a majority coalition with the Center (Z), Bavarian People's (BVP), Democratic (DDP), and People's (DVP) parties.
+
+[? if dvp_relation < 20 : As our relation with the DVP is poor, they are demanding more minister posts in order to remain part of the coalition. ?]
 
 Who should be the chancellor?
 
@@ -789,7 +797,7 @@ We have promised to let the Center have more influence in the government in resp
 @z_chancellor
 title: Let the Center party have their chancellor.
 subtitle: This is unexpected and will cause internal dissent, but may give us a better position in negotiating for other cabinet positions.
-on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; z_relation += 10; dvp_relation += 5; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0; chancellor = "Brüning"; spd_in_government = 1
+on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; z_relation += 10; dvp_relation += 5; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0; chancellor = "Brüning"; chancellor_party = "Z"; spd_in_government = 1; leverage += 5
 go-to: ministries
 
 This is highly unexpected, and many in the left and center of our party are criticizing this decision.
@@ -939,7 +947,7 @@ choose-if: leverage >= 10
 view-if: agriculture_minister_party != "SPD"
 on-arrival: leverage -= 10; agriculture_minister_party = "SPD"; agriculture_minister = "Baade"
 go-to: ministries
-#tags: mins_1928
+tags: mins_1928
 
 Fritz Baade of the SPD has been appointed Agriculture Minister.
 

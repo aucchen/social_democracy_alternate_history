@@ -175,7 +175,11 @@ Militarization: [+ sa_militancy : militancy +]
 
 **Reichswehr**: [+ reichswehr_strength +] thousand troops. This is Germany's military.
 
+Loyalty: [+ reichswehr_loyalty : loyalty +]
+
 **Prussian police**: [+ prussian_police_strength +] thousand members.
+
+Loyalty: [+ prussian_police_loyalty : loyalty +]
 
 
 
@@ -188,11 +192,15 @@ Overall dissent: [+ dissent_percent : dissent +]
 
 **Left**
 
+Many leftists are former members of the USPD (the left-wing, anti-war Independent Social Democratic Party), or are young radicals. Many are interested in closer cooperation with the KPD, and some support extraparliamentary action.
+
 Strength: [+ left_strength : strength +]
 
 Dissent: [+ left_dissent : dissent +]
 
 **Centrists**
+
+Centrists in the SPD are followers of the doctrine of orthodox Marxism as expounded by Karl Kautsky and later Rudolf Hilferding. They seek a middle course between reform and revolution, while defending the democratic state.
 
 Strength: [+ center_strength : strength +]
 
@@ -200,11 +208,15 @@ Dissent: [+ center_dissent : dissent +]
 
 **Labor**
 
+Many SPD members are also part of the ADGB, the federation of free trade unions. Their goal is economic reform and benefits for organized workers.
+
 Strength: [+ labor_strength : strength +]
 
 Dissent: [+ labor_dissent : dissent +]
 
 **Reformists**
+
+Reformists are pragmatic participants in government, and seek to expand the welfare state and defend democracy against the far right and left. [? if spd_prussia : They are dominant in the state government of Prussia. ?]
 
 Strength: [+ reformist_strength : strength +]
 
@@ -214,6 +226,8 @@ Dissent: [+ reformist_dissent : dissent +]
 go-to: menu
 
 **Neorevisionists**
+
+Neorevisionists focus on defending the republic and expanding democracy, while also expanding the party's base beyond the working class to create a people's party. They support new propaganda methods and extraparliamentary action in defense of the republic.
 
 Strength: [+ neorevisionist_strength : strength +]
 
