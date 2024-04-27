@@ -5,7 +5,7 @@ card-image: img/hirschfeld.jpg
 frequency: 25
 max-visits: 3
 view-if: spd_in_government == 1 and (womens_rights >= 2 or abortion_rights > 0) and chancellor_party == "SPD" and homosexual_rights_timer == 0
-on-arrival: homosexual_rights_timer = 10
+on-arrival: homosexual_rights_timer = 11
 tags: govt_affairs
 
 = Homosexual Rights
