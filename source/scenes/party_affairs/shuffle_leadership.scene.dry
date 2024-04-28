@@ -388,7 +388,7 @@ title: Kurt Rosenfeld
 subtitle: Kurt Rosenfeld is a lawyer, anti-militarist activist, and Reichstag member.
 is-card: true
 card-image: img/portraits/RosenfeldKurt.jpg
-view-if: rosenfeld_advisor = 0 and n_advisors < 3
+view-if: rosenfeld_advisor = 0 and n_advisors < 3 and sapd_formed = 0
 on-arrival: rosenfeld_advisor = 1; n_advisors += 1; left_strength += 5
 go-to: advisor_menu
 tags: left_advisor
