@@ -18,7 +18,7 @@ Due to the crisis of the Great Depression, government budgets have fallen and we
 
 @nothing_to_do
 view-if: spd_toleration == 0
-on-arrival: welfare -= 1; unemployed += 2; unemployed_nsdap += 4; unemployed_kpd += 3; unemployed_spd += 2; pro_republic -= 3
+on-arrival: welfare -= 1; unemployed += 2; unemployed_nsdap += 4; unemployed_kpd += 3; unemployed_spd += 2; pro_republic -= 4
 
 The emergency policy passes under emergency rules, as the Reichstag is currently dissolved. The Nazis use this as a recruiting tool, and so do we.
 
@@ -26,7 +26,7 @@ The emergency policy passes under emergency rules, as the Reichstag is currently
 @vote_no
 title: Vote against this measure, ending the toleration agreement.
 view-if: spd_toleration
-on-arrival: next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; pro_republic -= 4
+on-arrival: next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; pro_republic -= 5
 
 We have broken with the [+ chancellor +] government, and have voted against them in a vote of no confidence. Welfare has been saved, but at what cost?
 
