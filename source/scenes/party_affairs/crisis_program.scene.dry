@@ -15,6 +15,8 @@ From labor, the economist Wladimir Woytinsky argues that we must pursue a massiv
 
 The so-called WTB plan, after its chief supporters Woytinsky, Tarnow, and Baade, is receiving more attention within the party.
 
+However, leftists in the party argue that the WTB plan is merely a bandage over the fundamental flaws of capitalism. They argue that the crisis is an opportunity to end capitalism through massive nationalizations of industry.
+
 - @support_centrist: Support the Centrist view - let the depression play itself out.
 - @support_labor: Support the Labor view - call for increased public works and fiscal stimulus.
 - @defer: Defer making a decision until we have more information.
@@ -43,8 +45,9 @@ on-arrival: wtb_adopted = 1; labor_dissent -= 15; reformist_dissent -= 10; labor
 
 With our hard work, we have finally convinced the majority of the party to adopt the WTB plan! [? if spd_in_government == 1 : We can begin implementing the plan as soon as possible, as long as we have the Economic or Finance ministries. ?][? if spd_in_government = 0 : We should emphasize the plan in our electoral propaganda. ?]
 
+@support_left
+on-arrival: left_strength += 5; reformist_dissent += 7; labor_dissent += 5; nationalization_support += 1
 
 @defer
 
 We hold off on making a decision on economic policy, awaiting more information. Woytinsky and his supporters argue that inaction is a form of action of its own. 
-

@@ -14,6 +14,7 @@ Fiscal policy involves issues of taxation and budget.
 - @raise_rich: Increase taxes on the rich.
 - @raise_overall: Increase overall taxes.
 - @cut_overall: Cut overall taxes.
+- @regressive
 - @root: Do not change the tax system.
 - @easy_discard
 
@@ -41,3 +42,10 @@ subtitle: +3 budget
 on-arrival: budget += 3; new_middle_spd -= 4; old_middle_spd -= 4; workers_spd -= 3; rural_spd -= 3; unemployed += 2
 
 Raising taxes hurts our support among all those who pay taxes. [? if in_grand_coalition or in_weimar_coalition : However, our coalition partners are more supportive of the idea of "shared sacrifice" than simply taxing the rich. ?] Increasing taxes also decreases economic demand, which may lead to more unemployment.
+
+@regressive
+title: Lower taxes on the rich, while increasing consumption taxes (which affect the working class more).
+subtitle: This does not change overall revenue.
+on-arrival: workers_spd -= 5; new_middle_spd += 5*(1-dissent); old_middle_spd += 4*(1-dissent); dvp_relation += 5; z_relation += 4; coalition_dissent -= 1
+
+Our regressive taxation policy benefits the rich while hurting the poor and working-class. Our bourgeois coalition partners approve of this orthodox economic course.
