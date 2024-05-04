@@ -45,6 +45,7 @@ Minor changes:
 - Updated in-game credits to be the same as the credits.txt files.
 - Taking no action on Easy difficulty on some Party Affairs cards should not advance the clock.
 - Various bugfixes.
+- Minor balancing changes (reduced difficulty of forming a people's party, supporting reformist ideology increases relations with bourgeois parties).
 
 Future changes:
 

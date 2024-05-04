@@ -2,7 +2,7 @@ title: Building a People's Party
 new-page: true
 is-card: true
 card-image: img/poster_0.jpg
-view-if: neorevisionism > 0 and peoples_party_support >= 4 and peoples_party = 0 and peoples_party_timer == 0
+view-if: neorevisionism > 0 and peoples_party_support >= 3 and peoples_party = 0 and peoples_party_timer == 0
 on-arrival: peoples_party_timer = 6
 tags: party_affairs
 max-visits: 3
@@ -28,7 +28,7 @@ Within our party, we are pushing forward proposals for a people's party against 
 
 
 @support_peoples_party
-choose-if: (neorevisionist_strength + reformist_strength >= left_strength + center_strength) and peoples_party_support >= 5
+choose-if: (neorevisionist_strength + reformist_strength >= left_strength + center_strength) and peoples_party_support >= 4
 unavailable-subtitle: The opposition is too strong.
 on-arrival: neorevisionist_strength += 15; reformist_stremgth += 15; neorevisionist_dissent -= 10; reformist_dissent -= 10; peoples_party = 1; workers_spd -= 12; rural_spd += 10; new_middle_spd += 10; old_middle_spd += 8; left_dissent += 25; center_dissent += 20; kpd_relation -= 10
 achievement: volkspartei
@@ -47,7 +47,7 @@ Should we run a new campaign to publicize our new platform?
 
 @support_peoples_party_hard
 subtitle: This will increase dissent.
-view-if: (neorevisionist_strength + reformist_strength < left_strength + center_strength) or (peoples_party_support < 5)
+view-if: (neorevisionist_strength + reformist_strength < left_strength + center_strength) or (peoples_party_support < 4)
 on-arrival: neorevisionist_strength += 10; peoples_party = 1; workers_spd -= 15; rural_spd += 10; new_middle_spd += 10; old_middle_spd += 8; left_dissent += 40; center_dissent += 40; kpd_relation -= 10
 achievement: volkspartei
 
