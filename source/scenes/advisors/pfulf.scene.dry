@@ -11,7 +11,7 @@ Pfülf is a former teacher from Bavaria who came from a conservative Catholic fa
 
 - @support_peoples_party
 - @build_peoples_party
-- @womens_rights
+- @womens_rights_
 - @root: Return to main
 
 @support_peoples_party
@@ -32,7 +32,7 @@ on-arrival: advisor_action_timer = 6;
 go-to: peoples_party
 
 
-@womens_rights
+@womens_rights_
 title: Women's rights
 subtitle: Enact policy with regards to women's rights.
 choose-if: advisor_action_timer = 0 and spd_in_government

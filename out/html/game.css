@@ -183,9 +183,11 @@ p {
   margin-bottom: 1em;
   text-indent: 1em;
 }
+/*
 #content h1 + p {
   text-indent: 0;
 }
+*/
 /*
 #content h1 + p:first-line {
   font-weight: bold;

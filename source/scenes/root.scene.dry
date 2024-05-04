@@ -6,12 +6,16 @@ go-to: post_event if started = 1; start_menu if started = 0
 
 @start_menu
 new-page: true
+go-to: start_menu_2
 
 = Social Democracy: An Alternate History
+
+@start_menu_2
 
 - @start: Start game
 - @election_simulation: Election simulation
 - @credits: Credits
+- @game_over.achievements
 
 
 @start

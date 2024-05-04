@@ -16,7 +16,7 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 - @old_middle: The "old middle class" of small independent businessmen and artisans.
 - @rural: Rural workers and small farmers, who have felt neglected by us in the past.
 - @unemployed: The unemployed.
-- @root: We either don't want to or cannot campaign right now.
+- @return: We either don't want to or cannot campaign right now.
 - @easy_discard
 
 @workers

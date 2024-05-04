@@ -5,6 +5,8 @@ on-arrival: {!
 // Achievements:
 // Große Koalition - form a grand coalition
 // Eiserne Front - Form the Iron Front.
+this.achieve('game_completed');
+
 // Roter Zar von Preußen - At the end of the game, Otto Braun is president, chancellor, and minister-president of prussia at the same time.
 if (Q.president == 'Braun' && Q.chancellor == 'Braun' && Q.spd_prussia) {
     this.achieve('red_tzar_of_prussia');
@@ -54,12 +56,12 @@ if (Q.homosexual_rights >= 2) {
     this.achieve('hirschfeld');
 }
 // Mädchen und Uniform - a woman's place is in the Reichsbanner.
-// Die Gleichheit - Support and enact reforms for women's rights.
+// Gleichheit - Support and enact reforms for women's rights.
 if ((Q.womens_work && Q.womens_rights >= 5) || (Q.abortion_rights && Q.womens_rights >= 3)) {
     this.achieve('equality');
 }
 // Brüder, zur Sonne, zur Freiheit - reduce unemployment, pause reparations, increase women's rights, elect Otto Braun president, and deport Hitler in one playthrough on at least normal difficulty.
-if (Q.difficulty >= 0 && Q.president == "Braun" && !(Q.chancellor == "Hitler") && Q.unemployed < 15 && Q.year == 1933 && !Q.civil_war_seen && Q.hitler_deported && Q.reparations <= -2) {
+if (Q.difficulty >= 0 && Q.president == "Braun" && !(Q.chancellor == "Hitler") && Q.unemployed < 20 && Q.year == 1933 && !Q.civil_war_seen && Q.hitler_deported && Q.reparations <= -2 && Q.womens_rights >= 3) {
     this.achieve('bruder_zur_sonne');
 }
 // Sohn seiner Klasse - elect Ernst Thälmann as president or chancellor.
@@ -72,8 +74,12 @@ if (Q.chancellor == "Thälmann" || Q.president == "Thälmann") {
 if (Q.new_middle_spd_normalized && Q.new_middle_spd_normalized >= 50) {
     this.achieve('panik_im_mittelstand');
 }
+// Bauernrevolution - have over 50% rural support.
+if (Q.rural_spd_normalized && Q.rural_spd_normalized >= 50) {
+    this.achieve('bauernrevolution');
+}
 // Stolperstein - lose the civil war against Hitler.
-if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.civil_war_lost) {
+if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.total_defeat) {
     this.achieve('stolperstein');
 }
 !}
@@ -86,7 +92,6 @@ if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.civil_war_lost) {
 - #endings
 - @end_game: End game.
 
-# TODO: achievements
 
 @hitler_wins
 view-if: (chancellor == "Hitler" or president == "Hitler") and (total_defeat==1 or civil_war_seen == 0)
@@ -223,8 +228,9 @@ The SPD has been declared a "People's Party", representing all of the people, no
 
 @achievements
 title: Achievements
+view-if: achievement_game_completed == 1
 tags: endings
-go-to: eg_menu
+go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 = Completed Achievements in this Playthrough
 
@@ -265,7 +271,7 @@ go-to: eg_menu
 
 [? if game_achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10% and a budget surplus. ?]
 
-[? if game_achievement_equality: **Die Gleichheit** - pass reforms for women's rights. ?]
+[? if game_achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
 [? if game_achievement_hirschfeld: **Hirschfeld** - pass reforms for homosexual rights. ?]
 
@@ -277,7 +283,9 @@ go-to: eg_menu
 
 [? if game_achievement_panik_im_mittelstand: **Panik im Mittelstand** - SPD new middle class support is at least 50%. ?]
 
-[? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might remember us better... ?]
+[? if game_achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
+
+[? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
 
@@ -320,7 +328,7 @@ go-to: eg_menu
 
 [? if achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10% and a budget surplus. ?]
 
-[? if achievement_equality: **Die Gleichheit** - pass reforms for women's rights. ?]
+[? if achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
 [? if achievement_hirschfeld: **Hirschfeld** - pass reforms for homosexual rights. ?]
 
@@ -332,7 +340,9 @@ go-to: eg_menu
 
 [? if achievement_panik_im_mittelstand: **Panik im Mittelstand** - SPD new middle class support is at least 50%. ?]
 
-[? if achievement_stolperstein: **Stolperstein** - we lost, but history might remember us better... ?]
+[? if achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
+
+[? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
 = Incomplete Achievements
@@ -373,7 +383,7 @@ go-to: eg_menu
 
 [? if not achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10% and a budget surplus. ?]
 
-[? if not achievement_equality: **Die Gleichheit** - pass reforms for women's rights. ?]
+[? if not achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
 [? if not achievement_hirschfeld: **Hirschfeld** - pass reforms for homosexual rights. ?]
 
@@ -385,7 +395,9 @@ go-to: eg_menu
 
 [? if not achievement_panik_im_mittelstand: **Panik im Mittelstand** - SPD new middle class support is at least 50%. ?]
 
-[? if not achievement_stolperstein: **Stolperstein** - we lost, but history might remember us better... ?]
+[? if not achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
+
+[? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
 @end_game

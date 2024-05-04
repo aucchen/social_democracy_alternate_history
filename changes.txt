@@ -33,3 +33,20 @@ Future changes:
 - More tax/tariff policy options
 - A history page, showing a history of your actions.
 - Increase hand size to 4 (at least for easy difficulty)
+
+v0.8:
+
+Major changes:
+
+- Achievements! These can be seen after finishing a game.
+
+Minor changes:
+
+- Updated in-game credits to be the same as the credits.txt files.
+- Taking no action on Easy difficulty on some Party Affairs cards should not advance the clock.
+- Various bugfixes.
+
+Future changes:
+
+- I didn't get to any of the future changes listed in the previous update, so all of those are carrying over.
+- For the post-1933 update, coups can be initiated in 1933 if you're in power and are unpopular.
