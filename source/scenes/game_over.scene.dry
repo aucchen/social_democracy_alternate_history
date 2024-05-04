@@ -16,7 +16,7 @@ if (Q.long_war) {
     this.achieve('civil_war');
 }
 // Sieg für die Republik - victory for the republic
-if (Q.civil_war_won) {
+if (Q.republic_victory) {
     this.achieve('victory_for_the_republic');
 }
 // Einigkeit - survive on easy without a civil war.
@@ -32,11 +32,11 @@ if (Q.chancellor != "Hitler" && Q.president != "Hitler" && !Q.civil_war_seen) {
     }
 }
 // Einheitsfront - form a united front with the KPD, and win the civil war.
-if (Q.civil_war_won && Q.in_left_coalition) {
+if (Q.republic_victory && Q.in_left_coalition) {
     this.achieve('einheitsfront');
 }
 // Volksfront - form a popular front government, and win the civil war.
-if (Q.civil_war_won && Q.in_popular_front) {
+if (Q.republic_victory && Q.in_popular_front) {
     this.achieve('volksfront');
 }
 // Verfassungskoalition - form a Constitutional Coalition.
@@ -46,7 +46,7 @@ if (Q.year >= 1932  && Q.unemployed < 10 && Q.budget > 0) {
     this.achieve('wirtschaftswunder');
 }
 // Bollwerk der Demokratie - resist the Prussian Coup, and win.
-if (Q.civil_war_won && Q.resist_coup) {
+if (Q.republic_victory && Q.resist_coup) {
     this.achieve('bollwerk_der_demokratie');
 }
 // Der österreichische Gefreiter - deport hitler
@@ -68,6 +68,21 @@ if (Q.difficulty >= 0 && Q.president == "Braun" && !(Q.chancellor == "Hitler") &
 if (Q.chancellor == "Thälmann" || Q.president == "Thälmann") {
     this.achieve('sohn_seiner_klasse');
 }
+
+// calculate normalized class voting for the achievements
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
+        }
+        class_votes += Q[c+'_'+party];
+    }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    }
+}
+
 // Die Rote Fahne - join the KPD in the May Day march.
 // Mehrheitspartei - form an SPD majority government in the Reichstag.
 // Panik im Mittelstand - have over 50% of New Middle Class support.

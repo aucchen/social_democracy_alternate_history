@@ -51,3 +51,4 @@ Future changes:
 
 - I didn't get to any of the future changes listed in the previous update, so all of those are carrying over.
 - For the post-1933 update, coups can be initiated in 1933 if the SPD is in power and is unpopular.
+- Add ability to break toleration without using a event or advisor action.
