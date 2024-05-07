@@ -35,6 +35,7 @@ Q.nsdap_normalized = Q.nsdap_support/Q.total_support;
 Q.other_normalized = Q.other_support/Q.total_support;
 
 // 3. Round to integers
+// TODO: round to 1 decimal instead of rounding to integers
 Q.spd_votes = Math.round(Q.spd_normalized*100);
 Q.z_votes = Math.round(Q.z_normalized*100);
 Q.kpd_votes = Math.round(Q.kpd_normalized*100);
