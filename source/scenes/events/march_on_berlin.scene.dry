@@ -1,0 +1,42 @@
+title: March on Berlin
+subtitle: Right-wing militants are taking action...
+view-if: (spd_in_government = 1 and coup_progress >= 10 and year >= 1930) or (year >= 1933 and next_election_month > month and nsdap_normalized + dnvp_normalized >= 0.45)
+new-page: true
+max-visits: 1
+go-to: govt_menu if spd_in_government or president = "Braun"; non_govt_menu if spd_in_government = 0 and president != "Braun"
+# tags: event
+
+= March on Berlin
+
+The far right is mobilizing. Paramilitary forces of the Stahlhelm and SA, organized under the Harzburg Front, have marched on Berlin, threatening to violently overthrow the government.
+
+They demand either immediate elections under the "supervision" of the nationalist paramilitaries, or else the immediate resignation of the government and the appointment of Adolf Hitler as chancellor[? if hitler_deported : , and the revocation of his deportation ?]. It is obvious that they are threatening a civil war if their demands are not met.
+
+@non_govt_menu
+on-arrival:
+
+It appears that President [+ president +] is looking favorably upon the fascist proposals. Chancellor [+ chancellor +] has announced plans to resign, and a new election will be called next month.
+
+- @fight
+- @accept
+
+@accept
+title: There is nothing we can do.
+
+@govt_menu
+
+- @fight
+- @new_elections
+- @resign
+
+@fight
+title: Deploy the Reichsbanner and call a general strike to resist the fascists!
+
+# if reichsbanner alone is stronger than the SA + SH, they'll back down.
+
+@new_elections
+title: Call for new elections.
+
+@resign
+title: Resign our positions in the government.
+

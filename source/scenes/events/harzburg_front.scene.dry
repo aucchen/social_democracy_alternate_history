@@ -3,7 +3,7 @@ subtitle: The right-wing forces unite against the incumbent government.
 new-page: true
 on-arrival: harzburg_front_seen = 1; sh_strength += 100; sa_strength += 100; old_middle_nsdap += 5; unemployed_nsdap += 5; rural_nsdap += 5; nazi_urgency += 1; iron_front_timer = 0
 tags: event
-view-if: year = 1931 and month >= 10 and chancellor != "Schleicher" and chancellor != "Papen"
+view-if: (year = 1931 and month >= 10 and chancellor != "Schleicher" and chancellor != "Papen") or (coup_progress >= 6)
 max-visits: 1
 
 = The Harzburg Front

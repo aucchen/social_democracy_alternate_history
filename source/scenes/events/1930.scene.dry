@@ -5,6 +5,7 @@ on-arrival: {!
 // increase NSDAP vote share 
 Q.unemployed += 8; 
 Q.catholics += 3;
+Q.catholics_z += 3;
 Q.rural_nsdap += 15; 
 Q.rural_dnvp -= 15;
 Q.new_middle_dvp -= 5;

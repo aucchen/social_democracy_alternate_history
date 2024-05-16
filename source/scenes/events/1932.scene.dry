@@ -6,20 +6,27 @@ on-arrival: {!
 Q.sa_strength += 100;
 Q.sh_strength += 100;
 Q.sa_militancy += 0.05;
-Q.old_middle_nsdap += 5;
-Q.unemployed_nsdap += 8;
+Q.old_middle_nsdap += 6;
+Q.rural_nsdap += 4;
+Q.unemployed_nsdap += 4;
 Q.catholics_z += 5;
 if (!Q.works_program) {
     Q.unemployed += 6; 
     Q.catholics += 2;
     Q.workers -= 5;
-    Q.rural_dnvp -= 8;
-    Q.rural_nsdap += 10; 
+    Q.rural_dnvp -= 6;
+    Q.rural_nsdap += 8; 
     Q.new_middle_nsdap += 10; 
     Q.old_middle_nsdap += 10;
+    Q.unemployed_nsdap += 6;
     Q.workers_nsdap += 5;
     Q.workers_kpd += 5;
     Q.sa_strength += 200;
+} else if (Q.unemployed > 22) {
+    Q.rural_nsdap += 3;
+    Q.unemployed_nsdap += 3;
+    Q.old_middle_nsdap += 3;
+    Q.new_middle_nsdap += 3;
 }
 !}
 tags: event

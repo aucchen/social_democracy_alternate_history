@@ -21,18 +21,22 @@ Q.new_middle_ddp -= 5;
 Q.sa_strength += 50;
 Q.sh_strength += 50;
 Q.sa_militancy += 0.1;
-Q.unemployed_nsdap += 8;
+Q.old_middle_nsdap += 5;
+Q.rural_nsdap += 5;
+// TODO: economic policies should reduce NSDAP rurals
 if (!Q.works_program) {
+    Q.unemployed_nsdap += 8;
     Q.rural_nsdap += 10; 
     Q.new_middle_nsdap += 10; 
-    Q.old_middle_nsdap += 15;
+    Q.old_middle_nsdap += 10;
     Q.workers_nsdap += 5;
     Q.workers_kpd += 5;
     Q.sa_strength += 100;
     Q.sh_strength += 50;
 } else if (Q.unemployed > 15) {
+    Q.unemployed_nsdap += 4;
     Q.old_middle_nsdap += 4;
-    Q.new_middle_nsdap += 3;
+    Q.new_middle_nsdap += 4;
     Q.rural_nsdap += 4;
 }
 !}

@@ -1,0 +1,87 @@
+title: Economic Democracy
+is-card: true
+new-page: true
+on-arrival: economic_democracy_timer = 10;
+view-if: spd_in_government and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and (labor_minister_party == "SPD") and economic_democracy_timer == 0
+card-image: img/portraits/SchmidtRobert.jpg
+max-visits: 6
+tags: govt_affairs
+
+= Economic Democracy
+
+A key part of the social democratic platform is that workers should have more control over the economy. This can be done either directly at the enterprise level, by giving works councils greater influence over management, or indirectly via the democratic government, by acquiring key industries from the capitalist class and placing them under democratic control.
+
+As we control the Labor [? if economic_minister_party == "SPD" : and Economic ?][? if finance_minister_party == "SPD" : and Finance ?] ministries, we can finally begin to implement our long-standing goals. [? if in_grand_coalition: Our bourgeois coalition partners might not agree, however. ?]
+
+- @expand_councils
+- @expand_councils_2
+- @expand_councils_3
+- @nationalize_1
+- @cooperatives_1
+- @return: Do not enact any policies for now.
+
+# notes on economic democracy from https://www.jstor.org/stable/41783589:
+# wirtschaftsdemokratie (Naphtali): co-determination at sectorial & national economy level, as well as at the enterprise level (but it was of secondary importance)
+# - co-determination: works committees were introduced before ww1 to maintain labor peace, especially in key industries like coal mines.
+# - workers' councils in the German revolution
+# - Weimar constitution called for works councils: establishment level, industrial level, national level.
+# - national level works councils were mostly marginal and powerless.
+# - post-war: workers' representation on boards of companies was required, with some concessions to employers
+# - bietrabsrat - 1920 Works Councils Act. opposed by radical left, more based on pre-war works committees.
+# - works councils and trade unions have a symbiotic relationship up to present, with most seats on works councils being union members, but works councils are not solely elected by union members.
+
+# https://www.jstor.org/stable/j.ctt1wn0s45.19
+# - Rudolf Hilferding, Fritz Naphtali
+# - Naphtali: "organized economy controlled by the unions". economic democracy requires political democracy.
+# - expand the public and cooperative sectors, democratization of ecnonomic bodies and control over monopolies
+# - inspired by British guild socialism.
+# - Otto Bauer (austromarxist): not just nationalization but socialization - boards of companies should consist of 3 types of representatives - trade unions (workers), consumers, and the state.
+
+
+@expand_councils
+title: Support works councils.
+subtitle: Give works councils a greater influence in managing enterprises.
+view-if: works_councils == 0
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition
+max-visits: 1
+
+The works councils have been in place since the German Revolution of 1918, but they have been largely powerless in the face of capital. Now, we will have worker representation on the boards of companies, giving them more influence in management decisions.
+
+
+@expand_councils_2
+title: Support national and sectorial works councils.
+subtitle: This is a step towards workers' control over the entire economy.
+view-if: works_councils == 1
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition
+max-visits: 1
+
+National and sectorial workers councils have been part of the Weimar Constitution, but they were disempowered in the past, acting as nothing more than advisory bodies. We can change that.
+
+
+@expand_councils_3
+title: Empower sectorial works councils.
+subtitle: Give works councils a role in setting wage and price policy for entire industrial sectors.
+view-if: works_councils == 2
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition; unemployed -= 2; workers += 2
+max-visits: 1
+
+Sectorial works councils can now negotiate wage and price policies for entire economic sectors, helping to both give workers more of a voice, and to rationalize the economy, smoothing over the anarchy of the market.
+
+
+@nationalize_1
+title: Begin to socialize key industries.
+subtitle: -1 budget - we should buy out industries and govern them together with workers and consumers.
+on-arrival: economic_democracy += 1; capital_strike_progress += 1; budget -= 1; socializations += 1; workers_spd += 6*(1-dissent); unemployed_spd += 3*(1-dissent);
+choose-if: budget >= 1
+max-visits: 3
+
+We have begun to socialize key industries by buying out the capitalist owners, and creating coordinated governing boards consisting of worker, consumer, and state representatives.
+
+@cooperatives_1
+title: Support worker and consumer cooperatives.
+subtitle: -1 budget
+on-arrival: economic_democracy += 1; cooperatives += 1; workers_spd += 6*(1-dissent); unemployed_spd += 4*(1-dissent); budget -= 1
+choose-if: budget >= 1
+max-visits: 3
+
+# TODO

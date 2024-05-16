@@ -1,7 +1,7 @@
 title: Campaigning
 new-page: true
 on-arrival: month_actions += 1
-max-visits: 10
+max-visits: 15
 is-card: true
 card-image: img/flags.jpg
 frequency: 100

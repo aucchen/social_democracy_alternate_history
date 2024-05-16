@@ -9,6 +9,37 @@ for (var c of Q.classes) {
         }
     }
 }
+// re-calculate party support
+// calculate normalized class voting for the achievements
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
+        }
+        class_votes += Q[c+'_'+party];
+    }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    }
+}
+// calculate support for each of the parties
+var total_support = 0; 
+for (var party of Q.parties) {
+    var party_support = 0;
+    for (var c of Q.classes) {
+        party_support += Q[c]*Q[c+'_'+party];
+    }
+    Q[party + '_support'] = party_support;
+    total_support += party_support; 
+}
+// 2. normalize support (fraction)
+for (var party of Q.parties) {
+    Q[party+'_normalized'] = Q[party + '_support']/total_support;
+}
+
+
+// set faction strength/dissent to 0
 for (var c of Q.factions) {
     if (Q[c+'_dissent'] < 0) {
         Q[c+'_dissent'] = 0;

@@ -1,6 +1,6 @@
 title: Election
 on-arrival: {!
-// calculate normalized class voting amounts
+// calculate normalized class voting amounts (0 to 100)
 for (var c of Q.classes) {
     var class_votes = 0;
     for (var party of Q.parties) {
@@ -15,36 +15,22 @@ for (var c of Q.classes) {
 }
 
 // 1. calculate support for each of the parties
+var total_support = 0;
 for (var party of Q.parties) {
     var party_support = 0;
     for (var c of Q.classes) {
         party_support += Q[c]*Q[c+'_'+party];
     }
     Q[party + '_support'] = party_support;
+    total_support += party_support;
 }
-
-// 2. normalize support
-Q.total_support = Q.spd_support + Q.z_support + Q.kpd_support + Q.ddp_support + Q.dvp_support + Q.dnvp_support + Q.nsdap_support + Q.other_support;
-Q.spd_normalized = Q.spd_support/Q.total_support;
-Q.z_normalized = Q.z_support/Q.total_support;
-Q.kpd_normalized = Q.kpd_support/Q.total_support;
-Q.ddp_normalized = Q.ddp_support/Q.total_support;
-Q.dvp_normalized = Q.dvp_support/Q.total_support;
-Q.dnvp_normalized = Q.dnvp_support/Q.total_support;
-Q.nsdap_normalized = Q.nsdap_support/Q.total_support;
-Q.other_normalized = Q.other_support/Q.total_support;
-
+// 2. normalize support (fraction)
 // 3. Round to integers
 // TODO: round to 1 decimal instead of rounding to integers
-Q.spd_votes = Math.round(Q.spd_normalized*100);
-Q.z_votes = Math.round(Q.z_normalized*100);
-Q.kpd_votes = Math.round(Q.kpd_normalized*100);
-Q.ddp_votes = Math.round(Q.ddp_normalized*100);
-Q.dvp_votes = Math.round(Q.dvp_normalized*100);
-Q.dnvp_votes = Math.round(Q.dnvp_normalized*100);
-Q.nsdap_votes = Math.round(Q.nsdap_normalized*100);
-Q.other_votes = Math.round(Q.other_normalized*100);
-
+for (var party of Q.parties) {
+    Q[party+'_normalized'] = Q[party + '_support']/total_support;
+    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
+}
 !}
 go-to: jumpScene
 

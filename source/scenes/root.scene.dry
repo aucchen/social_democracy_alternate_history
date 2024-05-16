@@ -89,6 +89,7 @@ Q.iron_front_formed = 0;
 Q.peoples_party_support = 0;
 // support for nationalizations
 Q.nationalization_support = 0;
+Q.nationalization_adopted = 0;
 
 // organizations
 
@@ -156,6 +157,11 @@ Q.pro_republic = 59;
 
 Q.emergency_rule = 0;
 
+// coups and capital strikes happen when you upset the right or the capitalists too much with your policies. they're an additional check on your policies, when purely electoral checks don't suffice.
+// when coup_progress reaches 10 or capital_strike_progress reaches 10, there's a special event that launches the coup.
+Q.coup_progress = 0;
+Q.capital_strike_progress = 0;
+
 Q.budget = 5;
 
 // Proportion of different social groups
@@ -206,7 +212,7 @@ Q.old_middle_nsdap = 10;
 Q.old_middle_other = 10;
 
 Q.new_middle_spd = 5;
-Q.new_middle_kpd = 0;
+Q.new_middle_kpd = 1;
 Q.new_middle_z = 10;
 Q.new_middle_ddp= 25;
 Q.new_middle_dvp = 25;
@@ -224,7 +230,7 @@ Q.rural_nsdap = 5;
 Q.rural_other = 10;
 
 Q.unemployed_spd = 25;
-Q.unemployed_kpd = 50;
+Q.unemployed_kpd = 51;
 Q.unemployed_z = 0;
 Q.unemployed_ddp = 0;
 Q.unemployed_dvp = 0;
@@ -233,13 +239,13 @@ Q.unemployed_nsdap = 25;
 Q.unemployed_other = 5;
 
 Q.catholics_spd = 15;
-Q.catholics_kpd = 5;
-Q.catholics_z = 50;
+Q.catholics_kpd = 2;
+Q.catholics_z = 55;
 Q.catholics_ddp = 0;
 Q.catholics_dvp = 5;
 Q.catholics_dnvp = 5;
 Q.catholics_nsdap = 0;
-Q.catholics_other = 10;
+Q.catholics_other = 12;
 
 
 // Current Reichstag composition
@@ -343,6 +349,11 @@ Q.rearmament_exposed = 0;
 // reparations vs baseline: young plan is -1.
 Q.reparations = 0;
 Q.reparations_negotiation = 0;
+// nationalization_progress is part of the left economic plan.
+Q.nationalization_progress = 0;
+// socializations is part of the economic democracy card.
+Q.socializations = 0;
+Q.nationalize_budget = 3;
 
 // our conduct in the government, and the conduct of our coalition opponents.
 // did the SPD vote against the previous government in a vote of no confidence?
@@ -365,7 +376,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'foreign_policy', 'judiciary', 'labor_affairs', 'military',
             'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
             'homosexual_rights', 'economic_policy',
-            'war_guilt', 'womens_rights', // events
+            'war_guilt', 'womens_rights', 'economic_democracy',// events
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban'];
 Q.advisor_action_timer = 0;
@@ -409,6 +420,7 @@ Q.social_welfare_timer = 0;
 Q.war_guilt_timer = 0;
 Q.womens_rights_timer = 0;
 Q.homosexual_rights_timer = 0;
+Q.economic_democracy_timer = 0;
 // event timers
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;

@@ -4,6 +4,7 @@ body {
   background-color: #f3f3e3;
   padding: 0;
   line-height: 155%;
+  overflow-y: scroll;
 }
 header, #content, footer {
   color: #431;
