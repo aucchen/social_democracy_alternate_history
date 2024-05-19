@@ -26,7 +26,7 @@ Making the tax system more progressive is popular among our base, but it upsets 
 
 @raise_rich
 subtitle: +2 budget
-on-arrival: workers_spd += 4*(1-dissent); old_middle_spd -= 4; new_middle_spd -= 4; coalition_dissent += 1 if in_grand_coalition = 1; budget += 2; dvp_relation -= 4; unemployed += 1
+on-arrival: workers_spd += 4*(1-dissent); old_middle_spd -= 4; new_middle_spd -= 4; coalition_dissent += 1 if in_grand_coalition = 1; budget += 2; dvp_relation -= 4; unemployed += 1; capital_strike_progress += 1;
 
 Raising taxes on the rich is popular among our base, but it alienates the bourgeoisie. Increasing taxes also decreases economic demand, which may lead to more unemployment.
 

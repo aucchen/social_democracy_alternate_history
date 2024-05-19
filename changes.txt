@@ -58,11 +58,12 @@ v0.9 - government updates:
 
 Major changes:
 
-- New government affairs card: Economic Democracy (labor + economy/finance ministries).
+- New government affairs card: Economic Democracy (labor + economy/finance ministries). New advisor action for Hilferding.
 - New events: March on Berlin, Capital Strike.
-- New options: Socialist economic plan for the transformation of the economy (mass nationalizations)
-- New achievements: Räterepublik
-- Ending of the game is set to June 1933.
+- New options: Left economic plan for the transformation of the economy (mass nationalizations), advisor actions to support the Left economic plan (Sender, Aufhäuser)
+- New achievements: Räterepublik, Polykrise
+- Ending of the game is set to May 1933.
+- Changed the demographic system somewhat - previously, raising support in one demographic could increase total support beyond that demographic's numbers. This made working-class support more powerful compared to its actual proportion of the population. This is no longer possible. To compensate, it is now easier to increase support among the unemployed and other demographics.
 
 Minor changes:
 
@@ -81,7 +82,7 @@ Future changes:
 Potential changes/ideas:
 
 - Communist revolt
-- moderate stimulus plan (as proposed by the AfA-Bund)
+- moderate stimulus plan
 
 
 v0.99 - content update

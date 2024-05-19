@@ -2,7 +2,7 @@ title: Economic Policy
 new-page: true
 is-card: true
 tags: govt_affairs
-on-arrival: economic_policy_timer = 12; month_actions += 1; nationalize_budget = 3; nationalize_budget -= 1 if works_councils >= 2; nationalize_budget -= 1 if socializations >= 2
+on-arrival: economic_policy_timer = 12; month_actions += 1; nationalize_budget = 4; nationalize_budget -= 1 if works_councils >= 2; nationalize_budget -= 1 if works_councils >= 3; nationalize_budget -= 1 if socializations >= 2
 view-if: spd_in_government = 1 and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and economic_policy_timer == 0 and economic_plan > 0
 card-image: img/portraits/SchmidtRobert.jpg
 
@@ -26,7 +26,7 @@ subtitle: -3 budget
 unavailable-subtitle: Unemployment is low enough that the time for the WTB-Plan has passed.
 view-if: works_program > 2 and budget >= 3 
 choose-if: unemployed > 8
-on-arrival: works_program += 1; budget -= 3; workers_spd += 6*(1-dissent); workers += 2 if unemployed > 8; unemployed -= 3 if unemployed > 8; unemployed_spd += 6*(1-dissent); workers_kpd -= 3; workers_nsdap -= 3;
+on-arrival: works_program += 1; budget -= 3; workers_spd += 7*(1-dissent); workers += 2 if unemployed > 8; unemployed -= 3 if unemployed > 8; unemployed_spd += 7*(1-dissent); workers_kpd -= 3; workers_nsdap -= 3;
 
 [? if works_program == 4 : We have commenced Phase 2 of the WTB-Plan. ?][? if works_program > 4 :  We have continued our implementation of the WTB-Plan. ?] In addition to public works, we are now focusing on rebuilding our industries.
 
@@ -37,7 +37,7 @@ subtitle: -3 budget - we will enter a deficit.
 unavailable-subtitle: Unemployment is low enough that we should not do deficit spending.
 view-if: works_program > 2 and budget < 3 and budget >= -3
 choose-if: unemployed > 10
-on-arrival: works_program += 1; budget -= 3; workers_spd += 5*(1-dissent); workers += 1; unemployed -= 2; unemployed_spd += 5*(1-dissent); workers_kpd -= 2; workers_nsdap -= 2; coalition_dissent += 1
+on-arrival: works_program += 1; budget -= 3; workers_spd += 6*(1-dissent); workers += 2; unemployed -= 2; unemployed_spd += 6*(1-dissent); workers_kpd -= 2; workers_nsdap -= 2; coalition_dissent += 1; capital_strike_progress += 1
 
 We have continued our implementation of the WTB-Plan, despite the continued deficit spending. In addition to public works, we are now focusing on rebuilding our industries.
 
@@ -85,7 +85,7 @@ go-to: nationalize_deficit if budget < nationalize_budget; nationalize_no_defici
 
 
 @nationalize_no_deficit
-on-arrival: nationalization_progress += 1; capital_strike_progress += 2; unemployed -= 2.5; workers += 2.5; budget -= nationalize_budget; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 1; dvp_relation -= 4;
+on-arrival: nationalization_progress += 1; capital_strike_progress += 2; unemployed -= 2.5; workers += 2.5; budget -= nationalize_budget; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 1; dvp_relation -= 4; left_dissent -= 5; new_middle_spd -= 2; old_middle_spd -= 3
 achievement: wirtschaftspolitik
 
 We have begun purchasing idling enterprises from the capitalists[? if works_councils >= 1: , and running them in coordination with empowered works councils ?]. By keeping production going, we can stave off the rising unemployment.
@@ -106,7 +106,7 @@ title: Take a budget deficit to fund the nationalization program.
 choose-if: left_strength > reformist_strength + center_strength or woytinsky_advisor == 1
 subtitle: [? if woytinsky_advisor: Woytinsky can bring us around to supporting a budget deficit. ?]
 unavailable-subtitle: [? if left_strength <= reformist_strength + center_strength: The party does not yet support budget deficits for this purpose. ?] [? if not woytinsky_advisor : Perhaps bringing on an advisor might help make this action palatable? ?]
-on-arrival: nationalization_progress += 1; capital_strike_progress += 2; unemployed -= 2; budget -= nationalize_budget; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 2; dvp_relation -= 4;
+on-arrival: nationalization_progress += 1; capital_strike_progress += 3; unemployed -= 2; budget -= nationalize_budget; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 2; dvp_relation -= 4; new_middle_spd -= 3; old_middle_spd -= 3
 achievement: wirtschaftspolitik
 
 [? if woytinsky_advisor: Most of the party, even on the left, are opposed to budget deficits for any purpose, with the exception of Wladimir Woytinsky. While he did not originally support the left's "transformational" plan, he has come around, and has persuaded the party and the Finance Ministry to support budget deficits in limited cases, for the purpose of exiting from the depression. ?]
@@ -119,12 +119,12 @@ The Left argues that this should only be a first step in the socialist transform
 @nationalize_without_compensation
 title: Nationalize without compensation.
 subtitle: There is no reason why we should not simply take over idle factories. This is likely to provoke a confrontation with the capitalists.
-unavailable-subtitle: [? if left_strength <= reformist_strength + center_strength: The bulk of the party does not support this action. ?] [? if judicial_reform < 4 : The judiciary would oppose this action. ?]
-choose-if: left_strength > reformist_strength + center_strength and judicial_reform >= 4
-on-arrival: nationalization_progress += 1; capital_strike_progress += 6; coup_progress += 3; unemployed -= 2; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 2; dvp_relation -= 4; left_strength += 15; reformist_dissent += 10; left_dissent -= 5;
+unavailable-subtitle: [? if left_strength <= reformist_strength: The bulk of the party does not support this quasi-legal action. ?] [? if judicial_reform < 3 : The judiciary would oppose this action. ?]
+choose-if: left_strength > reformist_strength and judicial_reform >= 3
+on-arrival: nationalization_progress += 1; capital_strike_progress += 7; coup_progress += 3; unemployed -= 2; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 2; dvp_relation -= 4; left_strength += 15; reformist_dissent += 10; left_dissent -= 10; new_middle_spd -= 5; old_middle_spd -= 8
 achievement: wirtschaftspolitik
 
-The capitalists are, predictably, up in arms about our policy of nationalization without compensation. They call it illegal expropriation, and it is. Nevertheless, it is clear that they have failed, and we must take radical action.
+The capitalists are, predictably, up in arms about our policy of nationalization without compensation. They call it illegal expropriation, and it is. Nevertheless, it is clear that they have failed by keeping their factories idle, and we must take radical action.
 
 We have begun acquiring idling enterprises from the capitalists[? if works_councils >= 1: , and running them in coordination with empowered works councils ?]. By keeping production going, we can stave off the rising unemployment.
 
@@ -132,9 +132,9 @@ We have begun acquiring idling enterprises from the capitalists[? if works_counc
 @empower_workers
 title: Empower workers to take over factories.
 subtitle: We can promise to legalize factory occupations, giving the factories over to worker unions. This is highly confrontational, and would likely provoke a reaction from right-wing militants as well as capitalists.
-unavailable-subtitle: [? if left_strength <= reformist_strength + center_strength: The bulk of the party does not support this action. ?] [? if judicial_reform < 4 : The judiciary would oppose this action. ?]
-choose-if: left_strength > reformist_strength + center_strength and judicial_reform >= 4
-on-arrival: nationalization_progress += 1; capital_strike_progress += 6; coup_progress += 6; unemployed -= 2; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 2; dvp_relation -= 4; workers_nsdap -= 5*(1-dissent); unemployed_nsdap -= 5*(1-dissent); left_strength += 15; reformist_dissent += 10; left_dissent -= 5;
+unavailable-subtitle: [? if left_strength <= reformist_strength + center_strength: The bulk of the party does not support this radical action. ?] [? if judicial_reform < 3 : The judiciary would oppose this action. ?]
+choose-if: left_strength > reformist_strength + center_strength and judicial_reform >= 3
+on-arrival: nationalization_progress += 1; capital_strike_progress += 6; coup_progress += 6; unemployed -= 2; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 2; dvp_relation -= 4; workers_nsdap -= 5*(1-dissent); unemployed_nsdap -= 5*(1-dissent); left_strength += 15; reformist_dissent += 10; left_dissent -= 10; new_middle_spd -= 5; old_middle_spd -= 10
 achievement: wirtschaftspolitik
 
 The capitalists are, predictably, up in arms about our policy of legalizing factory occupations. They call it illegal expropriation, and it is. Nevertheless, it is clear that they have failed, and we must take radical action.
@@ -147,7 +147,7 @@ title: Continue the Left plan for the transformation of the economy.
 subtitle: -[+ nationalize_budget +] budget. [? if works_councils >= 3 : Our works councils have reduced the budget necessary for this program. ?] [? if socializations >= 2: Our existing socialization policies have reduced the budget necessary for this program. ?]
 view-if: nationalization_adopted == 1 and nationalization_progress >= 1
 choose-if: budget >= nationalize_budget
-on-arrival: budget -= nationalize_budget; nationalization_progress += 1; capital_strike_progress += 2; unemployed -= 2.5; workers += 2.5; budget -= nationalize_budget; works_program += 1; workers_spd += 6*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 1; dvp_relation -= 4;
+on-arrival: budget -= nationalize_budget; nationalization_progress += 1; capital_strike_progress += 2; unemployed -= 2.5; workers += 2.5; budget -= nationalize_budget; works_program += 1; workers_spd += 6*(1-dissent); unemployed_spd += 4*(1-dissent); coalition_dissent += 1; dvp_relation -= 4; left_dissent -= 5
 
-We purchase additional underutilized factories and run them in a coordinated socialist fashion.
+We purchase additional underutilized enterprises and run them in a coordinated socialist fashion with the works councils, hiring formerly laid off workers. A significant portion of the economy is now under public control.
 

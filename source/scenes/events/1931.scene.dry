@@ -3,16 +3,14 @@ subtitle: A new year
 on-arrival: {!
 // increase NSDAP vote share 
 // TODO: if a public works program has started, unemployment is not so bad.
-Q.unemployed += 8; 
-Q.catholics += 2;
-Q.catholics_z += 5;
+Q.unemployed += 8;
 if (Q.works_program) {
     Q.unemployed -= 5;
 }
-if (Q.works_program > 1) {
+if (Q.works_program && Q.works_program > 1) {
     Q.unemployed -= 2;
 }
-Q.workers -= 5;
+Q.catholics_z += 5;
 Q.rural_dvp -= 5;
 Q.old_middle_dvp -= 5;
 Q.new_middle_dvp -= 5;
@@ -25,6 +23,7 @@ Q.old_middle_nsdap += 5;
 Q.rural_nsdap += 5;
 // TODO: economic policies should reduce NSDAP rurals
 if (!Q.works_program) {
+    Q.workers -= 5;
     Q.unemployed_nsdap += 8;
     Q.rural_nsdap += 10; 
     Q.new_middle_nsdap += 10; 
@@ -33,6 +32,7 @@ if (!Q.works_program) {
     Q.workers_kpd += 5;
     Q.sa_strength += 100;
     Q.sh_strength += 50;
+    Q.crisis_urgency += 1;
 } else if (Q.unemployed > 15) {
     Q.unemployed_nsdap += 4;
     Q.old_middle_nsdap += 4;

@@ -19,7 +19,7 @@ The social welfare program, including unemployment insurance, healthcare, and ol
 
 @reduce_spending
 subtitle: This will hurt our proletarian base. +1 Budget
-on-arrival: budget += 1; workers_spd -= 5; unemployed_spd -= 5; workers_kpd += 3; welfare -= 1; reformist_dissent += 10; left_dissent += 10; labor_dissent += 10; center_dissent += 5; neorevisionist_dissent += 5; dvp_relation += 5; z_relation += 3; pro_republic -= 3; 
+on-arrival: budget += 1; workers_spd -= 6; unemployed_spd -= 6; workers_kpd += 3; welfare -= 1; reformist_dissent += 10; left_dissent += 10; labor_dissent += 10; center_dissent += 5; neorevisionist_dissent += 5; dvp_relation += 5; z_relation += 3; pro_republic -= 3; coalition_dissent -= 1 if in_grand_coalition; 
 
 We have reduced levels of social welfare spending. This means more poverty and suffering for the working class. Our detractors claim that we are sacrificing proletarian livelihoods for the sake of class peace with the bourgeoisie. Are they wrong? Are the workers wrong to turn to the Communists, in light of our choices?
 
@@ -27,14 +27,14 @@ We have reduced levels of social welfare spending. This means more poverty and s
 view-if: unemployed <= 15
 choose-if: budget > 0
 subtitle: -1 Budget
-on-arrival: budget -= 1; workers_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent); welfare += 1; reformist_dissent -= 5; labor_dissent -= 5; center_dissent -= 5; left_dissent -= 5; neorevisionist_dissent -= 5; coalition_dissent += 1 if welfare > 1
+on-arrival: budget -= 1; workers_spd += 6*(1-dissent); unemployed_spd += 6*(1-dissent); welfare += 1; reformist_dissent -= 5; labor_dissent -= 5; center_dissent -= 5; left_dissent -= 5; neorevisionist_dissent -= 5; coalition_dissent += 1 if welfare > 1
 
 We have increased welfare spending. Our proletarian base is pleased.
 
 @increase_spending_post_depression
 view-if: unemployed > 15
 choose-if: budget > 0
-on-arrival: budget -= 1; workers_spd += 3*(1-dissent); coalition_dissent += 1 if welfare > 0
+on-arrival: budget -= 1; workers_spd += 3*(1-dissent); unemployed_spd += 3*(1-dissent); coalition_dissent += 1 if welfare > 0
 subtitle: The increased levels of unemployment necessitate more spending on aid to maintain the same benefits. -1 Budget
 
 Increasing welfare spending is necessary in light of the rise in unemployment, so we are essentially treading water.

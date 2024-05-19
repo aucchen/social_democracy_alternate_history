@@ -154,7 +154,7 @@ Woytinsky has been removed as an advisor. The Labor faction disapproves.
 title: Remove Levi
 view-if: levi_advisor = 1
 tags: remove_advisor
-on-arrival: levi_advisor = 0; leftist_dissent += 5; n_advisors -= 1
+on-arrival: levi_advisor = 0; left_dissent += 5; n_advisors -= 1
 go-to: rm_main
 
 Levi has been removed as an advisor. The Leftist faction disapproves.
@@ -163,7 +163,7 @@ Levi has been removed as an advisor. The Leftist faction disapproves.
 title: Remove Sender
 view-if: sender_advisor = 1
 tags: remove_advisor
-on-arrival: sender_advisor = 0; leftist_dissent += 3; n_advisors -= 1
+on-arrival: sender_advisor = 0; left_dissent += 3; n_advisors -= 1
 go-to: rm_main
 
 Sender has been removed as an advisor. The Leftist faction disapproves.
@@ -172,7 +172,7 @@ Sender has been removed as an advisor. The Leftist faction disapproves.
 title: Remove Rosenfeld
 view-if: rosenfeld_advisor = 1
 tags: remove_advisor
-on-arrival: rosenfeld_advisor = 0; leftist_dissent += 3; n_advisors -= 1
+on-arrival: rosenfeld_advisor = 0; left_dissent += 3; n_advisors -= 1
 go-to: rm_main
 
 Rosenfeld has been removed as an advisor. The Leftist faction disapproves.

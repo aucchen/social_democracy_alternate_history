@@ -19,7 +19,17 @@ var total_support = 0;
 for (var party of Q.parties) {
     var party_support = 0;
     for (var c of Q.classes) {
-        party_support += Q[c]*Q[c+'_'+party];
+        // but this version is somewhat more entertaining and allows for wilder swings in votes.
+        // the other option basically necessitates a multi-class strategy. while the first option allows for a working-class-only strategy.
+        if (Q.old_demographics) {
+            // okay i'm pretty sure this is wrong, and the hard version is correct
+            // basically this allows for "spillover" effects in other demographics.
+            // so you can campaign among say the workers and 
+            party_support += Q[c]*Q[c+'_'+party];
+            // However, there should be a cap on how much party support you can get in a certain demo.
+        } else  {
+            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+        }
     }
     Q[party + '_support'] = party_support;
     total_support += party_support;

@@ -1,7 +1,7 @@
 title: Banking Crisis
 subtitle: The collapse of the German banking system...
 new-page: true
-on-arrival: banking_crisis_seen = 1; workers_kpd += 6; workers_nsdap += 5; unemployed += 3
+on-arrival: banking_crisis_seen = 1; workers_kpd += 6; workers_nsdap += 5; unemployed += 3; crisis_urgency += 1
 tags: event
 view-if: year = 1931 and month >= 6 and chancellor = "Brüning" and spd_in_government == 0
 max-visits: 1

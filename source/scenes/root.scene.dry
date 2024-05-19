@@ -30,6 +30,8 @@ Q.month_actions = 0;
 
 // 0 = normal difficulty, 1 = hard mode, 2 = hard mode no saves
 Q.difficulty = 0;
+// old demographics
+Q.old_demographics = 0;
 
 // party resources
 Q.resources = 2;
@@ -166,7 +168,7 @@ Q.budget = 5;
 
 // Proportion of different social groups
 // source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 45, table 3.4 - using 1925 figures
-Q.workers = 46; // industry and trade
+Q.workers = 48; // industry and trade
 Q.old_middle = 13; // "old mittelstand"
 // 16.4 trade & commerce, 6.6 public and private services, 4.4 domestic help
 Q.new_middle = 14; // "new mittelstand"
@@ -240,7 +242,7 @@ Q.unemployed_other = 5;
 
 Q.catholics_spd = 15;
 Q.catholics_kpd = 2;
-Q.catholics_z = 55;
+Q.catholics_z = 50;
 Q.catholics_ddp = 0;
 Q.catholics_dvp = 5;
 Q.catholics_dnvp = 5;
@@ -373,7 +375,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'party_organizations', 'rally', 'reichsbanner',
             'shuffle_leadership', 'streetfighting', 'peoples_party',// govt
             'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
-            'foreign_policy', 'judiciary', 'labor_affairs', 'military',
+            'foreign_policy', 'judiciary', 'labor_affairs', 'military_policy',
             'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
             'homosexual_rights', 'economic_policy',
             'war_guilt', 'womens_rights', 'economic_democracy',// events

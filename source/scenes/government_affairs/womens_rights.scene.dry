@@ -17,12 +17,13 @@ For better or for worse, the Socialists stand virtually alone in supporting incr
 - @labor: Institute policies that help women in the workforce.
 - @welfare: Improve welfare for single mothers and children.
 - @liberalize: Attempt to liberalize abortion laws.
-- @root: Do not enact any policies for now.
+- @return: Do not enact any policies for now.
 - @easy_discard
 
 @labor
 subtitle: Paid maternal leave policies, equal pay policies, and so on.
-on-arrival: womens_work = 1; womens_rights += 1; workers_spd -= 4 if unemployed > 15; new_middle_spd += 4*(1-dissent); workers_spd += 3*(1 - dissent);
+on-arrival: womens_work = 1; womens_rights += 1; workers_spd -= 4 if unemployed > 15; new_middle_spd += 4*(1-dissent); workers_spd += 4*(1 - dissent);
+max-visits: 3
 
 These policies mean that our party is increasing in popularity among the "new women" who work outside the home. [? if unemployed > 15 : However, many male workers develop a backlash towards women in the workplace, especially given the rising unemployment. ?]
 
@@ -30,9 +31,9 @@ These policies mean that our party is increasing in popularity among the "new wo
 @welfare
 subtitle: -1 budget
 choose-if: budget > 0
-on-arrival: welfare += 1; workers_spd += 5*(1-dissent); unemployed_spd += 3*(1-dissent); budget -= 1; womens_rights += 1; coalition_dissent += 1 if welfare >= 1 and unemployed >= 15
+on-arrival: welfare += 1; workers_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent); budget -= 1; womens_rights += 1; coalition_dissent += 1 if welfare >= 1 and unemployed >= 15
 
-We have increased welfare spending on women and children. [? if welfare >= 1 : Some of our coalition partners consider increased welfare spending profligate at this time. ?]
+We have increased welfare spending on women and children. [? if welfare >= 1 and unemployed >= 15 : Some of our coalition partners consider increased welfare spending profligate at this time. ?]
 
 
 @liberalize

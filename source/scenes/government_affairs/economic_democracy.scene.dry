@@ -1,9 +1,9 @@
 title: Economic Democracy
 is-card: true
 new-page: true
-on-arrival: economic_democracy_timer = 10;
+on-arrival: economic_democracy_timer = 10; month_actions += 1
 view-if: spd_in_government and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and (labor_minister_party == "SPD") and economic_democracy_timer == 0
-card-image: img/portraits/SchmidtRobert.jpg
+card-image: img/portraits/HilferdingRudolf.jpg
 max-visits: 6
 tags: govt_affairs
 
@@ -19,24 +19,6 @@ As we control the Labor [? if economic_minister_party == "SPD" : and Economic ?]
 - @nationalize_1
 - @cooperatives_1
 - @return: Do not enact any policies for now.
-
-# notes on economic democracy from https://www.jstor.org/stable/41783589:
-# wirtschaftsdemokratie (Naphtali): co-determination at sectorial & national economy level, as well as at the enterprise level (but it was of secondary importance)
-# - co-determination: works committees were introduced before ww1 to maintain labor peace, especially in key industries like coal mines.
-# - workers' councils in the German revolution
-# - Weimar constitution called for works councils: establishment level, industrial level, national level.
-# - national level works councils were mostly marginal and powerless.
-# - post-war: workers' representation on boards of companies was required, with some concessions to employers
-# - bietrabsrat - 1920 Works Councils Act. opposed by radical left, more based on pre-war works committees.
-# - works councils and trade unions have a symbiotic relationship up to present, with most seats on works councils being union members, but works councils are not solely elected by union members.
-
-# https://www.jstor.org/stable/j.ctt1wn0s45.19
-# - Rudolf Hilferding, Fritz Naphtali
-# - Naphtali: "organized economy controlled by the unions". economic democracy requires political democracy.
-# - expand the public and cooperative sectors, democratization of ecnonomic bodies and control over monopolies
-# - inspired by British guild socialism.
-# - Otto Bauer (austromarxist): not just nationalization but socialization - boards of companies should consist of 3 types of representatives - trade unions (workers), consumers, and the state.
-
 
 @expand_councils
 title: Support works councils.
@@ -71,17 +53,19 @@ Sectorial works councils can now negotiate wage and price policies for entire ec
 @nationalize_1
 title: Begin to socialize key industries.
 subtitle: -1 budget - we should buy out industries and govern them together with workers and consumers.
-on-arrival: economic_democracy += 1; capital_strike_progress += 1; budget -= 1; socializations += 1; workers_spd += 6*(1-dissent); unemployed_spd += 3*(1-dissent);
+on-arrival: economic_democracy += 1; capital_strike_progress += 1; budget -= 1; socializations += 1; workers_spd += 6*(1-dissent); unemployed_spd += 3*(1-dissent); coalition_dissent += 1 if in_grand_coalition; capital_strike_progress += 1 if black_thursday_seen
 choose-if: budget >= 1
 max-visits: 3
 
-We have begun to socialize key industries by buying out the capitalist owners, and creating coordinated governing boards consisting of worker, consumer, and state representatives.
+We have begun to socialize key industries by buying out the capitalist owners, and creating coordinated governing boards consisting of worker, consumer, and state representatives. The capitalists are not pleased at our intrusion into the economy.
 
 @cooperatives_1
 title: Support worker and consumer cooperatives.
 subtitle: -1 budget
-on-arrival: economic_democracy += 1; cooperatives += 1; workers_spd += 6*(1-dissent); unemployed_spd += 4*(1-dissent); budget -= 1
+on-arrival: economic_democracy += 1; cooperatives += 1; workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); budget -= 1
 choose-if: budget >= 1
 max-visits: 3
+
+We have enacted legislation that makes it easier to create cooperative enterprises of all sorts, and provide financial support to struggling cooperatives.
 
 # TODO

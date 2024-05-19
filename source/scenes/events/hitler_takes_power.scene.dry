@@ -1,6 +1,7 @@
 title: Hitler is Chancellor.
 subtitle: The beginning of the end.
 view-if: chancellor == "Hitler" or president == "Hitler"
+on-arrival: spd_in_government = 0
 tags: event
 new-page: true
 

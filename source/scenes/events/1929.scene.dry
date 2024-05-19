@@ -2,7 +2,9 @@ title: 1929
 subtitle: A new year
 on-arrival: {!
 Q.unemployed += 3;
-Q.catholics_z += 3;
+if (Q.old_demographics) {
+    Q.catholics_z += 3;
+}
 // increase NSDAP vote share
 Q.new_middle_nsdap += 10;
 Q.old_middle_nsdap += 10;

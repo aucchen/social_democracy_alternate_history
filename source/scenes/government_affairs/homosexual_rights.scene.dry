@@ -5,7 +5,7 @@ card-image: img/hirschfeld.jpg
 frequency: 25
 max-visits: 3
 view-if: spd_in_government == 1 and (womens_rights >= 2 or abortion_rights > 0) and chancellor_party == "SPD" and homosexual_rights_timer == 0
-on-arrival: homosexual_rights_timer = 11
+on-arrival: homosexual_rights_timer = 11; month_actions += 1
 tags: govt_affairs
 
 = Homosexual Rights
@@ -15,7 +15,7 @@ There is a constellation of different groups that have grown up around divergenc
 - @repeal_175: Repeal Paragraph 175.
 - @reform_183: Reform Paragraph 183.
 - @change_sex: Create a legal process for changing sex.
-- @root: Do not enact any changes for now.
+- @return: Do not enact any changes for now.
 - @easy_discard
 
 @repeal_175
