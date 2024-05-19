@@ -101,6 +101,14 @@ if (Q.spd_in_government && ((Q.nationalization_progress >= 2 && Q.economic_democ
 if (Q.march_on_berlin_seen && Q.capital_strike_seen && Q.chancellor != "Hitler" && Q.president != "Hitler" && !Q.total_defeat) {
     this.achieve("polykrise");
 }
+// Wirtschaftsexperiment - implement two different economic plans.
+if (Q.nationalization_progress >= 1 && Q.wtb_implemented >= 1) {
+    this.achieve("wirtschaftsexperiment");
+}
+// Syndikalismus - support factory takeovers by workers.
+if (Q.factory_takeovers >= 2) {
+    this.achieve("syndikalismus");
+}
 // Stolperstein - lose the civil war against Hitler.
 if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.total_defeat) {
     this.achieve('stolperstein');
@@ -247,6 +255,21 @@ go-to: eg_menu
 
 The SPD has been declared a "People's Party", representing all of the people, not just the working class. This policy has many supporters and detractors, and what will become of the party is still unclear.
 
+@nationalization_achieved
+title: Socialization of the economy has commenced.
+view-if: nationalization_progress >= 2
+tags: endings
+go-to: eg_menu
+
+As part of our socialist economic plan, we have nationalized a substantial portion of the economy, beginning the transition to actual socialism.
+
+@works_councils
+title: Works councils have more power.
+view-if: works_councils >= 3
+tags: endings
+go-to: eg_menu
+
+Works councils now have substantially greater influence, giving workers democratic control over their economic lives.
 
 
 @achievements
@@ -294,6 +317,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10% and a budget surplus. ?]
 
+[? if game_achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
+
 [? if game_achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
 [? if game_achievement_hirschfeld: **Hirschfeld** - pass reforms for homosexual rights. ?]
@@ -311,6 +336,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if game_achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if game_achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
+
+[? if game_achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
 
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
@@ -355,6 +382,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10% and a budget surplus. ?]
 
+[? if achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
+
 [? if achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
 [? if achievement_hirschfeld: **Hirschfeld** - pass reforms for homosexual rights. ?]
@@ -372,6 +401,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
+
+[? if achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
 
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
@@ -414,6 +445,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10% and a budget surplus. ?]
 
+[? if not achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
+
 [? if not achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
 [? if not achievement_hirschfeld: **Hirschfeld** - pass reforms for homosexual rights. ?]
@@ -431,6 +464,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if not achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
+
+[? if not achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 

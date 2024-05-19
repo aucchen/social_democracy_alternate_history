@@ -26,7 +26,7 @@ go-to: crisis_program.plan_adopted
 title: Carry out the economic plan.
 subtitle: If we are in government, we can carry out a public works program such as the WTB-Plan.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if wtb_adopted == 0 : We have not yet adopted an economic plan. ?][? if spd_in_government == 0 : The SPD is not in government. ?][? if works_program >= 2 : We have already started implementing the plan. ?]
-choose-if: advisor_action_timer <= 0 and wtb_adopted and spd_in_government and works_program <= 1
+choose-if: advisor_action_timer <= 0 and wtb_adopted and spd_in_government and wtb_implemented <= 1
 on-arrival: advisor_action_timer = 6;
 go-to: economic_policy
 

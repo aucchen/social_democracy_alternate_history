@@ -27,7 +27,7 @@ view-if: works_councils == 0
 on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition
 max-visits: 1
 
-The works councils have been in place since the German Revolution of 1918, but they have been largely powerless in the face of capital. Now, we will have worker representation on the boards of companies, giving them more influence in management decisions.
+The works councils, elected by workers at each major business, have been in place since the German Revolution of 1918, but they have been largely powerless in the face of capital. Now, we will have worker representation on the boards of companies, giving them more influence in management decisions.
 
 
 @expand_councils_2
