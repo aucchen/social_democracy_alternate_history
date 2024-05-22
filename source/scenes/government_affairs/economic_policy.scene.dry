@@ -26,7 +26,7 @@ subtitle: -3 budget
 unavailable-subtitle: Unemployment is low enough that the time for the WTB-Plan has passed.
 view-if: wtb_implemented > 2 and budget >= 3 
 choose-if: unemployed > 8
-on-arrival: works_program += 1; budget -= 3; workers_spd += 7*(1-dissent); workers += 2 if unemployed > 8; unemployed -= 3 if unemployed > 8; unemployed_spd += 7*(1-dissent); workers_kpd -= 3; workers_nsdap -= 3; wtb_implemented += 1;
+on-arrival: works_program += 1; budget -= 3; workers_spd += 7*(1-dissent); workers += 2 if unemployed > 8; unemployed -= 3 if unemployed > 8; unemployed_spd += 7*(1-dissent); workers_kpd -= 3; workers_nsdap -= 3; wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 5 if in_popular_front or in_left_front
 
 [? if works_program == 4 : We have commenced Phase 2 of the WTB-Plan. ?][? if works_program > 4 :  We have continued our implementation of the WTB-Plan. ?] In addition to public works, we are now focusing on rebuilding our industries.
 
@@ -37,7 +37,7 @@ subtitle: -3 budget - we will enter a deficit.
 unavailable-subtitle: Unemployment is low enough that we should not do deficit spending.
 view-if: wtb_implemented > 2 and budget < 3 and budget >= -3
 choose-if: unemployed > 10
-on-arrival: works_program += 1; budget -= 3; workers_spd += 6*(1-dissent); workers += 2; unemployed -= 2; unemployed_spd += 6*(1-dissent); workers_kpd -= 2; workers_nsdap -= 2; coalition_dissent += 1; capital_strike_progress += 1; wtb_implemented += 1;
+on-arrival: works_program += 1; budget -= 3; workers_spd += 6*(1-dissent); workers += 2; unemployed -= 2; unemployed_spd += 6*(1-dissent); workers_kpd -= 2; workers_nsdap -= 2; coalition_dissent += 1; capital_strike_progress += 1; wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 5 if in_popular_front or in_left_front
 
 We have continued our implementation of the WTB-Plan, despite the continued deficit spending. In addition to public works, we are now focusing on rebuilding our industries.
 
@@ -45,12 +45,13 @@ We have continued our implementation of the WTB-Plan, despite the continued defi
 @wtb_continuation
 title: Look back on our results, and continue our implementation...
 view-if: wtb_implemented >= 1 and wtb_implemented <= 2
-on-arrival: budget += 1 if works_program <= 2; unemployed -= 6 if (works_program <= 2 and unemployed > 15) else unemployed -= 3; unemployed += 3 if unemployed < 5; unemployed += 3 if unemployed < 0; workers += 4 if works_program <= 2 else workers += 2; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); workers_kpd -= 3; workers_nsdap -= 5; works_program += 1; z_relation += 3; dvp_relation += 3; coalition_dissent -= 1 if coalition_dissent >= 1; wtb_implemented += 1;
+on-arrival: budget += 1 if works_program <= 2; unemployed -= 6 if (works_program <= 2 and unemployed > 15) else unemployed -= 3; unemployed += 3 if unemployed < 5; unemployed += 3 if unemployed < 0; workers += 4 if works_program <= 2 else workers += 2; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); workers_kpd -= 3; workers_nsdap -= 5; works_program += 1; z_relation += 3; dvp_relation += 3; coalition_dissent -= 1 if coalition_dissent >= 1; wtb_implemented += 1; kpd_coalition_dissent += 1;
 
 Our spending on public works has resulted in a lower need for unemployment insurance and welfare, and increased tax receipts through the multiplier effect as the new money courses through the economy, recuperating some of our spending. We continue to invest most of the new revenue into the program.
 
-The economy is doing better, finally. Even our coalition partners begin to see the light.
+The economy is doing better, finally. Even the bourgeois parties are beginning to see the light.
 
+[? if in_popular_front or in_left_front: The KPD, however, still opposes our policy of "rescuing" capitalism. ?]
 
 @implement_wtb_no_deficit
 title: Implement the WTB plan.
@@ -58,10 +59,12 @@ subtitle: -3 budget
 unavailable-subtitle: Unemployment is low enough that the time for the WTB-Plan has passed.
 view-if: budget >= 3 and works_program == 0 and wtb_adopted == 1
 choose-if: unemployed > 8
-on-arrival: budget -= 3; works_program += 1; unemployed -= 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); wtb_implemented += 1;
+on-arrival: budget -= 3; works_program += 1; unemployed -= 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 6 if in_popular_front or in_left_front
 achievement: wirtschaftspolitik
 
 We have started to enact the WTB plan. Money is beginning to flow through the economy via investments in large-scale public works.
+
+[? if in_popular_front or in_left_front: The KPD opposes the WTB plan, seeing it as a rescue of capitalism rather than a step towards real socialism. ?]
 
 @implement_wtb_deficit
 title: Implement the WTB plan.
@@ -69,10 +72,12 @@ subtitle: -3 budget - we will enter deficit spending.
 unavailable-subtitle: Unemployment is low enough that the time for the WTB-Plan has passed.
 view-if: budget < 3 and works_program == 0 and wtb_adopted == 1
 choose-if: unemployed > 8
-on-arrival: coalition_dissent += 1; works_program += 1; budget -= 3; unemployed -= 3; workers += 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); capital_strike_progress += 1; wtb_implemented += 1;
+on-arrival: coalition_dissent += 1; works_program += 1; budget -= 3; unemployed -= 3; workers += 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); capital_strike_progress += 1; wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 6 if in_popular_front or in_left_front
 achievement: wirtschaftspolitik
 
 We have entered the realm of deficit spending. Our coalition partners are disgusted, but the works plan is enacted anyway. Money is beginning to flow through the economy via investments in large-scale public works.
+
+[? if in_popular_front or in_left_front: The KPD opposes the WTB plan, seeing it as a rescue of capitalism rather than a step towards real socialism. ?]
 
 
 ####################### left economic policies (socializations)

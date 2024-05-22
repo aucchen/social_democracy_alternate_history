@@ -32,7 +32,7 @@ if (Q.chancellor != "Hitler" && Q.president != "Hitler" && !Q.civil_war_seen) {
     }
 }
 // Einheitsfront - form a united front with the KPD, and win the civil war.
-if (Q.republic_victory && Q.in_left_coalition) {
+if (Q.republic_victory && Q.in_left_front) {
     this.achieve('einheitsfront');
 }
 // Volksfront - form a popular front government, and win the civil war.

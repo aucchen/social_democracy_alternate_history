@@ -26,7 +26,7 @@ Supporting labor is always popular in the SPD, although many of our coalition pa
 
 @support_employers
 subtitle: Popular among the bourgeoisie, much less so among the workers.
-on-arrival: labor_dissent += 8; workers_spd -= 3; coalition_dissent -= 1; dvp_relation += 5; z_relation += 5; workers_kpd += 3
+on-arrival: labor_dissent += 8; workers_spd -= 3; coalition_dissent -= 1; dvp_relation += 5; z_relation += 5; workers_kpd += 3; kpd_coalition_dissent += 1
 
 The more radical workers despise our suppression of their strikes, recalling the days of Friedrich Ebert.
 
