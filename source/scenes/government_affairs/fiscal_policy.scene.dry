@@ -20,7 +20,7 @@ Fiscal policy involves issues of taxation and budget.
 
 @raise_progressive
 subtitle: This does not change overall revenue.
-on-arrival: workers_spd += 6*(1-dissent); old_middle_spd -= 3; new_middle_spd -= 3; coalition_dissent += 1 if in_grand_coalition; dvp_relation -= 4
+on-arrival: workers_spd += 6*(1-dissent); old_middle_spd -= 3; new_middle_spd -= 3; coalition_dissent += 1 if in_grand_coalition; dvp_relation -= 4; finance_goal_completed += 1;
 
 Making the tax system more progressive is popular among our base, but it upsets our bourgeois coalition partners, as well as our minimal number of bourgeois voters.
 

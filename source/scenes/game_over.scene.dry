@@ -339,6 +339,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
 
+[? if game_achievement_drei_pfeile: **Drei Pfeile** - defeat a coup without a civil war. ?]
+
+[? if game_achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
+
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -404,6 +408,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
 
+[? if achievement_drei_pfeile: **Drei Pfeile** - defeat a coup without a civil war. ?]
+
+[? if achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
+
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -466,6 +474,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
 
 [? if not achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
+
+[? if not achievement_drei_pfeile: **Drei Pfeile** - defeat a coup without a civil war. ?]
+
+[? if not achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 

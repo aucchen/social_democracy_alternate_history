@@ -85,13 +85,24 @@ Potential changes/ideas:
 - moderate stimulus plan
 
 
-v0.99 - content update
+v0.10 - content update
 
 Major changes:
 
-- Government with the popular front or left front are possible without civil war.
+- Governments with the Popular Front or Left Front are possible without civil war. The Communists will have specific policy demands, and may call votes of no confidence. Popular Front governments may have dissent from both the left and the right. Both government types have significantly higher coup risk.
+- Can delay elections under emergency/presidential rule.
+- End date extended to December 1933.
+- New advisor actions: Christian Socialism (Mierendorff)
+
+Minor changes:
+
+- A whole bunch of bug fixes (thanks to everyone who commented!)
+- People's Party now improves Catholic vote share as well.
+- Coup progress adjusted for various events.
+
 
 New achievement: Schwarz-Rot-Gold (reach 1933 without a civil war on Historical difficulty)
 
+- Historical mode: no saving/loading, and lots of adjusted thresholds and parameters.
 
 - Other than that, I have most of the content I want in this game already. It just needs some polishing.

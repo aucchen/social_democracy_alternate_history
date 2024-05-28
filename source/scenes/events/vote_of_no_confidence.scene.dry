@@ -1,7 +1,7 @@
 title: The Right calls a vote of no confidence against the current government!
 subtitle: We have angered our coalition partners too much...
 new-page: true
-view-if: spd_in_government = 1 and (in_grand_coalition = 1 and coalition_dissent >= 3) or (in_weimar_coalition = 1 and coalition_dissent >= 4)
+view-if: spd_in_government = 1 and ((in_grand_coalition = 1 or in_popular_front = 1) and coalition_dissent >= 3) or (in_weimar_coalition = 1 and coalition_dissent >= 4) and spd_r < 0.5
 tags: event
 
 # Options: spend relations to reduce coalition_dissent, ask for kpd to abstain
@@ -9,7 +9,7 @@ tags: event
 
 = Vote of No Confidence
 
-[? if in_grand_coaliton : The DVP ?][? if in_weimar_coalition: The Center Party ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
+[? if in_grand_coaliton : The DVP ?][? if in_weimar_coalition or in_popular_front: The Center Party ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
 
 - @try_assuage: Try to assuage our partners.
 - @support_kpd: Could we get the KPD to abstain?
@@ -68,6 +68,6 @@ The KPD is not interested in a "toleration" arrangement; they will only support 
 @let_it_happen
 on-arrival: next_election_time = time + 3 if next_election_time >= time + 3; next_election_month = month + 3 if next_election_time >= time + 3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; coalition_dissent = 0; welfare -= 2; pro_republic -= 5; old_middle_spd -= 3; new_middle_spd -= 2; workers_spd -= 3 if pro_republic < 50; workers_spd -= 4 if pro_republic < 40; old_middle_nsdap += 4 if pro_republic < 50; new_middle_nsdap += 3 if pro_republic < 50
 
-The vote succeeds, and our government has resigned. Chancellor Brüning now leads an all-bourgeois cabinet. He immediately proceeds to cut welfare spending substantially.
+The vote succeeds, and our government has resigned. Chancellor Brüning has been appointed as the head of an acting government, consisting solely of the bourgeois parties. He immediately proceeds to cut welfare spending substantially.
 
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].

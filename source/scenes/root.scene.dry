@@ -382,10 +382,11 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
             'foreign_policy', 'judiciary', 'labor_affairs', 'military_policy',
             'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
-            'homosexual_rights', 'economic_policy',
+            'homosexual_rights', 'economic_policy', 'coalition_affairs',
             'war_guilt', 'womens_rights', 'economic_democracy',// events
             'emergency_cuts', 'unemployment_insurance',
-            'sa_ban', 'sh_ban'];
+            'sa_ban', 'sh_ban',
+            'kpd_policy_timer', 'kpd_ultimatum_timer', 'popular_front_dispute_timer'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
@@ -428,6 +429,7 @@ Q.war_guilt_timer = 0;
 Q.womens_rights_timer = 0;
 Q.homosexual_rights_timer = 0;
 Q.economic_democracy_timer = 0;
+Q.coalition_affairs_timer = 0;
 // event timers
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;

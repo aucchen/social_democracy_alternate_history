@@ -10,6 +10,25 @@ set-jump: post_election_1928
 The Reichstag elections are to be held now.
 
 - @election_algorithm: May we do our best...
+- @cancel_elections
+
+@cancel_elections
+title: We cannot hold the elections now. Cancel the elections.
+subtitle: This is an anti-democratic move that may backfire.
+view-if: in_emergency_government == 1 and president == "Braun"
+
+Since we are currently ruling as part of an emergency government, we may use quasi-constitutional trickery to significantly delay these elections, and continue governing via Article 48. This is likely to be extremely unpopular both with our base and with the other parties. However, this may be necessary to prevent the extremists from gaining power.
+
+- @cancel_elections_2: Yes, do it.
+- @election_algorithm: No, let's hold the elections.
+
+@cancel_elections_2
+on-departure: next_election_year = next_election_year + 1; next_election_time = time + 12; pro_republic -= 6; dvp_relation -= 8; z_relation -= 8; ddp_relation -= 10; kpd_relation -= 8; coup_progress += 2; workers_spd -= 4; new_middle_spd -= 5; old_middle_spd -= 5; rural_spd -= 5; catholics_spd -= 5; unemployed_spd -= 5; coup_progress += 2 if nsdap_normalized > 0.4
+achievement: ausnahmezustand
+
+Fine. President [+ president +] has taken the unprecedented step of canceling these elections. New elections are scheduled for [+ next_election_month : month +] [+ next_election_year +].
+
+Let us hope this does not backfire.
 
 @post_election_1928
 on-arrival: {!
@@ -71,6 +90,24 @@ Q.reichswehr_minister_party = 'I';
 Q.economic_minister_party = 'DDP';
 Q.finance_minister_party = 'DVP';
 Q.agriculture_minister_party = 'Z';
+
+// reset KPD goals
+Q.kpd_goals_seen = 0;
+Q.agriculture_goal = 0;
+Q.economy_goal = 0;
+Q.finance_goal = 0;
+Q.labor_goal = 0;
+Q.foreign_goal = 0;
+Q.interior_goal = 0;
+Q.reichswehr_goal = 0;
+
+Q.agriculture_goal_completer = 0;
+Q.economy_goal_completed = 0;
+Q.finance_goal_completed = 0;
+Q.labor_goal_completed = 0;
+Q.foreign_goal_completed = 0;
+Q.interior_goal_completed = 0;
+Q.reichswehr_goal_completed = 0;
 !}
 on-departure: nazi_urgency = 1 if (nazi_urgency == 0 and nsdap_r >= 15)
 go-to: coalition_menu
@@ -121,6 +158,8 @@ There are some potential coalition arrangements.
 - @left_coalition
 - @popular_front_coalition
 
+# TODO: black-brown coalition
+
 
 @popular_front_coalition
 title: A new "Popular Front" coalition?
@@ -164,9 +203,23 @@ view-if: president == "Braun"
 go-to: popular_front_success
 
 @popular_front_success
-on-arrival: spd_in_government = 1; in_popular_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; reichswehr_loyalty += 0.25; kpd_relation = 80; sh_strength -= 250;
+on-arrival: spd_in_government = 1; in_popular_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation += 10; coup_progress += 2
+go-to: popular_front_civil_war if coup_progress >= 10; popular_front_no_civil_war if coup_progress < 10
 
 Somehow, surprisingly, the coalition is successfully formed! We still need a chancellor; the only acceptable choice among the parties was Rudolf Breitscheid of the SPD, acceptable to the Center [? if president == "Hindenburg" : as well as President Hindenburg, albeit extremely reluctantly ?].
+
+@popular_front_no_civil_war
+on-arrival: kpd_goals_seen = 0; finance_minister_party = "Z"; interior_minister_party = "Z"; economy_minister_party = "KPD"; labor_minister_party = "KPD"; foreign_minister_party = "Z"; agriculture_minister_party = "Z"; reichswehr_minister = "Z"; kpd_policy_timer = 4
+
+# TODO: just increase coup progress, don't start a coup right away.
+
+In response to the KPD's entrance into the government, the right-wing takes a "wait-and-see" approach for now. They expect that the Popular Front government will be unstable and incompetent, and will collapse of its own accord, discrediting the left and center and eventually enabling the destruction of the Weimar Republic. Our task is to prove them wrong.
+
+- @ministries: First, we must select our ministries.
+
+
+@popular_front_civil_war
+on-arrival: kpd_relation = 80; reichswehr_loyalty += 0.25;
 
 In response to the KPD's entrance into the government, the right-wing immediately launches a coup attempt. Troops of the Stahlhelm and Nazi SA enter Berlin and immediately begin clashing with our supporters! Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop us from taking power.
 
@@ -233,7 +286,7 @@ The KPD is still very reluctant to join a coalition, despite grassroots friendli
 - @coalition_menu: Try a different governing arrangement.
 
 @thalmann_chancellor
-choose-if: president == "Braun" and reformist_strength < left_strength
+choose-if: president == "Braun" and reformist_strength + neorevisionist_strength < left_strength
 unavailable-subtitle: [? if president != "Braun": President [+ president +] would never allow such a thing. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
 on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_front = 1; spd_in_government = 1 
 
@@ -262,9 +315,23 @@ go-to: left_coalition_success
 
 
 @left_coalition_success
-on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; reichswehr_loyalty += 0.1;
+on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; coup_progress += 3;
+go-to: left_coalition_civil_war if coup_progress >= 10; left_coalition_no_civil_war if coup_progress < 10
 
 Somehow, surprisingly, the left coalition is successfully formed, without appointing Thälmann as chancellor. The consensus choice for chancellor, accepted by the SPD, KPD, and President [+ president +], is Rudolf Breitscheid, who belongs to the centrist faction of the SPD, but was acceptable to the left due to his previous membership in the left-wing anti-war USPD.
+
+# TODO: just raise the coup limit, don't immediately go to civil war
+
+@left_coalition_no_civil_war
+on-arrival: kpd_goals_seen = 0; finance_minister_party = "KPD"; interior_minister_party = "KPD"; economy_minister_party = "KPD"; labor_minister_party = "KPD"; foreign_minister_party = "KPD"; agriculture_minister_party = "KPD"; reichswehr_minister = "KPD"; kpd_policy_timer = 2
+
+In response to the KPD's entrance into the government, the right-wing takes a "wait-and-see" approach for now. They expect that our government will be unstable and incompetent, and will collapse of its own accord, discrediting the left and eventually enabling the destruction of the Weimar Republic. Our task is to prove them wrong.
+
+- @ministries: First, we must select our ministries.
+
+
+@left_coalition_civil_war
+on-arrival: reichswehr_loyalty += 0.1
 
 In response to the KPD's entrance into the government, the right-wing immediately launches a coup attempt. Troops of the Stahlhelm and Nazi SA enter Berlin and begin clashing with our supporters. Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop us from taking power.
 
@@ -463,6 +530,7 @@ President Braun faces a dilemma. He desperately desires a socialist or at least 
 - @left_coalition
 - @popular_front_coalition
 - @far_right_coalition
+
 
 
 @emergency_braun
@@ -866,7 +934,7 @@ We are seen as responsible for the failure to form a government, and many of our
 
 @ministries
 
-We can pick from any number of ministries. Controlling a ministry allows us to directly effect policy in that area.
+We can pick from any number of ministries. Controlling a ministry allows us to directly effect policy in that area. [? if in_left_front : Any ministry that we do not take will be given to the KPD. ?] [? if in_left_front and reichswehr_minister_party == "KPD" : If the KPD controls the Reichswehr Ministry, the army will most likely revolt. ?]
 
 - #mins_1928
 - #drop_mins_1928
