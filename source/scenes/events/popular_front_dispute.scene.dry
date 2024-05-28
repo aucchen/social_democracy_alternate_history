@@ -1,0 +1,27 @@
+title: Disputes within the Popular Front
+subtitle: As expected, there are clashes between the KPD and Center Party.
+view-if: in_popular_front = 1 and popular_front_dispute_counter = 0 and (labor_minister_party = "Z" or economy_minister_party = "Z" or interior_minister_party = "Z" or agriculture_minister_party = "Z")
+new-page: true
+on-arrival: popular_front_dispute_counter = 5;
+tags: event
+
+# really the popular front dispute should be on a randomized timer
+
+= Disputes within the Popular Front
+
+
+@labor
+
+@agriculture
+
+@foreign
+
+@finance
+
+@economy
+
+@interior
+
+@education
+
+@secularism

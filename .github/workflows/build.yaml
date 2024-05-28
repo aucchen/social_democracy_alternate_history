@@ -37,7 +37,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Build game
-        run: npm run dendrynexus make-html --pretty
+        run: npm run dendrynexus make-html -- --pretty
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

@@ -1,0 +1,21 @@
+title: The KPD ministers are carrying out their policies.
+view-if: (in_popular_front or in_left_front) and (labor_minister_party = "KPD" or economy_minister_party = "KPD" or finance_minister_party = "KPD") and (kpd_policy_timer = 0)
+
+# different policies for every minister choice
+
+@labor
+
+The KPD-controlled Labor Ministry is taking a policy of supporting labor in every dispute between workers and employees. Do we support them in this policy?
+
+@labor_support
+
+This policy is popular among workers and is bringing the KPD more support, while also potentially setting up for a 
+
+@labor_oppose
+on-arrival: kpd_coalition_dissent += 1; workers_spd -= 5; workers_kpd += 5;
+
+We oppose
+
+@economy
+
+The KPD-controlled Economy Ministry is beginning a policy of 
