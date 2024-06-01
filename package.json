@@ -1,0 +1,23 @@
+{
+  "name": " social_democracy_alternate_history",
+  "version": "0.10.0",
+  "description": "Building the game:",
+  "main": "out/html/index.html",
+  "scripts": {
+    "dendrynexus": "dendrynexus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://aucchen@github.com/aucchen/social_democracy_alternate_history.git"
+  },
+  "keywords": [],
+  "author": "Autumn Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aucchen/social_democracy_alternate_history/issues"
+  },
+  "homepage": "https://github.com/aucchen/social_democracy_alternate_history",
+  "dependencies": {
+    "dendrynexus": "github:aucchen/dendrynexus"
+  }
+}

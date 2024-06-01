@@ -1,0 +1,44 @@
+title: The KPD checks upon our progress in accomplishing the coalition's goals...
+view-if: (in_popular_front or in_left_front) and kpd_ultimatum_counter = 0 and kpd_goals_seen = 1
+on-arrival: {!
+Q.kpd_goals_completed = 1;
+if (Q.agriculture_goal && !Q.agriculture_goal_completed) {
+    Q.kpd_goals_completed = 0;
+}
+if (Q.economy_goal && !Q.economy_goal_completed) {
+    Q.kpd_goals_completed = 0;
+}
+if (Q.finance_goal && !Q.finance_goal_completed) {
+}
+if (Q.labor_goal && !Q.labor_goal_completed) {
+    Q.kpd_goals_completed = 0;
+}
+if (Q.foreign_goal && !Q.foreign_goal_completed) {
+    Q.kpd_goals_completed = 0;
+}
+if (Q.interior_goal && !Q.interior_goal_completed) {
+    Q.kpd_goals_completed = 0;
+}
+!}
+new-page: true
+tags: event
+
+= KPD Goals
+
+One year ago, the KPD presented a list of goals for the coalition:
+
+[? if agriculture_goal = 1 : Enact a land reform program. ?]
+
+[? if economy_goal = 1 : Start substantial nationalization of the economy. ?]
+
+[? if finance_goal = 1 : Make taxes more progressive. ?]
+
+[? if labor_goal = 1 : Support workers in labor disputes. ?]
+
+[? if foreign_goal = 1 : Improve our relations with the Soviet Union. ?]
+
+[? if interior_goal = 1 : Ban the SA and Stahlhelm. ?]
+
+Now, our progress is...
+
+# TODO: any single item being broken would result in a vote of no confidence

@@ -9,6 +9,12 @@ for (var c of Q.classes) {
         }
     }
 }
+if (Q.pro_republic < 0) {
+    Q.pro_republic = 0;
+}
+if (Q.pro_republic >= 100) {
+    Q.pro_republic = 99;
+}
 // re-calculate party support
 // calculate normalized class voting for the achievements
 for (var c of Q.classes) {

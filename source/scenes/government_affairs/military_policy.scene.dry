@@ -20,13 +20,15 @@ The Reichswehr is a deeply reactionary institution that has been generally hosti
 subtitle: -1 budget
 choose-if: budget >= 1
 unavailable-subtitle: We do not have the budget.
-on-arrival: budget -= 1; coalition_dissent -= 1; reichswehr_loyalty += 0.1; reichswehr_strength += 20;
+on-arrival: budget -= 1; coalition_dissent -= 1; reichswehr_loyalty += 0.1; reichswehr_strength += 20; kpd_coalition_dissent += 1
 
 The military and the center-right parties are surprised that we would increase military funding. Our membership tends to be anti-military, and is less enthused.
 
 @decrease_funding
 subtitle: +1 budget
-on-arrival: budget += 1; coalition_dissent += 1 if in_grand_coalition == 1; reichswehr_militancy -= 1; reichswehr_strength -= 20; reichswehr_loyalty -= 0.05
+unavailable-subtitle: There is nothing left to cut.
+choose-if: reichswehr_strength > 0
+on-arrival: budget += 1; coalition_dissent += 1 if in_grand_coalition == 1; reichswehr_militancy -= 1; reichswehr_strength -= 20; reichswehr_loyalty -= 0.05; coup_progress += 1
 
 The military has fewer guns and fewer soldiers. There is no hint of a coup yet, but we do not know where the line will be drawn. The center-right parties are committed to the military and deeply opposed to our budget cuts.
 

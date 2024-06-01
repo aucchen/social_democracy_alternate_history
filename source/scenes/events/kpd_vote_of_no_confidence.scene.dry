@@ -1,0 +1,35 @@
+title: The Left calls a vote of no confidence against the current government!
+subtitle: We have angered the KPD too much...
+new-page: true
+view-if: spd_in_government = 1 and (in_popular_front = 1 and kpd_coalition_dissent >= 3) or (in_left_front = 1 and kpd_coalition_dissent >= 4) and spd_r < 0.5
+tags: event
+
+= Vote of No Confidence
+
+The KPD has called a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
+
+- @try_assuage: Try to assuage them somehow.
+- @support_center: Could we form a new government based on the Center Party (and possibly DVP)?
+- @let_it_happen: Let the vote happen.
+
+@try_assuage
+
+
+@support_center
+choose-if: (weimar_coalition >= 50 or grand_coalition >= 50) and z_relation >= 40
+
+@let_it_happen
+go-to: let_it_happen_braun if president = "Braun"; let_it_happen_hindenburg if president = "Hindenburg"
+
+# if Braun is president, we are now a caretaker government. If Hindenburg is president, Brüning is a caretaker government
+
+@let_it_happen_braun
+on-arrival: next_election_time = time + 3 if next_election_time >= time + 3; next_election_month = month + 3 if next_election_time >= time + 3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_popular_front = 0; in_left_front = 0;
+
+
+@let_it_happen_hindenburg
+on-arrival: next_election_time = time + 3 if next_election_time >= time + 3; next_election_month = month + 3 if next_election_time >= time + 3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_popular_front = 0; in_left_front = 0; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; coalition_dissent = 0; kpd_coalitipn_dissent = 0; pro_republic -= 5; old_middle_spd -= 3; new_middle_spd -= 2; workers_spd -= 3 if pro_republic < 50; workers_spd -= 4 if pro_republic < 40; old_middle_nsdap += 4 if pro_republic < 50; new_middle_nsdap += 3 if pro_republic < 50
+
+The vote succeeds, and our government has resigned. Chancellor Brüning has been appointed as the head of an acting government, consisting solely of the bourgeois parties. He immediately proceeds to cut welfare spending substantially.
+
+New elections have been set for [+ next_election_month : month +] [+ next_election_year +].

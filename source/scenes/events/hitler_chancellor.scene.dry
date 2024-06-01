@@ -1,6 +1,6 @@
 title: Hitler appointed Chancellor!
 subtitle: The beginning of the end...
-view-if: year = 1933 and president = "Hindenburg" and (chancellor = "Papen" or chancellor = "Schleicher" or chancellor = "Brüning") and in_grand_coalition = 0 and spd_in_government = 0 and largest_party = "NSDAP" and hitler_deported = 0
+view-if: year >= 1933 and president = "Hindenburg" and (chancellor = "Papen" or chancellor = "Schleicher") and in_grand_coalition = 0 and spd_in_government = 0 and largest_party = "NSDAP" and hitler_deported = 0
 on-departure: chancellor = "Hitler"; chancellor_party = "NSDAP"
 tags: event
 new-page: true
