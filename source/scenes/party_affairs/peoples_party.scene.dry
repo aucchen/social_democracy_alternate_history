@@ -30,7 +30,7 @@ Within our party, we are pushing forward proposals for a people's party against 
 @support_peoples_party
 choose-if: (neorevisionist_strength + reformist_strength >= left_strength + center_strength) and peoples_party_support >= 4
 unavailable-subtitle: The opposition is too strong.
-on-arrival: neorevisionist_strength += 15; reformist_strength += 15; neorevisionist_dissent -= 10; reformist_dissent -= 10; peoples_party = 1; workers_spd -= 12; rural_spd += 10; new_middle_spd += 10; old_middle_spd += 8; catholics_spd += 8; left_dissent += 25; center_dissent += 20; kpd_relation -= 10
+on-arrival: neorevisionist_strength += 15; reformist_strength += 15; neorevisionist_dissent -= 10; reformist_dissent -= 10; peoples_party = 1; workers_spd -= 12; rural_spd += 10; new_middle_spd += 10; old_middle_spd += 8; catholics_spd += 8; left_dissent += 25; center_dissent += 20; kpd_relation -= 10; kpd_coalition_dissent += 1; coalition_dissent -= 1; z_relation += 5*(1-dissent); dvp_relation += 5*(1-dissent)
 achievement: volkspartei
 
 In an emergency conference, we have decided to become a people's party that encompasses all of the regular people of Germany, not just the workers and urban poor. The Left and Center claim that our new party platform is a betrayal of our founding principles, a turn away from Marxism towards bourgeois opportunism. Whatever the case, we are now a party representing all of the people, not just the proletariat.
@@ -48,7 +48,7 @@ Should we run a new campaign to publicize our new platform?
 @support_peoples_party_hard
 subtitle: This will increase dissent.
 view-if: (neorevisionist_strength + reformist_strength < left_strength + center_strength) or (peoples_party_support < 4)
-on-arrival: neorevisionist_strength += 10; peoples_party = 1; workers_spd -= 15; rural_spd += 10; new_middle_spd += 10; old_middle_spd += 8; catholics_spd += 8; left_dissent += 40; center_dissent += 40; kpd_relation -= 10
+on-arrival: neorevisionist_strength += 10; reformist_strength += 8; peoples_party = 1; workers_spd -= 15; rural_spd += 10; new_middle_spd += 10; old_middle_spd += 8; catholics_spd += 8; left_dissent += 40; center_dissent += 40; kpd_relation -= 10; kpd_coalition_dissent += 1; coalition_dissent -= 1
 achievement: volkspartei
 
 It is an arduous and contentious process, but we have pushed through the proposal to become a people's party. The Left and Center claim that our new party platform is a betrayal of our founding principles, a turn away from Marxism towards bourgeois opportunism. Whatever the case, we are now a party representing all of the people, not just the proletariat.
