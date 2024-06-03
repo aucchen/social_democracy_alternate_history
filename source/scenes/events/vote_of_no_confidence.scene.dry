@@ -1,7 +1,7 @@
 title: The Right calls a vote of no confidence against the current government!
 subtitle: We have angered our coalition partners too much...
 new-page: true
-view-if: spd_in_government = 1 and ((in_grand_coalition = 1 or in_popular_front = 1) and coalition_dissent >= 3) or (in_weimar_coalition = 1 and coalition_dissent >= 4) and spd_r < 0.5
+view-if: spd_in_government = 1 and ((in_grand_coalition = 1 or in_popular_front = 1) and coalition_dissent >= 3) or (in_weimar_coalition = 1 and coalition_dissent >= 4) and spd_r < 50
 tags: event
 
 # Options: spend relations to reduce coalition_dissent, ask for kpd to abstain

@@ -386,7 +386,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'war_guilt', 'womens_rights', 'economic_democracy',// events
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban',
-            'kpd_policy_timer', 'kpd_ultimatum_timer', 'popular_front_dispute_timer'];
+            'kpd_policy', 'kpd_ultimatum', 'popular_front_dispute'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
@@ -435,6 +435,7 @@ Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;
 Q.sa_ban_timer = 0;
 Q.sh_ban_timer = 0;
+Q.kpd_ultimatum_timer = 0;
 
 
 // all the initial advisors are centrists.

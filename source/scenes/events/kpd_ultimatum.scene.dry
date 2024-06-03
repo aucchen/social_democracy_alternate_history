@@ -1,7 +1,11 @@
 title: The KPD checks upon our progress in accomplishing the coalition's goals...
-view-if: (in_popular_front or in_left_front) and kpd_ultimatum_counter = 0 and kpd_goals_seen = 1
+view-if: (in_popular_front or in_left_front) and kpd_ultimatum_timer = 0 and kpd_goals_seen = 1 and kpd_ultimatum_seen = 0
 on-arrival: {!
+Q.kpd_ultimatum_seen = 1;
 Q.kpd_goals_completed = 1;
+if (!Q.welfare_goal_completed) {
+    Q.kpd_goals_completed = 0;
+}
 if (Q.agriculture_goal && !Q.agriculture_goal_completed) {
     Q.kpd_goals_completed = 0;
 }
@@ -9,36 +13,61 @@ if (Q.economy_goal && !Q.economy_goal_completed) {
     Q.kpd_goals_completed = 0;
 }
 if (Q.finance_goal && !Q.finance_goal_completed) {
+    Q.kpd_goals_completed = 0;
 }
 if (Q.labor_goal && !Q.labor_goal_completed) {
     Q.kpd_goals_completed = 0;
 }
+/*
 if (Q.foreign_goal && !Q.foreign_goal_completed) {
     Q.kpd_goals_completed = 0;
 }
 if (Q.interior_goal && !Q.interior_goal_completed) {
     Q.kpd_goals_completed = 0;
 }
+*/
+if (Q.reichswehr_goal && !Q.reichswehr_goal_completed) {
+    Q.kpd_goals_completed = 0;
+}
 !}
 new-page: true
 tags: event
+go-to: goals_success if kpd_goals_completed; goals_failed if not kpd_goals_completed
 
 = KPD Goals
 
 One year ago, the KPD presented a list of goals for the coalition:
 
-[? if agriculture_goal = 1 : Enact a land reform program. ?]
+ - Expand social welfare programs - [? if welfare_goal_completed : success ?][? if not welfare_goal_completed: failed ?]
 
-[? if economy_goal = 1 : Start substantial nationalization of the economy. ?]
+[? if agriculture_goal = 1 : - Enact a land reform program. - [? if agriculture_goal_completed : success ?][? if not agriculture_goal_completed: failed ?] ?]
 
-[? if finance_goal = 1 : Make taxes more progressive. ?]
+[? if economy_goal = 1 : - Start substantial nationalization of the economy. - [? if economy_goal_completed : success ?][? if not economy_goal_completed: failed ?] ?]
 
-[? if labor_goal = 1 : Support workers in labor disputes. ?]
+[? if finance_goal = 1 : - Make taxes more progressive. - [? if finance_goal_completed : success ?][? if not finance_goal_completed: failed ?] ?]
 
-[? if foreign_goal = 1 : Improve our relations with the Soviet Union. ?]
+[? if labor_goal = 1 : - Support workers in labor disputes. - [? if labor_goal_completed : success ?][? if not labor_goal_completed: failed ?] ?]
 
-[? if interior_goal = 1 : Ban the SA and Stahlhelm. ?]
+[? if foreign_goal = 1 : - Improve our relations with the Soviet Union. - [? if foreign_goal_completed : success ?][? if not foreign_goal_completed: failed ?] ?]
 
-Now, our progress is...
+[? if reichswehr_goal = 1 : - Reduce funding for the Reichswehr. - [? if reichswehr_goal_completed : success ?][? if not reichswehr_goal_completed: failed ?] ?]
 
-# TODO: any single item being broken would result in a vote of no confidence
+@goals_failed
+on-arrival: kpd_relation -= 10; workers_spd -= 8; unemployed_spd -= 8;
+go-to: kpd_vote_of_no_confidence.menu
+
+Unfortunately, we have failed to accomplish all of the goals the KPD set out. They will call a vote of no confidence against our government, and have already begun mounting a propaganda campaign to delegitimize our government in the eyes of the workers.
+
+
+@goals_success
+on-arrival: workers_spd += 8; unemployed_spd += 8; kpd_relation += 10
+go-to: popular_front_achievement if in_popular_front; united_front_achievement if in_left_front
+
+Against all expectations, the KPD's goals have all been met! Apparently the Communists did not prepare for this eventuality, a worker's government successfully built through democratic means. They will continue to "tolerate" our government for the rest of our term, while still acting as a watchdog against bourgeois backsliding.
+
+
+@popular_front_achievement
+achievement: volksfront_2
+
+@united_front_achievement
+achievement: einheitsfront_2

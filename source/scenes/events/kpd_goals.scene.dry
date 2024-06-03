@@ -1,6 +1,6 @@
 title: The KPD presents its list of goals for the coalition.
 view-if: (in_popular_front = 1 or in_left_front = 1) and kpd_goals_seen = 0
-on-arrival: kpd_goals_seen = 1; agriculture_goal = 1 if agriculture_minister_party != "KPD"; economy_goal = 1 if economy_minister_party != "KPD"; finance_goal = 1 if finance_minister_party != "KPD"; labor_goal = 1 if labor_minister_party != "KPD"; foreign_goal = 1 if foreign_minister_party != "KPD"; interior_goal = 1 if interior_minister_party != "KPD"; kpd_ultimatum_timer = 12; kpd_ultimatum_timer = next_election_time - time - 1 if next_election_time - time <= 12;
+on-arrival: kpd_goals_seen = 1; welfare_goal = 1; agriculture_goal = 1 if agriculture_minister_party != "KPD"; economy_goal = 1 if economy_minister_party != "KPD"; finance_goal = 1 if finance_minister_party != "KPD"; labor_goal = 1 if labor_minister_party != "KPD"; reichswehr_goal = 1 if reichswehr_minister_party != "KPD"; kpd_ultimatum_timer = 12; kpd_ultimatum_timer = next_election_time - time - 1 if next_election_time - time <= 12;
 new-page: true
 tags: event
 
@@ -8,16 +8,20 @@ tags: event
 
 The KPD presents us with a list of goals for the coalition:
 
-[? if agriculture_goal = 1 : Enact a land reform program. ?]
+ - Expand social welfare programs.
 
-[? if economy_goal = 1 : Start substantial nationalization of the economy. ?]
+[? if agriculture_goal = 1 : - Enact a land reform program. ?]
 
-[? if finance_goal = 1 : Make taxes more progressive. ?]
+[? if economy_goal = 1 : - Start substantial nationalization of the economy. ?]
 
-[? if labor_goal = 1 : Support workers in labor disputes. ?]
+[? if finance_goal = 1 : - Make taxes more progressive. ?]
 
-[? if foreign_goal = 1 : Improve our relations with the Soviet Union. ?]
+[? if labor_goal = 1 : - Support workers in labor disputes. ?]
 
-[? if interior_goal = 1 : Ban the SA and Stahlhelm. ?]
+#[? if foreign_goal = 1 : - Improve our relations with the Soviet Union. ?]
 
-They say that they expect to see these goals fulfilled in [+ kpd_ultimatum_timer +] months.
+#[? if interior_goal = 1 : - Ban the SA and Stahlhelm. ?]
+
+[? if reichswehr_goal = 1 : - Reduce funding for the Reichswehr. ?]
+
+They say that they expect to see these goals fulfilled in [+ kpd_ultimatum_timer +] months. Otherwise, they will vote to dissolve the coalition.

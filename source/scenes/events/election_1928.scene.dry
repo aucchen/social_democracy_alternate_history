@@ -93,6 +93,7 @@ Q.agriculture_minister_party = 'Z';
 
 // reset KPD goals
 Q.kpd_goals_seen = 0;
+Q.kpd_ultimatum_seen = 0;
 Q.agriculture_goal = 0;
 Q.economy_goal = 0;
 Q.finance_goal = 0;
@@ -101,6 +102,7 @@ Q.foreign_goal = 0;
 Q.interior_goal = 0;
 Q.reichswehr_goal = 0;
 
+Q.welfare_goal_completed = 0;
 Q.agriculture_goal_completer = 0;
 Q.economy_goal_completed = 0;
 Q.finance_goal_completed = 0;
@@ -185,10 +187,10 @@ Somehow, both the Communists and Center are at the very least willing to enterta
 
 @popular_front_resources
 title: Use our resources to smooth things over.
-unavailable-subtitle: Required: 5 resources
-subtitle: -5 resources
-choose-if: resources >= 5
-on-arrival: resources -= 5
+unavailable-subtitle: Required: 4 resources
+subtitle: -4 resources
+choose-if: resources >= 4
+on-arrival: resources -= 4
 go-to: popular_front_success
 
 @popular_front_democracy
@@ -205,15 +207,18 @@ go-to: popular_front_success
 @popular_front_success
 on-arrival: spd_in_government = 1; in_popular_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation += 10; coup_progress += 2
 go-to: popular_front_civil_war if coup_progress >= 10; popular_front_no_civil_war if coup_progress < 10
+achievement: volksfront
 
 Somehow, surprisingly, the coalition is successfully formed! We still need a chancellor; the only acceptable choice among the parties was Rudolf Breitscheid of the SPD, acceptable to the Center [? if president == "Hindenburg" : as well as President Hindenburg, albeit extremely reluctantly ?].
 
 @popular_front_no_civil_war
-on-arrival: kpd_goals_seen = 0; finance_minister_party = "Z"; interior_minister_party = "Z"; economy_minister_party = "KPD"; labor_minister_party = "KPD"; foreign_minister_party = "Z"; agriculture_minister_party = "Z"; reichswehr_minister = "Z"; kpd_policy_timer = 4
+on-arrival: kpd_goals_seen = 0; finance_minister_party = "Z"; interior_minister_party = "Z"; economy_minister_party = "Z"; labor_minister_party = "Z"; foreign_minister_party = "Z"; agriculture_minister_party = "Z"; reichswehr_minister = "I"; leverage += kpd_r
 
 # TODO: just increase coup progress, don't start a coup right away.
 
 In response to the KPD's entrance into the government, the right-wing takes a "wait-and-see" approach for now. They expect that the Popular Front government will be unstable and incompetent, and will collapse of its own accord, discrediting the left and center and eventually enabling the destruction of the Weimar Republic. Our task is to prove them wrong.
+
+The KPD has taken an abstentionist position with regards to ministries. They claim to be participating as the "loyal opposition" within the Popular Front government, supporting us from the outside while also running their own propaganda campaigns to turn workers to their side. They seem to expect that the Popular Front would inevitably fail, and that our failure would benefit them.
 
 - @ministries: First, we must select our ministries.
 
@@ -315,20 +320,22 @@ go-to: left_coalition_success
 
 
 @left_coalition_success
-on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; coup_progress += 3;
+on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; coup_progress += 3; capital_strike_progress += 2
 go-to: left_coalition_civil_war if coup_progress >= 10; left_coalition_no_civil_war if coup_progress < 10
+achievement: einheitsfront
 
 Somehow, surprisingly, the left coalition is successfully formed, without appointing Thälmann as chancellor. The consensus choice for chancellor, accepted by the SPD, KPD, and President [+ president +], is Rudolf Breitscheid, who belongs to the centrist faction of the SPD, but was acceptable to the left due to his previous membership in the left-wing anti-war USPD.
 
-# TODO: just raise the coup limit, don't immediately go to civil war
+# just raise the coup limit, don't immediately go to civil war
 
 @left_coalition_no_civil_war
-on-arrival: kpd_goals_seen = 0; finance_minister_party = "KPD"; interior_minister_party = "KPD"; economy_minister_party = "KPD"; labor_minister_party = "KPD"; foreign_minister_party = "KPD"; agriculture_minister_party = "KPD"; reichswehr_minister = "KPD"; kpd_policy_timer = 2
+on-arrival: kpd_goals_seen = 0; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD"; reichswehr_loyalty -= 0.05; 
 
 In response to the KPD's entrance into the government, the right-wing takes a "wait-and-see" approach for now. They expect that our government will be unstable and incompetent, and will collapse of its own accord, discrediting the left and eventually enabling the destruction of the Weimar Republic. Our task is to prove them wrong.
 
-- @ministries: First, we must select our ministries.
+The KPD has taken an abstentionist position with regards to ministries. They claim to be participating as the "loyal opposition" in the worker's government, supporting us from the outside while also running their own propaganda campaigns to turn workers to their side. They seem to expect that we would inevitably fail, and that our failure would benefit them. 
 
+Whatever their reasoning is, the SPD has control over the ministries of government.
 
 @left_coalition_civil_war
 on-arrival: reichswehr_loyalty += 0.1
@@ -1049,55 +1056,55 @@ This coalition arrangement is tolerable to all.
 @drop_labor
 title: Drop the Labor Ministry.
 view-if: labor_minister_party = "SPD"
-on-arrival: labor_minister_party = "Z"; labor_minister = "Stegerwald"; leverage += 5
+on-arrival: labor_minister_party = "Z"; labor_minister = "Stegerwald"; leverage += 5;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_interior
 title: Drop the Interior Ministry.
 view-if: interior_minister_party = "SPD"
-on-arrival: interior_minister_party = "Z"; interior_minister = "Wirth"; leverage += 5
+on-arrival: interior_minister_party = "Z"; interior_minister = "Wirth"; leverage += 5;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_finance
 title: Drop the Finance Ministry.
 view-if: finance_minister_party = "SPD"
-on-arrival: finance_minister_party = "DVP"; finance_minister = "Moldenhauer"; leverage += 10
+on-arrival: finance_minister_party = "DVP"; finance_minister = "Moldenhauer"; leverage += 10; finance_minister_party = "DDP" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_economic
 title: Drop the Economic Ministry.
 view-if: economic_minister_party = "SPD"
-on-arrival: economic_minister_party = "DVP"; economic_minister = "Curtius"; leverage += 10
+on-arrival: economic_minister_party = "DVP"; economic_minister = "Curtius"; leverage += 10; economic_minister_party = "Z" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_justice
 title: Drop the Justice Ministry.
 view-if: justice_minister_party = "SPD"
-on-arrival: justice_minister_party = "DDP"; justice_minister = "Koch-Weser"; leverage += 10
+on-arrival: justice_minister_party = "DDP"; justice_minister = "Koch-Weser"; leverage += 10;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_foreign
 title: Drop the Foreign Ministry.
 view-if: foreign_minister_party = "SPD"
-on-arrival: foreign_minister_party = "DVP"; foreign_minister = "Stresemann"; leverage += 10
+on-arrival: foreign_minister_party = "DVP"; foreign_minister = "Stresemann"; leverage += 10; foreign_minister_party = "Z" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_agriculture
 title: Drop the Agriculture Ministry.
 view-if: agriculture_minister_party = "SPD"
-on-arrival: agriculture_minister_party = "DDP"; agriculture_minister = "Dietrich"; leverage += 10
+on-arrival: agriculture_minister_party = "DDP"; agriculture_minister = "Dietrich"; leverage += 10;
 tags: drop_mins_1928
 go-to: ministries
 
 @drop_reichswehr
 title: Drop the Reichswehr Ministry.
 view-if: reichswehr_minister_party = "SPD"
-on-arrival: reichswehr_minister_party = "I"; reichswehr_minister = "Groener"; leverage += 15
+on-arrival: reichswehr_minister_party = "I"; reichswehr_minister = "Groener"; leverage += 15;
 tags: drop_mins_1928
 go-to: ministries

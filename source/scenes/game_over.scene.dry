@@ -297,9 +297,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_red_tzar_of_prussia : **Roter Zar von Preußen** - Otto Braun is President, Chancellor, and Minister-President. ?]
 
-[? if game_achievement_einheitsfront: **Einheitsfront** - Form a government consisting of the SPD and KPD, and win the resulting civil war. ?]
+[? if game_achievement_einheitsfront: **Einheitsfront** - Form a government consisting of the SPD and KPD. ?]
 
-[? if game_achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP, and win the resulting civil war. ?]
+[? if game_achievement_einheitsfront_2: **Sieg für die Einheitsfront** - Form a Left Front that survives for over one year. ?]
+
+[? if game_achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP. ?]
+
+[? if game_achievement_volksfront_2: **Sieg für die Volksfront** - Form a Popular Front that survives for over one year. ?]
 
 [? if game_achievement_constitutional_coalition: **Verfassungskoalition** - form a "constitutional coalition". ?]
 
@@ -366,9 +370,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_red_tzar_of_prussia : **Roter Zar von Preußen** - Otto Braun is President, Chancellor, and Minister-President. ?]
 
-[? if achievement_einheitsfront: **Einheitsfront** - Form a government consisting of the SPD and KPD, and win the resulting civil war. ?]
+[? if achievement_einheitsfront: **Einheitsfront** - Form a government consisting of the SPD and KPD. ?]
 
-[? if achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP, and win the resulting civil war. ?]
+[? if achievement_einheitsfront_2: **Sieg für die Einheitsfront** - Form a Left Front that survives for over one year. ?]
+
+[? if achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP. ?]
+
+[? if achievement_volksfront_2: **Sieg für die Volksfront** - Form a Popular Front that survives for over one year. ?]
 
 [? if achievement_constitutional_coalition: **Verfassungskoalition** - form a "constitutional coalition". ?]
 
@@ -433,9 +441,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_red_tzar_of_prussia : **Roter Zar von Preußen** - Otto Braun is President, Chancellor, and Minister-President. ?]
 
-[? if not achievement_einheitsfront: **Einheitsfront** - Form a government consisting of the SPD and KPD, and win the resulting civil war. ?]
+[? if not achievement_einheitsfront: **Einheitsfront** - Form a government consisting of the SPD and KPD. ?]
 
-[? if not achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP, and win the resulting civil war. ?]
+[? if not achievement_einheitsfront_2: **Sieg für die Einheitsfront** - Form a Left Front that survives for over one year. ?]
+
+[? if not achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP. ?]
+
+[? if not achievement_volksfront_2: **Sieg für die Volksfront** - Form a Popular Front that survives for over one year. ?]
 
 [? if not achievement_constitutional_coalition: **Verfassungskoalition** - form a "constitutional coalition". ?]
 
