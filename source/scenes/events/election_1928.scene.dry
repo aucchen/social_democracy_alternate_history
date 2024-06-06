@@ -893,7 +893,7 @@ title: We do not form the government.
 subtitle: This will cause significant internal dissent, and will lead to increased distrust from the bourgeois parties.
 on-arrival: reformist_dissent += 5; center_dissent += 5; labor_dissent += 5; neorevisionist_dissent += 5
 
-Are we sure about not participating in government? This will cause significant internal dissent, and will lead to increased distrust from the bourgeois parties. Even debating this option causes internal backlash. In addition, it is possible that the bourgeois and right-wing parties will also be unable to form a coalition government, leading to a regime appointed by President Hindenburg.
+Are we sure about not participating in government? This will cause significant internal dissent, and will lead to increased distrust from the bourgeois parties. Even debating this option causes internal backlash. [? if president == "Hindenburg" : In addition, it is possible that the bourgeois and right-wing parties will also be unable to form a coalition government, leading to a regime appointed by President Hindenburg. ?][? if president == "Braun" : However, since Otto Braun is president, we could potentially use this maneuver under Article 48 to strategically and undemocratically be named the sole ruling party for the duration of the emergency, or at least until new elections. ?]
 
 - @muller
 - @braun
@@ -907,6 +907,7 @@ What are our goals here, exactly?
 - @majority: We hope to reach a socialist majority in the next election.
 - @trap: It is a trap to form a government now. We would be unable to accomplish our goals.
 - @socialism: Revolutionary socialism is our goal.
+- @seizepower: We wish to have president Braun install us as the sole head of an acting government.
 
 @majority
 go-to: no_govt_2
@@ -918,6 +919,10 @@ go-to: no_govt_2
 @socialism
 go-to: no_govt_2
 
+# These are in addition to the pain points from emergency_braun, feel free to play around with ??? 
+@seizepower
+on-arrival: pro_republic -= 5; reichswehr_loyalty -= 0.05; z_relation -=5; ddp_relation -= 5; dvp_relation -= 10; democratization -= 2; democratization = 0 if democratization < 0;
+go-to: emergency_braun
 
 @no_govt_2
 on-arrival: reformist_dissent += 25; center_dissent += 10; labor_dissent += 25; neorevisionist_dissent += 25; in_weimar_coalition = 0; in_grand_coalition = 0; chancellor = "Brüning" if chancellor == "Marx"; spd_in_government = 0
