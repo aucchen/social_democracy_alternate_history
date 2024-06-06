@@ -28,14 +28,14 @@ We have reduced levels of social welfare spending. This means more poverty and s
 view-if: unemployed <= 15
 choose-if: budget > 0
 subtitle: -1 Budget
-on-arrival: budget -= 1; workers_spd += 6*(1-dissent); unemployed_spd += 6*(1-dissent); welfare += 1; reformist_dissent -= 5; labor_dissent -= 5; center_dissent -= 5; left_dissent -= 5; neorevisionist_dissent -= 5; coalition_dissent += 1 if welfare > 1
+on-arrival: budget -= 1; workers_spd += 6*(1-dissent); unemployed_spd += 6*(1-dissent); welfare += 1; reformist_dissent -= 5; labor_dissent -= 5; center_dissent -= 5; left_dissent -= 5; neorevisionist_dissent -= 5; coalition_dissent += 1 if welfare > 1; welfare_goal_completed += 1
 
 We have increased welfare spending. Our proletarian base is pleased.
 
 @increase_spending_post_depression
 view-if: unemployed > 15
 choose-if: budget > 0
-on-arrival: budget -= 1; workers_spd += 3*(1-dissent); unemployed_spd += 3*(1-dissent); coalition_dissent += 1 if welfare > 0
+on-arrival: budget -= 1; workers_spd += 3*(1-dissent); unemployed_spd += 3*(1-dissent); coalition_dissent += 1 if welfare > 0; welfare_goal_completed += 1;
 subtitle: The increased levels of unemployment necessitate more spending on aid to maintain the same benefits. -1 Budget
 
 Increasing welfare spending is necessary in light of the rise in unemployment, so we are essentially treading water.

@@ -104,6 +104,9 @@ Q.dvp_relation = 35;
 Q.DNVP_relation = 10;
 Q.NSDAP_relation = 0;
 
+Q.kpd_leader = "Thälmann";
+Q.z_leader = "Brüning";
+
 // hmm... maybe we can play nice with Hindenburg???
 Q.hindenburg_relation = 25;
 
@@ -376,7 +379,7 @@ Q.n_advisors = 3;
 Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'fundraising', 'ideology',
             'inter_party_relationships', 'international_relations',
-            'iron_front', 'media',
+            'iron_front', 'media', 'enemies',
             'party_organizations', 'rally', 'reichsbanner',
             'shuffle_leadership', 'streetfighting', 'peoples_party',// govt
             'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
@@ -386,7 +389,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'war_guilt', 'womens_rights', 'economic_democracy',// events
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban',
-            'kpd_policy_timer', 'kpd_ultimatum_timer', 'popular_front_dispute_timer'];
+            'kpd_policy', 'kpd_ultimatum', 'popular_front_dispute'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
@@ -397,6 +400,7 @@ Q.inter_party_relationships_timer = 0;
 Q.international_relations_timer = 0;
 Q.iron_front_timer = 0;
 Q.media_timer = 0;
+Q.enemies_timer = 0;
 Q.party_organizations_timer =  0;
 Q.rally_timer = 0;
 Q.reichsbanner_timer = 0;
@@ -435,6 +439,7 @@ Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;
 Q.sa_ban_timer = 0;
 Q.sh_ban_timer = 0;
+Q.kpd_ultimatum_timer = 0;
 
 
 // all the initial advisors are centrists.

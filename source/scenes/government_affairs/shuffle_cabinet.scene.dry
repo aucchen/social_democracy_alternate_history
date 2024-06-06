@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 tags: govt_affairs
 on-arrival: shuffle_cabinet_timer = 6; month_actions += 1
-view-if: spd_in_government == 1 and shuffle_cabinet_timer == 0 and chancellor_party == "SPD" and not in_spd_majority and not in_emergency_government
+view-if: spd_in_government == 1 and shuffle_cabinet_timer == 0 and chancellor_party == "SPD" and not in_spd_majority and not in_emergency_government and not in_left_front
 card-image: img/muller_cabinet.jpg
 
 Do we wish to shuffle our cabinet? This might upset our current coalition.
@@ -23,6 +23,8 @@ Justice: [+ justice_minister_party +]
 Foreign: [+ foreign_minister_party +]
 
 Reichswehr: [+ reichswehr_minister_party +]
+
+Agriculture: [+ agriculture_minister_party +]
 
 - @shuffle: Yes, do it.
 - @root: No, there is no need.

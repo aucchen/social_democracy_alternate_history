@@ -85,24 +85,48 @@ Potential changes/ideas:
 - moderate stimulus plan
 
 
-v0.10 - content update
+v0.10 - Popular Front
 
 Major changes:
 
-- Governments with the Popular Front or Left Front are possible without civil war. The Communists will have specific policy demands, and may call votes of no confidence. Popular Front governments may have dissent from both the left and the right. Both government types have significantly higher coup risk.
+- Governments with the Popular Front or Left Front (United Front/Einheitsfront) are possible without civil war. The Communists will have specific policy demands, and may call votes of no confidence. Popular Front governments will have dissent from both the left and the right.
 - Can delay elections under emergency/presidential rule.
-- End date extended to December 1933.
-- New advisor actions: Christian Socialism (Mierendorff)
 
 Minor changes:
 
 - A whole bunch of bug fixes (thanks to everyone who commented!)
-- People's Party now improves Catholic vote share as well.
+- People's Party now improves Catholic vote share, and enables campaigning among Catholics.
 - Coup progress adjusted for various events.
 
+New Achievements:
 
-New achievement: Schwarz-Rot-Gold (reach 1933 without a civil war on Historical difficulty)
+- Sieg für die Einheitsfront, Sieg für die Volksfront - successfully carry out the policies of the United Front/Popular Front.
+- Ausnahmezustand - use emergency powers to cancel elections.
+- Drei Pfeile - defeat a coup attempt without a civil war.
 
+Potential future changes:
+
+- Extend end date to the end of 1933.
 - Historical mode: no saving/loading, and lots of adjusted thresholds and parameters.
-
+- New advisor actions: Christian Socialism (Mierendorff)
 - Other than that, I have most of the content I want in this game already. It just needs some polishing.
+
+Notes on the Popular Front:
+
+I don't know how the KPD would contend themselves in government. A KPD that is willing to support an SPD government would necessarily be different from Thälmann's Stalinist organization, so I looked to the earlier Paul Levi KPD as well as the French Popular Front for ideas. Originally I had the KPD ministers implementing certain policies, but reading about Paul Levi, I think that the KPD would be abstentionist in government, in that they would not have any ministers to preserve their independent course of action, and disavow themselves from any unpopular course the government may take. 
+
+Ironically the hypothetical KPD position towards the Popular Front is basically analogous to the SPD position towards the Brüning government (i.e. toleration).
+
+Sources: Gaido, Daniel. “Paul Levi and the Origins of the United-Front Policy in the Communist International.” Historical Materialism 25, no. 1 (2017): 131–74. https://doi.org/10.1163/1569206x-12341515.
+
+LaPorte, Norman H. “The German Communist Party in Saxony, 1924-1933 : Factionalism, Fratricide and Political Failure,” 1998. http://dspace.stir.ac.uk/handle/1893/3259.
+
+
+
+
+v0.10.1 - An easier Popular Front
+
+Changes:
+- KPD ultimatum set at 16 months, with an option to appeal for more time.
+- More events cause changes to KPD relations, some other stat changes
+- Bug fixes - thanks everyone for reporting!
