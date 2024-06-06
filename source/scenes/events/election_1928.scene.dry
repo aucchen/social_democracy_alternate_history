@@ -94,6 +94,7 @@ Q.agriculture_minister_party = 'Z';
 // reset KPD goals
 Q.kpd_goals_seen = 0;
 Q.kpd_ultimatum_seen = 0;
+Q.welfare_goal = 0;
 Q.agriculture_goal = 0;
 Q.economy_goal = 0;
 Q.finance_goal = 0;
@@ -103,7 +104,7 @@ Q.interior_goal = 0;
 Q.reichswehr_goal = 0;
 
 Q.welfare_goal_completed = 0;
-Q.agriculture_goal_completer = 0;
+Q.agriculture_goal_completed = 0;
 Q.economy_goal_completed = 0;
 Q.finance_goal_completed = 0;
 Q.labor_goal_completed = 0;
@@ -205,7 +206,7 @@ view-if: president == "Braun"
 go-to: popular_front_success
 
 @popular_front_success
-on-arrival: spd_in_government = 1; in_popular_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation += 10; coup_progress += 2
+on-arrival: spd_in_government = 1; in_popular_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation += 10; coup_progress += 2; in_left_front = 0; in_weimar_coalition = 0; in_grand_coalition = 0;
 go-to: popular_front_civil_war if coup_progress >= 10; popular_front_no_civil_war if coup_progress < 10
 achievement: volksfront
 
@@ -320,7 +321,7 @@ go-to: left_coalition_success
 
 
 @left_coalition_success
-on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; coup_progress += 3; capital_strike_progress += 2
+on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; coup_progress += 3; capital_strike_progress += 2; in_popular_front = 0; in_grand_coalition = 0; in_weimar_coalition = 0; kpd_relation += 10
 go-to: left_coalition_civil_war if coup_progress >= 10; left_coalition_no_civil_war if coup_progress < 10
 achievement: einheitsfront
 
@@ -329,7 +330,7 @@ Somehow, surprisingly, the left coalition is successfully formed, without appoin
 # just raise the coup limit, don't immediately go to civil war
 
 @left_coalition_no_civil_war
-on-arrival: kpd_goals_seen = 0; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD"; reichswehr_loyalty -= 0.05; 
+on-arrival: kpd_goals_seen = 0; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD"; reichswehr_loyalty -= 0.05
 
 In response to the KPD's entrance into the government, the right-wing takes a "wait-and-see" approach for now. They expect that our government will be unstable and incompetent, and will collapse of its own accord, discrediting the left and eventually enabling the destruction of the Weimar Republic. Our task is to prove them wrong.
 
@@ -656,7 +657,7 @@ We have won the vote. Now our task is to fix the country.
 title: We can form a Weimar Coalition.
 subtitle: SPD + Z + DDP ([+ weimar_coalition +]%)
 view-if: weimar_coalition >= 50
-on-arrival: leverage += 15; in_weimar_coalition = 1; spd_in_government = 1
+on-arrival: leverage += 15; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0
 achievement: weimar_coalition
 
 We have enough votes to form a "Weimar Coalition" government consisting of the SPD, Center (Z) and Democratic (DDP) parties! This has been our preferred governing coalition.
@@ -682,7 +683,7 @@ Rudolf Breitscheid has been appointed chancellor.
 title: We can form a Grand Coalition.
 view-if: grand_coalition >= 50 and grand_coalition_failed == 0
 subtitle: SPD + Z + BVP + DDP + DVP
-on-arrival: in_grand_coalition = 1
+on-arrival: in_grand_coalition = 1; in_popular_front = 0; in_left_front = 0
 go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 30); grand_coalition_z_lead if (n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD")
 
 # TODO: if there are enough votes to form a grand coalition, who leads? Does the SPD lead or does Brüning (Z) lead? In reality this depended on Hindenburg's will, basically, which in turn depended on what his camarilla supported.

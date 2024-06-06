@@ -9,7 +9,7 @@ tags: event
 
 = Vote of No Confidence
 
-[? if in_grand_coaliton : The DVP ?][? if in_weimar_coalition or in_popular_front: The Center Party ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
+[? if in_grand_coalition : The DVP ?][? if in_weimar_coalition or in_popular_front: The Center Party ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
 
 - @try_assuage: Try to assuage our partners.
 - @support_kpd: Could we get the KPD to abstain?
@@ -46,8 +46,8 @@ on-arrival: resources -= 3; coalition_dissent -= 1;
 By transferring resources to our coalition partners, we can reduce their dissent against our policies. This is a crude, but effective solution.
 
 @support_kpd
-choose-if: communist_coalition >= 3 and kpd_relation >= 50 and kpd_r >= dvp_r
-unavailable-subtitle: [? if communist_coalition < 3 : The KPD won't take part in parliamentary government. ?] [? if kpd_relation < 50 : The KPD is not friendly enough with us. ?] [? if kpd_r < dvp_r: The KPD does not have enough votes. ?]
+choose-if: (in_grand_coalition and communist_coalition >= 3 and kpd_relation >= 50 and kpd_r >= dvp_r) or (in_weimar_coalition and kpd_relation >= 50 and kpd_r >= z_r and communist_coalition >= 3)
+unavailable-subtitle: [? if communist_coalition < 3 : The KPD won't take part in parliamentary government. ?] [? if kpd_relation < 50 : The KPD is not friendly enough with us. ?] [? if (in_grand_coalition and kpd_r < dvp_r) or (in_weimar_coalition and kpd_r < z_r): The KPD does not have enough votes. ?] [? if in_popular_front : We are already in a Popular Front with the KPD. ?]
 
 If the Communists abstain, then we essentially can maintain a minority government[? if president=="Hindenburg":, although it would be very difficult to make policy without the support of President Hindenburg, which we do not have ?]. If this happens, then we will own a massive debt to the KPD. This could lead to broader cooperation in the future, for better or for worse.
 
@@ -56,13 +56,20 @@ If the Communists abstain, then we essentially can maintain a minority governmen
 
 @support_kpd_2
 on-arrival: communist_coalition += 1; workers_kpd += 3; kpd_relation += 5
+go-to: support_kpd_weimar if in_weimar_coalition; support_kpd_grand if in_grand_coalition
 
 The KPD is not interested in a "toleration" arrangement; they will only support us if they can participate in the government as part of a coalition. And, if this toleration agreement happens, the right-wing parties will not be inclined to support us. 
+
+@support_kpd_grand
 
 - @election_1928.popular_front_coalition: Form a "Popular Front" coalition?
 - @election_1928.left_coalition
 - @try_assuage: Never mind. We must deal with this some other way.
 
+@support_kpd_weimar
+
+- @election_1928.left_coalition
+- @try_assuage: Never mind. We must deal with this some other way.
 
 
 @let_it_happen
