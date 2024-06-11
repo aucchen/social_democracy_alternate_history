@@ -18,59 +18,33 @@ Internal dissent: [+ dissent_percent : dissent +]
 
 Рейхсканцлер: [+ chancellor +] ([+ chancellor_party +])
 
-Результаты опросов:
-
-on-arrival: {!
-Q.pro_republic = Math.round(Q.pro_republic);
-Q.nationalism = Math.round(Q.nationalism);
-Q.socialism = Math.round(Q.socialism);
-!}
-go-to: election_algorithm
-set-jump: election_projections
-
-**Public Opinion**
-
-#Support for Socialism: [+ socialism +]%
-
-#Support for Nationalism: [+ nationalism +]%
-
-Support for the Republic: [+ pro_republic +]%
-
-
-@election_projections
-go-to: menu
-
-**Projected election results** (if the election were to be held now):
+Результаты последнего опросов(устройте в библиотеке чтобы не был = 0):
 
 # 1928: 30, 1930: 25, 1932: 22
 SPD: [+ spd_votes +]%
-
 # 1928: 15, 1930: 15, 1932: 
 Z + BVP: [+ z_votes +]%
-
 # 1928: 10, 1930: 13
 KPD: [+ kpd_votes +]%
-
 # 1928: 5, 1930: 4 (as DstP)
 DDP: [+ ddp_votes +]%
-
 # 1928: 9, 1930: 5
 DVP: [+ dvp_votes +]%
-
 # 1928: 14, 1930: 7
 DNVP: [+ dnvp_votes +]%
-
 # 1928: 3, 1930: 18
 NSDAP: [+ nsdap_votes +]%
-
 # 1928: 9, 1930: 10
 Others: [+ other_votes +]%
+
+Support for Socialism: [+ socialism +]%
+Support for Nationalism: [+ nationalism +]%
+Support for the Republic: [+ pro_republic +]%
 
 [? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed +]% ?]
 
+[? if advisor_action_timer = 0 : Советник ждет указаний ]
+
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
-
-
-# = Public Opinion
