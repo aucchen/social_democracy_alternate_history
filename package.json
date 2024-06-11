@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://aucchen@github.com/aucchen/social_democracy_alternate_history.git"
+    "url": "git+https://socdemtestmode@github.com/socdemtestmode/social_democracy_alternate_history.git"
   },
   "keywords": [],
   "author": "Autumn Chen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aucchen/social_democracy_alternate_history/issues"
+    "url": "https://github.com/socdemtestmode/social_democracy_alternate_history/issues"
   },
-  "homepage": "https://github.com/aucchen/social_democracy_alternate_history",
+  "homepage": "https://github.com/socdemtestmode/social_democracy_alternate_history",
   "dependencies": {
     "dendrynexus": "github:aucchen/dendrynexus"
   }
