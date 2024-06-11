@@ -14,34 +14,34 @@ Internal dissent: [+ dissent_percent : dissent +]
 
 = Government
 
-President: [+ president +]
+Рейхспрезидент: [+ president +]
 
-Chancellor: [+ chancellor +] ([+ chancellor_party +])
+Рейхсканцлер: [+ chancellor +] ([+ chancellor_party +])
 
-Reichstag composition:
+Результаты опросов:
 
 # 1928: 30, 1930: 25, 1932: 22
-SPD: [+ spd_r +]%
+SPD: [+ spd_votes +]%
 # 1928: 15, 1930: 15, 1932: 
-Z + BVP: [+ z_r +]%
+Z + BVP: [+ z_votes +]%
 # 1928: 10, 1930: 13
-KPD: [+ kpd_r +]%
+KPD: [+ kpd_votes +]%
 # 1928: 5, 1930: 4 (as DstP)
-DDP: [+ ddp_r +]%
+DDP: [+ ddp_votes +]%
 # 1928: 9, 1930: 5
-DVP: [+ dvp_r +]%
+DVP: [+ dvp_votes +]%
 # 1928: 14, 1930: 7
-DNVP: [+ dnvp_r +]%
+DNVP: [+ dnvp_votes +]%
 # 1928: 3, 1930: 18
-NSDAP: [+ nsdap_r +]%
+NSDAP: [+ nsdap_votes +]%
 # 1928: 9, 1930: 10
-Others: [+ other_r +]%
+Others: [+ other_votes +]%
 
 [? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed +]% ?]
 
-Next election: [+ next_election_month : month +] [+ next_election_year +]
+Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
 
 # = Public Opinion

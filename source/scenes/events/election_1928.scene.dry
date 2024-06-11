@@ -353,7 +353,7 @@ title: A right-wing coalition may be formed.
 subtitle: Z + BVP + DVP + DNVP + Others ([+ right_coalition +]%)
 unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
 view-if: right_coalition >= 50
-choose-if: year < 1928
+choose-if: year < 1930
 go-to: no_right_coalition if year >= 1930; right_coalition_2 if year <= 1929
 
 There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties.
