@@ -18,7 +18,7 @@ Internal dissent: [+ dissent_percent : dissent +]
 
 Рейхсканцлер: [+ chancellor +] ([+ chancellor_party +])
 
-Результаты последнего опросов(устройте в библиотеке чтобы не был = 0):
+Результаты последнего опросов, устройте в библиотеке чтобы не был равен 0:
 
 # 1928: 30, 1930: 25, 1932: 22
 SPD: [+ spd_votes +]%
@@ -36,10 +36,6 @@ DNVP: [+ dnvp_votes +]%
 NSDAP: [+ nsdap_votes +]%
 # 1928: 9, 1930: 10
 Others: [+ other_votes +]%
-
-Support for Socialism: [+ socialism +]%
-Support for Nationalism: [+ nationalism +]%
-Support for the Republic: [+ pro_republic +]%
 
 [? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
