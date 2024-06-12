@@ -6,11 +6,11 @@ is-special: true
 
 [+ month : month +] [+ year +]
 
-Resources available: [+ resources +]
+Ресуров доступно: [+ resources +]
 
-SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 : opposition ?]
+Позиция СДПГ: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 : opposition ?]
 
-Internal dissent: [+ dissent_percent : dissent +]
+Уровень разногласий в партии: [+ dissent_percent : dissent +]
 
 = Государство
 
