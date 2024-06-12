@@ -12,16 +12,6 @@ SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in g
 
 Internal dissent: [+ dissent_percent : dissent +]
 
-Сила фракций
-
-Левые: [+ left_strength : strength +]
-
-Центристы: [+ center_strength : strength +]
-
-Трудовики: [+ labor_strength : strength +]
-
-Реформисты: [+ reformist_strength : strength +]
-
 = Государство
 
 Рейхспрезидент: [+ president +]
@@ -62,5 +52,3 @@ Others: [+ other_votes +]%
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
 [? spd_prussia = 1 Прусская полиция : [+ prussian_police_strength +] тыс. чел. ?]
-
-[? spd_prussia = 1 Лояльность прусской полиции: [+ prussian_police_loyalty : loyalty +] ?]
