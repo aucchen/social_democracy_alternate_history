@@ -19,8 +19,11 @@ go-to: start_menu_2
 
 @start_0
 go-to: election_algorithm
-set-jump: start
+set-jump: start_01
 
+@start_01
+new-page: true
+go-to: start
 
 @start
 on-arrival: {!
