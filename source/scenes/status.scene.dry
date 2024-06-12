@@ -8,7 +8,7 @@ is-special: true
 
 Ресуров доступно: [+ resources +]
 
-Позиция СДПГ: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 : opposition ?]
+Позиция СДПГ: [? if spd_toleration : толерантность ?][? if spd_in_government : в правительстве ?][? if spd_toleration == 0 and spd_in_government == 0 : оппозиция ?]
 
 Уровень раскола: [+ dissent_percent : dissent +]
 
