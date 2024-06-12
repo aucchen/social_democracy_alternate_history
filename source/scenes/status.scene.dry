@@ -44,6 +44,11 @@ Others: [+ other_votes +]%
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
+Prussian police: [+ prussian_police_strength +] thousand members.
+
+Loyalty: [+ prussian_police_loyalty : loyalty +]
+
+
 = Иное
 
 Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
