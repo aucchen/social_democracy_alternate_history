@@ -48,7 +48,7 @@ Others: [+ other_votes +]%
 
 Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
 
-Уровень милитаризации: [+ rb_militancy : militancy +]
+Милитаризация: [+ rb_militancy : militancy +]
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
