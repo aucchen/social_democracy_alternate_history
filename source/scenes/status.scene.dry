@@ -12,6 +12,16 @@ SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in g
 
 Internal dissent: [+ dissent_percent : dissent +]
 
+Сила фракций
+
+Левые: [+ left_strength : strength +]
+
+Центристы: [+ center_strength : strength +]
+
+Трудовики: [+ labor_strength : strength +]
+
+Реформисты: [+ reformist_strength : strength +]
+
 = Государство
 
 Рейхспрезидент: [+ president +]
@@ -43,7 +53,7 @@ Others: [+ other_votes +]%
 
 [? if black_thursday_seen = 1 : Уровень безработицы: [+ unemployed +]% ?]
 
-Уровень инфляции: [+ inflation }]%
+Уровень инфляции: [+ inflation +]%
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
