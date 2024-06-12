@@ -10,7 +10,7 @@ is-special: true
 
 Позиция СДПГ: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 : opposition ?]
 
-Уровень разногласий в партии: [+ dissent_percent : dissent +]
+Уровень раскола: [+ dissent_percent : dissent +]
 
 = Государство
 
@@ -18,7 +18,7 @@ is-special: true
 
 Рейхсканцлер: [+ chancellor +] ([+ chancellor_party +])
 
-Результаты последнего опроса \ выборов:
+Популярность партий:
 
 # 1928: 30, 1930: 25, 1932: 22
 SPD: [+ spd_votes +]%
@@ -47,6 +47,8 @@ Others: [+ other_votes +]%
 = Иное
 
 Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
+
+Уровень милитаризации: [+ rb_militancy : militancy +]
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
