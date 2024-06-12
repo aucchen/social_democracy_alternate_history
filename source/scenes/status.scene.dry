@@ -43,8 +43,6 @@ Others: [+ other_votes +]%
 
 [? if black_thursday_seen = 1 : Уровень безработицы: [+ unemployed +]% ?]
 
-Уровень инфляции: [+ inflation +]%
-
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
 = Иное
