@@ -108,8 +108,8 @@ if (choices && choices[0].title != "Continue...") {
 if (typeof window !== "undefined" && window.generateBar) {
 }
 !}
-go-to: events_choice if has_event = 1; main if has_event = 0
-
+go-to: election_algorithm
+set-jump: events_choice if has_event = 1; main if has_event = 0
 = [+ month : month +] [+ year +]
 
 @events_choice
