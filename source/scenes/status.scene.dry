@@ -4,6 +4,8 @@ is-special: true
 
 = Status
 
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
 [+ month : month +] [+ year +]
 
 Resources available: [+ resources +]
@@ -18,7 +20,7 @@ Internal dissent: [+ dissent_percent : dissent +]
 
 Рейхсканцлер: [+ chancellor +] ([+ chancellor_party +])
 
-Результаты последнего опросов, устройте в библиотеке чтобы не был равен 0:
+Результаты последнего опроса \ выборов:
 
 # 1928: 30, 1930: 25, 1932: 22
 SPD: [+ spd_votes +]%
@@ -37,10 +39,10 @@ NSDAP: [+ nsdap_votes +]%
 # 1928: 9, 1930: 10
 Others: [+ other_votes +]%
 
-[? if spd_in_government = 1 : Budget: [+ budget +] ?]
+Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
 
-[? if black_thursday_seen = 1 : Unemployment: [+ unemployed +]% ?]
+[? if spd_in_government = 1 : Бюджет: [+ budget +] ?]
 
-[? if advisor_action_timer = 0 : Советник ждет указаний ?]
+[? if black_thursday_seen = 1 : Уровень безработицы: [+ unemployed +]% ?]
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
