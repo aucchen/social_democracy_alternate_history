@@ -50,3 +50,7 @@ Others: [+ other_votes +]%
 = Иное
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
+[? spd_prussia = 1 Прусская полиция : [+ prussian_police_strength +] тыс. чел. ?]
+
+[? spd_prussia = 1 Лояльность прусской полиции: [+ prussian_police_loyalty : loyalty +] ?]
