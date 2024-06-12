@@ -12,36 +12,11 @@ go-to: start_menu_2
 
 @start_menu_2
 
-- @start_0: Начать игру с тест-модом
+- @start: Начать игру с тест-модом
 - @election_simulation: Election simulation
 - @credits: Credits
 - @game_over.achievements
 
-@start_0
-go-to: election_algorithm
-set-jump: start_01
-В мае 1928 пройдут выборы в Рейхстаг. На сегодня опросы показывают такие результаты:
-
-# 1928: 30, 1930: 25, 1932: 22
-SPD: [+ spd_votes +]%
-# 1928: 15, 1930: 15, 1932: 
-Z + BVP: [+ z_votes +]%
-# 1928: 10, 1930: 13
-KPD: [+ kpd_votes +]%
-# 1928: 5, 1930: 4 (as DstP)
-DDP: [+ ddp_votes +]%
-# 1928: 9, 1930: 5
-DVP: [+ dvp_votes +]%
-# 1928: 14, 1930: 7
-DNVP: [+ dnvp_votes +]%
-# 1928: 3, 1930: 18
-NSDAP: [+ nsdap_votes +]%
-# 1928: 9, 1930: 10
-Others: [+ other_votes +]%
-
-
-@start_01
-go-to: start
 
 @start
 on-arrival: {!
