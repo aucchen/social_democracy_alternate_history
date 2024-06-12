@@ -11,7 +11,7 @@ go-to: start_menu_1
 = Social Democracy: An Alternate History
 
 @start_menu_1
-go-to:election_simulation
+go-to: election_algorithm
 set-jump:start_menu_2
 
 @start_menu_2
