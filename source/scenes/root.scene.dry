@@ -48,7 +48,7 @@ for (var party of Q.parties) {
     Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
 }
 !}
-
+go-to: jumpScene
 new-page: true
 go-to: start_menu_2
 

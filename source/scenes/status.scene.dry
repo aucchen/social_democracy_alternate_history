@@ -2,7 +2,7 @@ title: Status
 new-page: true
 is-special: true
 
-= Status
+= Статус
 
 [+ month : month +] [+ year +]
 
@@ -12,7 +12,7 @@ SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in g
 
 Internal dissent: [+ dissent_percent : dissent +]
 
-= Government
+= Государство
 
 Рейхспрезидент: [+ president +]
 
@@ -43,8 +43,10 @@ Others: [+ other_votes +]%
 
 [? if black_thursday_seen = 1 : Уровень безработицы: [+ unemployed +]% ?]
 
-[? if advisor_action_timer = 0 : Советник ждет указаний ?]
-
 Уровень инфляции: [+ inflation }]%
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
+
+= Иное
+
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
