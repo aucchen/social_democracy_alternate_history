@@ -48,6 +48,7 @@ Others: [+ other_votes +]%
 
 [? if spd_prussia = 1 : Лояльность полиции: [+ prussian_police_loyalty : loyalty +] ?]
 
+[? if spd_prussia = 0 : Пруссия во власти партии: [+ prussian_government +] ?]
 
 = Иное
 
