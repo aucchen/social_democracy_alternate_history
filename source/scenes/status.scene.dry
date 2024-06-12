@@ -45,8 +45,4 @@ Others: [+ other_votes +]%
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
-= Иное
-
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
-
-[? spd_prussia = 1 : Прусская полиция : [+ prussian_police_strength +] тыс. чел. ?]
