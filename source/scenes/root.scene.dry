@@ -6,7 +6,11 @@ go-to: post_event if started = 1; start_menu if started = 0
 
 @start_menu
 new-page: true
+go-to: start_menu_1
+
+@start_menu_1
 go-to: start_menu_2
+set-jump: election_projections
 
 = Social Democracy: An Alternate History
 
