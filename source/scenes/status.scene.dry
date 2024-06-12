@@ -46,3 +46,15 @@ Others: [+ other_votes +]%
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
+[? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
+
+[? if advisor_action_timer = 5 : Советник будет доступен через 5 месяцев ?]
+
+[? if advisor_action_timer = 4 : Советник будет доступен через 4 месяца ?]
+
+[? if advisor_action_timer = 3 : Советник будет доступен через 3 месяца ?]
+
+[? if advisor_action_timer = 2 : Советник будет доступен через 2 месяца ?]
+
+[? if advisor_action_timer = 1 : Советник будет доступен через 1 месяц ?]
