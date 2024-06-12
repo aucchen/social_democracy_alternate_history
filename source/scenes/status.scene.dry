@@ -41,6 +41,6 @@ Others: [+ other_votes +]%
 
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed +]% ?]
 
-[? if advisor_action_timer = 0 : Советник ждет указаний ]
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
