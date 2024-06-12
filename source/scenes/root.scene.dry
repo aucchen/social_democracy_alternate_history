@@ -12,7 +12,7 @@ go-to: start_menu_1
 
 @start_menu_1
 go-to:election_simulation
-set-jump: election_projections:start_menu_2
+set-jump:start_menu_2
 
 @start_menu_2
 
