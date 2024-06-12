@@ -33,7 +33,7 @@ Raising taxes on the rich is popular among our base, but it alienates the bourge
 @cut_overall
 subtitle: -2 budget
 choose-if: budget >= 2
-on-arrival: budget -= 2; new_middle_spd += 5*(1-dissent); old_middle_spd += 4*(1-dissent); workers_spd += 3*(1-dissent); dvp_relation += 5*(1-dissent); z_relation += 5*(1-dissent); unemployed -= 1
+on-arrival: budget -= 2; new_middle_spd += 6*(1-dissent); old_middle_spd += 5*(1-dissent); workers_spd += 3*(1-dissent); dvp_relation += 5*(1-dissent); z_relation += 5*(1-dissent); unemployed -= 1
 
 Cutting taxes benefits most the rich and middle-class, who pay more taxes than the working class. Our coalition partners are happy at our orthodox economic course.
 
