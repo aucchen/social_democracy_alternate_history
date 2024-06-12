@@ -503,8 +503,8 @@ go-to: 1928_main
 @1928_main
 audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_HOHEN_BERGEN_noise_reduced.mp3 music/1928_1930/MarekWeber.mp3 music/1928_1930/BAUERNKAPELLE.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3 music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1930_1933/Internationale-de_normalized.ogg
 new-page: true
-set-jump:election_algorithm
-go-to: main
+go-to: election_algorithm
+set-jump: main
 
 = 1928
 
