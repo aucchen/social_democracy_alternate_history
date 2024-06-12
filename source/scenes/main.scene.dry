@@ -2,6 +2,8 @@ title: Next month
 set-bg: img/map_2.jpg
 is-hand: true
 max-cards: 4
+go-to: election_algorithm
+set-jump: main
 
 # TODO: should this really be a new page?
 
