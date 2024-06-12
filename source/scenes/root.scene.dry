@@ -24,6 +24,24 @@ set-jump: start_01
 @start_01
 new-page: true
 go-to: start
+В мае 1928 пройдут выборы в Рейхстаг. На сегодня опросы показывают такие результаты:
+
+# 1928: 30, 1930: 25, 1932: 22
+SPD: [+ spd_votes +]%
+# 1928: 15, 1930: 15, 1932: 
+Z + BVP: [+ z_votes +]%
+# 1928: 10, 1930: 13
+KPD: [+ kpd_votes +]%
+# 1928: 5, 1930: 4 (as DstP)
+DDP: [+ ddp_votes +]%
+# 1928: 9, 1930: 5
+DVP: [+ dvp_votes +]%
+# 1928: 14, 1930: 7
+DNVP: [+ dnvp_votes +]%
+# 1928: 3, 1930: 18
+NSDAP: [+ nsdap_votes +]%
+# 1928: 9, 1930: 10
+Others: [+ other_votes +]%
 
 @start
 on-arrival: {!
