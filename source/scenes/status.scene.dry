@@ -45,4 +45,6 @@ Others: [+ other_votes +]%
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
+Уровень инфляции: [+ inflation }]%
+
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
