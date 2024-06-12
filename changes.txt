@@ -130,3 +130,12 @@ Changes:
 - KPD ultimatum set at 16 months, with an option to appeal for more time.
 - More events cause changes to KPD relations, some other stat changes
 - Bug fixes - thanks everyone for reporting!
+
+v. 1.1. test mode
+
+-Я научился модить
+-Заметно информативнее статус
+-частичный перевод статуса на русский
+-фикс бага с правой коалиции
+-4 клетки для карточек
+-за понижение налогов дают больше популярности среднему классу
