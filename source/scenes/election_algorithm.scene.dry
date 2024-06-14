@@ -33,7 +33,7 @@ on-arrival: {!
     var total_votes = 0;
     for (var party of sorted_parties) {
         var normalized = (party_supports[party] / total_support * 100);
-        var rounded = Math.round(normalized * 100) / 100;
+        var rounded = Number(normalized.toFixed(2));
         total_votes += rounded;
         Q[party+'_votes'] = rounded;
     }
@@ -42,7 +42,7 @@ on-arrival: {!
     var discrepancy = 100 - total_votes;
     if (discrepancy !== 0) {
         var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party+'_votes'] += discrepancy;
+        Q[last_party+'_votes'] = Number((Q[last_party+'_votes'] + discrepancy).toFixed(2));
     }
 !}
 go-to: jumpScene
