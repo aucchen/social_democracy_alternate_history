@@ -1,5 +1,10 @@
 title: Election
 on-arrival: {!
+    // Helper function to round numbers to two decimal places accurately
+    function roundToTwo(num) {
+        return +(Math.round(num + "e+2")  + "e-2");
+    }
+
     // calculate normalized class voting amounts (0 to 100)
     var class_normalized = {};
     for (var c of Q.classes) {
@@ -12,7 +17,7 @@ on-arrival: {!
         }
         class_normalized[c] = {};
         for (var party of Q.parties) {
-            class_normalized[c][party] = class_votes > 0 ? parseFloat((100 * Q[c+'_'+party] / class_votes).toFixed(2)) : 0;
+            class_normalized[c][party] = class_votes > 0 ? roundToTwo(100 * Q[c+'_'+party] / class_votes) : 0;
         }
     }
 
@@ -22,7 +27,7 @@ on-arrival: {!
     for (var party of Q.parties) {
         var party_support = 0;
         for (var c of Q.classes) {
-            party_support += Q.old_demographics ? parseFloat((Q[c]*Q[c+'_'+party]).toFixed(2)) : parseFloat((Q[c]*class_normalized[c][party]).toFixed(2));
+            party_support += Q.old_demographics ? roundToTwo(Q[c]*Q[c+'_'+party]) : roundToTwo(Q[c]*class_normalized[c][party]);
         }
         party_supports[party] = party_support;
         total_support += party_support;
@@ -32,22 +37,16 @@ on-arrival: {!
     var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
     var total_votes = 0;
     for (var party of sorted_parties) {
-        var normalized = parseFloat((party_supports[party] / total_support * 100).toFixed(2));
-        total_votes = parseFloat((total_votes + normalized).toFixed(2));
+        var normalized = roundToTwo(party_supports[party] / total_support * 100);
+        total_votes = roundToTwo(total_votes + normalized);
         Q[party+'_votes'] = normalized;
     }
 
     // Adjust the last party's votes if necessary
-    var discrepancy = parseFloat((100 - total_votes).toFixed(2));
+    var discrepancy = roundToTwo(100 - total_votes);
     if (discrepancy !== 0) {
         var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party+'_votes'] = parseFloat((Q[last_party+'_votes'] + discrepancy).toFixed(2));
+        Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
     }
-
-    // Calculate coalition totals and round to two decimals
-    Q['Weimar_Coalition'] = parseFloat((Q['SPD_votes'] + Q['Z_votes'] + Q['DDP_votes']).toFixed(2));
-    Q['Grand_Coalition'] = parseFloat((Q['SPD_votes'] + Q['Z_votes'] + Q['BVP_votes'] + Q['DDP_votes'] + Q['DVP_votes']).toFixed(2));
-    Q['Bourgeois_Coalition'] = parseFloat((Q['Z_votes'] + Q['BVP_votes'] + Q['DDP_votes'] + Q['DVP_votes'] + Q['Other_votes']).toFixed(2));
-    Q['Right_wing_Coalition'] = parseFloat((Q['Z_votes'] + Q['BVP_votes'] + Q['DVP_votes'] + Q['Other_votes'] + Q['DNVP_votes']).toFixed(2));
 !}
 go-to: jumpScene
