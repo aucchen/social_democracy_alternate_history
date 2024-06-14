@@ -2,33 +2,35 @@ title: Election
 on-arrival: {!
     // calculate normalized class voting amounts (0 to 100)
     for (var c of Q.classes) {
-        var class_votes = Q.parties.reduce(function(sum, party) {
-            Q[c+'_'+party] = Math.max(Q[c+'_'+party], 0);
-            return sum + Q[c+'_'+party];
-        }, 0);
-
-        Q.parties.forEach(function(party) {
-            Q[c + '_' + party + '_normalized'] = class_votes ? (100 * Q[c+'_'+party] / class_votes) : 0;
-        });
+        var class_votes = 0;
+        for (var party of Q.parties) {
+            if (Q[c+'_'+party] < 0) {
+                Q[c+'_'+party] = 0;
+            }
+            class_votes += Q[c+'_'+party];
+        }
+        for (var party of Q.parties) {
+            Q[c + '_' + party + '_normalized'] = (class_votes > 0) ? ((100 * Q[c+'_'+party] / class_votes).toFixed(2)) : '0.00';
+        }
     }
 
-    // calculate support for each of the parties
-    var total_support = Q.parties.reduce(function(sum, party) {
-        var party_support = Q.classes.reduce(function(sum, c) {
-            var support = Q.old_demographics ? Q[c]*Q[c+'_'+party] : Q[c]*Q[c+'_'+party+'_normalized'];
-            return sum + support;
-        }, 0);
-
+    // 1. calculate support for each of the parties
+    var total_support = 0;
+    for (var party of Q.parties) {
+        var party_support = 0;
+        for (var c of Q.classes) {
+            party_support += Q.old_demographics ? Q[c]*Q[c+'_'+party] : Q[c]*Q[c+'_'+party+'_normalized'];
+        }
         Q[party + '_support'] = party_support;
-        return sum + party_support;
-    }, 0);
+        total_support += party_support;
+    }
 
-    // normalize support (fraction)
-    Q.parties.forEach(function(party) {
-        Q[party+'_normalized'] = total_support ? (Q[party + '_support'] / total_support) : 0;
-        Q[party+'_votes'] = Q[party+'_normalized'] * 100;
-    });
+    // 2. normalize support (fraction)
+    // 3. Round to two decimals
+    for (var party of Q.parties) {
+        Q[party+'_normalized'] = (total_support > 0) ? (Q[party + '_support'] / total_support).toFixed(2) : '0.00';
+        Q[party+'_votes'] = (Q[party+'_normalized'] * 100).toFixed(2);
+    }
 !}
 go-to: jumpScene
 
-# note: this is a helpful utility to deal with elections and so on.
