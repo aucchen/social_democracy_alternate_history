@@ -28,7 +28,7 @@ on-arrival: {!
         total_support += party_support;
     }
 
-    // 2. normalize support (fraction) and round to two decimals
+    // 2. normalize support (fraction) and round to two decimals. now worked 
     var remaining = 100;
     var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
     var total_rounded = 0; // Track the total of rounded values
