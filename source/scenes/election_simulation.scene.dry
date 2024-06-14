@@ -264,17 +264,22 @@ if (Q.kpd_r >= Q.spd_r && Q.kpd_r >= Q.nsdap_r) {
     Q.largest_party = 'KPD';
 }
 
-// coalitions with rounding to two decimal places using Math.round
-Q.weimar_coalition = Math.round((Q.spd_r + Q.ddp_r + Q.z_r - 3) * 100) / 100;
-Q.grand_coalition = Math.round((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r) * 100) / 100;
-Q.bourgeois_coalition = Math.round((Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r) * 100) / 100;
-Q.center_right_coalition = Math.round((Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r) * 100) / 100;
-Q.right_coalition = Math.round((Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r) * 100) / 100;
-Q.far_right_coalition = Math.round((Q.dnvp_r + Q.nsdap_r) * 100) / 100;
-Q.left_coalition = Math.round((Q.spd_r + Q.kpd_r) * 100) / 100;
-Q.united_front_coalition = Math.round((Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3) * 100) / 100;
-Q.anti_democratic_coalition = Math.round((Q.kpd_r + Q.nsdap_r) * 100) / 100;
-Q.neo_weimar_coalition = Math.round((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r) * 100) / 100;
+// Function to truncate a number to two decimal places
+function truncateToTwo(num) {
+    return Math.trunc(num * 100) / 100;
+}
+
+// coalitions with truncation to two decimal places
+Q.weimar_coalition = truncateToTwo(Q.spd_r + Q.ddp_r + Q.z_r - 3);
+Q.grand_coalition = truncateToTwo(Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r);
+Q.bourgeois_coalition = truncateToTwo(Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r);
+Q.center_right_coalition = truncateToTwo(Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r);
+Q.right_coalition = truncateToTwo(Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r);
+Q.far_right_coalition = truncateToTwo(Q.dnvp_r + Q.nsdap_r);
+Q.left_coalition = truncateToTwo(Q.spd_r + Q.kpd_r);
+Q.united_front_coalition = truncateToTwo(Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3);
+Q.anti_democratic_coalition = truncateToTwo(Q.kpd_r + Q.nsdap_r);
+Q.neo_weimar_coalition = truncateToTwo(Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r);
 !}
 
 The electoral system is essentially proportional, with the proportion of Reichstag seats roughly equal to the proportion of votes.
