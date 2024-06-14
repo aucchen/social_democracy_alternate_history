@@ -28,20 +28,20 @@ on-arrival: {!
         total_support += party_support;
     }
 
-    // 2. normalize support (fraction)
+    // 2. normalize support (fraction) and round to two decimals
     var remaining = 100;
     var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
+    var total_rounded = 0; // Track the total of rounded values
     for (var i = 0; i < sorted_parties.length; i++) {
         var party = sorted_parties[i];
-        if (i === sorted_parties.length - 1) {
-            Q[party+'_votes'] = remaining;
-        } else {
-            var normalized = (party_supports[party] / total_support * 100);
-            var rounded = Math.round(normalized * 100) / 100;
-            remaining -= rounded;
-            Q[party+'_votes'] = rounded;
-        }
+        var normalized = (party_supports[party] / total_support * 100);
+        var rounded = Math.round(normalized * 100) / 100;
+        total_rounded += rounded;
+        Q[party+'_votes'] = rounded;
     }
+
+    // Adjust the last party's votes to make the total equal to 100
+    var last_party = sorted_parties[sorted_parties.length - 1];
+    Q[last_party+'_votes'] += 100 - total_rounded;
 !}
 go-to: jumpScene
-
