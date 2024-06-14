@@ -44,5 +44,9 @@ on-arrival: {!
         var last_party = sorted_parties[sorted_parties.length - 1];
         Q[last_party+'_votes'] = Math.round((Q[last_party+'_votes'] + discrepancy) * 100) / 100;
     }
+
+    // Calculate coalition totals and round to two decimals
+    Q['Weimar_Coalition'] = Math.round((Q['SPD_votes'] + Q['Z_votes'] + Q['DDP_votes']) * 100) / 100;
+    Q['Grand_Coalition'] = Math.round((Q['SPD_votes'] + Q['Z_votes'] + Q['BVP_votes'] + Q['DDP_votes'] + Q['DVP_votes']) * 100) / 100;
 !}
 go-to: jumpScene
