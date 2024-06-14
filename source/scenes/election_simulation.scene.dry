@@ -264,23 +264,17 @@ if (Q.kpd_r >= Q.spd_r && Q.kpd_r >= Q.nsdap_r) {
     Q.largest_party = 'KPD';
 }
 
-// Helper function to round numbers to two decimal places accurately
-function roundToTwo(num) {
-    return +(Math.round(num + "e+2")  + "e-2");
-}
-
-// coalitions with accurate rounding to two decimal places
-Q.weimar_coalition = roundToTwo(Q.spd_r + Q.ddp_r + Q.z_r - 3);
-Q.grand_coalition = roundToTwo(Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r);
-Q.bourgeois_coalition = roundToTwo(Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r);
-Q.center_right_coalition = roundToTwo(Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r);
-Q.right_coalition = roundToTwo(Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r);
-Q.far_right_coalition = roundToTwo(Q.dnvp_r + Q.nsdap_r);
-Q.left_coalition = roundToTwo(Q.spd_r + Q.kpd_r);
-Q.united_front_coalition = roundToTwo(Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3);
-Q.anti_democratic_coalition = roundToTwo(Q.kpd_r + Q.nsdap_r);
-Q.neo_weimar_coalition = roundToTwo(Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r);
-
+// coalitions with rounding to two decimal places using toFixed and Number
+Q.weimar_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r - 3).toFixed(2));
+Q.grand_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r).toFixed(2));
+Q.bourgeois_coalition = Number((Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r).toFixed(2));
+Q.center_right_coalition = Number((Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r).toFixed(2));
+Q.right_coalition = Number((Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r).toFixed(2));
+Q.far_right_coalition = Number((Q.dnvp_r + Q.nsdap_r).toFixed(2));
+Q.left_coalition = Number((Q.spd_r + Q.kpd_r).toFixed(2));
+Q.united_front_coalition = Number((Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3).toFixed(2));
+Q.anti_democratic_coalition = Number((Q.kpd_r + Q.nsdap_r).toFixed(2));
+Q.neo_weimar_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r).toFixed(2));
 !}
 
 The electoral system is essentially proportional, with the proportion of Reichstag seats roughly equal to the proportion of votes.
