@@ -53,6 +53,14 @@ Others: [+ other_votes +]%
 
 [? if (wtb_support >= 3 and wtb_adopted = 1) : План Войтинского принят ?]
 
+[? if nationalization_support = 1 : В партии начата агитация за план национализации экономики ?]
+
+[? if nationalization_support = 2 : В партии почти готовы к принятию плана национализации ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 0) : План национализации можно принять ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 1) : План национализации принят ?]
+
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
 [? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
