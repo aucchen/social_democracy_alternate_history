@@ -36,6 +36,7 @@ Others: [+ other_votes +]%
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
 [? if spd_prussia = 1 : Прусская полиция: [+ prussian_police_strength +] тыс. чел. ?]
+
 [? if spd_prussia = 1 : Лояльность полиции: [+ prussian_police_loyalty : loyalty +] ?]
 
 
@@ -43,6 +44,8 @@ Others: [+ other_votes +]%
 
 Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
 Милитаризация: [+ rb_militancy : militancy +]
+
+[? if (communist_coalition >=3 and kpd_relation >=50) : Коммунисты согласны образовать с нами коалицию ?]
 
 [? if wtb_support = 1 : В партии начата агитация за план Войтинского ?]
 
