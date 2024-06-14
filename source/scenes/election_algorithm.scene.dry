@@ -1,6 +1,7 @@
 title: Election
 on-arrival: {!
     // calculate normalized class voting amounts (0 to 100)
+    var class_normalized = {};
     for (var c of Q.classes) {
         var class_votes = 0;
         for (var party of Q.parties) {
@@ -9,27 +10,37 @@ on-arrival: {!
             }
             class_votes += Q[c+'_'+party];
         }
+        class_normalized[c] = {};
         for (var party of Q.parties) {
-            Q[c + '_' + party + '_normalized'] = (class_votes > 0) ? ((100 * Q[c+'_'+party] / class_votes).toFixed(2)) : '0.00';
+            class_normalized[c][party] = class_votes > 0 ? (100 * Q[c+'_'+party] / class_votes) : 0;
         }
     }
 
     // 1. calculate support for each of the parties
     var total_support = 0;
+    var party_supports = {};
     for (var party of Q.parties) {
         var party_support = 0;
         for (var c of Q.classes) {
-            party_support += Q.old_demographics ? Q[c]*Q[c+'_'+party] : Q[c]*Q[c+'_'+party+'_normalized'];
+            party_support += Q.old_demographics ? Q[c]*Q[c+'_'+party] : Q[c]*class_normalized[c][party];
         }
-        Q[party + '_support'] = party_support;
+        party_supports[party] = party_support;
         total_support += party_support;
     }
 
     // 2. normalize support (fraction)
-    // 3. Round to two decimals
-    for (var party of Q.parties) {
-        Q[party+'_normalized'] = (total_support > 0) ? (Q[party + '_support'] / total_support).toFixed(2) : '0.00';
-        Q[party+'_votes'] = (Q[party+'_normalized'] * 100).toFixed(2);
+    var remaining = 100;
+    var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
+    for (var i = 0; i < sorted_parties.length; i++) {
+        var party = sorted_parties[i];
+        if (i === sorted_parties.length - 1) {
+            Q[party+'_votes'] = remaining;
+        } else {
+            var normalized = (party_supports[party] / total_support * 100);
+            var rounded = Math.round(normalized * 100) / 100;
+            remaining -= rounded;
+            Q[party+'_votes'] = rounded;
+        }
     }
 !}
 go-to: jumpScene
