@@ -49,7 +49,9 @@ Others: [+ other_votes +]%
 
 [? if wtb_support = 2 : В партии почти готовы к принятию плана Войтинского ?]
 
-[? if wtb_support >= 3 : План Войтинского принят ?]
+[? if (wtb_support >= 3 and wtb_adopted = 0 : План Войтинского можно принять ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 1 : План Войтинского принят ?]
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
