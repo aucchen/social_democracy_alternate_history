@@ -35,8 +35,7 @@ on-arrival: {!
     for (var i = 0; i < sorted_parties.length; i++) {
         var party = sorted_parties[i];
         var normalized = (party_supports[party] / total_support * 100);
-        var fluctuation = (normalized * 0.004 * (Math.random() * 2 - 1)); // ±0.4% fluctuation
-        var rounded = Math.round((normalized + fluctuation) * 100) / 100;
+        var rounded = Math.round(normalized * 100) / 100;
         total_rounded += rounded;
         Q[party+'_votes'] = rounded;
     }
