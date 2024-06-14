@@ -1,5 +1,5 @@
 title: Election
-on-arrival: {!
+on-arrival: {
     // calculate normalized class voting amounts (0 to 100)
     var class_normalized = {};
     for (var c of Q.classes) {
@@ -32,17 +32,16 @@ on-arrival: {!
     var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
     var total_votes = 0;
     for (var party of sorted_parties) {
-        var normalized = (party_supports[party] / total_support * 100);
-        var rounded = Number(normalized.toFixed(2));
-        total_votes += rounded;
-        Q[party+'_votes'] = rounded;
+        var normalized = Math.round((party_supports[party] / total_support * 100) * 100) / 100;
+        total_votes += normalized;
+        Q[party+'_votes'] = normalized;
     }
 
     // Adjust the last party's votes if necessary
     var discrepancy = 100 - total_votes;
     if (discrepancy !== 0) {
         var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party+'_votes'] = Number((Q[last_party+'_votes'] + discrepancy).toFixed(2));
+        Q[last_party+'_votes'] = Math.round((Q[last_party+'_votes'] + discrepancy) * 100) / 100;
     }
-!}
+}
 go-to: jumpScene
