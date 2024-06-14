@@ -8,9 +8,9 @@ is-special: true
 
 Ресуров доступно: [+ resources +]
 
-Позиция СДПГ: [? if spd_toleration : толерантность ?][? if spd_in_government : в правительстве ?][? if spd_toleration == 0 and spd_in_government == 0 : оппозиция ?]
+СДПГ: [? if spd_toleration : воздерживается от вотума недоверия ?][? if spd_in_government : в правительстве ?][? if spd_toleration == 0 and spd_in_government == 0 : в оппозиции ?]
 
-Уровень раскола: [+ dissent_percent : dissent +]
+Раскол: [+ dissent_percent : dissent +]
 
 = Государство
 
@@ -48,12 +48,10 @@ Others: [+ other_votes +]%
 
 [? if spd_prussia = 1 : Лояльность полиции: [+ prussian_police_loyalty : loyalty +] ?]
 
-[? if spd_prussia = 0 : Пруссия во власти партии: [+ prussian_government +] ?]
 
 = Иное
 
 Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
-
 Милитаризация: [+ rb_militancy : militancy +]
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
