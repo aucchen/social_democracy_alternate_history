@@ -52,22 +52,23 @@ if (Q.kpd_r >= Q.spd_r && Q.kpd_r >= Q.nsdap_r) {
 }
 
 // coalitions
-Q.weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r - 3;
-Q.grand_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r;
-Q.bourgeois_coalition = Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
-Q.center_right_coalition = Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r;
-Q.right_coalition = Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r;
-Q.far_right_coalition = Q.dnvp_r + Q.nsdap_r;
-Q.left_coalition = Q.spd_r + Q.kpd_r;
+// coalitions with rounding to two decimal places using toFixed and Number
+Q.weimar_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r - 3).toFixed(2));
+Q.grand_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r).toFixed(2));
+Q.bourgeois_coalition = Number((Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r).toFixed(2));
+Q.center_right_coalition = Number((Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r).toFixed(2));
+Q.right_coalition = Number((Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r).toFixed(2));
+Q.far_right_coalition = Number((Q.dnvp_r + Q.nsdap_r).toFixed(2));
+Q.left_coalition = Number((Q.spd_r + Q.kpd_r).toFixed(2));
 // this is an absurd concept lol
-Q.popular_front_coalition = Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3;
-Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r + Q.dnvp_r;
+Q.popular_front_coalition = Number((Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3).toFixed(2));
+Q.anti_democratic_coalition = Number((Q.kpd_r + Q.nsdap_r + Q.dnvp_r).toFixed(2));
 // aka everyone except nazi, kpd, dnvp
-Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
+Q.neo_weimar_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r).toFixed(2));
 // Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
-Q.hitler_right_coalition = Q.z_r + Q.dnvp_r + Q.nsdap_r;
+Q.hitler_right_coalition = Number((Q.z_r + Q.dnvp_r + Q.nsdap_r).toFixed(2));
 // Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
-Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.ddp_r;
+Q.progressive_coalition = Number((Q.spd_r + Q.kpd_r + Q.ddp_r).toFixed(2));
 
 Q.leverage = Q.spd_r;
 
