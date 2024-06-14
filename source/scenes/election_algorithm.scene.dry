@@ -46,7 +46,7 @@ on-arrival: {!
     var discrepancy = roundToTwo(100 - total_votes);
     if (discrepancy !== 0) {
         var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party+'__votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
+        Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
     }
 
     // Calculate coalition totals and round to two decimals
