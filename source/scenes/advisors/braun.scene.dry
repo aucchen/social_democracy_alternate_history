@@ -12,6 +12,7 @@ Braun [? if spd_prussia = 1 : is ?][? if spd_prussia = 0 : was ?] the Minister-P
 - @coalition
 - @prussian_bulwark
 - @snap_election
+- @chancellor_appointment
 - @root: Return to main
 
 @coalition
@@ -38,4 +39,60 @@ unavailable-subtitle: [? if chancellor != "Braun" and president != "Braun" : Bra
 choose-if: advisor_action_timer == 0 and (chancellor == "Braun" or president == "Braun")
 on-arrival: advisor_action_timer = 6; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; 
 
-We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +]
+We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].
+
+@chancellor_appointment
+title: Переназначить канцлера
+subtitle: Поскольку Браун является президентом, он может в любой момент заменить канцлера.
+choose-if: advisor_action_timer == 0 and president == "Braun"
+unavailable-subtitle: [? if president != "Braun" : Braun must be President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6 
+
+- @thalmann_chancellor: Appoint Thälmann as chancellor.
+- @braun_emergency_chancellor: Otto Braun for Chancellor-President!
+- @breitscheid_emergency_chancellor: Rudolf Breitscheid for emergency Chancellor.
+- @bruning_emergency_chancellor: Brüning of the Center Party, as a goodwill gesture toward the bourgeoisie.
+- @schleicher_emergency_chancellor: Генерал Шлейхер поможет нам поладить с армией.
+
+@thalmann_chancellor
+choose-if: kpd_relation > 45 and reformist_strength + neorevisionist_strength < left_strength
+unavailable-subtitle: [? if kpd_relation < 45 : Тельман не согласится сотрудничать с социал-фашистами. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
+on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_front = 1 
+
+With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
+
+Immediately, [+ chancellor +] goes to work building a "Soviet Germany": consolidating as much power as possible in the KPD, purging state institutions of anti-communists, and sending street fighters against the "enemies of the people".
+
+In response to [+ chancellor +] being appointed Chancellor, the right-wing forces launches almost immediately launch an attempted coup. Troops of the Stahlhelm and Nazi SA enter Berlin and immediately begin clashing with our supporters! Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop the KPD from taking power. We are forced to be on the same side as the KPD, whether we want to or not.
+
+- @civil_war
+
+@braun_emergency_chancellor
+subtitle: This is unprecedented.
+view-if: chancellor != "Braun"
+on-arrival: chancellor = "Braun"; chancellor_party = "SPD"; pro_republic -= 5; reichswehr_loyalty -= 0.1
+
+Our experts have checked the constitution, and have discovered that there is no specific prohibition against the Chancellor also being the President (the President may not be a member of the Reichstag; there is no law saying that the Chancellor *must* be a member of the Reichstag).
+
+Thus, we have Chancellor-President Otto Braun. He claims that he will resign as soon as the economic-political crisis is over. The right-wing parties, who were once clamoring to replace parliamentary rule with dictatorship or monarchy, are now clamoring for the restoration of democracy.
+
+@bruning_emergency_chancellor
+view-if: chancellor != "Brüning"
+on-arrival: chancellor = "Brüning"; chancellor_party = "Z"; z_relation += 10
+
+The Center Party is pleased, and somewhat surprised, that we have appointed [+ chancellor +] as chancellor.
+
+@breitscheid_emergency_chancellor
+view-if: chancellor != "Breitscheid"
+subtitle: The Communists are warming to him...
+on-arrival: chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation += 5
+
+We have appointed Rudolf Breitscheid as emergency chancellor. The Communists consider him less objectionable than the alternatives, although it is unclear whether they will tolerate this government.
+
+@schleicher_emergency_chancellor
+view-if: chancellor != "Schleicher"
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 10; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 2; left_dissent += 5
+
+[+ president +] appoints Kurt von Schleicher, a former general, as chancellor. Армия приветствует это назначение.
+
+Schleicher's government is deeply unpopular among all parties of the Reichstag.
