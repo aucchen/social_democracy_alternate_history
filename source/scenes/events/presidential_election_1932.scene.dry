@@ -245,13 +245,13 @@ go-to: hindenburg_wins if hindenburg_majority == 1; thalmann_wins if thalmann_ma
 
 Results:
 
-Hindenburg - [+ hindenburg_votes +]%
+Hindenburg - [+ Number(hindenburg_votes.toFixed(2)) +]%
 
-[+ nsdap_candidate +] - [+ hitler_votes +]%
+[+ nsdap_candidate +] - [+ Number(hitler_votes.toFixed(2)) +]%
 
-[? if kpd_support_braun == 0 : Thälmann - [+ thalmann_votes +]% ?]
+[? if kpd_support_braun == 0 : Thälmann - [+ Number(thalmann_votes.toFixed(2)) +]% ?]
 
-[? if braun_campaign > 0 : Braun - [+ braun_votes +]% ?]
+[? if braun_campaign > 0 : Braun - [+ Number(braun_votes.toFixed(2)) +]% ?]
 
 @no_majority_round1
 on-arrival: hitler_support_hindenburg = 1 if (braun_plurality or thalmann_plurality)
