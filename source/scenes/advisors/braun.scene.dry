@@ -45,6 +45,7 @@ We have called for new elections, set for [+ next_election_month : month +] [+ n
 @chancellor_appointment
 title: Переназначить канцлера
 subtitle: Поскольку Браун является президентом, он может в любой момент заменить канцлера.
+choose-if: advisor_action_timer == 0 and president == "Braun"
 unavailable-subtitle: [? if president != "Braun" : Braun must be President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6 
 
@@ -55,8 +56,8 @@ on-arrival: advisor_action_timer = 6
 - @schleicher_emergency_chancellor: Генерал Шлейхер поможет нам поладить с армией.
 
 @thalmann_chancellor
-choose-if: president == "Braun"
-unavailable-subtitle: [? if kpd_relation <50 : Тельман не согласится стать канцлером. ?]
+choose-if: president == "Braun" and kpd_relation > 50
+unavailable-subtitle: [? if kpd_relation < 50 : Тельман не согласится стать канцлером. ?]
 on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_front = 1 
 
 With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
