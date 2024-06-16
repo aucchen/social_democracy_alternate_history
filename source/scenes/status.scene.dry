@@ -1,6 +1,11 @@
 title: Status
 new-page: true
 is-special: true
+on-arrival: {!
+if (Q.unemployed) {
+    Q.unemployed_2 = Q.unemployed.toFixed(1);
+}
+!}
 
 = Статус
 
@@ -31,7 +36,7 @@ Others: [+ other_votes +]%
 
 [? if spd_in_government = 1 : Бюджет: [+ budget +] ?]
 
-[? if black_thursday_seen = 1 : Уровень безработицы: [+ unemployed +]% ?]
+[? if black_thursday_seen = 1 : Unemployment: [+ unemployed_2 +]% ?]
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
