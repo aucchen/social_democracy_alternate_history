@@ -28,8 +28,8 @@ header {
   float: left;
   display: inline-block;
   margin-bottom: 0.5em;
-  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
-               rgba(0, 0, 0, 0.1) -1px -1px 2px; 
+  padding-left: 1em;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
   background-color: #f3f3e3;
 }
 #header-links a {

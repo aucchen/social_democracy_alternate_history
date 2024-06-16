@@ -1,10 +1,10 @@
 title: 1933
-subtitle: A new year 
+subtitle: The end of the crisis?
 tags: event
-view-if: year = 1933 and month >= 5
+view-if: (year = 1933 and month >= 12) or year = 1934
 max-visits: 1
 
-It is 1933, and the NSDAP still has not taken power. It appears that we have already passed the worst of the years of crisis. We are turning the corner on the Great Depression, and Nazism's days are numbered.
+It is the end of 1933, and the NSDAP still has not taken power. It appears that we have already passed the worst of the years of crisis. We are turning the corner on the Great Depression, and Nazism's days are numbered.
 
 Perhaps Germany will finally enter into a new era of genuine peace...
 

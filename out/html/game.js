@@ -133,6 +133,7 @@
   window.updateSidebar = function() {
       $('#qualities').empty();
       var scene = dendryUI.game.scenes.status;
+      dendryUI.dendryEngine._runActions(scene.onArrival);
       var displayContent = dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
       $('#qualities').append(dendryUI.contentToHTML.convert(displayContent));
   };

@@ -365,6 +365,10 @@ Q.nationalize_budget = 4;
 // have there been any factory takeovers?
 Q.factory_takeovers = 0;
 
+// Tax rates relative to 1928 baseline
+Q.lower_tax_rates = 0;
+Q.upper_tax_rates = 0;
+
 // our conduct in the government, and the conduct of our coalition opponents.
 // did the SPD vote against the previous government in a vote of no confidence?
 Q.spd_no_confidence = 0;

@@ -130,3 +130,19 @@ Changes:
 - KPD ultimatum set at 16 months, with an option to appeal for more time.
 - More events cause changes to KPD relations, some other stat changes
 - Bug fixes - thanks everyone for reporting!
+
+
+v0.11 - End of 1933
+
+Major changes:
+
+- Ending date is set to December 1933 
+- New events: Businesses Lose Confidence (capital strike progress), Global Economic Recovery (middle of 1933), Nazis in Crisis (late 1933)
+- New options to further persecute SA/Stahlhelm/RFB after banning them
+
+Other changes:
+
+- If Braun is president, not forming a Grand Coalition government can lead to an emergency government.
+- Tax policy affects capital strike progress more.
+- The unemployment number no longer has that ugly string of zeros.
+- Various bugfixes
