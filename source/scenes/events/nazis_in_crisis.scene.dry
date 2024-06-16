@@ -1,0 +1,23 @@
+title: Nazis in Crisis
+subtitle: Finally, the internal contradictions of the NSDAP have caught up to it.
+view-if: year = 1933 and month = 9 and nsdap_r >= 10
+on-arrival: workers_nsdap -= 10; new_middle_nsdap -= 10; old_middle_nsdap -= 8; rural_nsdap -= 8; unemployed_nsdap -= 8; sa_strength *= 0.8; coup_progress -= 2 if coup_progress > 6
+max-visits: 1
+new-page: true
+tags: event
+
+= Nazis in Crisis
+
+Finally, the internal contradictions of the NSDAP have caught up to it. With the improving economic conditions, many business leaders are less interested in supporting them. Tensions between their remaining big capitalist funders and their lower middle class frontliners have come to a head, leading to desertions and public spats. This all saps Hitler's aura of strength, weakening Nazi support across a variety of demographics.
+
+- @celebrate: This is an occasion to celebrate.
+- @complacency: The Nazis are still a threat. We must not be too complacent.
+
+@celebrate
+
+This is an occasion to celebrate! Hopefully he Nazis will no longer be a threat to the Republic.
+
+
+@complacency
+
+Even in their weakened state, the Nazis are still a threat. We must not be too complacent.
