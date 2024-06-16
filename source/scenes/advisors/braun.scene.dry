@@ -12,7 +12,6 @@ Braun [? if spd_prussia = 1 : is ?][? if spd_prussia = 0 : was ?] the Minister-P
 - @coalition
 - @prussian_bulwark
 - @snap_election
-- @chancellor_appointment
 - @root: Return to main
 
 @coalition
