@@ -51,7 +51,9 @@ Others: [+ other_votes +]%
 
 [? if wtb_support = 2 : В партии почти готовы к принятию плана Войтинского ?]
 
-[? if (wtb_support >= 3 and wtb_adopted = 0) : План Войтинского можно принять ?]
+[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 1) : План Войтинского можно принять ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 0) : План Войтинского больше не встречает возражений ?]
 
 [? if (wtb_support >= 3 and wtb_adopted = 1) : План Войтинского принят ?]
 
@@ -59,7 +61,9 @@ Others: [+ other_votes +]%
 
 [? if nationalization_support = 2 : В партии почти готовы к принятию плана национализации ?]
 
-[? if (nationalization_support >= 3 and nationalization_adopted = 0) : План национализации можно принять ?]
+[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 1) : План национализации можно принять ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 0) : План национализации больше не встречает возражений ?]
 
 [? if (nationalization_support >= 3 and nationalization_adopted = 1) : План национализации принят ?]
 
