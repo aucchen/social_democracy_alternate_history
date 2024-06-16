@@ -46,7 +46,7 @@ We have called for new elections, set for [+ next_election_month : month +] [+ n
 title: Переназначить канцлера
 subtitle: Поскольку Браун является президентом, он может в любой момент заменить канцлера.
 unavailable-subtitle: [? if president != "Braun" : Braun must be President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; 
+on-arrival: advisor_action_timer = 6; 
 
 - @thalmann_chancellor: Appoint Thälmann as chancellor.
 - @braun_emergency_chancellor: Otto Braun for Chancellor-President!
@@ -57,7 +57,7 @@ on-arrival: advisor_action_timer = 6; next_election_time = time + 3 if next_elec
 @thalmann_chancellor
 choose-if: president == "Braun" and reformist_strength + neorevisionist_strength < left_strength
 unavailable-subtitle: [? if kpd_relation <50 : Тельман не согласится стать канцлером. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
-on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80 if kpd_relation < 80; in_left_front = 1; 
+on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80 if kpd_relation < 80; in_left_front = 1 
 
 With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
 
@@ -66,6 +66,7 @@ Immediately, [+ chancellor +] goes to work building a "Soviet Germany": consolid
 In response to [+ chancellor +] being appointed Chancellor, the right-wing forces launches almost immediately launch an attempted coup. Troops of the Stahlhelm and Nazi SA enter Berlin and immediately begin clashing with our supporters! Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop the KPD from taking power. We are forced to be on the same side as the KPD, whether we want to or not.
 
 - @civil_war
+
 
 @braun_emergency_chancellor
 subtitle: This is unprecedented.
