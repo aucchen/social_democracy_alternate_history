@@ -46,7 +46,7 @@ We have called for new elections, set for [+ next_election_month : month +] [+ n
 title: Переназначить канцлера
 subtitle: Поскольку Браун является президентом, он может в любой момент заменить канцлера.
 unavailable-subtitle: [? if president != "Braun" : Braun must be President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; 
+on-arrival: advisor_action_timer = 6 
 
 - @thalmann_chancellor: Appoint Thälmann as chancellor.
 - @braun_emergency_chancellor: Otto Braun for Chancellor-President!
@@ -55,9 +55,9 @@ on-arrival: advisor_action_timer = 6;
 - @schleicher_emergency_chancellor: Генерал Шлейхер поможет нам поладить с армией.
 
 @thalmann_chancellor
-choose-if: president == "Braun" and reformist_strength + neorevisionist_strength < left_strength
-unavailable-subtitle: [? if kpd_relation <50 : Тельман не согласится стать канцлером. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
-on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80 if kpd_relation < 80; in_left_front = 1 
+choose-if: president == "Braun"
+unavailable-subtitle: [? if kpd_relation <50 : Тельман не согласится стать канцлером. ?]
+on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_front = 1 
 
 With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
 
@@ -95,7 +95,7 @@ We have appointed Rudolf Breitscheid as emergency chancellor. The Communists con
 
 @schleicher_emergency_chancellor
 view-if: chancellor != "Schleicher"
-on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 10; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -=2; workers_spd -= 1;
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 10; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 2; workers_spd -= 1
 
 [+ president +] appoints Kurt von Schleicher, a former general, as chancellor. Армия приветствует это назначение.
 
