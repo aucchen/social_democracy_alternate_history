@@ -63,8 +63,6 @@ for (var c of Q.factions) {
 
 if (Q.unemployed <= 1) {
     Q.unemployed = 1;
-} else {
-    Q.unemployed = Number(Q.unemployed.toFixed(2));
 }
 
 // re-calculate dissent.
