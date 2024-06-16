@@ -12,6 +12,7 @@ Braun [? if spd_prussia = 1 : is ?][? if spd_prussia = 0 : was ?] the Minister-P
 - @coalition
 - @prussian_bulwark
 - @snap_election
+- @cancellor_appointment
 - @root: Return to main
 
 @coalition
@@ -40,7 +41,7 @@ on-arrival: advisor_action_timer = 6; next_election_time = time + 3 if next_elec
 
 We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].
 
-@cancellor_appoitment
+@cancellor_appointment
 title: Переназначить канцлера
 subtitle: Поскольку Браун является президентом при чрезвычайном правительстве, он может в любой момент заменить канцлера.
 unavailable-subtitle: [? if president != "Braun" : Braun must be President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
