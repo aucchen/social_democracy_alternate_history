@@ -56,8 +56,8 @@ on-arrival: advisor_action_timer = 6
 - @schleicher_emergency_chancellor: Генерал Шлейхер поможет нам поладить с армией.
 
 @thalmann_chancellor
-choose-if: president == "Braun" and kpd_relation > 50
-unavailable-subtitle: [? if kpd_relation < 50 : Тельман не согласится стать канцлером. ?]
+choose-if: president == "Braun" and reformist_strength + neorevisionist_strength < left_strength
+unavailable-subtitle: [? if president != "Braun": President [+ president +] would never allow such a thing. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
 on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_front = 1 
 
 With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
@@ -68,7 +68,6 @@ In response to [+ chancellor +] being appointed Chancellor, the right-wing force
 
 - @civil_war
 
-
 @braun_emergency_chancellor
 subtitle: This is unprecedented.
 view-if: chancellor != "Braun"
@@ -78,13 +77,11 @@ Our experts have checked the constitution, and have discovered that there is no 
 
 Thus, we have Chancellor-President Otto Braun. He claims that he will resign as soon as the economic-political crisis is over. The right-wing parties, who were once clamoring to replace parliamentary rule with dictatorship or monarchy, are now clamoring for the restoration of democracy.
 
-
 @bruning_emergency_chancellor
 view-if: chancellor != "Brüning"
 on-arrival: chancellor = "Brüning"; chancellor_party = "Z"; z_relation += 10
 
 The Center Party is pleased, and somewhat surprised, that we have appointed [+ chancellor +] as chancellor.
-
 
 @breitscheid_emergency_chancellor
 view-if: chancellor != "Breitscheid"
@@ -93,11 +90,11 @@ on-arrival: chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation +
 
 We have appointed Rudolf Breitscheid as emergency chancellor. The Communists consider him less objectionable than the alternatives, although it is unclear whether they will tolerate this government.
 
-
 @schleicher_emergency_chancellor
 view-if: chancellor != "Schleicher"
-on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 10; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 2;
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 10; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 2
 
 [+ president +] appoints Kurt von Schleicher, a former general, as chancellor. Армия приветствует это назначение.
 
 Schleicher's government is deeply unpopular among all parties of the Reichstag.
+
