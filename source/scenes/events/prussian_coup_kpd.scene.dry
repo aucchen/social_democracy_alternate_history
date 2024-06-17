@@ -1,6 +1,6 @@
 title: Советы рабочих депутатов берут власть в Пруссии
 subtitle: The Chancellor attempts to overthrow the Prussian government.
-view-if: (chancellor = "Thälmann" and kpd_r > spd_r and spd_prussia = 1) or (chancellor = "Thälmann" and year >= 1932 and month >= 8 and spd_prussia = 0) 
+view-if: (chancellor = "Thälmann" and kpd_r > spd_r and spd_prussia = 1) or (chancellor = "Thälmann" and year >= 1932 and month >= 8 and spd_prussia = 0) or (chancellor = "Thälmann" and kpd_relation < 50 and spd_prussia = 1)
 on-arrival: prussian_coup_seen = 1
 new-page: true
 tags: event
@@ -8,7 +8,7 @@ max-visits: 1
 
 = Coup in Prussia
 
-A crisis! Chancellor [+ chancellor +] has ordered the dismissal of the Prussian government in a procedure known as the *Reichsexecution*. His argument is that the Prussian state government is unable to maintain order due to the battles on the streets between the SA, Reichsbanner, and other paramilitaries. This is despite his own government legalizing them.
+Канцлер [+ chancellor +] has ordered the dismissal of the Prussian government in a procedure known as the *Reichsexecution*. His argument is that the Prussian state government is unable to maintain order due to the battles on the streets between the SA, Reichsbanner, and other paramilitaries. This is despite his own government legalizing them.
 
 The legality of the action is questionable. Many of our members are ready to resist.
 
@@ -30,6 +30,7 @@ The Reichswehr and Stahlhelm are already surrounding the left-leaning cities, an
 @defend_2
 go-to: civil_war
 on-arrival: resist_coup = 1
+
 
 
 @surrender
