@@ -8,19 +8,19 @@ max-visits: 1
 
 = Coup in Prussia
 
-Канцлер [+ chancellor +] has ordered the dismissal of the Prussian government in a procedure known as the *Reichsexecution*. His argument is that the Prussian state government is unable to maintain order due to the battles on the streets between the SA, Reichsbanner, and other paramilitaries. This is despite his own government legalizing them.
+Канцлер [+ chancellor +] распустил прусский ландтаг. Единственным органом власти остались лишь советы рабочих депутатов, где широко представлены коммунисты.
 
-The legality of the action is questionable. Many of our members are ready to resist.
+Законность этих мероприятий под большим вопросом. Если мы не вмешаемся, эта земля уйдет под власть комммунистов.
 
 - @defend
 - @surrender
 
 
 @defend
-title: Fight against the overthrow attempt!
+title: Выступить против коммунистов
 subtitle: Labor will call a general strike. The Reichsbanner and the loyal elements of the Prussian police will resist the coup.
 unavailable-subtitle: We do not have the forces to resist.
-choose-if: rb_strength*rb_militancy >= 200
+choose-if: rb_strength*rb_militancy >= 175
 
 The Reichswehr and Stahlhelm are already surrounding the left-leaning cities, and the SA is supporting them. This will be civil war. We do realize that, correct?
 
