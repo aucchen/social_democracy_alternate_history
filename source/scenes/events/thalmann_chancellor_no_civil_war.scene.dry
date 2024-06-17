@@ -1,0 +1,13 @@
+title: Тельман назначен канцлером
+new-page: true
+tags: event
+max-visits: 1
+on-arrival: nsdap_relation -= 20; z_relation -= 15; ddp_relation -= 15; dvp_relation -= 15; dnvp_relation -= 15; coup_progress += 8; center_dissent += 15; reformist_dissent += 10; economic_minister_party = 'KPD'; finance_minister_party = 'KPD'; labor_minister_party = 'KPD'; nationalization_adopted = 1; nationalization_progress += 8; workers_kpd += 12; rural_kpd += 2; unemployed_kpd += 5; wtb_adopted = 0; wtb_implemented = 0 if wtb_implemented >= 2; factory_takeovers += 2; rfb_strength += 200; sh_strength += 10 if sh_banned = 0; reichsbanner_strenth -= 50; old_middle_nsdap += 12; new_middle_nsdap += 6; pacifism -= 2; old_middle_kpd -= 8; new_middle_kpd -= 5; judicial_reform -= 2 if judicial_reform >= 2; pro_republic -= 15; socialism += 35; kpd_relation += 20; budget -= 2; sa_banned = 1; sh_banned = 1
+
+= Тельман назначен канцлером
+
+Тельман согласился на условиях предоставления ему права на социалистическую перестройку экономики и запрета нацистских и националистических организаций. Коммунисты немеделенно начали захватывать заводы выхватывая их из рук промышленников! Улицы становятся ареной битвы между коммунистами и нацистами. Буржуазия в ужасе готова сотрудничть с нацистами. Нам будет сложно удержать страну от гражданской войны. 
+
+
+
+
