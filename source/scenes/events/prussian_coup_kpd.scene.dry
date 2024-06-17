@@ -18,8 +18,8 @@ max-visits: 1
 - @nenashedelo
 
 @defend
-title: Выступить с коммунистами 
-subtitle: Рабочие объявили всеообщую забастовку. Рейхсбаннер и союз красных фронтовиков вместе дадут отпор правым.
+title: Выступить с коммунистами.
+subtitle: Рейхсбаннер и Союз красных фронтовиков вместе дадут отпор правым.
 unavailable-subtitle: У нас не хватит сил разгромить путчистов. 
 choose-if: ((rb_strength*rb_militancy) + (rfb_strength*rfb_militancy)) >= 200
 on-arrival: spd_prussia = 0; workers_spd -= 4; center_dissent += 15; neorevisionist_dissent += 15; kpd_relation += 25;
@@ -33,13 +33,13 @@ on-arrival: spd_prussia = 0; workers_spd -= 4; center_dissent += 15; neorevision
 
 @defend_2
 go-to: civil_war
-on-arrival: resist_coup = 1; rb_militancy += 0.05; rfb_militancy += 0.05; rfb_strength += (prussian_police_strength*0.5);
+on-arrival: resist_coup = 1; rb_militancy += 0.05; rfb_militancy += 0.15; rfb_strength += (prussian_police_strength*0.5);
 
 
 @surrender
 title: Не вмешиваться.
 view-if: spd_prussia = 1
-on-arrival: spd_prussia = 0; workers_spd -= 5; old_middle_spd -= 4; center_dissent += 10; neorevisionist_dissent += 10; rb_militancy -= 0.1; rb_strength -= 400; rfb_strength += 100; rfb_militancy += 0.35; sa_strength += 100; sh_strength += 10; old_middle_nsdap += 6; new_middle_nsdap += 3; kpd_relation += 10; left_dissent -= 5; left_strength += 5;
+on-arrival: spd_prussia = 0; workers_kpd += 6; workers_spd -= 5; old_middle_spd -= 4; center_dissent += 10; neorevisionist_dissent += 10; rb_militancy -= 0.1; rb_strength -= 400; rfb_strength += 100; rfb_militancy += 0.35; sa_strength += 100; sh_strength += 10; old_middle_nsdap += 6; new_middle_nsdap += 2; kpd_relation += 10; left_dissent -= 5; left_strength += 5;
 
 Коммунисты практически без боя одержали верх. Правые отказались защищать социал-демократическое правительство, которое закрывает глаза на ползучую советизацию. 
 
@@ -61,7 +61,7 @@ on-arrival: communist_coalition -= 2; kpd_relation -= 50; workers_spd += 3; pro_
 
 @protocivil_war
 title: Разгромить Советы и сместить Тельмана.
-subtitle: Мы выступим на стороне правых
+subtitle: Мы выступим на стороне правых.
 view-if: spd_prussia = 1
 on-arrival: spd_prussia = 1; kpd_relation -= 100; communist_coalition -= 5; left_coalition = 0; rfb_banned = 1; rfb_strength = 10; rfb_militancy = rfb_militancy/1.5; nationalism += 5;  next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; chancellor = 'Schleicher'; chancellor_party = "I"; nsdap_relation += 5; dnvp_relation += 5; workers_nsdap += 4; workers_dnvp += 2; workers_z += 1; workers_kpd -= 5; workers_spd -= 4; workers_dvp += 1; sa_strength += 50; sh_strength += 20; rb_strength -= 50; z_relation += 5; dvp_relation += 5; sa_banned = 0; sh_banned = 0
 
@@ -72,7 +72,7 @@ on-arrival: spd_prussia = 1; kpd_relation -= 100; communist_coalition -= 5; left
 Новые выборы назначены на [+ next_election_month : month +] [+ next_election_year +].
 
 @nenashedelo
-title: Не наше дело.
+title: Это не наше дело.
 view-if: spd_prussia = 0
 on-arrival: rfb_strength -=30; sa_strength -= 20; sh_strength -= 30; old_middle_nsdap += 5; rfb_militancy += 0.25; sa_militancy += 0.05; workers_spd -= 1; workers_kpd += 5; prussian_government = "KPD"; sh_militancy += 0.05; kpd_relation -= 5; pro_republic -= 5; coup_progress += 1; z_relation -= 5; ddp_relation -= 5; nsdap_relation -= 10; dnvp_relation -= 5; dvp_relation -= 5; workers_nsdap -= 2;
 
