@@ -301,20 +301,20 @@ With great reluctance, President [+ president +] appoints [+ chancellor +] as ch
 
 Immediately, [+ chancellor +] goes to work building a "Soviet Germany": consolidating as much power as possible in the KPD, purging state institutions of anti-communists, and sending street fighters against the "enemies of the people".
 
-In response to [+ chancellor +] being appointed Chancellor, the right-wing may forces launches almost immediately launch an attempted coup. Troops of the Stahlhelm and Nazi SA enter Berlin and immediately begin clashing with our supporters! Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop the KPD from taking power. We are forced to be on the same side as the KPD, whether we want to or not.
+Канцлер [+ chancellor +] уже стал предметом нападок правых и его назначение может послужить спусковым крючком для гражданской войны.
 
 - @thalmann_chancellor_no_civil_war: Тельман назначен канцлером.
 
 @thalmann_chancellor_no_civil_war
 title: Тельман назначен канцлером
 max-visits: 1
-on-arrival: nsdap_relation -= 20; z_relation -= 15; ddp_relation -= 15; dvp_relation -= 15; dnvp_relation -= 15; coup_progress += 10; center_dissent += 15; reformist_dissent += 10; economic_minister_party = 'KPD'; finance_minister_party = 'KPD'; labor_minister_party = 'KPD'; nationalization_adopted = 1; nationalization_progress += 3; workers_kpd += 14; rural_kpd += 2; unemployed_kpd += 6; wtb_adopted = 0; wtb_implemented = 0; factory_takeovers += 2; rfb_strength += 250; reichsbanner_strenth -= 100; old_middle_nsdap += 20; new_middle_nsdap += 10; pacifism -= 2; old_middle_kpd -= 10; new_middle_kpd -= 5; pro_republic -= 15; socialism += 35; kpd_relation += 20; budget -= 2; sa_banned = 1; sh_banned = 1; old_middle_spd -= 5; new_middle_spd -= 5; workers_spd += 2;
+on-arrival: nsdap_relation -= 25; z_relation -= 15; ddp_relation -= 15; dvp_relation -= 15; dnvp_relation -= 15; coup_progress += 10; center_dissent += 15; reformist_dissent += 10; economic_minister_party = 'KPD'; finance_minister_party = 'KPD'; labor_minister_party = 'KPD'; nationalization_adopted = 1; nationalization_progress += 3; workers_kpd += 14; rural_kpd += 2; unemployed_kpd += 6; wtb_adopted = 0; wtb_implemented = 0; factory_takeovers += 2; rfb_strength += 250; reichsbanner_strenth -= 100; old_middle_nsdap += 35; new_middle_nsdap += 15; rural_nsdap += 5; pacifism -= 2; old_middle_kpd -= 10; new_middle_kpd -= 5; pro_republic -= 15; socialism += 35; kpd_relation += 20; budget -= 2; sa_banned = 1; sh_banned = 1; old_middle_spd -= 5; new_middle_spd -= 5; workers_spd += 1; catholics_nsdap += 10; thalmann_was_a_chancellor = 1
 
 = Тельман назначен канцлером
 
-Тельман согласился стать канцлером на условиях предоставления ему права на социалистическую перестройку экономики и запрета нацистских и националистических организаций. Коммунисты немеделенно начали захватывать фабрики и заводы из рук промышленников! Улицы становятся ареной битвы между коммунистами и нацистами.
+Тельман согласился стать канцлером на условиях предоставления ему права на социалистическую перестройку экономики и запрета нацистских и националистических организаций. Коммунисты немеделенно начали формировать советы и захватывать фабрики и заводы в свои руки! Улицы становятся ареной битвы между коммунистами и нацистами.
 
-Буржуазия в ужасе готова сотрудничть с нацистами. Нам будет сложно удержать страну от гражданской войны. Сохраняется угроза как переворота справа, так и перерастания реформ Тельмана в социалистическую революцию. 
+Буржуазия в ужасе готова сотрудничть с нацистами. Нам будет сложно удержать страну от гражданской войны. Сохраняется угроза как переворота справа, так и перерастания преобразований Тельмана в социалистическую революцию. 
 
 @left_coalition_resources
 title: Use our resources to smooth things over.

@@ -10,17 +10,17 @@ max-visits: 1
 
 Канцлер [+ chancellor +] распустил прусский ландтаг. Единственным органом власти остались лишь советы рабочих депутатов, где широко представлены коммунисты.
 
-Законность этих мероприятий под большим вопросом. Если мы не вмешаемся, эта земля уйдет под власть комммунистов.
+Законность этих мероприятий под большим вопросом. Если мы не вмешаемся, эта земля уйдет под власть комммунистов. 
 
 - @defend
 - @surrender
-
+- @protest
 
 @defend
-title: Выступить против коммунистов
+title: Выступить в поддержку коммунистов
 subtitle: Labor will call a general strike. The Reichsbanner and the loyal elements of the Prussian police will resist the coup.
 unavailable-subtitle: We do not have the forces to resist.
-choose-if: rb_strength*rb_militancy >= 175
+choose-if: (rb_strength*rb_militancy) + (rfb_strength*rfb_militancy) >= 200
 
 The Reichswehr and Stahlhelm are already surrounding the left-leaning cities, and the SA is supporting them. This will be civil war. We do realize that, correct?
 
@@ -38,3 +38,12 @@ title: Give up on the Prussian government.
 on-arrival: spd_prussia = 0; workers_spd -= 5; left_dissent += 10; labor_dissent += 10; rb_militancy = rb_militancy/2; rb_strength -= 1000;
 
 A pall of hopelessness and despair descends over social democracy. We have failed. Many in the Reichsbanner simply quit, demoralized by their leaders' lack of a call to action.
+
+
+
+@protest
+title: Give up on the Prussian government.
+on-arrival: spd_prussia = 0; workers_spd -= 5; left_dissent += 10; labor_dissent += 10; rb_militancy = rb_militancy/2; rb_strength -= 1000;
+
+A pall of hopelessness and despair descends over social democracy. We have failed. Many in the Reichsbanner simply quit, demoralized by their leaders' lack of a call to action.
+

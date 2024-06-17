@@ -365,6 +365,9 @@ Q.nationalize_budget = 4;
 // have there been any factory takeovers?
 Q.factory_takeovers = 0;
 
+//Thalmann was a chancellor
+Q.thalmann_was_a_chancellor = 0
+
 // Tax rates relative to 1928 baseline
 Q.lower_tax_rates = 0;
 Q.upper_tax_rates = 0;
