@@ -51,7 +51,7 @@ As it turns out, the Nazi SA has many allies in the police and bureaucracy. Our 
 
 @unban_sa
 view-if: sa_banned = 1
-on-arrival: sa_banned = 0; sa_strength += 100; sa_militancy += 0.05; nsdap_relation += 5; kpd_relation -=5;
+on-arrival: sa_banned = 0; sa_strength += 100; sa_militancy += 0.05; nsdap_relation += 5; kpd_relation -= 5
 
 The SA is no longer banned. They immediately go on a recruiting spree.
 
