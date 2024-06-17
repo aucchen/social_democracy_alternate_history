@@ -14,6 +14,7 @@ At the Labor and Socialist International, we can forge contacts with our fratern
 - @scandi: Learn the path of economics and reform from the Scandinavian social democrats.
 - @comintern: Forget the second international - embed a spy in the Comintern's conference.
 - @america: Contact the Socialist party of America.
+- @italia: Изучить итальянский опыт. 
 - @return: We do not need international contacts at the moment.
 - @easy_discard
 
@@ -57,6 +58,14 @@ unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1
 
 The Socialist Party of America is tiny and has limited support. There is not much we can do for them, and conversely, not much they can do for us.
+
+@italia
+subtitle: -1 resources
+choose-if: resources >= 1 and (nsdap_relation > 0 and left_strength < center_strength)
+unavailable-subtitle: [? if resources < 1 : Not enough resources. ?][? if nsdap_relation <= 0 : Мы не собираемся связываться с фашистами. ?][? if center_strength < left_strength : Левая часть партии никогда на это не согласится ]
+on-arrival: resources -= 1; nsdap_relation += 6*(1-dissent); kpd_relation -= 5; z_relation -= 1; dvp_relation -= 3; ddp_relation -= 4; left_dissent += 6; labor_dissent += 1; center_dissent -= 1; dnvp_relation += 3
+
+Коммунисты убедились, что они были правы называя нас "социал-фашистами". Итальянские фашисты отказались принимать нашу делегацию. Лишь немногие правые положительно восприняли нашу попытку наладить связи с режимом Муссолини.
 
 @reduce
 

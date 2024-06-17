@@ -16,7 +16,7 @@ The Nazi SA is planning a march through Altona, a working-class neighborhood of 
 @ban_march
 choose-if: judicial_reform >= 2
 unavailable-subtitle: The judiciary would not allow us to ban the protest, because of free speech.
-on-arrival: sa_strength -= 10
+on-arrival: sa_strength -= 10; nsdap_relation -= 15
 
 We have banned the planned protest. The Nazis appeal the ban in the courts in the name of freedom of speech. Thankfully, the judiciary agrees with us that the Nazis' argument is specious.
 
@@ -25,7 +25,7 @@ We have banned the planned protest. The Nazis appeal the ban in the courts in th
 go-to: allow_police_violence if prussian_police_loyalty <= 0.75; allow_police_no_violence if prussian_police_loyalty > 0.75 
 
 @allow_police_violence
-on-arrival: strife += 1; sa_strength += 50; kpd_relation -= 8; communist_coalition -= 1
+on-arrival: strife += 1; sa_strength += 50; kpd_relation -= 8; communist_coalition -= 1; nsdap_relation += 5
 
 When the march arrives in Altona, they are immediately confronted by an angry crowd of communists and socialists, who throw objects at the Nazis. The police attempt to separate the two groups, to no avail. Gunshots are heard, reportedly from rooftop snipers (whom the police believe are communists). In response, the police fire into the surrounding buildings. Dozens are killed. All turn out to be civilians, and the reported snipers are never found.
 
