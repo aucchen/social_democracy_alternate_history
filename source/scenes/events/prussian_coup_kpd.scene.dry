@@ -51,7 +51,7 @@ on-arrival: spd_prussia = 0; workers_spd -= 5; old_middle_spd -= 4; center_disse
 title: Склонить коммунистов к мирному разрешению конфликта.
 subtitle: Тельман должен отменить незаконное решение.
 view-if: spd_prussia = 1
-unavailable-subtitle: [? if kpd_relation < 65 : Коммунисты нас не станут слушать. ?][? if (prussian_police_strength*prussian_police_loyalty*1.5) < (rfb_strength*rfb_militancy) : Коммунисты слишком сильны. ?]
+unavailable-subtitle: Коммунисты нас не станут слушать.
 choose-if: (prussian_police_strength*prussian_police_loyalty*1.5) > (rfb_strength*rfb_militancy) and kpd_relation > 65
 on-arrival: communist_coalition -= 2; kpd_relation -= 50; workers_spd += 3; pro_republic += 10; pacifism += 10; z_relation += 5; nsdap_relation += 3; ddp_relation += 6; dvp_relation += 5; dnvp_relation += 5; reformist_dissent -= 1; center_dissent -= 1; workers_kpd -= 5;
 
