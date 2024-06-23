@@ -1,6 +1,6 @@
 title: Nazis in Crisis
 subtitle: Finally, the internal contradictions of the NSDAP have caught up to it.
-view-if: year = 1933 and month = 9 and nsdap_r >= 10
+view-if: year = 1933 and month >= 9 and nsdap_r >= 10
 on-arrival: workers_nsdap -= 10; new_middle_nsdap -= 10; old_middle_nsdap -= 8; rural_nsdap -= 8; unemployed_nsdap -= 8; sa_strength *= 0.8; coup_progress -= 2 if coup_progress > 6
 max-visits: 1
 new-page: true
