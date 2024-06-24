@@ -1,9 +1,12 @@
 title: Reichstag Elections
 new-page: true
 tags: event
-view-if: year >= next_election_year and month >= next_election_month
+priority: -1
+view-if: (year = next_election_year and month >= next_election_month) or (year > next_election_year)
 on-departure: month_actions += 1; in_election = 0; next_election_year = next_election_year + 4; n_elections += 1; next_election_time = time + 48;
 set-jump: post_election_1928
+
+# the low priority means that this event is only seen after all other events are resolved for the month.
 
 = Elections, [+ month : month +] [+ year +]
 

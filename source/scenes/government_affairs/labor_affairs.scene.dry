@@ -5,7 +5,7 @@ tags: govt_affairs
 on-arrival: labor_affairs_timer = 6; month_actions += 1
 view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_affairs_timer = 0
 card-image: img/portraits/WissellRudolf.jpg
-max-visits: 3
+max-visits: 4
 
 # TODO: separate labor affairs and labor policy into two cards - implement Economic Democracy
 
@@ -26,7 +26,7 @@ Supporting labor is always popular in the SPD, although many of our coalition pa
 
 @support_employers
 subtitle: Popular among the bourgeoisie, much less so among the workers.
-on-arrival: labor_dissent += 8; workers_spd -= 3; coalition_dissent -= 1; dvp_relation += 5; z_relation += 5; workers_kpd += 3; kpd_coalition_dissent += 1; kpd_relation -= 8
+on-arrival: labor_dissent += 8; workers_spd -= 3; coalition_dissent -= 1; dvp_relation += 5; z_relation += 5; workers_kpd += 3; kpd_coalition_dissent += 1; kpd_relation -= 8; capital_strike_progress -= 1 if capital_strike_progress > 1; capital_strike_progress -= 1 if capital_strike_progress > 8
 
 The more radical workers despise our suppression of their strikes, recalling the days of Friedrich Ebert.
 

@@ -146,3 +146,11 @@ Other changes:
 - Tax policy affects capital strike progress more.
 - The unemployment number no longer has that ugly string of zeros.
 - Various bugfixes
+
+v0.11.1 - bugfixes, save system updates
+
+Changes:
+- Fixed elections preempting other events - elections are now only held after all other events for the month have been resolved.
+- Save system: added functions to export to file, load from file
+- Supporting employers in labor disputes now lowers capital strike progress.
+
