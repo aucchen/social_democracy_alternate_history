@@ -1,0 +1,42 @@
+title: Cоциалистическая революция
+subtitle: Коммунисты берут власть в свои руки
+view-if: (prussian_government = "KPD" and year >= 1933 and month >= 10) or (chancellor = "Thälmann" and year >= 1933 and month >= 10 and spd_prussia = 0 and kpd_r > 20) or (chancellor = "Thälmann" and workers_kpd > workers_spd and year >= 1933 and month >= 10) 
+new-page: true
+tags: event
+max-visits: 1
+
+[? if prussian_government = "KPD" : Советы рабочих депутатов, укрепившись в Пруссии, берут власть в свои руки по всей стране. ?] Социалистическая революция, о необходимости которой так долго говорили немецкие коммунисты, свершилась.
+Берлин перешел в руки восставшего рабочего класса. 
+
+- @join_revolution
+- @out_from_revoluiton
+- @fight_with_revoluiton
+
+@join_revolution
+title: Присоединится к революции!
+subtitle: Labor will call a general strike. The Reichsbanner and the loyal elements of the Prussian police will resist the coup.
+unavailable-subtitle: Социал-демократы не пойдут за левыми.
+choose-if: left_strength > (neorevisionist_strength + center_strength + reformist_strength + labor_strength) and kpd_relation > 50
+on-arrival: rfb_militancy += 0.4; rb_militancy += 0.15; prussian_police_loyalty -= 0.1; reichswehr_loyalty -= 0.2; 
+
+Предательство 1918-1919 годов не повторится. Социал-демократы выступят на стороне восставшего народа. Было сформировано двухпартийное социалистическое временное рабочее правительство с нашим участием.
+
+Дело идет к гражданскй войне и мы вооружаемся.
+
+- @civil_war
+
+@out_from_revoluiton
+title: Не вмешиваться
+
+Мы не можем ничего сделать. В раздираемой классовой войной стране мы останемся безучастными наблюдателями.
+
+- @game_over
+
+@fight_with_revoluiton
+title: Сокрушить восстание!
+subtitle: Labor will call a general strike. The Reichsbanner and the loyal elements of the Prussian police will resist the coup.
+unavailable-subtitle: Мы слишком далеко ушли влево чтобы сражаться с коммунистами.
+choose-if: left_strength < (neorevisionist_strength + center_strength + reformist_strength + labor_strength) and (z_relation > 5 or nsdap_relation > 5 or dnvp_relation > 5)
+on-arrival: rfb_militancy = 0; rfb_strength = 0; kpd_relation = 0; chancellor = "Schleicher"; chancellor_party = "I"
+
+- @main
