@@ -1,8 +1,8 @@
 title: Cоциалистическая революция
 subtitle: Коммунисты берут власть в свои руки
 view-if: (prussian_government = "KPD" and year >= 1933 and month >= 1) or (chancellor = "Thälmann" and year >= 1933 and month >= 3 and spd_prussia = 0 and kpd_r > 16) or (chancellor = "Thälmann" and workers_kpd > workers_spd and year >= 1933 and month >= 1) or (year >= 1933 and month >= 9 and kpd_r > spd_r and spd_in_government = 1 and workers_kpd > workers_spd) or (factory_takeovers = 1 and year >= 1933 and month >= 3 and workers_kpd > workers_spd)
-on-arrival: rfb_militancy += 0.55; rfb_strength += 50; workers_kpd += 2; new_middle_kpd -= 5; old_middle_kpd -= 15
 new-page: true
+on-arrival: rfb_militancy += 0.55; rfb_strength += 50; workers_kpd += 2; new_middle_kpd -= 5; old_middle_kpd -= 15
 tags: event
 max-visits: 1
 
