@@ -204,6 +204,14 @@ go-to: eg_menu
 
 The KPD has won power in Germany, with our assistance. They will try to remake Germany in the Soviet image. How much they succeed is yet to be determined.
 
+@country_in_flame
+title: Страна в огне революции
+view-if: out_from_soc_rev = 1
+tags: endings
+go-to: eg_menu
+
+Страна погрузилась в хаос беспорядков. Мы не смогли ни предотвратить, ни подавить, ни возглавить революцию. А значит наше место на свалке истории. Кто бы не победил в этой страшной междоусобице, партия больше никогда не будет играть ведущую роль.
+
 @works_program
 title: Works program enacted!
 view-if: works_program > 0
