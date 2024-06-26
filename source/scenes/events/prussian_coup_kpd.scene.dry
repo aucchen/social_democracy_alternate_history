@@ -1,6 +1,6 @@
 title: Советы рабочих депутатов берут власть в Пруссии
 subtitle: The Chancellor attempts to overthrow the Prussian government.
-view-if: (chancellor = "Thälmann" and workers_kpd > workers_spd and spd_prussia = 1) or (chancellor = "Thälmann" and year >= 1932 and month >= 8 and spd_prussia = 0) or (chancellor = "Thälmann" and kpd_relation < 46 and spd_prussia = 1)
+view-if: (chancellor = "Thälmann" and workers_kpd*1.1 > workers_spd and spd_prussia = 1) or (chancellor = "Thälmann" and year >= 1932 and month >= 8 and spd_prussia = 0) or (chancellor = "Thälmann" and kpd_relation < 46 and spd_prussia = 1)
 new-page: true
 tags: event
 max-visits: 1
