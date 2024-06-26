@@ -102,7 +102,7 @@ We have appointed Rudolf Breitscheid as emergency chancellor. The Communists con
 
 @schleicher_emergency_chancellor
 view-if: chancellor != "Schleicher"
-on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 10; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 2; left_dissent += 5
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 9; z_relation -= 4; dvp_relation -= 4; ddp_relation -= 4; coup_progress -= 2; left_dissent += 5; dnvp_relation += 2; nsdap_relation += 1
 
 [+ president +] appoints Kurt von Schleicher, a former general, as chancellor. Армия приветствует это назначение.
 
