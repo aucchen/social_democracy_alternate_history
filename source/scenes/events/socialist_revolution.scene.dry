@@ -14,10 +14,9 @@ max-visits: 1
 - @fight_with_revoluiton
 
 @join_revolution
-title: Присоединится к революции!
-subtitle: Labor will call a general strike. The Reichsbanner and the loyal elements of the Prussian police will resist the coup.
+title: Присоединиться к восстанию
 unavailable-subtitle: Социал-демократы не пойдут за левыми.
-choose-if: left_strength > (neorevisionist_strength + center_strength + reformist_strength + labor_strength) and kpd_relation > 50
+choose-if: left_strength*1.2 > (neorevisionist_strength + center_strength + reformist_strength + labor_strength) and kpd_relation > 50
 on-arrival: rb_militancy += 0.25; prussian_police_loyalty -= 0.1; reichswehr_loyalty -= 0.2; kpd_relation += 50; center_dissent += 50; neorevisionist_dissent += 35; reformist_dissent += 25; labor_dissent += 5; rb_strength *= 0.85
 
 Предательство 1918-1919 годов не повторится. Социал-демократы выступят на стороне восставшего народа. Было сформировано двухпартийное социалистическое временное рабочее правительство. 
