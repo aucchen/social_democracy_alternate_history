@@ -113,9 +113,9 @@ if (Q.factory_takeovers >= 2) {
 if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.total_defeat) {
     this.achieve('stolperstein');
 }
-// Sechzehn Republik - войти в состав СССР.
+// Sowjet Sozialistische Republik - войти в состав СССР..
 if ((Q.weltrevolution_win == "1" && Q.soviet_relation >= 2) && !Q.total_defeat) {
-    this.achieve('sechzehn_republik');
+    this.achieve('sowjet_sozialistische_republik');
 }
 !}
 
@@ -129,14 +129,14 @@ if ((Q.weltrevolution_win == "1" && Q.soviet_relation >= 2) && !Q.total_defeat) 
 
 
 @hitler_wins
-view-if: (chancellor == "Hitler" or president == "Hitler") and (total_defeat== 1 or civil_war_seen == 0)
+view-if: (chancellor == "Hitler" or president == "Hitler") and (total_defeat == 1 or civil_war_seen == 0)
 title: Adolf Hitler is in undisputed control over Germany.
 tags: endings
 go-to: eg_menu
 
 Adolf Hitler is in undisputed control over Germany. The SPD, along with all of the democratic forces, have failed.
 
-[? if civil_war_seen == 1 : At the very least, we fought back. Perhaps our resistance will be celebrated in an impossible-to-forsee future. ?]
+[? if civil_war_seen == 1 : At the very least, we fought back. Perhaps our resistance will be celebrated in an impossible-to-forsee future. ?][? if out_from_soc_rev == 1 : Но Гитлер в первых рядах борьбы с коммунистами и, скорее всего, близок час захватит власть в свои руки. ?]
 
 @war_against_hitler
 view-if: (chancellor == "Hitler" or president == "Hitler") and (long_war == 1)
@@ -371,9 +371,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
-[? if game_achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
+[? if game_achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
 
-[? if game_achievement_sechzehn_republik: **Sechzehn Republik** - войти в состав СССР ?]
+[? if game_achievement_sowjet_sozialistische_republikk: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
 
 = Completed Achievements Overall
 
@@ -446,9 +446,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
-[? if achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
+[? if achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
 
-[? if achievement_sechzehn_republik: **Sechzehn Republik** - войти в состав СССР ?]
+[? if achievement_sowjet_sozialistische_republikk: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
 
 = Incomplete Achievements
 
@@ -520,9 +520,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
-[? if not achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
+[? if not achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
 
-[? if not achievement_sechzehn_republik: **Sechzehn Republik** - войти в состав СССР ?]
+[? if not achievement_sowjet_sozialistische_republikk: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
 
 @end_game
 game-over: true

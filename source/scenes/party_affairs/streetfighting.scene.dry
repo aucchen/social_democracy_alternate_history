@@ -18,6 +18,7 @@ We must do something to protect the workers against these predations.
 - @prussian_police_training: Use the Prussian police to help train the Reichsbanner.
 - @peace: Try to avoid all militant confrontations, as much as possible.
 - @truce_rfb: Try to make peace with the RFB.
+- @truce_sa: Заключить перемирие с СА.
 - @easy_discard
 
 @battle
@@ -57,6 +58,14 @@ By not fighting, the strength of the Reichsbanner atrophies. Pacifists in the pa
 choose-if: kpd_relation >= 45
 view-if: kpd_truce == 0
 unavailable-subtitle: The KPD is not interested.
-on-arrival: kpd_truce = 1; kpd_relation += 5; rfb_strength += 50; rb_strength += 50; sa_strength += 50;
+on-arrival: kpd_truce = 1; kpd_relation += 5; rfb_strength += 50; rb_strength += 50; sa_strength += 50; nsdap_relation -= 5
 
 We have made at least a temporary truce with the KPD, so that our respective paramilitaries will stop fighting.
+
+@truce_sa
+choose-if: nsdap_relation >= 40 and (rb_strength*rb_militancy) > (sa_strength*sa_militancy)
+view-if: nsdap_truce == 0 and nsdap_relation >= 25
+unavailable-subtitle: НСДАП еще не заинтересована. [if (rb_strength*rb_militancy) < (sa_strength*sa_militancy) : Мы слишком слабы чтобы с нами считались. ?]
+on-arrival: nsdap_truce = 1; nsdap_relation += 5; kpd_relation -= 4; rfb_strength += 60; rb_strength += 50; sa_strength += 50;
+
+We have made at least a temporary truce with the NSDAP, so that our respective paramilitaries will stop fighting.
