@@ -14,6 +14,7 @@ The SPD cannot govern by itself yet. Because we do not have an electoral majorit
 - @liberals: Strengthen our bonds with the left-liberal German Democratic Party and conservative-liberal German People's Party.
 - @center: Strengthen our bonds with the Catholic Center Party.
 - @kpd: Work towards repairing relationships with the Communist Party.
+- @right_party_inter_relations: Заискивать перед крайне правыми партиями.
 - @spd_alone: The SPD can stand alone for now.
 - @easy_discard
 
@@ -93,5 +94,27 @@ However, given the influence of the DVP among the other right-leaning parties[? 
 @spd_alone
 
 Whether it is because we *cannot* or *will not*, we do not make ties with other parties at this moment.
+
+@right_party_inter_relations
+subtitle: -2 resources
+choose-if: resources >= 2
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 2; nsdap_relation -= 1 if spd_in_government == 1; dnvp_relation -= 1 if spd_in_government == 1; nsdap_relation -= 1 if ideology == "left" or kpd_relation > 25
+go-to: rpir1 if nsdap_relation <= 25; rpir2 if nsdap_relation >= 25
+
+@rpir1
+on-arrival: nsdap_relation += 4*(1 - dissent); dnvp_relation += 5*(1 - dissent)
+
+Наладить отношения с самыми правыми партиями было достаточно сложно, поскольку в их глазах мы безусловно являемся врагами.
+
+[if spd_in_government = 1 : Кроме того, наше участие в правительстве делает в их глазах делает нас виновниками текущего положения Германии. ?]
+
+
+@rpir2
+on-arrival: nsdap_relation += 5*(1 - dissent); dnvp_relation += 6*(1 - dissent)
+
+Мы в глазах правах уже не главная угроза, но поддержание отношений все равно выходит с трудом.
+
+[if spd_in_government = 1 : Кроме того, наше участие в правительстве делает в их глазах делает нас виновниками текущего положения Германии. ?]
 
 - @return: Continue...
