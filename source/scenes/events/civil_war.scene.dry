@@ -89,7 +89,7 @@ go-to: war_menu
 
 Our enemies are the nationalist Stahlhelm, with [+ sh_strength +] thousand troops, and the Nazi SA, with [+ sa_strength +] thousand troops. The loyalties of the Reichswehr, with its [+ reichswehr_strength +] thousand regular soldiers, and Prussian police, with [+ prussian_police_strength +] thousand members, are unclear.
 
-[? if chancellor_party == "KPD" or president == "Thälmann" : The KPD's paramilitary, the RFB, is leading the battle, and we are their co-combatants. ?]
+[? if chancellor_party == "KPD" or president == "Thälmann" or we_join_soc_rev = 1 : The KPD's paramilitary, the RFB, is leading the battle, and we are their co-combatants. ?]
 
 On our side, we have the Reichsbanner, at [+ rb_strength +] thousand members. [? if dissent > 0.15 and dissent <= 0.25: It is somewhat weakened by dissent within the party, and some members choose not to fight. ?][? if dissent > 0.25 and dissent < 0.5: It is weakened by dissent within the party, and many members choose not to fight. ?][? if dissent >= 0.5: It is heavily weakened by dissent within the party, and a substantial portion of members choose not to fight. ?]
 
@@ -116,7 +116,7 @@ We have urged the Reichswehr to stand down, to avoid killing their countrymen. [
 
 @kpd_help
 max-visits: 1
-view-if: chancellor_party != "KPD" and president != "Thälmann" 
+view-if: chancellor_party != "KPD" and president != "Thälmann" and we_join_soc_rev != 1
 go-to: war_menu
 on-arrival: war_choices += 1
 

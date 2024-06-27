@@ -332,6 +332,8 @@ Q.panzerkreuzer_funded = 0;
 Q.panzerkreuzer_failed = 0;
 Q.unemployment_insurance_seen = 0;
 Q.blutmai = 0;
+Q.we_join_soc_rev = 0;
+Q.out_from_soc_rev = 0;
 
 // have we reformed these institutions to be more democratic?
 Q.judicial_reform = 0;

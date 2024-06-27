@@ -114,7 +114,7 @@ if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.total_defeat) {
     this.achieve('stolperstein');
 }
 // Sowjet Sozialistische Republik - войти в состав СССР..
-if ((Q.weltrevolution_win == "1" && Q.soviet_relation >= 2) && !Q.total_defeat) {
+if ((Q.we_join_soc_rev == "1" && Q.soviet_relation >= 2) && !Q.total_defeat) {
     this.achieve('sowjet_sozialistische_republik');
 }
 !}

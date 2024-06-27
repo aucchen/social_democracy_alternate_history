@@ -13,9 +13,25 @@ The far-right parties and paramilitaries - the NSDAP (and its paramilitary the S
 - @strategy: We must develop a coherent strategy to combat the Right.
 - @confronting_nazis.iron_front: We must form the Iron Front!
 - @iron_front: The Iron Front will be our answer!
+- @harzburg_front_ask_join: Мы тоже заинтересованы в участии.
+- @harzburg_front_join: Мы войдем.
 
 @strategy
 view-if: nazi_urgency < 3
 on-arrival: nazi_urgency += 1
 
 We do not yet have a coherent strategy for combatting the fascists. We must develop one as soon as possible.
+
+@harzburg_front_ask_join
+choose-if: (nsdap_relation > 24 or dnvp_relation > 26) and spd_in_government = 0
+view-if: (nsdap_relation > 24 or dnvp_relation > 26)
+unavailable-subtitle: Нелепо предлагать войти в фронт против правительства если мы участвуем в правительстве.
+on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; workers_spd -= 1; left_dissent += 5
+
+Наше предложение шокировало общественность. Конечно же, правые единым фронтом выступили против нашего присутствия на встрече в Бад-Гарцбурге. Но наша заинтересованность в борьбе с коммунизмом их, безусловно, радует.
+
+@harzburg_front_join
+view-if: (nsdap_relation > 40 or dnvp_relation > 45) and kpd_relation < 15
+on-arrival: nsdap_relation += 10; dnvp_relation += 5; kpd_relation -= 10; workers_spd -= 3; old_middle_spd += 3
+
+Мы вошли в Гарцбургский фронт на правах младшего партнера. Наша давняя антикоммунистическая платформа позволяет нам полностью солидаризироваться с правыми.
