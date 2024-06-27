@@ -210,7 +210,17 @@ view-if: out_from_soc_rev = 1
 tags: endings
 go-to: eg_menu
 
-Страна погрузилась в хаос беспорядков. Мы не смогли ни предотвратить, ни подавить, ни возглавить революцию. А значит наше место на свалке истории. Кто бы не победил в этой страшной междоусобице, партия больше никогда не будет играть ведущую роль.
+Страна погрузилась в хаос беспорядков. Мы не смогли ни предотвратить, ни подавить, ни поддержать революцию. А значит наше место на свалке истории. Кто бы не победил в этой страшной междоусобице, партия утратила свои позиции.
+
+@weltrevolution_win
+title: Мировая революция началась
+view-if: we_join_soc_rev = 1 and total_defeat == 0 and long_war == 0
+tags: endings
+go-to: eg_menu
+
+Мы победили в гражданской войне и коммунизм шагает дальше по планете. 
+
+[? if comintern_seen = 1 : Штаб-квартира Коминтерна переехала в Берлин. ?][? if soviet_relation >= 2 : Германская Советская Социалистическая Республика вошла в состав СССР. ?]
 
 @works_program
 title: Works program enacted!
@@ -357,7 +367,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
-
+[? if game_achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
 
 = Completed Achievements Overall
 
@@ -430,6 +440,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
+[? if achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
 
 = Incomplete Achievements
 
@@ -500,6 +511,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
+
+[? if not achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
 
 
 @end_game
