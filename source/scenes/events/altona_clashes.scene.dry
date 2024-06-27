@@ -12,6 +12,7 @@ The Nazi SA is planning a march through Altona, a working-class neighborhood of 
 - @ban_march: Ban the march before it starts.
 - @allow_police: Allow the march, with a heavy police presence.
 - @allow_no_police: Allow the march without a police presence.
+- @join_altona: Участвовать вместе с СА.
 
 @ban_march
 choose-if: judicial_reform >= 2
@@ -41,3 +42,11 @@ When the march arrives in Altona, they are immediately confronted by an angry cr
 on-arrival: sa_strength += 80; rfb_strength += 50; strife += 1; kpd_relation -= 8; communist_coalition -= 1
 
 When the march arrives in Altona, they are immediately confronted by an angry crowd of communists and socialists, who throw objects at the Nazis. Gunshots are heard, reportedly from rooftop snipers. In response, the SA engage the surrounding crowd and fire at the surrounding buildings. Dozens are killed, mostly civilians. The Nazis recruit off their dead martyrs.
+
+@join_altona
+view-if: nsdap_relation > 44
+on-arrival: nsdap_relation += 6; sa_strength += 60; rfb_strength += 30; rb_strength -= 60; strife += 1; kpd_relation -= 15; communist_coalition -= 2; workers_spd -= 3; workers_kpd += 2; left_dissent += 10; neorevisionist_dissent += 10
+
+К всеобщему ужасу и удивлению, члены Рейхсбаннера в одном строю с нацистами участвовали в кровавом походе на Альтону, а прусская полиция бездействовала. Многие убиты, в основном мирные гражданские рабочие, сообщают о снайперах на крышах. Коммунисты получили наилучшее доказательство в верности идеи социал-фашизма, а многие старые сторонники от нас отшатнулись.
+
+This incident has been called "Altona Bloody Sunday" in the media.
