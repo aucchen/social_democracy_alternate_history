@@ -100,7 +100,7 @@ subtitle: -2 resources
 view-if: nsdap_relation > 3
 choose-if: resources >= 2
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 2; nsdap_relation -= 1 if spd_in_government == 1; dnvp_relation -= 1 if spd_in_government == 1; nsdap_relation -= 1 and dnvp_relation -= 1 if ideology == "left" or kpd_relation > 25
+on-arrival: resources -= 2; nsdap_relation -= 1 if spd_in_government == 1; dnvp_relation -= 1 if spd_in_government == 1; nsdap_relation -= 1 if (ideology == "left" or kpd_relation > 25)
 go-to: rpir1 if nsdap_relation <= 25; rpir2 if nsdap_relation >= 25
 
 @rpir1
