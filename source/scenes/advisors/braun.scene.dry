@@ -56,7 +56,7 @@ on-arrival: advisor_action_timer = 6
 
 @thalmann_chancellor
 choose-if: kpd_relation > 45 and reformist_strength + neorevisionist_strength < left_strength and chancellor != "Thälmann"
-unavailable-subtitle: [? if kpd_relation < 45 : Тельман не согласится сотрудничать с социал-фашистами. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
+unavailable-subtitle: [? if kpd_relation < 45 : Тельман не согласится сотрудничать с социал-фашистами. ?] [? if reformist_strength + neorevisionist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
 on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_front = 1; reichswehr_loyalty -= 0.05 
 
 With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
