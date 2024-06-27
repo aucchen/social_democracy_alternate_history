@@ -113,6 +113,10 @@ if (Q.factory_takeovers >= 2) {
 if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.total_defeat) {
     this.achieve('stolperstein');
 }
+// Sechzehn Republik - войти в состав СССР.
+if ((Q.weltrevolution_win == "1" && Q.soviet_relation >= 2) && !Q.total_defeat) {
+    this.achieve('sechzehn_republik');
+}
 !}
 
 = End
@@ -125,7 +129,7 @@ if ((Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.total_defeat) {
 
 
 @hitler_wins
-view-if: (chancellor == "Hitler" or president == "Hitler") and (total_defeat==1 or civil_war_seen == 0)
+view-if: (chancellor == "Hitler" or president == "Hitler") and (total_defeat== 1 or civil_war_seen == 0)
 title: Adolf Hitler is in undisputed control over Germany.
 tags: endings
 go-to: eg_menu
@@ -369,6 +373,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
 
+[? if game_achievement_sechzehn_republik: **Sechzehn Republik** - войти в состав СССР ?]
+
 = Completed Achievements Overall
 
 
@@ -442,6 +448,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
 
+[? if achievement_sechzehn_republik: **Sechzehn Republik** - войти в состав СССР ?]
+
 = Incomplete Achievements
 
 [? if not achievement_eiserne_front : **Eiserne Front** - form the Iron Front. ?]
@@ -514,6 +522,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции ?]
 
+[? if not achievement_sechzehn_republik: **Sechzehn Republik** - войти в состав СССР ?]
 
 @end_game
 game-over: true
