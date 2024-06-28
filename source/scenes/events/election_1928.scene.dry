@@ -247,7 +247,14 @@ unavailable-subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
 view-if: anticommunist_coalition >= 50 and nsdap_relation > 25
 choose-if: nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8
 on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
+
+- @anticommunist_coalition_form_2
+- @coalition_menu: This is impossible. Try another governing arrangement.
+
+@anticommunist_coalition_form_2
+title: Ударим единым фронтом по большевизму.
 go-to: ministries
+
 
 
 @far_right_coalition
