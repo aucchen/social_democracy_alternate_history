@@ -253,9 +253,10 @@ on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dis
 
 @anticommunist_coalition_form_2
 title: Ударим единым фронтом по большевизму.
-on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 9; z_relation -= 4; dvp_relation -= 4; ddp_relation -= 4; coup_progress -= 4; left_dissent += 5;
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.2; kpd_relation -= 15; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 5; left_dissent += 5; capital_strike_progress += 2; rfb_strength += 10
 go-to: ministries
 
+Канцлером был назначен генерал Шлейхер как компромиссная фигура.
 
 
 @far_right_coalition
