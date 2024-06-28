@@ -245,7 +245,7 @@ title: Антикоммунистическая коалиция
 subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
 unavailable-subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%) - [? if nsdap_relation < 50: Нацисты не войдут с нами в коалицию. ?][? if dnvp_relation < 50: У нас плохие отношения с немецкой национальной народной партией. ?] [? if kpd_r < 8 : Коммунисты слишком слабы чтобы выглядеть серьезной угрозой. ?]
 view-if: anticommunist_coalition >= 50 and nsdap_relation > 25
-choose-if: nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8
+choose-if: (nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8) or (nsdap_relation > 45 and dnvp_relation > 45 and kpd_r > 16) or (nsdap_relation > 36 and dnvp_relation > 36 and kpd_r > 24)
 on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
 
 - @anticommunist_coalition_form_2
