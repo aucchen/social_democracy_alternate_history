@@ -39,7 +39,7 @@ unavailable-subtitle: [? if nsdap_relation < 50 : Гитлер не примет
 @support_hitler_2
 on-arrival: spd_support_hitler = 1; left_dissent += 20; center_dissent += 5; labor_dissent += 10; neorevisionist_dissent += 15; workers_spd -= 5; kpd_relation -= 10; nsdap_relation += 10; z_relation -= 15; dvp_relation -= 10
 
-Хм, ну ладно. Мы призовем наших сторонников голосовать за Гитлера. Не стоит ждать, что все будут следовать нашему решению.
+Хм, ну ладно. Мы призовем наших сторонников голосовать за Гитлера. Не стоит ждать, что все будут следовать нашему решению, часть готова голосовать за Тельмана.
 
 - @final_election: The final vote...
 
@@ -225,11 +225,12 @@ if (Q.braun_campaign) {
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
 } else if (Q.spd_support_hitler) {
-    Q.hitler_votes += Q.spd_votes*0.7;
+    Q.hitler_votes += Q.spd_votes*(0.8-Q.dissent);
     Q.hindenburg_votes += Q.z_votes;
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
     Q.thalmann_votes += Q.kpd_votes;
+    Q.thalmann_votes += Q.spd_votes*(0.2+Q.dissent);
 } else {
     Q.hindenburg_votes += Q.spd_votes;
     Q.hindenburg_votes += Q.z_votes;
