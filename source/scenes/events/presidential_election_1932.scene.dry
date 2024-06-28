@@ -245,10 +245,10 @@ if (Q.thalmann_to_braun_bonus) {
     Q.braun_votes += Q.thalmann_to_braun_bonus;
 }
 
-if (Q.spd_support_hitler == 1 && braun_campaign == 0 && spd_support_thalmann == 0) {
-    Q.hitler_votes += Q.spd_r;
+if (Q.spd_support_hitler == 1) {
+    Q.hitler_votes += Q.braun_votes;
     Q.hitler_votes += Q.hitler_votes;
-    Q.hindenburg_votes -= Q.spd_r;
+    Q.hindenburg_votes -= Q.braun_votes;
     Q.hindenburg_votes += Q.z_votes;
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
