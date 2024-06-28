@@ -72,6 +72,8 @@ Q.neo_weimar_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r
 Q.hitler_right_coalition = Number((Q.z_r + Q.dnvp_r + Q.nsdap_r).toFixed(2));
 // Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
 Q.progressive_coalition = Number((Q.spd_r + Q.kpd_r + Q.ddp_r).toFixed(2));
+// Anticommunist coalition
+Q.anticommunist_coalition = Number((Q.spd_r + Q.dnvp_r + Q.nsdap_r).toFixed(2));
 
 Q.leverage = Q.spd_r;
 
@@ -164,6 +166,7 @@ There are some potential coalition arrangements.
 - @brauns_dilemma
 - @left_coalition
 - @popular_front_coalition
+- @anticommunist_coalition_form
 
 # TODO: black-brown coalition
 
@@ -235,6 +238,25 @@ In response to the KPD's entrance into the government, the right-wing immediatel
 The Center manages to diffuse some of the hostility from the Reichswehr and the Stahlhelm, but fail to prevent the outbreak of fighting. We are forced to fight on the same side as the KPD, whether we want to or not.
 
 - @civil_war: A civil war, then.
+
+
+
+@anticommunist_coalition_form
+title: Антикоммунистическая коалиция
+subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
+unavailable-subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%) - [? if nsdap_relation < 50 : Нацисты не войдут с нами в коалицию. ?][? if dnvp_relation < 50: У нас плохие отношения с немецкой национальной народной партией. ?][? if communist_r < 8 : Коммунисты слишком слабы чтобы выглядеть серьезной угрозой. ?]
+view-if: anticommunist_coalition >= 50 and nsdap_relation > 25
+choose-if: nsdap relation > 50 and dnvp_relation > 50 and kpd_r > 8
+
+- @anticommunist_coalition_2
+- @coalition_menu: This is impossible. Try another governing arrangement.
+
+@anticommunist_coalition_2
+title: Единым фронтом по большевистской заразе.
+on-arrival: chancellor == "Schleicher"; chancellor_party == "I"; nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
+go-to: ministries
+
+Канцлером был назначен генерал Шлейхер. 
 
 
 

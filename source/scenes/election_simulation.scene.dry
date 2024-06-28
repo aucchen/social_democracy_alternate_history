@@ -275,6 +275,7 @@ Q.left_coalition = Number((Q.spd_r + Q.kpd_r).toFixed(2));
 Q.united_front_coalition = Number((Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3).toFixed(2));
 Q.anti_democratic_coalition = Number((Q.kpd_r + Q.nsdap_r).toFixed(2));
 Q.neo_weimar_coalition = Number((Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r).toFixed(2));
+Q.anticommunist_coalition = Number((Q.spd_r + Q.dnvp_r + Q.nsdap_r).toFixed(2));
 !}
 
 The electoral system is essentially proportional, with the proportion of Reichstag seats roughly equal to the proportion of votes.
