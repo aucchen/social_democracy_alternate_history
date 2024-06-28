@@ -65,7 +65,7 @@ We have made at least a temporary truce with the KPD, so that our respective par
 @truce_sa
 choose-if: nsdap_relation >= 40 and (rb_strength*rb_militancy) > (sa_strength*sa_militancy)
 view-if: nsdap_truce == 0 and nsdap_relation >= 25
-unavailable-subtitle: НСДАП еще не заинтересована. [? if (rb_strength*rb_militancy) < (sa_strength*sa_militancy) : Мы слишком слабы чтобы с нами считались. ?]
+unavailable-subtitle: НСДАП еще не заинтересована.
 on-arrival: nsdap_truce = 1; nsdap_relation += 5; kpd_relation -= 4; rfb_strength += 60; rb_strength += 50; sa_strength += 50;
 
 We have made at least a temporary truce with the NSDAP, so that our respective paramilitaries will stop fighting.
