@@ -15,6 +15,7 @@ As with the state police units and the Reichswehr, the internal police tends to 
 - @loyalty: Improve the loyalty of the Interior Ministry forces.
 - @investigate_corruption: Investigate corruption by big businesses.
 - @investigate_far_right: Investigate illegal activity among the far right.
+- @investigate_far_left: Investigate illegal activity among the far left.
 - @domestic_enemies: Investigate or ban our domestic enemies.
 - @deport_hitler
 - @root: Take no action for now.
@@ -45,14 +46,25 @@ Unfortunately, our investigations have failed to turn up anything. Rumors are th
 go-to: investigate_far_right_success if interior_police_loyalty >= 0.55; investigate_far_right_failure if interior_police_loyalty < 0.55
 
 @investigate_far_right_success
-on-arrival: investigate_far_right += 1; sa_strength -= 20; workers_nsdap -= 3; new_middle_nsdap -= 3; nazi_urgency += 1 if investigate_far_right == 2; nazi_urgency += 2 if investigate_far_right == 3; workers_nsdap -= 3 if investigate_far_right == 3; new_middle_nsdap -= 3 if investigate_far_right == 3; old_middle_nsdap -= 3 if investigate_far_right == 3; unemployed_spd -= 3 if investigate_far_right == 3;
+on-arrival: nsdap_relation -= 5; dnvp_relation -= 3; kpd_relation += 1; investigate_far_right += 1; sa_strength -= 20; workers_nsdap -= 3; new_middle_nsdap -= 3; nazi_urgency += 1 if investigate_far_right == 2; nazi_urgency += 2 if investigate_far_right == 3; workers_nsdap -= 3 if investigate_far_right == 3; new_middle_nsdap -= 3 if investigate_far_right == 3; old_middle_nsdap -= 3 if investigate_far_right == 3; unemployed_spd -= 3 if investigate_far_right == 3; nsdap_relation -= 2 if investigate_far_right == 2; nsdap_relation -= 3 if investigate_far_right == 3
 
 [? if investigate_far_right == 1 : We have discovered collusion between Hjalmar Schacht, president of the Reichsbank, and the Nazis. This is very useful information. ?]
 [? if investigate_far_right == 2 : We have discovered illegal arms smuggling by the SA, the Nazi paramilitary. ?]
 [? if investigate_far_right == 3 : We have discovered a secret cache of documents from the NSDAP detailing their plan to violently take over the country if they enter into power. This is an anti-constitutional plot, and will be publicized and persecuted. ?]
 [? if investigate_far_right > 3 : Of course the Nazis are doing crimes; everyone knows that. Now, we finally have proof. ?]
 
-
 @investigate_far_right_failure
 
 Unfortunately, our investigations have failed to turn up anything. Rumors are that the targets of our investigation were tipped off by infiltrators within the police.
+
+@investigate_far_left
+
+go-to: investigate_far_left_success
+
+@investigate_far_left_success
+on-arrival: kpd_coalition_dissent += 1; nsdap_relation += 4; dnvp_relation += 2; kpd_relation -= 5; investigate_far_left += 1; rfb_strength -= 5; workers_kpd -= 1; workers_kpd -= 1 if investigate_far_left == 2; rfb_strength -= 10 if investigate_far_left == 2; rural_kpd -= 3 if investigate_far_left == 3; workers_kpd -= 3 if investigate_far_left == 3; unemployed_kpd -= 2 if investigate_far_left == 3; old_middle_kpd -= 4 if investigate_far_left == 3; new_middle_kpd -= 2 if investigate_far_left == 3
+
+[? if investigate_far_left == 1 : Мы начали расследование преступной деятельности коммунистов, но пока нет никаких значимых результатов. ?]
+[? if investigate_far_left == 2 : Мы нашли небольшое количество оружия, которое, возможно, связано с союзом красных фронтовиков. ?]
+[? if investigate_far_left == 3 : Мы провели обыски в доме имени Карла Либкнехта, где помещался ЦК КПГ, не нашли ничего серьезного, но запустили слухи о найденных там планах восстания, складах оружия, таинственных катакомбах. Кто-нибудь в это поверит. ?]
+[? if investigate_far_left > 3 : Ничего больше нельзя предпринять в рамках закона - коммунисты тщательно прячут следы своих преступлений. ?]
