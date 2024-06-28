@@ -246,10 +246,8 @@ subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
 unavailable-subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
 view-if: anticommunist_coalition >= 50 and nsdap_relation > 25
 choose-if: nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8
-on-arrival: chancellor = "Schleicher"; chancellor_party == "I"; nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
+on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
 go-to: ministries
-
-Канцлером был назначен генерал Шлейхер. 
 
 
 @far_right_coalition
