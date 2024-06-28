@@ -11,9 +11,11 @@ What are we to do now?
 
 - @fight: We will fight on the streets to prevent Hitler from taking power.
 - @give_up: We will vote against the nazis in the Reichstag.
-
+- @vote_for_na
 
 @fight
+unavailable-subtitle: У нас слишком тесные связи с его партией.
+choose-if: nsdap_relation < 40
 
 Do we realize that this means civil war, against the full force of the state?
 
@@ -29,3 +31,10 @@ The Reichstag is burned, ostensibly by a foreign communist. In the wake, the Naz
 Germany is lost.
 
 - @game_over: Game over.
+
+@vote_for_na
+title: Согласится с назначением.
+view-if: nsdap_relation > 50
+on-arrival: nsdap_relation += 10; z_relation -= 30; dvp_relation -= 30; ddp_relation -= 40; kpd_relation -= 50; rfb_strength *= 0.6; left_dissent += 25; neorevisionist_dissent += 20; nazi_urgency -= 2; workers_spd -= 4; coup_progress -= 1
+
+Мы приветствовали назначение нового канцлера. Будем надеятся, что наши планы о том, что нацисты дискредитируют себя в глазах рабочих оправдаются - пока что дискредитировали себя в их глазах лишь мы сами.
