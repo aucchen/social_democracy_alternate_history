@@ -246,17 +246,16 @@ subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
 unavailable-subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%) - [? if nsdap_relation < 50: Нацисты не войдут с нами в коалицию. ?][? if dnvp_relation < 50: У нас плохие отношения с немецкой национальной народной партией. ?] [? if kpd_r < 8 : Коммунисты слишком слабы чтобы выглядеть серьезной угрозой. ?]
 view-if: anticommunist_coalition >= 50 and nsdap_relation > 25
 choose-if: (nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8) or (nsdap_relation > 45 and dnvp_relation > 45 and kpd_r > 16) or (nsdap_relation > 36 and dnvp_relation > 36 and kpd_r > 24)
-on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
 
 - @anticommunist_coalition_form_2
 - @coalition_menu: This is impossible. Try another governing arrangement.
 
 @anticommunist_coalition_form_2
 title: Ударим единым фронтом по большевизму.
-on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.2; kpd_relation -= 15; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 5; left_dissent += 5; capital_strike_progress += 2; rfb_strength += 10
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.2; kpd_relation -= 15; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 5; left_dissent += 5; capital_strike_progress += 2; rfb_strength += 10; foreign_minister_party = "DNVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "DNVP"; reichswehr_minister_party = "I"; economic_minister_party = "NSDAP"; finance_minister_party = "NSDAP"; agriculture_minister_party = "NSDAP"; nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
 go-to: ministries
 
-Канцлером был назначен генерал Шлейхер как компромиссная фигура.
+Канцлером был назначен генерал Шлейхер как компромиссная фигура. 
 
 
 @far_right_coalition
