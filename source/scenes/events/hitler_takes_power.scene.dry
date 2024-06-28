@@ -37,5 +37,6 @@ Germany is lost.
 title: Согласится с назначением.
 view-if: nsdap_relation > 50
 on-arrival: nsdap_relation += 10; z_relation -= 30; dvp_relation -= 30; ddp_relation -= 40; kpd_relation -= 50; rfb_strength *= 0.6; left_dissent += 25; neorevisionist_dissent += 20; nazi_urgency -= 2; workers_spd -= 4; coup_progress -= 1
+achievement: sozialfaschismus
 
 Мы приветствовали назначение нового канцлера. Будем надеятся, что наши планы о том, что нацисты дискредитируют себя в глазах рабочих оправдаются - пока что дискредитировали себя в их глазах лишь мы сами.

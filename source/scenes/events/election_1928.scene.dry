@@ -253,6 +253,7 @@ choose-if: (nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8 and far_rig
 @anticommunist_coalition_form_2
 title: Ударим единым фронтом по большевизму.
 on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.2; kpd_relation -= 15; z_relation -= 5; dvp_relation -= 5; ddp_relation -= 5; coup_progress -= 5; left_dissent += 5; capital_strike_progress += 2; rfb_strength += 10; foreign_minister_party = "DNVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "DNVP"; reichswehr_minister_party = "I"; economic_minister_party = "NSDAP"; finance_minister_party = "NSDAP"; agriculture_minister_party = "NSDAP"; nsdap_relation += 5; dnvp_relation += 6; kpd_relation -= 10; left_dissent += 10; neorevisionist_dissent += 5; labor_dissent += 1; spd_in_government = 1 
+achievement: sozialfaschismus
 go-to: ministries
 
 Канцлером был назначен генерал Шлейхер как компромиссная фигура, мы были вынуждены уступить. Часть мест в правительстве отойдет нам.
