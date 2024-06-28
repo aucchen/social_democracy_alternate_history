@@ -58,7 +58,6 @@ on-arrival: nsdap_relation -= 5; dnvp_relation -= 3; kpd_relation += 1; investig
 Unfortunately, our investigations have failed to turn up anything. Rumors are that the targets of our investigation were tipped off by infiltrators within the police.
 
 @investigate_far_left
-
 go-to: investigate_far_left_success
 
 @investigate_far_left_success
