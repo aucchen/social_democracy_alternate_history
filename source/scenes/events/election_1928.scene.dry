@@ -240,11 +240,10 @@ The Center manages to diffuse some of the hostility from the Reichswehr and the 
 - @civil_war: A civil war, then.
 
 
-
 @anticommunist_coalition_form
 title: Антикоммунистическая коалиция
 subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
-unavailable-subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%) - [? if nsdap_relation < 50 : Нацисты не войдут с нами в коалицию. ?][? if dnvp_relation < 50: У нас плохие отношения с немецкой национальной народной партией. ?][? if kpd_r < 8 : Коммунисты слишком слабы чтобы выглядеть серьезной угрозой. ?]
+unavailable-subtitle: SPD + NSDAP + DNVP ([+ anticommunist_coalition +]%)
 view-if: anticommunist_coalition >= 50 and nsdap_relation > 25
 choose-if: nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8
 
@@ -253,12 +252,10 @@ choose-if: nsdap_relation > 50 and dnvp_relation > 50 and kpd_r > 8
 
 @anticommunist_coalition_2
 title: Единым фронтом по большевистской заразе.
-on-arrival: chancellor == "Schleicher"; chancellor_party == "I"; nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
+on-arrival: chancellor = "Schleicher"; chancellor_party == "I"; nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dissent += 5; spd_in_government = 1
+go-to: ministries
 
 Канцлером был назначен генерал Шлейхер. 
-
-- @ministries: Назначим министров.
-
 
 
 @far_right_coalition
