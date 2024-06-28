@@ -225,13 +225,12 @@ if (Q.braun_campaign) {
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
 } else if (Q.spd_support_hitler) {
-    Q.hitler_votes += Q.spd_r;
+    Q.hitler_votes += Q.spd_votes;
     Q.hitler_votes += Q.hitler_votes;
-    Q.hindenburg_votes -= Q.spd_r;
     Q.hindenburg_votes += Q.z_votes;
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
-    Q.thalmann_votes += Q.thalmann_votes;
+    Q.thalmann_votes += Q.kpd_votes;
 } else {
     Q.hindenburg_votes += Q.spd_votes;
     Q.hindenburg_votes += Q.z_votes;
@@ -414,8 +413,9 @@ We have switched our support to Hindenburg.
 
 @round2_hitler
 choose-if: nsdap_relation >= 50 or (nsdap_relation >= 45 and kpd_r > 20)
-view-if: nsdap_relation > 25 and spd_support_hitler = 1
+view-if: nsdap_relation > 25 and spd_support_hitler = 0
 unavailable-subtitle: [? if nsdap_relation < 50 : Гитлер не примет нашу помощь, он все еще считает нас врагами ?]
+on-arrival: spd_support_hitler = 1
 
 Поддержка такого опасного правого популиста будет не понята партией.
 
