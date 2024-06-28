@@ -253,6 +253,7 @@ on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; left_dis
 
 @anticommunist_coalition_form_2
 title: Ударим единым фронтом по большевизму.
+on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; reichswehr_loyalty += 0.3; kpd_relation -= 9; z_relation -= 4; dvp_relation -= 4; ddp_relation -= 4; coup_progress -= 4; left_dissent += 5;
 go-to: ministries
 
 
