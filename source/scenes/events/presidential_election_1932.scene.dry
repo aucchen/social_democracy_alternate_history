@@ -30,7 +30,7 @@ choose-if: nsdap_relation >= 50 or (nsdap_relation >= 45 and kpd_r > 20)
 view-if: nsdap_relation > 25
 unavailable-subtitle: [? if nsdap_relation < 50 : Гитлер не примет нашу помощь, он все еще считает нас врагами ?]
 
-Поддержка такого опасного правого популиста будет не понята партией
+Поддержка такого опасного правого популиста будет не понята партией.
 
 - @support_hitler_2: Да, мы поддержим Гитлера.
 - @support_braun: Support Braun instead.
@@ -225,12 +225,12 @@ if (Q.braun_campaign) {
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
 } else if (Q.spd_support_hitler) {
-    Q.hitler_votes += Q.spd_votes*(0.8-Q.dissent);
+    Q.hitler_votes += Q.spd_votes*(0.9-Q.dissent);
     Q.hindenburg_votes += Q.z_votes;
     Q.hindenburg_votes += Q.ddp_votes;
     Q.hindenburg_votes += Q.dvp_votes;
     Q.thalmann_votes += Q.kpd_votes;
-    Q.thalmann_votes += Q.spd_votes*(0.2+Q.dissent);
+    Q.thalmann_votes += Q.spd_votes*(0.1+Q.dissent);
 } else {
     Q.hindenburg_votes += Q.spd_votes;
     Q.hindenburg_votes += Q.z_votes;
