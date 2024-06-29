@@ -20,6 +20,8 @@ if (Q.inflation) {
 
 Раскол: [+ dissent_percent : dissent +]
 
+
+
 = Государство
 
 Рейхспрезидент: [+ president +]
@@ -44,6 +46,42 @@ Inflation: [+ inflation_2 +]%
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed_2 +]% ?]
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
+
+[? if (communist_coalition >=3 and kpd_relation >=50) : Коммунисты согласны образовать с нами коалицию ?]
+
+[? if wtb_support = 1 : В партии начата агитация за план Войтинского ?]
+
+[? if wtb_support = 2 : В партии почти готовы к принятию плана Войтинского ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 1) : План Войтинского можно принять ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 0) : План Войтинского больше не встречает возражений ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 1) : План Войтинского принят ?]
+
+[? if nationalization_support = 1 : В партии начата агитация за план национализации экономики ?]
+
+[? if nationalization_support = 2 : В партии почти готовы к принятию плана национализации ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 1) : План национализации можно принять ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 0) : План национализации больше не встречает возражений ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 1) : План национализации принят ?]
+
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
+[? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
+
+[? if advisor_action_timer = 5 : Советник будет доступен через 5 месяцев ?]
+
+[? if advisor_action_timer = 4 : Советник будет доступен через 4 месяца ?]
+
+[? if advisor_action_timer = 3 : Советник будет доступен через 3 месяца ?]
+
+[? if advisor_action_timer = 2 : Советник будет доступен через 2 месяца ?]
+
+[? if advisor_action_timer = 1 : Советник будет доступен через 1 месяц ?]
 
 # = Public Opinion
 
@@ -75,6 +113,43 @@ Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_d
 
 [? if neorevisionism > 0 : Neorevisionist strength: [+ neorevisionist_strength : strength +], dissent: [+ neorevisionist_dissent : dissent +] ?]
 
+[? if (communist_coalition >=3 and kpd_relation >=50) : Коммунисты согласны образовать с нами коалицию ?]
+
+[? if wtb_support = 1 : В партии начата агитация за план Войтинского ?]
+
+[? if wtb_support = 2 : В партии почти готовы к принятию плана Войтинского ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 1) : План Войтинского можно принять ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 0) : План Войтинского больше не встречает возражений ?]
+
+[? if (wtb_support >= 3 and wtb_adopted = 1) : План Войтинского принят ?]
+
+[? if nationalization_support = 1 : В партии начата агитация за план национализации экономики ?]
+
+[? if nationalization_support = 2 : В партии почти готовы к принятию плана национализации ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 1) : План национализации можно принять ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 0) : План национализации больше не встречает возражений ?]
+
+[? if (nationalization_support >= 3 and nationalization_adopted = 1) : План национализации принят ?]
+
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
+[? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
+
+[? if advisor_action_timer = 5 : Советник будет доступен через 5 месяцев ?]
+
+[? if advisor_action_timer = 4 : Советник будет доступен через 4 месяца ?]
+
+[? if advisor_action_timer = 3 : Советник будет доступен через 3 месяца ?]
+
+[? if advisor_action_timer = 2 : Советник будет доступен через 2 месяца ?]
+
+[? if advisor_action_timer = 1 : Советник будет доступен через 1 месяц ?]
 
 @paramilitaries
 
@@ -144,6 +219,20 @@ Catholics: SPD: [+ catholics_spd_normalized +]%, Z: [+ catholics_z_normalized +]
 
 Support for the Republic: [+ pro_republic +]%
 
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
+[? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
+
+[? if advisor_action_timer = 5 : Советник будет доступен через 5 месяцев ?]
+
+[? if advisor_action_timer = 4 : Советник будет доступен через 4 месяца ?]
+
+[? if advisor_action_timer = 3 : Советник будет доступен через 3 месяца ?]
+
+[? if advisor_action_timer = 2 : Советник будет доступен через 2 месяца ?]
+
+[? if advisor_action_timer = 1 : Советник будет доступен через 1 месяц ?]
+
 @other
 
 [? if spd_prussia = 1 : Прусская полиция: [+ prussian_police_strength +] тыс. чел. ?]
@@ -155,28 +244,6 @@ Support for the Republic: [+ pro_republic +]%
 
 Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
 Милитаризация: [+ rb_militancy : militancy +]
-
-[? if (communist_coalition >=3 and kpd_relation >=50) : Коммунисты согласны образовать с нами коалицию ?]
-
-[? if wtb_support = 1 : В партии начата агитация за план Войтинского ?]
-
-[? if wtb_support = 2 : В партии почти готовы к принятию плана Войтинского ?]
-
-[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 1) : План Войтинского можно принять ?]
-
-[? if (wtb_support >= 3 and wtb_adopted = 0 and black_thursday_seen = 0) : План Войтинского больше не встречает возражений ?]
-
-[? if (wtb_support >= 3 and wtb_adopted = 1) : План Войтинского принят ?]
-
-[? if nationalization_support = 1 : В партии начата агитация за план национализации экономики ?]
-
-[? if nationalization_support = 2 : В партии почти готовы к принятию плана национализации ?]
-
-[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 1) : План национализации можно принять ?]
-
-[? if (nationalization_support >= 3 and nationalization_adopted = 0 and black_thursday_seen = 0) : План национализации больше не встречает возражений ?]
-
-[? if (nationalization_support >= 3 and nationalization_adopted = 1) : План национализации принят ?]
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 

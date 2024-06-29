@@ -371,7 +371,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
 
-[? if game_achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы не немногим лучше фашистов. ?]
+[? if game_achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы немногим лучше фашистов. ?]
 
 
 = Completed Achievements Overall
@@ -451,7 +451,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
 
-[? if achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы не немногим лучше фашистов. ?]
+[? if achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы немногим лучше фашистов. ?]
 
 
 = Incomplete Achievements
@@ -530,7 +530,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
 
-[? if not achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы не немногим лучше фашистов. ?]
+[? if not achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы немногим лучше фашистов. ?]
 
 @end_game
 game-over: true
