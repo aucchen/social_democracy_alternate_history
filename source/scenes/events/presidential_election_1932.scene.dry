@@ -415,7 +415,7 @@ We have switched our support to Hindenburg.
 choose-if: nsdap_relation >= 50 or (nsdap_relation >= 45 and kpd_r > 20)
 view-if: nsdap_relation > 25 and spd_support_hitler = 0
 unavailable-subtitle: [? if nsdap_relation < 50 : Гитлер не примет нашу помощь, он все еще считает нас врагами ?]
-on-arrival: spd_support_thalmann = 0; spd_support_hitler = 1
+on-arrival: spd_support_thalmann = 0; spd_support_hitler = 1; braun_campaign = 0
 
 Поддержка такого опасного правого популиста будет не понята партией. Мы призовем наших сторонников голосовать за Гитлера. Не стоит ждать, что все будут следовать нашему решению, часть готова голосовать за Тельмана.
 
@@ -445,7 +445,7 @@ Ernst Thälmann of the KPD has won the presidency. Immediately, the far-right la
 - @civil_war: This is civil war.
 
 @hitler_wins
-on-arrival: president = nsdap_candidate; chancellor = "Hitler"; chancellor_party = "NSDAP"
+on-arrival: president = nsdap_candidate; chancellor = "Hitler"; chancellor_party = "NSDAP"; workers_nsdap += 2; old_middle_nsdap += 4
 
 [? if nsdap_candidate == "Hitler" : Adolf Hitler of the NSDAP has won the presidency. He wastes no time in consolidating power. ?]
 [? if nsdap_candidate != "Hitler" : The NSDAP candidate [+ president +] has won. The first action President [+ president +] takes is inviting Hitler back into Germany, and appointing him chancellor. The Nazis waste no time in consolidating power. ?]
