@@ -1,0 +1,24 @@
+title: Теперь не главное зло?
+subtitle: Социал-демократы все ближе к фашистам. 
+view-if: year > 1929 and nsdap_relation > 24 or (year > 1929 and nsdap_relation > z_relation and nsdap_relation > kpd_relation and nsdap_relation > ddp_relation and nsdap_relation > dvp_relation)
+max-visits: 1
+new-page: true
+tags: event
+
+Слова коммунистов, называющих нас социал-фашистами все больше становятся похожи на правду. Теория "меньшего зла", видимо, утратила свою актуальность. Мы должны высказаться.
+
+- @nazi_main_evil
+- @nazi_not_main_evil
+
+@nazi_main_evil
+title: Ничего не изменилось. Фашистская угроза - главная опасность для Германии. 
+on-arrival: nsdap_relation -= 10; kpd_relation += 5; left_dissent -= 10; neorevisionist_dissent -= 1; nazi_urgency += 1; kpd_coalition_dissent -= 1; communist_coalition += 1
+
+Главные наши враги - справа, а не слева. 
+
+@nazi_not_main_evil
+title: Главная угроза - большевизм.
+subtitle: Не случится ничего страшного если допустить на время нацистов к власти чтобы они дискредитировали себя в глазах трудящихся.
+on-arrival: nazi_urgency -= 1; nsdap_relation += 5; kpd_relation -= 10; reformist_dissent -= 2; center_dissent -= 1; left_dissent += 6; neorevisionist_dissent += 3
+
+Разве нельзя при желании дать национал-социалистам возможность воспользоваться случаем и в нынешней суровой обста­новке осуществить свои слова на деле? - выразил всеобщее мнение Зеверинг. Главное - не дать коммунистам захватить власть.

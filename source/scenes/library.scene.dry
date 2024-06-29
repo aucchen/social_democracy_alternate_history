@@ -151,25 +151,25 @@ go-to: menu
 
 Strength: [+ rb_strength +] thousand
 
-Militarization: [+ rb_militancy : militancy +]
+Милитаризация: [+ rb_militancy : militancy +]
 
 **Rotfrontkämpferbund (RFB)**: The "Red Front Fighter's League" is associated with the KPD.
 
 Strength: [+ rfb_strength +] thousand
 
-Militarization: [+ rfb_militancy : militancy +]
+Милитаризация: [+ rfb_militancy : militancy +]
 
 **Der Stahlhelm**: A right-wing nationalist organization of primarily Great War veterans, descended from the *Freikorps* that emerged after the war. Associated with the DNVP.
 
 Strength: [+ sh_strength +] thousand
 
-Militarization: [+ sh_militancy : militancy +]
+Милитаризация: [+ sh_militancy : militancy +]
 
 **Sturmabteilung (SA)**: This is the nazi paramilitary group.
 
 Strength: [+ sa_strength +] thousand
 
-Militarization: [+ sa_militancy : militancy +]
+Милитаризация: [+ sa_militancy : militancy +]
 
 **Official military/paramilitary groups:**
 

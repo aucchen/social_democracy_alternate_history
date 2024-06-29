@@ -1,0 +1,23 @@
+title: Нацисты хотят запретить нашу партию
+view-if: nazi_full_win_timer <= 0 and (chancellor == "Hitler" or president == "Hitler" or chancellor_party == "NSDAP")
+max-visits: 1
+tags: event
+new-page: true
+on-arrival: spd_in_government = 0
+
+= Запрет социал-демократов
+
+Хотя нам удалось пережить первые дни прихода Гитлера к власти, противоречия между нами нарастают. Видимо, как и коммунистам, нам не миновать запрета.
+
+- @civil_war: Мы этого так не оставим. К оружию!
+- @give_up: We are not ready for war. Instead, we will vote against the nazis in the Reichstag.
+
+@give_up
+
+Speeches are made. Votes are held. Bullets fly in the streets. Some socialists are killed or jailed. Others flee the country. What can votes even do at this juncture?
+
+In the wake, the Nazis pass decrees giving them unlimited power. They, combined with the DNVP, will win a majority at the next elections.
+
+Germany is lost.
+
+- @game_over

@@ -1,0 +1,84 @@
+title: Советы рабочих депутатов берут власть в Пруссии
+subtitle: The Chancellor attempts to overthrow the Prussian government.
+view-if: (chancellor = "Thälmann" and workers_kpd*1.1 > workers_spd and spd_prussia = 1) or (chancellor = "Thälmann" and year >= 1932 and month >= 8 and spd_prussia = 0) or (chancellor = "Thälmann" and kpd_relation < 46 and spd_prussia = 1)
+new-page: true
+tags: event
+max-visits: 1
+
+= Советы рабочих депутатов берут власть в Пруссии
+
+Канцлер [+ chancellor +] распустил прусский ландтаг. Власть начинает перетекать в руки советов рабочих депутатов, где широко представлены поддерживаемые пролетариатом коммунисты.
+
+Законность этих мероприятий под большим вопросом. Если мы не вмешаемся, эта земля уйдет под власть комммунистов. Против коммунистов немеделенно выступили правые силы, которые ждут, что мы их поддержим.
+
+- @defend
+- @surrender
+- @protest
+- @protocivil_war
+- @nenashedelo
+
+@defend
+title: Выступить с коммунистами.
+subtitle: Рейхсбаннер и Союз красных фронтовиков вместе дадут отпор правым.
+unavailable-subtitle: У нас не хватит сил разгромить путчистов. 
+choose-if: ((rb_strength*rb_militancy) + (rfb_strength*rfb_militancy)) >= 200
+on-arrival: spd_prussia = 0; workers_spd -= 4; center_dissent += 15; neorevisionist_dissent += 15; kpd_relation += 25;
+
+Угроза справа для нас куда опаснее и мы вынуждены поддержать коммунистов.
+
+Части рейхсвера и боевики Стального шлема уже окружают города, находящиеся под властью Советов, а штурмовики оказывают им поддержку. Начинется гржданская война, но ведь мы этого и хотели?
+
+- @defend_2: Гражданская война началась.
+- @surrender: Не вмешиваться.
+- @nenashedelo
+
+@defend_2
+go-to: civil_war
+on-arrival: resist_coup = 1; rb_militancy += 0.05; rfb_militancy += 0.15; rfb_strength += (prussian_police_strength*0.5);
+
+
+@surrender
+title: Не вмешиваться.
+view-if: spd_prussia = 1
+on-arrival: spd_prussia = 0; workers_kpd += 6; workers_spd -= 5; old_middle_spd -= 4; center_dissent += 10; neorevisionist_dissent += 10; rb_militancy -= 0.1; rb_strength -= 400; rfb_strength += 100; rfb_militancy += 0.35; sa_strength += 100; sh_strength += 10; old_middle_nsdap += 6; new_middle_nsdap += 2; kpd_relation += 5; left_dissent -= 5; left_strength += 5;
+
+Коммунисты практически без боя одержали верх. Правые отказались защищать социал-демократическое правительство, которое закрывает глаза на ползучую советизацию. 
+
+Наша пассивность вызывает всеобщее недоумение. 
+
+Пруссия становится советской. Нацисты и коммунисты готовятся к решающему бою, а значит и нам пора определяться.
+
+@protest
+title: Склонить коммунистов к мирному разрешению конфликта.
+subtitle: Тельман должен отменить незаконное решение.
+view-if: spd_prussia = 1
+unavailable-subtitle: Коммунисты нас не станут слушать.
+choose-if: (prussian_police_strength*prussian_police_loyalty*1.5) > (rfb_strength*rfb_militancy) and kpd_relation > 65
+on-arrival: communist_coalition -= 2; kpd_relation -= 50; workers_spd += 3; pro_republic += 10; pacifism += 10; z_relation += 5; nsdap_relation += 3; ddp_relation += 6; dvp_relation += 5; dnvp_relation += 5; reformist_dissent -= 1; center_dissent -= 1; workers_kpd -= 5;
+
+Коммунисты, опасаясь совместных действий правых и социал-демократов, пошли на попятную. Канцлер [+ chancellor +] отменил свое решение.
+
+Советы не были распущены, но объявили о своем подчинении ландтагу, законность восстановлена. Коммунисты считают нас предателями рабочего класса.
+
+@protocivil_war
+title: Разгромить Советы и сместить Тельмана.
+subtitle: Мы выступим на стороне правых.
+view-if: spd_prussia = 1
+on-arrival: spd_prussia = 1; kpd_relation -= 100; communist_coalition -= 5; left_coalition = 0; rfb_banned = 1; rfb_strength = 10; rfb_militancy = rfb_militancy/1.5; nationalism += 5;  next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; chancellor = 'Schleicher'; chancellor_party = "I"; nsdap_relation += 5; dnvp_relation += 5; workers_nsdap += 4; workers_dnvp += 2; workers_z += 1; workers_kpd -= 5; workers_spd -= 4; workers_dvp += 1; sa_strength += 50; sh_strength += 20; rb_strength -= 50; z_relation += 5; dvp_relation += 5; sa_banned = 0; sh_banned = 0
+
+Мы сохранили в своих руках Пруссию, но о союзе с коммунистами больше не может идти и речи. Главную роль в подавлении Советов сыграли правые вооруженные формирования - Стальной шлем и штурмовики. Отныне нам надо с этим считаться. 
+
+Коммунисты оттеснены в подполье, а канцлер Тельман отправлен в отставку. Германия спасена от большевистского переворота, но какой ценой?
+
+Новые выборы назначены на [+ next_election_month : month +] [+ next_election_year +].
+
+@nenashedelo
+title: Это не наше дело.
+view-if: spd_prussia = 0
+on-arrival: rfb_strength -=30; sa_strength -= 20; sh_strength -= 30; old_middle_nsdap += 5; rfb_militancy += 0.15; sa_militancy += 0.05; workers_spd -= 1; workers_kpd += 5; prussian_government = "KPD"; sh_militancy += 0.05; kpd_relation -= 5; pro_republic -= 5; coup_progress += 1; z_relation -= 5; ddp_relation -= 5; nsdap_relation -= 10; dnvp_relation -= 5; dvp_relation -= 5; workers_nsdap -= 2;
+
+Социал-демократы давно утратили свои позиции в прусском правительстве. А значит нам нет дела до происходящего в этой земле. 
+
+Коммунисты, в стычках с правыми отстояли власть Советов. Обе стороны понесли потери, но приобрели ценный боевой опыт.
+
+Мы, оставаясь в стороне, навлекли гнев как правых, так и левых. Советизация Германии продолжается. Решающая битва еще впереди и мы не больше не сможем быть в стороне.

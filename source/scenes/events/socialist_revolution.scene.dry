@@ -1,0 +1,46 @@
+title: Cоциалистическая революция
+subtitle: Коммунисты берут власть в свои руки
+view-if: (prussian_government = "KPD" and year >= 1933 and month >= 1) or (chancellor = "Thälmann" and year >= 1933 and month >= 3 and spd_prussia = 0 and kpd_r > 16) or (chancellor = "Thälmann" and workers_kpd > workers_spd and year >= 1933 and month >= 1) or (year >= 1933 and month >= 9 and kpd_r > spd_r and spd_in_government = 1) or (factory_takeovers >= 1 and year >= 1933 and month >= 3 and workers_kpd > workers_spd)
+new-page: true
+on-arrival: rfb_militancy += 0.55; rfb_strength += 50; workers_kpd += 2; new_middle_kpd -= 5; old_middle_kpd -= 15
+tags: event
+max-visits: 1
+
+[? if prussian_government = "KPD" : Советы рабочих депутатов, укрепившись в Пруссии, берут власть в свои руки по всей стране. ?] [? if factory_takeovers = 1 : Рабочие, захватившие заводы, теперь хотят взять всю власть в свои руки. ?] Социалистическая революция, о необходимости которой так долго говорили немецкие коммунисты, свершилась.
+Берлин перешел в руки восставшего рабочего класса. Страна на пороге гражданской войны.
+
+- @join_revolution
+- @out_from_revoluiton
+- @fight_with_revoluiton
+
+@join_revolution
+title: Присоединиться к восстанию
+unavailable-subtitle: Социал-демократы не пойдут за левыми.
+choose-if: (left_strength*1.1) > (neorevisionist_strength + center_strength + reformist_strength) and kpd_relation > 45
+on-arrival: rb_militancy += 0.25; prussian_police_loyalty -= 0.1; reichswehr_loyalty -= 0.2; kpd_relation += 50; center_dissent += 50; neorevisionist_dissent += 35; reformist_dissent += 25; rb_strength *= 0.85; workers_spd += 8; left_dissent -= 15; we_join_soc_rev = 1;
+achievement: weltrevolution
+
+Предательство 1918-1919 годов не повторится. Социал-демократы выступят на стороне народа. Мы согласились войти в социалистическое временное рабочее правительство. 
+
+Буржуазия не отдаст власть без боя. Это будет наш последний и решительный бой.
+
+- @civil_war
+
+@out_from_revoluiton
+title: Не вмешиваться
+on-arrival: out_from_soc_rev = 1
+
+Мы не можем ничего сделать. В раздираемой классовой войной стране мы остаемся безучастными наблюдателями. Это конец.
+
+- @game_over
+
+@fight_with_revoluiton
+title: Сокрушить восстание!
+subtitle: Хватит уступок левым. Уничтожить большевистскую чуму под корень.
+unavailable-subtitle: Мы слишком далеко ушли влево чтобы сражаться с коммунистами.
+choose-if: left_strength < (neorevisionist_strength + center_strength + reformist_strength)
+on-arrival: rfb_militancy = 0; rfb_strength = 0; kpd_relation = 0; chancellor = "Schleicher"; chancellor_party = "I"; left_dissent -= 80; prussian_government = "I"; workers_spd -= 8; workers_kpd *= 0.1; rfb_banned = 1; rb_strength -= 400; left_strength *= 0.2; workers_nsdap += 4; workers_dnvp += 2; old_middle_dnvp += 1; old_middle_nsdap += 3; rural_kpd -= 8; judicial_reform = 0; next_election_time = time+3 if next_election_time >= time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; coup_progress -= 5; soviet_relation = 0; left_coalition = 0; nsdap_relation += 10; dnvp_relation += 10; z_relation += 10; dvp_relation += 10; ddp_relation += 10; reichswehr_loyalty += 0.1; center_dissent -= 15; reformist_dissent -= 10; neorevisionist_dissent -= 10; pro_republic -= 5
+
+Был сформирован кабинет во главе с генералом Шлейхером для подавления беспорядков. В стране бушует белый террор, коммунисты разгромлены и загнаны глубоко в подполье. Республика спасена, но в глазах рабочего класса мы навсегда останемся врагами революции. Рейхстаг распущен, новые выборы назначены на [+ next_election_month : month +] [+ next_election_year +].
+
+- @main

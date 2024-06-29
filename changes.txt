@@ -130,7 +130,7 @@ Changes:
 - KPD ultimatum set at 16 months, with an option to appeal for more time.
 - More events cause changes to KPD relations, some other stat changes
 - Bug fixes - thanks everyone for reporting!
-
+=======
 
 v0.11 - End of 1933
 
@@ -153,7 +153,6 @@ Changes:
 - Fixed elections preempting other events - elections are now only held after all other events for the month have been resolved.
 - Save system: added functions to export to file, load from file
 - Supporting employers in labor disputes now lowers capital strike progress.
-
 
 v0.12 - Economics, coups, and technical improvements
 
@@ -186,3 +185,28 @@ Potential future changes:
 - Quality of Life as an economic variable for every social class
 - "Historical mode"
 - "Unlimited Play"
+
+v. 1.1. test mode
+
+-Я научился модить
+-Заметно информативнее статус
+-частичный перевод статуса на русский
+-фикс бага с правой коалиции
+-4 клетки для карточек
+-за понижение налогов дают больше популярности среднему классу
+
+v. 1.2 test mode
+-Система выборов изменена: отображаются итоги до сотых
+-Снова 3 клетки
+-изображения отображаются!
+-статус еще больше и емче отображает основное (библиотека не нужна)
+
+v. 1.3. test mode
+
+- Тельман-канцлер не вызывет ГВ иногда, но еще не доделан
+- правый путь для сдпг (недоделан)
+- совмещение кривое с обновами
+
+TODO:
+-новые эвенты
+-локализация на русский (лень)

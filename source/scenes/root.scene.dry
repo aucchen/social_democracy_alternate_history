@@ -12,7 +12,7 @@ go-to: start_menu_2
 
 @start_menu_2
 
-- @start: Start game
+- @start: Начать игру с тест-модом
 - @election_simulation: Election simulation
 - @credits: Credits
 - @game_over.achievements
@@ -104,8 +104,8 @@ Q.kpd_relation = 25;
 Q.ddp_relation = 60;
 Q.dvp_relation = 35;
 // DNVP and NSDAP are invariably hostile
-Q.DNVP_relation = 10;
-Q.NSDAP_relation = 0;
+Q.dnvp_relation = 10;
+Q.nsdap_relation = 0;
 
 Q.kpd_leader = "Thälmann";
 Q.z_leader = "Brüning";
@@ -339,6 +339,8 @@ Q.panzerkreuzer_funded = 0;
 Q.panzerkreuzer_failed = 0;
 Q.unemployment_insurance_seen = 0;
 Q.blutmai = 0;
+Q.we_join_soc_rev = 0;
+Q.out_from_soc_rev = 0;
 
 // have we reformed these institutions to be more democratic?
 Q.judicial_reform = 0;
@@ -374,6 +376,9 @@ Q.factory_takeovers = 0;
 // progress on the moderate economic plan
 Q.moderate_plan_progress = 0;
 
+//Thalmann was a chancellor
+Q.thalmann_was_a_chancellor = 0
+
 // Tax rates relative to 1928 baseline
 Q.lower_tax_rates = 0;
 Q.upper_tax_rates = 0;
@@ -403,7 +408,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban',
             'kpd_policy', 'kpd_ultimatum', 'popular_front_dispute',
-            'high_inflation'];
+            'high_inflation', 'nazi_full_win'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
@@ -454,7 +459,7 @@ Q.unemployment_insurance_timer = 0;
 Q.sa_ban_timer = 0;
 Q.sh_ban_timer = 0;
 Q.kpd_ultimatum_timer = 0;
-
+Q.nazi_full_win_timer = 0;
 
 // all the initial advisors are centrists.
 Q.wels_advisor = 1; // Otto Wels
