@@ -137,8 +137,6 @@ Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_d
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
-[? if advisor_action_timer = 0 : Советник ждет указаний ?]
-
 [? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
 
 [? if advisor_action_timer = 5 : Советник будет доступен через 5 месяцев ?]
