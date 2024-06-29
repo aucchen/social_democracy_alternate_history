@@ -1,7 +1,7 @@
 title: Global Economic Recovery
 subtitle: Finally, the world economy is leaving the worst throes of the depression.
 view-if: year = 1933 and month >= 6
-on-arrival: unemployed -= 3 if unemployed > 25; unemployed -= 2 if unemployed > 15; unemployed -= 1 if unemployed > 10; workers_nsdap -= 5; unemployed_nsdap -= 5
+on-arrival: unemployed -= 3 if unemployed > 25; unemployed -= 2 if unemployed > 15; unemployed -= 1 if unemployed > 10; workers_nsdap -= 5; unemployed_nsdap -= 5; inflation += 1.5
 new-page: true
 max-visits: 1
 tags: event

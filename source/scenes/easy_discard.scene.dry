@@ -6,7 +6,11 @@ Q.month_actions -= 1;
 // return card to hand
 var card = this.state.lastPlayedCard;
 card.image = card.cardImage;
-this.state.currentHands['main'].push(card);
+if (Q.difficulty >= 0) {
+    this.state.currentHands['main'].push(card);
+} else {
+    this.state.currentHands['main.main_easy'].push(card);
+}
 // reset the timer...
 if (Q[card.id + "_timer"]) {
     Q[card.id + "_timer"] = 0;

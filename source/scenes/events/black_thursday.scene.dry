@@ -1,7 +1,7 @@
 title: Black Thursday
 subtitle: The great stock market crash...
 new-page: true
-on-arrival: black_thursday_seen = 1; workers_kpd += 10; workers_nsdap += 5; unemployed += 2; budget -= 1 if budget > 0; dues -= 1 if dues > 2;
+on-arrival: black_thursday_seen = 1; workers_kpd += 10; workers_nsdap += 5; unemployed += 2; budget -= 1 if budget > 0; dues -= 1 if dues > 2; inflation -= 1
 tags: event
 view-if: year = 1929 and month >= 10
 max-visits: 1

@@ -87,7 +87,7 @@ header {
   font-weight: normal;
 }
 /* smaller screens: hide left margin */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .tools {
       margin-right: 0.4em;
       margin-left: 0.4em;
@@ -132,6 +132,27 @@ header {
   }
 }
 
+/* tabs */
+.tab_container {
+    background-color: #dedede;
+    margin-top: -0.6em;
+    margin-left: -0.6em;
+    margin-right: -0.6em;
+}
+.tab_button {
+    font-family: "Minion Pro", Georgia, serif;
+    background-color: #ddd;
+    /*float: left;*/
+    border: none;
+    outline: none;
+    padding: 10px;
+}
+.tab_button.active {
+    background-color: #f3f3f3;
+}
+.tab_button:hover {
+    background-color: #ececec;
+}
 
 
 header h1, header h2 {
@@ -250,26 +271,6 @@ blockquote.attribution {
 }
 blockquote + blockquote.attribution {
   margin-top: -1em;
-}
-#save {
-    background: rgba(0,0,0,0.7);
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-}
-#saves_table {
-    position: relative;
-    max-width: 540px;
-    margin: 100px auto;
-    background: rgba(50,50,50,0.7);
-    border: 2px solid;
-    color: white;
 }
 .overlay {
     background: rgba(0,0,0,0.7);

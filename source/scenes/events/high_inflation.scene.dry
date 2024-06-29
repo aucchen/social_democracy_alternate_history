@@ -1,0 +1,39 @@
+title: High Inflation
+subtitle: Workers are seeing their purchasing power decline.
+view-if: inflation >= 8 and high_inflation_timer = 0 and spd_in_government
+new-page: true
+max-visits: 1
+on-arrival: capital_strike_progress += 1; workers_spd -= 4; old_middle_spd -= 6; new_middle_spd -= 6; rural_spd -= 5; unemployed_spd -= 4; high_inflation_timer = 8;
+tags: event
+
+= High Inflation
+
+Inflation has risen. People of all social classes are seeing their purchasing power fall. Memories of the hyperinflation period of 1923 echo through the public conscious, even though the present inflation is not nearly as severe.
+
+The people and the press are clamoring for action to reduce inflation.
+
+- @taxes: Raise taxes.
+- @welfare: Reduce welfare and social spending.
+- @bank: Surely the Reichsbank has a plan this time?
+- @nothing: Realistically, there is nothing we can do.
+
+@taxes
+on-arrival: upper_tax_rates += 1; lower_tax_rates += 1; budget += 2; unemployed += 1.5; capital_strike_progress -= 1; inflation -= 1; new_middle_spd -= 3; old_middle_spd -= 3; workers_spd -= 3; rural_spd -= 3; kpd_coalition_dissent += 1; kpd_relation -= 5; left_dissent += 5
+
+Raising taxes is unpopular among everyone, but it might be what it takes to keep inflation under control.
+
+@welfare
+on-arrival: welfare -= 1; budget += 1; capital_strike_progress -= 2; unemployed += 1.5; new_middle_spd += 4*(1-dissent); old_middle_spd += 4*(1-dissent); workers_spd -= 5; unemployed_spd -= 5; inflation -= 1; left_dissent += 5; labor_dissent += 5; center_dissent += 5; kpd_coalition_dissent += 1;
+
+Reducing the amount of government spending should reduce the inflation rate, according to classical economics. But it imposes pain upon the people who are suffering the most.
+
+@bank
+on-arrival: capital_strike_progress += 2
+
+Unfortunately, but perhaps expectedly, the Reichsbank is refusing to help the government, claiming that our socialist policies are solely to blame. Reichsbank president Hjalmar Schacht is all but calling for the fall of the government.
+
+@nothing
+on-arrival: capital_strike_progress += 1
+
+Realistically, there is nothing we can do to stem the tide of inflation.
+

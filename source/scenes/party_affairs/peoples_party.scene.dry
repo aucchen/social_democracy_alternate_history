@@ -101,7 +101,7 @@ Catholics have historically been tied to the Center Party, but there is no reaso
 
 
 @no_new_ideas
-on-arrival: neorevisionist_strength -= 6; neorevisionist_dissent += 5; center_strength += 8; left_strength += 3; peoples_party -= 3
+on-arrival: neorevisionist_strength -= 6; neorevisionist_dissent += 5; center_strength += 8; left_strength += 3; peoples_party = 0; peoples_party_support -= 3
 
 The Social Democrats have been and will always be a party of the working class.
 

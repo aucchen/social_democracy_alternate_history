@@ -85,8 +85,8 @@
         </div>
     </div>
 
-    <div id="save" style="display: none;">
-        <table id="saves_table">
+    <div id="save" class="overlay" style="display: none;">
+        <table id="saves_table" class="overlay_top">
             <tr>
                 <td>Auto-0</td>
                 <td>
@@ -254,6 +254,12 @@
             </header>
             <div id="tools_wrapper">
                 <div id='stats_sidebar' class='tools left'>
+                    <div class="tab_container">
+                        <button class="tab_button active" id="main_tab" onclick="window.changeTab('status', 'main_tab');">Main</button>
+                        <button class="tab_button" id="politics_tab" onclick="window.changeTab('status.politics', 'politics_tab');">Politics</button>
+                        <button class="tab_button" id="paramilitary_tab" onclick="window.changeTab('status.paramilitaries', 'paramilitary_tab');">Defense</button>
+                        <button class="tab_button" id="poll_tab" onclick="window.changeTab('status.polls', 'poll_tab');">Polls</button>
+                    </div>
                     <div id="qualities">
                     </div>
                 </div>

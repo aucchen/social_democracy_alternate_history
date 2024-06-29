@@ -1,8 +1,30 @@
 title: 1933
 subtitle: The end of the crisis?
 tags: event
-view-if: (year = 1933 and month >= 12) or year = 1934
+priority: -3
+view-if: (year = 1933 and month >= 12) or year >= 1934
 max-visits: 1
+on-arrival: {!
+// Einigkeit - survive on easy without a civil war.
+// Einigkeit und Recht - survive on medium without a civil war.
+// Einigkeit und Recht und Freiheit - survive on hard without a civil war.
+if (Q.difficulty < 0) {
+    this.achieve('einigkeit');
+} else if (Q.difficulty == 0) {
+    this.achieve('einigkeit_und_recht');
+} else if (Q.difficulty > 0) {
+    this.achieve('einigkeit_und_recht_und_freiheit');
+}
+// Brüder, zur Sonne, zur Freiheit - reduce unemployment, pause reparations, increase women's rights, elect Otto Braun president, and deport Hitler in one playthrough on at least normal difficulty.
+if (Q.difficulty >= 0 && Q.president == "Braun" && !(Q.chancellor == "Hitler") && Q.unemployed < 20 && Q.year == 1933 && !Q.civil_war_seen && Q.hitler_deported && Q.reparations <= -2 && Q.womens_rights >= 3) {
+    this.achieve('bruder_zur_sonne');
+}
+// Freie Marktwirtschaft - win without doing an economic plan.
+if (!Q.economic_plan) {
+    this.achieve('freie_marktwirtschaft');
+}
+
+!}
 
 It is the end of 1933, and the NSDAP still has not taken power. It appears that we have already passed the worst of the years of crisis. We are turning the corner on the Great Depression, and Nazism's days are numbered.
 
