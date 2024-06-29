@@ -1,5 +1,5 @@
 title: Нацисты хотят запретить нашу партию
-view-if: nazi_full_win_timer <= 0
+view-if: nazi_full_win_timer <= 0 and (chancellor == "Hitler" or president == "Hitler" or chancellor_party == "NSDAP")
 max-visits: 1
 tags: event
 new-page: true
