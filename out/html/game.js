@@ -125,17 +125,32 @@
   // This function runs on a new page. Right now, this auto-saves.
   window.onNewPage = function() {
     var scene = window.dendryUI.dendryEngine.state.sceneId;
-    if (scene != 'root') {
+    if (scene != 'root' && !window.justLoaded) {
         window.dendryUI.autosave();
+    }
+    if (window.justLoaded) {
+        window.justLoaded = false;
     }
   };
 
+  // TODO: have some code for tabbed sidebar browsing.
   window.updateSidebar = function() {
       $('#qualities').empty();
-      var scene = dendryUI.game.scenes.status;
+      var scene = dendryUI.game.scenes[window.statusTab];
       dendryUI.dendryEngine._runActions(scene.onArrival);
       var displayContent = dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
       $('#qualities').append(dendryUI.contentToHTML.convert(displayContent));
+  };
+
+  window.changeTab = function(newTab, tabId) {
+      var tabButton = document.getElementById(tabId);
+      var tabButtons = document.getElementsByClassName('tab_button');
+      for (i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(' active', '');
+      }
+      tabButton.className += ' active';
+      window.statusTab = newTab;
+      window.updateSidebar();
   };
 
   window.onDisplayContent = function() {
@@ -174,6 +189,8 @@
   };
 
 
+  window.justLoaded = true;
+  window.statusTab = "status";
   window.dendryModifyUI = main;
   console.log("Modifying stats: see dendryUI.dendryEngine.state.qualities");
 

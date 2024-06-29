@@ -7,7 +7,9 @@ new-page: true
 
 = Hitler Appointed Chancellor!
 
-Internal scheming by the camarilla surrounding the president has caused President Hindenburg to appoint Hitler as chancellor, replacing the unpopular [+ chancellor +]. He has promised a campaign of revenge against the socialists, and the Nazis have already spilled blood. In his published manifesto, he promises a campaign of unspeakable horror against our Jews, and endless wars of violent expansion that will ruin all of Europe.
+Internal scheming by the camarilla surrounding the president has caused President Hindenburg to appoint Hitler as chancellor, replacing the unpopular [+ chancellor +]. [? if hitler_deported : Despite his earlier deportation, the Nazi leaders and their reactionary allies have connived for the president to give him German citizenship after all. ?] Some of the reactionaries surrounding Hindenburg believe that he will restore Germany to its supposed former glory, while others believe that they can control him and his movement.
+
+He has promised a campaign of revenge against the socialists, and the Nazis have already spilled blood. In his published manifesto, he promises a campaign of unspeakable horror against Jews, and endless wars of violent expansion that will ruin all of Europe.
 
 What are we to do now?
 

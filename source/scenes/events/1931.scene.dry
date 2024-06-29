@@ -4,11 +4,14 @@ on-arrival: {!
 // increase NSDAP vote share 
 // TODO: if a public works program has started, unemployment is not so bad.
 Q.unemployed += 8;
+Q.inflation -= 5;
 if (Q.works_program) {
     Q.unemployed -= 5;
+    Q.inflation += 2;
 }
 if (Q.works_program && Q.works_program > 1) {
     Q.unemployed -= 2;
+    Q.inflation += 2;
 }
 Q.catholics_z += 5;
 Q.rural_dvp -= 5;

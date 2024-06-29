@@ -5,6 +5,7 @@ on-arrival: {!
 // TODO: if a public works program has started, unemployment is not so bad.
 if (Q.works_program && Q.works_program >= 2) {
     Q.unemployed -= 1;
+    Q.inflation += 1
 }
 Q.sa_strength += 100;
 Q.sh_strength += 100;
@@ -17,6 +18,7 @@ if (Q.old_demographics) {
 }
 if (!Q.works_program) {
     Q.unemployed += 6; 
+    Q.inflation -= 2;
     Q.catholics_z += 4;
     Q.workers -= 5;
     Q.rural_dnvp -= 6;

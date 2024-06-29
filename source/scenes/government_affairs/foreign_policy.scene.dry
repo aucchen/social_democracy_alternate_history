@@ -78,7 +78,7 @@ Negotiations procede smoothly for the most part. The Western powers are convince
 title: The Western Allies are finally willing to pause our reparations payments!
 subtitle: Our negotiations have been successful.
 view-if: reparations_negotiation >= 3 and black_thursday_seen == 1
-on-arrival: west_relation += 1; reparations = -2; budget += 2; coalition_dissent -= 1; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent);
+on-arrival: west_relation += 1; reparations = -2; budget += 2; coalition_dissent -= 1; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); coup_progress -= 2 if coup_progress > 2
 max-visits: 1
 
 Finally, given both the economic circumstances and our continued negotiations, the Western Allies are willing to pause our reparations payments! Much of the credit must go to American president Hoover, who has been friendlier towards us than the Europeans.

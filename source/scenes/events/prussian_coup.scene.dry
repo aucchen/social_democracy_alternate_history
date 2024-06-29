@@ -1,6 +1,6 @@
 title: Coup in Prussia
 subtitle: The Chancellor attempts to overthrow the Prussian government.
-view-if: (chancellor = "Papen" or chancellor = "Schleicher") and year >= 1932 and month >= 8 and spd_in_government == 0 and spd_prussia = 1
+view-if: (chancellor = "Papen" or chancellor = "Schleicher") and president = "Hindenburg" and year >= 1932 and month >= 8 and spd_in_government == 0 and spd_prussia = 1
 on-arrival: prussian_coup_seen = 1
 new-page: true
 tags: event
@@ -22,14 +22,35 @@ subtitle: Labor will call a general strike. The Reichsbanner and the loyal eleme
 unavailable-subtitle: We do not have the forces to resist.
 choose-if: rb_strength*rb_militancy >= 200
 
-The Reichswehr and Stahlhelm are already surrounding the left-leaning cities, and the SA is supporting them. This will be civil war. We do realize that, correct?
+The Reichswehr and Stahlhelm are already surrounding Berlin, and the SA is supporting them. This could be civil war. We do realize that, correct? 
 
-- @defend_2: Civil war it is.
+- @defend_2: We will fight, even if it leads to a civil war.
 - @surrender
 
 @defend_2
-go-to: civil_war
-on-arrival: resist_coup = 1
+on-arrival: resist_coup = 1; defense_strength = rb_strength*rb_militancy*(1-dissent/2); defense_strength += prussian_police_strength*prussian_police_militancy*prussian_police_loyalty if spd_prussia; enemy_strength = sa_strength*sa_militancy + sh_strength*sh_militancy; enemy_strength += reichswehr_strength*reichswehr_militancy*(1-reichswehr_loyalty)/2; defense_strength += workers_spd_normalized*(2 - dissent)*(2 - unemployed/100);
+go-to: defend_2_civil_war if defense_strength < enemy_strength; defend_2_victory if defense_strength >= enemy_strength
+
+@defend_2_victory
+on-arrival: sa_strength *= 0.8; sh_strength *= 0.8; pro_republic += 10; workers_spd += 6; unemployed_spd += 6; workers_nsdap -= 6; unemployed_nsdap -= 6;
+achievement: bollwerk_der_demokratie
+go-to: defend_2_victory_2
+
+Our forces confront the government troops and their reactionary auxiliaries, and somehow, our enemies retreat without a fight! They were overwhelmed by our display of strength, and have chosen to slink away. Chancellor [+ chancellor +] withdraws the dismissal of the Prussian government, at least for now.
+
+The show of force has reinvigorated support for the republic and for the SPD, and has weakened the fascists.
+
+@defend_2_victory_2
+achievement: drei_pfeile
+
+
+@defend_2_civil_war
+
+Our forces confront the government troops and their supporters on the streets of Berlin, and armed fighting erupts. The reactionaries do not budge from their positions. We are caught at a disadvantage.
+
+- @civil_war: It is a civil war.
+
+
 
 
 @surrender

@@ -5,6 +5,9 @@ on-arrival: {!
 if (Q.unemployed) {
     Q.unemployed_2 = Q.unemployed.toFixed(1);
 }
+if (Q.inflation) {
+    Q.inflation_2 = Q.inflation.toFixed(1);
+}
 !}
 
 = Status
@@ -44,9 +47,108 @@ Others: [+ other_r +]%
 
 [? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
+Inflation: [+ inflation_2 +]%
+
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed_2 +]% ?]
 
 Next election: [+ next_election_month : month +] [+ next_election_year +]
 
 
 # = Public Opinion
+
+@politics
+
+= Inter-party Relations
+
+Z: [+ z_relation : relationships +]
+
+DDP: [+ ddp_relation : relationships +]
+
+DVP: [+ dvp_relation : relationships +]
+
+KPD: [+ kpd_relation : relationships +]
+
+DNVP: [+ dnvp_relation : relationships +]
+
+NSDAP: [+ nsdap_relation : relationships +]
+
+= Internal Factions of the SPD
+
+Left strength: [+ left_strength : strength +], dissent: [+ left_dissent : dissent +]
+
+Center strength: [+ center_strength : strength +], dissent: [+ center_dissent : dissent +]
+
+Labor strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
+
+Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_dissent : dissent +]
+
+[? if neorevisionism > 0 : Neorevisionist strength: [+ neorevisionist_strength : strength +], dissent: [+ neorevisionist_dissent : dissent +] ?]
+
+
+@paramilitaries
+
+= Paramilitaries
+
+Reichsbanner Strength: [+ rb_strength +] thousand
+
+Reichsbanner Militarization: [+ rb_militancy : militancy +]
+
+RFB Strength: [+ rfb_strength +] thousand
+
+RFB Militarization: [+ rfb_militancy : militancy +]
+
+Stahlhelm Strength: [+ sh_strength +] thousand
+
+Stahlhelm Militarization: [+ sh_militancy : militancy +]
+
+SA Strength: [+ sa_strength +] thousand
+
+SA Militarization: [+ sa_militancy : militancy +]
+
+= Official military/paramilitaries
+
+Reichswehr: [+ reichswehr_strength +] thousand troops.
+
+Reichswehr Loyalty: [+ reichswehr_loyalty : loyalty +]
+
+Prussian police: [+ prussian_police_strength +] thousand members.
+
+Prussian police loyalty: [+ prussian_police_loyalty : loyalty +]
+
+@polls
+
+= Projected election results
+
+(if the election were to be held now):
+
+SPD: [+ spd_votes +]%
+
+Z + BVP: [+ z_votes +]%
+
+KPD: [+ kpd_votes +]%
+
+DDP: [+ ddp_votes +]%
+
+DVP: [+ dvp_votes +]%
+
+DNVP: [+ dnvp_votes +]%
+
+NSDAP: [+ nsdap_votes +]%
+
+Others: [+ other_votes +]%
+
+**Detailed results for each demographic**
+
+Workers: SPD: [+ workers_spd_normalized +]%, Z: [+ workers_z_normalized +]%, KPD: [+ workers_kpd_normalized +]%, DDP: [+ workers_ddp_normalized +]%, DVP: [+ workers_dvp_normalized +]%; DNVP: [+ workers_dnvp_normalized +]%, NSDAP: [+ workers_nsdap_normalized +]%, Others: [+ workers_other_normalized +]%
+
+New Middle Class: SPD: [+ new_middle_spd_normalized +]%, Z: [+ new_middle_z_normalized +]%, KPD: [+ new_middle_kpd_normalized +]%, DDP: [+ new_middle_ddp_normalized +]%, DVP: [+ new_middle_dvp_normalized +]%; DNVP: [+ new_middle_dnvp_normalized +]%, NSDAP: [+ new_middle_nsdap_normalized +]%, Others: [+ new_middle_other_normalized +]%
+
+Old Middle Class: SPD: [+ old_middle_spd_normalized +]%, Z: [+ old_middle_z_normalized +]%, KPD: [+ old_middle_kpd_normalized +]%, DDP: [+ old_middle_ddp_normalized +]%, DVP: [+ old_middle_dvp_normalized +]%; DNVP: [+ old_middle_dnvp_normalized +]%, NSDAP: [+ old_middle_nsdap_normalized +]%, Others: [+ old_middle_other_normalized +]%
+
+Rural: SPD: [+ rural_spd_normalized +]%, Z: [+ rural_z_normalized +]%, KPD: [+ rural_kpd_normalized +]%, DDP: [+ rural_ddp_normalized +]%, DVP: [+ rural_dvp_normalized +]%; DNVP: [+ rural_dnvp_normalized +]%, NSDAP: [+ rural_nsdap_normalized +]%, Others: [+ rural_other_normalized +]%
+
+Unemployed: SPD: [+ unemployed_spd_normalized +]%, Z: [+ unemployed_z_normalized +]%, KPD: [+ unemployed_kpd_normalized +]%, DDP: [+ unemployed_ddp_normalized +]%, DVP: [+ unemployed_dvp_normalized +]%; DNVP: [+ unemployed_dnvp_normalized +]%, NSDAP: [+ unemployed_nsdap_normalized +]%, Others: [+ unemployed_other_normalized +]%
+
+Catholics: SPD: [+ catholics_spd_normalized +]%, Z: [+ catholics_z_normalized +]%, KPD: [+ catholics_kpd_normalized +]%, DDP: [+ catholics_ddp_normalized +]%, DVP: [+ catholics_dvp_normalized +]%; DNVP: [+ catholics_dnvp_normalized +]%, NSDAP: [+ catholics_nsdap_normalized +]%, Others: [+ catholics_other_normalized +]%
+
+Support for the Republic: [+ pro_republic +]%

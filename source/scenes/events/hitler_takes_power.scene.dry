@@ -1,9 +1,11 @@
 title: Hitler is Chancellor.
 subtitle: The beginning of the end.
-view-if: chancellor == "Hitler" or president == "Hitler"
+view-if: chancellor == "Hitler" or president == "Hitler" or chancellor_party == "NSDAP"
 on-arrival: spd_in_government = 0
 tags: event
 new-page: true
+
+[? if hitler_deported and president != "Hitler": The first act that Chancellor [+ chancellor +] takes upon assuming office is bringing Adolf Hitler back to Germany, and giving him citizenship and an official cabinet position. ?]
 
 Hitler has promised a campaign of revenge against the socialists, and the Nazis have already spilled much blood on the streets. In his published manifesto, he promises a campaign of unspeakable horror against our Jews, and endless wars of violent expansion that will ruin all of Europe.
 

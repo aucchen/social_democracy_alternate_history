@@ -92,6 +92,9 @@ Q.peoples_party_support = 0;
 // support for nationalizations
 Q.nationalization_support = 0;
 Q.nationalization_adopted = 0;
+// moderate economic plan
+Q.moderate_plan_support = 0;
+Q.moderate_plan_adopted = 0;
 
 // organizations
 
@@ -106,6 +109,7 @@ Q.NSDAP_relation = 0;
 
 Q.kpd_leader = "Thälmann";
 Q.z_leader = "Brüning";
+Q.nsdap_leader = "Hitler";
 
 // hmm... maybe we can play nice with Hindenburg???
 Q.hindenburg_relation = 25;
@@ -189,9 +193,12 @@ Q.income = 1600;
 // inflation (in %; 1928: 2.9; 1929: 0; 1930: -5%; 1931: -10%; 1932: -10%) - source: https://en.wikipedia.org/wiki/File:BSPDRWeltkriseEngl.PNG, derived from https://www.destatis.de/DE/Methoden/WISTA-Wirtschaft-und-Statistik/2009/03/rezession-betrachtung-032009.pdf?__blob=publicationFile
 Q.inflation = 2.9;
 
-// standard of living (as % of 1928 - currently unused - should be welfare-adjusted.)
-Q.workers_sol = 100;
-Q.rural_sol = 100;
+// quality of life (as % of 1928 - currently unused - should be welfare-adjusted.)
+Q.workers_qol = 100;
+Q.rural_qol = 100;
+Q.unemployed_qol = 100;
+Q.old_middle_qol = 100;
+Q.new_middle_qol = 100;
 
 Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
 Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
@@ -364,6 +371,8 @@ Q.socializations = 0;
 Q.nationalize_budget = 4;
 // have there been any factory takeovers?
 Q.factory_takeovers = 0;
+// progress on the moderate economic plan
+Q.moderate_plan_progress = 0;
 
 // Tax rates relative to 1928 baseline
 Q.lower_tax_rates = 0;
@@ -507,7 +516,7 @@ go-to: 1928_main
 @1928_main
 audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_HOHEN_BERGEN_noise_reduced.mp3 music/1928_1930/MarekWeber.mp3 music/1928_1930/BAUERNKAPELLE.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3 music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1930_1933/Internationale-de_normalized.ogg
 new-page: true
-go-to: main
+go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
 
 = 1928
 

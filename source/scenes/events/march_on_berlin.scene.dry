@@ -56,7 +56,7 @@ President [+ president +] has asked our government to resign.
 
 @fight
 title: Deploy the Reichsbanner and call a general strike to resist the fascists!
-on-arrival: defense_strength = rb_strength*rb_militancy*(1-dissent/2); defense_strength += prussian_police_strength*prussian_police_militancy*prussian_police_loyalty if spd_prussia; enemy_strength = sa_strength*sa_militancy + sh_strength*sh_militancy; defense_strength += workers_spd_normalized*(2 - dissent - 2*unemployed/100); defense_strength += reichswehr_strength*reichswehr_loyalty*reichswehr_militancy if president=="Braun" and spd_in_government
+on-arrival: defense_strength = rb_strength*rb_militancy*(1-dissent/2); defense_strength += prussian_police_strength*prussian_police_militancy*prussian_police_loyalty if spd_prussia; enemy_strength = sa_strength*sa_militancy + sh_strength*sh_militancy; defense_strength += workers_spd_normalized*(2 - dissent)*(2 - unemployed/100); defense_strength += reichswehr_strength*reichswehr_loyalty*reichswehr_militancy if president=="Braun" and spd_in_government
 go-to: fight_2_win if defense_strength >= enemy_strength; fight_2_pre_civil_war if defense_strength < enemy_strength
 
 The Reichsbanner number at [+ rb_strength +] thousand; many are in Berlin to counter the fascist demonstration.
@@ -75,7 +75,7 @@ The show of force has reinvigorated support for the republic and for the SPD, an
 
 @fight_2_pre_civil_war
 
-Our forces confront the fascists on the streets of Berlin, and fighting erupts. Neither side is dislodged from their positions.
+Our forces confront the fascists on the streets of Berlin, and armed fighting erupts. Neither side is dislodged from their positions.
 
 - @civil_war: It is a civil war.
 

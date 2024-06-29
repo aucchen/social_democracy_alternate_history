@@ -17,9 +17,12 @@ The so-called WTB plan, after its chief supporters Woytinsky, Tarnow, and Baade,
 
 However, leftists in the party argue that the WTB plan is merely a bandage over the fundamental flaws of capitalism. They argue that the crisis is an opportunity to end capitalism through massive nationalizations of industry, and finally bring our country to socialism.
 
+Meanwhile, moderates and reformists draw up proposals for a limited plan of job creation through public works, funded through taxes, that does not involve deficit spending or large-scale restructuring of the economy. Labor argues that the plan is inadequate in its scale and ambition.
+
 - @support_centrist: Support the Centrist view.
 - @support_labor: Support the Labor view.
 - @support_left: Support the Left view.
+- @support_moderate: Support the Reformist view.
 - @defer: Defer making a decision until we have more information.
 
 @support_centrist
@@ -63,6 +66,21 @@ on-arrival: left_strength += 15; left_dissent -= 10; reformist_dissent += 10; ne
 
 With our hard work, we have convinced the majority of the party to adopt the socialist economic plan! [? if spd_in_government == 1 : We can begin implementing the plan as soon as possible, as long as we have the Economic or Finance ministries. ?] Bourgeois opposition is likely to be fierce. [? if spd_in_government == 0 : It might be difficult to enact the plan, given present conditions. ?]
 
+@support_moderate
+subtitle: Call for a limited program of job creation without deficit spending.
+on-arrival: moderate_plan_support += 1; reformist_strength += 8; reformist_dissent -= 5; left_dissent += 6; labor_dissent += 5
+go-to: adopt_moderate if moderate_plan_support >= 2; support_moderate_progress if moderate_plan_support < 2
+
+@support_moderate_progress
+
+We attempt to convince the party to support a moderate program of job creation without deficit spending. Advocates of the moderate plan argue that this plan is most likely to receive support from the bourgeois parties, and most practical in the immediate term. Opponents in the left and labor factions criticize the plan for being inadequate in its ambition.
+
+We have not yet adopted the plan. More work needs to be done.
+
+@adopt_moderate
+on-arrival: reformst_strength += 10; reformist_dissent -= 10; left_dissent += 8; labor_dissent += 6; moderate_plan_adopted = 1; economic_plan = 2; coalition_dissent -= 1 if unemployed > 15; z_relation += 5;
+
+With our hard work, we have convinced the majority of the party to adopt the moderate job creation plan! [? if spd_in_government == 1 : We can begin implementing the plan as soon as possible, as long as we have the Economic or Finance ministries. ?]
 
 @defer
 

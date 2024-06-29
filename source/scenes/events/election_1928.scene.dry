@@ -242,14 +242,15 @@ The Center manages to diffuse some of the hostility from the Reichswehr and the 
 title: Far-right coalition
 subtitle: NSDAP + DNVP ([+ far_right_coalition +]%)
 view-if: far_right_coalition >= 50
-go-to: far_right_win if year >= 1932 or nsdap_r > 44; far_right_fail if year < 1932
+go-to: far_right_win if (year >= 1932 or nsdap_r >= 44) and president != "Braun"; far_right_fail if (year < 1932 and nsdap_r < 44) and president != "Braun"; far_right_braun if president == "Braun"
+priority: 2
 
-There are enough votes for the Nazis and the DNVP to form a coalition. Hitler has made his participation in government contingent on being appointed chancellor, while Hugenberg of the DNVP does not support his and would rather he be made chancellor. It is up to President [+ president +] to decide.
+There are enough votes for the Nazis and the DNVP to form a coalition. [+ nsdap_leader +] has made his participation in government contingent on being appointed chancellor. It is up to President [+ president +] to decide.
 
 @far_right_win
-on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"
+on-arrival: chancellor = nsdap_leader; chancellor_party = "NSDAP"
 
-[? if president == "Hindenburg" : President Hindenburg's camarilla ?][? if president == "Braun" : President Braun somehow ?] has decided that Hitler must be chancellor[? if president == "Hindenburg": , and the aging president accepts their recommendations ?][? if president == "Braun" :  because it is what the constitution would stipulate ?].
+[? if president == "Hindenburg" : President Hindenburg's camarilla ?][? if president == "Braun" : President Braun somehow ?] has decided that [+ nsdap_leader +] must be chancellor[? if president == "Hindenburg": , and the aging president accepts their recommendations ?][? if president == "Braun" :  because it is what the constitution would stipulate ?].
 
 - @hitler_takes_power: What do we do now?
 
@@ -257,12 +258,22 @@ on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"
 @far_right_fail
 on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; next_election_time = time+5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
 
-The reactionary establishment is still very skeptical of Hitler, so instead, [+ president +] appoints Kurt von Schleicher, a former general, as chancellor.
+The reactionary establishment is still very skeptical of the Nazis, so instead, [+ president +] appoints Kurt von Schleicher, a former general, as chancellor, to try to "tame" the Nazis.
 
 Schleicher's government is deeply unpopular among all parties of the Reichstag. Despite his support for a coalition with the NSDAP, the Nazis want power all to themselves, without Schleicher.
 
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
 
+@far_right_braun
+on-arrival: coup_progress += 2
+
+President Braun faces a dilemma. Is it "democratic" to let democracy be destroyed, if the majority of voters have willed it so? Some, even on the left, suggest that the Nazis would not *truly* be as horrific as their platform suggests, and that giving them power would let them discredit themselves in the eyes of the public.
+
+Alternatively, Braun could use the emergency powers of the presidency. Article 48 has been used by Hindenburg to promulgate anti-democratic and anti-worker policies; can Article 48 be used for good as well as evil?
+
+- @emergency_braun: We will form an emergency government with Braun's support.
+- @new_elections: We will have new elections.
+- @far_right_win: Let the Nazis form their government.
 
 
 @left_coalition
@@ -482,11 +493,13 @@ New elections have been set for [+ next_election_month : month +] [+ next_electi
 @no_majority_schleicher
 go-to: hitler_chancellor
 
+# TODO: there should be a second Schleicher option if the NSDAP isn't the strongest
+
 
 @hitler_chancellor
 on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"
 
-There is no path to a majority government for now. The scheming around President Hindenburg is leading to only one path - that of Chancellor Adolf Hitler. [? if largest_party == "NSDAP" : Since they are the largest party, it is not exactly contrary to parliamentary procedure, so it is difficult to raise objections solely on procedural grounds. ?]
+There is no path to a majority government for now. The scheming around President Hindenburg is leading to only one path - that of Chancellor Adolf Hitler. [? if largest_party == "NSDAP" : Since they are the largest party, it is not exactly contrary to parliamentary procedure, so it is difficult to raise objections solely on procedural grounds. ?] [? if hitler_deported: Despite his earlier deportation, the Nazi leaders and their reactionary allies have connived for the president to give him German citizenship after all. ?]
 
 - @hitler_takes_power: What now?
 

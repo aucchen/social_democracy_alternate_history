@@ -154,3 +154,34 @@ Changes:
 - Save system: added functions to export to file, load from file
 - Supporting employers in labor disputes now lowers capital strike progress.
 
+
+v0.12 - Economics, coups, and technical improvements
+
+Major changes:
+
+- Added an inflation variable, and relationships between inflation/deflation, unemployment, and spending.
+- New events: High Inflation, Labor Unrest
+- New economic plan: moderate/reformist plan
+- Added a tabbed view in the status sidebar, showing more information.
+- Easy mode now has 4 cards in the hand.
+- New achievement: Freie Marktwirtschaft (survive to the end of 1933 without adopting an economic plan)
+- New options for President Braun when dealing with a right-wing majority.
+- Prussian coup can end peacefully (in a similar way as the March on Berlin)
+
+Minor changes:
+
+- New text if Hitler has been deported and the Nazis take power anyway.
+- Slightly easier to win against the coups without a civil war.
+- Various bugfixes
+
+Future changes:
+
+- Parliament diagrams for visualization
+- After that's implemented, I'm probably going to work on the Steam release. I hope to release on Steam by November 9, the date of the proclamation of the German Republic.
+
+Potential future changes:
+
+- History/records of major events in the game (chart showing how party support changes over time, maybe)
+- Quality of Life as an economic variable for every social class
+- "Historical mode"
+- "Unlimited Play"

@@ -9,6 +9,11 @@ for (var c of Q.classes) {
         }
     }
 }
+
+Q.pro_republic = Math.round(Q.pro_republic);
+Q.nationalism = Math.round(Q.nationalism);
+Q.socialism = Math.round(Q.socialism);
+
 if (Q.pro_republic < 0) {
     Q.pro_republic = 0;
 }
@@ -46,6 +51,7 @@ for (var party of Q.parties) {
 // 2. normalize support (fraction)
 for (var party of Q.parties) {
     Q[party+'_normalized'] = Q[party + '_support']/total_support;
+    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
 }
 
 
@@ -94,6 +100,31 @@ if (Q.month_actions >= 1) {
             Q[timer+'_timer'] -= 1;
         }
     }
+    // change economic stats...
+    // we're basically implicity drawing a Philips curve
+    // budget deficits lead to some inflation
+    if (Q.budget <= 0 && Q.budget > -2 && Q.inflation < 2.5) {
+        Q.inflation += 0.1;
+    }
+    if (Q.budget <= -2 && Q.budget > -5 && Q.inflation < 5) {
+        Q.inflation += 0.2;
+        if (Q.unemployed >= 12) {
+            Q.inflation -= 0.1;
+        }
+    }
+    if (Q.budget <= -5 && Q.inflation < 10) {
+        Q.inflation += 0.3;
+        if (Q.unemployed >= 15) {
+            Q.inflation -= 0.1;
+        }
+    }
+    // deflation is bad
+    if (Q.inflation < -0.5 && Q.inflation > -5 && Q.unemployed < 15) {
+        Q.unemployed += 0.2;
+    }
+    if (Q.inflation <= -5 && Q.unemployed < 20) {
+        Q.unemployed += 0.3;
+    }
 }
 Q.has_event = 0;
 // check if there are any cards in #event, and then go to main if not.
@@ -108,7 +139,7 @@ if (choices && choices[0].title != "Continue...") {
 if (typeof window !== "undefined" && window.generateBar) {
 }
 !}
-go-to: events_choice if has_event = 1; main if has_event = 0
+go-to: events_choice if has_event = 1; main if has_event = 0 and difficulty >= 0; main.main_easy if has_event = 0 and difficulty < 0
 
 = [+ month : month +] [+ year +]
 
@@ -116,8 +147,4 @@ go-to: events_choice if has_event = 1; main if has_event = 0
 
 - #event
 
-# go-to: main
-
 # This scene is solely for updating numbers after events, and routing to special events.
-
-# TODO: don't have to do event dispatch here - we can just have a tag with a maximum number
