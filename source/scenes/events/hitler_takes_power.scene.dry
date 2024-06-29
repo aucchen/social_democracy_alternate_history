@@ -1,4 +1,4 @@
-title: Hitler is Chancellor.
+title: Hitler takes power.
 subtitle: The beginning of the end.
 view-if: chancellor == "Hitler" or president == "Hitler" or chancellor_party == "NSDAP"
 on-arrival: spd_in_government = 0

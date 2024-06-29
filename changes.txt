@@ -182,6 +182,7 @@ Future changes:
 Potential future changes:
 
 - History/records of major events in the game (chart showing how party support changes over time, maybe)
+- GDP as an economic variable
 - Quality of Life as an economic variable for every social class
 - "Historical mode"
 - "Unlimited Play"
