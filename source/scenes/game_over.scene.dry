@@ -87,7 +87,7 @@ if (Q.march_on_berlin_seen && Q.capital_strike_seen && Q.chancellor != "Hitler" 
     this.achieve("polykrise");
 }
 // Wirtschaftsexperiment - implement two different economic plans.
-if (Q.nationalization_progress >= 1 && Q.wtb_implemented >= 1) {
+if ((Q.nationalization_progress >= 1 && Q.wtb_implemented >= 1) || (Q.wtb_implemented >= 1 && Q.moderate_plan_progress >= 1) || (Q.nationalization_progress >= 1 && Q.moderate_plan_progress >= 1)) {
     this.achieve("wirtschaftsexperiment");
 }
 // Syndikalismus - support factory takeovers by workers.

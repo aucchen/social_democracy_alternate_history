@@ -186,3 +186,18 @@ Potential future changes:
 - Quality of Life as an economic variable for every social class
 - "Historical mode"
 - "Unlimited Play"
+
+v0.12.1 - Economics changes, bug fixes
+
+Changes:
+
+- Fixed issue with Wels' clearing the agenda on Easy
+- Added a "limited budget" option for the reformist economic plan
+- WTB-plan now costs 4 resources for the first iteration, but can be decreased to 3 by pro-labor policies or existing socializations.
+- Slight boost to the reformist economic plan.
+
+For the next major update:
+
+- Visualizations - parliament diagrams, electoral history
+- Cards: Dealing with Toleration
+- Foreign Ministry option to organize an international economic summit?
