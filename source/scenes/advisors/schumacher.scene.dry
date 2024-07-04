@@ -1,0 +1,10 @@
+title: Kurt Schumacher
+is-pinned-card: true
+tags: advisor, neorevisionist
+card-image: img/portraits/SchumacherKurt.jpg
+view-if: schumacher_advisor = 1
+new-page: true 
+
+= Kurt Schumacher
+
+

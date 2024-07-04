@@ -37,7 +37,7 @@ Our policy course is currently that nothing can be done to alleviate the depress
 @support_labor
 subtitle: Call for increased public works and fiscal stimulus.
 on-arrival: center_dissent += 10; left_dissent += 5; labor_strength += 5; wtb_support += 1;
-go-to: plan_adopted if wtb_support >= 3; plan_support if wtb_supprt < 3
+go-to: plan_adopted if wtb_support >= 3; plan_support if wtb_support < 3
 
 @plan_support
 

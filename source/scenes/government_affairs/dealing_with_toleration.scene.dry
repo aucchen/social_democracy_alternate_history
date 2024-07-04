@@ -1,0 +1,11 @@
+title: Dealing with Toleration
+new-page: true
+is-card: true
+card-image: img/portraits/BrüningHeinrich.jpg
+view-if: dealing_with_toleration_timer = 0 and spd_toleration
+on-arrival: dealing_with_toleration_timer += 6; month_actions += 1
+#tags: govt_affairs
+
+= Dealing with Toleration
+
+We are currently acting as external support to the government of Chancellor [+ chancellor +]. How should we use our position?
