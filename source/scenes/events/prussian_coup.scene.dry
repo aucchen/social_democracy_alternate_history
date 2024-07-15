@@ -32,7 +32,7 @@ on-arrival: resist_coup = 1; defense_strength = rb_strength*rb_militancy*(1-diss
 go-to: defend_2_civil_war if defense_strength < enemy_strength; defend_2_victory if defense_strength >= enemy_strength
 
 @defend_2_victory
-on-arrival: sa_strength *= 0.8; sh_strength *= 0.8; pro_republic += 10; workers_spd += 6; unemployed_spd += 6; workers_nsdap -= 6; unemployed_nsdap -= 6;
+on-arrival: sa_strength *= 0.8; sh_strength *= 0.8; pro_republic += 10; workers_spd += 6; unemployed_spd += 6; workers_nsdap -= 6; unemployed_nsdap -= 6; coup_victory = 1
 achievement: bollwerk_der_demokratie
 go-to: defend_2_victory_2
 

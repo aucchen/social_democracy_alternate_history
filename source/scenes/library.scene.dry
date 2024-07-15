@@ -14,7 +14,8 @@ Herein contains relevant information about the government and politics of the Ge
 - @parties: Parties
 - @public_opinion: Public opinion (and projected election results)
 - @paramilitaries: Paramilitary groups
-- @factions: Internal Factions
+- @factions: Internal factions
+- @figures: Figures and charts
 - @backSpecialScene: Exit library.
 
 @government
@@ -137,6 +138,8 @@ Current relations: [+ kpd_relation : relationships +]
 
 Current relations: [+ nsdap_relation : relationships +]
 
+**Other parties** - there is a multitude of small, mostly conservative parties, such as the Economic Party of the German Middle Class, the Farmer's Party, the Agricultural League, and others. Their political position usually lies between the DVP and DNVP. 
+
 @paramilitaries
 on-arrival: {!
 Q.rb_strength = Math.round(Q.rb_strength);
@@ -234,3 +237,117 @@ Strength: [+ neorevisionist_strength : strength +]
 Dissent: [+ neorevisionist_dissent : dissent +]
 
 
+@figures
+title: Figures and Charts
+go-to: menu
+on-arrival: z_minus_bvp_r = z_r - 3;
+on-display: {!
+data = [
+    {
+        "id": "kpd",
+        "legend": "KPD",
+        "name": "KPD",
+        "seats": Q.kpd_r*5,
+    },
+    {
+        "id": "spd",
+        "legend": "SPD",
+        "name": "SPD",
+        "seats": Q.spd_r*5,
+    },
+    {
+        "id": "ddp",
+        "legend": "DDP",
+        "name": "DDP",
+        "seats": Q.ddp_r*5,
+    },
+    {
+        "id": "z",
+        "legend": "Center",
+        "name": "Center",
+        "seats": (Q.z_r - 3)*5,
+    },
+    {
+        "id": "bvp",
+        "legend": "BVP",
+        "name": "BVP",
+        "seats": 3*5,
+    },
+    {
+        "id": "dvp",
+        "legend": "DVP",
+        "name": "DVP",
+        "seats": Q.dvp_r*5,
+    },
+    {
+        "id": "other",
+        "legend": "Other",
+        "name": "Other",
+        "seats": Q.other_r*5,
+    },
+    {
+        "id": "dnvp",
+        "legend": "DNVP",
+        "name": "DNVP",
+        "seats": Q.dnvp_r*5,
+    },
+    {
+        "id": "nsdap",
+        "legend": "NSDAP",
+        "name": "NSDAP",
+        "seats": Q.nsdap_r*5,
+    },
+];
+if (d3 && window) {
+    // get screen width
+    var width = 500;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("reichstag").style.height = screenWidth/2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#reichstag").datum(data).call(parliament);
+
+    var lines = d3.linegraph();
+    lines.width(width).height(400);
+    //var svg = lines(Q.election_records);
+    d3.select("#election_history").datum(Q.election_records).call(lines);
+    //document.getElementById('election_history').innerHTML = svg.outerHTML;
+}
+!}
+
+= Reichstag composition
+
+{!<svg id="reichstag" style="width: 500px; height: 250px;"> </svg>!}
+
+{!<table>!}
+{!<tr><td><div class="box" style='background-color:#E3000F; outline: 2px; outline-style: solid;'> </div></td><td>!} **SPD:** {!</td><td>!} **[+ spd_r +]%** {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#8B0000'> </div></td> <td>!}KPD: {!</td><td>!} [+ kpd_r +]% {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#DCCA4A'> </div></td><td>!} DDP: {!</td><td>!} [+ ddp_r +]% {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#000'> </div></td><td>!} Z: {!</td><td>!} [+ z_minus_bvp_r +]% {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#69A2BE'> </div></td><td>!} BVP: {!</td><td>!} 3% {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#D5AC27'> </div></td><td>!} DVP: {!</td><td>!} [+ dvp_r +]% {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#a0a0a0'> </div></td><td>!} Other parties: {!</td><td>!} [+ other_r +] % {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#3f7bc1'> </div></td><td>!} DNVP: {!</td><td>!} [+ dnvp_r +]% {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#954B00'> </div></td><td>!} NSDAP: {!</td><td>!} [+ nsdap_r +]% {!</td></tr>!}
+{!</table>!}
+
+= Election history
+
+{!<svg id="election_history" style="width: 500px; height: 400px;"> </svg>!}
+
+# TODO: maybe add textual histories too? some accessibility stuff as well...

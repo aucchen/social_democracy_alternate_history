@@ -16,7 +16,7 @@ Q.sa_strength += 50;
 Q.sh_strength += 100;
 Q.rural_dnvp -= 15;
 Q.rural_nsdap += 10;
-Q.unemployed_nsdap += 8;
+Q.unemployed_nsdap += 18;
 !}
 tags: event
 view-if: year = 1929 and month = 1

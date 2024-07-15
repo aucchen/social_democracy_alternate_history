@@ -5,11 +5,9 @@ is-card: true
 on-arrival: panzerkreuzer_seen = 1
 view-if: panzerkreuzer_seen = 0 and year = 1928 and month >= 8 and reichswehr_minister_party != "SPD" and spd_in_government = 1
 
-# TODO different paths if you control the reichswehr ministry
 = Panzerkreuzer
 
 The Reichswehr Ministry is demanding the construction of a new battlecruiser, as part of Germany's rearmament. Our coalition partners are united in support. While many of our members are vehemently against new military spending, this vote may be necessary to preserve the coalition. 
-
 We campaigned on food for children instead of battlecruisers. Will we really betray our campaign promises?
 
 - @vote_yes: Vote yes, for constructing the battlecruiser.
@@ -17,9 +15,11 @@ We campaigned on food for children instead of battlecruisers. Will we really bet
 - @abstain: Abstain from the vote.
 
 @vote_yes
-on-arrival: left_dissent += 10; labor_dissent += 5; center_dissent += 5; reformist_dissent += 5; neorevisionist_dissent += 5; panzerkreuzer_funded = 1; kpd_coalition_dissent += 1; kpd_relation -= 6
+on-arrival: left_dissent += 10; labor_dissent += 5; center_dissent += 5; reformist_dissent += 5; neorevisionist_dissent += 5; panzerkreuzer_funded = 1; kpd_coalition_dissent += 1; kpd_relation -= 6; workers_spd -= 3
 
-Our grassroots party members are shocked by our intransigence! Many party branches have begun agitating against the cabinet, and our Reichstag members even plan a full vote on the proposal. The vote against the battlecruiser fails, with only the SPD and KPD members voting against. The ship will be built.
+Our grassroots party members are shocked by our intransigence! Many party branches have begun agitating against the cabinet, and our Reichstag members even plan a full vote on the proposal, contravening the government's decision.
+
+The campaign against the battlecruiser fails, with only the dissident SPD and KPD members voting against. The ship will be built.
 
 @vote_no
 on-arrival: dvp_relation -= 8; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1

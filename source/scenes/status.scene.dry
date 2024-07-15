@@ -16,7 +16,9 @@ if (Q.inflation) {
 
 Resources available: [+ resources +]
 
-SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 : opposition ?]
+SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in government ?][? if spd_toleration == 0 and spd_in_government == 0 and spd_caretaker == 0 : opposition ?][? if spd_caretaker : caretaker government ?]
+
+[? if spd_in_government : Coalition dissent: [+ coalition_dissent : coalition_dissent +] ?]
 
 Internal dissent: [+ dissent_percent : dissent +]
 
@@ -59,6 +61,7 @@ Next election: [+ next_election_month : month +] [+ next_election_year +]
 @politics
 
 = Inter-party Relations
+
 
 Z: [+ z_relation : relationships +]
 

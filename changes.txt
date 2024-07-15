@@ -201,3 +201,30 @@ For the next major update:
 - Visualizations - parliament diagrams, electoral history
 - Cards: Dealing with Toleration
 - Foreign Ministry option to organize an international economic summit?
+
+
+v0.13 - Visualizing history
+
+Major changes:
+
+- Added election visualizations! Election results will now show a parliament diagram visualization, and there is a "Figures and charts" option in the library that will also show an electoral history chart.
+- New event: Panzerkreuzer B
+- New government affairs card: Dealing with Toleration
+
+Minor changes:
+
+- Changes to the mobile UI - making cards and font sizes slightly smaller to fit more on the screen.
+- The constitutional coalition/new grand coalition is more accessible.
+- bug fixes
+- slight changes to initial party support levels
+- slight tweaks in some event outcomes
+
+Future plans:
+- See previous posts...
+- International economic summit, more Foreign Ministry options
+- Party disunity cards for high dissent?
+- Working on features for Steam release
+
+Known issue- the election results won't exactly sum to 100 because of rounding. I'm not sure if having more decimal places would work well, though - even if we truncate the numbers to one decimal place, there will be terrible floating point issues that make any derived numbers look ugly. I'm still thinking of how to deal with that problem (probably a display layer that truncates the decimal places?).
+
+Would you prefer to see more decimal places in the election results?

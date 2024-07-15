@@ -5,7 +5,6 @@ is-card: true
 on-arrival: panzerkreuzer_seen = 1
 view-if: panzerkreuzer_seen = 0 and year = 1928 and month >= 8 and reichswehr_minister_party = "SPD" and spd_in_government = 1
 
-# TODO different paths if you control the reichswehr ministry
 = Panzerkreuzer
 
 Navy leaders are asking for the construction of a new battlecruiser, as promised by the previous government. Since we control the Reichswehr ministry, it is our decision as to whether to build the battlecruiser or not.
