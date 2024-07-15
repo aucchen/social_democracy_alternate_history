@@ -207,7 +207,7 @@ v0.13 - Visualizing history
 
 Major changes:
 
-- Added election visualizations! Election results will now show a parliament diagram visualization, and there is a "Figures and charts" option in the library that will also show an electoral history chart.
+- Added election visualizations! Election results will now show a parliament diagram visualization, and there is a "Figures and charts" option in the library that will also show an electoral history chart. The parliament visualizations are created using the [d3-parliament](https://github.com/geoffreybr/d3-parliament) library, and the electoral history graphs are made using d3.
 - New event: Panzerkreuzer B
 - New government affairs card: Dealing with Toleration
 
