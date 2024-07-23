@@ -77,6 +77,7 @@ As a people's party, we represent the employees and small businesspeople of the 
 @campaign_rural
 title: Campaign in rural areas.
 choose-if: rural_policy > 0
+unavailable-subtitle: We have not enacted any rural policies yet.
 on-arrival: rural_spd += 7*(1-dissent)
 
 As a people's party, we represent farmers and rural workers as well, and they are becoming receptive to our messages.

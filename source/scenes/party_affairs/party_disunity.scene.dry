@@ -1,0 +1,24 @@
+title: Party Disunity
+new-page: true
+is-card: true
+view-if: party_disunity_timer = 0 and dissent >= 0.3
+on-arrival: month_actions += 1; party_disunity_timer = 4
+card-image: img/arbeiterbew.jpg
+frequency: 200
+#tags: party_affairs
+
+# TODO: party dissent events for every faction, have a good image for this... 
+
+= Party Disunity
+
+The party is being torn apart by internal dissent. Upset at the leadership and general direction, factions have started sabotaging their rivals, hampering our efforts to win votes and carry out our policies.
+
+Something must be done to reinforce party unity.
+
+
+@enforce_unity
+title: Enforce party discipline.
+
+@concessions_reformists
+
+@concessions

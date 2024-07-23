@@ -59,13 +59,13 @@ Q.rural_nsdap = 5;
 Q.rural_other = 10;
 
 Q.unemployed_spd = 25;
-Q.unemployed_kpd = 50;
-Q.unemployed_z = 0;
+Q.unemployed_kpd = 55;
+Q.unemployed_z = 1;
 Q.unemployed_ddp = 0;
 Q.unemployed_dvp = 0;
 Q.unemployed_dnvp = 5;
-Q.unemployed_nsdap = 25;
-Q.unemployed_other = 5;
+Q.unemployed_nsdap = 15;
+Q.unemployed_other = 9;
 
 Q.catholics_spd = 15;
 Q.catholics_kpd = 5;

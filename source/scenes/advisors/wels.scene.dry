@@ -21,7 +21,11 @@ choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: {!
 Q.advisor_action_timer = 5;
-window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+if (Q.difficulty >= 0) {
+    window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+} else {
+    window.dendryUI.dendryEngine.state.currentHands['main.main_easy'] = [];
+}
 !}
 
 All items from our agenda have been cleared.
