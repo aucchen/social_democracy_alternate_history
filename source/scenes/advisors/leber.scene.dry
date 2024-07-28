@@ -13,6 +13,7 @@ Leber is a former army officer who turned against the military leaders of the Ka
 - @military_affairs
 - @support_peoples_party
 - @build_peoples_party
+- @campaigning_peoples_party
 - @root: Return to main
 
 @democratic_rally
@@ -35,7 +36,8 @@ go-to: military_policy
 @support_peoples_party
 title: Build support for a People's Party
 subtitle: Can we expand our party beyond the industrial working class?
-choose-if: peoples_party_support <= 4 and advisor_action_timer = 0
+view-if: peoples_party = 0
+choose-if: peoples_party_support <= 4 and advisor_action_timer = 0 and peoples_party == 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support > 4: There is already substantial support for a People's Party. ?]
 on-arrival: advisor_action_timer = 6; peoples_party_support += 1
 
@@ -44,8 +46,17 @@ We are building up support for the idea of a People's Party.
 @build_peoples_party
 title: Building a People's Party
 subtitle: Can we expand our party beyond the industrial working class?
+view-if: peoples_party == 0
 choose-if: peoples_party_support >= 3 and advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support < 3: There is not enough support for this policy within the party. ?]
 on-arrival: advisor_action_timer = 6;
 go-to: peoples_party
 
+@campaigning_peoples_party
+title: Campaigning as a People's Party
+subtitle: Campaigning with some of our previously nontraditional demographics.
+view-if: peoples_party = 1
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6;
+go-to: peoples_party_campaigning
