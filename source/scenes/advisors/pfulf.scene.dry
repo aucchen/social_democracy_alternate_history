@@ -34,16 +34,6 @@ unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +
 on-arrival: advisor_action_timer = 6;
 go-to: peoples_party
 
-@campaigning_peoples_party
-title: Campaigning as a People's Party
-subtitle: Campaigning with some of our previously nontraditional demographics.
-view-if: peoples_party = 1
-choose-if: advisor_action_timer = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6;
-go-to: peoples_party
-
-
 @womens_rights_
 title: Women's rights
 subtitle: Enact policy with regards to women's rights.
