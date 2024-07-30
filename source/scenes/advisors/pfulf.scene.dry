@@ -41,7 +41,7 @@ view-if: peoples_party = 1
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6;
-go-to: peoples_party_campaigning
+go-to: peoples_party
 
 
 @womens_rights_
