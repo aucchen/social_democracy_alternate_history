@@ -319,6 +319,11 @@ if (d3 && window) {
     //var svg = lines(Q.election_records);
     d3.select("#election_history").datum(Q.election_records).call(lines);
     //document.getElementById('election_history').innerHTML = svg.outerHTML;
+
+    // TODO: party support records should not have so many ticks
+    var lines_2 = d3.linegraph(true, true);
+    lines_2.width(width).height(400);
+    d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
 }
 !}
 
@@ -350,4 +355,7 @@ if (d3 && window) {
 
 {!<svg id="election_history" style="width: 500px; height: 400px;"> </svg>!}
 
+= Party support history
+
+{!<svg id="party_support_history" style="width: 500px; height: 400px;"> </svg>!}
 # TODO: maybe add textual histories too? some accessibility stuff as well...

@@ -287,6 +287,10 @@ Q.old_other_r = 9;
 
 // array of objects of the form {date: Date(), spd: 10, kpd: 12, ...} for each election
 Q.election_records = [];
+// party support records for every month
+Q.party_support_records = [];
+// inflation and unemployment records
+Q.economic_records = [];
 
 
 // State of the government

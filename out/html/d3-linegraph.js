@@ -13,7 +13,7 @@ function addMonths(date, months) {
 }
 
 
-d3.linegraph = function() {
+d3.linegraph = function(noTicks, noDots) {
     /* params */
     var parties = ['spd', 'kpd', 'ddp', 'z', 'dvp', 'dnvp', 'nsdap', 'other'];
     var partyColors = {'spd': '#E3000F', 'kpd': '#8B0000', 'ddp': '#DCCA4A', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3f7bc1', 'nsdap': '#954B00', 'other': '#a0a0a0'};
@@ -37,10 +37,17 @@ d3.linegraph = function() {
       const maxDate = d3.max(dates);
       const xScale = d3.scaleUtc([new Date(1928, 0), addMonths(maxDate, 10)], [marginLeft, width - marginRight]);
 
-      const xaxis = d3.axisBottom()
+      var xaxis = d3.axisBottom()
         .tickFormat(d3.timeFormat('%b %Y'))
         .tickValues(dates)
         .scale(xScale);
+      if (noTicks) {
+        console.log('noTicks');
+        xaxis = d3.axisBottom()
+        .tickFormat(d3.timeFormat('%b %Y'))
+        .ticks(10)
+        .scale(xScale);
+      }
 
       // Declare the y (vertical position) scale.
       const maxSPD = d3.max(data, d => d.spd);
@@ -100,33 +107,35 @@ d3.linegraph = function() {
 
       // draw nodes
       const z = d3.scaleOrdinal(d3.schemeCategory10);
-      svg.selectAll(".series")
-          .data(series)
-        .enter().append("g")
-        .selectAll(".point")
-          .data(d => d)
-        .enter().append("circle")
-          .attr("class", d => d.series + " " + d.series+"-node " + "party-node")
-          .attr("fill", d => partyColors[d.series])
-          .attr("series", d => d.series)
-          .attr("r", 4)
-          .attr("cx", d => xScale(d.x))
-          .attr("cy", d => yScale(d.y))
-          .on("mouseover", function (d) {
-              const node = d3.select(this);
-              const series = node.attr('series');
-              d3.selectAll(".party-line").attr("stroke-width", 0.1);
-              d3.selectAll(".party-node").attr("fill-opacity", 0.1);
-              d3.selectAll(".party-label").attr("opacity", 0.1);
-              d3.selectAll("."+series+'-node').attr("fill-opacity", 1);
-              d3.selectAll("#"+series+'-line').attr("stroke-width", 5);
-              d3.selectAll("."+series+'-label').attr("opacity", 1);
-          })
-          .on("mouseout", function (d) {
-              d3.selectAll(".party-line").attr("stroke-width", 1.5);
-              d3.selectAll(".party-node").attr("fill-opacity", 1);
-              d3.selectAll(".party-label").attr("opacity", 1);
-          });
+      if (!noDots) {
+          svg.selectAll(".series")
+              .data(series)
+            .enter().append("g")
+            .selectAll(".point")
+              .data(d => d)
+            .enter().append("circle")
+              .attr("class", d => d.series + " " + d.series+"-node " + "party-node")
+              .attr("fill", d => partyColors[d.series])
+              .attr("series", d => d.series)
+              .attr("r", 4)
+              .attr("cx", d => xScale(d.x))
+              .attr("cy", d => yScale(d.y))
+              .on("mouseover", function (d) {
+                  const node = d3.select(this);
+                  const series = node.attr('series');
+                  d3.selectAll(".party-line").attr("stroke-width", 0.1);
+                  d3.selectAll(".party-node").attr("fill-opacity", 0.1);
+                  d3.selectAll(".party-label").attr("opacity", 0.1);
+                  d3.selectAll("."+series+'-node').attr("fill-opacity", 1);
+                  d3.selectAll("#"+series+'-line').attr("stroke-width", 5);
+                  d3.selectAll("."+series+'-label').attr("opacity", 1);
+              })
+              .on("mouseout", function (d) {
+                  d3.selectAll(".party-line").attr("stroke-width", 1.5);
+                  d3.selectAll(".party-node").attr("fill-opacity", 1);
+                  d3.selectAll(".party-label").attr("opacity", 1);
+              });
+      }
 
       // draw right-hand labels
       svg.selectAll(".labels")
