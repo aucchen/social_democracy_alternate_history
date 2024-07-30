@@ -18,35 +18,43 @@ on-arrival: {!
         class_normalized[c] = {};
         for (var party of Q.parties) {
             class_normalized[c][party] = class_votes > 0 ? roundToTwo(100 * Q[c+'_'+party] / class_votes) : 0;
+            Q[c + '_' + party + '_normalized'] = Math.round(class_normalized[c][party]);
         }
     }
 
-    // 1. calculate support for each of the parties
+    // calculate support for each of the parties
     var total_support = 0;
     var party_supports = {};
     for (var party of Q.parties) {
         var party_support = 0;
         for (var c of Q.classes) {
-            party_support += Q.old_demographics ? roundToTwo(Q[c]*Q[c+'_'+party]) : roundToTwo(Q[c]*class_normalized[c][party]);
+            if (Q.old_demographics) {
+                party_support += Q[c] * Q[c+'_'+party];
+            } else {
+                party_support += Q[c] * class_normalized[c][party];
+            }
         }
         party_supports[party] = party_support;
+        Q[party + '_support'] = party_support;
         total_support += party_support;
     }
 
-    // 2. normalize support (fraction) and round to two decimals
-    var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
+    // normalize support, round to one decimal, and ensure total is 100%
+    var sorted_parties = Q.parties.sort((a, b) => party_supports[b] - party_supports[a]);
     var total_votes = 0;
     for (var party of sorted_parties) {
         var normalized = roundToTwo(party_supports[party] / total_support * 100);
         total_votes = roundToTwo(total_votes + normalized);
-        Q[party+'_votes'] = normalized;
+        Q[party+'_votes_dec'] = normalized;
+        Q[party+'_votes'] = Math.round(normalized);
     }
 
     // Adjust the last party's votes if necessary
     var discrepancy = roundToTwo(100 - total_votes);
     if (discrepancy !== 0) {
         var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
+        Q[last_party+'_votes_dec'] = roundToTwo(Q[last_party+'_votes_dec'] + discrepancy);
+        Q[last_party+'_votes'] = Math.round(Q[last_party+'_votes_dec']);
     }
 !}
 go-to: jumpScene
