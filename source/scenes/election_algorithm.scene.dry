@@ -48,8 +48,5 @@ on-arrival: {!
         var last_party = sorted_parties[sorted_parties.length - 1];
         Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
     }
-    Q[party + '_support'] = party_support;
-    total_support += party_support;
-}
 !}
 go-to: jumpScene
