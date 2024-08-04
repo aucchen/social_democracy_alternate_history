@@ -3,7 +3,7 @@ subtitle: The Foreign Ministry seeks closer ties to Austria...
 new-page: true
 on-arrival: customs_union_seen = 1
 tags: event
-view-if: year = 1931 and month >= 3 and foreign_minister_party != "SPD" and foreign_minister_party != "KPD"
+view-if: year = 1931 and month >= 3 and foreign_minister_party != "SPD" and foreign_minister_party != "KPD" and customs_union == 0
 max-visits: 1
 
 # TODO: this should happen regardless of the current state of the government...

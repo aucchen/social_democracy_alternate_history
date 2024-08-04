@@ -27,7 +27,7 @@ There is, essentially, nothing we can do.
 view-if: spd_in_government = 1
 subtitle: -1 budget
 choose-if: budget >= 1
-on-arrival: workers_spd += 5; unemployed -= 2.5; inflation += 1 if inflation < 0
+on-arrival: workers_spd += 5; unemployed -= 2; inflation += 1 if inflation < 0; budget -= 1
 
 In the face of the banking crisis, we have taken emergency action to stabilize the economy. It is not enough.
 
