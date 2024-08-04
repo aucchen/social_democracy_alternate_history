@@ -2,28 +2,40 @@ title: Foreign Policy
 new-page: true
 is-card: true
 tags: govt_affairs
-on-arrival: month_actions += 1; foreign_policy_timer = 8
-view-if: spd_in_government = 1 and foreign_minister_party = "SPD" and  foreign_policy_timer = 0
+on-arrival: month_actions += 1; foreign_policy_timer += 8
+view-if: spd_in_government = 1 and foreign_minister_party = "SPD" and  foreign_policy_timer <= 0
 card-image: img/portraits/BreitscheidRudolf.jpg
+go-to: fp_menu
 
 = Foreign Policy
 
 What should our foreign policy priority be?
 
+@fp_menu
+
 - @improve_west
+- @improve_east
 - @improve_soviet
+- @customs_union
 - @negotiate
 - @reduce_reparations
 - @expose
+- @european_union
+- @european_union_2
+- @root: Do not enact any policies for now.
 - @easy_discard
 
 @improve_west
-title: Improve our relations with all of our neighbors.
-on-arrival: west_relation += 2; east_relation += 2; reparations_negotiation += 1
+title: Improve our relations with the Western Allies.
+on-arrival: west_relation += 2; reparations_negotiation += 1
 
 The key to peace in Europe is a rapproachment between France and Germany. We are taking steps towards that rapproachment. [? if young_plan_seen == 0 : This is difficult to do when France is occupying a major portion of Germany's territory, but we are working on that part. ?]
 
-We also aim to improve relations with our eastern neighbors, Poland and Czechoslovakia, who are righfully terrified of German aggression.
+@improve_east
+title: Improve our relations with our eastern neighbors.
+on-arrival: east_relation += 2;
+
+We also aim to improve relations with our eastern neighbors, Poland and Czechoslovakia, who are righfully terrified of German aggression. Hopefully we can convince them of our peaceful intentions.
 
 @improve_soviet
 title: Improve our relations with the Soviet Union.
@@ -65,6 +77,26 @@ on-arrival: kpd_relation += 8*(1-dissent); communist_coalition += 1 if kpd_forei
 We also mention the KPD in our conversations with the Soviet ambassador. They claim that the KPD is entirely independent of the Soviet government, and that the conflict is Thälmann's doing. But, soon after our conversation we notice a slight improvement in attitudes from the KPD.
 
 
+@customs_union
+title: Form a customs union with Austria?
+subtitle: This will likely incur the wrath of France.
+view-if: black_thursday_seen = 1
+
+The right has long desired closer ties with Austria, with the eventual goal of the merger of the two German-speaking countries. A customs union with Austria is the first step towards this goal. Additionally, many believe that a union with Austria would improve our current economic circumstances.
+
+However, the Allies, especially France, are likely to object. This agreement would break the terms of the Versailles Treaty, and could lead to economic sanctions, further hurting our economy.
+
+- @customs_union_2: Yes, do it!
+- @fp_menu: No, we should do something else.
+
+@customs_union_2
+on-arrival: banking_crisis_timer = 2; customs_union = 1; west_relation -= 2; east_relation -= 2; z_relation += 6; dvp_relation += 6; coalition_dissent -= 1; coup_progress -= 1
+
+We have formed a customs union with Austria! The right-wing parties are praising us for this unexpected turn of events.
+
+Immediately, France and other neighboring countries lodge their protests. The longer-term response is yet to be seen.
+
+
 @negotiate
 title: Negotiate regarding our remaining obligations from the Treaty of Versailles.
 subtitle: [? if young_plan_seen == 1 : After passing the Young Plan, France has committed to withdrawing from the Rhineland. Now, we must see if they can reduce our reparations further, given the economic depression. ?]
@@ -77,8 +109,8 @@ Negotiations procede smoothly for the most part. The Western powers are convince
 @reduce_reparations
 title: The Western Allies are finally willing to pause our reparations payments!
 subtitle: Our negotiations have been successful.
-view-if: reparations_negotiation >= 3 and black_thursday_seen == 1
-on-arrival: west_relation += 1; reparations = -2; budget += 2; coalition_dissent -= 1; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); coup_progress -= 2 if coup_progress > 2
+view-if: reparations_negotiation >= 3 and black_thursday_seen == 1 and reparations > -2
+on-arrival: west_relation += 1; reparations = -2; budget += 2 if hoover_memorandum_seen == 0; budget += 1 if hoover_memorandum_seen == 1; coalition_dissent -= 1; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); coup_progress -= 2 if coup_progress > 2
 max-visits: 1
 
 Finally, given both the economic circumstances and our continued negotiations, the Western Allies are willing to pause our reparations payments! Much of the credit must go to American president Hoover, who has been friendlier towards us than the Europeans.
@@ -88,8 +120,41 @@ This has reduced tensions within our government, and our party has gotten credit
 @expose
 title: Expose the secret rearmament plans of the previous foreign ministry!
 view-if: rearmament_exposed == 0
-on-arrival: west_relation += 2; nationalism -= 5*(1-dissent); pro_republic += 5*(1-dissent); coalition_dissent += 1; rearmament_exposed += 1; reparations_negotiation += 3; coup_progress += 2
+on-arrival: west_relation += 2; east_relation += 1; nationalism -= 5*(1-dissent); pro_republic += 5*(1-dissent); coalition_dissent += 1; rearmament_exposed += 1; reparations_negotiation += 3; coup_progress += 2
 
 The previous foreign ministry, despite its benevolent and peaceful face, was secretly helping the Reichswehr to build up its forces, in contravention of the Treaty of Versailles.
 
 The Allies are grateful of our exposure and repudiation of militarism. Our partners in the coalition are less supportive.
+
+
+@economic_conference
+title: Organize an international economic conference to deal with the Depression.
+unavailable-subtitle: [? if west_relation < 4 : Our relations with the West are not good enough. ?]
+view-if: black_friday_seen == 1 and crisis_urgency >= 1 and reparations <= -2
+choose-if: west_relation >= 4
+on-arrival: economic_conference = 1; west_relation += 1; east_relation += 1
+max-visits: 1
+
+
+
+
+@european_union
+title: Take steps to form a "European Union".
+subtitle: Is a "United States of Europe" possible?
+unavailable-subtitle: [? if west_relation < 5 : Our relations with the West are not good enough. ?] [? if east_relation < 4 : Our relations with the East are not good enough. ?]
+view-if: reparations <= -2 and eu_progress < 2
+choose-if: west_relation >= 5 and east_relation >= 4
+on-arrival: eu_progress += 1; west_relation += 1
+
+Forming a "United States of Europe" has long been part of the Social Democratic foreign program. Finally, we are taking steps towards it. Given our positive relations with the other countries of Europe, we can begin to hold multilateral negotiations for more European federalism. It will take time to hammer out the exact shape of this future "European Union", however.
+
+@european_union_2
+title: We can sign a treaty to form a European Union!
+view-if: west_relation >= 5 and east_relation >= 4 and eu_progress >= 2
+on-arrival: eu = 1; unemployed -= 2 if unemployed > 10
+max-visits: 1
+achievement: eu
+
+Along with France, Great Britain, and many other states of Western and Eastern Europe, we have signed a treaty to form a European Union! The first step of this union is the free movement of people and goods across the countries of Europe.
+
+Fascist Italy remains a problem, as does the Soviet Union.

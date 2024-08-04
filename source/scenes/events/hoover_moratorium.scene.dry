@@ -1,0 +1,14 @@
+title: Hoover Moratorium
+subtitle: Owing to the economic crisis, our debt payments have been paused...
+new-page: true
+view-if: banking_crisis_seen = 1 and ((year == 1931 and month >= 6) or (year == 1932)) and reparations >= 0 and unemployed > 15
+on-arrival: budget += 1; reparations_negotiation += 2; hoover_moratorium_seen = 1; workers_dvp += 3 if foreign_minister_party == "DVP"; new_middle_dvp += 3 if foreign_minister_party == "DVP"; old_middle_dvp += 3 if foreign_minister_party == "DVP"; rural_dvp += 3 if foreign_minister_party == "DVP"; workers_z += 3 if foreign_minister_party == "Z"; new_middle_z += 3 if foreign_minister_party == "Z"; old_middle_z += 3 if foreign_minister_party == "Z"; rural_z += 3 if foreign_minister_party == "Z"; workers_spd += 3 if foreign_minister_party == "SPD"; new_middle_spd += 3 if foreign_minister_party == "SPD"; old_middle_spd += 3 if foreign_minister_party == "SPD"; rural_spd += 3 if foreign_minister_party == "SPD";
+tags: event
+max-visits: 1
+
+= Hoover Moratorium
+
+In light of the current economic situation, and the German banking crisis, President Herbert Hoover of the United States has issued a moratorium on war debt payments from the Great War, including Germany's. Our budget situation should improve somewhat.
+
+[? if spd_in_government and foreign_minister_party == "SPD": Even though this is not our accomplishment, our foreign ministry is eager to take credit for this accomplishment. ?][? if not spd_in_government and foreign_minister_party != "SPD": Even though this is not the work of the foreign ministry, it is eager to take credit for this accomplishment. ?]
+

@@ -9,10 +9,9 @@ new-page: true
 
 A World War 1 veteran and a neorevisionist leader, Kurt Schumacher argues for a strong resistance against the Nazis.
 
-# emergency fundraising, party discipline, build the reichsbanner
-
 - @emergency_fundraising
 - @build_reichsbanner
+- @moderate_economic_plan
 - @root: Return to main
 
 @emergency_fundraising
@@ -31,6 +30,14 @@ We have gained +[+ dues +] resources.
 title: Building the Reichsbanner
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6
+on-arrival: advisor_action_timer = 6; reichsbanner_timer -= 6;
 go-to: reichsbanner
+
+@moderate_economic_plan
+title: Support the reformist economic plan
+subtitle: Call for a limited program of job creation without deficit spending.
+choose-if: advisor_action_timer = 0 and moderate_economic_plan = 0 and black_thursday_seen = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if moderate_economic_plan = 0 : We have already adopted the reformist economic plan. ?] [? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?]
+on-arrival: advisor_action_timer = 6
+go-to: crisis_program.support_moderate
 

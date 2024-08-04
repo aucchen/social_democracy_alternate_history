@@ -425,7 +425,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban',
             'kpd_policy', 'kpd_ultimatum', 'popular_front_dispute',
-            'high_inflation'];
+            'high_inflation', 'banking_crisis'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;

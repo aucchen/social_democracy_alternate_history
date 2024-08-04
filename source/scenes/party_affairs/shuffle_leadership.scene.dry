@@ -448,17 +448,17 @@ tags: neorev_advisor
 
 Carlo Mierendorff is now an advisor.
 
-#@add_schumacher
-#title: Kurt Schumacher
-#subtitle: Kurt Schumacher is a leading neo-revisionist.
-#is-card: true
-#card-image: img/portraits/SchumacherKurt.jpg
-#tags: neorev_advisor
-#view-if: schumacher_advisor = 0 and n_advisors < 3
-#on-arrival: schumacher_advisor = 1; n_advisors += 1; neorevisionist_strength += 5
-#go-to: advisor_menu
+@add_schumacher
+title: Kurt Schumacher
+subtitle: Kurt Schumacher is a leading neo-revisionist.
+is-card: true
+card-image: img/portraits/SchumacherKurt.jpg
+tags: neorev_advisor
+view-if: schumacher_advisor = 0 and n_advisors < 3
+on-arrival: schumacher_advisor = 1; n_advisors += 1; neorevisionist_strength += 5
+go-to: advisor_menu
 
-#Kurt Schumacher is now an advisor.
+Kurt Schumacher is now an advisor.
 
 @add_leber
 title: Julius Leber

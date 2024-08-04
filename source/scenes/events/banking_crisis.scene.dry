@@ -3,7 +3,7 @@ subtitle: The collapse of the German banking system...
 new-page: true
 on-arrival: banking_crisis_seen = 1; workers_kpd += 6; workers_nsdap += 5; unemployed += 3; crisis_urgency += 1
 tags: event
-view-if: year = 1931 and month >= 6 and spd_in_government = 0 and inflation < -1
+view-if: customs_union = 1 and banking_crisis_timer = 0
 max-visits: 1
 
 = Banking Crisis
@@ -12,10 +12,27 @@ The Darmstädter und Nationalbank, or Danat Bank, has collapsed! Along with it g
 
 This is a bourgeois dispute, but the costs will be borne by the proletariat. The people are facing ever-increasing hunger and poverty, and perhaps we are partly to blame.
 
+- @nothing_to_do: There is nothing we can do.
+- @stabilization: Take action to stabilize the economy!
 - @austerity: Chancellor [+ chancellor +]'s response is, as always, more austerity.
 - @end_toleration: We are tired of austerity. End the toleration arrangement!
 
+@nothing_to_do
+view-if: spd_in_government = 1
+on-arrival: welfare -= 1; workers_spd -= 3; unemployed_spd -= 3; pro_republic -= 3
+
+There is, essentially, nothing we can do.
+
+@stabilization
+view-if: spd_in_government = 1
+subtitle: -1 budget
+choose-if: budget >= 1
+on-arrival: workers_spd += 5; unemployed -= 2.5; inflation += 1 if inflation < 0
+
+In the face of the banking crisis, we have taken emergency action to stabilize the economy. It is not enough.
+
 @austerity
+view-if: spd_in_government = 0
 on-arrival: welfare -= 1; workers_spd -= 3; unemployed_spd -= 3; pro_republic -= 3
 
 Chancellor [+ chancellor +] responds to the banking crisis with more cuts to welfare.

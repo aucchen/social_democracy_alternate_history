@@ -1,10 +1,10 @@
 title: Economic Democracy
 is-card: true
 new-page: true
-on-arrival: economic_democracy_timer = 10; month_actions += 1
-view-if: spd_in_government and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and (labor_minister_party == "SPD") and economic_democracy_timer == 0
+on-arrival: economic_democracy_timer += 10; month_actions += 1
+view-if: spd_in_government and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and (labor_minister_party == "SPD") and economic_democracy_timer <= 0
 card-image: img/portraits/HilferdingRudolf.jpg
-max-visits: 6
+max-visits: 8
 tags: govt_affairs
 
 = Economic Democracy
