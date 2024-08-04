@@ -28,7 +28,7 @@ title: The Prussian Bulwark
 subtitle: As the Minister-President of Prussia, Braun has power over the Prussian bureaucracy and security services.
 choose-if: advisor_action_timer <= 0 and spd_prussia = 1
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if spd_prussia == 0 : The SPD does not control Prussia. ?]
-on-arrival: advisor_action_timer = 5; prussian_affairs_timer = 0
+on-arrival: advisor_action_timer = 5; prussian_affairs_timer -= 6
 go-to: prussian_affairs
 
 @snap_election

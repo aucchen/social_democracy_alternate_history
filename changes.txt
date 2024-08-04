@@ -228,3 +228,22 @@ Future plans:
 Known issue- the election results won't exactly sum to 100 because of rounding. I'm not sure if having more decimal places would work well, though - even if we truncate the numbers to one decimal place, there will be terrible floating point issues that make any derived numbers look ugly. I'm still thinking of how to deal with that problem (probably a display layer that truncates the decimal places?).
 
 Would you prefer to see more decimal places in the election results?
+
+v0.14 - Foreign Affairs
+
+Major changes:
+
+- Added visualization for party support history.
+- New events: Austrian Customs Union, Hoover Moratorium, Lausanne Conference. Also changed the requirements of the Banking Crisis.
+- New party affairs card: Party Disunity
+- New options for Foreign Affairs: splitting up Western Allies and eastern neighbors, forming an Austrian Customs Union, creating a European Union
+- New advisor: Kurt Schumacher (neorevisionist)
+- New achievement: Vereinigte Staaten von Europa
+
+Minor changes:
+
+- For most advisors, advisor actions should not reset the card timer.
+- Typographical fixes
+- Party faction strengths should sum to 100.
+
+It is unlikely that there will be updates in August, as I work on my entries for IFComp 2024. I submitted intents for two entries, but I feel like there's a less than 50% chance I'll manage to complete one game. I'm also writing a postmortem for this game, which will *hopefully* be out soon-ish.

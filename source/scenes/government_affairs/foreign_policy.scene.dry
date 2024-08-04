@@ -148,13 +148,16 @@ on-arrival: eu_progress += 1; west_relation += 1
 
 Forming a "United States of Europe" has long been part of the Social Democratic foreign program. Finally, we are taking steps towards it. Given our positive relations with the other countries of Europe, we can begin to hold multilateral negotiations for more European federalism. It will take time to hammer out the exact shape of this future "European Union", however.
 
+
 @european_union_2
 title: We can sign a treaty to form a European Union!
 view-if: west_relation >= 5 and east_relation >= 4 and eu_progress >= 2
-on-arrival: eu = 1; unemployed -= 2 if unemployed > 10
+on-arrival: eu = 1; unemployed -= 2 if unemployed >= 10; inflation += 2 if inflation <= -2; workers_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); old_middle_spd += 5*(1-dissent); rural_spd += 4*(1-dissent); catholics_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); pro_republic += 5; nationalism -= 5
 max-visits: 1
 achievement: eu
 
-Along with France, Great Britain, and many other states of Western and Eastern Europe, we have signed a treaty to form a European Union! The first step of this union is the free movement of people and goods across the countries of Europe.
+Along with France, Great Britain, and many other states of Western and Eastern Europe, we have signed a treaty to form a European Union! It is hoped that Europe has learned the lessons of the Great War; never again will there be another war that tears the continent apart.
 
-Fascist Italy remains a problem, as does the Soviet Union.
+A major component of the union is the free movement of people and goods across the countries of Europe, as well as the stabilization of currency exchange rates. This provides new markets for German products and new sources of investment.
+
+Fascist Italy remains a problem, and the Soviet Union also lies outside the system. But for now, there is new hope for peace and prosperity throughout the continent.

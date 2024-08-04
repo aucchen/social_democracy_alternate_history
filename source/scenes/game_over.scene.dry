@@ -265,6 +265,13 @@ go-to: eg_menu
 
 Works councils now have substantially greater influence, giving workers democratic control over their economic lives.
 
+@european_union
+title: There is now a European Union!
+view-if: eu = 1
+tags: endings
+go-to: eg_menu
+
+We have helped to form a European Union to bring peace and prosperity to the continent. Time will tell how effective it will be.
 
 @achievements
 title: Achievements
