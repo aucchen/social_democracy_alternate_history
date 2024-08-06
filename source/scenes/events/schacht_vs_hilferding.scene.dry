@@ -29,6 +29,6 @@ After a second budget proposal, Schacht still considers Hilferding's budget to b
 
 
 @hilferding_resign
-on-arrival: finance_minister_party = "DVP" if in_grand_coalition; foreign_minister_party = "I" if in_weimar_coalition or in_popular_front or in_left_front; finance_minister = "Moldenhauer"
+on-arrival: finance_minister_party = "DVP" if in_grand_coalition; finance_minister_party = "I" if in_weimar_coalition or in_popular_front or in_left_front; finance_minister = "Moldenhauer"
 
 With no other choice, Hilferding has resigned as Finance Minister, to be replaced by a [? if in_grand_coalition: center-right ?][? if not in_grand_coalition: technocratic ?] candidate.
