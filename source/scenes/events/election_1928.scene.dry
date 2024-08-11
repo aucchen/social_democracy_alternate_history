@@ -86,6 +86,7 @@ Q.in_grand_coalition = 0;
 Q.in_left_front = 0;
 Q.in_popular_front = 0;
 Q.in_emergency_government = 0;
+Q.in_minority_government = 0;
 Q.spd_toleration = 0;
 Q.spd_caretaker = 0;
 Q.foreign_minister_party = 'DVP';
@@ -758,13 +759,17 @@ if (Q.pro_republic < 40) {
     Q.unemployed_nsdap += 5;   
 }
 !}
+view-if: no_confidence_votes > 50
 
 The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
 
 
 @no_confidence_win
+view-if: no_confidence_votes <= 50
+on-arrival: in_minority_government = 1
+achievement: minderheitsregierung
 
-We have won the vote. Now our task is to fix the country.
+We have won the vote of no confidence, and are currently ruling under an SPD minority government. Now our task is to fix the country.
 
 
 @weimar_coalition
@@ -895,6 +900,8 @@ The people's faith in democracy is shaken by this ordeal. Of course, the Nazis a
 
 
 @toleration_bruning
+choose-if: neo_weimar_coalition >= 50
+unavailable-subtitle: The parties supporting Brüning do not have a majority.
 on-arrival: spd_in_government = 0; spd_toleration = 1; minority_government = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; pro_republic -= 4; new_middle_dvp -= 5; new_middle_ddp -= 5; old_middle_dvp -= 5; old_middle_ddp -= 5; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_dnvp -= 5;
 
 We have decided to tolerate Brüning's government. This means that we will vote against no-confidence votes to make sure they fail, but also that we will not be directly participating as ministers in the government. Thus, we can prevent a new election and stop the far right from entering government.

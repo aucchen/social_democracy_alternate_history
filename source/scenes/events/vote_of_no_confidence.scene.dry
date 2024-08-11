@@ -1,7 +1,7 @@
 title: The Right calls a vote of no confidence against the current government!
 subtitle: We have angered our coalition partners too much...
 new-page: true
-view-if: spd_in_government = 1 and ((in_grand_coalition = 1 or in_popular_front = 1) and coalition_dissent >= 3) or (in_weimar_coalition = 1 and coalition_dissent >= 4) and spd_r < 50
+view-if: spd_in_government = 1 and ((in_grand_coalition = 1 or in_popular_front = 1 or in_minority_government = 1) and coalition_dissent >= 3) or (in_weimar_coalition = 1 and coalition_dissent >= 4) and spd_r < 50
 tags: event
 
 # Options: spend relations to reduce coalition_dissent, ask for kpd to abstain
@@ -9,7 +9,7 @@ tags: event
 
 = Vote of No Confidence
 
-[? if in_grand_coalition : The DVP ?][? if in_weimar_coalition or in_popular_front: The Center Party ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
+[? if in_grand_coalition : The DVP ?][? if in_weimar_coalition or in_popular_front or in_minority_government: The Center Party ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
 
 - @try_assuage: Try to assuage our partners.
 - @support_kpd: Could we get the KPD to abstain?

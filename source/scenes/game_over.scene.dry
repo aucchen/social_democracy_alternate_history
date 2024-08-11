@@ -98,6 +98,10 @@ if (Q.factory_takeovers >= 2) {
 if ((Q.chancellor_party == "NSDAP" || Q.chancellor == "Hitler" || Q.president == "Hitler") && Q.total_defeat) {
     this.achieve('stolperstein');
 }
+// Heidelberger Programm - fulfill the goals of the Heidelberg programm - increase welfare, reform justice, support women's rights, progressive taxation, works councils, build a European Union.
+if ((Q.welfare > 0 && Q.judicial_reform >= 2 && Q.womens_work >= 1 && Q.family_law >= 1 && Q.upper_tax_rates > Q.lower_tax_rates && Q.works_councils > 0 && Q.eu > 0)) {
+    this.achieve('heidelberger_programm');
+}
 !}
 
 = End
@@ -310,7 +314,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_weimar_coalition: **Weimarer Koalition** - form a Weimar coalition. ?]
 
-[? if game_achievement_majority_party: **Mehrheitspartei** - form an SPD majority government. ?]
+[? if game_achievement_majority_party: **Mehrheitspartei** - form an SPD-only majority government. ?]
+
+[? if game_achievement_minderheitsregierung: **Minderheitsregierung** - form an SPD minority government. ?]
 
 [? if game_achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
@@ -352,6 +358,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_eu: **Vereinigte Staaten von Europa** - form a "European Union". ?]
 
+[? if game_achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
+
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -387,7 +395,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_weimar_coalition: **Weimarer Koalition** - form a Weimar coalition. ?]
 
-[? if achievement_majority_party: **Mehrheitspartei** - form an SPD majority government. ?]
+[? if achievement_majority_party: **Mehrheitspartei** - form an SPD-only majority government. ?]
+
+[? if achievement_minderheitsregierung: **Minderheitsregierung** - form an SPD minority government. ?]
 
 [? if achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
@@ -429,6 +439,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_eu: **Vereinigte Staaten von Europa** - form a "European Union". ?]
 
+[? if achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
+
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -462,7 +474,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_weimar_coalition: **Weimarer Koalition** - form a Weimar coalition. ?]
 
-[? if not achievement_majority_party: **Mehrheitspartei** - form an SPD majority government. ?]
+[? if not achievement_majority_party: **Mehrheitspartei** - form an SPD-only majority government. ?]
+
+[? if not achievement_minderheitsregierung: **Minderheitsregierung** - form an SPD minority government. ?]
 
 [? if not achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
@@ -503,6 +517,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
 
 [? if not achievement_eu: **Vereinigte Staaten von Europa** - form a "European Union". ?]
+
+[? if not achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 

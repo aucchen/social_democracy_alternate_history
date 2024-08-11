@@ -247,3 +247,15 @@ Minor changes:
 - Party faction strengths should sum to 100.
 
 It is unlikely that there will be updates in August, as I work on my entries for IFComp 2024. I submitted intents for two entries, but I feel like there's a less than 50% chance I'll manage to complete one game. I'm also writing a postmortem for this game, which will *hopefully* be out soon-ish.
+
+v0.14.2 - Heidelberg Program, bug fixes, minority government
+
+Changes:
+
+- New achievement: Heidelberger Programm (fulfill most of the historical goals of the Heidelberg Program)
+- New achievement: Minderheitsregierung (successfully form an SPD minority government)
+- Minority/emergency governments can get votes of no confidence.
+- Tolerating Brüning cannot happen if the constitutional parties do not have a majority.
+- Bug fix: advisor actions should not reset card timers.
+- Bug fix: emergency/minority government options should show up correctly.
+- Some minor changes for policy outcomes.
