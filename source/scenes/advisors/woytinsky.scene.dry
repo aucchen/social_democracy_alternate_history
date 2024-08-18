@@ -17,7 +17,7 @@ Wladimir Woytinsky is a Russian Menshevik in exile, and the chief economist of t
 @plan
 title: Adopt the WTB-plan!
 subtitle: Convincing the rest of the party to support the WTB-plan.
-choose-if: advisor_action_timer <= 0 and wtb_adopted == 0 and wtb_support >= 3 and black_thursday_seen
+choose-if: advisor_action_timer <= 0 and wtb_adopted == 0 and wtb_support >= 3 and black_thursday_seen and (not historical_mode or ((labor_strength > center_strength) and (labor_strength > left_strength) and (labor_strength > reformist_strength)))
 on-arrival: advisor_action_timer = 6;
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if wtb_adopted > 0 : We have already adopted the WTB-Plan. ?][? if wtb_support < 3 : There is not enough support for the WTB-Plan. ?]
 go-to: crisis_program.plan_adopted

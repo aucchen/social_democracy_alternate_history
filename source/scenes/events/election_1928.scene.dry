@@ -559,6 +559,7 @@ Who should be chancellor?
 
 @braun_chancellor_new
 subtitle: This will reduce our leverage in the ministries.
+view-if: not historical_mode or not spd_prussia
 on-arrival: leverage -= 10; chancellor = "Braun"; chancellor_party = "SPD"
 go-to: ministries
 
@@ -615,6 +616,7 @@ Who should be chancellor?
 - @wels_majority_chancellor: Otto Wels for Chancellor.
 
 @braun_majority_chancellor
+view-if: not historical_mode or not spd_prussia
 on-arrival: chancellor = "Braun"
 
 [? if president == "Braun": Our experts have checked the constitution, and have discovered that there is no specific prohibition against the Chancellor also being the President (the President may not be a member of the Reichstag; there is no law saying that the Chancellor must be a member of the Reichstag). Thus, we have Chancellor-President Otto Braun. ?]
@@ -992,6 +994,7 @@ Otto Wels's appointment as chancellor is approved by our potential allies.
 
 @braun
 title: Otto Braun for Chancellor
+view-if: not historical_mode or not spd_prussia
 subtitle: Braun is currently the Minister-President of Prussia, and is one of our most popular leaders. However, other parties may have qualms about concentrating too much power in one man.
 
 The Center party has significant qualms about appointing Braun as chancellor, given that he is already Minister-President of Prussia. They ask for either more cabinet positions, or for Braun to resign his state government role. The latter is completely unacceptable.
@@ -1002,6 +1005,7 @@ The Center party has significant qualms about appointing Braun as chancellor, gi
 
 @braun_2
 subtitle: Otto Braun will be Chancellor.
+view-if: not historical_mode
 on-arrival: spd_in_government = 1; chancellor = "Braun"; chancellor_party = "SPD"; leverage -= 10; in_grand_coalition = 1 if in_weimar_coalition == 0
 go-to: ministries
 

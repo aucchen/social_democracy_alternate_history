@@ -66,6 +66,7 @@ Support for the Republic: [+ pro_republic +]%
 
 
 @election_projections
+view-if: (not historical_mode) or game_over
 go-to: menu
 
 **Projected election results** (if the election were to be held now):
@@ -238,6 +239,7 @@ Dissent: [+ neorevisionist_dissent : dissent +]
 
 
 @figures
+view-if: (not historical_mode) or game_over
 title: Figures and Charts
 go-to: menu
 on-arrival: z_minus_bvp_r = z_r - 3;
@@ -320,10 +322,20 @@ if (d3 && window) {
     d3.select("#election_history").datum(Q.election_records).call(lines);
     //document.getElementById('election_history').innerHTML = svg.outerHTML;
 
-    // TODO: party support records should not have so many ticks
+    // party support records should not have so many ticks
     var lines_2 = d3.linegraph(true, true);
     lines_2.width(width).height(400);
     d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
+
+    // economic stats
+    var minInflation = d3.min(Q.economic_records, d => d.inflation);
+    var maxUnemployment = d3.max(Q.economic_records, d => d.unemployment);
+    var lines_3 = d3.linegraph(true, true, ['inflation', 'unemployment'],
+            {'inflation': '#0000FF', 'unemployment': '#FF0000'},
+            {'inflation': 'Inflation', 'unemployment': 'Unemployment'},
+            maxUnemployment + 5, minInflation - 5, 21);
+    lines_3.width(width).height(300);
+    d3.select("#economic_history").datum(Q.economic_records).call(lines_3);
 }
 !}
 
@@ -358,4 +370,8 @@ if (d3 && window) {
 = Party support history
 
 {!<svg id="party_support_history" style="width: 500px; height: 400px;"> </svg>!}
+
+= Economic history
+
+{!<svg id="economic_history" style="width: 500px; height: 300px;"> </svg>!}
 # TODO: maybe add textual histories too? some accessibility stuff as well...

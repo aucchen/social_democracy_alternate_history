@@ -31,9 +31,12 @@ Many Reichsbanner members are not ready for actual fighting, and thus quit. Howe
 subtitle: -[+ rb_militarization_cost +] resource
 choose-if: resources >= rb_militarization_cost
 unavailable-subtitle: Not enough resources ([+ rb_militarization_cost +] needed).
-on-arrival: resources -= rb_militarization_cost; rb_militancy += 0.06; rb_strength += 50; sa_strength += 50; 
+on-arrival: resources -= rb_militarization_cost; rb_militancy += 0.06; rb_strength += 50; sa_strength += 50; z_relation -= 5 if historical_mode 
 
 We have increased training and purchased more armaments for the Reichsbanner.
+
+[? if historical_mode : The Center Party decries the militarization of the Reichsbanner, and its members are leaving the republican organization. ?]
+
 
 @if_training
 view-if: iron_front_formed == 1

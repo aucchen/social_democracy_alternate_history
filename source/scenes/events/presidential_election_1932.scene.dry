@@ -80,7 +80,7 @@ if (Q.z_relation >= 55) {
     Q.z_support_braun = 2;
 }
 !}
-go-to: z_failed if z_support_braun = 0; z_success if z_support_braun = 1; z_partial if z_support_braun = 2
+go-to: z_failed if z_support_braun = 0 or (z_support_braun == 2 and historical_mode); z_success if z_support_braun = 1; z_partial if z_support_braun = 2 and not historical_mode
 max-visits: 1
 
 We remind the Center leaders of Hindenburg's anti-Catholicism, and try to convince them that Hindenburg's path will eventually lead to Hitler. We also remind them of the successes they've had as part of the Weimar coalition in Prussia with Otto Braun, and our support for the Center candidate Wilhelm Marx in the 1925 presidential election.
@@ -123,7 +123,7 @@ The KPD is supporting their own candidate, Ernst Thälmann. [? if kpd_relation >
 - @braun_campaign: Forget about the KPD.
 
 @kpd_resources
-view-if: kpd_relation >= 50
+view-if: kpd_relation >= 50 and not historical_mode
 choose-if: resources >= 3
 subtitle: -3 resources
 unavailable-subtitle: Not enough resources (need 3).
@@ -291,7 +291,7 @@ if (Q.z_relation >= 55) {
     Q.z_support_braun = 2;
 }
 !}
-go-to: r2_z_failed if z_support_braun = 0; r2_z_success if z_support_braun = 1; r2_z_partial if z_support_braun = 2
+go-to: r2_z_failed if z_support_braun = 0 or (z_support_braun = 2 and historical_mode); r2_z_success if z_support_braun = 1; r2_z_partial if z_support_braun = 2 and not historical_mode
 max-visits: 1
 
 @r2_z_success
@@ -336,7 +336,7 @@ The KPD is committed to supporting Ernst Thälmann. [? if kpd_relation >= 45 : H
 - @round2_menu: Forget about the KPD.
 
 @r2_kpd_resources
-view-if: kpd_relation >= 45
+view-if: kpd_relation >= 45 and not historical_mode
 choose-if: resources >= 3
 subtitle: -3 resources
 unavailable-subtitle: Not enough resources (need 3).

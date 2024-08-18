@@ -26,6 +26,7 @@ Fine. By cutting welfare, we have reduced dissent within the coalition.
 
 @resources
 subtitle: -2 resources
+view-if: historical_mode = 0
 unavailable-subtitle: Not enough resources (need 2).
 choose-if: resources >= 2
 on-arrival: resources -= 2; coalition_dissent -= 1

@@ -30,6 +30,7 @@ Q.month_actions = 0;
 
 // 0 = normal difficulty, 1 = hard mode, 2 = hard mode no saves
 Q.difficulty = 0;
+Q.historical_mode = 0;
 // old demographics
 Q.old_demographics = 0;
 
@@ -529,6 +530,7 @@ For more information on the politics and government of the German Republic, see 
 - @1928_easy: Begin (easy difficulty)
 - @1928_main: Begin (normal difficulty)
 - @1928_hard: Begin (hard difficulty)
+- @1928_historical: Begin (historical mode)
 
 @1928_easy
 on-arrival: difficulty = -1; resources = 4; dues = 3; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49;
@@ -536,6 +538,26 @@ go-to: 1928_main
 
 @1928_hard
 on-arrival: difficulty = 1; resources = 0; dues = 1; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31;
+go-to: 1928_main
+
+@1928_historical
+subtitle: Saving and loading will be disabled.
+on-arrival: {!
+Q.difficulty = 2;
+Q.historical_mode = 1;
+Q.resources = 2;
+Q.dues = 1;
+Q.rb_strength = 2000;
+Q.reformist_dissent = 25;
+Q.left_dissent = 30;
+Q.labor_dissent = 25;
+Q.center_dissent = 25;
+Q.z_relation = 41;
+Q.kpd_relation = 16;
+Q.dvp_relation = 31;
+Q.budget = 2;
+this.state.disableSaves = true;
+!}
 go-to: 1928_main
 
 @1928_main

@@ -13,11 +13,20 @@ function addMonths(date, months) {
 }
 
 
-d3.linegraph = function(noTicks, noDots) {
+d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataMax, dataMin, additionalMonths) {
     /* params */
-    var parties = ['spd', 'kpd', 'ddp', 'z', 'dvp', 'dnvp', 'nsdap', 'other'];
-    var partyColors = {'spd': '#E3000F', 'kpd': '#8B0000', 'ddp': '#DCCA4A', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3f7bc1', 'nsdap': '#954B00', 'other': '#a0a0a0'};
-    var partyNames = {'spd': 'SPD', 'kpd': 'KPD', 'ddp': 'DDP', 'z': 'Z + BVP', 'dvp': 'DVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others'};
+    if (!parties) {
+        parties = ['spd', 'kpd', 'ddp', 'z', 'dvp', 'dnvp', 'nsdap', 'other'];
+    }
+    if (!partyColors) {
+        partyColors = {'spd': '#E3000F', 'kpd': '#8B0000', 'ddp': '#DCCA4A', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3f7bc1', 'nsdap': '#954B00', 'other': '#a0a0a0'};
+    }
+    if (!partyNames) {
+        partyNames = {'spd': 'SPD', 'kpd': 'KPD', 'ddp': 'DDP', 'z': 'Z + BVP', 'dvp': 'DVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others'};
+    }
+    if (!additionalMonths) {
+        additionalMonths = 10;
+    }
 
     // Declare the chart dimensions and margins.
     var width = 500;
@@ -35,14 +44,13 @@ d3.linegraph = function(noTicks, noDots) {
 
       // Declare the x (horizontal position) scale.
       const maxDate = d3.max(dates);
-      const xScale = d3.scaleUtc([new Date(1928, 0), addMonths(maxDate, 10)], [marginLeft, width - marginRight]);
+      const xScale = d3.scaleUtc([new Date(1928, 0), addMonths(maxDate, additionalMonths)], [marginLeft, width - marginRight]);
 
       var xaxis = d3.axisBottom()
         .tickFormat(d3.timeFormat('%b %Y'))
         .tickValues(dates)
         .scale(xScale);
       if (noTicks) {
-        console.log('noTicks');
         xaxis = d3.axisBottom()
         .tickFormat(d3.timeFormat('%b %Y'))
         .ticks(10)
@@ -50,9 +58,13 @@ d3.linegraph = function(noTicks, noDots) {
       }
 
       // Declare the y (vertical position) scale.
-      const maxSPD = d3.max(data, d => d.spd);
-      const maxNSDAP = d3.max(data, d => d.nsdap);
-      const yScale = d3.scaleLinear([0, maxSPD >= maxNSDAP ? maxSPD + 10 : maxNSDAP + 10], [height - marginBottom, marginTop]);
+      if (!dataMax) {
+          const maxSPD = d3.max(data, d => d.spd);
+          const maxNSDAP = d3.max(data, d => d.nsdap);
+          dataMax = maxSPD >= maxNSDAP ? maxSPD + 10 : maxNSDAP + 10;
+          dataMin = 0;
+      }
+      const yScale = d3.scaleLinear([dataMin, dataMax], [height - marginBottom, marginTop]);
 
       //Create the SVG container.
       //const svg = d3.create("svg")
