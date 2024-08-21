@@ -57,8 +57,4 @@ on-arrival: {!
         Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
         Q[last_party+'_votes_dec'] = Q[last_party+'_votes'];
     }
-}
 !}
-go-to: jumpScene
-
-# note: this is a helpful utility to deal with elections and so on.
