@@ -1,4 +1,3 @@
-title: Election
 on-arrival: {!
     // Helper function to round numbers to two decimal places accurately
     function roundToTwo(num) {
@@ -10,15 +9,14 @@ on-arrival: {!
     for (var c of Q.classes) {
         var class_votes = 0;
         for (var party of Q.parties) {
-            if (Q[c+'_'+party] < 0) {
-                Q[c+'_'+party] = 0;
-            }
+            Q[c+'_'+party] = Math.max(0, Q[c+'_'+party]); // Ensure non-negative values
             class_votes += Q[c+'_'+party];
         }
-        class_normalized[c] = {};
         for (var party of Q.parties) {
-            class_normalized[c][party] = class_votes > 0 ? roundToTwo(100 * Q[c+'_'+party] / class_votes) : 0;
-            Q[c + '_' + party + '_normalized'] = class_normalized[c][party];
+            var normalized = class_votes > 0 ? roundToTwo(100 * Q[c+'_'+party] / class_votes) : 0;
+            class_normalized[c] = class_normalized[c] || {};
+            class_normalized[c][party] = normalized;
+            Q[c + '_' + party + '_normalized'] = normalized; // Store normalized values
         }
     }
 
@@ -39,15 +37,15 @@ on-arrival: {!
         total_support += party_support;
     }
 
-    // 2. normalize support (fraction) and round to two decimals
-    var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
+    // 2. normalize support and calculate votes
+    var sorted_parties = Q.parties.sort((a, b) => party_supports[b] - party_supports[a]);
     var total_votes = 0;
     for (var party of sorted_parties) {
         Q[party+'_normalized'] = roundToTwo(party_supports[party] / total_support);
-        var normalized = roundToTwo(Q[party+'_normalized'] * 100);
-        total_votes = roundToTwo(total_votes + normalized);
-        Q[party+'_votes'] = normalized;
-        Q[party+'_votes_dec'] = normalized;
+        var votes = roundToTwo(Q[party+'_normalized'] * 100);
+        total_votes = roundToTwo(total_votes + votes);
+        Q[party+'_votes'] = votes;
+        Q[party+'_votes_dec'] = votes;
     }
 
     // Adjust the last party's votes if necessary
