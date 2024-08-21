@@ -1,48 +1,62 @@
 title: Election
 on-arrival: {!
-// calculate normalized class voting amounts (0 to 100)
-for (var c of Q.classes) {
-    var class_votes = 0;
-    for (var party of Q.parties) {
-        if (Q[c+'_'+party] < 0) {
-            Q[c+'_'+party] = 0;
-        }
-        class_votes += Q[c+'_'+party];
+    // Helper function to round numbers to two decimal places accurately
+    function roundToTwo(num) {
+        return +(Math.round(num + "e+2")  + "e-2");
     }
-    for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
-    }
-}
 
-// 1. calculate support for each of the parties
-var total_support = 0;
-for (var party of Q.parties) {
-    var party_support = 0;
+    // calculate normalized class voting amounts (0 to 100)
+    var class_normalized = {};
     for (var c of Q.classes) {
-        // but this version is somewhat more entertaining and allows for wilder swings in votes.
-        // the other option basically necessitates a multi-class strategy. while the first option allows for a working-class-only strategy.
-        if (Q.old_demographics) {
-            // okay i'm pretty sure this is wrong, and the hard version is correct
-            // basically this allows for "spillover" effects in other demographics.
-            // so you can campaign among say the workers and 
-            party_support += Q[c]*Q[c+'_'+party];
-            // However, there should be a cap on how much party support you can get in a certain demo.
-        } else  {
-            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+        var class_votes = 0;
+        for (var party of Q.parties) {
+            if (Q[c+'_'+party] < 0) {
+                Q[c+'_'+party] = 0;
+            }
+            class_votes += Q[c+'_'+party];
+        }
+        class_normalized[c] = {};
+        for (var party of Q.parties) {
+            class_normalized[c][party] = class_votes > 0 ? roundToTwo(100 * Q[c+'_'+party] / class_votes) : 0;
+            Q[c + '_' + party + '_normalized'] = class_normalized[c][party];
         }
     }
-    Q[party + '_support'] = party_support;
-    total_support += party_support;
-}
-// 2. normalize support (fraction)
-// 3. Round to integers
-// TODO: round to 1 decimal instead of rounding to integers
-// to do that, we multiply party_normalized*1000 and divide the rounded number by 10.
-for (var party of Q.parties) {
-    Q[party+'_normalized'] = Q[party + '_support']/total_support;
-    Q[party+'_votes_dec'] = Math.round(Q[party+'_normalized']*1000)/10;
-    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
-    //Q[party+'_votes'] = Q[party+'_votes_dec'];
+
+    // 1. calculate support for each of the parties
+    var total_support = 0;
+    var party_supports = {};
+    for (var party of Q.parties) {
+        var party_support = 0;
+        for (var c of Q.classes) {
+            if (Q.old_demographics) {
+                party_support += roundToTwo(Q[c] * Q[c+'_'+party]);
+            } else {
+                party_support += roundToTwo(Q[c] * class_normalized[c][party]);
+            }
+        }
+        party_supports[party] = party_support;
+        Q[party + '_support'] = party_support;
+        total_support += party_support;
+    }
+
+    // 2. normalize support (fraction) and round to two decimals
+    var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
+    var total_votes = 0;
+    for (var party of sorted_parties) {
+        Q[party+'_normalized'] = roundToTwo(party_supports[party] / total_support);
+        var normalized = roundToTwo(Q[party+'_normalized'] * 100);
+        total_votes = roundToTwo(total_votes + normalized);
+        Q[party+'_votes'] = normalized;
+        Q[party+'_votes_dec'] = normalized;
+    }
+
+    // Adjust the last party's votes if necessary
+    var discrepancy = roundToTwo(100 - total_votes);
+    if (discrepancy !== 0) {
+        var last_party = sorted_parties[sorted_parties.length - 1];
+        Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
+        Q[last_party+'_votes_dec'] = Q[last_party+'_votes'];
+    }
 }
 !}
 go-to: jumpScene
