@@ -209,6 +209,7 @@ v. 1.3. test mode
 
 V. 1.3.1.. test mode
 - Откат мода
+- резерв
 
 
 TODO:
