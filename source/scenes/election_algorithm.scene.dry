@@ -1,7 +1,8 @@
+title: Election
 on-arrival: {!
     // Helper function to round numbers to two decimal places accurately
     function roundToTwo(num) {
-        return +(Math.round(num + "e+2")  + "e-2");
+        return +(Math.round(num + "e+2") + "e-2");
     }
 
     // calculate normalized class voting amounts (0 to 100)
@@ -9,14 +10,17 @@ on-arrival: {!
     for (var c of Q.classes) {
         var class_votes = 0;
         for (var party of Q.parties) {
-            Q[c+'_'+party] = Math.max(0, Q[c+'_'+party]); // Ensure non-negative values
-            class_votes += Q[c+'_'+party];
+            if (Q[c + '_' + party] < 0) {
+                Q[c + '_' + party] = 0;
+            }
+            class_votes += Q[c + '_' + party];
         }
+        class_normalized[c] = {};
         for (var party of Q.parties) {
-            var normalized = class_votes > 0 ? roundToTwo(100 * Q[c+'_'+party] / class_votes) : 0;
-            class_normalized[c] = class_normalized[c] || {};
-            class_normalized[c][party] = normalized;
-            Q[c + '_' + party + '_normalized'] = normalized; // Store normalized values
+            // Используем округление до двух знаков после запятой
+            class_normalized[c][party] = class_votes > 0 ? roundToTwo(100 * Q[c + '_' + party] / class_votes) : 0;
+            // Также сохраняем нормализованные значения для прямого использования
+            Q[c + '_' + party + '_normalized'] = class_normalized[c][party];
         }
     }
 
@@ -26,33 +30,42 @@ on-arrival: {!
     for (var party of Q.parties) {
         var party_support = 0;
         for (var c of Q.classes) {
+            // Добавляем логику выбора между старыми демографическими данными и новыми нормализованными значениями
             if (Q.old_demographics) {
-                party_support += roundToTwo(Q[c] * Q[c+'_'+party]);
+                party_support += roundToTwo(Q[c] * Q[c + '_' + party]);
             } else {
                 party_support += roundToTwo(Q[c] * class_normalized[c][party]);
             }
         }
         party_supports[party] = party_support;
-        Q[party + '_support'] = party_support;
         total_support += party_support;
+        Q[party + '_support'] = party_support;
     }
 
-    // 2. normalize support and calculate votes
-    var sorted_parties = Q.parties.sort((a, b) => party_supports[b] - party_supports[a]);
+    // 2. normalize support (fraction) and round to two decimals
+    var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
     var total_votes = 0;
     for (var party of sorted_parties) {
-        Q[party+'_normalized'] = roundToTwo(party_supports[party] / total_support);
-        var votes = roundToTwo(Q[party+'_normalized'] * 100);
-        total_votes = roundToTwo(total_votes + votes);
-        Q[party+'_votes'] = votes;
-        Q[party+'_votes_dec'] = votes;
+        var normalized = roundToTwo(party_supports[party] / total_support * 100);
+        total_votes = roundToTwo(total_votes + normalized);
+        Q[party + '_votes'] = normalized;
     }
 
     // Adjust the last party's votes if necessary
     var discrepancy = roundToTwo(100 - total_votes);
     if (discrepancy !== 0) {
         var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
-        Q[last_party+'_votes_dec'] = Q[last_party+'_votes'];
+        Q[last_party + '_votes'] = roundToTwo(Q[last_party + '_votes'] + discrepancy);
+    }
+
+    // 3. Additional normalization and rounding logic
+    for (var party of Q.parties) {
+        Q[party + '_normalized'] = Q[party + '_support'] / total_support;
+        Q[party + '_votes_dec'] = Math.round(Q[party + '_normalized'] * 1000) / 10;
+        Q[party + '_votes'] = Math.round(Q[party + '_normalized'] * 100);
+        // Q[party + '_votes'] = Q[party + '_votes_dec']; // Если нужно использовать одну десятичную точность
     }
 !}
+go-to: jumpScene
+
+# note: this is a helpful utility to deal with elections and so on.
