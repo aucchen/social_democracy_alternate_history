@@ -18,7 +18,7 @@ title: Prussian Bulwark
 subtitle: Severing has influence over Prussian politics.
 choose-if: advisor_action_timer <= 0 and spd_prussia = 1
 unavailable-subtitle: Not available right now.
-on-arrival: advisor_action_timer = 6; prussian_affairs_timer = 0
+on-arrival: advisor_action_timer = 6; prussian_affairs_timer -= 6
 go-to: prussian_affairs
 
 
@@ -27,6 +27,6 @@ title: Police affairs
 subtitle: We can set our police policy. 
 choose-if: advisor_action_timer == 0 and spd_in_government and interior_minister_party == "SPD"
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The SPD is not in government. ?][? if interior_minister_party != "SPD": The SPD does not have the Interior ministry. ?]
-on-arrival: advisor_action_timer = 6;
+on-arrival: advisor_action_timer = 6; police_timer -= 6
 go-to: police
 

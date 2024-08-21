@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 tags: govt_affairs
 view-if: spd_in_government = 1 and womens_rights_timer = 0 and chancellor_party == "SPD"
-on-arrival: womens_rights_timer = 10; month_actions += 1
+on-arrival: womens_rights_timer += 10; month_actions += 1
 card-image: img/portraits/PfülfAntonie.jpg
 frequency: 50
 max-visits: 4
@@ -15,6 +15,7 @@ According to the Constitution, women are equal to men, but this is not followed 
 For better or for worse, the Socialists stand virtually alone in supporting increased rights for women, and even within the party, the leadership does not consider it a priority. [? if spd_r < 50 : Unfortunately, women still disproportionately support the bourgeois parties. ?]
 
 - @labor: Institute policies that help women in the workforce.
+- @family: Reform marriage, divorce, and property law.
 - @welfare: Improve welfare for single mothers and children.
 - @liberalize: Attempt to liberalize abortion laws.
 - @return: Do not enact any policies for now.
@@ -26,6 +27,13 @@ on-arrival: womens_work = 1; womens_rights += 1; workers_spd -= 4 if unemployed 
 max-visits: 3
 
 These policies mean that our party is increasing in popularity among the "new women" who work outside the home. [? if unemployed > 15 : However, many male workers develop a backlash towards women in the workplace, especially given the rising unemployment. ?]
+
+@family
+subtitle: Change family and inheritance law to treat women more equally.
+on-arrival: family_law += 1; womens_rights += 1; new_middle_spd += 2*(1-dissent); workers_spd += 3*(1-dissent); old_middle_spd -= 2*(1-dissent); rural_spd -= 2*(1-dissent); catholics_spd -= 2*(1-dissent);
+max-visits: 2
+
+These policies aim to ensure that women have equal rights within a marriage, including the right to divorce. The more conservative segments of society treat our reforms as deleterious to the social fabric.
 
 
 @welfare

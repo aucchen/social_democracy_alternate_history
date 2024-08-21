@@ -1,0 +1,6 @@
+
+(..0) very low
+(1..1) low
+(2..2) medium
+(3..3) high
+(4..) very high

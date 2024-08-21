@@ -2,6 +2,7 @@ title: Game Over.
 new-page: true
 go-to: eg_menu
 on-arrival: {!
+Q.game_over = 1;
 // Achievements:
 // Große Koalition - form a grand coalition
 // Eiserne Front - Form the Iron Front.
@@ -87,7 +88,7 @@ if (Q.march_on_berlin_seen && Q.capital_strike_seen && Q.chancellor != "Hitler" 
     this.achieve("polykrise");
 }
 // Wirtschaftsexperiment - implement two different economic plans.
-if (Q.nationalization_progress >= 1 && Q.wtb_implemented >= 1) {
+if ((Q.nationalization_progress >= 1 && Q.wtb_implemented >= 1) || (Q.wtb_implemented >= 1 && Q.moderate_plan_progress >= 1) || (Q.nationalization_progress >= 1 && Q.moderate_plan_progress >= 1)) {
     this.achieve("wirtschaftsexperiment");
 }
 // Syndikalismus - support factory takeovers by workers.
@@ -101,6 +102,9 @@ if ((Q.chancellor_party == "NSDAP" || Q.chancellor == "Hitler" || Q.president ==
 // Sowjet Sozialistische Republik - войти в состав СССР..
 if ((Q.we_join_soc_rev == "1" && Q.soviet_relation >= 2) && !Q.total_defeat) {
     this.achieve('sowjet_sozialistische_republik');
+// Heidelberger Programm - fulfill the goals of the Heidelberg programm - increase welfare, reform justice, support women's rights, progressive taxation, works councils, build a European Union.
+if ((Q.welfare > 0 && Q.judicial_reform >= 2 && Q.womens_work >= 1 && Q.family_law >= 1 && Q.upper_tax_rates > Q.lower_tax_rates && Q.works_councils > 0 && Q.eu > 0)) {
+    this.achieve('heidelberger_programm');
 }
 !}
 
@@ -138,7 +142,7 @@ title: Hitler does not yet control Germany...
 tags: endings
 go-to: eg_menu
 
-Hitler does not yet control Germany. [? if chancellor == "Papen" : However, Chancellor Papen's authoritarianism and far-right politics are paving the way for Hitler, or someone like him, to take power. ?] [? if chancellor == "Schleicher" : However, Chancellor Schleicher's authoritarianism and scheming is paving the way for Hitler, or someone like him, to take power. ?][? if resist_coup == 1 and republic_victory == 0 and long_war == 0 : Given our defeat in the Prussian coup, the far-right appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
+Hitler does not yet control Germany. [? if chancellor == "Papen" : However, Chancellor Papen's authoritarianism and far-right politics are paving the way for Hitler, or someone like him, to take power. ?] [? if chancellor == "Schleicher" : However, Chancellor Schleicher's authoritarianism and scheming is paving the way for Hitler, or someone like him, to take power. ?][? if resist_coup == 1 and republic_victory == 0 and long_war == 0 and coup_victory == 0 : Given our defeat in the Prussian coup, the far-right appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
 
 [? if hitler_deported == 1 : We have deported Hitler back to Austria. Hopefully he will never return. ?]
 
@@ -287,6 +291,13 @@ go-to: eg_menu
 
 Works councils now have substantially greater influence, giving workers democratic control over their economic lives.
 
+@european_union
+title: There is now a European Union!
+view-if: eu = 1
+tags: endings
+go-to: eg_menu
+
+We have helped to form a European Union to bring peace and prosperity to the continent. Time will tell how effective it will be.
 
 @achievements
 title: Achievements
@@ -301,11 +312,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_civil_war : **Bürgerkrieg** - enter a long civil war. ?]
 
-[? if game_achievement_einigkeit : **Einigkeit** - reach 1933 without a civil war on easy. ?]
+[? if game_achievement_einigkeit : **Einigkeit** - reach the end of 1933 without a civil war on easy. ?]
 
-[? if game_achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach 1933 without a civil war on normal. ?]
+[? if game_achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of 1933 without a civil war on normal. ?]
 
-[? if game_achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach 1933 without a civil war on hard. ?]
+[? if game_achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of 1933 without a civil war on hard. ?]
+
+[? if game_achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of 1933 without a civil war on historical mode. ?]
 
 [? if game_achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
@@ -325,7 +338,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_weimar_coalition: **Weimarer Koalition** - form a Weimar coalition. ?]
 
-[? if game_achievement_majority_party: **Mehrheitspartei** - form an SPD majority government. ?]
+[? if game_achievement_majority_party: **Mehrheitspartei** - form an SPD-only majority government. ?]
+
+[? if game_achievement_minderheitsregierung: **Minderheitsregierung** - form an SPD minority government. ?]
 
 [? if game_achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
@@ -365,6 +380,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
 
+[? if game_achievement_eu: **Vereinigte Staaten von Europa** - form a "European Union". ?]
+
+[? if game_achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
+
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 [? if game_achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
@@ -381,11 +400,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_civil_war : **Bürgerkrieg** - enter a long civil war. ?]
 
-[? if achievement_einigkeit : **Einigkeit** - reach 1933 without a civil war on easy. ?]
+[? if achievement_einigkeit : **Einigkeit** - reach the end of 1933 without a civil war on easy. ?]
 
-[? if achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach 1933 without a civil war on normal. ?]
+[? if achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of 1933 without a civil war on normal. ?]
 
-[? if achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach 1933 without a civil war on hard. ?]
+[? if achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of 1933 without a civil war on hard. ?]
+
+[? if achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of 1933 without a civil war on historical mode. ?]
 
 [? if achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
@@ -405,7 +426,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_weimar_coalition: **Weimarer Koalition** - form a Weimar coalition. ?]
 
-[? if achievement_majority_party: **Mehrheitspartei** - form an SPD majority government. ?]
+[? if achievement_majority_party: **Mehrheitspartei** - form an SPD-only majority government. ?]
+
+[? if achievement_minderheitsregierung: **Minderheitsregierung** - form an SPD minority government. ?]
 
 [? if achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
@@ -445,6 +468,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
 
+[? if achievement_eu: **Vereinigte Staaten von Europa** - form a "European Union". ?]
+
+[? if achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
+
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 [? if achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
@@ -460,11 +487,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_civil_war : **Bürgerkrieg** - enter a long civil war. ?]
 
-[? if not achievement_einigkeit : **Einigkeit** - reach 1933 without a civil war on easy. ?]
+[? if not achievement_einigkeit : **Einigkeit** - reach the end of 1933 without a civil war on easy. ?]
 
-[? if not achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach 1933 without a civil war on normal. ?]
+[? if not achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of 1933 without a civil war on normal. ?]
 
-[? if not achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach 1933 without a civil war on hard. ?]
+[? if not achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of 1933 without a civil war on hard. ?]
+
+[? if not achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of 1933 without a civil war on historical mode. ?]
 
 [? if not achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
@@ -484,7 +513,9 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_weimar_coalition: **Weimarer Koalition** - form a Weimar coalition. ?]
 
-[? if not achievement_majority_party: **Mehrheitspartei** - form an SPD majority government. ?]
+[? if not achievement_majority_party: **Mehrheitspartei** - form an SPD-only majority government. ?]
+
+[? if not achievement_minderheitsregierung: **Minderheitsregierung** - form an SPD minority government. ?]
 
 [? if not achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
@@ -523,6 +554,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_drei_pfeile: **Drei Pfeile** - defeat a coup without a civil war. ?]
 
 [? if not achievement_ausnahmezustand: **Ausnahmezustand** - use emergency powers to cancel elections. ?]
+
+[? if not achievement_eu: **Vereinigte Staaten von Europa** - form a "European Union". ?]
+
+[? if not achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 

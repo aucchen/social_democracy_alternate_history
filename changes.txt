@@ -186,6 +186,46 @@ Potential future changes:
 - "Historical mode"
 - "Unlimited Play"
 
+
+v0.12.1 - Economics changes, bug fixes
+
+Changes:
+
+- Fixed issue with Wels' clearing the agenda on Easy
+- Added a "limited budget" option for the reformist economic plan
+- WTB-plan now costs 4 resources for the first iteration, but can be decreased to 3 by pro-labor policies or existing socializations.
+- Slight boost to the reformist economic plan.
+
+For the next major update:
+
+- Visualizations - parliament diagrams, electoral history
+- Cards: Dealing with Toleration
+- Foreign Ministry option to organize an international economic summit?
+
+
+v0.13 - Visualizing history
+
+Major changes:
+
+- Added election visualizations! Election results will now show a parliament diagram visualization, and there is a "Figures and charts" option in the library that will also show an electoral history chart. The parliament visualizations are created using the [d3-parliament](https://github.com/geoffreybr/d3-parliament) library, and the electoral history graphs are made using d3.
+- New event: Panzerkreuzer B
+- New government affairs card: Dealing with Toleration
+
+Minor changes:
+
+- Changes to the mobile UI - making cards and font sizes slightly smaller to fit more on the screen.
+- The constitutional coalition/new grand coalition is more accessible.
+- bug fixes
+- slight changes to initial party support levels
+- slight tweaks in some event outcomes
+
+Future plans:
+- See previous posts...
+- International economic summit, more Foreign Ministry options
+- Party disunity cards for high dissent?
+- Working on features for Steam release
+
+
 v. 1.1. test mode
 
 -Я научился модить
@@ -215,3 +255,38 @@ V. 1.3.1.. test mode
 TODO:
 -новые эвенты
 -локализация на русский (лень)
+
+Known issue- the election results won't exactly sum to 100 because of rounding. I'm not sure if having more decimal places would work well, though - even if we truncate the numbers to one decimal place, there will be terrible floating point issues that make any derived numbers look ugly. I'm still thinking of how to deal with that problem (probably a display layer that truncates the decimal places?).
+
+Would you prefer to see more decimal places in the election results?
+
+v0.14 - Foreign Affairs
+
+Major changes:
+
+- Added visualization for party support history.
+- New events: Austrian Customs Union, Hoover Moratorium, Lausanne Conference. Also changed the requirements of the Banking Crisis.
+- New party affairs card: Party Disunity
+- New options for Foreign Affairs: splitting up Western Allies and eastern neighbors, forming an Austrian Customs Union, creating a European Union
+- New advisor: Kurt Schumacher (neorevisionist)
+- New achievement: Vereinigte Staaten von Europa
+
+Minor changes:
+
+- For most advisors, advisor actions should not reset the card timer.
+- Typographical fixes
+- Party faction strengths should sum to 100.
+
+It is unlikely that there will be updates in August, as I work on my entries for IFComp 2024. I submitted intents for two entries, but I feel like there's a less than 50% chance I'll manage to complete one game. I'm also writing a postmortem for this game, which will *hopefully* be out soon-ish.
+
+v0.14.2 - Heidelberg Program, bug fixes, minority government
+
+Changes:
+
+- New achievement: Heidelberger Programm (fulfill most of the historical goals of the Heidelberg Program)
+- New achievement: Minderheitsregierung (successfully form an SPD minority government)
+- Minority/emergency governments can get votes of no confidence.
+- Tolerating Brüning cannot happen if the constitutional parties do not have a majority.
+- Bug fix: advisor actions should not reset card timers.
+- Bug fix: emergency/minority government options should show up correctly.
+- Some minor changes for policy outcomes.

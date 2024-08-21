@@ -38,5 +38,5 @@ title: Economic Democracy
 subtitle: Enact policies to build a more democratic economy.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if spd_in_government = 0 : SPD not in government: ?] [? if labor_minister_party != "SPD" or (finance_minister_party != "SPD" and economic_minister_party != "SPD") : We do not have the necessary government ministers. ?]
 choose-if: advisor_action_timer == 0 and spd_in_government == 1 and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and (labor_minister_party == "SPD")
-on-arrival: advisor_action_timer = 6
+on-arrival: advisor_action_timer = 6; economic_democracy_timer -= 10
 go-to: economic_democracy

@@ -29,11 +29,17 @@ if (!Q.works_program) {
     Q.workers_nsdap += 5;
     Q.workers_kpd += 5;
     Q.sa_strength += 200;
-} else if (Q.unemployed > 22) {
-    Q.rural_nsdap += 4;
-    Q.unemployed_nsdap += 3;
-    Q.old_middle_nsdap += 4;
-    Q.new_middle_nsdap += 3;
+} else if (Q.unemployed > 25) {
+    Q.rural_nsdap += 5;
+    Q.unemployed_nsdap += 5;
+    Q.old_middle_nsdap += 5;
+    Q.new_middle_nsdap += 4;
+    Q.sa_strength += 50;
+} else if (Q.unemployed > 20) {
+    Q.rural_nsdap += 2;
+    Q.unemployed_nsdap += 2;
+    Q.old_middle_nsdap += 2;
+    Q.new_middle_nsdap += 2;
 }
 !}
 tags: event

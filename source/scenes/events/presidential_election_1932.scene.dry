@@ -13,7 +13,7 @@ set-jump: pres_election
 
 The presidential election is coming up soon. [? if spd_in_government = 0 : While the position of Chancellor is typically more important, recent governments have depended on the president's emergency decree powers, making the office vital. ?] [? if hitler_deported==0 : The Nazis will run Hitler, while the KPD will run Thälmann. A victory for Hitler would mean the end of parliamentary democracy, and the beginning of an era of unspeakable horrors. ?][? if hitler_deported==1 : Since Hitler has been deported, the Nazis will run Hermann Göring in his stead. He is widely seen as a proxy for Hitler, who, despite his legal persecution, retains a popular base who wishes to see him returned to Germany. Meanwhile, the KPD will run Ernst Thälmann. ?]
 
-# TODO: if hitler is deported, who would nsdap run? Duesterberg? or Goering?
+# if hitler is deported, who would nsdap run? Duesterberg? or Goering?
 # Goering runs, essentially as a proxy for Hitler, who is now stateless.
 
 Many are calling for us to support the incumbent Hindenburg, despite his well-known reactionary tendencies. Is he truly the best bulwark against Hitler's ascension? On the other hand, many in our party are calling for Otto Braun to run again, but he is reluctant.
@@ -99,7 +99,7 @@ if (Q.z_relation >= 55) {
     Q.z_support_braun = 2;
 }
 !}
-go-to: z_failed if z_support_braun = 0; z_success if z_support_braun = 1; z_partial if z_support_braun = 2
+go-to: z_failed if z_support_braun = 0 or (z_support_braun == 2 and historical_mode); z_success if z_support_braun = 1; z_partial if z_support_braun = 2 and not historical_mode
 max-visits: 1
 
 We remind the Center leaders of Hindenburg's anti-Catholicism, and try to convince them that Hindenburg's path will eventually lead to Hitler. We also remind them of the successes they've had as part of the Weimar coalition in Prussia with Otto Braun, and our support for the Center candidate Wilhelm Marx in the 1925 presidential election.
@@ -142,7 +142,7 @@ The KPD is supporting their own candidate, Ernst Thälmann. [? if kpd_relation >
 - @braun_campaign: Forget about the KPD.
 
 @kpd_resources
-view-if: kpd_relation >= 50
+view-if: kpd_relation >= 50 and not historical_mode
 choose-if: resources >= 3
 subtitle: -3 resources
 unavailable-subtitle: Not enough resources (need 3).
@@ -186,7 +186,6 @@ on-arrival: election_round = 0
 go-to: election_algorithm
 set-jump: post_election
 
-# TODO: change the election outcomes
 
 @post_election
 on-arrival: {!
@@ -287,7 +286,6 @@ There is no majority in this round. In the second round, any candidate who wins 
 
 [? if braun_plurality or thalmann_plurality : In order to consolidate the vote for the Right, and to prevent a socialist from becoming president, [+ nsdap_candidate +] is no longer running in the second round, and has switched his endorsement to Hindenburg. ?]
 
-# TODO: 
 
 @round2_menu
 
@@ -320,7 +318,7 @@ if (Q.z_relation >= 55) {
     Q.z_support_braun = 2;
 }
 !}
-go-to: r2_z_failed if z_support_braun = 0; r2_z_success if z_support_braun = 1; r2_z_partial if z_support_braun = 2
+go-to: r2_z_failed if z_support_braun = 0 or (z_support_braun = 2 and historical_mode); r2_z_success if z_support_braun = 1; r2_z_partial if z_support_braun = 2 and not historical_mode
 max-visits: 1
 
 @r2_z_success
@@ -365,7 +363,7 @@ The KPD is committed to supporting Ernst Thälmann. [? if kpd_relation >= 45 : H
 - @round2_menu: Forget about the KPD.
 
 @r2_kpd_resources
-view-if: kpd_relation >= 45
+view-if: kpd_relation >= 45 and not historical_mode
 choose-if: resources >= 3
 subtitle: -3 resources
 unavailable-subtitle: Not enough resources (need 3).

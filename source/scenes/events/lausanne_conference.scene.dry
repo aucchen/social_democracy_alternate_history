@@ -1,0 +1,15 @@
+title: Lausanne Conference
+subtitle: On the question of reparations...
+view-if: year = 1932 and month >= 6 and hoover_moratorium_seen = 1 and reparations > -2 and unemployed >= 15
+on-arrival: reparations = -2; budget += 1; workers_dvp += 3 if foreign_minister_party == "DVP"; new_middle_dvp += 3 if foreign_minister_party == "DVP"; old_middle_dvp += 3 if foreign_minister_party == "DVP"; rural_dvp += 3 if foreign_minister_party == "DVP"; workers_z += 3 if foreign_minister_party == "Z"; new_middle_z += 3 if foreign_minister_party == "Z"; old_middle_z += 3 if foreign_minister_party == "Z"; rural_z += 3 if foreign_minister_party == "Z"; workers_spd += 3 if foreign_minister_party == "SPD"; new_middle_spd += 3 if foreign_minister_party == "SPD"; old_middle_spd += 3 if foreign_minister_party == "SPD"; rural_spd += 3 if foreign_minister_party == "SPD";
+new-page: true
+max-visits: 1
+tags: event
+
+= Lausanne Conference
+
+At the Lausanne Conference, the Allies have met with Germany's representatives in order to deal with the issue of war reparations once and for all. In light of the current economic crisis, the Allies believe that Germany is unable to make the reparation payments.
+
+Therefore, our reparations have been paused indefinitely! This should reduce the strain on our budget. [? if spd_in_government and foreign_minister_party == "SPD": Even though this is not our accomplishment, our foreign ministry is eager to take credit for this accomplishment. ?][? if not spd_in_government and foreign_minister_party != "SPD": Even though this is not the work of the foreign ministry, it is eager to take credit for this accomplishment. ?]
+
+

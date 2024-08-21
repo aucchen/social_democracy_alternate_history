@@ -12,6 +12,13 @@ header, #content, footer {
   margin: 0 auto;
   overflow: auto;
 }
+#content {
+  position: relative;
+  background-color: #f3f3f3;
+  font-size: 1.1em;
+  padding: 1em 1.5em 1.5em 1.5em;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+}
 footer {
   margin-top: 1em;
   font-size: 0.8em;
@@ -35,126 +42,6 @@ header {
 #header-links a {
   padding-right: 1em;
 }
-
-/* This is mostly copied from undum. */
-#mid_panel {
-  margin: 0 16rem;
-}
-#page {
-  margin: 0 auto;
-  position: relative;
-}
-#tools_wrapper {
-  position: absolute;
-  width: 100%;
-  max-width: 69em;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-}
-.tools {
-  padding: 0.6em;
-  width: 14rem;
-  color: #431;
-  background-color: #f3f3f3;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-}
-.tools.left {
-  float: left;
-  left: 0.4em;
-}
-.tools.right {
-  float: right;
-  right: 0.4em;
-}
-#qualities {
-  text-indent: 0;
-  line-height: 1.3em;
-}
-#qualities p {
-  text-indent: 0;
-}
-#qualities h1 {
-  font-size: 1.1em;
-  font-weight: normal;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
-               rgba(0, 0, 0, 0.1) -1px -1px 2px;
-}
-#qualities h1 + p:first-line {
-  font-weight: normal;
-}
-/* smaller screens: hide left margin */
-@media screen and (max-width: 1200px) {
-  .tools {
-      margin-right: 0.4em;
-      margin-left: 0.4em;
-  }
-  #mid_panel {
-      margin-right: 0.4em;
-  }
-}
-/* mobile: move the stat box to the top if the screen is too small,
- * and reduce font size slightly. */
-@media screen and (max-width: 560px) {
-  #page {
-      position: static;
-  }
-  #content {
-      position: static;
-      font-size: 1.05em;
-      line-height: 160%;
-      padding: 1em 1em 1.5em 1em;
-  }
-  #qualities {
-      font-size: 1em;
-  }
-  #tools_wrapper {
-    position: static;
-  }
-  .tools {
-      width: 90%;
-      margin: 2em 0 1em 0;
-      margin: 0.4em;
-  }
-  .tools.left {
-      float: none;
-      left: 0;
-  }
-  .tools.right {
-      float: none;
-      right: 0;
-  }
-  #mid_panel {
-      margin: 0 auto;
-  }
-}
-
-/* tabs */
-.tab_container {
-    background-color: #dedede;
-    margin-top: -0.6em;
-    margin-left: -0.6em;
-    margin-right: -0.6em;
-}
-.tab_button {
-    font-family: "Minion Pro", Georgia, serif;
-    background-color: #ddd;
-    /*float: left;*/
-    border: none;
-    outline: none;
-    padding: 10px;
-}
-.tab_button.active {
-    background-color: #f3f3f3;
-}
-.tab_button:hover {
-    background-color: #ececec;
-}
-
-
 header h1, header h2 {
   display: inline-block;
   font-weight: normal;
@@ -169,13 +56,7 @@ header h2:before {
   font-style: italic;
   padding: 0 0.3em 0 0;
 }
-#content {
-  position: relative;
-  background-color: #f3f3f3;
-  font-size: 1.1em;
-  padding: 1em 1.5em 1.5em 1.5em;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-}
+
 #content #read-marker {
   border: none;
   border-top: 1px solid #000;
@@ -272,6 +153,81 @@ blockquote.attribution {
 blockquote + blockquote.attribution {
   margin-top: -1em;
 }
+/* This is mostly copied from undum. */
+#mid_panel {
+  margin: 0 16rem;
+}
+#page {
+  margin: 0 auto;
+  position: relative;
+}
+#tools_wrapper {
+  position: absolute;
+  width: 100%;
+  max-width: 69em;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.tools {
+  padding: 0.6em;
+  width: 14rem;
+  color: #431;
+  background-color: #f3f3f3;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+}
+.tools.left {
+  float: left;
+  left: 0.4em;
+}
+.tools.right {
+  float: right;
+  right: 0.4em;
+}
+#qualities {
+  text-indent: 0;
+  line-height: 1.3em;
+}
+#qualities p {
+  text-indent: 0;
+}
+#qualities h1 {
+  font-size: 1.1em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 2px,
+               rgba(0, 0, 0, 0.1) -1px -1px 2px;
+}
+#qualities h1 + p:first-line {
+  font-weight: normal;
+}
+
+
+/* tabs */
+.tab_container {
+    background-color: #dedede;
+    margin-top: -0.6em;
+    margin-left: -0.6em;
+    margin-right: -0.6em;
+}
+.tab_button {
+    font-family: "Minion Pro", Georgia, serif;
+    background-color: #ddd;
+    /*float: left;*/
+    border: none;
+    outline: none;
+    padding: 10px;
+}
+.tab_button.active {
+    background-color: #f3f3f3;
+}
+.tab_button:hover {
+    background-color: #ececec;
+}
+
+
 .overlay {
     background: rgba(0,0,0,0.7);
     display: none;
@@ -471,5 +427,120 @@ img {
     float: right;
     right: 0.4em;
     top: 50%;
+}
+
+/* smaller screens: hide left margin */
+@media screen and (max-width: 1200px) {
+  .tools {
+      margin-right: 0.4em;
+      margin-left: 0.4em;
+  }
+  #mid_panel {
+      margin-right: 0.4em;
+  }
+}
+/* mobile: move the stat box to the top if the screen is too small,
+ * and reduce font size slightly. */
+@media screen and (max-width: 560px) {
+  #page {
+      position: static;
+  }
+  #content {
+      position: static;
+      font-size: 1em;
+      line-height: 160%;
+      padding: 1em 1em 1.5em 1em;
+  }
+  #qualities {
+      font-size: 1em;
+  }
+  #tools_wrapper {
+    position: static;
+  }
+  .tools {
+      width: 90%;
+      margin: 2em 0 1em 0;
+      margin: 0.4em;
+  }
+  .tools.left {
+      float: none;
+      left: 0;
+  }
+  .tools.right {
+      float: none;
+      right: 0;
+  }
+  #mid_panel {
+      margin: 0 auto;
+  }
+
+  /* cards are smaller on mobile */
+  .card-img {
+    height: 125px;
+    width: 100px;
+  }
+  a.card {
+    width: 100px;
+    height: 125px;
+    border: 8px solid #ccc;
+    margin-bottom: 0.5em;
+    position: relative;
+  }
+  div.blank-card {
+    width: 100px;
+    height: 125px;
+    border: 8px solid #ccc;
+    margin-bottom: 0.5em;
+  }
+  .card-in-hand, .pinned-card, .deck {
+    max-width: 120px;
+    margin-right: 1em;
+    vertical-align: top;
+  }
+}
+
+
+/* New stuff just for this game */
+
+/* colored box div */
+.box {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+}
+
+table {
+    border-spacing: 0.5em;
+}
+
+/* Styles for parties */
+.seat.kpd {
+    fill: #8B0000;
+}
+.seat.spd {
+    fill: #E3000F;
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+.seat.ddp {
+    fill: #DCCA4A;
+}
+.seat.z {
+    fill: #000;
+}
+.seat.bvp {
+    fill: #69A2BE;
+}
+.seat.dvp {
+    fill: #D5AC27;
+}
+.seat.other {
+    fill: #909090;
+}
+.seat.dnvp {
+    fill: #3F7BC1;
+}
+.seat.nsdap {
+    fill: #954B00;
 }
 

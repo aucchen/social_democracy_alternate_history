@@ -1,6 +1,6 @@
 title: Labor Unrest
 subtitle: Clashes between workers and employers in the Ruhr...
-view-if: year = 1928 and month = 12 and spd_in_government and labor_ministry_party != "SPD"
+view-if: year = 1928 and month = 12 and spd_in_government and labor_minister_party != "SPD"
 max-visits: 1
 new-page: true
 tags: event

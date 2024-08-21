@@ -16,7 +16,9 @@ if (Q.inflation) {
 
 Ресуров доступно: [+ resources +]
 
-СДПГ: [? if spd_toleration : воздерживается от вотума недоверия ?][? if spd_in_government : в правительстве ?][? if spd_toleration == 0 and spd_in_government == 0 : в оппозиции ?]
+СДПГ: [? if spd_toleration : воздерживается от вотума недоверия ?][? if spd_in_government : в правительстве ?][? if spd_toleration == 0 and spd_in_government == 0 : в оппозиции ?][? if spd_caretaker : caretaker government ?]
+
+[? if spd_in_government : Разногласия в коалициии: [+ coalition_dissent : coalition_dissent +] ?]
 
 Раскол: [+ dissent_percent : dissent +]
 
@@ -88,6 +90,7 @@ Inflation: [+ inflation_2 +]%
 @politics
 
 = Inter-party Relations
+
 
 Z: [+ z_relation : relationships +]
 

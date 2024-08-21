@@ -3,7 +3,7 @@ new-page: true
 subtitle: Centrist disagreements with our policies have grown too severe.
 tags: event
 view-if: center_dissent >= 60
-on-arrival: center_strength *= 0.3; workers_spd -= 5; n_advisors -= 1 if wels_advisor == 1; n_advisors -= 1 if hilferding_advisor == 1; n_advisors -= 1 if muller_advisor == 1; wels_advisor = 0; hilferding_advisor = 0; muller_advisor = 0; rb_strength -= 100;
+on-arrival: center_strength *= 0.3; workers_spd -= 5; n_advisors -= 1 if wels_advisor == 1; n_advisors -= 1 if hilferding_advisor == 1; n_advisors -= 1 if muller_advisor == 1; wels_advisor = 0; hilferding_advisor = 0; muller_advisor = 0; rb_strength -= 100; centrists_resign = 1
 max-visits: 1
 
 = Centrist leaders resign

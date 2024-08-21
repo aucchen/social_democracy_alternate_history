@@ -30,6 +30,7 @@ Q.month_actions = 0;
 
 // 0 = normal difficulty, 1 = hard mode, 2 = hard mode no saves
 Q.difficulty = 0;
+Q.historical_mode = 0;
 // old demographics
 Q.old_demographics = 0;
 
@@ -242,13 +243,13 @@ Q.rural_nsdap = 5;
 Q.rural_other = 10;
 
 Q.unemployed_spd = 25;
-Q.unemployed_kpd = 51;
-Q.unemployed_z = 0;
+Q.unemployed_kpd = 55;
+Q.unemployed_z = 1;
 Q.unemployed_ddp = 0;
 Q.unemployed_dvp = 0;
 Q.unemployed_dnvp = 5;
-Q.unemployed_nsdap = 25;
-Q.unemployed_other = 5;
+Q.unemployed_nsdap = 15;
+Q.unemployed_other = 9;
 
 Q.catholics_spd = 15;
 Q.catholics_kpd = 2;
@@ -274,6 +275,24 @@ Q.dvp_r = 10;
 Q.dnvp_r = 20;
 Q.nsdap_r = 3;
 Q.other_r = 9;
+
+// diff from prev
+Q.old_spd_r = 26;
+Q.old_kpd_r = 9;
+Q.old_z_r = 17;
+Q.old_ddp_r = 6;
+Q.old_dvp_r = 10;
+Q.old_dnvp_r = 20;
+Q.old_nsdap_r = 3;
+Q.old_other_r = 9;
+
+// array of objects of the form {date: Date(), spd: 10, kpd: 12, ...} for each election
+Q.election_records = [];
+// party support records for every month
+Q.party_support_records = [];
+// inflation and unemployment records
+Q.economic_records = [];
+
 
 // State of the government
 Q.president = "Hindenburg";
@@ -301,6 +320,8 @@ Q.in_left_front = 0;
 Q.in_emergency_government = 0;
 Q.in_spd_majority = 0;
 Q.grand_coalition_failed = 0;
+// if the SPD is ruling as part of a minority government
+Q.in_minority_government = 0;
 
 // if you're in a coalition, this is an incremental counter for how many times dissent has happened from the right.
 Q.coalition_dissent = 0;
@@ -399,16 +420,20 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'inter_party_relationships', 'international_relations',
             'iron_front', 'media', 'enemies',
             'party_organizations', 'rally', 'reichsbanner',
-            'shuffle_leadership', 'streetfighting', 'peoples_party',// govt
+            'shuffle_leadership', 'streetfighting', 'peoples_party',
+            'party_disunity',
+            // govt
             'agricultural_policy', 'domestic_enemies', 'fiscal_policy',
             'foreign_policy', 'judiciary', 'labor_affairs', 'military_policy',
             'police', 'prussian_affairs', 'shuffle_cabinet', 'social_welfare',
             'homosexual_rights', 'economic_policy', 'coalition_affairs',
-            'war_guilt', 'womens_rights', 'economic_democracy',// events
+            'war_guilt', 'womens_rights', 'economic_democracy',
+            'dealing_with_toleration',
+            // events
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban',
             'kpd_policy', 'kpd_ultimatum', 'popular_front_dispute',
-            'high_inflation', 'nazi_full_win'];
+            'high_inflation', 'nazi_full_win', 'banking_crisis'];
 Q.advisor_action_timer = 0;
 // party affairs timers
 Q.confronting_nazis_timer = 0;
@@ -510,6 +535,7 @@ For more information on the politics and government of the German Republic, see 
 - @1928_easy: Begin (easy difficulty)
 - @1928_main: Begin (normal difficulty)
 - @1928_hard: Begin (hard difficulty)
+- @1928_historical: Begin (historical mode)
 
 @1928_easy
 on-arrival: difficulty = -1; resources = 4; dues = 3; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49;
@@ -517,6 +543,26 @@ go-to: 1928_main
 
 @1928_hard
 on-arrival: difficulty = 1; resources = 0; dues = 1; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31;
+go-to: 1928_main
+
+@1928_historical
+subtitle: Saving and loading will be disabled.
+on-arrival: {!
+Q.difficulty = 2;
+Q.historical_mode = 1;
+Q.resources = 2;
+Q.dues = 1;
+Q.rb_strength = 2000;
+Q.reformist_dissent = 25;
+Q.left_dissent = 30;
+Q.labor_dissent = 25;
+Q.center_dissent = 25;
+Q.z_relation = 41;
+Q.kpd_relation = 16;
+Q.dvp_relation = 31;
+Q.budget = 2;
+this.state.disableSaves = true;
+!}
 go-to: 1928_main
 
 @1928_main
