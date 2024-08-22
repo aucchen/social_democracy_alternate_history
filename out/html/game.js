@@ -235,8 +235,6 @@
       },
       get: function() {
         return currentTimer;
-      }
-    }
-}
-}
+      })
+  }
 }());
