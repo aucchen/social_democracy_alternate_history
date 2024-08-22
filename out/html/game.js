@@ -200,11 +200,11 @@
 
   window.onload = function() {
     window.dendryUI.loadSettings();
-    window.pinnedCardsDescription = "Карты советника - используются раз в шесть месяцев. " + getAdvisorStatus();
-};
+    window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months. " + getAdvisorStatus();
+  };
 
-function getAdvisorStatus() {
-    var timer = Q.advisor_action_timer;
+  function getAdvisorStatus() {
+    var timer = window.dendryUI.dendryEngine.state.qualities.advisor_action_timer;
     if (timer === 0) {
         return "Советник ждет указаний.";
     } else if (timer === 6) {
@@ -222,5 +222,5 @@ function getAdvisorStatus() {
     } else {
         return "";
     }
-}
+  }
 }());
