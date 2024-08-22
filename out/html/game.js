@@ -208,20 +208,20 @@
   }
 
   function getAdvisorStatus() {
-    var timer = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
-    if (timer === 0) {
+    var timer_advisor = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
+    if (timer_advisor === 0) {
       return "Советник ждет указаний.";
-    } else if (timer === 6) {
+    } else if (timer_advisor === 6) {
       return "Советник будет доступен через 6 месяцев.";
-    } else if (timer === 5) {
+    } else if (timer_advisor === 5) {
       return "Советник будет доступен через 5 месяцев.";
-    } else if (timer === 4) {
+    } else if (timer_advisor === 4) {
       return "Советник будет доступен через 4 месяца.";
-    } else if (timer === 3) {
+    } else if (timer_advisor === 3) {
       return "Советник будет доступен через 3 месяца.";
-    } else if (timer === 2) {
+    } else if (timer_advisor === 2) {
       return "Советник будет доступен через 2 месяца.";
-    } else if (timer === 1) {
+    } else if (timer_advisor === 1) {
         return "Советник будет доступен через 1 месяц.";
       } else {
         return "БАГ";
