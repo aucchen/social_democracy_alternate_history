@@ -207,17 +207,21 @@
   };
   
   function updatePinnedCardsDescription() {
-    window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 месяцев. " + getAdvisorStatus();
+    window.pinnedCardsDescription = "Карта советника - действия можно совершить раз в 6 месяцев. " + getAdvisorStatus();
   }
   
   function getAdvisorStatus() {
     var timer = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
     if (timer === 0) {
-      return "Советник ждет указаний.";
+      return "Советник доступен и ждет указаний.";
     } else if (timer === 1) {
       return "Советник будет доступен через 1 месяц.";
     } else if (timer >= 2 && timer <= 6) {
-      return `Советник будет доступен через ${timer} месяца(ев).`;
+      if (timer === 2 || timer === 3 || timer === 4) {
+        return `Советник будет доступен через ${timer} месяца.`;
+      } else {
+        return `Советник будет доступен через ${timer} месяцев.`;
+      }
     } else {
       return "БАГ";
     }
