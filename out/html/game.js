@@ -200,7 +200,47 @@
 
   window.onload = function() {
     window.dendryUI.loadSettings();
-    window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months.";
-  };
 
+    function updateAdvisorMessage() {
+        let statusMessage = "";
+        switch (Q.advisor_action_timer) {
+            case 0:
+                statusMessage = "Советник ждет указаний";
+                break;
+            case 6:
+                statusMessage = "Советник будет доступен через 6 месяцев";
+                break;
+            case 5:
+                statusMessage = "Советник будет доступен через 5 месяцев";
+                break;
+            case 4:
+                statusMessage = "Советник будет доступен через 4 месяца";
+                break;
+            case 3:
+                statusMessage = "Советник будет доступен через 3 месяца";
+                break;
+            case 2:
+                statusMessage = "Советник будет доступен через 2 месяца";
+                break;
+            case 1:
+                statusMessage = "Советник будет доступен через 1 месяц";
+                break;
+            default:
+                statusMessage = ""; // Пустая строка для всех других значений
+        }
+
+        let baseDescription = "Advisor cards - actions are only usable once per 6 months.";
+        window.pinnedCardsDescription = baseDescription + (statusMessage ? " " + statusMessage : "");
+    }
+
+    // Вызываем функцию при загрузке страницы
+    updateAdvisorMessage();
+
+    // Обновляем сообщение при изменении Q.advisor_action_timer
+    window.dendryUI.on('qualityUpdate', function(quality) {
+        if (quality === 'advisor_action_timer') {
+            updateAdvisorMessage();
+        }
+    });
+};
 }());
