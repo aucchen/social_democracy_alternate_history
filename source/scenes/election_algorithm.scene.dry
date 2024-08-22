@@ -2,7 +2,7 @@ title: Election
 on-arrival: {!
     // Helper function to round numbers to two decimal places accurately
     function roundToTwo(num) {
-        return +(Math.round(num + "e+2")  + "e-2");
+        return +(Math.round(num + "e+2") + "e-2");
     }
 
     // calculate normalized class voting amounts (0 to 100)
@@ -10,26 +10,40 @@ on-arrival: {!
     for (var c of Q.classes) {
         var class_votes = 0;
         for (var party of Q.parties) {
-            if (Q[c+'_'+party] < 0) {
-                Q[c+'_'+party] = 0;
+            if (Q[c + '_' + party] < 0) {
+                Q[c + '_' + party] = 0;
             }
-            class_votes += Q[c+'_'+party];
+            class_votes += Q[c + '_' + party];
         }
         class_normalized[c] = {};
         for (var party of Q.parties) {
-            class_normalized[c][party] = class_votes > 0 ? roundToTwo(100 * Q[c+'_'+party] / class_votes) : 0;
+            class_normalized[c][party] = class_votes > 0 ? roundToTwo(100 * Q[c + '_' + party] / class_votes) : 0;
             Q[c + '_' + party + '_normalized'] = Math.round(class_normalized[c][party]);
         }
     }
 
-    // 1. calculate support for each of the parties
+    // 1. Apply party bans based on Q.kpd_banned and Q.nsdap_banned
+    if (Q.kpd_banned === 1) {
+        for (var c of Q.classes) {
+            Q[c + '_KPD'] = 0;
+            class_normalized[c]['KPD'] = 0;
+        }
+    }
+    if (Q.nsdap_banned === 1) {
+        for (var c of Q.classes) {
+            Q[c + '_NSDAP'] = 0;
+            class_normalized[c]['NSDAP'] = 0;
+        }
+    }
+
+    // 2. calculate support for each of the parties
     var total_support = 0;
     var party_supports = {};
     for (var party of Q.parties) {
         var party_support = 0;
         for (var c of Q.classes) {
             if (Q.old_demographics) {
-                party_support += roundToTwo(Q[c] * Q[c+'_'+party]);
+                party_support += roundToTwo(Q[c] * Q[c + '_' + party]);
             } else {
                 party_support += roundToTwo(Q[c] * class_normalized[c][party]);
             }
@@ -39,27 +53,28 @@ on-arrival: {!
         total_support += party_support;
     }
 
-    // 2. normalize support (fraction) and round to two decimals
-    var sorted_parties = Q.parties.sort(function(a, b) { return party_supports[b] - party_supports[a]; });
+    // 3. normalize support (fraction) and round to two decimals
+    var sorted_parties = Q.parties.sort(function (a, b) {
+        return party_supports[b] - party_supports[a];
+    });
     var total_votes = 0;
     for (var party of sorted_parties) {
         var normalized = roundToTwo(party_supports[party] / total_support * 100);
         total_votes = roundToTwo(total_votes + normalized);
-        Q[party+'_votes'] = normalized;
+        Q[party + '_votes'] = normalized;
     }
 
-    // Adjust the last party's votes if necessary
+    // 4. Adjust the last party's votes if necessary
     var discrepancy = roundToTwo(100 - total_votes);
     if (discrepancy !== 0) {
         var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party+'_votes'] = roundToTwo(Q[last_party+'_votes'] + discrepancy);
+        Q[last_party + '_votes'] = roundToTwo(Q[last_party + '_votes'] + discrepancy);
     }
 
-    // Calculate additional metrics
+    // 5. Calculate additional metrics
     for (var party of Q.parties) {
-        Q[party+'_normalized'] = roundToTwo(Q[party + '_support'] / total_support);
-        Q[party+'_votes_dec'] = roundToTwo(Q[party+'_normalized'] * 100);
-        //Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
+        Q[party + '_normalized'] = roundToTwo(Q[party + '_support'] / total_support);
+        Q[party + '_votes_dec'] = roundToTwo(Q[party + '_normalized'] * 100);
     }
 !}
 go-to: jumpScene
