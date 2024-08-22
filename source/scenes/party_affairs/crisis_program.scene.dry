@@ -27,7 +27,7 @@ Meanwhile, moderates and reformists draw up proposals for a limited plan of job 
 
 @support_centrist
 subtitle: Let the depression play itself out.
-on-arrival: center_strength += 5; center_dissent -= 5; labor_dissent += 10; wtb_support -= 1; left_dissent += 10;
+on-arrival: center_strength += 5; center_dissent -= 5; labor_dissent += 10; wtb_support -= 1; left_dissent += 10; old_middle_spd += 4
 
 Woytinsky and the trade unions vehemently criticize the centrists for their policy. The workers are starving; are we going to callously abandon them and side with bourgeois austerity? On the other hand, the centrists criticize Woytinsky for promising the workers false hope; their position is that nothing can be done to alleviate the depression. They also speak of the fear of another round of hyperinflation that may result from deficit spending.
 

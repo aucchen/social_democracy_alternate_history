@@ -213,7 +213,7 @@
   function getAdvisorStatus() {
     var timer = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
     if (timer === 0) {
-      return "Советник доступен и ждет указаний.";
+      return "";
     } else if (timer === 1) {
       return "Советник будет доступен через 1 месяц.";
     } else if (timer >= 2 && timer <= 6) {

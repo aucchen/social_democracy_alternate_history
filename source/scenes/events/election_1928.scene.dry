@@ -268,7 +268,7 @@ There are some potential coalition arrangements.
 title: A new "Popular Front" coalition?
 subtitle: SPD + KPD + Z + DDP ([+ popular_front_coalition +]%)
 unavailable-subtitle: SPD + KPD + Z + DDP ([+ popular_front_coalition +]%) - [? if kpd_relation < 50: We do not have good enough relations with the KPD. ?][? if z_relation < 50: We do not have good enough relations with the Center Party. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
-view-if: popular_front_coalition >= 50
+view-if: popular_front_coalition >= 50 and kpd_banned = 0
 choose-if: kpd_relation >= 50 and z_relation >= 50 and ddp_relation >= 50 and communist_coalition >= 3
 
 Could we really form a coalition that included both the Center and the Communists? It seems like an absurd concept, but given our good relationships with both sides, it is not an impossibility.
@@ -393,7 +393,7 @@ Alternatively, Braun could use the emergency powers of the presidency. Article 4
 title: Is a United Left coalition possible?
 subtitle: SPD + KPD ([+ left_coalition +]%)
 unavailable-subtitle: SPD + KPD ([+ left_coalition +]%). [? if kpd_relation < 50 : We do not have adequate relations with the KPD. ?][? if communist_coalition < 3 : The Communists are too committed to their radical ways to partake in government. ?]
-view-if: left_coalition >= 50
+view-if: left_coalition >= 50 and kpd_banned = 0
 choose-if: kpd_relation >= 50 and communist_coalition >= 3
 
 There are enough votes for a SPD + KPD coalition government, if such a thing were actually possible.
