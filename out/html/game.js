@@ -200,47 +200,27 @@
 
   window.onload = function() {
     window.dendryUI.loadSettings();
-
-    function updateAdvisorMessage() {
-        let statusMessage = "";
-        switch (Q.advisor_action_timer) {
-            case 0:
-                statusMessage = "Советник ждет указаний";
-                break;
-            case 6:
-                statusMessage = "Советник будет доступен через 6 месяцев";
-                break;
-            case 5:
-                statusMessage = "Советник будет доступен через 5 месяцев";
-                break;
-            case 4:
-                statusMessage = "Советник будет доступен через 4 месяца";
-                break;
-            case 3:
-                statusMessage = "Советник будет доступен через 3 месяца";
-                break;
-            case 2:
-                statusMessage = "Советник будет доступен через 2 месяца";
-                break;
-            case 1:
-                statusMessage = "Советник будет доступен через 1 месяц";
-                break;
-            default:
-                statusMessage = ""; // Пустая строка для всех других значений
-        }
-
-        let baseDescription = "Advisor cards - actions are only usable once per 6 months.";
-        window.pinnedCardsDescription = baseDescription + (statusMessage ? " " + statusMessage : "");
-    }
-
-    // Вызываем функцию при загрузке страницы
-    updateAdvisorMessage();
-
-    // Обновляем сообщение при изменении Q.advisor_action_timer
-    window.dendryUI.on('qualityUpdate', function(quality) {
-        if (quality === 'advisor_action_timer') {
-            updateAdvisorMessage();
-        }
-    });
+    window.pinnedCardsDescription = "Карты советника - используются раз в шесть месяцев. " + getAdvisorStatus();
 };
+
+function getAdvisorStatus() {
+    var timer = Q.advisor_action_timer;
+    if (timer === 0) {
+        return "Советник ждет указаний.";
+    } else if (timer === 6) {
+        return "Советник будет доступен через 6 месяцев.";
+    } else if (timer === 5) {
+        return "Советник будет доступен через 5 месяцев.";
+    } else if (timer === 4) {
+        return "Советник будет доступен через 4 месяца.";
+    } else if (timer === 3) {
+        return "Советник будет доступен через 3 месяца.";
+    } else if (timer === 2) {
+        return "Советник будет доступен через 2 месяца.";
+    } else if (timer === 1) {
+        return "Советник будет доступен через 1 месяц.";
+    } else {
+        return "";
+    }
+}
 }());
