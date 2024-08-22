@@ -85,8 +85,7 @@ on-arrival: kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_mi
 go-to: ban_nsdap_begin
 
 @ban_nsdap_begin
-on-arrival: 
-{!
+on-arrival: {!
 Q.rb_strength = Math.round(Q.rb_strength);
 Q.sh_strength = Math.round(Q.sh_strength);
 Q.sa_strength = Math.round(Q.sa_strength);
@@ -155,6 +154,7 @@ Q.enemy_power += Q.sh_power;
 Q.hostile_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*(1-Q.reichswehr_loyalty);
 Q.enemy_power += Q.hostile_reichswehr_power;
 console.log("Enemy strength:", Q.enemy_power);
+}
 !}
 go-to: ban_nsdap_success if nsdap_r > 24 and (total_power > enemy_power*0.85); ban_nsdap_failure if nsdap_r < 25 and (total_power < enemy_power*0.85)
 
