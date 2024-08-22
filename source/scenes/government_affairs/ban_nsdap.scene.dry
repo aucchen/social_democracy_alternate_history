@@ -89,6 +89,7 @@ if (Q.total_power >= Q.enemy_power*0.95) {
 }
 !}
 on-departure: long_war = 0; republic_victory = 0; total_defeat = 0;
+go-to: ban_nsdap_success if nsdap_r < 25 and (total_power > enemy_power*0.85); ban_nsdap_failure if nsdap_r > 24 and (total_power < enemy_power*0.85)
 
 @ban_nsdap_success
 on-arrival: nsdap_banned = 1; kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_militancy += 0.02; sa_strength += 30; workers_dnvp += 3; rural_dnvp += 2; new_middle_dnvp += 4; old_middle_dnvp += 6; unemployed_dnvp += 3; workers_spd += 1; workers_kpd += 1
