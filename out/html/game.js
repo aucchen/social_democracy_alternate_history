@@ -197,34 +197,40 @@
   window.statusTab = "status";
   window.dendryModifyUI = main;
   console.log("Modifying stats: see dendryUI.dendryEngine.state.qualities");
-
+  
   window.onload = function() {
     window.dendryUI.loadSettings();
     updatePinnedCardsDescription();
-  };
+};
 
-  function updatePinnedCardsDescription() {
+function updatePinnedCardsDescription() {
     window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 месяцев. " + getAdvisorStatus();
-  }
+}
 
-  function getAdvisorStatus() {
-    var timer_advisor = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
-    if (timer_advisor === 0) {
-      return "Советник ждет указаний.";
-    } else if (timer_advisor === 6) {
-      return "Советник будет доступен через 6 месяцев.";
-    } else if (timer_advisor === 5) {
-      return "Советник будет доступен через 5 месяцев.";
-    } else if (timer_advisor === 4) {
-      return "Советник будет доступен через 4 месяца.";
-    } else if (timer_advisor === 3) {
-      return "Советник будет доступен через 3 месяца.";
-    } else if (timer_advisor === 2) {
-      return "Советник будет доступен через 2 месяца.";
-    } else if (timer_advisor === 1) {
-        return "Советник будет доступен через 1 месяц.";
-      } else {
-        return "БАГ";
-      }
+function getAdvisorStatus() {
+    let advisorTimer = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
+    
+    switch (advisorTimer) {
+        case 0:
+            return "Советник ждет указаний.";
+        case 6:
+            return "Советник будет доступен через 6 месяцев.";
+        case 5:
+            return "Советник будет доступен через 5 месяцев.";
+        case 4:
+            return "Советник будет доступен через 4 месяца.";
+        case 3:
+            return "Советник будет доступен через 3 месяца.";
+        case 2:
+            return "Советник будет доступен через 2 месяца.";
+        case 1:
+            return "Советник будет доступен через 1 месяц.";
+        default:
+            return "БАГ";
     }
-  }());
+}
+// Предположительно, эта функция должна вызываться при изменении значения advisor_action_timer
+function onAdvisorActionTimerChange() {
+    updatePinnedCardsDescription();
+}
+}());
