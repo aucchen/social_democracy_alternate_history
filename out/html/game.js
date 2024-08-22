@@ -208,7 +208,7 @@
   }
 
   function getAdvisorStatus() {
-    var timer = Q.advisor_action_timer;
+    var timer = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
     if (timer === 0) {
       return "Советник ждет указаний.";
     } else if (timer === 6) {
