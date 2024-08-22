@@ -201,36 +201,40 @@
   window.onload = function() {
     window.dendryUI.loadSettings();
     updatePinnedCardsDescription();
-};
-
-function updatePinnedCardsDescription() {
-    window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 месяцев. " + getAdvisorStatus();
-}
-
-function getAdvisorStatus() {
-    let advisorTimer = window.dendryUI.dendryEngine.state.qualities.advisor_action_timer;
     
-    switch (advisorTimer) {
-        case 0:
-            return "Советник ждет указаний.";
-        case 6:
-            return "Советник будет доступен через 6 месяцев.";
-        case 5:
-            return "Советник будет доступен через 5 месяцев.";
-        case 4:
-            return "Советник будет доступен через 4 месяца.";
-        case 3:
-            return "Советник будет доступен через 3 месяца.";
-        case 2:
-            return "Советник будет доступен через 2 месяца.";
-        case 1:
-            return "Советник будет доступен через 1 месяц.";
-        default:
-            return "БАГ";
+    // Устанавливаем наблюдатель за изменениями таймера
+    setupAdvisorTimerObserver();
+  };
+  
+  function updatePinnedCardsDescription() {
+    window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 месяцев. " + getAdvisorStatus();
+  }
+  
+  function getAdvisorStatus() {
+    var timer = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
+    if (timer === 0) {
+      return "Советник ждет указаний.";
+    } else if (timer === 1) {
+      return "Советник будет доступен через 1 месяц.";
+    } else if (timer >= 2 && timer <= 6) {
+      return `Советник будет доступен через ${timer} месяца(ев).`;
+    } else {
+      return "БАГ";
     }
-}
-// Предположительно, эта функция должна вызываться при изменении значения advisor_action_timer
-function onAdvisorActionTimerChange() {
-    updatePinnedCardsDescription();
-}
-}());
+  }
+  
+  function setupAdvisorTimerObserver() {
+    let currentTimer = window.dendryUI.dendryEngine.state.qualities.advisor_action_timer;
+    
+    Object.defineProperty(window.dendryUI.dendryEngine.state.qualities, 'advisor_action_timer', {
+      set: function(newValue) {
+        if (newValue !== currentTimer) {
+          currentTimer = newValue;
+          updatePinnedCardsDescription();
+        }
+      },
+      get: function() {
+        return currentTimer;
+      }
+    });
+  }());
