@@ -64,11 +64,10 @@ on-arrival: {!
         Q[party + '_votes'] = normalized;
     }
 
-    // 4. Adjust the last party's votes if necessary
+    // 4. Adjust the votes for the 'other' party
     var discrepancy = roundToTwo(100 - total_votes);
     if (discrepancy !== 0) {
-        var last_party = sorted_parties[sorted_parties.length - 1];
-        Q[last_party + '_votes'] = roundToTwo(Q[last_party + '_votes'] + discrepancy);
+        Q['other_votes'] = roundToTwo(Q['other_votes'] + discrepancy);
     }
 
     // 5. Calculate additional metrics
@@ -77,9 +76,6 @@ on-arrival: {!
         Q[party + '_votes_dec'] = roundToTwo(Q[party + '_normalized'] * 100);
     }
 !}
-go-to: jumpScene
-
-# note: this is a helpful utility to deal with elections and so on.
 go-to: jumpScene
 
 # note: this is a helpful utility to deal with elections and so on.
