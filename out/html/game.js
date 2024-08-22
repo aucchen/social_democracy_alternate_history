@@ -236,4 +236,7 @@
       get: function() {
         return currentTimer;
       }
-   }());
+    }
+}
+}
+}());
