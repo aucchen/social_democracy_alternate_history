@@ -16,6 +16,8 @@ As with the state police units and the Reichswehr, the internal police tends to 
 - @investigate_corruption: Investigate corruption by big businesses.
 - @investigate_far_right: Investigate illegal activity among the far right.
 - @investigate_far_left: Investigate illegal activity among the far left.
+- @ban_kpd: Запретить компартию.
+- @ban_nsdap: Запретить национал-социалистическую партию.
 - @domestic_enemies: Investigate or ban our domestic enemies.
 - @deport_hitler
 - @root: Take no action for now.
@@ -66,4 +68,104 @@ on-arrival: kpd_coalition_dissent += 1; nsdap_relation += 4; dnvp_relation += 2;
 [? if investigate_far_left == 1 : Мы начали расследование преступной деятельности коммунистов, но пока нет никаких значимых результатов. ?]
 [? if investigate_far_left == 2 : Мы нашли небольшое количество оружия, которое, возможно, связано с союзом красных фронтовиков. ?]
 [? if investigate_far_left == 3 : Мы провели обыски в доме имени Карла Либкнехта, где помещался ЦК КПГ, не нашли ничего серьезного, но запустили слухи о найденных там планах восстания, складах оружия, таинственных катакомбах. Кто-нибудь в это поверит. ?]
-[? if investigate_far_left > 3 : Ничего больше нельзя предпринять в рамках закона - коммунисты тщательно прячут следы своих преступлений. ?]
+[? if investigate_far_left > 3 : Практически ничего больше нельзя предпринять в рамках закона - коммунисты тщательно прячут следы своих преступлений. ?]
+
+@ban_kpd
+unavailable-subtitle: После реформ в сфере юстиции суды требуют больших доказательств для запрета КПГ
+view-if: investigate_far_left > 3 and (rfb_banned = 1 or rfb_banned_prussia = 1)
+choose-if: judicial_reform < 2 or (judicial_reform > 1 and investigate_far_left > 5)
+on-arrival: kpd_banned = 1; kpd_relation -= 150; workers_spd -= 2; nsdap_relation += 10; dnvp_relation += 8; z_relation += 3; dvp_relation += 2; rfb_strength += 20; rfb-strength *= 1.5; rfb_militancy += 0.05;
+
+[? if judicial_reform < 2 : Реакционный суд с радостью принял решение о запрете компартии. ?] КПГ теперь запрещена. Партия переходит на нелегальное положение. К участию на выборах их больше не допустят.
+
+@ban_nsdap
+view-if: investigate_far_right > 3 and (sa_banned = 1 or sa_banned_prussia = 1) and hitler_deported = 1
+choose-if: judicial_reform >= 2
+on-arrival: kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_militancy += 0.05; sa_strength += 20
+go-to: ban_nsdap_begin
+
+@ban_nsdap_begin
+on-arrival: 
+{!
+Q.rb_strength = Math.round(Q.rb_strength);
+Q.sh_strength = Math.round(Q.sh_strength);
+Q.sa_strength = Math.round(Q.sa_strength);
+// re-calculate dissent, in case we transitioned from, say, the KPD support that raised reformist dissent.
+var total_strength = Q.left_strength + Q.center_strength + Q.labor_strength + Q.reformist_strength + Q.neorevisionist_strength;
+var total_dissent = Q.left_strength*Q.left_dissent + Q.center_strength*Q.center_dissent + Q.labor_strength*Q.labor_dissent + Q.reformist_strength*Q.reformist_dissent + Q.neorevisionist_strength*Q.neorevisionist_dissent;
+
+Q.dissent = 0.01*total_dissent/total_strength;
+console.log('new dissent: ' + Q.dissent);
+
+if (Q.dissent < 0) {
+    Q.dissent = 0;
+} else if (Q.dissent > 0.95) {
+    Q.dissent = 0.95;
+}
+
+Q.civil_war_seen = 1;
+
+// our allies
+Q.total_power = 0;
+// TODO:  lower reichsbanner strength if the party's popularity is very low.
+Q.rb_power = Q.rb_strength*Q.rb_militancy;
+if (Q.dissent > 0.15) {
+    Q.rb_power *= (1 - Q.dissent/1.5);
+}
+Q.total_power += Q.rb_power;
+Q.prussian_police_power = Q.prussian_police_strength*Q.prussian_police_militancy*Q.prussian_police_loyalty;
+if (Q.spd_prussia) {
+    Q.total_power += Q.prussian_police_power;
+}
+if (Q.reichswehr_loyalty < 0) {
+    Q.reichswehr_loyalty = 0;
+}
+Q.loyal_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*Q.reichswehr_loyalty;
+if (Q.spd_in_government && Q.chancellor_party == "SPD") {
+    Q.total_power += Q.loyal_reichswehr_power;
+} else {
+    Q.total_power += Q.loyal_reichswehr_power/4;
+}
+Q.rfb_power = Q.rfb_strength*Q.rfb_militancy;
+if (Q.kpd_relation >= 60) {
+    Q.total_power += Q.rfb_power;
+} else if (Q.kpd_relation >= 45) {
+    Q.total_power += Q.rfb_power*0.5;
+}
+// general strike strength
+// maximum (given 25 labor strength) is 400
+// use normalized workers_spd instead of labor_strength?
+Q.normalized_workers_spd = 100*Q.workers_spd/(Q.workers_spd + Q.workers_kpd + Q.workers_nsdap + Q.workers_other + Q.workers_dnvp + Q.workers_z);
+Q.normalized_workers_kpd = 100*Q.workers_kpd/(Q.workers_spd + Q.workers_kpd + Q.workers_nsdap + Q.workers_other + Q.workers_dnvp + Q.workers_z);
+Q.normalized_workers_total = Q.normalized_workers_spd;
+if (Q.kpd_relation >= 60) {
+    Q.normalized_workers_total += Q.normalized_workers_kpd;
+} else if (Q.kpd_relation >= 45) {
+    Q.normalized_workers_total += Q.normalized_workers_kpd*0.5;
+}
+Q.total_power += (2 - Q.labor_dissent/100)*Q.normalized_workers_total*(2 - Q.unemployed/100)*2.5;
+console.log("Supporter strength:", Q.total_power);
+
+// our enemies
+Q.enemy_power = 0;
+Q.sa_power = Q.sa_strength*Q.sa_militancy;
+Q.enemy_power += Q.sa_power;
+Q.sh_power = Q.sh_strength*Q.sh_militancy;
+Q.enemy_power += Q.sh_power;
+Q.hostile_reichswehr_power = Q.reichswehr_strength*Q.reichswehr_militancy*(1-Q.reichswehr_loyalty);
+Q.enemy_power += Q.hostile_reichswehr_power;
+console.log("Enemy strength:", Q.enemy_power);
+!}
+go-to: ban_nsdap_success if nsdap_r > 24 and (total_power > enemy_power*0.85); ban_nsdap_failure if nsdap_r < 25 and (total_power < enemy_power*0.85)
+
+@ban_nsdap_success
+on-arrival: nsdap_banned = 1; kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_militancy += 0.02; sa_strength += 30; workers_dnvp += 3; rural_dnvp += 2; new_middle_dnvp += 4; old_middle_dnvp += 6; unemployed_dnvp += 3; workers_spd += 1; workers_kpd += 1
+
+Нам удалось запретить национал-социалистическую партию. Молодчики из запрещенных штурмовых отрядов все еще представляют угрозу, но политическое влияние нацистов изрядно подорвано. Нельзя сказать, что нам удалось уничтожить партию, но участвовать в выборах они больше не смогут.
+
+@ban_nsdap_failure
+on-arrival: sa_militancy += 0.03; kpd_relation += 5; rfb_strength += 10; rb_strength += 20;
+
+[? if nsdap_r > 24 : Пытаться запретить столь популярную у народа партию было не лучшей идеей ?]. Нацисты дали вооруженный отпор попыткам исполнить решение суда о запрете их партии. 
+
+- @civil_war: Это ведет к гражданской войне
