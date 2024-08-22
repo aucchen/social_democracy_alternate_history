@@ -197,7 +197,7 @@
   window.statusTab = "status";
   window.dendryModifyUI = main;
   console.log("Modifying stats: see dendryUI.dendryEngine.state.qualities");
-  
+
   window.onload = function() {
     window.dendryUI.loadSettings();
     updatePinnedCardsDescription();
@@ -208,7 +208,7 @@ function updatePinnedCardsDescription() {
 }
 
 function getAdvisorStatus() {
-    let advisorTimer = dendryUI.dendryEngine.state.qualities.advisor_action_timer;
+    let advisorTimer = window.dendryUI.dendryEngine.state.qualities.advisor_action_timer;
     
     switch (advisorTimer) {
         case 0:
