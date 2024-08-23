@@ -25,7 +25,7 @@ We do not yet have a coherent strategy for combatting the fascists. We must deve
 @harzburg_front_ask_join
 choose-if: (nsdap_relation > 24 or dnvp_relation > 26) and spd_in_government = 0
 view-if: (nsdap_relation > 24 or dnvp_relation > 26)
-unavailable-subtitle: Нелепо предлагать войти в фронт против правительства если мы участвуем в правительстве.
+unavailable-subtitle: Нелепо предлагать войти в фронт против правительства если мы находимся в правительстве.
 on-arrival: nsdap_relation += 5; dnvp_relation += 5; kpd_relation -= 5; workers_spd -= 1; left_dissent += 5
 
 Наше предложение шокировало общественность. Конечно же, правые единым фронтом выступили против нашего присутствия на встрече в Бад-Гарцбурге. Но наша заинтересованность в борьбе с коммунизмом их, безусловно, радует.

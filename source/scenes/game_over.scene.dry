@@ -107,6 +107,10 @@ if ((Q.we_join_soc_rev == "1" && Q.soviet_relation >= 2) && !Q.total_defeat) {
 if (Q.workers_spd_normalized < 2) {
     this.achieve('verraten');
 }
+// Weder Rot noch Braun - запретить КПГ и НСДАП
+if (Q.nsdap_banned = 1 && Q.kpd_banned = 1)
+    this.achieve('all_banned');
+}
 // Heidelberger Programm - fulfill the goals of the Heidelberg programm - increase welfare, reform justice, support women's rights, progressive taxation, works councils, build a European Union.
 if ((Q.welfare > 0 && Q.judicial_reform >= 2 && Q.womens_work >= 1 && Q.family_law >= 1 && Q.upper_tax_rates > Q.lower_tax_rates && Q.works_councils > 0 && Q.eu > 0)) {
     this.achieve('heidelberger_programm');
@@ -393,9 +397,11 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_verraten: **Wer hat uns verraten? Die Sozialdemokraten!** - полностью потерять доверие рабочего класса.?]
 
+[? if game_achievement_all_banned: **Weder Rot noch Braun** - запретить крайне левых и крайне правых ?]
+
 [? if game_achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
 
-[? if game_achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
+[? if game_achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. (возможно недостижимо)(возможно недостижимо) ?]
 
 [? if game_achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы немногим лучше фашистов. ?]
 
@@ -483,9 +489,11 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_verraten: **Wer hat uns verraten? Die Sozialdemokraten!** - полностью потерять доверие рабочего класса.?]
 
+[? if achievement_all_banned: **Weder Rot noch Braun** - запретить крайне левых и крайне правых ?]
+
 [? if achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
 
-[? if achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
+[? if achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. (возможно недостижимо)?]
 
 [? if achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы немногим лучше фашистов. ?]
 
@@ -572,9 +580,11 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_verraten: **Wer hat uns verraten? Die Sozialdemokraten!** - полностью потерять доверие рабочего класса.?]
 
+[? if not achievement_all_banned: **Weder Rot noch Braun** - запретить крайне левых и крайне правых ?]
+
 [? if not achievement_weltrevolution: **Weltrevolution** - мы разожгли пожар мировой революции. ?]
 
-[? if not achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. ?]
+[? if not achievement_sowjet_sozialistische_republik: **Sowjet Sozialistische Republik** - войти в состав СССР. (возможно недостижимо)?]
 
 [? if not achievement_sozialfaschismus: **Sozialfaschismus** - коммунисты были правы - мы немногим лучше фашистов. ?]
 

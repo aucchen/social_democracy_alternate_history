@@ -41,8 +41,12 @@ Our forces confront the government troops and their reactionary auxiliaries, and
 The show of force has reinvigorated support for the republic and for the SPD, and has weakened the fascists.
 
 @defend_2_victory_2
+on-arrival: investigate_far_right += 2;
+on-departure: investigate_far_right -= 2;
 achievement: drei_pfeile
 
+- @ban_nsdap: Воспользоваться случаем и запретить НСДАП за попытку государственного переворота
+- @main: Мы отстояли Пруссию и этого достаточно.
 
 @defend_2_civil_war
 

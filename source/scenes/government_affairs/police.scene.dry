@@ -74,6 +74,7 @@ on-arrival: kpd_coalition_dissent += 1; nsdap_relation += 4; dnvp_relation += 2;
 unavailable-subtitle: После реформ в сфере юстиции суды требуют больших доказательств для запрета КПГ
 view-if: investigate_far_left > 3 and (rfb_banned = 1 or rfb_banned_prussia = 1)
 choose-if: judicial_reform < 2 or (judicial_reform > 1 and investigate_far_left > 5)
-on-arrival: kpd_banned = 1; kpd_relation -= 150; workers_spd -= 2; nsdap_relation += 10; dnvp_relation += 8; z_relation += 3; dvp_relation += 2; rfb_strength += 20; rfb-strength *= 1.5; rfb_militancy += 0.05; workers_nsdap += 1; workers_other += 2; left_dissent *= 1.3; left_strength *= 0.75; workers_other += 10 if sapd_formed = 1;
+on-arrival: pro_republic -= 10; kpd_banned = 1; kpd_relation -= 150; workers_spd -= 2; nsdap_relation += 10; dnvp_relation += 8; z_relation += 3; dvp_relation += 2; rfb_strength += 20; rfb-strength *= 1.5; rfb_militancy += 0.05; workers_nsdap += 1; workers_other += 2; left_dissent *= 1.3; left_strength *= 0.75; workers_other += 10 if sapd_formed = 1; capital_strike_progress += 1
+max-visits: 1
 
 [? if judicial_reform < 2 : Реакционный суд без возражений принял решение о запрете компартии. ?] КПГ теперь запрещена. Партия переходит на нелегальное положение. Наш главный конкурент на выборах больше не сможет в них участвовать.

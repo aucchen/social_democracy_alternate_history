@@ -1,7 +1,9 @@
 title: nsdap ban
-view-if: investigate_far_right > 3 and (sa_banned = 1 or sa_banned_prussia = 1) and hitler_deported = 1
+unavailable-subtitle: Реакционные судьи не дадут разрешение на запрет этой партии
+view-if: investigate_far_right > 4 and (sa_banned = 1 or sa_banned_prussia = 1) or (hitler_deported = 1 and investigate_far_right > 3 and (sa_banned = 1 or sa_banned_prussia = 1))
 choose-if: judicial_reform >= 2
-on-arrival: kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_militancy += 0.05; sa_strength += 20
+on-arrival: pro_republic -= 10; kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_militancy += 0.05; sa_strength += 20
+max-visits: 1
 go-to: ban_nsdap_begin
 
 @ban_nsdap_begin
@@ -92,7 +94,7 @@ on-departure: long_war = 0; republic_victory = 0; total_defeat = 0;
 go-to: ban_nsdap_success if nsdap_r < 25 and (total_power > enemy_power*0.85); ban_nsdap_failure if nsdap_r > 24 and (total_power < enemy_power*0.85)
 
 @ban_nsdap_success
-on-arrival: nsdap_banned = 1; kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_militancy += 0.02; sa_strength += 30; workers_dnvp += 3; rural_dnvp += 2; new_middle_dnvp += 4; old_middle_dnvp += 6; unemployed_dnvp += 3; workers_spd += 1; workers_kpd += 1
+on-arrival: nsdap_banned = 1; kpd_relation += 6; nsdap_relation -= 150; dnvp_relation -= 25; sa_militancy += 0.02; sa_strength += 30; workers_dnvp += 3; rural_dnvp += 2; new_middle_dnvp += 3; old_middle_dnvp += 5; unemployed_dnvp += 3; workers_other += 1; old_middle_other += 2; workers_spd += 1; workers_kpd += 1; coup_progress -= 2 if (total_power > enemy_power *0.6); coup_progress += 2 if (total_power < enemy_power)
 
 Нам удалось запретить национал-социалистическую партию. Молодчики из запрещенных штурмовых отрядов все еще представляют угрозу, но политическое влияние нацистов изрядно подорвано. Нельзя сказать, что нам удалось уничтожить партию, но участвовать в выборах они больше не смогут.
 
