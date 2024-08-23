@@ -16,19 +16,19 @@ Braun [? if spd_prussia = 1 : is ?][? if spd_prussia = 0 : was ?] the Minister-P
 
 @coalition
 title: Negotiating with the Coalition
-subtitle: Braun can improve our relationships with our centrist and center-right coalition partners.
-choose-if: advisor_action_timer <= 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 5; coalition_dissent -= 1 if spd_in_government = 1; z_relation += 5; ddp_relation += 5; dvp_relation += 5
+subtitle: Braun can improve our relationships with our centrist and center-right coalition partners in Prussia as well as in the Reichstag.
+choose-if: advisor_action_timer <= 0 and (spd_prussia or in_weimar_coalition or in_grand_coalition or in_popular_front)
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if not spd_prussia : The SPD does not control the Prussian government. ?]
+on-arrival: advisor_action_timer = 6; coalition_dissent -= 1 if spd_in_government = 1; z_relation += 6; ddp_relation += 6; dvp_relation += 2; dvp_relation += 3 if in_grand_coalition
 
-We have improved our relations with the Z, DDP, and DVP, and reduced tensions with the coalition.
+We have improved our relations with the [? if in_grand_coalition : Center (Zentrum) Party, DDP, and DVP, ?][? if not in_grand_coalition: Center (Zentrum) Party and DDP, ?] and reduced tensions with the coalition.
 
 @prussian_bulwark
 title: The Prussian Bulwark
 subtitle: As the Minister-President of Prussia, Braun has power over the Prussian bureaucracy and security services.
 choose-if: advisor_action_timer <= 0 and spd_prussia = 1
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if spd_prussia == 0 : The SPD does not control Prussia. ?]
-on-arrival: advisor_action_timer = 5; prussian_affairs_timer -= 6
+on-arrival: advisor_action_timer = 6; prussian_affairs_timer -= 6
 go-to: prussian_affairs
 
 @snap_election

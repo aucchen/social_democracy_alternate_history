@@ -27,9 +27,9 @@ We have reduced the strength of the dissident factions in the party.
 @toleration
 title: Defending Toleration
 subtitle: Hilferding supports cooperation with the bourgeois parties.
-unavailable-subtitle: Not available right now. [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-choose-if: year >= 1930 and spd_in_government = 0 and spd_toleration = 1 and advisor_action_timer = 0
-on-arrival: advisor_action_timer = 5; left_dissent -= 10; neorevisionist_dissent -= 8;
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_toleration: The SPD is not in toleration. ?]
+choose-if: spd_in_government = 0 and spd_toleration = 1 and advisor_action_timer = 0
+on-arrival: advisor_action_timer = 6; left_dissent -= 10; neorevisionist_dissent -= 8; center_dissent -= 5
 
 We have reduced dissent among the anti-toleration factions.
 

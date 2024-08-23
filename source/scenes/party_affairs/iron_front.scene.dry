@@ -2,7 +2,7 @@ title: The Iron Front
 new-page: true
 is-card: true
 view-if: iron_front_formed == 1 and iron_front_timer = 0
-on-arrival: iron_front_timer = 7; month_actions += 1; reichsbanner_strenth -= 200 if workers_spd < 45 or workers_spd < workers_nsdap or workers_spd < workers_kpd; rb_militarization_cost = 2 if rb_militancy > 0.1 else rb_militarization_cost = 1; rb_militarization_cost = 3 if rb_militancy > 0.25
+on-arrival: iron_front_timer = 7; month_actions += 1; rb_militarization_cost = 2 if rb_militancy > 0.1 else rb_militarization_cost = 1; rb_militarization_cost = 3 if rb_militancy > 0.25
 card-image: img/iron_front.png
 frequency: 200
 tags: party_affairs, antifascism

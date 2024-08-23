@@ -280,3 +280,15 @@ Minor changes:
 - Some changes to when Papen can be appointed Chancellor.
 - Economic Democracy options can reduce unemployment.
 - Slightly increased unemployment reduction from the Left Plan.
+
+
+v0.15.1 - bug fixes
+
+Changes:
+- viewing polls in historical mode is disabled.
+- some issues with awkward values in qdisplays have been resolved.
+- all advisor timers are now 6 months.
+- clarifying Woytinsky's action for adopting the economic plan in historical mode.
+
+Future changes:
+- 

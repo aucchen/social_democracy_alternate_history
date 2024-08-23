@@ -2,7 +2,7 @@
 # party faction dissent
 
 (..4.999) very low
-(5..14.999) low
-(15..30.999) medium
-(31..49.999) high
-(50..) very high
+(4.999..14.999) low
+(14.999..30.999) medium
+(30.999..49.999) high
+(49.999..) very high

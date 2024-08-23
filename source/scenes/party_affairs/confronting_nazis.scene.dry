@@ -26,7 +26,7 @@ The Nazis are just another far-right movement that will die of its own contradic
 
 @economic_crisis
 title: We must address the economic crisis first.
-view-if: economic_plan == 0
+view-if: economic_plan == 0 and black_thursday_seen == 1
 go-to: crisis_program
 
 @major_crisis
