@@ -35,17 +35,21 @@ Let us hope this does not backfire.
 
 @post_election_1928
 on-arrival: {!
+// Helper function to round numbers to two decimal places accurately
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2") + "e-2");
+}
+
 // set old results
 for (var party of Q.parties) {
     Q['old_' + party + '_r'] = Q[party + '_r'];
     Q[party + '_r'] = Q[party + '_votes'];
-    Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
-    var sign = Q['change_' + party + '_r'] > 0 ? '+'  : '';
-    Q['str_change_' + party] = sign + Q['change_' + party + '_r'];//.toFixed(1);
+    Q['change_' + party + '_r'] = roundToTwo(Q[party + '_r'] - Q['old_' + party + '_r']);
+    var sign = Q['change_' + party + '_r'] > 0 ? '+' : '';
+    Q['str_change_' + party] = sign + Q['change_' + party + '_r'];
 }
 
 // get change arrows and signs
-
 
 // The largest party can only be the NSDAP or the SPD.
 Q.largest_party = 'SPD';
