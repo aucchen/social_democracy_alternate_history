@@ -108,7 +108,7 @@ if (Q.workers_spd_normalized < 2) {
     this.achieve('verraten');
 }
 // Weder Rot noch Braun - запретить КПГ и НСДАП
-if (Q.nsdap_banned = 1 && Q.kpd_banned = 1) {
+if (Q.nsdap_banned == 1 && Q.kpd_banned == 1) {
     this.achieve('all_banned');
 }
 // Heidelberger Programm - fulfill the goals of the Heidelberg programm - increase welfare, reform justice, support women's rights, progressive taxation, works councils, build a European Union.
