@@ -1,7 +1,7 @@
 title: Hitler takes power.
 subtitle: The beginning of the end.
 view-if: chancellor == "Hitler" or president == "Hitler" or chancellor_party == "NSDAP"
-on-arrival: spd_in_government = 0 if nsdap_relation < 51; nazi_full_win_timer = 3
+on-arrival: spd_in_government = 0 if nsdap_relation < 51; nazi_full_win_timer = 3; kpd_banned = 1;
 max-visits: 1
 tags: event
 new-page: true

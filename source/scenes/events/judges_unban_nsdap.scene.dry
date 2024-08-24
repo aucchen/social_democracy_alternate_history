@@ -1,0 +1,7 @@
+title: Запрет НСДАП отменен.
+subtitle: The judges have re-legalized the NSDAP.
+view-if: nsdap_banned == 1 and judicial_reform < 2 or (justice_minister_party = "DNVP")
+on-arrival: nsdap_banned = 0; workers_nsdap += 1; rural_nsdap += 1; new_middle_nsdap += 1; unemployed_nsdap += 2;  old_middle_nsdap += 2; 
+tags: event
+
+Judges have ordered the NSDAP to be re-legalized. They immediately return to politics.
