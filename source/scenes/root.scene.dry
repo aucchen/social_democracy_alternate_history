@@ -12,8 +12,9 @@ go-to: start_menu_2
 
 @start_menu_2
 
-- @start: Начать игру с тест-модом
+- @start: Начать игру с модом.
 - @election_simulation: Election simulation
+- @mode-info: Описание мода.
 - @credits: Credits
 - @game_over.achievements
 

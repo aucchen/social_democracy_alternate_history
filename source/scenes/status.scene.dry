@@ -43,9 +43,9 @@ Others: [+ other_votes +]%
 
 [? if spd_in_government = 1 : Бюджет: [+ budget +] ?]
 
-Inflation: [+ inflation_2 +]%
+Инфляция: [+ inflation_2 +]%
 
-[? if black_thursday_seen = 1 : Unemployment: [+ unemployed_2 +]% ?]
+[? if black_thursday_seen = 1 : Безработица: [+ unemployed_2 +]% ?]
 
 Следующие выборы: [+ next_election_month : month +] [+ next_election_year +]
 
@@ -112,13 +112,13 @@ DNVP: [+ dnvp_relation : relationships +]
 
 NSDAP: [+ nsdap_relation : relationships +]
 
-= Internal Factions of the SPD
+= Фракции SPD
 
-Left strength: [+ left_strength : strength +], dissent: [+ left_dissent : dissent +]
+Left strength: [+ left_strength : strength +], раскол: [+ left_dissent : dissent +]
 
-Center strength: [+ center_strength : strength +], dissent: [+ center_dissent : dissent +]
+Center strength: [+ center_strength : strength +], раскол: [+ center_dissent : dissent +]
 
-Labor strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
+Labor strength: [+ labor_strength : strength +], раскол: [+ labor_dissent : dissent +]
 
 Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_dissent : dissent +]
 
@@ -162,39 +162,56 @@ Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_d
 
 @paramilitaries
 
-= Paramilitaries
+= Парамилитарные организации
 
-Reichsbanner Strength: [+ rb_strength +] thousand
+Численность Рейхсбаннера: [+ rb_strength +] thousand
 
-Reichsbanner Militarization: [+ rb_militancy : militancy +]
+Милитаризация: [+ rb_militancy : militancy +]
 
-RFB Strength: [+ rfb_strength +] thousand
+Численность Союза Красных Фронтовиков (RFB): [+ rfb_strength +] thousand
 
-RFB Militarization: [+ rfb_militancy : militancy +]
+Милитаризация: [+ rfb_militancy : militancy +]
 
-Stahlhelm Strength: [+ sh_strength +] thousand
+Численность Стального Шлема (Stahlhelm): [+ sh_strength +] thousand
 
-Stahlhelm Militarization: [+ sh_militancy : militancy +]
+Милитаризация: [+ sh_militancy : militancy +]
 
-SA Strength: [+ sa_strength +] thousand
+Численность штурмовиков (SA): [+ sa_strength +] thousand
 
-SA Militarization: [+ sa_militancy : militancy +]
+Милитаризация: [+ sa_militancy : militancy +]
 
-= Official military/paramilitaries
+= Официальные вооруженные формирования
 
-Reichswehr: [+ reichswehr_strength +] thousand troops.
+Рейхсвер: [+ reichswehr_strength +] тыс. солдат.
 
-Reichswehr Loyalty: [+ reichswehr_loyalty : loyalty +]
+Лояльность рейхсвера: [+ reichswehr_loyalty : loyalty +]
 
-Prussian police: [+ prussian_police_strength +] thousand members.
+[? if spd_prussia = 1 : Прусская полиция: [+ prussian_police_strength +] тыс. чел. ?]
 
-Prussian police loyalty: [+ prussian_police_loyalty : loyalty +]
+[? if spd_prussia = 1 : Лояльность прусской полиции: [+ prussian_police_loyalty : loyalty +] ?]
+
+Лояльность центральной полиции [+ interior_police_loyalty : loyalty +]
+
+[? if advisor_action_timer = 0 : Советник ждет указаний ?]
+
+[? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
+
+[? if advisor_action_timer = 5 : Советник будет доступен через 5 месяцев ?]
+
+[? if advisor_action_timer = 4 : Советник будет доступен через 4 месяца ?]
+
+[? if advisor_action_timer = 3 : Советник будет доступен через 3 месяца ?]
+
+[? if advisor_action_timer = 2 : Советник будет доступен через 2 месяца ?]
+
+[? if advisor_action_timer = 1 : Советник будет доступен через 1 месяц ?]
+
 
 @polls
 
-= Projected election results
+= Прогнозируемые результаты выборов
 
-(if the election were to be held now):
+(если бы выборы проводились прямо сейчас):
 
 SPD: [+ spd_votes +]%
 
@@ -214,45 +231,19 @@ Others: [+ other_votes +]%
 
 **Detailed results for each demographic**
 
-Workers: SPD: [+ workers_spd_normalized +]%, Z: [+ workers_z_normalized +]%, KPD: [+ workers_kpd_normalized +]%, DDP: [+ workers_ddp_normalized +]%, DVP: [+ workers_dvp_normalized +]%; DNVP: [+ workers_dnvp_normalized +]%, NSDAP: [+ workers_nsdap_normalized +]%, Others: [+ workers_other_normalized +]%
+Рабочие: SPD: [+ workers_spd_normalized +]%, Z: [+ workers_z_normalized +]%, KPD: [+ workers_kpd_normalized +]%, DDP: [+ workers_ddp_normalized +]%, DVP: [+ workers_dvp_normalized +]%; DNVP: [+ workers_dnvp_normalized +]%, NSDAP: [+ workers_nsdap_normalized +]%, Others: [+ workers_other_normalized +]%
 
-New Middle Class: SPD: [+ new_middle_spd_normalized +]%, Z: [+ new_middle_z_normalized +]%, KPD: [+ new_middle_kpd_normalized +]%, DDP: [+ new_middle_ddp_normalized +]%, DVP: [+ new_middle_dvp_normalized +]%; DNVP: [+ new_middle_dnvp_normalized +]%, NSDAP: [+ new_middle_nsdap_normalized +]%, Others: [+ new_middle_other_normalized +]%
+Новый средний класс: SPD: [+ new_middle_spd_normalized +]%, Z: [+ new_middle_z_normalized +]%, KPD: [+ new_middle_kpd_normalized +]%, DDP: [+ new_middle_ddp_normalized +]%, DVP: [+ new_middle_dvp_normalized +]%; DNVP: [+ new_middle_dnvp_normalized +]%, NSDAP: [+ new_middle_nsdap_normalized +]%, Others: [+ new_middle_other_normalized +]%
 
-Old Middle Class: SPD: [+ old_middle_spd_normalized +]%, Z: [+ old_middle_z_normalized +]%, KPD: [+ old_middle_kpd_normalized +]%, DDP: [+ old_middle_ddp_normalized +]%, DVP: [+ old_middle_dvp_normalized +]%; DNVP: [+ old_middle_dnvp_normalized +]%, NSDAP: [+ old_middle_nsdap_normalized +]%, Others: [+ old_middle_other_normalized +]%
+Старый средний класс: SPD: [+ old_middle_spd_normalized +]%, Z: [+ old_middle_z_normalized +]%, KPD: [+ old_middle_kpd_normalized +]%, DDP: [+ old_middle_ddp_normalized +]%, DVP: [+ old_middle_dvp_normalized +]%; DNVP: [+ old_middle_dnvp_normalized +]%, NSDAP: [+ old_middle_nsdap_normalized +]%, Others: [+ old_middle_other_normalized +]%
 
-Rural: SPD: [+ rural_spd_normalized +]%, Z: [+ rural_z_normalized +]%, KPD: [+ rural_kpd_normalized +]%, DDP: [+ rural_ddp_normalized +]%, DVP: [+ rural_dvp_normalized +]%; DNVP: [+ rural_dnvp_normalized +]%, NSDAP: [+ rural_nsdap_normalized +]%, Others: [+ rural_other_normalized +]%
+Крестьянство: SPD: [+ rural_spd_normalized +]%, Z: [+ rural_z_normalized +]%, KPD: [+ rural_kpd_normalized +]%, DDP: [+ rural_ddp_normalized +]%, DVP: [+ rural_dvp_normalized +]%; DNVP: [+ rural_dnvp_normalized +]%, NSDAP: [+ rural_nsdap_normalized +]%, Others: [+ rural_other_normalized +]%
 
-Unemployed: SPD: [+ unemployed_spd_normalized +]%, Z: [+ unemployed_z_normalized +]%, KPD: [+ unemployed_kpd_normalized +]%, DDP: [+ unemployed_ddp_normalized +]%, DVP: [+ unemployed_dvp_normalized +]%; DNVP: [+ unemployed_dnvp_normalized +]%, NSDAP: [+ unemployed_nsdap_normalized +]%, Others: [+ unemployed_other_normalized +]%
+Безработные: SPD: [+ unemployed_spd_normalized +]%, Z: [+ unemployed_z_normalized +]%, KPD: [+ unemployed_kpd_normalized +]%, DDP: [+ unemployed_ddp_normalized +]%, DVP: [+ unemployed_dvp_normalized +]%; DNVP: [+ unemployed_dnvp_normalized +]%, NSDAP: [+ unemployed_nsdap_normalized +]%, Others: [+ unemployed_other_normalized +]%
 
-Catholics: SPD: [+ catholics_spd_normalized +]%, Z: [+ catholics_z_normalized +]%, KPD: [+ catholics_kpd_normalized +]%, DDP: [+ catholics_ddp_normalized +]%, DVP: [+ catholics_dvp_normalized +]%; DNVP: [+ catholics_dnvp_normalized +]%, NSDAP: [+ catholics_nsdap_normalized +]%, Others: [+ catholics_other_normalized +]%
+Католики: SPD: [+ catholics_spd_normalized +]%, Z: [+ catholics_z_normalized +]%, KPD: [+ catholics_kpd_normalized +]%, DDP: [+ catholics_ddp_normalized +]%, DVP: [+ catholics_dvp_normalized +]%; DNVP: [+ catholics_dnvp_normalized +]%, NSDAP: [+ catholics_nsdap_normalized +]%, Others: [+ catholics_other_normalized +]%
 
-Support for the Republic: [+ pro_republic +]%
-
-[? if advisor_action_timer = 0 : Советник ждет указаний ?]
-
-[? if advisor_action_timer = 6 : Советник будет доступен через 6 месяцев ?]
-
-[? if advisor_action_timer = 5 : Советник будет доступен через 5 месяцев ?]
-
-[? if advisor_action_timer = 4 : Советник будет доступен через 4 месяца ?]
-
-[? if advisor_action_timer = 3 : Советник будет доступен через 3 месяца ?]
-
-[? if advisor_action_timer = 2 : Советник будет доступен через 2 месяца ?]
-
-[? if advisor_action_timer = 1 : Советник будет доступен через 1 месяц ?]
-
-@other
-
-[? if spd_prussia = 1 : Прусская полиция: [+ prussian_police_strength +] тыс. чел. ?]
-
-[? if spd_prussia = 1 : Лояльность полиции: [+ prussian_police_loyalty : loyalty +] ?]
-
-
-= Иное
-
-Численность Рейхсбаннера: [+ rb_strength +] тыс. чел.
-Милитаризация: [+ rb_militancy : militancy +]
+Поддержка Республики: [+ pro_republic +]%
 
 [? if advisor_action_timer = 0 : Советник ждет указаний ?]
 
