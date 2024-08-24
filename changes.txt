@@ -292,3 +292,36 @@ Changes:
 - Bug fix: advisor actions should not reset card timers.
 - Bug fix: emergency/minority government options should show up correctly.
 - Some minor changes for policy outcomes.
+
+v0.15 - Historical Mode
+
+Major changes:
+
+- Historical Mode:
+    - disables saves and poll information
+    - changes fundraising to automatically give 2 resources each year (no fundraising card or emergency fundraising)
+    - significantly reduces the initial government budget
+    - increases the roles of factions in the economic plan
+    - Otto Braun cannot be both president, minister-president, and chancellor simultaneously
+    - increasing Reichsbanner militarization will reduce relations with Zentrum
+- New achievement: Schwarz-Rot-Gold - successfully complete the game in historical mode.
+- New visualization for inflation and unemployment history.
+- Option for high inflation: price and wage controls.
+
+Minor changes:
+
+- Some changes to when Papen can be appointed Chancellor.
+- Economic Democracy options can reduce unemployment.
+- Slightly increased unemployment reduction from the Left Plan.
+
+
+v0.15.1 - bug fixes
+
+Changes:
+- viewing polls in historical mode is disabled.
+- some issues with awkward values in qdisplays have been resolved.
+- all advisor timers are now 6 months.
+- clarifying Woytinsky's action for adopting the economic plan in historical mode.
+
+Future changes:
+- 

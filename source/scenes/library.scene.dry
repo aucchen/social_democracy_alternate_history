@@ -53,6 +53,7 @@ Q.pro_republic = Math.round(Q.pro_republic);
 Q.nationalism = Math.round(Q.nationalism);
 Q.socialism = Math.round(Q.socialism);
 !}
+view-if: (not historical_mode) or game_over
 go-to: election_algorithm
 set-jump: election_projections
 
@@ -239,7 +240,6 @@ Dissent: [+ neorevisionist_dissent : dissent +]
 
 
 @figures
-view-if: (not historical_mode) or game_over
 title: Figures and Charts
 go-to: menu
 on-arrival: z_minus_bvp_r = z_r - 3;
@@ -323,9 +323,11 @@ if (d3 && window) {
     //document.getElementById('election_history').innerHTML = svg.outerHTML;
 
     // party support records should not have so many ticks
-    var lines_2 = d3.linegraph(true, true);
-    lines_2.width(width).height(400);
-    d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
+    if (!Q.historical_mode) {
+        var lines_2 = d3.linegraph(true, true);
+        lines_2.width(width).height(400);
+        d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
+    }
 
     // economic stats
     var minInflation = d3.min(Q.economic_records, d => d.inflation);
@@ -368,6 +370,8 @@ if (d3 && window) {
 {!<svg id="election_history" style="width: 500px; height: 400px;"> </svg>!}
 
 = Party support history
+
+[? if historical_mode: Not available in historical mode. ?]
 
 {!<svg id="party_support_history" style="width: 500px; height: 400px;"> </svg>!}
 

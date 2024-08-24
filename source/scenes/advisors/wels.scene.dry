@@ -20,7 +20,7 @@ subtitle: Removes all cards from the hand.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: {!
-Q.advisor_action_timer = 5;
+Q.advisor_action_timer = 6;
 if (Q.difficulty >= 0) {
     window.dendryUI.dendryEngine.state.currentHands['main'] = [];
 } else {
