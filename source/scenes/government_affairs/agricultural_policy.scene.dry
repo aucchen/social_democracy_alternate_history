@@ -1,7 +1,7 @@
 title: Agricultural Policy
 new-page: true
 is-card: true
-on-arrival: agricultural_policy_timer = 6; month_actions += 1
+on-arrival: agricultural_policy_timer += 6; month_actions += 1
 view-if: spd_in_government = 1 and (agriculture_minister_party = "SPD") and agricultural_policy_timer == 0
 card-image: img/portraits/BaadeFritz.jpg
 tags: govt_affairs

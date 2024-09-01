@@ -494,6 +494,7 @@ Q.sender_advisor = 0; // Toni Sender
 Q.levi_advisor = 0; // Paul Levi
 Q.levi_dead = 0;
 Q.rosenfeld_advisor = 0; // Kurt Rosenfeld
+Q.seydewitz_advisor = 0; // Max Seydewitz
 
 // centrist alternate advisors
 Q.pfulf_advisor = 0; // Antonie Pfülf
@@ -515,6 +516,11 @@ Q.mierendorff_advisor = 0; // Carlo Mierendorf (post-1930)
 
 Q.leber_advisor = 0; // Julius Leber (post-1930)
 Q.schumacher_advisor = 0; // Kurt Schumacher (post-1930)
+
+// Nonfactional advisors
+Q.hirschfeld_advisor = 0; // Magnus Hirschfeld
+Q.radbruch_advisor = 0; // Gustav Radbruch
+Q.stampfer_advisor = 0; // Friedrich Stampfer
 !}
 set-bg: img/map_2.jpg
 new-page: true

@@ -1,7 +1,7 @@
 title: The Economic Crisis
 new-page: true
 is-card: true
-view-if: crisis_urgency >= 1 and crisis_program_timer = 0 and economic_plan = 0
+view-if: crisis_urgency >= 1 and crisis_program_timer = 0 and economic_plan = 0 and black_thursday_seen == 1
 frequency: 200
 on-arrival: month_actions += 1; crisis_program_timer = 5
 card-image: img/bankrun.jpg

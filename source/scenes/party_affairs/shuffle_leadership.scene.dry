@@ -82,15 +82,6 @@ go-to: rm_main
 
 Severing has been removed as an advisor. The Reformist faction disapproves.
 
-@remove_baade
-title: Remove Baade
-view-if: baade_advisor = 1
-tags: remove_advisor
-on-arrival: baade_advisor = 0; reformist_dissent += 3; n_advisors -= 1
-go-to: rm_main
-
-Baade has been removed as an advisor. The Reformist faction disapproves.
-
 @remove_braun
 title: Remove Braun
 view-if: braun_advisor = 1
@@ -177,6 +168,16 @@ go-to: rm_main
 
 Rosenfeld has been removed as an advisor. The Leftist faction disapproves.
 
+@remove_seydewitz
+title: Remove Seydewitz
+view-if: seydewitz_advisor = 1
+tags: remove_advisor
+on-arrival: seydewitz_advisor = 0; left_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Seydewitz has been removed as an advisor. The Leftist faction disapproves.
+
+
 
 # neorevisionists
 
@@ -208,6 +209,52 @@ go-to: rm_main
 Schumacher has been removed as an advisor. The Neorevisionist faction disapproves.
 
 
+## nonfactional
+
+# tbh I'm not sure if Baade should be a reformist or nonfactional. same for stampfer. they were vaguely reformist-aligned but had pretty different ideas from the other reformists here. so they're non-factional.
+
+@remove_baade
+title: Remove Baade
+view-if: baade_advisor = 1
+tags: remove_advisor
+on-arrival: baade_advisor = 0; n_advisors -= 1
+go-to: rm_main
+
+Baade has been removed as an advisor.
+
+#The Reformist faction disapproves.
+
+
+@remove_hirschfeld
+title: Remove Hirschfeld
+view-if: hirschfeld_advisor = 1
+tags: remove_advisor
+on-arrival: hirschfeld_advisor = 0; n_advisors -= 1
+go-to: rm_main
+
+Hirschfeld has been removed as an advisor. 
+
+@remove_stampfer
+title: Remove Stampfer
+view-if: stampfer_advisor = 1
+tags: remove_advisor
+on-arrival: stampfer_advisor = 0; n_advisors -= 1
+go-to: rm_main
+
+Stampfer has been removed as an advisor. 
+
+@remove_radbruch
+title: Remove Radbruch
+view-if: radbruch_advisor = 1
+tags: remove_advisor
+on-arrival: radbruch_advisor = 0; n_advisors -= 1
+go-to: rm_main
+
+Radbruch has been removed as an advisor. 
+
+
+
+
 
 ####################### adding advisors
 
@@ -228,6 +275,7 @@ frequency: 1
 - @reformist: Add Reformists
 - @labor: Add Labor
 - @neorev: Add Neorevisionists
+- @nonfactional: Add non-factional advisors
 - @rm_main: Remove advisors instead.
 - @remove_none: Stop changing advisors.
 
@@ -255,6 +303,11 @@ view-if: n_advisors < 3
 view-if: neorevisionism > 0 and n_advisors < 3
 
 - #neorev_advisor
+
+@nonfactional
+view-if: n_advisors < 3
+
+- #nonfactional_advisor
 
 @add_hilferding
 title: Rudolf Hilferding
@@ -364,7 +417,7 @@ title: Paul Levi
 subtitle: Paul Levi is a former KPD leader who was purged for criticizing Communist policies.
 is-card: true
 card-image: img/portraits/LeviPaul.jpg
-view-if: levi_advisor = 0 and levi_dead = 0 and n_advisors < 3
+view-if: levi_advisor = 0 and levi_dead = 0 and n_advisors < 3 and sapd_formed = 0
 on-arrival: levi_advisor = 1; n_advisors += 1; left_strength += 5
 go-to: advisor_menu
 tags: left_advisor
@@ -395,6 +448,19 @@ tags: left_advisor
 
 Kurt Rosenfeld is now an advisor.
 
+@add_seydewitz
+title: Max Seydewitz
+subtitle: Max Seydewitz is a former leader of the youth wing, current supporter of the left wing of the SPD, and advocates for class struggle.
+is-card: true
+card-image: img/portraits/SeydewitzMax.jpg
+view-if: seydewitz_advisor = 0 and n_advisors < 3 and sapd_formed = 0
+on-arrival: seydewitz_advisor = 1; n_advisors += 1; left_strength += 5
+go-to: advisor_menu
+tags: left_advisor
+
+Max Seydewitz is now an advisor.
+
+
 # labor
 
 @add_leipart
@@ -403,7 +469,7 @@ subtitle: Theodor Leipart is the leader of the ADGB, the German Trade Union Fede
 is-card: true
 card-image: img/portraits/LeipartTheodor.jpg
 tags: labor_advisor
-view-if: leipart_advisor = 0 and n_advisors < 3
+view-if: leipart_advisor = 0 and n_advisors < 3 and unions_independent = 0
 on-arrival: leipart_advisor = 1; n_advisors += 1; labor_strength += 5
 go-to: advisor_menu
 
@@ -427,7 +493,7 @@ subtitle: Wladimir Woytinsky is a former Russian Menshevik who is now the lead t
 is-card: true
 card-image: img/portraits/WoytinskyWladimir.jpg
 tags: labor_advisor
-view-if: woytinsky_advisor = 0 and n_advisors < 3
+view-if: woytinsky_advisor = 0 and n_advisors < 3 and unions_independent = 0
 on-arrival: woytinsky_advisor = 1; n_advisors += 1; labor_strength += 3
 go-to: advisor_menu
 
@@ -462,7 +528,7 @@ Kurt Schumacher is now an advisor.
 
 @add_leber
 title: Julius Leber
-subtitle: Julius Leber is a former Reichswehr officer who resigned in opposition to the coup attempt.
+subtitle: Julius Leber is a former Reichswehr officer who resigned in opposition to the Kapp coup attempt.
 is-card: true
 card-image: img/portraits/LeberJulius.jpg
 view-if: leber_advisor = 0 and n_advisors < 3
@@ -472,6 +538,33 @@ tags: neorev_advisor
 
 Julius Leber is now an advisor.
 
+# Nonfactional advisors
 
+@add_baade
+title: Fritz Baade
+subtitle: Fritz Baade is one of the few agricultural policy experts in the SPD.
+is-card: true
+card-image: img/portraits/BaadeFritz.jpg
+view-if: baade_advisor = 0 and n_advisors < 3
+on-arrival: baade_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: nonfactional_advisor
+
+Fritz Baade is now an advisor.
+
+
+@add_hirschfeld
+title: Magnus Hirschfeld
+subtitle: Magnus Hirschfeld is the founder of the Institut für Sexualwissenschaft and an advocate for the rights of sexual minorities.
+is-card: true
+card-image: img/portraits/hirschfeld.jpg
+view-if: hirschfeld_advisor = 0 and n_advisors < 3
+on-arrival: hirschfeld_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: nonfactional_advisor
+
+Magnus Hirschfeld is now an advisor.
+
+# TODO: add radbruch, stampfer
 
 
