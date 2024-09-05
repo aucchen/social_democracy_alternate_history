@@ -1,0 +1,46 @@
+title: Constitutional Reform
+new-page: true
+is-card: true
+view-if: spd_in_government = 1 and justice_minister_party = "SPD" and judiciary_timer = 0 and judicial_reform >= 4 and neorevisionism and ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front))
+frequency: 25
+on-arrival: month_actions += 1; constitutional_reform_timer += 12
+card-image: img/portraits/RadbruchGustav.jpg
+go-to: reforms_menu
+#tags: govt_affairs
+
+# technically you could do some trickery to get a 2/3 quorum in the Reichstag by stopping some people from attending... if the NSDAP is boycotting the Reichstag, or if the NSDAP or DNVP are banned in the aftermath of a coup atempt...
+
+# alternatively, a constitutional referendum can be initiated, that requires a simple majority of voters to pass (as I understand article 76). This should depend on support for the republic and for democracy, and the relationships with the other parties (more similar to the presidential election).
+
+= Constitutional Reform
+
+# the ideas for constitutional reform here are based on the bundesrepublik constitution... I'm not sure if it's totally realistic to what someone like Mierendorff would've wanted.
+
+Many neorevisionists consider the Weimar Constitution to be inadequate.
+
+A constitutional reform requires either a two-thirds supermajority in the Reichstag, or a constitutional referendum with support from a majority of the electorate. If we do not have such a majority, we must be assured of strong support from the other parties. 
+
+@reforms_menu
+
+- @vote_threshold: Change the vote threshold to 5% for parties to be represented in the Reichstag.
+- @constructive_vonc: Ban non-constructive votes of no confidence.
+- @as_is: Do not pursue constitutional reform.
+- @easy_discard
+#- @constitutional_bans: Allow the banning of anti-constitutional parties.
+
+@vote_threshold
+on-arrival: {!
+
+!}
+
+@constructive_vonc
+
+# Zentrum and DDP will always support this, all other parties oppose.
+
+@constitutional_bans
+
+# Temporarily disable this for now - how would this interact with the already-extant law for the protection of the republic? This 
+
+
+@as_is
+go-to: root

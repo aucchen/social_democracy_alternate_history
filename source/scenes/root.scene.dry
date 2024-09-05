@@ -110,6 +110,8 @@ Q.NSDAP_relation = 0;
 
 Q.kpd_leader = "Thälmann";
 Q.z_leader = "Brüning";
+// party leader - can be Ludwig Kaas, Joseph Joos, or Adam Stegerwald after the 1928 December conference. Joos will be most friendly to the SPD.
+Q.z_party_leader = "Marx";
 Q.nsdap_leader = "Hitler";
 
 // hmm... maybe we can play nice with Hindenburg???
@@ -166,6 +168,17 @@ Q.socialism = 40;
 Q.pro_republic = 59;
 
 Q.emergency_rule = 0;
+
+// minimum percentage of votes to be represented in the Reichstag
+Q.electoral_threshold = 0;
+// constitutional reform level
+Q.constitutional_reform = 0;
+// constructive vote of no confidence
+Q.constructive_vonc = 0;
+// allows banning of non-constitutional parties
+Q.constitutional_protection = 0;
+Q.kpd_banned = 0;
+Q.nsdap_banned = 0;
 
 // coups and capital strikes happen when you upset the right or the capitalists too much with your policies. they're an additional check on your policies, when purely electoral checks don't suffice.
 // when coup_progress reaches 10 or capital_strike_progress reaches 10, there's a special event that launches the coup.
@@ -322,6 +335,7 @@ Q.in_spd_majority = 0;
 Q.grand_coalition_failed = 0;
 // if the SPD is ruling as part of a minority government
 Q.in_minority_government = 0;
+// national unity governmet
 
 // if you're in a coalition, this is an incremental counter for how many times dissent has happened from the right.
 Q.coalition_dissent = 0;
@@ -399,6 +413,8 @@ Q.moderate_plan_progress = 0;
 Q.lower_tax_rates = 0;
 Q.upper_tax_rates = 0;
 
+Q.electoral_threshold = 0;
+
 // our conduct in the government, and the conduct of our coalition opponents.
 // did the SPD vote against the previous government in a vote of no confidence?
 Q.spd_no_confidence = 0;
@@ -424,6 +440,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'homosexual_rights', 'economic_policy', 'coalition_affairs',
             'war_guilt', 'womens_rights', 'economic_democracy',
             'dealing_with_toleration',
+            'constitutional_reform',
             // events
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban',

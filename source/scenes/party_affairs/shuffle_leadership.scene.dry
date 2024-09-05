@@ -315,7 +315,7 @@ subtitle: Rudolf Hilferding is an economist and one of our chief Marxist theoret
 is-card: true
 card-image: img/portraits/HilferdingRudolf.jpg
 tags: center_advisor
-view-if: hilferding_advisor = 0 and n_advisors < 3
+view-if: hilferding_advisor = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: hilferding_advisor = 1; n_advisors += 1
 go-to: advisor_menu
 
@@ -327,7 +327,7 @@ subtitle: Otto Wels is a long-time party organizer and member of the leadership,
 is-card: true
 card-image: img/portraits/WelsRudolf.jpg
 tags: center_advisor
-view-if: wels_advisor = 0 and n_advisors < 3
+view-if: wels_advisor = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: wels_advisor = 1; n_advisors += 1
 go-to: advisor_menu
 
@@ -339,7 +339,7 @@ subtitle: Hermann Müller is the last Social Democratic Chancellor.
 is-card: true
 card-image: img/portraits/MüllerHermann.jpg
 tags: center_advisor
-view-if: muller_advisor = 0 and muller_dead = 0 and n_advisors < 3
+view-if: muller_advisor = 0 and muller_dead = 0 and n_advisors < 3 and centrists_resign = 0
 on-arrival: muller_advisor = 1; n_advisors += 1
 go-to: advisor_menu
 
