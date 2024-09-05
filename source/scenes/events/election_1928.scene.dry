@@ -36,12 +36,32 @@ Let us hope this does not backfire.
 @post_election_1928
 on-arrival: {!
 // set old results
+// election threshold constitutional reform
+// banning parties
+var new_party_sum = 0;
 for (var party of Q.parties) {
     Q['old_' + party + '_r'] = Q[party + '_r'];
-    Q[party + '_r'] = Q[party + '_votes'];
+    if (Q.constitutional_reform) {
+        if (Q[party + '_votes'] < Q.electoral_threshold || Q[party + '_banned']) {
+            Q[party + '_r'] = 0;
+        } else {
+            Q[party + '_r'] = Q[party + '_votes'];
+        }
+        new_party_sum += Q[party + '_r'];
+    } else {
+        Q[party + '_r'] = Q[party + '_votes'];
+    }
     Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
     var sign = Q['change_' + party + '_r'] > 0 ? '+'  : '';
     Q['str_change_' + party] = sign + Q['change_' + party + '_r'];//.toFixed(1);
+}
+// calculate new party sum if electoral reform
+if (Q.electoral_threshold && Q.electoral_threshold > 0) {
+    for (var party of Q.parties) {
+        if (Q[party + '_r'] > 0) {
+            Q[party + '_r'] = Math.round(Q[party + '_r']*100/new_party_sum);
+        }
+    }
 }
 
 // get change arrows and signs

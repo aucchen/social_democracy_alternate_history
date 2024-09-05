@@ -29,7 +29,7 @@ title: Support the Socialist Youth
 subtitle: We must end our reputation as a party for old men by increasing funding to the youth organizations. -1 resources
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if resources <= 0 : Not enough resources. ?]
 choose-if: advisor_action_timer = 0 and resources > 0
-on-arrival: advisor_action_timer = 6; resources -= 1; left_strength += 5; left_dissent -= 3; rb_strength += 50; rb_militancy += 0.025; workers_spd += 1; new_middle_spd += 1;
+on-arrival: advisor_action_timer = 6; resources -= 1; left_strength += 5; left_dissent -= 3; rb_strength += 50; rb_militancy += 0.025; workers_spd += 2*(1-dissent); new_middle_spd += 1;
 
 Seydewitz supports building up the Socialist Youth, which attracts support to the Left and increases the militancy of the Reichsbanner.
 

@@ -21,12 +21,12 @@ There is great demand in our membership for reforming the judiciary, although th
 subtitle: -1 budget
 unavailable-subtitle: Not enough budget.
 choose-if: budget >= 1
-on-arrival: budget -= 1; democratization += 2; coalition_dissent += 1 if in_grand_coalition == 1; workers_spd += 5*(1-dissent) if democratization >= 3; judicial_reform += 2; pro_republic += 5*(1-dissent); coup_progress += 1
+on-arrival: budget -= 1; democratization += 2; coalition_dissent += 1 if in_grand_coalition == 1; workers_spd += 5*(1-dissent) if democratization >= 3; judicial_reform += 2; pro_republic += 5*(1-dissent); coup_progress += 1; coalition_dissent += 1 if historical_mode
 
 We investigate jurists who have shown themselves to have biased or corrupt behavior, and try to remove them, replacing them with more democratically-oriented jurists. This obviously raises quite a great deal of ire in conservative circles, including within our coalition. 
 
 @minor_reforms
-on-arrival: democratization += 1; workers_spd += 3*(1-dissent) if democratization >= 3; judicial_reform += 1; pro_republic += 3*(1-dissent); coalition_dissent += 1 if historical_mode
+on-arrival: democratization += 1; workers_spd += 3*(1-dissent) if democratization >= 3; judicial_reform += 1; pro_republic += 3*(1-dissent); judiciary_timer += 6
 
 We try to remove the most obviously biased and corrupt jurists, while leaving most of the system intact. It is slow work reforming the judiciary.
 

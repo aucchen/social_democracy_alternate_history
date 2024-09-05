@@ -12,6 +12,7 @@ Hilferding is an economist and a disciple of Karl Kautsky. Originating from Vien
 
 - @against_right_and_left
 - @toleration
+- @finance_ministry_
 - @economic_democracy_
 - @root: Return to main
 
@@ -32,6 +33,14 @@ choose-if: spd_in_government = 0 and spd_toleration = 1 and advisor_action_timer
 on-arrival: advisor_action_timer = 6; left_dissent -= 10; neorevisionist_dissent -= 8; center_dissent -= 5
 
 We have reduced dissent among the anti-toleration factions.
+
+@finance_ministry_
+title: Fiscal Policy
+subtitle: As Finance Minister, Hilferding can enact tax policies.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if spd_in_government = 0 : SPD not in government: ?] [? if finance_minister_party != "SPD" : The SPD does not control the finance ministry. ?]
+choose-if: advisor_action_timer == 0 and spd_in_government == 1 and finance_minister_party == "SPD"
+on-arrival: advisor_action_timer = 6; fiscal_policy_timer -= 6
+go-to: fiscal_policy
 
 @economic_democracy_
 title: Economic Democracy
