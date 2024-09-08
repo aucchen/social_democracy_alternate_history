@@ -18,7 +18,7 @@ The Reichstag elections are to be held now.
 @cancel_elections
 title: We cannot hold the elections now. Cancel the elections.
 subtitle: This is an anti-democratic move that may backfire.
-view-if: in_emergency_government == 1 and president == "Braun"
+view-if: in_emergency_government == 1 and president == "Braun" and not presidential_powers
 
 Since we are currently ruling as part of an emergency government, we may use quasi-constitutional trickery to significantly delay these elections, and continue governing via Article 48. This is likely to be extremely unpopular both with our base and with the other parties. However, this may be necessary to prevent the extremists from gaining power.
 
@@ -41,8 +41,8 @@ on-arrival: {!
 var new_party_sum = 0;
 for (var party of Q.parties) {
     Q['old_' + party + '_r'] = Q[party + '_r'];
-    if (Q.constitutional_reform) {
-        if (Q[party + '_votes'] < Q.electoral_threshold || Q[party + '_banned']) {
+    if (Q.constitutional_reform > 0) {
+        if (Q[party + '_votes'] < Q.electoral_threshold || (Q.electoral_threshold > 1 && party == 'other') || Q[party + '_banned']) {
             Q[party + '_r'] = 0;
         } else {
             Q[party + '_r'] = Q[party + '_votes'];
@@ -107,6 +107,7 @@ Q.in_left_front = 0;
 Q.in_popular_front = 0;
 Q.in_emergency_government = 0;
 Q.in_minority_government = 0;
+Q.in_unity_government = 0;
 Q.spd_toleration = 0;
 Q.spd_caretaker = 0;
 Q.foreign_minister_party = 'DVP';
@@ -271,6 +272,7 @@ There are some potential coalition arrangements.
 - @weimar_coalition
 - @grand_coalition
 - @new_grand_coalition
+- @unity_government
 - @right_coalition
 - @far_right_coalition
 - @no_majority
@@ -502,7 +504,7 @@ Even though the DNVP is very reluctant to participate in such a coalition, given
 title: There is no clear governing majority.
 view-if: weimar_coalition < 50 and (grand_coalition < 50 or grand_coalition_failed == 1) and president = "Hindenburg" and far_right_coalition < 50
 on-arrival: no_majority_elections += 1
-go-to: no_majority_bruning if chancellor = "Brüning"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
+go-to: no_majority_bruning if chancellor = "Brüning" or chancellor = "Wirth"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
 
 # TODO: if there is an anti-democratic coalition majority, you should appoint Papen.
 
@@ -544,6 +546,7 @@ The third option is to have new elections.
 - @toleration_bruning: We will tolerate Brüning.
 - @new_grand_coalition: We will try to form a new grand coalition.
 - @new_elections: We will have new elections.
+- @unity_government
 
 
 @new_grand_coalition
@@ -558,6 +561,7 @@ How do we convince vehemently anti-socialist parties to allow us to form a major
 - @use_resources
 - @toleration_bruning: No. We will tolerate a minority government.
 - @new_elections: No. We will have new elections.
+- @unity_government
 
 @use_resources
 title: Use our resources to smooth over the creation of a coalition.
@@ -584,6 +588,46 @@ on-arrival: leverage -= 10; chancellor = "Braun"; chancellor_party = "SPD"
 go-to: ministries
 
 We have assembled a new coalition under Otto Braun.
+
+
+@unity_government
+title: The Center Party offers a "Government of National Unity" under Chancellor Joseph Wirth.
+subtitle: SPD + Z + BVP + DDP + DVP + Others ([+ neo_weimar_coalition +]%)
+view-if: z_party_leader == "Joos" and neo_weimar_coalition >= 50 and weimar_coalition < 50
+
+The Center Party leader, Joseph Joos, clearly sees the threat from the ascension of the anti-democratic extremist parties, and thus tries to negotiate a "Government of National Unity" to save the republic. This coalition would be led by Joseph Wirth, a left-leaning member of the Center Party and former chancellor, and would encompass all of the constitutional parties. Our role in this government might be limited, however.
+
+- @unity_government_2
+- @reject_unity_government: No, we will not accept this offer.
+
+@unity_government_2
+title: Accept the offer!
+on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 1; in_grand_coalition = 1; in_unity_government = 1; leverage = 10; z_relation += 5; dvp_relation += 3
+achievement: constitutional_coalition
+go-to: ministries
+
+We have formed a new unity government of all the constitutional parties! We have a limited choice in ministries for this government.
+
+
+@reject_unity_government
+on-arrival: z_relation -= 8; ddp_relation -= 5; dvp_relation -= 5
+
+Our rejection of the unity government has hurt our relations with the bourgeois and center-right parties.
+
+- @brauns_dilemma
+- @toleration_bruning: We will tolerate a minority government led by Brüning.
+- @toleration_wirth: We will tolerate a minority government led by Joseph Wirth.
+- @new_elections: There will be new elections.
+
+
+@toleration_wirth
+view-if: z_party_leader = "Joos"
+choose-if: president == "Braun"
+unavailable-subtitle: President Hindenburg will not support a minority government led by Joseph Wirth.
+on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 0; spd_toleration = 1; z_relation += 5
+
+We have supported a minority government led by the Center Party under Chancellor Joseph Wirth.
+
 
 
 @no_majority_papen
@@ -848,6 +892,7 @@ Brüning is not opposed to a coalition with us. Alternatively, we could enter a 
 - @join_bruning: Join the Brüning coalition.
 - @bruning_oppo: Join the opposition.
 - @toleration_bruning: We will "tolerate" a minority Brüning government.
+- @unity_government
 
 @join_bruning
 view-if: grand_coalition >= 50 or neo_weimar_coalition >= 50
@@ -1247,7 +1292,7 @@ go-to: ministries
 @drop_foreign
 title: Drop the Foreign Ministry.
 view-if: foreign_minister_party = "SPD"
-on-arrival: foreign_minister_party = "DVP"; foreign_minister = "Stresemann"; leverage += 10; foreign_minister_party = "Z" if in_weimar_coalition or in_popular_front;
+on-arrival: foreign_minister_party = "DVP"; foreign_minister = "Stresemann"; foreign_minister = "Curtius" if streseman_dead; leverage += 10; foreign_minister_party = "Z" if in_weimar_coalition or in_popular_front;
 tags: drop_mins_1928
 go-to: ministries
 

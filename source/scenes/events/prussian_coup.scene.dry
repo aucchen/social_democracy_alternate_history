@@ -1,6 +1,6 @@
 title: Coup in Prussia
 subtitle: The Chancellor attempts to overthrow the Prussian government.
-view-if: (chancellor = "Papen" or chancellor = "Schleicher") and president = "Hindenburg" and year >= 1932 and month >= 8 and spd_in_government == 0 and spd_prussia = 1
+view-if: (chancellor = "Papen" or chancellor = "Schleicher") and president = "Hindenburg" and year >= 1932 and month >= 8 and spd_in_government == 0 and spd_prussia = 1 and not presidential_powers
 on-arrival: prussian_coup_seen = 1
 new-page: true
 tags: event

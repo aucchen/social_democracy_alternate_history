@@ -1,7 +1,7 @@
 title: Unemployment Insurance Crisis
 subtitle: The right wing of our coalition presents an ultimatum.
 new-page: true
-view-if: spd_in_government = 1 and (year = 1930 or year = 1931) and month == 3 and in_grand_coalition = 1 and unemployment_insurance_timer = 0 and unemployed >= 15
+view-if: spd_in_government = 1 and (year = 1930 or year = 1931) and month == 3 and in_grand_coalition = 1 and unemployment_insurance_timer = 0 and unemployed >= 15 and not constructive_vonc
 on-arrival: unemployment_insurance_crisis += 1; budget -= 1 if budget >= 1; unemployment_insurance_timer = 8; crisis_urgency += 1
 tags: event
 max-visits: 2

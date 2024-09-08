@@ -5,7 +5,7 @@ tags: party_affairs
 is-card: true
 on-arrival: month_actions += 1; inter_party_relationships_timer = 6;
 card-image: img/weimar_coalition_2.jpg
-max-visits: 8
+max-visits: 12
 
 = Inter-Party Relationships
 
@@ -44,7 +44,7 @@ After the events of Blütmai, reconciling with the Communists is difficult, if n
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1;
+on-arrival: resources -= 1; z_relation += 2 if z_party_leader == "Joos"
 go-to: center_op if z_in_government = 1 and spd_in_government = 0 and chancellor != "Brüning"; center_coalition if spd_in_government = 1 and z_in_government = 1; center_bruning if chancellor = "Brüning"
 
 @center_op
@@ -53,7 +53,7 @@ on-arrival: z_relation += 5*(1 - dissent)
 We are currently in opposition to the Center-led government, but that does not preclude the general building of feelings of good will.
 
 @center_coalition
-on-arrival: z_relation += 10*(1 - dissent)
+on-arrival: z_relation += 8*(1 - dissent)
 
 We are currently coalition partners with them, so improving relations comes naturally.
 

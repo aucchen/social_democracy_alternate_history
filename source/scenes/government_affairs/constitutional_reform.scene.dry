@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 view-if: spd_in_government = 1 and justice_minister_party = "SPD" and judiciary_timer = 0 and judicial_reform >= 4 and neorevisionism and ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front))
 frequency: 25
-on-arrival: month_actions += 1; constitutional_reform_timer += 12
+on-arrival: month_actions += 1; constitutional_reform_timer += 12; pass_threshold = 0.51; pass_threshold = 0.6 if pro_republic < 65;
 card-image: img/portraits/RadbruchGustav.jpg
 go-to: reforms_menu
 #tags: govt_affairs
@@ -14,28 +14,112 @@ go-to: reforms_menu
 
 = Constitutional Reform
 
-# the ideas for constitutional reform here are based on the bundesrepublik constitution... I'm not sure if it's totally realistic to what someone like Mierendorff would've wanted.
+# the ideas for constitutional reform here are based on the bundesrepublik basic law... I'm not sure if it's totally realistic to what someone like Mierendorff would've wanted.
 
-Many neorevisionists consider the Weimar Constitution to be inadequate.
+Many neorevisionists consider the Weimar Constitution to be inadequate. They believe that the clauses of the constitution are in part responsible for the instability of the country, and must change in order to build a more stable democratic republic. Ideas from both socialists and liberals
 
-A constitutional reform requires either a two-thirds supermajority in the Reichstag, or a constitutional referendum with support from a majority of the electorate. If we do not have such a majority, we must be assured of strong support from the other parties. 
+A constitutional reform requires either a two-thirds supermajority in the Reichstag, or a constitutional referendum with support from a majority of the electorate. If we do not have a supermajority in the Reichstag, we must be assured of strong support from the other parties for the constitutional referendum.
 
 @reforms_menu
 
-- @vote_threshold: Change the vote threshold to 5% for parties to be represented in the Reichstag.
+- @vote_threshold: Change the vote threshold.
 - @constructive_vonc: Ban non-constructive votes of no confidence.
+- @presidential_powers: Reduce presidential powers.
 - @as_is: Do not pursue constitutional reform.
 - @easy_discard
 #- @constitutional_bans: Allow the banning of anti-constitutional parties.
 
 @vote_threshold
+subtitle: Change the vote threshold to 5% for parties to be represented in the Reichstag.
 on-arrival: {!
-
+Q.reform_support = Q.spd_normalized;
+if (Q.z_relation > 30) {
+    Q.reform_support += Q.z_normalized;
+}
+if (Q.kpd_relation > 50 && Q.kpd_normalized >= 0.1) {
+    Q.reform_support += Q.kpd_normalized;
+}
+if (Q.nsdap_normalized >= 0.2 ) {
+    Q.reform_support += Q.nsdap_normalized;
+}
 !}
 
-@constructive_vonc
+# The left is opposed to this.
 
-# Zentrum and DDP will always support this, all other parties oppose.
+Some political thinkers believe that the proliferation of minor parties is responsible for the instability of the republic. They believe that a higher electoral threshold will reduce the influence of small radical parties. 
+
+The smaller parties will obviously oppose this reform. [? if z_relation > 30 : The Center Party supports this reform. ?] [? if kpd_relation > 50 and kpd_normalized >= 0.1 : Perhaps surprisingly, the KPD supports this reform. ?] [? if nsdap_normalized >= 0.2 : The NSDAP supports this reform, as they believe they have something to gain. ?]
+
+The SPD Left opposes this change, as they believe that it is anti-democratic.
+
+- @vote_threshold_2: Call a constitutional referendum to pass the reform!
+- @reforms_menu: See other reform options.
+
+
+@vote_threshold_2
+choose-if: reform_support >= pass_threshold
+unavailable-subtitle: We do not have enough support for this policy. [? if pro_republic < 65 : We should have an additional margin for the referendum since we need a majority of voters, and many voters who do not support the republic will not participate. ?] [? if z_relation <= 30 : The Center Party does not trust us enough to support this policy. ?]
+on-arrival: constitutional_reform += 1; electoral_threshold = 5; ddp_relation -= 25; dvp_relation -= 25; left_dissent += 20; workers_other *= 0.1; new_middle_other *= 0.1; old_middle_other *= 0.1; rural_other *= 0.2; unemployed_other *= 0.2; catholics_other *= 0.1;
+achievement: verfassungsreform
+
+# this should result in a redistribution of votes - other parties should not get so many votes anymore. maybe ddp and dvp get a recovery of middle-class votes? or maybe they flow to the others.
+
+We have passed a constitutional amendment to increase the electoral threshold to 5%. This is likely to benefit the larger parties and harm the smaller ones.
+
+
+
+@constructive_vonc
+subtitle: Votes of no confidence can only be called if an alternative plan for government formation can be passed, greatly reducing their incidence.
+on-arrival: {!
+Q.reform_support = Q.spd_normalized + Q.ddp_normalized;
+if (Q.z_relation >= 30) {
+    Q.reform_support += Q.z_normalized;
+}
+if (!Q.stresemann_dead) {
+    Q.reform_support += Q.dvp_normalized;
+}
+!}
+
+[? if z_relation >= 30 : The Weimar Coalition parties, the DDP and Center Party, support this reform, which will greatly improve the stability of the government. ?] [? if z_relation < 30 : The DDP supports this reform, but the Center Party does not trust us enough to support the constitutional referendum. ?] The more conservative and radical right-wing parties and the KPD are in opposition, as they seem to relish in the republican system's instability.
+
+- @constructive_vonc_2: Call a constitutional referendum to pass the reform!
+- @reforms_menu: See other reform options.
+
+@constructive_vonc_2
+choose-if: reform_support >= pass_threshold
+unavailable-subtitle: We do not have enough support for this policy. [? if pro_republic < 65 : We should have an additional margin for the referendum since we need a majority of voters, and many voters who do not support the republic will not participate. ?] [? if z_relation <= 30 : The Center Party does not trust us enough to support this policy. ?]
+on-arrival: constitutional_reform += 1; constructive_vonc = 1
+achievement: verfassungsreform
+
+We have successfully passed a constitutional amendment to ban votes of no confidence when a new government cannot be formed. Hopefully this increases the stability of our governments.
+
+@presidential_powers
+subtitle: The president can no longer dissolve the Reichstag at will, or call a *Reichsexecution* on state governments.
+on-arrival: {!
+Q.reform_support = Q.spd_normalized + Q.ddp_normalized + Q.kpd_normalized;
+if (Q.z_relation > 49 && (Q.president == "Hindenburg" || Q.president == "Eckener")) {
+    Q.reform_support += Q.z_normalized;
+} else if (Q.president == "Braun") {
+    Q.reform_support += Q.z_normalized;
+}
+!}
+
+The wide-ranging presidential powers promised by the constitution are a potential gateway to authoritarianism. Thus, we can support reforms that limit the powers of the president, ending his power to unilaterally terminate an elected government and to remove state governments.
+
+The KPD is in favor of this reform, having been victims of the *Reichsexecution* in the past (when KPD-supported state governments in Thuringia and Saxony were removed). The democrats of the DDP also support this. [? if president == "Hindenburg": However, the opposition from conservatives is vehement, as they see a reduction in presidential powers as disrespectful to Hindenburg. ?] [? if z_relation <= 49 and president == "Hindenburg" : Thus, the Center Party has been influenced to oppose these reforms. ?] [? if z_relation > 49 and president == "Hindenburg" : Despite this, the Center Party supports the proposed reform. ?] [? if president == "Braun" : The Center Party supports this reform. ?]
+
+- @presidential_powers_2: Call a constitutional referendum to pass the reform!
+- @reforms_menu: See other reform options.
+
+@presidential_powers_2
+choose-if: reform_support >= pass_threshold
+unavailable-subtitle: We do not have enough support for this policy. [? if pro_republic < 65 : We should have an additional margin for the referendum since we need a majority of voters, and many voters who do not support the republic will not participate. ?] [? if z_relation <= 49 and president != "Braun" : The Center Party does not trust us enough to support this policy. ?]
+on-arrival: constitutional_reform += 1; presidential_powers = 1
+achievement: verfassungsreform
+
+We have successfully passed a constitutional amendment to limit presidential powers! Hopefully this results in a less authoritarian Germany.
+
+
 
 @constitutional_bans
 

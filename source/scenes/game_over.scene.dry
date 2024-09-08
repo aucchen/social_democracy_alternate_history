@@ -363,6 +363,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
 
+[? if game_achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
+
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -446,6 +448,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
 
+[? if achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
+
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -526,6 +530,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_eu: **Vereinigte Staaten von Europa** - form a "European Union". ?]
 
 [? if not achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
+
+[? if not achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
