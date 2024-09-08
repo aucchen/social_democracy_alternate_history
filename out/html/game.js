@@ -18,6 +18,11 @@
 
   var TITLE = "Social Democracy: An Alternate History" + '_' + "Autumn Chen";
 
+  // the url is a link to game.json
+  // TODO; 
+  window.loadMod = function(url) {
+  };
+
   window.showStats = function() {
     if (window.dendryUI.dendryEngine.state.sceneId.startsWith('library')) {
         window.dendryUI.dendryEngine.goToScene('backSpecialScene');
