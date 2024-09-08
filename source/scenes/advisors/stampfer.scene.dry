@@ -1,7 +1,7 @@
 title: Friedrich Stampfer
 is-pinned-card: true
 tags: advisor
-card-image: img/StampferFriedrich.jpg
+card-image: img/portraits/StampferFriedrich.jpg
 view-if: stampfer_advisor = 1
 new-page: true 
 

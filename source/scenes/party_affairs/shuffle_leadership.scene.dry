@@ -21,7 +21,7 @@ Removing advisors will increase dissent from their faction of the party, while s
 
 @rm_main
 title: Remove advisors.
-tags: center_advisor, left_advisor, reformist_advisor, labor_advisor, neorevisionist_advisor, nonfactional_advisor 
+tags: center_advisor, left_advisor, reformist_advisor, labor_advisor, neorev_advisor, nonfactional_advisor 
 frequency: 1
 
 - #remove_advisor
@@ -557,7 +557,7 @@ Fritz Baade is now an advisor.
 title: Magnus Hirschfeld
 subtitle: Magnus Hirschfeld is the founder of the Institut für Sexualwissenschaft and an advocate for the rights of sexual minorities.
 is-card: true
-card-image: img/portraits/hirschfeld.jpg
+card-image: img/portraits/HirschfeldMagnus.jpg
 view-if: hirschfeld_advisor = 0 and n_advisors < 3
 on-arrival: hirschfeld_advisor = 1; n_advisors += 1
 go-to: advisor_menu
@@ -566,5 +566,30 @@ tags: nonfactional_advisor
 Magnus Hirschfeld is now an advisor.
 
 # TODO: add radbruch, stampfer
+
+@add_radbruch
+title: Gustav Radbruch
+subtitle: Gustav Radbruch is a renowned legal scholar and long-time SPD justice minister.
+is-card: true
+card-image: img/portraits/RadbruchGustav.jpg
+view-if: radbruch_advisor = 0 and n_advisors < 3
+on-arrival: radbruch_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: nonfactional_advisor
+
+Gustav Radbruch is now an advisor.
+
+
+@add_stampfer
+title: Friedrich Stampfer
+subtitle: Friedrich Stampfer is the long-time editor-in-chief of Vorwärts, our party newspaper.
+is-card: true
+card-image: img/portraits/StampferFriedrich.jpg
+view-if: stampfer_advisor = 0 and n_advisors < 3
+on-arrival: stampfer_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: nonfactional_advisor
+
+Friedrich Stampfer is now an advisor.
 
 
