@@ -21,6 +21,8 @@ We can enact policies in Prussia.
 - @unban_rfb: Reverse the RFB ban.
 - @ban_sh: Ban the Stahlhelm, the Nationalist paramilitary.
 - @unban_sh: Reverse the Stahlhelm ban.
+- @negotiate_concordat: Negotiate a concordat with the Vatican.
+- @sign_concordat: Sign a concordat with the Vatican.
 - @root: No new policies are needed.
 - @easy_discard
 
@@ -79,3 +81,11 @@ view-if: rfb_banned = 1
 on-arrival: rfb_banned = 0; rfb_strength += 50; prussian_police_loyalty -= 0.1
 
 The Communist RFB is no longer banned.
+
+@negotiate_concordat
+view-if: prussian_concordat_progress < 1
+on-arrival: prussian_concordat_progress += 1
+
+@sign_concordat
+view-if: prussian_concordat_progress >= 1
+on-arrival: prussian_concordat = 1
