@@ -29,6 +29,6 @@ title: Constitutional Reform
 subtitle: Pursue reforms of the inadequate Weimar Constitution.
 choose-if: advisor_action_timer = 0 and spd_in_government and justice_minister_party = "SPD" and chancellor_party = "SPD"
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The SPD is not currently in government. ?]
-on-arrival: advisor_action_timer = 6; constitutional_reform_timer -= 12
+on-arrival: advisor_action_timer = 6
 go-to: constitutional_reform
 
