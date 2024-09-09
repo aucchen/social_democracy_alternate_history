@@ -34,6 +34,7 @@ Through his work, Rosenfeld has defended individual KPD members; this should mak
 
 @against_toleration
 title: Against toleration
+view-if: not constructive_vonc
 subtitle: Break our current toleration arrangement, and bring down the government via a no-confidence vote.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if spd_toleration == 0 : The SPD is not currently in toleration. ?]
 choose-if: advisor_action_timer == 0 and spd_toleration

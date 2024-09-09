@@ -175,6 +175,8 @@ Q.electoral_threshold = 0;
 Q.constitutional_reform = 0;
 // constructive vote of no confidence
 Q.constructive_vonc = 0;
+// reduction in presidential powers
+Q.presidential_powers = 0;
 // allows banning of non-constitutional parties
 Q.constitutional_protection = 0;
 Q.kpd_banned = 0;

@@ -3,9 +3,8 @@ new-page: true
 is-card: true
 tags: party_affairs
 view-if: media_timer <= 0
-on-arrival: month_actions += 1; media_timer = 6;
+on-arrival: month_actions += 1; media_timer += 6;
 card-image: img/sangerbund.jpg
-max-visits: 6
 
 = Media
 
@@ -37,7 +36,7 @@ Our campaign media is mostly reaching the workers who are already saturated with
 @ideological
 title: We will have vibrant ideological debate within our newspapers.
 subtitle: There will be space for all factions to air their views.
-on-arrival: left_dissent -= 8; labor_dissent -= 8; center_dissent -= 8; reformist_dissent -= 8; neorevisionist_dissent -= 8
+on-arrival: left_dissent -= 6; labor_dissent -= 6; center_dissent -= 6; reformist_dissent -= 6; neorevisionist_dissent -= 6
 
 This has been our media course historically, and it has successfully paved over the many tensions in our party.
 

@@ -5,7 +5,6 @@ tags: party_affairs
 view-if: rally_timer <= 0
 on-arrival: month_actions += 1; rally_timer = 6
 card-image: img/protest.jpg
-max-visits: 10
 go-to: main_rally; sa_disrupt if sa_strength > 180
 
 @sa_disrupt

@@ -292,3 +292,28 @@ Changes:
 
 Future changes:
 - 
+
+v0.16 - Constitutional Reform, new advisors, Zentrum politics
+
+Major changes:
+- New government card - Constitutional reform (requires judicial ministry, at least a Weimar Coalition, and neorevisionism) - change vote threshold for Reichstag representation, requiring a constructive vote of no confidence, reducing presidential powers.
+- new category of advisors - non-factional. New advisors: Magnus Hirschfeld, Gustav Radbruch, Fritz Baade, Friedrich Stampfer.
+- New advisor: Max Seydewitz (left)
+- New advisor actions: Fiscal Policy (Hilferding). Now, all cabinet ministry actions should have a corresponding advisor action (Economic Ministry is Woytinsky's action).
+- New event: Center Party Conference of December 1928 - if relations with the Center Party are strong enough, then it's possible to support Joseph Joos as party leader in place of Ludwig Kaas. This unlocks additional government options.
+- New government options: National Unity Government under Joseph Wirth (see previous) - this is basically a Constitutional Coalition.
+- New foreign ministry option - negotiate a Reichskonkordat with the Vatican.
+- Prussian Concordat (Prussian Affairs)
+- New achievement: Verfassungsreform
+
+Minor changes:
+- The number of months remaining until an advisor action is available is now displayed on the front page.
+- slight changes in actions.
+- Austrian customs union is no longer activated when the EU has been formed
+- minor typos and bug fixes
+
+Future changes:
+- making a mod loader?
+- Welfare details (healthcare, housing, unemployment, pensions), limits to welfare cuts
+
+

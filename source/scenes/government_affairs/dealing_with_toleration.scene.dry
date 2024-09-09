@@ -17,6 +17,7 @@ We are currently acting as external support to the government of Chancellor [+ c
 - @stay_course: Stay the course, for stability's sake.
 
 @break_toleration
+view-if: not constructive_vonc
 title: End the toleration agreement with a vote of no confidence!
 
 Are we sure about this? A vote of no confidence would trigger new elections, and potentially an increased vote-share for the extremist parties.

@@ -37,6 +37,7 @@ Sender's message is popular among young women working in the service sector, and
 
 @against_toleration
 title: Against toleration
+view-if: not constructive_vonc
 subtitle: Break our current toleration arrangement, and bring down the government via a no-confidence vote.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if spd_toleration == 0 : The SPD is not currently in toleration. ?]
 choose-if: advisor_action_timer == 0 and spd_toleration

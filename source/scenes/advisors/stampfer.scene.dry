@@ -1,0 +1,75 @@
+title: Friedrich Stampfer
+is-pinned-card: true
+tags: advisor
+card-image: img/portraits/StampferFriedrich.jpg
+view-if: stampfer_advisor = 1
+new-page: true 
+
+= Friedrich Stampfer
+
+Friedrich Stampfer is the long-time editor-in-chief of Vorwärts, our party newspaper, and also a Reichstag member. He was historically part of the Majority SPD that supported our participation in the Great War, but also supports cooperation with the KPD to save the Republic.
+
+- @media_
+- @faction_support_
+- @kpd_cooperation
+- @root: Return to main
+
+
+@media_
+title: Media
+subtitle: Manage our party's newspapers and media.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; media_timer -= 6
+go-to: media
+
+
+@faction_support_
+title: Editorial Line
+subtitle: We can change the editorial line of Vorwärts to support a particular faction.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6
+
+Which faction should we support?
+
+- @support_left: Left
+- @support_center: Center
+- @support_labor: Labor
+- @support_reform: Reformists
+- @support_neorev: Neorevisionists
+
+@support_left
+on-arrival: left_dissent -= 6; left_strength += 5
+
+Vorwärts prints editorials in support of Left positions.
+
+@support_center
+on-arrival: center_dissent -= 6; center_strength += 5
+
+Vorwärts prints editorials in support of centrist positions.
+
+@support_labor
+on-arrival: labor_dissent -= 6; labor_strength += 5
+
+Vorwärts prints editorials in support of the policies of the trade unions.
+
+@support_reform
+on-arrival: reformist_dissent -= 6; reformist_strength += 5;
+
+Vorwärts prints editorials in support of the reformist policies.
+
+@support_neorev
+view-if: neorevisionism
+on-arrival: neorevisionist_dissent -= 6; neorevisionist_strength += 5
+
+Vorwärts prints editorials in support of neorevisionist ideas.
+
+@kpd_cooperation
+title: Cooperation with the KPD
+subtitle: Could we build closer ties with the KPD?
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer = 0
+on-arrival: advisor_action_timer = 6; left_strength += 2; kpd_relation += 4*(1-dissent); reformist_dissent += 2
+
+Stampfer works towards closer ties with the KPD through our media.
