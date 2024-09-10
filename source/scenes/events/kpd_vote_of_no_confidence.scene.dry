@@ -1,7 +1,7 @@
 title: The KPD calls a vote of no confidence against the current government!
 subtitle: We have angered the KPD too much...
 new-page: true
-view-if: spd_in_government = 1 and ((in_popular_front = 1 and kpd_coalition_dissent >= 3) or (in_left_front = 1 and kpd_coalition_dissent >= 4)) and spd_r < 50
+view-if: spd_in_government = 1 and ((in_popular_front = 1 and kpd_coalition_dissent >= 3) or (in_left_front = 1 and kpd_coalition_dissent >= 4)) and spd_r < 50 and not constructive_vonc
 tags: event
 go-to: menu
 
@@ -60,6 +60,7 @@ We could try to boot the KPD from our governing coalition, and form a new govern
 
 
 @let_it_happen
+view-if: not constructive_vonc
 on-arrival: kpd_relation -= 8; workers_kpd -= 5; workers_spd -= 8; unemployed_spd -= 6
 go-to: let_it_happen_braun if president = "Braun"; let_it_happen_hindenburg if president = "Hindenburg"
 

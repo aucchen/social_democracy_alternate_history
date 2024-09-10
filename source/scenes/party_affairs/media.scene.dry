@@ -16,6 +16,7 @@ The SPD runs a veritable media empire, with many newspapers throughout every Ger
 - @radio
 - @radio_2
 - @radio_3
+- @radio_4
 - @return: We should not do anything with media at the moment.
 - @easy_discard
 
@@ -63,7 +64,17 @@ Our new radio network has a mix of popular and political programming, and is pro
 @radio_3
 title: We must keep on building up our radio network.
 subtitle: It is now financially self-sufficient, and does not require any more resources.
-view-if: radio > 3
+view-if: radio > 3 and radio <= 5 and year <= 1931
 on-arrival: radio += 1; new_middle_spd += 5*(1 - dissent); old_middle_spd += 4*(1 - dissent); workers_spd += 4*(1 - dissent); rural_spd += 3*(1 - dissent); unemployed_spd += 2*(1-dissent); socialism += 3*(1 - dissent); nationalism -= 3*(1 - dissent)*(pacifism-2) if pacifism > 2; pro_republic += 3*(1-dissent)*(democratization-2) if democratization > 2
 
 Our radio network has become a successful tool for spreading our message.
+
+@radio_4
+title: We should keep on supporting our radio network.
+subtitle: As radio becomes more common, the novelty is beginning to wear off, and radio is becoming saturated in society. -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+view-if: radio > 3 and (radio >= 6 or year >= 1932) and radio <= 9
+on-arrival: radio += 1; resources -= 1; new_middle_spd += 3*(1 - dissent); old_middle_spd += 2*(1 - dissent); workers_spd += 3*(1 - dissent); rural_spd += 2*(1 - dissent); unemployed_spd += 2*(1-dissent); socialism += 2*(1 - dissent); nationalism -= 2*(1 - dissent)*(pacifism-2) if pacifism > 2; pro_republic += 2*(1-dissent)*(democratization-2) if democratization > 2
+
+We are continuing to invest in our radio stations. Both commercial and political radio are becoming more prevalent, making it harder to spread our message amidst the competition.

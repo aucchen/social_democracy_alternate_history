@@ -152,7 +152,7 @@ The Roman Catholic Church is interested in furthering relations with the German 
 
 @concordat
 title: We can sign a Concordat with the Vatican!
-view-if: reichskonkordat_progress >= 4
+view-if: reichskonkordat_progress >= 4 and reichskonkordat = 0
 on-arrival: reichskonkordat = 1; z_relation += 15; catholics_spd += 8; catholics_z += 5 if in_weimar_coalition or in_grand_coalition or in_popular_front;
 achievement: reichskonkordat
 
