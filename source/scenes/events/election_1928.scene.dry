@@ -61,6 +61,9 @@ if (Q.electoral_threshold && Q.electoral_threshold > 0) {
         if (Q[party + '_r'] > 0) {
             Q[party + '_r'] = Math.round(Q[party + '_r']*100/new_party_sum);
         }
+        Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
+        var sign = Q['change_' + party + '_r'] > 0 ? '+'  : '';
+        Q['str_change_' + party] = sign + Q['change_' + party + '_r'];//.toFixed(1);
     }
 }
 
