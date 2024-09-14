@@ -627,7 +627,7 @@ Our rejection of the unity government has hurt our relations with the bourgeois 
 view-if: z_party_leader = "Joos"
 choose-if: president == "Braun"
 unavailable-subtitle: President Hindenburg will not support a minority government led by Joseph Wirth.
-on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 0; spd_toleration = 1; z_relation += 5
+on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 0; spd_toleration = 1; z_relation += 5; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; pro_republic -= 2;
 
 We have supported a minority government led by the Center Party under Chancellor Joseph Wirth.
 
@@ -735,6 +735,7 @@ Yes, an emergency minority government, with the support of the SPD. Who should l
 - @braun_emergency_chancellor: Otto Braun for Chancellor-President!
 - @breitscheid_emergency_chancellor: Rudolf Breitscheid for emergency Chancellor.
 - @bruning_emergency_chancellor: Brüning of the Center Party, as a goodwill gesture toward the bourgeoisie.
+- @wirth_emergency_chancellor: Joseph Wirth of the Center Party, as a gesture of republican unity.
 
 @braun_emergency_chancellor
 subtitle: This is unprecedented.
@@ -765,6 +766,17 @@ The Center Party is pleased, and somewhat surprised, that we have appointed [+ c
 
 - @far_right_coup
 - @emergency_no_confidence
+
+@wirth_emergency_chancellor
+view-if: z_party_leader == "Joos"
+on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 1; z_relation += 10; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD" 
+
+The Center Party is pleased that we have appointed [+ chancellor +] as chancellor.
+
+- @far_right_coup
+- @emergency_no_confidence
+
+
 
 @far_right_coup
 title: The far-right parties immediately launch a military coup against us...
@@ -986,6 +998,7 @@ Unfortunately, the DVP and BVP are unwilling to enter into another coalition wit
 - @brauns_dilemma
 - @right_coalition: Perhaps a right-wing coalition may form.
 - @beg_dvp: Perhaps we could ask the DVP to change their minds?
+- @unity_government
 - @coalition_menu: What are the other governing arrangements?
 
 

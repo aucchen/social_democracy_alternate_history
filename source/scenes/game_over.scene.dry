@@ -79,6 +79,9 @@ if (Q.new_middle_spd_normalized && Q.new_middle_spd_normalized >= 50) {
 if (Q.rural_spd_normalized && Q.rural_spd_normalized >= 50) {
     this.achieve('bauernrevolution');
 }
+if (Q.catholics_spd_normalized && Q.catholics_spd_normalized >= 50) {
+    this.achieve('katholischer_sozialismus');
+}
 // Räterepublik - begin the transformation to a socialist economy.
 if (Q.spd_in_government && ((Q.nationalization_progress >= 2 && Q.economic_democracy >= 3) || (Q.nationalization_progress >= 1 && Q.economic_democracy >= 4))) {
     this.achieve('raterepublik');
@@ -349,6 +352,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
 
+[? if game_achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
+
 [? if game_achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if game_achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
@@ -434,6 +439,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
 
+[? if achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
+
 [? if achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
@@ -516,6 +523,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_panik_im_mittelstand: **Panik im Mittelstand** - SPD new middle class support is at least 50%. ?]
 
 [? if not achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
+
+[? if not achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
 
 [? if not achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 

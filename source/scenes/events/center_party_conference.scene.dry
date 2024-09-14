@@ -25,6 +25,6 @@ Ludwig Kaas has been selected as the chairman of the Center Party. He seems to r
 unavailable-subtitle: Our relations are not good enough.
 subtitle: Joos is likely to be friendlier to us than Kaas.
 choose-if: z_relation >= 70
-on-arrival: z_party_leader = "Joos"
+on-arrival: z_party_leader = "Joos"; catholics_spd += 5; workers_z += 3
 
 With our grassroots connections, we have been able to influence the Center delegates to support Joseph Joos as the new Center chairman. He has long been a friend of the SPD, and will be more inclined to collaborate with us compared to Kaas.
