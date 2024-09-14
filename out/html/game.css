@@ -522,8 +522,8 @@ table {
     stroke: #000;
     stroke-width: 1.5px;
 }
-.seat.ddp {
-    fill: #DCCA4A;
+.seat.lvp {
+    fill: #F37934;
 }
 .seat.z {
     fill: #000;
@@ -531,9 +531,7 @@ table {
 .seat.bvp {
     fill: #69A2BE;
 }
-.seat.dvp {
-    fill: #D5AC27;
-}
+
 .seat.other {
     fill: #909090;
 }
