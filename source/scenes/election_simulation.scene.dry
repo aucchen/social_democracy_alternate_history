@@ -272,7 +272,7 @@ Z + BVP: [+ z_r +]
 KPD: [+ kpd_r +]
 
 # 1928: 5, 1930: 4 (as DstP)
-lvp: [+ lvp_r +]
+LVP: [+ lvp_r +]
 
 # 1928: 14, 1930: 7
 DNVP: [+ dnvp_r +]

@@ -24,13 +24,13 @@ Our grassroots party members are highly critical of our decision. Many party bra
 The vote in favor of the battlecruiser easily passes, with opposition only from the KPD. The ship will be built.
 
 @vote_no
-on-arrival: dvp_relation -= 8; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1; workers_spd += 4*(1-dissent) if nationalism < 49;
-go-to: built if spd_r + kpd_r + ddp_r < 50; not_built if spd_r + kpd_r + ddp_r >= 50
+on-arrival: lvp_relation -= 5; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1; workers_spd += 4*(1-dissent) if nationalism < 49;
+go-to: built if spd_r + kpd_r + vlp_r*0.5 < 50; not_built if spd_r + kpd_r + lvp_r*0.5 >= 50
 
 Our vote against the battlecruiser is unpopular among the right-wing parties[? if in_grand_coalition or in_weimar_coalition: , including our coalition partners ?][? if spd_toleration: , including the minority government that we are currently supporting ?].
 
 @abstain
-on-arrival: dvp_relation -= 5; z_relation -= 3; left_dissent += 5; labor_dissent += 5 if not panzerkreuzer_funded; panzerkreuzer_b_funded = 1; kpd_relation -= 3
+on-arrival: lvp_relation -= 3; z_relation -= 3; left_dissent += 5; labor_dissent += 5 if not panzerkreuzer_funded; panzerkreuzer_b_funded = 1; kpd_relation -= 3
 
 The center-right parties are critical of our decision to abstain, and the pressure from our left flank is not entirely assuaged. Despite our abstention, the vote in the Reichstag passes, with all parties in favor except the SPD and KPD. The ship will be built.
 
@@ -44,7 +44,7 @@ Chancellor [+ chancellor +] brings the matter to a full Reichstag vote, which pa
 @not_built
 on-arrival: panzerkreuzer_b_funded = 0; budget += 1 if panzerkreuzer_funded = 0
 
-Our vote against the battlecruiser succeeds, with the support of the KPD and anti-war portions of the former DDP. The ship will not be built! [? if panzerkreuzer_funded == 0 : We have saved some budget from not funding the two ships. ?]
+Our vote against the battlecruiser succeeds, with the support of the KPD and anti-war portions of the LVP. The ship will not be built! [? if panzerkreuzer_funded == 0 : We have saved some budget from not funding the two ships. ?]
 
 @ministry
 on-arrival: panzerkreuzer_b_funded = 0; budget += 1 if panzerkreuzer_funded = 0

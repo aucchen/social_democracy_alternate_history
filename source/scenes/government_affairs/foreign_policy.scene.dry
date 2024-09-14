@@ -94,7 +94,7 @@ However, the Allies, especially France, are likely to object. This agreement wou
 - @fp_menu: No, we should do something else.
 
 @customs_union_2
-on-arrival: banking_crisis_timer = 2; customs_union = 1; west_relation -= 2; east_relation -= 2; z_relation += 6; dvp_relation += 6; coalition_dissent -= 1; coup_progress -= 1
+on-arrival: banking_crisis_timer = 2; customs_union = 1; west_relation -= 2; east_relation -= 2; z_relation += 6; lvp_relation += 4; coalition_dissent -= 1; coup_progress -= 1
 max-visits: 1
 
 We have formed a customs union with Austria! The right-wing parties are praising us for this unexpected turn of events.

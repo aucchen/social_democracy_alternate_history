@@ -3,6 +3,6 @@ view-if: year = 1929 and month >= 9
 frequency: 1000
 max-visits: 1
 tags: event
-on-arrival: stresemann_dead = 1; dvp_relation -= 5
+on-arrival: stresemann_dead = 1; lvp_relation -= 5
 
-Gustav Stresemann, leader of the DVP, has died. He was the primary force driving the party to support democracy; without him, the democratic forces in the Republic will be so much weaker.
+Gustav Stresemann, leader of the LVP, has died. He was the primary force driving the right of the party to support democracy; without him, the democratic forces in the Republic will be so much weaker.

@@ -25,7 +25,7 @@ As we control the Labor [? if economic_minister_party == "SPD" : and Economic ?]
 title: Support works councils.
 subtitle: Give works councils a greater influence in managing enterprises.
 view-if: works_councils == 0
-on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; lvp_relation -= 3; coalition_dissent +=1 if in_grand_coalition
 max-visits: 1
 
 The works councils, elected by workers at each major business, have been in place since the German Revolution of 1918, but they have been largely powerless in the face of capital. Now, we will have worker representation on the boards of companies, giving them more influence in management decisions.
@@ -35,7 +35,7 @@ The works councils, elected by workers at each major business, have been in plac
 title: Support national and sectorial works councils.
 subtitle: This is a step towards workers' control over the entire economy.
 view-if: works_councils == 1
-on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; lvp_relation -= 3; coalition_dissent +=1 if in_grand_coalition
 max-visits: 1
 
 National and sectorial workers councils have been part of the Weimar Constitution, but they were disempowered in the past, acting as nothing more than advisory bodies. We can change that.
@@ -45,7 +45,7 @@ National and sectorial workers councils have been part of the Weimar Constitutio
 title: Empower sectorial works councils.
 subtitle: Give works councils a role in setting wage and price policy for entire industrial sectors.
 view-if: works_councils == 2
-on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition; unemployed -= 2 if unemployed > 5; workers += 2
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; lvp_relation -= 3; coalition_dissent +=1 if in_grand_coalition; unemployed -= 2 if unemployed > 5; workers += 2
 max-visits: 1
 
 Sectorial works councils can now negotiate wage and price policies for entire economic sectors, helping to both give workers more of a voice, and to rationalize the economy, smoothing over the anarchy of the market.

@@ -22,7 +22,7 @@ Our grassroots party members are shocked by our intransigence! Many party branch
 The campaign against the battlecruiser fails, with only the dissident SPD and KPD members voting against. The ship will be built.
 
 @vote_no
-on-arrival: dvp_relation -= 8; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1
+on-arrival: lvp_relation -= 3; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1
 go-to: vote_no_chancellor if chancellor_party = "SPD"; vote_no_pass if chancellor_party != "SPD"
 
 @vote_no_chancellor
@@ -44,6 +44,6 @@ on-arrival: panzerkreuzer_funded = 1
 Our coalition partners are shocked by our intransigence! Chancellor [+ chancellor +] brings the matter to a Reichstag vote, which passes with all parties in favor except the SPD and KPD. The ship will be built.
 
 @abstain
-on-arrival: dvp_relation -= 5; z_relation -= 3; left_dissent += 5; labor_dissent += 5; panzerkreuzer_funded = 1; kpd_relation -= 3
+on-arrival: lvp_relation -= 1; z_relation -= 3; left_dissent += 5; labor_dissent += 5; panzerkreuzer_funded = 1; kpd_relation -= 3
 
 Our coalition partners are shocked by our intransigence! Despite our abstention, the vote in the Reichstag goes through, with all parties in favor except the SPD and KPD. The ship will be built.

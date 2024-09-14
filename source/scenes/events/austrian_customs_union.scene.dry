@@ -29,20 +29,20 @@ The customs union has been formed. Immediately, France and other neighboring cou
 
 @end_coalition
 view-if: spd_in_government = 1
-on-arrival: coalition_dissent += 1; dvp_relation -= 5; z_relation -= 4; z_relation -= 3 if chancellor_party == "Z"; dvp_relation -= 3 if chancellor_party == "Z"
+on-arrival: coalition_dissent += 1; lvp_relation -= 3; z_relation -= 4; z_relation -= 3 if chancellor_party == "Z"; lvp_relation -= 2 if chancellor_party == "Z"
 
-We attempt to impress upon our coalition partners the gravity of the potential Allied response. The proposal is dead, although the DVP and Center are not pleased.
+We attempt to impress upon our coalition partners the gravity of the potential Allied response. The proposal is dead, although the LVP and Center are not pleased.
 
 
 @end_toleration
 view-if: spd_toleration = 1
 subtitle: This is difficult; all of the right-of-center parties support this policy.
-go-to: end_toleration_success if spd_r + kpd_r + ddp_r >= 50; end_toleration_fail if spd_r + kpd_r + ddp_r < 50
+go-to: end_toleration_success if spd_r + kpd_r + lvp_r*0.5 >= 50; end_toleration_fail if spd_r + kpd_r + lvp_r*0.5 < 50
 
 @end_toleration_success
 on-arrival: next_election_time = time+3 if next_election_time >= time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0;
 
-With the support of the KPD and DDP/DStP, we have successfully stopped the formation of the customs union. This results in the fall of the [+ chancellor +] government.
+With the support of the KPD and left LVP, we have successfully stopped the formation of the customs union. This results in the fall of the [+ chancellor +] government.
 
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
 

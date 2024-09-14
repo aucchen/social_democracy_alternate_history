@@ -17,7 +17,7 @@ Many non-communists are afraid of the possibility of another violent uprising, a
 - @join: Join in the demonstrations ourselves.
 
 @ban
-on-arrival: blutmai = 1; kpd_relation -= 25; z_relation += 5; dvp_relation += 5; workers_spd -= 3; unemployed_spd -= 3; workers_kpd += 3; unemployed_kpd += 3; communist_coalition -= 3
+on-arrival: blutmai = 1; kpd_relation -= 25; z_relation += 5; lvp_relation += 3; workers_spd -= 3; unemployed_spd -= 3; workers_kpd += 3; unemployed_kpd += 3; communist_coalition -= 3
 face-image: img/blutmai.jpg
 
 We issued the order to ban the demonstrations, and sent police to enforce the ban. There was a confrontation between the police and Communists, and violence erupted. Reports say that the Berlin police killed dozens of demonstrators and innocent bystanders. The Communists are already calling this incident *Blutmai*, "Bloody May".
@@ -29,14 +29,14 @@ This may end any attempt at reconciliation with the KPD, but the Center and Peop
 - @no_fault: It is an unfortunate incident that should not have happened, but is no one's fault at all.
 
 @corrupt_police
-on-arrival: kpd_relation += 10; z_relation -= 2; dvp_relation -= 2; prussian_police_loyalty += 0.05
+on-arrival: kpd_relation += 10; z_relation -= 2; lvp_relation -= 1; prussian_police_loyalty += 0.05
 
 We arrested the police responsible for the killings, and put them on trial. [? if judicial_reform = 0 : Unfortunately, the reactionary judiciary let them go free with barely any punishment at all. ?]
 
 This assuages some of the Communists' outrage, but certainly not all.
 
 @communist_fault
-on-arrival: kpd_relation -= 10; z_relation += 5; dvp_relation += 5; rfb_strength -= 80; rfb_banned = 1
+on-arrival: kpd_relation -= 10; z_relation += 5; lvp_relation += 5; rfb_strength -= 80; rfb_banned = 1
 
 If the KPD continues to act illegally, they must suffer the consequences. Thus, we have banned the RFKB, their paramilitary group. The bourgeois and right-leaning parties approve.
 
@@ -52,7 +52,7 @@ The demonstration proceeds peacefully under the watchful eyes of the police. Onl
 
 
 @allow
-on-arrival: workers_kpd += 5; unemployed_kpd += 5; kpd_relation += 10; rfb_strength += 50; z_relation -= 3; dvp_relation -= 3; coalition_dissent += 1; rfb_militancy += 0.1
+on-arrival: workers_kpd += 5; unemployed_kpd += 5; kpd_relation += 10; rfb_strength += 50; z_relation -= 3; lvp_relation -= 2; coalition_dissent += 1; rfb_militancy += 0.1
 
 The demonstration proceeds peacefully, with a minimal police presence. Onlookers admire the strength of the Communist workers, and perhaps some of our members have been peeled off. The KPD will never admit it, but they are developing a less hostile view towards us (even if they do not *like* us yet). Our centrist allies denounce the demonstration, but their cries are ineffectual.
 
@@ -60,7 +60,7 @@ The demonstration proceeds peacefully, with a minimal police presence. Onlookers
 @join
 choose-if: kpd_relation >= 45
 unavailable-subtitle: The Communists do not trust us enough.
-on-arrival: kpd_relation += 15; workers_kpd += 5; unemployed_kpd += 5; workers_spd += 5; unemployed_spd += 5; new_middle_spd -= 5; old_middle_spd -= 5; z_relation -= 10; dvp_relation -= 10; coalition_dissent += 2; communist_coalition += 2; rfb_strength += 100; rfb_militancy += 0.1; sa_strength += 50; sh_strength += 50
+on-arrival: kpd_relation += 15; workers_kpd += 5; unemployed_kpd += 5; workers_spd += 5; unemployed_spd += 5; new_middle_spd -= 5; old_middle_spd -= 5; z_relation -= 10; lvp_relation -= 10; coalition_dissent += 2; communist_coalition += 2; rfb_strength += 100; rfb_militancy += 0.1; sa_strength += 50; sh_strength += 50
 achievement: die_rote_fahne
 
 It is difficult to persuade the Communists to let us march with them, given the histories of their party and ours. However, they eventually relent. The display of proletarian unity inspires the workers and terrifies the bourgeoisie and middle class. [? if in_grand_coalition : Our coalition partners in the government are outraged at our display with the communists, and are threatening to break up the government. ?] The far-right paramilitaries increase their recruitment to counter us.

@@ -1,7 +1,7 @@
 title: Lausanne Conference
 subtitle: On the question of reparations...
 view-if: year = 1932 and month >= 6 and hoover_moratorium_seen = 1 and reparations > -2 and unemployed >= 15
-on-arrival: reparations = -2; budget += 1; workers_dvp += 3 if foreign_minister_party == "DVP"; new_middle_dvp += 3 if foreign_minister_party == "DVP"; old_middle_dvp += 3 if foreign_minister_party == "DVP"; rural_dvp += 3 if foreign_minister_party == "DVP"; workers_z += 3 if foreign_minister_party == "Z"; new_middle_z += 3 if foreign_minister_party == "Z"; old_middle_z += 3 if foreign_minister_party == "Z"; rural_z += 3 if foreign_minister_party == "Z"; workers_spd += 3 if foreign_minister_party == "SPD"; new_middle_spd += 3 if foreign_minister_party == "SPD"; old_middle_spd += 3 if foreign_minister_party == "SPD"; rural_spd += 3 if foreign_minister_party == "SPD";
+on-arrival: reparations = -2; budget += 1; workers_lvp += 3 if foreign_minister_party == "LVP"; new_middle_lvp += 3 if foreign_minister_party == "LVP"; old_middle_lvp += 3 if foreign_minister_party == "LVP"; rural_lvp += 3 if foreign_minister_party == "LVP"; workers_z += 3 if foreign_minister_party == "Z"; new_middle_z += 3 if foreign_minister_party == "Z"; old_middle_z += 3 if foreign_minister_party == "Z"; rural_z += 3 if foreign_minister_party == "Z"; workers_spd += 3 if foreign_minister_party == "SPD"; new_middle_spd += 3 if foreign_minister_party == "SPD"; old_middle_spd += 3 if foreign_minister_party == "SPD"; rural_spd += 3 if foreign_minister_party == "SPD";
 new-page: true
 max-visits: 1
 tags: event
