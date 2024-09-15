@@ -120,13 +120,13 @@ Prussian police loyalty: [+ prussian_police_loyalty : loyalty +]
 
 (if the election were to be held now):
 
-SPD: [+ spd_votes +]%
-
-Z + BVP: [+ z_votes +]%
-
 KPD: [+ kpd_votes +]%
 
+SPD: [+ spd_votes +]%
+
 LVP: [+ lvp_votes +]%
+
+Z + BVP: [+ z_votes +]%
 
 DNVP: [+ dnvp_votes +]%
 

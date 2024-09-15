@@ -72,17 +72,17 @@ go-to: menu
 
 **Projected election results** (if the election were to be held now):
 
-# 1928: 30, 1930: 25, 1932: 22
-SPD: [+ spd_votes +]%
-
-# 1928: 15, 1930: 15, 1932: 
-Z + BVP: [+ z_votes +]%
-
 # 1928: 10, 1930: 13
 KPD: [+ kpd_votes +]%
 
+# 1928: 30, 1930: 25, 1932: 22
+SPD: [+ spd_votes +]%
+
 # 1928: 5, 1930: 4 (as DstP)
 LVP: [+ lvp_votes +]%
+
+# 1928: 15, 1930: 15, 1932: 
+Z + BVP: [+ z_votes +]%
 
 # 1928: 14, 1930: 7
 DNVP: [+ dnvp_votes +]%
