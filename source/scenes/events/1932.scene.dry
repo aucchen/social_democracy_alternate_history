@@ -17,6 +17,8 @@ if (Q.pro_republic > 75) {
     Q.new_middle_lvp += 5;
     Q.old_middle_lvp += 5;
     Q.rural_lvp += 3;
+    Q.old_middle_nsdap -= 5;
+    Q.new_middle_nsdap -= 5;
 }
 if (Q.old_demographics) {
     Q.catholics_z += 5;
@@ -53,5 +55,7 @@ priority: 2
 max-visits: 1
 
 A new year begins. [? if works_program = 0 : There is little to no good news in Germany. The economic depression has still not bottomed out. ?][? if works_program >= 1 and unemployment >= 20 : We have begun to launch a public works program, but unemployment is still stubbornly high. The people are beginning to finally have optimism, however. ?][? if works_program >= 1 and unemployment < 20 : We have begun to launch a public works program, and unemployment is finally starting to fall. The people are beginning to finally have optimism. ?]
+
+[? pro_republic > 75 : The peoples surprisingly strong support for democracy against Nazi rhetoric has mitigated their surge in popularity. ?]
 
 The presidential election is in April of this year.
