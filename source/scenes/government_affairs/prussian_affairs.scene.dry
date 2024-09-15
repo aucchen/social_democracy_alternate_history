@@ -58,10 +58,10 @@ on-arrival: sa_banned = 0; sa_strength += 100; sa_militancy += 0.05
 The SA is no longer banned. They immediately go on a recruiting spree.
 
 @ban_sh
-on-arrival: sh_strength *= 0.85; sh_strength *= 0.7 if prussian_police_loyalty >= 0.75; sh_banned = 1; lvp_relation -= 5; prussian_police_loyalty -= 0.1; coalition_dissent += 1 if spd_in_government = 1 and in_grand_coalition = 1 and president = "Hindenburg"; sh_ban_timer = 6;
+on-arrival: sh_strength *= 0.85; sh_strength *= 0.7 if prussian_police_loyalty >= 0.75; sh_banned = 1; lvp_relation -= 5; prussian_police_loyalty -= 0.1; coalition_dissent += 1 if spd_in_government = 1 and in_grand_coalition = 1  or in_weimar_coalition = 1 and president = "Hindenburg"; sh_ban_timer = 6;
 view-if: sh_banned == 0
 
-[? if president == "Hindenburg": Banning the Stahlhelm weakens our relationship with President Hindenburg, as well as the political right and the police. ?][? if president != "Hindenburg": Banning the Stahlhelm weakens our relationship with the political right and the police. ?] [? if spd_in_government = 1 and in_grand_coalition = 1 and president = "Hindenburg" : It also weakens our coalition due to the influence of Hindenburg on the right wing of our coalition. ?] In addition, the Stahlhelm still operates out of public sight. 
+[? if president == "Hindenburg": Banning the Stahlhelm weakens our relationship with President Hindenburg, as well as the political right and the police. ?][? if president != "Hindenburg": Banning the Stahlhelm weakens our relationship with the political right and the police. ?] [? if spd_in_government = 1 and in_grand_coalition or in_weimar_coalition = 1 and president = "Hindenburg" : It also weakens our coalition due to the influence of Hindenburg on the right wing of our coalition. ?] In addition, the Stahlhelm still operates out of public sight. 
 
 @unban_sh
 view-if: sh_banned = 1

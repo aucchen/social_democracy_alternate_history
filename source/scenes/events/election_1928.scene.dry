@@ -851,9 +851,45 @@ We have won the vote of no confidence, and are currently ruling under an SPD min
 @weimar_coalition
 title: We can form a Weimar Coalition.
 subtitle: SPD + Z + LVP ([+ weimar_coalition +]%)
-view-if: weimar_coalition >= 50
-on-arrival: leverage += 15; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0
+view-if: weimar_coalition >= 50 and weimar_coalition_failed == 0
+on-arrival: leverage += 10; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0
 achievement: weimar_coalition
+go-to: weimar_coalition_z_lead if president != "Braun" and ((n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD"))
+
+@weimar_coalition_z_lead
+go-to: weimar_coalition_z_lead_2 if lvp_relation and z_relation >= 40; weimar_coalition_failed if lvp_relation or z_relation < 40
+
+There are enough votes to form a majority coalition consisting of the SPD, Center (Z), and the Liberal People's Party(LVP). Given our rather weak electoral performance, [? if spd_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_spd = 1 : and the vote of no confidence against us, ?] President Hindenburg has asked the Center Party to take the lead role in forming a government.
+
+@weimar_coalition_z_lead_2
+
+The Center chancellor is likely to be Heinrich Brüning of the Center Party[? if chancellor = "Brüning" : again ?]. He is known for his conservatism and sympathy for monarchism, being on the right wing of the Center. [? if austerity >= 2 : Due to the government's austerity policies, many of our members are reluctant to participate in this coalition again. Some support a "toleration" arrangement in which we will provide outside support to prevent the far-right from either entering government or calling a successful no-confidence vote. Others support entering into pure opposition, and letting the right do what it wishes. ?]
+
+Brüning is not opposed to a coalition with us. Alternatively, we could enter a "toleration" agreement.
+
+- @join_bruning: Join the Brüning coalition.
+- @bruning_oppo: Join the opposition.
+- @toleration_bruning: We will "tolerate" a minority Brüning government.
+- @unity_government
+
+@join_bruning_weimar
+view-if: weimar_coalition >= 50
+on-arrival: spd_in_government = 1; spd_toleration = 0; in_weimar_coalition = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "LVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; leverage = 25 if leverage >= 25;
+go-to: ministries
+
+Heinrich Brüning welcomes us into his new cabinet. Now, we have our pick of ministries.
+
+@bruning_oppo_weimar
+on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "LVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; weimar_coalition_failed = 1
+
+By refusing to join the Weimar coalition or tolerating it, we essentially throw the balance of government to the right wing. [? if right_coalition >= 50 : There are enough votes to form a right-wing coalition that includes the DNVP. However, the DNVP leader, Hugenberg, is opposed to a coalition with the "November criminals" of the Center Party. And of course, the NSDAP is not interested in coalition government. This means that there will not be enough votes to form a majority coalition. ?][? if right_coalition < 50 : There are not enough votes to form a right-wing coalition that includes the DNVP, and they are not interested in joining in a coalition with the "November criminals" of the Center Party, anyhow. And of course, the NSDAP is not interested in coalition government. This means that there is no route to a majority coalition. ?]
+
+If we do not at least "tolerate" the government, there will be new elections in a few months. In the meantime, the President and Chancellor may use the emergency powers granted by Article 48 of the constitution to essentially govern by decree. And it is not at all clear that we will do any better in the next election.
+
+- @join_bruning: Join the Brüning coalition.
+- @toleration_bruning: We will tolerate Brüning after all.
+- @brauns_dilemma
+- @new_elections: New elections, it is!
 
 We have enough votes to form a "Weimar Coalition" government consisting of the SPD, Center (Z) and Liberal (LVP) parties! This has been our preferred governing coalition.
 
@@ -874,7 +910,6 @@ go-to: ministries
 
 Rudolf Breitscheid has been appointed chancellor.
 
-
 @grand_coalition
 title: We can form a Grand Coalition.
 view-if: grand_coalition >= 50 and grand_coalition_failed == 0
@@ -886,7 +921,7 @@ go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD")
 # In the first election, SPD always leads. In subsequent elections, if spd_r >= 29 then SPD leads, otherwise Z leads?
 
 @grand_coalition_z_lead
-go-to: grand_coalition_z_lead_2 if lvp_relation >= 35; grand_coalition_fail if lvp_relation < 35
+go-to: grand_coalition_z_lead_2 if lvp_relation and z_relation >= 35; grand_coalition_fail if lvp_relation or z_relation < 35
 
 There are enough votes to form a majority coalition consisting of the SPD, Center (Z), Bavarian People's (BVP) and the Liberal People's Party(LVP). Given our rather weak electoral performance, [? if spd_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_spd = 1 : and the vote of no confidence against us, ?] President Hindenburg has asked the Center Party to take the lead role in forming a government.
 
@@ -1045,14 +1080,68 @@ go-to: no_majority
 
 As expected, the right LVP is too set in their anti-democratic ways.
 
+@toleration_bruning_weimar
+choose-if: neo_weimar_coalition >= 50
+unavailable-subtitle: The parties supporting Brüning do not have a majority.
+on-arrival: spd_in_government = 0; spd_toleration = 1; minority_government = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "LVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "LVP"; finance_minister_party = "LVP"; agriculture_minister_party = "Z"; pro_republic -= 4; new_middle_lvp -= 10; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_dnvp -= 5;
 
+We have decided to tolerate Brüning's government. This means that we will vote against no-confidence votes to make sure they fail, but also that we will not be directly participating as ministers in the government. Thus, we can prevent a new election and stop the far right from entering government.
+
+@weimar_coalition_fail
+on-arrival: weimar_coalition_failed = 1
+
+Unfortunately, the Center conservatives and right LVP are unwilling to enter into another coalition with the SPD, so the grand coalition is unable to be formed.
+
+- @no_majority: Thus, there is no clear majority.
+- @brauns_dilemma
+- @right_coalition: Perhaps a right-wing coalition may form.
+- @beg_lvp: Perhaps we could ask the LVP to change their minds?
+- @unity_government
+- @coalition_menu: What are the other governing arrangements?
+
+
+@beg_lvp
+view-if: lvp_relation >= 35
+go-to: lvp_conservative if stresemann_dead == 1; lvp_majority if stresemann_dead == 0
+
+@lvp_majority
+go-to: join_bruning or join_bruning_weimar if weimar_coalition_failed
+
+Under the influence of Gustav Stresemann, the right LVP agrees to allow us into the coalition, and so does the BVP.
+
+
+@lvp_conservative
+
+The right LVP asks us to adhere to their conservative economic policies (that is, extreme austerity and labor discipline) in exchange for us joining the coalition.
+
+- @beg_lvp_2: But they would not have a majority without the SPD! The DNVP and NSDAP have no interest in participating in government.
+- @no_majority: There is no chance that we would agree.
+- @brauns_dilemma
+- @coalition_menu: What are the other governing arrangements?
+
+
+@beg_lvp_2
+go-to: beg_lvp_succeed; beg_lvp_fail
+
+We make the case that without the SPD, there is no parliamentary majority, given the DNVP and NSDAP's hostility to constitutional government.
+
+@beg_lvp_succeed
+go-to: join_bruning or join_bruning_weimar if weimar_coalition_failed
+
+Somehow, we succeed in convincing them! We are now in a coalition.
+
+
+@beg_lvp_fail
+go-to: no_majority
+
+As expected, the right LVP is too set in their anti-democratic ways.
 
 @grand_coalition_spd_lead
-on-arrival: leverage -= 15 if lvp_relation < 35
+on-arrival: leverage -= 15 if lvp_relation or z_relation < 35
 
 As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President [+ president +] has asked us to form a majority coalition with the Center (Z), Bavarian People's (BVP), and the Liberal People's Party(LVP).
 
-[? if lvp_relation < 35 : As our relation with the right LVP is poor, they are demanding more minister posts in order to remain part of the coalition. ?]
+[? if lvp_relation or z_relation < 35 : As our relation with our more right-wing coalition partners are poor, they are demanding more minister posts in order to remain part of the coalition. ?]
 
 Who should be the chancellor?
 

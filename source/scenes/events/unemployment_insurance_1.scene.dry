@@ -1,7 +1,7 @@
 title: Unemployment Insurance Crisis
 subtitle: The right wing of our coalition presents an ultimatum.
 new-page: true
-view-if: spd_in_government = 1 and (year = 1930 or year = 1931) and month == 3 and in_grand_coalition = 1 and unemployment_insurance_timer = 0 and unemployed >= 15 and not constructive_vonc
+view-if: spd_in_government = 1 and (year = 1930 or year = 1931) and month == 3 and in_grand_coalition = 1 or in_weimar_coalition = 1 and unemployment_insurance_timer = 0 and unemployed >= 15 and not constructive_vonc
 on-arrival: unemployment_insurance_crisis += 1; budget -= 1 if budget >= 1; unemployment_insurance_timer = 8; crisis_urgency += 1
 tags: event
 max-visits: 2
@@ -39,7 +39,7 @@ But the crux of the matter is, what can we do?
 - @compromise: Surely there is some compromise to be had?
 
 @destroy
-on-arrival: spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; lvp_relation -= 6; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; budget += 1; inflation -= 2; foreign_minister_party = "LVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "LVP"; finance_minister_party = "LVP"; agriculture_minister_party = "Z"; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_no_confidence = 1; pro_republic -= 4; old_middle_spd -= 3; new_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 2
+on-arrival: spd_in_government = 0; in_grand_coalition = 0; in_weimar_coalition = 0; spd_toleration = 0; z_relation -= 8; lvp_relation -= 6; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; budget += 1; inflation -= 2; foreign_minister_party = "LVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "LVP"; finance_minister_party = "LVP"; agriculture_minister_party = "Z"; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_no_confidence = 1; pro_republic -= 4; old_middle_spd -= 3; new_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 2
 
 Fine. If the bourgeoisie wish to blow up the government, let them do so. Socialists will not be complicit in the destruction of the working class.
 

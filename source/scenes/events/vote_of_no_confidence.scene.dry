@@ -68,12 +68,13 @@ The KPD is not interested in a "toleration" arrangement; they will only support 
 
 @support_kpd_weimar
 
+- @election_1928.popular_front_coalition: Form a "Popular Front" coalition?
 - @election_1928.left_coalition
 - @try_assuage: Never mind. We must deal with this some other way.
 
 
 @let_it_happen
-on-arrival: next_election_time = time + 3 if next_election_time >= time + 3; next_election_month = month + 3 if next_election_time >= time + 3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; in_weimar_coalition = 0; in_popular_front = 0; spd_toleration = 0; foreign_minister_party = "LVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "LVP"; finance_minister_party = "LVP"; agriculture_minister_party = "Z"; labor_minister = "Stegerwald"; interior_minister = "Wirth"; finance_minister = "Moldenhauer"; economic_minister = "Curtius"; justice_minister = "Koch-Weser"; foreign_minister = "Stresemann"; agriculture_minister = "Dietrich"; reichswehr_minister = "Groener";  coalition_dissent = 0; pro_republic -= 5; old_middle_spd -= 3; new_middle_spd -= 2; workers_spd -= 3 if pro_republic < 50; workers_spd -= 4 if pro_republic < 40; old_middle_nsdap += 4 if pro_republic < 50; new_middle_nsdap += 3 if pro_republic < 50
+on-arrival: next_election_time = time + 3 if next_election_time >= time + 3; next_election_month = month + 3 if next_election_time >= time + 3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_in_government = 0; in_grand_coalition = 0; in_weimar_coalition = 0; in_popular_front = 0; spd_toleration = 0; foreign_minister_party = "LVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "LVP"; finance_minister_party = "LVP"; agriculture_minister_party = "Z"; labor_minister = "Stegerwald"; interior_minister = "Wirth"; finance_minister = "Moldenhauer"; economic_minister = "Curtius"; justice_minister = "Koch-Weser"; foreign_minister = "Stresemann"; agriculture_minister = "Dietrich"; reichswehr_minister = "Groener";  coalition_dissent = 0; pro_republic -= 5; old_middle_spd -= 3; new_middle_spd -= 2; workers_spd -= 3 if pro_republic < 50; workers_spd -= 4 if pro_republic < 40; old_middle_nsdap += 4 if pro_republic < 50; new_middle_nsdap += 3 if pro_republic < 50; spd_no_confidence = 1;
 go-to: let_it_happen_hindenburg if president != "Braun"; let_it_happen_braun if president == "Braun"
 
 @let_it_happen_hindenburg

@@ -46,10 +46,10 @@ on-arrival: sa_strength *= 0.7; sa_militancy -= 0.05
 We have arrested more of the SA's leaders and confiscated their weapons.
 
 @ban_sh
-on-arrival: sh_strength *= 0.85; sh_strength *= 0.7 if interior_police_loyalty >= 0.7; sh_banned = 1; lvp_relation -= 2; prussian_police_loyalty -= 0.1; interior_police_loyalty -= 0.05; coalition_dissent += 1 if spd_in_government = 1 and in_grand_coalition = 1 and president = "Hindenburg"; sh_ban_timer = 6;
+on-arrival: sh_strength *= 0.85; sh_strength *= 0.7 if interior_police_loyalty >= 0.7; sh_banned = 1; lvp_relation -= 2; prussian_police_loyalty -= 0.1; interior_police_loyalty -= 0.05; coalition_dissent += 1 if spd_in_government = 1 and in_grand_coalition or in_weimar_coalition = 1 and president = "Hindenburg"; sh_ban_timer = 6;
 view-if: sh_banned == 0
 
-[? if president == "Hindenburg": Banning the Stahlhelm weakens our relationship with President Hindenburg, as well as the political right and the police. ?][? if president != "Hindenburg": Banning the Stahlhelm weakens our relationship with the political right and the police. ?] [? if spd_in_government = 1 and in_grand_coalition = 1 and president = "Hindenburg" : It also weakens our coalition due to the influence of Hindenburg on the right wing of our coalition. ?] In addition, the Stahlhelm still operates out of public sight.
+[? if president == "Hindenburg": Banning the Stahlhelm weakens our relationship with President Hindenburg, as well as the political right and the police. ?][? if president != "Hindenburg": Banning the Stahlhelm weakens our relationship with the political right and the police. ?] [? if spd_in_government = 1 and in_grand_coalition or in_weimar_coalition = 1 and president = "Hindenburg" : It also weakens our coalition due to the influence of Hindenburg on the right wing of our coalition. ?] In addition, the Stahlhelm still operates out of public sight.
 
 @unban_sh
 view-if: sh_banned = 1
@@ -62,7 +62,7 @@ title: Further persecute the Stahlhelm.
 view-if: sh_banned = 1
 choose-if: judicial_reform >= 4 and interior_police_loyalty >= 0.7
 unavailable-subtitle: [? if judicial_reform < 4 : The judiciary would not allow this. ?] [? if interior_police_loyalty < 0.7 : The police are too disloyal to be trusted with this. ?]
-on-arrival: sh_strength *= 0.7; sh_militancy -= 0.05; lvp_relation -= 2; prussian_police_loyalty -= 0.1; interior_police_loyalty -= 0.05; coalition_dissent += 1 if spd_in_government = 1 and in_grand_coalition = 1 and president = "Hindenburg";
+on-arrival: sh_strength *= 0.7; sh_militancy -= 0.05; lvp_relation -= 2; prussian_police_loyalty -= 0.1; interior_police_loyalty -= 0.05; coalition_dissent += 1 if spd_in_government = 1 and in_grand_coalition or in_weimar_coalition = 1 and president = "Hindenburg";
 
 We have arrested more of the Stahlhelm's leaders and confiscated their weapons.
 
