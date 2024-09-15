@@ -345,7 +345,6 @@ Q.lvp_support_braun = 0
 
 if (Q.lvp_relation >= 50) {
     Q.lvp_support_braun = 1;
-    }
 } else if (Q.lvp_relation >= 45 && Q.hitler_support_hindenburg) {
     Q.lvp_support_braun = 1;
 } else if (Q.lvp_relation <= 35) {
