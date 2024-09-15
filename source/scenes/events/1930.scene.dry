@@ -11,12 +11,12 @@ if (Q.old_demographics) {
 }
 Q.rural_nsdap += 15; 
 Q.rural_dnvp -= 15;
-Q.new_middle_lvp -= 15;
-Q.old_middle_lvp -= 15;
-Q.new_middle_nsdap += 10; 
-Q.old_middle_nsdap += 15;
-Q.new_middle_other += 5;
-Q.old_middle_other += 5;
+Q.new_middle_lvp -= 10;
+Q.old_middle_lvp -= 10;
+Q.new_middle_nsdap += 5; 
+Q.old_middle_nsdap += 10;
+Q.new_middle_other += 3;
+Q.old_middle_other += 3;
 Q.unemployed_nsdap += 7;
 Q.rural_other += 5;
 Q.workers_other += 5;

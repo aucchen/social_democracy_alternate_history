@@ -84,11 +84,11 @@ Q.weimar_coalition = Q.spd_r + Q.lvp_r + Q.z_r - 3;
 Q.grand_coalition = Q.spd_r + Q.lvp_r + Q.z_r;
 Q.bourgeois_coalition = Q.lvp_r + Q.z_r + Q.other_r;
 Q.center_right_coalition = Q.z_r + Q.lvp_r + Q.other_r + Q.dnvp_r;
-Q.right_coalition = Q.z_r + Q.other_r + Q.dnvp_r;
+Q.right_coalition = Q.z_r + + Q.lvp_r + Q.other_r + Q.dnvp_r;
 Q.far_right_coalition = Q.dnvp_r + Q.nsdap_r;
 Q.left_coalition = Q.spd_r + Q.kpd_r;
 // this is an absurd concept lol
-Q.popular_front_coalition = Q.spd_r + Q.kpd_r + Q.z_r + Q.lvp_r - 3;
+Q.popular_front_coalition = Q.spd_r + Q.kpd_r + Q.z_r - + Q.lvp_r - 3;
 Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r + Q.dnvp_r;
 // aka everyone except nazi, kpd, dnvp
 Q.neo_weimar_coalition = Q.spd_r + Q.lvp_r + Q.z_r + Q.other_r;
@@ -941,13 +941,13 @@ Q.new_middle_spd -= 5;
 Q.old_middle_spd -= 5;
 Q.rural_spd -= 5;
 Q.catholics_spd -= 3;
-Q.new_middle_lvp -= 13;
-Q.old_middle_lvp -= 18;
+Q.new_middle_lvp -= 10;
+Q.old_middle_lvp -= 15;
 Q.rural_dnvp -= 5;
 Q.workers_nsdap += 5;
-Q.old_middle_nsdap += 6;
-Q.new_middle_nsdap += 6;
-Q.rural_nsdap += 6;
+Q.old_middle_nsdap += 5;
+Q.new_middle_nsdap += 5;
+Q.rural_nsdap += 5;
 Q.unemployed_nsdap += 5;
 if (Q.pro_republic < 45) {
     // TODO: if you pursue a consistently revolutionary course, you might avoid this? But you might also cause a coalition between Hitler and the Center.
@@ -966,11 +966,28 @@ if (Q.pro_republic < 45) {
     Q.unemployed_nsdap += 10;   
 }
 !}
-
+if (Q.pro_republic > 75 && Q.year >= 1931) {
+    Q.z_relation += 5;
+    Q.lvp_relation += 5;
+    Q.workers_spd += 6;
+    Q.unemployed_spd += 4;
+    Q.new_middle_spd += 5;
+    Q.old_middle_spd += 5;
+    Q.new_middle_lvp += 10;
+    Q.old_middle_lvp += 10;
+    Q.rural_spd += 5;
+    Q.catholics_spd += 3;
+    Q.workers_nsdap -= 10;
+    Q.old_middle_nsdap -= 10;
+    Q.new_middle_nsdap -= 10;
+    Q.rural_nsdap -= 10;
+    Q.unemployed_nsdap -= 10;   
+}
+!}
 There is no path to a workable Reichstag majority or minority government. The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
 
 The people's faith in democracy is shaken by this ordeal. Of course, the Nazis are exploiting the instability to claim that democracy is unworkable, and that Germany needs a strong leader.
-
+[? if pro_republic > 75 : However, the high pro-democratic sentiment in this country has stemmed the effects of Nazi propaganda. ?]
 
 @toleration_bruning
 choose-if: neo_weimar_coalition >= 50

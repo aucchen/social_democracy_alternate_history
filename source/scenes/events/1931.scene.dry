@@ -15,8 +15,8 @@ if (Q.works_program && Q.works_program > 1) {
 }
 Q.catholics_z += 5;
 Q.rural_lvp -= 5;
-Q.old_middle_lvp -= 10;
-Q.new_middle_lvp -= 10;
+Q.old_middle_lvp -= 5;
+Q.new_middle_lvp -= 5;
 Q.sa_strength += 50;
 Q.sh_strength += 50;
 Q.sa_militancy += 0.1;

@@ -40,7 +40,7 @@ go-to: braun_campaign
 
 It takes effort to run a somewhat unexpected campaign. First, Braun has to be convinced to run. He himself had supported voting for Hindenburg, and it takes a good deal of prodding to convince him of his destiny.
 
-The miniscule remnants of the Democratic Party (now called the German State Party) will likely support us. Who else will? Can we convince the Center to support Braun? What about the Communists?
+The left wing of the declining liberals(LVP) will likely support us. Who else will? Can we convince the Center to support Braun? What about the Communists?
 
 
 @support_thalmann
@@ -64,7 +64,7 @@ Fine. We have thrown our support to Chairman Thälmann of the KPD.
 
 - @convince_z: Convince the Center Party.
 - @convince_kpd: Convince the Communists.
-- @convince_liberals: Convince the liberals.
+- @convince_liberals: Convince the Liberals.
 - @final_election: The final vote...
 
 @convince_z
@@ -140,33 +140,52 @@ go-to: braun_campaign
 
 The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
 
-
-
 @convince_liberals
 max-visits: 1
-go-to: convince_liberals_success if lvp_relation >= 40; convince_liberals_fail if lvp_relation < 40
+on-arrival: {!
+Q.lvp_support_braun = 0;
+if (Q.lvp_relation >= 55) {
+    Q.lvp_support_braun = 1;
+} else if (lvp_relation <= 35) {
+    Q.lvp_support_braun = 0;
+} else {
+    Q.lvp_support_braun = 2;
+}
+!}
+go-to: lvp_failed if lvp_support_braun = 0 or (lvp_support_braun == 2 and historical_mode); lvp_success if lvp_support_braun = 1; lvp_partial if lvp_support_braun = 2 and not historical_mode
 
-The liberal vote(LVP) has been falling over time, for what it's worth, the left wing of the LVP is in favor of endorsing Braun.
+The liberal vote(LVP) has been falling over time, for what it's worth, the left wing of the LVP has shown their support of Braun.
 
-@convince_liberals_success
-on-arrival: lvp_support_braun = 1
+@lvp_success
 go-to: braun_campaign
 
-Thanks to our good relations, the whole LVP has promised to support Braun in the election.
+The LVP are convinced! They will be part of the Braun coalition.
 
-@convince_liberals_fail
-on-arrival: lvp_support_braun = 0
+@lvp_partial
+
+The right wing of the LVP are not satisfied with our arguments, but they are open to being convinced. They are willing to run a joint campaign if we front the resources for their dying party.
+
+- @pay_lvp: Give them the resources they need.
+- @braun_campaign: Forget about the liberals.
+
+@pay_lvp
+choose-if: resources >= 3
+subtitle: -3 resources
+unavailable-subtitle: Not enough resources (need 3)
+on-arrival: resources -= 3; lvp_support_braun = 1
 go-to: braun_campaign
 
-We failed to convince the whole LVP to support Braun.
+With our resources, the Liberals(LVP) are convinced to support Braun over Hindenburg.
 
+@lvp_failed
+go-to: braun_campaign
 
+Unfortunately, we fail to convince the right of the party away from Hindenburg.
 
 @final_election
 on-arrival: election_round = 0
 go-to: election_algorithm
 set-jump: post_election
-
 
 @post_election
 on-arrival: {!
@@ -182,7 +201,7 @@ Q.hindenburg_votes += Q.dnvp_votes;
 
 if (Q.braun_campaign) {
     Q.braun_votes += Q.spd_votes;
-    Q.braun_votes += Q.lvp_votes*0.5;
+    Q.braun_votes += Q.lvp_votes/2;
     if (Q.z_support_braun && Q.z_support_braun == 1) {
         Q.braun_votes += Q.z_votes;
     } else {
@@ -196,7 +215,7 @@ if (Q.braun_campaign) {
     if (Q.lvp_support_braun) {
         Q.braun_votes += Q.lvp_votes;
     } else {
-        Q.hindenburg_votes += Q.lvp_votes*0.5;
+        Q.hindenburg_votes += Q.lvp_votes/2;
     }
 } else if (Q.spd_support_thalmann) {
     Q.thalmann_votes += Q.kpd_votes;
@@ -263,6 +282,7 @@ There is no majority in this round. In the second round, any candidate who wins 
 
 - @round2_convince_z: Convince the Center to switch their support to us.
 - @round2_convince_kpd: Convince the KPD to switch their support to us. 
+- @round2_convince_lvp: Convince the LVP to switch their support to us. 
 - @round2_hindenburg: Switch our support to Hindenburg.
 - @round2_thalmann: Switch our support to Thälmann of the KPD.
 - @round2_vote: Let the second round voting begin.
@@ -318,7 +338,50 @@ go-to: round2_menu
 
 Unfortunately, we fail to turn them away from Hindenburg.
 
+@round2_convince_lvp
+view-if: braun_campaign > 0 and lvp_support_braun != 1 
+on-arrival: {!
+Q.lvp_support_braun = 0 
 
+if (Q.lvp_relation >= 50) {
+    Q.lvp_support_braun = 1;
+    }
+} else if (Q.lvp_relation >= 45 && Q.hitler_support_hindenburg) {
+    Q.lvp_support_braun = 1;
+} else if (Q.lvp_relation <= 35) {
+    Q.lvp_support_braun = 0;
+} else {
+    Q.lvp_support_braun = 2;
+}
+!}
+go-to: r2_lvp_failed if lvp_support_braun = 0 or (lvp_support_braun = 2 and historical_mode); r2_lvp_success if lvp_support_braun = 1; r2_lvp_partial if lvp_support_braun = 2 and not historical_mode
+max-visits: 1
+
+@r2_lvp_success
+go-to: round2_menu
+
+[? if hitler_support_hindenburg : The Liberal's opinion is affected by the Nazis' support of Hindenburg, and is willing to turn away from him. ?] The Liberals(LVP) are convinced! They will be part of the Braun coalition.
+
+@r2_lvp_partial
+
+The Liberals(LVP) are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given the Nazis' support for Hindenburg. ?]. They are willing to run a joint campaign if we front the resources for their dying party.
+
+- @r2_pay_lvp: Give them the resources they need.
+- @round2_menu: Forget about the Liberals.
+
+@r2_pay_lvp
+choose-if: resources >= 2
+subtitle: -2 resources
+unavailable-subtitle: Not enough resources (need 2)
+on-arrival: resources -= 2; lvp_support_braun = 1
+go-to: round2_menu
+
+With our resources, the Liberals(FVP) are convinced to support Braun over Hindenburg.
+
+@r2_lvp_failed
+go-to: round2_menu
+
+Unfortunately, we fail to convince the right of the party away from Hindenburg.
 
 
 @round2_convince_kpd

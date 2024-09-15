@@ -8,8 +8,8 @@ if (Q.old_demographics) {
 }
 // increase NSDAP vote share
 Q.new_middle_nsdap += 10;
-Q.old_middle_nsdap += 10;
-Q.new_middle_lvp -= 10;
+Q.old_middle_nsdap += 5;
+Q.new_middle_lvp -= 5;
 Q.workers_kpd += 5;
 Q.sa_strength += 50;
 Q.sh_strength += 100;
