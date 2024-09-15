@@ -7,7 +7,7 @@ view-if: panzerkreuzer_b_seen = 0 and year = 1931 and month >= 2 and (spd_in_gov
 
 = Panzerkreuzer B
 
-The Navy is demanding the construction of another new battlecruiser. [? if panzerkreuzer_funded: The previous battlecruiser had been funded, and has already been launched. Another ship would futher progress Germany's rearmament. ?][? if not panzerkreuzer_funded: The previous battlecruiser requested by the Navy was not funded, thanks to us. The military remains bitter, but nevertheless they are still pursuing their rearmament plan, and must seek funding from the Reichstag. ?]
+The Navy is demanding the construction of another new battlecruiser. [? if panzerkreuzer_funded: The previous battlecruiser had been funded, and has already been launched. Another ship would further progress Germany's rearmament. ?][? if not panzerkreuzer_funded: The previous battlecruiser requested by the Navy was not funded, thanks to us. The military remains bitter, but nevertheless they are still pursuing their rearmament plan, and must seek funding from the Reichstag. ?]
 
 Much of our party is deeply opposed to rearmament, while the center and right parties are united in support. What will we do?
 
@@ -25,7 +25,7 @@ The vote in favor of the battlecruiser easily passes, with opposition only from 
 
 @vote_no
 on-arrival: lvp_relation -= 5; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1; workers_spd += 4*(1-dissent) if nationalism < 49;
-go-to: built if spd_r + kpd_r + vlp_r*0.5 < 50; not_built if spd_r + kpd_r + lvp_r*0.5 >= 50
+go-to: built if progressive_coalition < 50; not_built if progressive_coalition >= 50
 
 Our vote against the battlecruiser is unpopular among the right-wing parties[? if in_grand_coalition or in_weimar_coalition: , including our coalition partners ?][? if spd_toleration: , including the minority government that we are currently supporting ?].
 
