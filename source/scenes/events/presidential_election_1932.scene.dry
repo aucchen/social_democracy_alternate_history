@@ -201,7 +201,7 @@ Q.hindenburg_votes += Q.dnvp_votes;
 
 if (Q.braun_campaign) {
     Q.braun_votes += Q.spd_votes;
-    Q.braun_votes += Math.round([Q.lvp_votes/2;]*100);
+    Q.braun_votes += Math.round([Q.lvp_votes/2]*100);
     if (Q.z_support_braun && Q.z_support_braun == 1) {
         Q.braun_votes += Q.z_votes;
     } else {
