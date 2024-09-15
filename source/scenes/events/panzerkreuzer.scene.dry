@@ -22,11 +22,10 @@ Our grassroots party members are shocked by our intransigence! Many party branch
 The campaign against the battlecruiser fails, with only the dissident SPD and KPD members voting against. The ship will be built.
 
 @vote_no
-on-arrival: lvp_relation -= 3; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1
+
+We would lack the majority in the Reichstag to successfully block the construction of the Panzerkreuzer, with only the SPD and KPD voting against. We would have to explore other options if we want to prevent the ship from being built.
 
 - @lvp_abstain: Is there any room for political maneuvering?
-  choose-if: lvp_relation >= 60 and progressive_coalition >= 50
-  unavailable-subtitle: [? if lvp_relation < 60 and progressive_coalition >= 50 : We lack the relations with the LVP.  ?] [? if progressive_coalition < 50 : We lack the majority to block the vote. ?]
 - @vote_no_chancellor: Can our chancellor convince the cabinet?
 
 @vote_no_chancellor
@@ -55,7 +54,8 @@ Military leaders are upset at the Reichstag's decision to not construct the batt
 No matter what, the battlecruiser will not be built. We have fulfilled one of our campaign promises, and our supporters are pleased.
 
 @lvp_abstain
-
+choose-if: lvp_relation >= 60 and progressive_coalition >= 50
+unavailable-subtitle: [? if lvp_relation < 60 and progressive_coalition >= 50 : We lack the relations with the LVP.  ?] [? if progressive_coalition < 50 : We lack the majority to block the vote. ?]
 Our good relations and connections with the anti-war portions of the LVP has bought us the option of blocking the ship's construction with the support of the "progressive coalition," consisting of the KPD, SPD & portions of the LVP. However, the LVP demands us to lend them some resources for them to break their party line.
 
 - @lvp_pay: Convince the liberals.
