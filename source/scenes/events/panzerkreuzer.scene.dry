@@ -56,6 +56,7 @@ No matter what, the battlecruiser will not be built. We have fulfilled one of ou
 @lvp_abstain
 choose-if: lvp_relation >= 60 and progressive_coalition >= 50
 unavailable-subtitle: [? if lvp_relation < 60 and progressive_coalition >= 50 : We lack the relations with the LVP.  ?] [? if progressive_coalition < 50 : We lack the majority to block the vote. ?]
+
 Our good relations and connections with the anti-war portions of the LVP has bought us the option of blocking the ship's construction with the support of the "progressive coalition," consisting of the KPD, SPD & portions of the LVP. However, the LVP demands us to lend them some resources for them to break their party line.
 
 - @lvp_pay: Convince the liberals.
