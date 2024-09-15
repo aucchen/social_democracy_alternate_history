@@ -965,7 +965,6 @@ if (Q.pro_republic < 45) {
     Q.rural_nsdap += 10;
     Q.unemployed_nsdap += 10;   
 }
-!}
 if (Q.pro_republic > 75 && Q.year >= 1931) {
     Q.z_relation += 5;
     Q.lvp_relation += 5;
