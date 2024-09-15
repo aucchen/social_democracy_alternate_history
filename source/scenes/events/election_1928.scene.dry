@@ -979,8 +979,8 @@ if (Q.pro_republic > 75 && Q.year >= 1931 ) {
     Q.new_middle_nsdap += 10;
     Q.rural_nsdap += 10;
     Q.unemployed_nsdap += 10;   
+}
 !}
-
 There is no path to a workable Reichstag majority or minority government. The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
 
 The people's faith in democracy is shaken by this ordeal. Of course, the Nazis are exploiting the instability to claim that democracy is unworkable, and that Germany needs a strong leader.
