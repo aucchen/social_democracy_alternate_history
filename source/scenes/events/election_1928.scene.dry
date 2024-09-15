@@ -95,7 +95,7 @@ Q.neo_weimar_coalition = Q.spd_r + Q.lvp_r + Q.z_r + Q.other_r;
 // Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
 Q.hitler_right_coalition = Q.z_r + Q.dnvp_r + Q.nsdap_r;
 // Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
-Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.lvp_r;
+Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.lvp_r/2;
 
 Q.leverage = Q.spd_r;
 
