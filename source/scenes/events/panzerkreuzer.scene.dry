@@ -29,7 +29,7 @@ We would lack the majority in the Reichstag to successfully block the constructi
 - @vote_no_chancellor: Can our chancellor convince the cabinet?
 
 @vote_no_chancellor
-go-to: braun if chancellor = "Braun"; muller if chancellor = "Müller"; vote_no_pass if chancellor_party != "SPD";
+go-to: braun if chancellor = "Braun"; muller if chancellor = "Müller"; vote_no_pass if chancellor_party != "SPD"
 
 @braun
 on-arrival: panzerkreuzer_funded = 0; nationalism -= 3*(1-dissent); panzerkreuzer_failed = 1; workers_spd += 5*(1-dissent);
