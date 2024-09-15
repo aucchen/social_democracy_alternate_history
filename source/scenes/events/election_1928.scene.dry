@@ -1034,43 +1034,6 @@ Unfortunately, the right LVP and BVP are unwilling to enter into another coaliti
 - @unity_government
 - @coalition_menu: What are the other governing arrangements?
 
-
-@beg_lvp
-view-if: lvp_relation >= 35
-go-to: lvp_conservative if stresemann_dead == 1; lvp_majority if stresemann_dead == 0
-
-@lvp_majority
-go-to: join_bruning
-
-Under the influence of Gustav Stresemann, the right LVP agrees to allow us into the coalition, and so does the BVP.
-
-
-@lvp_conservative
-
-The right LVP asks us to adhere to their conservative economic policies (that is, extreme austerity and labor discipline) in exchange for us joining the coalition.
-
-- @beg_lvp_2: But they would not have a majority without the SPD! The DNVP and NSDAP have no interest in participating in government.
-- @no_majority: There is no chance that we would agree.
-- @brauns_dilemma
-- @coalition_menu: What are the other governing arrangements?
-
-
-@beg_lvp_2
-go-to: beg_lvp_succeed; beg_lvp_fail
-
-We make the case that without the SPD, there is no parliamentary majority, given the DNVP and NSDAP's hostility to constitutional government.
-
-@beg_lvp_succeed
-go-to: join_bruning
-
-Somehow, we succeed in convincing them! We are now in a coalition.
-
-
-@beg_lvp_fail
-go-to: no_majority
-
-As expected, the right LVP is too set in their anti-democratic ways.
-
 @toleration_bruning_weimar
 choose-if: neo_weimar_coalition >= 50
 unavailable-subtitle: The parties supporting Brüning do not have a majority.
