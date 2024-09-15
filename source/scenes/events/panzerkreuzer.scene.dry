@@ -7,7 +7,7 @@ view-if: panzerkreuzer_seen = 0 and year = 1928 and month >= 8 and reichswehr_mi
 
 = Panzerkreuzer
 
-The Reichswehr Ministry is demanding the construction of a new battlecruiser, as part of Germany's rearmament. Our coalition partners are united in support. While many of our members are vehemently against new military spending, this vote may be necessary to preserve the coalition. 
+The Reichswehr Ministry is demanding the construction of a new battlecruiser, as part of Germany's rearmament. Our coalition partners are mostly united in support, apart from anti-war members of the LVP choosing to abstain. While many of our members are vehemently against new military spending, this vote may be necessary to preserve the coalition. 
 We campaigned on food for children instead of battlecruisers. Will we really betray our campaign promises?
 
 - @vote_yes: Vote yes, for constructing the battlecruiser.
@@ -23,10 +23,14 @@ The campaign against the battlecruiser fails, with only the dissident SPD and KP
 
 @vote_no
 on-arrival: lvp_relation -= 3; z_relation -= 5; pacifism += 1; nationalism -= 5*(1-dissent); coalition_dissent += 1
-go-to: vote_no_chancellor if chancellor_party = "SPD"; vote_no_pass if chancellor_party != "SPD"
+
+- @lvp_abstain: Is there any room for political maneuvering?
+  choose-if: lvp_relation >= 60 and progressive_coalition >= 50
+  unavailable-subtitle: [? if lvp_relation < 60 and progressive_coalition >= 50 : We lack the relations with the LVP.  ?] [? if progressive_coalition < 50 : We lack the majority to block the vote. ?]
+- @vote_no_chancellor: Can our chancellor convince the cabinet?
 
 @vote_no_chancellor
-go-to: braun if chancellor = "Braun"; muller if chancellor = "Müller"
+go-to: braun if chancellor = "Braun"; muller if chancellor = "Müller"; vote_no_pass if chancellor_party != "SPD";
 
 @braun
 on-arrival: panzerkreuzer_funded = 0; nationalism -= 3*(1-dissent); panzerkreuzer_failed = 1; workers_spd += 5*(1-dissent);
@@ -42,6 +46,30 @@ Our coalition partners are shocked by our intransigence! Despite Chancellor Mül
 on-arrival: panzerkreuzer_funded = 1
 
 Our coalition partners are shocked by our intransigence! Chancellor [+ chancellor +] brings the matter to a Reichstag vote, which passes with all parties in favor except the SPD and KPD. The ship will be built.
+
+@vote_fails
+on-arrival: panzerkreuzer_funded = 0; coalition_dissent += 1; reichswehr_loyalty -= 0.05; left_dissent -= 10; labor_dissent -= 10; center_dissent -= 5; reformist_dissent -= 5; neorevisionist_dissent -= 5; nationalism -= 5; pacifism += 1; z_relation -= 5; workers_spd += 5*(1-dissent); panzerkreuzer_failed = 1
+
+Military leaders are upset at the Reichstag's decision to not construct the battlecruiser, and they have taken the complaints to our coalition partners. However, there is not much they can do to force the construction, as the anti-war coalition maintains a majority over the Reichstag.
+
+No matter what, the battlecruiser will not be built. We have fulfilled one of our campaign promises, and our supporters are pleased.
+
+@lvp_abstain
+
+Our good relations and connections with the anti-war portions of the LVP has bought us the option of blocking the ship's construction with the support of the "progressive coalition," consisting of the KPD, SPD & portions of the LVP. However, the LVP demands us to lend them some resources for them to break their party line.
+
+- @lvp_pay: Convince the liberals.
+- @vote_no_chancellor: The final vote...
+
+@lvp_pay
+choose-if: resources >= 2
+subtitle: -2 resources
+unavailable-subtitle: Not enough resources (need 2)
+on-arrival: resources -= 2
+
+With our resources, the left-LVPers are convinced to support us on this vote.
+
+- @vote_fails: The final vote...
 
 @abstain
 on-arrival: lvp_relation -= 1; z_relation -= 3; left_dissent += 5; labor_dissent += 5; panzerkreuzer_funded = 1; kpd_relation -= 3
