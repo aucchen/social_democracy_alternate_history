@@ -474,7 +474,7 @@ In response to the KPD's entrance into the government, the right-wing immediatel
 @right_coalition
 title: A right-wing coalition may be formed.
 subtitle: Z + BVP + LVP + DNVP + Others ([+ right_coalition +]%)
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
+unavailable-subtitle: The DNVP is not interested in a coalition with the Center or LVP.
 view-if: right_coalition >= 50
 choose-if: year < 1928
 go-to: no_right_coalition if year >= 1930; right_coalition_2 if year <= 1929
@@ -985,7 +985,7 @@ if (Q.pro_republic > 75 && Q.year >= 1931 ) {
 There is no path to a workable Reichstag majority or minority government. The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
 
 The people's faith in democracy is shaken by this ordeal. Of course, the Nazis are exploiting the instability to claim that democracy is unworkable, and that Germany needs a strong leader.
-[? if pro_republic > 75 : However, the high pro-democratic sentiment in this country has stemmed the effects of Nazi propaganda. ?]
+[? if pro_republic > 75 : However, the pro-democratic sentiment in this country has mitigated the impact of Nazi rhetoric. ?]
 
 @toleration_bruning
 choose-if: neo_weimar_coalition >= 50

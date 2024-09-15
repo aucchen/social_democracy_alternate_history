@@ -3,9 +3,9 @@ new-page: true
 subtitle: Reformist disagreements with our policies have grown too severe.
 tags: event
 view-if: reformist_dissent >= 60
-on-arrival: reformist_strength *= 0.3; workers_spd -= 10; workers_others += 5; n_advisors -= 1 if braun_advisor == 1; n_advisors -= 1 if severing_advisor == 1; braun_advisor = 0; severing_advisor = 0; rb_strength -= 250; reformists_resign = 1
+on-arrival: reformist_strength *= 0.3; workers_spd -= 10; workers_lvp += 5; new_middle_spd -= 10; new_middle_lvp += 8; old_middle_spd -= 10; old_middle_lvp += 8; n_advisors -= 1 if braun_advisor == 1; n_advisors -= 1 if severing_advisor == 1; braun_advisor = 0; severing_advisor = 0; rb_strength -= 250; reformists_resign = 1
 max-visits: 1
 
 = Reformist leaders resign
 
-Our policy choices have greatly offended the reformist faction. Many of our most experienced leaders have resigned.
+Our policy choices have greatly offended the reformist faction. Many of our most experienced leaders have resigned. A portion of our reformist membership has split to join the left wing of the LVP.

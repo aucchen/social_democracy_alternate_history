@@ -40,7 +40,7 @@ go-to: braun_campaign
 
 It takes effort to run a somewhat unexpected campaign. First, Braun has to be convinced to run. He himself had supported voting for Hindenburg, and it takes a good deal of prodding to convince him of his destiny.
 
-The left wing of the declining liberals(LVP) will likely support us. Who else will? Can we convince the Center to support Braun? What about the Communists?
+The left wing of the declining LVP will likely support us. Who else will? Can we convince the Center to support Braun? What about the Communists?
 
 
 @support_thalmann
@@ -375,7 +375,7 @@ unavailable-subtitle: Not enough resources (need 2)
 on-arrival: resources -= 2; lvp_support_braun = 1
 go-to: round2_menu
 
-With our resources, the Liberals(FVP) are convinced to support Braun over Hindenburg.
+With our resources, the Liberals(LVP) are convinced to support Braun over Hindenburg.
 
 @r2_lvp_failed
 go-to: round2_menu
