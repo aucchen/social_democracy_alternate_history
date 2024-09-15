@@ -13,6 +13,11 @@ Q.sa_militancy += 0.05;
 Q.old_middle_nsdap += 6;
 Q.rural_nsdap += 4;
 Q.unemployed_nsdap += 4;
+if (Q.pro_republic > 75) {
+    Q.new_middle_lvp += 5;
+    Q.old_middle_lvp += 5;
+    Q.rural_lvp += 3:
+}
 if (Q.old_demographics) {
     Q.catholics_z += 5;
 }
