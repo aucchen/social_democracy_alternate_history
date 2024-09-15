@@ -255,12 +255,11 @@ Bourgeois Coalition (Z + BVP + LVP + Others): [+ bourgeois_coalition +]%
 
 Right-wing Coalition (Z + BVP + LVP + Others + DNVP): [+ right_coalition +]%
 
+[? if lvp_r <= 5 : The collapse of the LVP is extremely worrying for our democracy and signals a realignment in Weimar politics. It would be difficult to find a stable governing majority with them becoming moribound. ?]
+
 [? if nazi_urgency <= 1 and nsdap_r >= 15 : The rapid rise in NSDAP votes is extremely worrying. Many had believed that the party was moribound; now, some of us consider it to be the greatest threat to democracy in Germany. ?]
 
 [? if anti_democratic_coalition >= 50 : Together, the anti-democratic KPD, DNVP, and NSDAP have a majority in the Reichstag. A stable governing majority will be almost impossible. ?]
-
-[? if lvp_r <= 5 : The collapse of the LVP is extremely worrying for our democracy and signals a realignment in Weimar politics. It would be difficult to find a stable governing majority with them becoming moribound. ?]
-
 
 There are some potential coalition arrangements.
 
