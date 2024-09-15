@@ -1080,7 +1080,7 @@ go-to: beg_lvp_succeed; beg_lvp_fail
 We make the case that without the SPD, there is no parliamentary majority, given the DNVP and NSDAP's hostility to constitutional government.
 
 @beg_lvp_succeed
-go-to: join_bruning or join_bruning_weimar if weimar_coalition_failed
+go-to: join_bruning; join_bruning_weimar if weimar_coalition_failed == 1
 
 Somehow, we succeed in convincing them! We are now in a coalition.
 
