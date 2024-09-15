@@ -949,23 +949,7 @@ Q.old_middle_nsdap += 5;
 Q.new_middle_nsdap += 5;
 Q.rural_nsdap += 5;
 Q.unemployed_nsdap += 5;
-if (Q.pro_republic < 45) {
-    // TODO: if you pursue a consistently revolutionary course, you might avoid this? But you might also cause a coalition between Hitler and the Center.
-    Q.z_relation -= 5;
-    Q.lvp_relation -= 5;
-    Q.workers_spd *= 0.85;
-    Q.unemployed_spd -= 2;
-    Q.new_middle_spd -= 5;
-    Q.old_middle_spd -= 5;
-    Q.rural_spd -= 5;
-    Q.catholics_spd -= 3;
-    Q.workers_nsdap += 10;
-    Q.old_middle_nsdap += 10;
-    Q.new_middle_nsdap += 10;
-    Q.rural_nsdap += 10;
-    Q.unemployed_nsdap += 10;   
-}
-if (Q.pro_republic > 75 && Q.year >= 1931) {
+if (Q.pro_republic > 75 && Q.year >= 1931 ) {
     Q.z_relation += 5;
     Q.lvp_relation += 5;
     Q.workers_spd += 6;
@@ -981,7 +965,22 @@ if (Q.pro_republic > 75 && Q.year >= 1931) {
     Q.new_middle_nsdap -= 10;
     Q.rural_nsdap -= 10;
     Q.unemployed_nsdap -= 10;   
+} else if (Q.pro_republic < 45) {
+    Q.z_relation -= 5;
+    Q.lvp_relation -= 5;
+    Q.workers_spd *= 0.85;
+    Q.unemployed_spd -= 2;
+    Q.new_middle_spd -= 5;
+    Q.old_middle_spd -= 5;
+    Q.rural_spd -= 5;
+    Q.catholics_spd -= 3;
+    Q.workers_nsdap += 10;
+    Q.old_middle_nsdap += 10;
+    Q.new_middle_nsdap += 10;
+    Q.rural_nsdap += 10;
+    Q.unemployed_nsdap += 10;   
 !}
+
 There is no path to a workable Reichstag majority or minority government. The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
 
 The people's faith in democracy is shaken by this ordeal. Of course, the Nazis are exploiting the instability to claim that democracy is unworkable, and that Germany needs a strong leader.
