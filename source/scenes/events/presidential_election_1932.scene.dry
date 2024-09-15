@@ -154,7 +154,7 @@ if (Q.lvp_relation >= 55) {
 !}
 go-to: lvp_failed if lvp_support_braun = 0 or (lvp_support_braun == 2 and historical_mode); lvp_success if lvp_support_braun = 1; lvp_partial if lvp_support_braun = 2 and not historical_mode
 
-The liberal vote(LVP) has been falling over time, for what it's worth, the left wing of the LVP has shown their support of Braun.
+The liberal vote (LVP) has been falling over time, for what it's worth, the left wing of the LVP has shown their support of Braun.
 
 @lvp_success
 go-to: braun_campaign
