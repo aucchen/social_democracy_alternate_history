@@ -55,4 +55,4 @@ max-visits: 1
 
 A new year begins. [? if works_program = 0 : Unemployment continues to spiral upwards. The strength of the NSDAP continues to rise. ?][? if works_program > 0 : A works program has been enacted in order to reduce unemployment. ?] [? if works_program > 0 and unemployment > 15 : However, unemployment remains too high for comfort. ?] 
 
-[? if Q.pro_republic > 75 : The peoples surprisingly strong support for democracy against Nazi rhetoric has mitigated their surge in popularity. ?]
+[? if pro_republic > 75 : The peoples surprisingly strong support for democracy against Nazi rhetoric has mitigated their surge in popularity. ?]
