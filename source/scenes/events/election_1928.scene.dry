@@ -1059,7 +1059,7 @@ view-if: lvp_relation >= 35
 go-to: lvp_conservative if stresemann_dead == 1; lvp_majority if stresemann_dead == 0
 
 @lvp_majority
-go-to: join_bruning or join_bruning_weimar if weimar_coalition_failed
+go-to: join_bruning; join_bruning_weimar if weimar_coalition_failed == 1
 
 Under the influence of Gustav Stresemann, the right LVP agrees to allow us into the coalition, and so does the BVP.
 
