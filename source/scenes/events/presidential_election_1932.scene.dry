@@ -363,7 +363,7 @@ go-to: round2_menu
 
 @r2_lvp_partial
 
-The Liberals(LVP) are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given the Nazis' support for Hindenburg. ?]. They are willing to run a joint campaign if we front the resources for their dying party.
+The Liberals(LVP) are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given the Nazis' support for Hindenburg ?]. They are willing to run a joint campaign if we front the resources for their dying party.
 
 - @r2_pay_lvp: Give them the resources they need.
 - @round2_menu: Forget about the Liberals.
