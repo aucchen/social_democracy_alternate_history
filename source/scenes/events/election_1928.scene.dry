@@ -877,9 +877,9 @@ The Center chancellor is likely to be Heinrich Brüning of the Center Party[? if
 
 Brüning is not opposed to a coalition with us. Alternatively, we could enter a "toleration" agreement.
 
-- @join_bruning: Join the Brüning coalition.
-- @bruning_oppo: Join the opposition.
-- @toleration_bruning: We will "tolerate" a minority Brüning government.
+- @join_bruning_weimar: Join the Brüning coalition.
+- @bruning_oppo_weimar: Join the opposition.
+- @toleration_bruning_weimar: We will "tolerate" a minority Brüning government.
 - @unity_government
 
 @join_bruning_weimar
@@ -896,8 +896,8 @@ By refusing to join the Weimar coalition or tolerating it, we essentially throw 
 
 If we do not at least "tolerate" the government, there will be new elections in a few months. In the meantime, the President and Chancellor may use the emergency powers granted by Article 48 of the constitution to essentially govern by decree. And it is not at all clear that we will do any better in the next election.
 
-- @join_bruning: Join the Brüning coalition.
-- @toleration_bruning: We will tolerate Brüning after all.
+- @join_bruning_weimar: Join the Brüning coalition.
+- @toleration_bruning_weimar: We will tolerate Brüning after all.
 - @brauns_dilemma
 - @new_elections: New elections, it is!
 
@@ -1041,7 +1041,7 @@ on-arrival: spd_in_government = 0; spd_toleration = 1; minority_government = 1; 
 
 We have decided to tolerate Brüning's government. This means that we will vote against no-confidence votes to make sure they fail, but also that we will not be directly participating as ministers in the government. Thus, we can prevent a new election and stop the far right from entering government.
 
-@weimar_coalition_fail
+@weimar_coalition_failed
 on-arrival: weimar_coalition_failed = 1
 
 Unfortunately, the Center conservatives and right LVP are unwilling to enter into another coalition with the SPD, so the grand coalition is unable to be formed.
