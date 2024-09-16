@@ -247,10 +247,10 @@ Q.new_middle_other = 20;
 Q.rural_spd = 10;
 Q.rural_kpd = 0;
 Q.rural_z = 5;
-Q.rural_lvp = 15;
+Q.rural_lvp = 10;
 Q.rural_dnvp = 45;
 Q.rural_nsdap = 5;
-Q.rural_other = 15;
+Q.rural_other = 20;
 
 Q.unemployed_spd = 25;
 Q.unemployed_kpd = 55;
