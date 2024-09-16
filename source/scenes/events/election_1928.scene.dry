@@ -854,7 +854,7 @@ subtitle: SPD + Z + LVP ([+ weimar_coalition +]%)
 view-if: weimar_coalition >= 50 and weimar_coalition_failed == 0
 on-arrival: leverage += 10; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0
 achievement: weimar_coalition
-go-to: weimar_coalition_z_lead if president != "Braun" and ((n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD"))
+go-to: weimar_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 30) or president = "Braun"; weimar_coalition_z_lead if president != "Braun" and ((n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD"))
 
 We have enough votes to form a "Weimar Coalition" government consisting of the SPD, Center (Z) and Liberal (LVP) parties! This has been our preferred governing coalition.
 
@@ -1044,7 +1044,7 @@ We have decided to tolerate Brüning's government. This means that we will vote 
 @weimar_coalition_failed
 on-arrival: weimar_coalition_failed = 1
 
-Unfortunately, the Center conservatives and right LVP are unwilling to enter into another coalition with the SPD, so the grand coalition is unable to be formed.
+Unfortunately, the Center conservatives and right LVP are unwilling to enter into another coalition with the SPD, so the Weimar coalition is unable to be formed.
 
 - @no_majority: Thus, there is no clear majority.
 - @brauns_dilemma
@@ -1105,6 +1105,20 @@ Who should be the chancellor?
 - @z_chancellor
 - @no_govt
 
+@weimar_coalition_spd_lead
+on-arrival: leverage -= 10 if lvp_relation or z_relation < 35
+
+As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President [+ president +] has asked us to form a majority coalition with the Center (Z), Bavarian People's (BVP), and the Liberal People's Party(LVP).
+
+[? if lvp_relation or z_relation < 35 : As our relation with our more right-wing coalition partners are poor, they are demanding more minister posts in order to remain part of the coalition. ?]
+
+Who should be the chancellor?
+
+- @muller
+- @braun
+- @breitscheid_coalition_chancellor
+- @wels
+- @z_chancellor
 
 @muller
 title: Hermann Müller for Chancellor
