@@ -234,7 +234,7 @@ Q.old_middle_z = 5;
 Q.old_middle_lvp = 30;
 Q.old_middle_dnvp = 25;
 Q.old_middle_nsdap = 10;
-Q.old_middle_other = 15;
+Q.old_middle_other = 10;
 
 Q.new_middle_spd = 15;
 Q.new_middle_kpd = 1;
@@ -242,7 +242,7 @@ Q.new_middle_z = 10;
 Q.new_middle_lvp = 40;
 Q.new_middle_dnvp = 10;
 Q.new_middle_nsdap = 5;
-Q.new_middle_other = 20;
+Q.new_middle_other = 15;
 
 Q.rural_spd = 10;
 Q.rural_kpd = 0;
