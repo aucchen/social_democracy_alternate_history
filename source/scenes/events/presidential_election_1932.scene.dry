@@ -215,7 +215,7 @@ if (Q.braun_campaign) {
     if (Q.lvp_support_braun) {
         Q.braun_votes += Q.lvp_votes;
     } else {
-        Q.hindenburg_votes += Q.lvp_votes/2;
+        Q.hindenburg_votes += Math.round([Q.lvp_votes/2]);
     }
 } else if (Q.spd_support_thalmann) {
     Q.thalmann_votes += Q.kpd_votes;
