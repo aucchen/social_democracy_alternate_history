@@ -16,7 +16,7 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 - @old_middle: The "old middle class" of small independent businessmen and artisans.
 - @rural: Rural workers and small farmers, who have felt neglected by us in the past.
 - @unemployed: The unemployed.
-- @catholics: Catholics, who typically support the Center Party.
+- @catholics: Catholics, who typically support the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?].
 - @root: We either don't want to or cannot campaign right now.
 - @easy_discard
 
@@ -64,7 +64,7 @@ We have increased our campaigning among the unemployed. [? if welfare < 0: The w
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-view-if: peoples_party == 1
-on-arrival: catholics_spd += 6*(1-dissent); resources -= 1
+view-if: peoples_party == 1 or cvp_formed == 1
+on-arrival: catholics_spd += 6*(1-dissent); catholics_spd += 6*(1-dissent) if cvp_formed = 1
 
-We have increased our campaigning among Catholics.
+Catholics have historically been tied to the Center Party, but there is no reason why our party cannot appeal to them. The Prussian Concordat in particular is a sign of our friendship with Catholicism. [? if cvp_formed = 1 : However, with the rebranding of the Center Party into an inclusive 'People's party,' our campaigning among Catholics has been more effective than ever. ?]

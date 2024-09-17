@@ -42,7 +42,9 @@ go-to: menu
 
 **Rural**: Small and large farmers and independent rural workers. Protestant farmers often support the DNVP. 20-30% of the population.
 
-**Catholics** are the largest religious minority, at about 30% of the population. They disproportionately support the Center Party (or the Bavarian People's Party in Bavaria). [? if z_party_leader = "Stegerwald" : Although, their dominance on the Catholic voter bloc has been diminished recently due to the formation of a 'People's Party'. ?]
+[? if z_party_leader = "Stegerwald" : **Catholics** are the largest religious minority, at about 30% of the population. They have disproportionately supported the Christian People's Party (or the Bavarian People's Party in Bavaria). Although, their dominance on the Catholic voter bloc has been diminished recently due to the formation of a 'People's Party'. ?]
+
+**Catholics** are the largest religious minority, at about 30% of the population. They disproportionately support the Center Party (or the Bavarian People's Party in Bavaria).
 
 **Jews** account for between 0.5% to 1% of the population, and tend to support the LVP, although substantial numbers support the SPD or KPD.
 
@@ -114,9 +116,11 @@ go-to: menu
 
 [? if z_party_name = "Z" : **Z** - *Zentrumspartei* (Center Party) - a centrist to center-right Catholic party that supports the Republic, and has historically supported many of our labor, welfare, and anti-militarist priorities. They have often been in coalitions with us. They are often associated with the **BVP** (Bavarian People's Party), which represents Catholics in Bavaria. [? if year >= 1930 or chancellor = "Brüning" : They have appeared to take a more conservative turn recently, with the rise of Brüning and the party leader, Ludwig Kaas. ?]?]
 
+[? if z_party_name = "CVP" : **CVP** - *Christliche Volkspartei* (Christian People's Party) - a new centrist to center-right Christian catch-all party that supports the Republic, and has historically supported many of our labor, welfare, and anti-militarist priorities. They have often been in coalitions with us. They are often associated with the **BVP** (Bavarian People's Party), which represents Catholics in Bavaria. [? if year >= 1930 or chancellor = "Brüning" : They have appeared to take a more conservative turn recently, with the rise of Brüning and their new party leader, Adam Stegerwald. ?]?]
+
 Current relations: [+ z_relation : relationships +]
 
-**LVP** - *Liberale Volkspartei* (Liberal People's Party) - a center-right to center-left liberal party, popular among the bourgeios and the middle class. They have often been in coalitions with us.
+**LVP** - *Liberale Volkspartei* (Liberal People's Party) - a center-right to center-left liberal party, popular among the bourgeois and the middle class. They have often been in coalitions with us and one of our best allies.
 
 Current relations: [+ lvp_relation : relationships +]
 

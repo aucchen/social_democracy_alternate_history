@@ -11,11 +11,12 @@ new-page: true
 
 The Center Party has recently announced its decision to officially reform the party to accept all Christians, including Protestants. The party was renamed to the Christian People's Party and seek to appeal to all Germans, above social classes.
 
-It is certain that the consequences of this historic move will prompt a drastic re-alignment of Weimar politics. For us, new competition has emerged for our working class base through Christian trade unions.
+It is certain that the consequences of this historic move will prompt a drastic re-alignment of Weimar politics. For us, new competition has emerged for our working class base through Christian trade unions. [? if peoples_party == 0 : This event has also sparked internal debates for whether we should become a People's party too. ?]
 
 - @stegerwald: The Center Party elects Adam Stegerwald as the party chair.
 
 @stegerwald
-on-arrival: z_party_leader = "Stegerwald"; workers_z += 20; catholics_z -= 20; new_middle_z += 20; old_middle_z += 20; rural_z += 10; unemployed_z += 5; z_relation -= 5; catholics_others += 5; new_middle_others -= 10; old_middle_others -= 10; rural_other -= 5
+on-arrival: z_party_leader = "Stegerwald"; workers_z += 15; catholics_z -= 25; new_middle_z += 15; old_middle_z += 15; rural_z += 10; unemployed_z += 5; z_relation -= 5; catholics_others += 5; new_middle_others -= 10; old_middle_others -= 10; rural_other -= 5; new_middle_dnvp -= 5; old_middle_dnvp -= 5; rural_dnvp -= 5; peoples_party_support += 3 if peoples_party == 0; cvp_formed = 1
+go-to: peoples_party if peoples_party == 0; peoples_party_campaigning if peoples_party == 1
 
-Adam Stegerwald, leader of the Catholic trade unions, has been selected as the chairman of the CVP. He seems to represent the unity of Catholics and Protestants, having long been a proponent of the "people's party" concept in his party. However, our relations are strained due to his support of austerity measures and reduction of labour rights.
+Adam Stegerwald, leader of the Catholic trade unions, has been selected as the chairman of the CVP. He seems to represent the unity of Catholics and Protestants, having long been a proponent of the "people's party" concept in his party. However, our relations are strained due to his support of austerity measures and reduction of labour rights [? if labor_minister = "Stegerwald" : under his current position as Minster of Labor ?].

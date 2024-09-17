@@ -17,7 +17,7 @@ In our media and campaign materials, who should we consider as our main opponent
 - @far_right: The far right - the NSDAP and DNVP.
 - @nsdap: The NSDAP alone.
 - @kpd: The KPD.
-- @bourgeois: The bourgeois parties - the Center and LVP.
+- @bourgeois: The bourgeois parties - the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] and LVP.
 - @easy_discard
 
 @anti_dem

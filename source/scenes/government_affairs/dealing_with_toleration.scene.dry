@@ -53,7 +53,7 @@ Unfortunately, our negotiations have met with failure. The center-right parties 
 title: Improve relations with the parties of the coalition.
 on-arrival: z_relation += 5*(1-dissent); lvp_relation += 5*(1-dissent); left_dissent += 5;
 
-We have increased our level of contact and discussions with the parties of the coalition, primarily the Center Party and LVP.
+We have increased our level of contact and discussions with the parties of the coalition, primarily the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?] and LVP.
 
 Our attempts to reach out to the center-right are met with disdain by leftists within our party.
 
@@ -69,7 +69,7 @@ unavailable-subtitle: [? if z_relation < 50 : We do not have adequate relations 
 on-arrival: resources -= 2; spd_in_government = 1; in_grand_coalition = 1; spd_toleration = 0; left_dissent += 6; reformist_strength += 5; leverage = 20 if leverage >= 20
 achievement: constitutional_coalition
 
-Our negotiations have succeeded, and the Center Party and LVP have agreed to form a new coalition government with us!
+Our negotiations have succeeded, and the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?] and LVP have agreed to form a new coalition government with us!
 
 We are now part of a "constitutional coalition" government that includes all parties except the extremists of the KPD, DNVP, and NSDAP. [+ chancellor +] will remain as chancellor. Leftists in our party are skeptical of this arrangement.
 

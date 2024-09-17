@@ -8,7 +8,7 @@ card-image: img/braun.jpg
 
 = Prussian Affairs
 
-Prussia, by far the largest and most important state in Germany, is governed by our party, in a coalition with the Center and Liberal parties. It is the most stable and democratic state government in Germany, led by the able Otto Braun.
+Prussia, by far the largest and most important state in Germany, is governed by our party, in a coalition with the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] and Liberal parties. It is the most stable and democratic state government in Germany, led by the able Otto Braun.
 
 We can enact policies in Prussia.
 

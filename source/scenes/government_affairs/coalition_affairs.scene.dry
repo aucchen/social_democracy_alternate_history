@@ -8,7 +8,7 @@ card-image: img/muller_cabinet.jpg
 
 = Coalition Affairs
 
-Our coalition is in trouble. The right-leaning members of the Center and the LVP are constantly criticizing us for our policies, and are threatening to call a vote of no confidence to collapse this government[? if spd_prussia :, or to do the same for our government in the state of Prussia ?].
+Our coalition is in trouble. The right-leaning members of the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?] and the LVP are constantly criticizing us for our policies, and are threatening to call a vote of no confidence to collapse this government[? if spd_prussia :, or to do the same for our government in the state of Prussia ?].
 
 How do we reduce tensions with the coalition?
 
