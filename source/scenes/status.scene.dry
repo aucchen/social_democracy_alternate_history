@@ -36,7 +36,7 @@ SPD: [+ spd_r +]%
 # 1928: 5, 1930: 4 (as DstP)
 LVP: [+ lvp_r +]%
 # 1928: 15, 1930: 15, 1932: 
-Z + BVP: [+ z_r +]%
+[+ z_party_name +] + BVP: [+ z_r +]%
 # 1928: 9, 1930: 5
 DNVP: [+ dnvp_r +]%
 # 1928: 3, 1930: 18
@@ -125,7 +125,7 @@ SPD: [+ spd_votes +]%
 
 LVP: [+ lvp_votes +]%
 
-Z + BVP: [+ z_votes +]%
+[+ z_party_name +] + BVP: [+ z_votes +]%
 
 DNVP: [+ dnvp_votes +]%
 

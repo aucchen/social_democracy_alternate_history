@@ -266,7 +266,7 @@ The electoral system is essentially proportional, with the proportion of Reichst
 SPD: [+ spd_r +]
 
 # 1928: 15, 1930: 15, 1932: 
-Z + BVP: [+ z_r +]
+[+ z_party_name +] + BVP: [+ z_r +]
 
 # 1928: 10, 1930: 13
 KPD: [+ kpd_r +]
