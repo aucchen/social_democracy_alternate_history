@@ -1,0 +1,21 @@
+title: Center Party leaves the tower!
+subtitle: The Center Party broadens it's appeal...
+view-if: year >= 1932 and pro_republic >= 75 and next_election_time - time == 1 and unemployment < 15
+max-visits: 1
+tags: event
+new-page: true
+
+= Center Party leaves the tower!
+
+# reference: i made it up, actually though, i made it up i've done no research.
+
+The Center Party has recently announced its decision to officially reform the party to accept all Christians, including Protestants. The party was renamed to the Christian People's Party and seek to appeal to all Germans, above social classes.
+
+It is certain that the consequences of this historic move will prompt a drastic re-alignment of Weimar politics. For us, new competition has emerged for our working class base through Christian trade unions.
+
+- @stegerwald: The Center Party elects Adam Stegerwald as the party chair.
+
+@stegerwald
+on-arrival: z_party_leader = "Stegerwald"; workers_z += 20; catholics_z -= 20; new_middle_z += 20; old_middle_z += 20; rural_z += 10; unemployed_z += 5; z_relation -= 5; catholics_others += 5; new_middle_others -= 10; old_middle_others -= 10; rural_other -= 5
+
+Adam Stegerwald, leader of the Catholic trade unions, has been selected as the chairman of the CVP. He seems to represent the unity of Catholics and Protestants, having long been a proponent of the "people's party" concept in his party. However, our relations are strained due to his support of austerity measures and reduction of labour rights.
