@@ -22,7 +22,7 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
         partyColors = {'kpd': '#8B0000', 'spd': '#E3000F', 'lvp': '#F37934', 'z': '#000', 'dnvp': '#3f7bc1', 'nsdap': '#954B00', 'other': '#a0a0a0'};
     }
     if (!partyNames) {
-        partyNames = {'spd': 'SPD', 'kpd': 'KPD', 'lvp': 'LVP', 'z': 'Z + BVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others'};
+        partyNames = {'spd': 'SPD', 'kpd': 'KPD', 'lvp': 'LVP', 'z': '[+ z_party_name +] + BVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others'};
     }
     if (!additionalMonths) {
         additionalMonths = 10;
