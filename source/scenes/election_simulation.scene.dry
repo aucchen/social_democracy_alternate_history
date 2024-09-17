@@ -42,7 +42,7 @@ Q.new_middle_spd = 5;
 Q.new_middle_kpd = 0;
 Q.new_middle_z = 10;
 Q.new_middle_lvp= 45;
-Q.new_middle_dnvp = 15;
+Q.new_middle_dnvp = 20;
 Q.new_middle_nsdap = 5;
 Q.new_middle_other = 15;
 
@@ -66,7 +66,7 @@ Q.catholics_spd = 15;
 Q.catholics_kpd = 5;
 Q.catholics_z = 50;
 Q.catholics_lvp = 5;
-Q.catholics_dnvp = 5;
+Q.catholics_dnvp = 0;
 Q.catholics_nsdap = 0;
 Q.catholics_other = 10;
 !}
