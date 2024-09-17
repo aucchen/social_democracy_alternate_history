@@ -488,7 +488,7 @@ Q.unemployment_insurance_timer = 0;
 Q.sa_ban_timer = 0;
 Q.sh_ban_timer = 0;
 Q.kpd_ultimatum_timer = 0;
-
+Q.z_cvp = 0;
 
 // all the initial advisors are centrists.
 Q.wels_advisor = 1; // Otto Wels
