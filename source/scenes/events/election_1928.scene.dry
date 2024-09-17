@@ -174,8 +174,8 @@ data = [
     },
     {
         "id": "z",
-        "legend": "[? if Q.z_party_name = "Z" : Center ?][? if Q.z_party_name = "CVP" : CVP ?]",
-        "name": "[? if Q.z_party_name = "Z" : Center ?][? if Q.z_party_name = "CVP" : CVP ?]",
+        "legend": "Center",
+        "name": "Center",
         "seats": Math.round((Q.z_r - 3)*5),
     },
     {
