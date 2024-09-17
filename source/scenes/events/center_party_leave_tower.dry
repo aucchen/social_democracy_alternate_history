@@ -1,6 +1,6 @@
 title: Center Party leaves the tower!
 subtitle: The Center Party broadens it's appeal...
-view-if: year >= 1932 and pro_republic >= 75 and unemployed < 15
+view-if: year >= 1928
 max-visits: 1
 tags: event
 new-page: true
