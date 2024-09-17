@@ -2,10 +2,11 @@ title: LVP Mod, merged liberal parties
 
 {!
 <p>Author: u/originalperson0</p>
+<p>Source Code: https://github.com/originn0/social_democracy_alternate_history </p>
+!}
+This mod simulates an alterative history scenario featuring a single, united liberal party. Many changes has been made to the code that go beyond merging the numbers of the base game DDP and DVP. I hope you enjoy!
 
-<p>This mod simulates an alterative history scenario featuring a single, united liberal party. Many changes has been made to the code that go beyond merging the numbers of the base game DDP and DVP. I hope you enjoy!</p>
-
-<b>Major features:</b>
+**Major features:**
 
 The Center Party now has an option to broaden their appeal beyond Catholics if the Republic is in a good position
 
@@ -19,17 +20,16 @@ A reformist split will cause members to look elsewhere...
 
 Support for the Republic has effects now, the decline of the liberals can be stopped with enough effort
 
-<b>Changelog</b>
+**Changelog**
 
 Initial Release(0.1) - Features above
 
 (0.2) - TBD
 
-<b>Future Plans</b>
+**Future Plans**
 
 Custom achievements
 
 Your suggestions
-!}
 
 - @root: Back
