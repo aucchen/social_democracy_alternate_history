@@ -15,7 +15,7 @@ Chancellor Hermann Müller has died while in office. He will be greatly missed. 
 - @braun_chancellor: Otto Braun (SPD) for Chancellor.
 - @wels_chancellor: Otto Wels (SPD) for Chancellor.
 - @breitscheid_chancellor: Rudolf Breitscheid (SPD) for Chancellor.
-- @bruning_chancellor: Let Heinrich Bruning of the Center Party become Chancellor.
+- @bruning_chancellor: Let Heinrich Brüning of the Center Party become Chancellor.
 
 @braun_chancellor
 on-arrival: chancellor = "Braun"; chancellor_party = "SPD"; z_relation -= 5; lvp_relation -= 4
