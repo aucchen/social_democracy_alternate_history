@@ -22,24 +22,12 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
     if (!partyColors) {
         partyColors = {'kpd': '#8B0000', 'spd': '#E3000F', 'lvp': '#F37934', 'z': '#000', 'dnvp': '#3f7bc1', 'nsdap': '#954B00', 'other': '#a0a0a0'};
     }
-// Define mappings
-const partyMapping = {
-    'CVP': 'CVP + BVP',
-    'default': 'Z + BVP'
-};
-
-// Initialize partyNames if it isn't already defined
-if (!partyNames) {
-    partyNames = {
-        'spd': 'SPD',
-        'kpd': 'KPD',
-        'lvp': 'LVP',
-        'z': partyMapping[z_party_name] || partyMapping['default'],
-        'dnvp': 'DNVP',
-        'nsdap': 'NSDAP',
-        'other': 'Others'
-    };
-}
+    if (!partyNames && z_party_name == "CVP") {
+        partyNames = {'spd': 'SPD', 'kpd': 'KPD', 'lvp': 'LVP', 'z': 'CVP + BVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others'};
+    }
+    if (!partyNames) {
+        partyNames = {'spd': 'SPD', 'kpd': 'KPD', 'lvp': 'LVP', 'z': 'Z + BVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others'};
+    }
     if (!additionalMonths) {
         additionalMonths = 10;
     }
