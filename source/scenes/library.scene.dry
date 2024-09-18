@@ -307,8 +307,8 @@ if (d3 && window) {
     d3.select("#reichstag").datum(data).call(parliament);
 
     var lines = d3.linegraph(false, ['z'],
-        {'z': '#000'},
-          {'z': 'CVP'},);
+        {'z': '#000'}
+        {'z': 'CVP'});
     lines.width(width).height(400);
     //var svg = lines(Q.election_records);
     d3.select("#election_history").datum(Q.election_records).call(lines);
