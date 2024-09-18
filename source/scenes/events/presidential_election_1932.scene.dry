@@ -175,7 +175,7 @@ unavailable-subtitle: Not enough resources (need 3)
 on-arrival: resources -= 3; lvp_support_braun = 1
 go-to: braun_campaign
 
-With our resources, the Liberals(LVP) are convinced to support Braun over Hindenburg.
+With our resources, the Liberals (LVP) are convinced to support Braun over Hindenburg.
 
 @lvp_failed
 go-to: braun_campaign
@@ -359,11 +359,11 @@ max-visits: 1
 @r2_lvp_success
 go-to: round2_menu
 
-[? if hitler_support_hindenburg : The Liberal's opinion is affected by the Nazis' support of Hindenburg, and is willing to turn away from him. ?] The Liberals(LVP) are convinced! They will be part of the Braun coalition.
+[? if hitler_support_hindenburg : The Liberal's opinion is affected by the Nazis' support of Hindenburg, and is willing to turn away from him. ?] The Liberals (LVP) are convinced! They will be part of the Braun coalition.
 
 @r2_lvp_partial
 
-The Liberals(LVP) are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given the Nazis' support for Hindenburg ?]. They are willing to run a joint campaign if we front the resources for their dying party.
+The Liberals (LVP) are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given the Nazis' support for Hindenburg ?]. They are willing to run a joint campaign if we front the resources for their dying party.
 
 - @r2_pay_lvp: Give them the resources they need.
 - @round2_menu: Forget about the Liberals.
@@ -375,7 +375,7 @@ unavailable-subtitle: Not enough resources (need 2)
 on-arrival: resources -= 2; lvp_support_braun = 1
 go-to: round2_menu
 
-With our resources, the Liberals(LVP) are convinced to support Braun over Hindenburg.
+With our resources, the Liberals (LVP) are convinced to support Braun over Hindenburg.
 
 @r2_lvp_failed
 go-to: round2_menu
