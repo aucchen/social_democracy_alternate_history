@@ -57,7 +57,7 @@ The workers are furious at our betrayal, as are a good portion of our membership
 
 @compromise
 unavailable-subtitle: We do not have good enough relations with the right-wing parties.
-choose-if: lvp_relation >= 45
+choose-if: lvp_relation >= 45 and z_relation >= 45
 
 Thanks to our good relations, the LVP have offered a compromise that raises some taxes on the wealthy, along with lesser welfare cuts. Our members have mixed opinions on accepting this compromise. Reformists and Centrists support maintaining our government to keep the fascists and communists out, while Labor generally opposes any cuts, and the Left is opposed to compromises with the bourgeoisie.
 
@@ -65,6 +65,6 @@ Thanks to our good relations, the LVP have offered a compromise that raises some
 - @destroy: Reject the compromise and let this government fall.
 
 @accept_compromise
-on-arrival: workers_spd -= 5; unemployed_spd -= 6; workers_kpd += 5; unemployed_kpd += 3; unemployed_nsdap += 3; left_dissent += 10; labor_dissent += 8; center_dissent += 5; welfare -= 1; budget += 1; month += 1; kpd_relation -= 4; inflation -= 1
+on-arrival: workers_spd -= 5; unemployed_spd -= 6; workers_kpd += 5; unemployed_kpd += 3; unemployed_nsdap += 6; left_dissent += 10; labor_dissent += 8; center_dissent += 5; welfare -= 1; budget += 1; month += 1; kpd_relation -= 4; inflation -= 1; pro_republic -= 2;
 
 We have accepted the compromise offered by the bourgeoisie. Many of the workers and unemployed see this as a betrayal, although we present it as the successful aversion of a much worse alternative.
