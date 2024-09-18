@@ -54,7 +54,7 @@ view-if: year = 1932 and month = 1
 priority: 2
 max-visits: 1
 
-A new year begins. [? if works_program = 0 : There is little to no good news in Germany. The economic depression has still not bottomed out. ?][? if works_program >= 1 and unemployment >= 20 : We have begun to launch a public works program, but unemployment is still stubbornly high. The people are beginning to finally have optimism, however. ?][? if works_program >= 1 and unemployment < 20 : We have begun to launch a public works program, and unemployment is finally starting to fall. The people are beginning to finally have optimism. ?]
+A new year begins. [? if works_program = 0 : There is little to no good news in Germany. The economic depression has still not bottomed out. ?][? if works_program >= 1 and unemployed >= 20 : We have begun to launch a public works program, but unemployment is still stubbornly high. The people are beginning to finally have optimism, however. ?][? if works_program >= 1 and unemployed < 20 : We have begun to launch a public works program, and unemployment is finally starting to fall. The people are beginning to finally have optimism. ?]
 
 [? if pro_republic > 75 : The peoples surprisingly strong support for democracy against Nazi rhetoric has mitigated their surge in popularity. ?]
 

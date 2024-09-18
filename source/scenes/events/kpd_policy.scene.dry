@@ -39,7 +39,7 @@ Do we support their radical labor policy?
 - @labor_oppose: No, this is too radical.
 
 @labor_support
-on-arrival: capital_strike_progress += 2; workers_kpd += 5; workers_spd += 3*(1-dissent); kpd_labor_support += 1; coalition_dissent += 1; z_relation -= 6; unemployment += 2; kpd_influence += 2
+on-arrival: capital_strike_progress += 2; workers_kpd += 5; workers_spd += 3*(1-dissent); kpd_labor_support += 1; coalition_dissent += 1; z_relation -= 6; unemployed += 2; kpd_influence += 2
 
 The pro-labor policy is popular among workers and is bringing the KPD more support, but in response businesses are laying off more workers and reducing hours. This is setting the government up for a confrontation with the capitalists.
 
