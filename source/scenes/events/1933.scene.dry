@@ -4,7 +4,7 @@ on-arrival: {!
 if (Q.works_program && Q.works_program >= 2) {
     Q.unemployed -= 1;
     Q.inflation += 1
-} if (Q.pro_republic > 75 && unemployed < 20) {
+} if (Q.pro_republic > 75 && Q.unemployed < 20) {
     Q.new_middle_lvp += 10;
     Q.old_middle_lvp += 10;
     Q.old_middle_nsdap -= 10;
