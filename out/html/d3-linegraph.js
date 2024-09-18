@@ -12,8 +12,6 @@ function addMonths(date, months) {
     return date;
 }
 
-var z_party_name = "CVP";
-
 d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataMax, dataMin, additionalMonths) {
     /* params */
     if (!parties) {
