@@ -247,13 +247,13 @@ go-to: coalition_menu
 
 **Potential coalitions:**
 
-Weimar Coalition (SPD + Z + LVP): [+ weimar_coalition +]%
+Weimar Coalition (SPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + LVP): [+ weimar_coalition +]%
 
-Grand Coalition (SPD + Z + BVP + LVP): [+ grand_coalition +]%
+Grand Coalition (SPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP): [+ grand_coalition +]%
 
-Bourgeois Coalition (Z + BVP + LVP + Others): [+ bourgeois_coalition +]%
+Bourgeois Coalition ([? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP + Others): [+ bourgeois_coalition +]%
 
-Right-wing Coalition (Z + BVP + LVP + Others + DNVP): [+ right_coalition +]%
+Right-wing Coalition ([? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP + Others + DNVP): [+ right_coalition +]%
 
 [? if lvp_r <= 5 : The collapse of the LVP is extremely worrying for our democracy and signals a realignment in Weimar politics. It would be difficult to find a stable governing majority with them becoming moribound. ?]
 
@@ -282,8 +282,8 @@ There are some potential coalition arrangements.
 
 @popular_front_coalition
 title: A new "Popular Front" coalition?
-subtitle: SPD + KPD + Z + LVP ([+ popular_front_coalition +]%)
-unavailable-subtitle: SPD + KPD + Z + LVP ([+ popular_front_coalition +]%) - [? if kpd_relation < 50: We do not have good enough relations with the KPD. ?][? if z_relation < 50: We do not have good enough relations with the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?]. ?][? if lvp_relation < 50: We do not have good enough relations with the LVP. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
+subtitle: SPD + KPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + LVP ([+ popular_front_coalition +]%)
+unavailable-subtitle: SPD + KPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + LVP ([+ popular_front_coalition +]%) - [? if kpd_relation < 50: We do not have good enough relations with the KPD. ?][? if z_relation < 50: We do not have good enough relations with the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?]. ?][? if lvp_relation < 50: We do not have good enough relations with the LVP. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
 view-if: popular_front_coalition >= 50
 choose-if: kpd_relation >= 50 and z_relation >= 50 and lvp_relation >= 50 and communist_coalition >= 3
 
@@ -475,7 +475,7 @@ In response to the KPD's entrance into the government, the right-wing immediatel
 
 @right_coalition
 title: A right-wing coalition may be formed.
-subtitle: Z + BVP + LVP + DNVP + Others ([+ right_coalition +]%)
+subtitle: [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP + DNVP + Others ([+ right_coalition +]%)
 unavailable-subtitle: The DNVP is not interested in a coalition with the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] or LVP.
 view-if: right_coalition >= 50
 choose-if: year < 1928
@@ -548,10 +548,10 @@ The third option is to have new elections.
 
 @new_grand_coalition
 title: A "New Grand Coalition" of all the constitutional parties?
-subtitle: SPD + Z + BVP + LVP + Others ([+ neo_weimar_coalition +]%)
+subtitle: SPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP + Others ([+ neo_weimar_coalition +]%)
 view-if: neo_weimar_coalition >= 50 and grand_coalition < 50
 choose-if: z_relation >= 50 and lvp_relation >= 45
-unavailable-subtitle: SPD + Z + BVP + LVP + Others ([+ neo_weimar_coalition +]%) - [? if z_relation < 50 : We do not have adequate relations with the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?]. ?][? if lvp_relation < 45 : We do not have adequate relations with the LVP. ?]
+unavailable-subtitle: SPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP + Others ([+ neo_weimar_coalition +]%) - [? if z_relation < 50 : We do not have adequate relations with the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?]. ?][? if lvp_relation < 45 : We do not have adequate relations with the LVP. ?]
 
 How do we convince vehemently anti-socialist parties to allow us to form a majority coalition? Our largely benevolent relations with the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] and LVP may allow us some leverage.
 
@@ -589,7 +589,7 @@ We have assembled a new coalition under Otto Braun.
 
 @unity_government
 title: The [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] offers a "Government of National Unity" under Chancellor Joseph Wirth.
-subtitle: SPD + Z + BVP + LVP + Others ([+ neo_weimar_coalition +]%)
+subtitle: SPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP + Others ([+ neo_weimar_coalition +]%)
 view-if: z_party_leader == "Joos" and neo_weimar_coalition >= 50 and weimar_coalition < 50
 
 The [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] leader, Joseph Joos, clearly sees the threat from the ascension of the anti-democratic extremist parties, and thus tries to negotiate a "Government of National Unity" to save the republic. This coalition would be led by Joseph Wirth, a left-leaning member of the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] and former chancellor, and would encompass all of the constitutional parties. Our role in this government might be limited, however.
@@ -850,7 +850,7 @@ We have won the vote of no confidence, and are currently ruling under an SPD min
 
 @weimar_coalition
 title: We can form a Weimar Coalition.
-subtitle: SPD + Z + LVP ([+ weimar_coalition +]%)
+subtitle: SPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + LVP ([+ weimar_coalition +]%)
 view-if: weimar_coalition >= 50 and weimar_coalition_failed == 0
 on-arrival: leverage += 10; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0
 achievement: weimar_coalition
@@ -905,7 +905,7 @@ If we do not at least "tolerate" the government, there will be new elections in 
 @grand_coalition
 title: We can form a Grand Coalition.
 view-if: grand_coalition >= 50 and grand_coalition_failed == 0
-subtitle: SPD + Z + BVP + LVP ([+ grand_coalition +]%)
+subtitle: SPD + [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?] + BVP + LVP ([+ grand_coalition +]%)
 on-arrival: in_grand_coalition = 1; in_popular_front = 0; in_left_front = 0
 go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 30) or president = "Braun"; grand_coalition_z_lead if president != "Braun" and ((n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD"))
 
