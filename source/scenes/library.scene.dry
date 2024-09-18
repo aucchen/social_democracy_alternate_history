@@ -44,7 +44,7 @@ go-to: menu
 
 [? if z_party_leader = "Stegerwald" : **Catholics** are the largest religious minority, at about 30% of the population. They have disproportionately supported the Christian People's Party (or the Bavarian People's Party in Bavaria). Although, their dominance on the Catholic voter bloc has been diminished recently due to the formation of a 'People's Party'. ?]
 
-**Catholics** are the largest religious minority, at about 30% of the population. They disproportionately support the Center Party (or the Bavarian People's Party in Bavaria).
+[? if z_party_name = "Z" : **Catholics** are the largest religious minority, at about 30% of the population. They disproportionately support the Center Party (or the Bavarian People's Party in Bavaria). ?]
 
 **Jews** account for between 0.5% to 1% of the population, and tend to support the LVP, although substantial numbers support the SPD or KPD.
 
@@ -261,8 +261,8 @@ data = [
     },
     {
         "id": "z",
-        "legend": "Center",
-        "name": "Center",
+        "legend": "[? if z_party_name = "Z" : Center?][? if z_party_name = "CVP" : CVP?]",
+        "name": "[? if z_party_name = "Z" : Center?][? if z_party_name = "CVP" : CVP?]",
         "seats": (Q.z_r - 3)*5,
     },
     {
@@ -306,9 +306,7 @@ if (d3 && window) {
     parliament.exit.toCenter(false).bigToSmall(true);
     d3.select("#reichstag").datum(data).call(parliament);
 
-    var lines = d3.linegraph(false, ['z'],
-        {'z': '#000'},
-        {'z': 'CVP'},);
+    var lines = d3.linegraph()
     lines.width(width).height(400);
     //var svg = lines(Q.election_records);
     d3.select("#election_history").datum(Q.election_records).call(lines);
