@@ -106,6 +106,10 @@ if ((Q.chancellor_party == "NSDAP" || Q.chancellor == "Hitler" || Q.president ==
 if ((Q.welfare > 0 && Q.judicial_reform >= 2 && Q.womens_work >= 1 && Q.family_law >= 1 && Q.upper_tax_rates > Q.lower_tax_rates && Q.works_councils > 0 && Q.eu > 0)) {
     this.achieve('heidelberger_programm');
 }
+// Volkspartei für Alle - SPD and Zentrum are both People's parties.
+if (Q.cvp_formed == 1 && Q.peoples_party == 1) {
+    this.achieve('volksparteifuralle');
+}
 !}
 
 = End
@@ -372,7 +376,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
-
+[? if game_achievement_volksparteifuralle: **Volkspartei für Alle** - Zentrum and the SPD are People's parties. ?]
 
 = Completed Achievements Overall
 
@@ -459,6 +463,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
+[? if achievement_volksparteifuralle: **Volkspartei für Alle** - Zentrum and the SPD are People's parties. ?]
+
 
 = Incomplete Achievements
 
@@ -543,6 +549,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
+
+[? if not achievement_volksparteifuralle: **Volkspartei für Alle** - Zentrum and the SPD are People's parties. ?]
 
 
 @end_game
