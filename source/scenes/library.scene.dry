@@ -306,8 +306,9 @@ if (d3 && window) {
     parliament.exit.toCenter(false).bigToSmall(true);
     d3.select("#reichstag").datum(data).call(parliament);
 
-    var lines = d3.linegraph(false, false, ['z'])
-    {'z': '#000', 'z': 'CVP'};
+    var lines = d3.linegraph(false, false, ['kpd', 'spd', 'lvp', 'z', 'other', 'dnvp', 'nsdap'],
+    {'kpd': '#8B0000', 'spd': '#E3000F', 'lvp': '#FFCC00', 'z': '#000', 'other': '#a0a0a0', 'dnvp': '#3f7bc1', 'nsdap': '#954B00'},
+    {'kpd': 'KPD', 'spd': 'SPD', 'lvp': 'LVP', 'z': Q.z_party_name, 'other':'Others', 'dnvp': 'DNVP', 'nsdap': 'NSDAP'});
     lines.width(width).height(400);
     //var svg = lines(Q.election_records);
     d3.select("#election_history").datum(Q.election_records).call(lines);
@@ -315,7 +316,9 @@ if (d3 && window) {
 
     // party support records should not have so many ticks
     if (!Q.historical_mode) {
-        var lines_2 = d3.linegraph(true, true);
+        var lines_2 = d3.linegraph(true, true, ['kpd', 'spd', 'lvp', 'z', 'other', 'dnvp', 'nsdap'],
+        {'kpd': '#8B0000', 'spd': '#E3000F', 'lvp': '#FFCC00', 'z': '#000', 'other': '#a0a0a0', 'dnvp': '#3f7bc1', 'nsdap': '#954B00'},
+        {'kpd': 'KPD', 'spd': 'SPD', 'lvp': 'LVP', 'z': Q.z_party_name, 'other':'Others', 'dnvp': 'DNVP', 'nsdap': 'NSDAP'});
         lines_2.width(width).height(400);
         d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
     }
