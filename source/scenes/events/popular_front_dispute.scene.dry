@@ -1,5 +1,5 @@
 title: Disputes within the Popular Front
-subtitle: As expected, there are clashes between the KPD and [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : the CVP ?].
+subtitle: As expected, there are clashes between the KPD and [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : the CVP?].
 view-if: in_popular_front = 1 and popular_front_dispute_timer = 0 and (labor_minister_party = "Z" or economy_minister_party = "Z" or interior_minister_party = "Z" or agriculture_minister_party = "Z")
 new-page: true
 on-arrival: popular_front_dispute_timer = 5;

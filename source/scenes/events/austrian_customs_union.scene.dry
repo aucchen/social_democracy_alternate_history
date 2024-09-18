@@ -31,7 +31,7 @@ The customs union has been formed. Immediately, France and other neighboring cou
 view-if: spd_in_government = 1
 on-arrival: coalition_dissent += 1; lvp_relation -= 3; z_relation -= 4; z_relation -= 3 if chancellor_party == "Z"; lvp_relation -= 2 if chancellor_party == "Z"
 
-We attempt to impress upon our coalition partners the gravity of the potential Allied response. The proposal is dead, although the LVP and [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] are not pleased.
+We attempt to impress upon our coalition partners the gravity of the potential Allied response. The proposal is dead, although the LVP and [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] are not pleased.
 
 
 @end_toleration

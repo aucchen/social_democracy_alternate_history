@@ -11,7 +11,7 @@ go-to: what_do if unemployment_insurance_crisis = 2
 
 The economic crisis has caused mass layoffs all throughout Germany, affecting the industrial working class the hardest. Our welfare spending is increasing due to the greater need.
 
-In the midst of all this, our right-wing coalition partners in the LVP and [? if z_party_name = "Z" : Center parties ?][? if z_party_name = "CVP" : CVP ?] have a plan to cut benefits for the unemployed, lower taxes on the rich, and raise taxes on the working class, as part of a plan to balance the budget and discipline labor. They do not see a possibility for compromise. If we do not accept, they could blow up the coalition.
+In the midst of all this, our right-wing coalition partners in the LVP and [? if z_party_name = "Z" : Center parties ?][? if z_party_name = "CVP" : CVP?] have a plan to cut benefits for the unemployed, lower taxes on the rich, and raise taxes on the working class, as part of a plan to balance the budget and discipline labor. They do not see a possibility for compromise. If we do not accept, they could blow up the coalition.
 
 [? if unemployment_insurance_crisis = 2 : This is the second such ultimatum thrown by the Right. Obviously, the bourgeoisie are trying to remove us from the government. ?]
 
@@ -43,7 +43,7 @@ on-arrival: spd_in_government = 0; in_grand_coalition = 0; in_weimar_coalition =
 
 Fine. If the bourgeoisie wish to blow up the government, let them do so. Socialists will not be complicit in the destruction of the working class.
 
-[? if chancellor_party = "SPD" : Heinrich Brüning of the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?] has been appointed Chancellor. ?] Brüning now leads an all-bourgeois cabinet. Using the emergency powers of Article 48, Brüning and President Hindenburg have passed the welfare cuts over the objections of the Reichstag.
+[? if chancellor_party = "SPD" : Heinrich Brüning of the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] has been appointed Chancellor. ?] Brüning now leads an all-bourgeois cabinet. Using the emergency powers of Article 48, Brüning and President Hindenburg have passed the welfare cuts over the objections of the Reichstag.
 
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
 

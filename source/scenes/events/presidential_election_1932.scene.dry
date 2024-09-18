@@ -40,7 +40,7 @@ go-to: braun_campaign
 
 It takes effort to run a somewhat unexpected campaign. First, Braun has to be convinced to run. He himself had supported voting for Hindenburg, and it takes a good deal of prodding to convince him of his destiny.
 
-The left wing of the declining LVP will likely support us. Who else will? Can we convince the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] to support Braun? What about the Communists?
+The left wing of the declining LVP will likely support us. Who else will? Can we convince the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] to support Braun? What about the Communists?
 
 
 @support_thalmann
@@ -62,14 +62,14 @@ Fine. We have thrown our support to Chairman Thälmann of the KPD.
 
 @braun_campaign
 
-- @convince_z: Convince the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?].
+- @convince_z: Convince the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?].
 - @convince_kpd: Convince the Communists.
 - @convince_liberals: Convince the Liberals.
 - @final_election: The final vote...
 
 @convince_z
 choose-if: spd_votes >= z_votes
-unavailable-subtitle: The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] knows that they are more popular than us; they do not see a reason to support our candidate.
+unavailable-subtitle: The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] knows that they are more popular than us; they do not see a reason to support our candidate.
 on-arrival: {!
 Q.z_support_braun = 0;
 if (Q.z_relation >= 55) {
@@ -83,19 +83,19 @@ if (Q.z_relation >= 55) {
 go-to: z_failed if z_support_braun = 0 or (z_support_braun == 2 and historical_mode); z_success if z_support_braun = 1; z_partial if z_support_braun = 2 and not historical_mode
 max-visits: 1
 
-We remind the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] leaders of Hindenburg's anti-Catholicism, and try to convince them that Hindenburg's path will eventually lead to Hitler. We also remind them of the successes they've had as part of the Weimar coalition in Prussia with Otto Braun, and our support for the Center candidate Wilhelm Marx in the 1925 presidential election.
+We remind the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] leaders of Hindenburg's anti-Catholicism, and try to convince them that Hindenburg's path will eventually lead to Hitler. We also remind them of the successes they've had as part of the Weimar coalition in Prussia with Otto Braun, and our support for the Center candidate Wilhelm Marx in the 1925 presidential election.
 
 @z_success
 go-to: braun_campaign
 
-The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] are convinced! They will be part of the Braun coalition.
+The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] are convinced! They will be part of the Braun coalition.
 
 @z_partial
 
-The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] are not satisfied with our arguments, but they are open to being convinced. They are willing to run a joint campaign if we front the resources.
+The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] are not satisfied with our arguments, but they are open to being convinced. They are willing to run a joint campaign if we front the resources.
 
 - @pay_z: Give them the resources they need.
-- @braun_campaign: Forget about the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?].
+- @braun_campaign: Forget about the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?].
 
 @pay_z
 choose-if: resources >= 3
@@ -104,7 +104,7 @@ unavailable-subtitle: Not enough resources (need 3)
 on-arrival: resources -= 3; z_support_braun = 1
 go-to: braun_campaign
 
-With our resources, the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] are convinced to support Braun over Hindenburg.
+With our resources, the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] are convinced to support Braun over Hindenburg.
 
 @z_failed
 go-to: braun_campaign
@@ -280,7 +280,7 @@ There is no majority in this round. In the second round, any candidate who wins 
 
 @round2_menu
 
-- @round2_convince_z: Convince the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] to switch their support to us.
+- @round2_convince_z: Convince the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] to switch their support to us.
 - @round2_convince_kpd: Convince the KPD to switch their support to us. 
 - @round2_convince_lvp: Convince the LVP to switch their support to us. 
 - @round2_hindenburg: Switch our support to Hindenburg.
@@ -291,7 +291,7 @@ There is no majority in this round. In the second round, any candidate who wins 
 @round2_convince_z
 view-if: braun_campaign > 0 and z_support_braun != 1 
 choose-if: spd_votes >= z_votes
-unavailable-subtitle: The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] knows that they are more popular than us; they do not see a reason to support our candidate.
+unavailable-subtitle: The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] knows that they are more popular than us; they do not see a reason to support our candidate.
 on-arrival: {!
 Q.z_support_braun = 0;
 
@@ -315,14 +315,14 @@ max-visits: 1
 @r2_z_success
 go-to: round2_menu
 
-[? if hitler_support_hindenburg : The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?]'s opinion is affected by the Nazis' support of Hindenburg, and is willing to turn away from him. ?] The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] are convinced! They will be part of the Braun coalition. [? if hitler_support_hindenburg : In addition, they will also bring in some minor parties who will support us. ?]
+[? if hitler_support_hindenburg : The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?]'s opinion is affected by the Nazis' support of Hindenburg, and is willing to turn away from him. ?] The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] are convinced! They will be part of the Braun coalition. [? if hitler_support_hindenburg : In addition, they will also bring in some minor parties who will support us. ?]
 
 @r2_z_partial
 
-The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given the Nazis' support for Hindenburg. ?]. They are willing to run a joint campaign if we front the resources.
+The [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] are not satisfied with our arguments, but they are open to being convinced[? if hitler_support_hindenburg: , especially given the Nazis' support for Hindenburg. ?]. They are willing to run a joint campaign if we front the resources.
 
 - @r2_pay_z: Give them the resources they need.
-- @round2_menu: Forget about the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?].
+- @round2_menu: Forget about the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?].
 
 @r2_pay_z
 choose-if: resources >= 2
@@ -331,7 +331,7 @@ unavailable-subtitle: Not enough resources (need 2)
 on-arrival: resources -= 2; z_support_braun = 1
 go-to: round2_menu
 
-With our resources, the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?] are convinced to support Braun over Hindenburg.
+With our resources, the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?] are convinced to support Braun over Hindenburg.
 
 @r2_z_failed
 go-to: round2_menu
@@ -430,7 +430,7 @@ on-departure: z_support_braun = 0; kpd_support_braun = 0;
 
 Fine. We have thrown our support to Chairman Thälmann of the KPD.
 
-[? if z_support_braun : The [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?] is confused at our capricious behavior, and have switched their support to Hindenburg. ?]
+[? if z_support_braun : The [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] is confused at our capricious behavior, and have switched their support to Hindenburg. ?]
 [? if lvp_support_braun : The LVP is confused at our capricious behavior, and have switched their support to Hindenburg. ?]
 
 - @round2_vote: Let the second round voting begin.

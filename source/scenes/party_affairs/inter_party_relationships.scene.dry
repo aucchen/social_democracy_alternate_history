@@ -9,7 +9,7 @@ max-visits: 12
 
 = Inter-Party Relationships
 
-The SPD cannot govern by itself yet. Because we do not have an electoral majority, we need the support of other parties. Recently, our governments have consisted of the Weimar Coalition of the SPD, [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : the CVP ?], and Liberal parties. We can reach out and build additional connections with these parties, or perhaps we can stand alone.
+The SPD cannot govern by itself yet. Because we do not have an electoral majority, we need the support of other parties. Recently, our governments have consisted of the Weimar Coalition of the SPD, [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : the CVP?], and Liberal parties. We can reach out and build additional connections with these parties, or perhaps we can stand alone.
 
 - @liberals: Strengthen our bonds with the Liberal People's Party
 - @center: Strengthen our bonds with the [? if z_party_name = "Z" : Catholic Center Party ?][? if z_party_name = "CVP" : Christian People's Party ?].
@@ -50,7 +50,7 @@ go-to: center_op if z_in_government = 1 and spd_in_government = 0 and chancellor
 @center_op
 on-arrival: z_relation += 5*(1 - dissent)
 
-We are currently in opposition to the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP ?]-led government, but that does not preclude the general building of feelings of good will.
+We are currently in opposition to the [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : CVP?]-led government, but that does not preclude the general building of feelings of good will.
 
 @center_coalition
 on-arrival: z_relation += 8*(1 - dissent)

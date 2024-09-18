@@ -9,7 +9,7 @@ tags: event
 
 = Vote of No Confidence
 
-[? if in_grand_coalition : The right wing of the LVP, along with the BVP and [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : the CVP ?] ?][? if in_weimar_coalition or in_popular_front or in_minority_government: The [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP ?], along with the right LVP ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
+[? if in_grand_coalition : The right wing of the LVP, along with the BVP and [? if z_party_name = "Z" : Center ?][? if z_party_name = "CVP" : the CVP?] ?][? if in_weimar_coalition or in_popular_front or in_minority_government: The [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?], along with the right LVP ?] has called for a vote of no confidence against us, due to our various policies and disagreements. If this succeeds, there will be an election in a few months.
 
 - @try_assuage: Try to assuage our partners.
 - @support_kpd: Could we get the KPD to abstain?
