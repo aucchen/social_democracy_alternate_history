@@ -261,8 +261,8 @@ data = [
     },
     {
         "id": "z",
-        "legend": "[? if Q.z_party_name = "Z" : Center?][? if Q.z_party_name = "CVP" : CVP?]",
-        "name": "[? if Q.z_party_name = "Z" : Center?][? if Q.z_party_name = "CVP" : CVP?]",
+        "legend": "Center",
+        "name": "Center",
         "seats": (Q.z_r - 3)*5,
     },
     {
@@ -342,7 +342,7 @@ if (d3 && window) {
 
 {!<tr><td><div class="box" style='background-color:#FFCC00'> </div></td><td>!} LVP: {!</td><td>!} [+ lvp_r +]% {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#000'> </div></td><td>!} Z: {!</td><td>!} [+ z_minus_bvp_r +]% {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#000'> </div></td><td>!} [? if z_party_name = "Z" : Z?][? if z_party_name = "CVP" : CVP?]: {!</td><td>!} [+ z_minus_bvp_r +]% {!</td></tr>!}
 
 {!<tr><td><div class="box" style='background-color:#69A2BE'> </div></td><td>!} BVP: {!</td><td>!} 3% {!</td></tr>!}
 
