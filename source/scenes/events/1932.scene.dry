@@ -16,7 +16,6 @@ Q.unemployed_nsdap += 4;
 if (Q.pro_republic > 75) {
     Q.new_middle_lvp += 5;
     Q.old_middle_lvp += 5;
-    Q.rural_lvp += 3;
     Q.old_middle_nsdap -= 5;
     Q.new_middle_nsdap -= 5;
 }
