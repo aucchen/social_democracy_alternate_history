@@ -42,7 +42,7 @@ go-to: menu
 
 **Rural**: Small and large farmers and independent rural workers. Protestant farmers often support the DNVP. 20-30% of the population.
 
-[? if z_party_leader = "Stegerwald" : **Catholics** are the largest religious minority, at about 30% of the population. They have disproportionately supported the Christian People's Party (or the Bavarian People's Party in Bavaria). Although, their dominance on the Catholic voter bloc has been diminished recently due to the formation of a 'People's Party'. ?]
+[? if z_party_leader = "Stegerwald" : **Catholics** are the largest religious minority, at about 30% of the population. They have disproportionately supported the Christian People's Party (or the Bavarian People's Party in Bavaria). Although, their dominance on the Catholic voter bloc has been diminished recently due to the formation of a "People's Party". ?]
 
 [? if z_party_name = "Z" : **Catholics** are the largest religious minority, at about 30% of the population. They disproportionately support the Center Party (or the Bavarian People's Party in Bavaria). ?]
 

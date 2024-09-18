@@ -67,4 +67,4 @@ unavailable-subtitle: Not enough resources.
 view-if: peoples_party == 1 or cvp_formed == 1
 on-arrival: catholics_spd += 6*(1-dissent); catholics_spd += 6*(1-dissent) if cvp_formed = 1
 
-Catholics have historically been tied to the Center Party, but there is no reason why our party cannot appeal to them. The Prussian Concordat in particular is a sign of our friendship with Catholicism. [? if cvp_formed = 1 : However, with the rebranding of the Center Party into an inclusive 'People's party,' our campaigning among Catholics has been more effective than ever. ?]
+Catholics have historically been tied to the Center Party, but there is no reason why our party cannot appeal to them. The Prussian Concordat in particular is a sign of our friendship with Catholicism. [? if cvp_formed = 1 : However, with the rebranding of the Center Party into an inclusive "People's Party". our campaigning among Catholics has been more effective than ever. ?]
