@@ -265,7 +265,7 @@ Q.catholics_spd = 15;
 Q.catholics_kpd = 2;
 Q.catholics_z = 50;
 Q.catholics_lvp = 5;
-Q.catholics_dnvp = 5;
+Q.catholics_dnvp = 0;
 Q.catholics_nsdap = 0;
 Q.catholics_other = 12;
 
