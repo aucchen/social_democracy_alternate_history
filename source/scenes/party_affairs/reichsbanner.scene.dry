@@ -31,7 +31,7 @@ on-arrival: resources -= rb_militarization_cost; rb_investment += 1; rb_strength
 Some in our party decry the increasing militarization of the Reichsbanner. They say it is emulating the right-wing nationalists or the communists, and risks alienating our allies in the centrist parties. On the other hand, more left-leaning radicals are being lured to our organizations, away from the communists.
 
 [? if historical_mode and z_party_name = "Z" : The Center Party decries the militarization of the Reichsbanner, and its members are leaving the republican organization. ?]
-[? if historical_mode and z_party_name = "CVP" : The CVPdecries the militarization of the Reichsbanner, and its members are leaving the republican organization. ?]
+[? if historical_mode and z_party_name = "CVP" : The CVP decries the militarization of the Reichsbanner, and its members are leaving the republican organization. ?]
 
 @militant_2
 view-if: funded_reichsbanner >= 1
