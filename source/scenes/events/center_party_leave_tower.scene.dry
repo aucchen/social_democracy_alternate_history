@@ -11,7 +11,7 @@ new-page: true
 
 The Center Party has recently announced its decision to officially reform the party to accept all Christians, including Protestants. The party was renamed to the Christian People's Party and seek to appeal to all Germans, above social classes.
 
-It is certain that the consequences of this historic move will prompt a drastic re-alignment of Weimar politics. For us, new competition has emerged for our working class base through Christian trade unions. [? if peoples_party == 0 : This event has also sparked internal debates for whether we should become a People's party too. ?]
+It is certain that the consequences of this historic move will prompt a drastic re-alignment of Weimar politics. For us, new competition has emerged for our working class base through Christian trade unions. [? if peoples_party == 0 : This event has also sparked internal debates for whether we should become a "People's Party" too. ?]
 
 - @stegerwald: The Center Party elects Adam Stegerwald as the party chair.
 
