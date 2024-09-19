@@ -12,10 +12,10 @@ if (Q.works_program && Q.works_program >= 2) {
     Q.workers_lvp += 4;
     Q.old_middle_nsdap -= 5;
     Q.new_middle_nsdap -= 5;
-    Q.old_middle_others -= 5;
-    Q.new_middle_others -= 5;
+    Q.old_middle_other -= 5;
+    Q.new_middle_other -= 5;
     Q.rural_other -= 5;
-    Q.catholics_others -= 5
+    Q.catholics_other -= 5
 }
 if (Q.old_demographics) {
     Q.catholics_z += 5;
