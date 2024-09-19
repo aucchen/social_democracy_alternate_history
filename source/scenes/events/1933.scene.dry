@@ -4,13 +4,16 @@ on-arrival: {!
 if (Q.works_program && Q.works_program >= 2) {
     Q.unemployed -= 1;
     Q.inflation += 1
-} if (Q.pro_republic > 75 && Q.unemployed < 20) {
-    Q.new_middle_lvp += 10;
-    Q.old_middle_lvp += 10;
-    Q.old_middle_nsdap -= 10;
-    Q.new_middle_nsdap -= 10;
-    Q.old_middle_others -= 10;
-    Q.new_middle_others -= 10;
+} if (Q.pro_republic > 75 && Q.unemployed < 15) {
+    Q.new_middle_lvp += 15;
+    Q.old_middle_lvp += 15;
+    Q.rural_lvp += 10;
+    Q.catholics_lvp += 4;
+    Q.workers_lvp += 4;
+    Q.old_middle_nsdap -= 5;
+    Q.new_middle_nsdap -= 5;
+    Q.old_middle_others -= 5;
+    Q.new_middle_others -= 5;
     Q.rural_other -= 5;
     Q.catholics_others -= 5
 }
