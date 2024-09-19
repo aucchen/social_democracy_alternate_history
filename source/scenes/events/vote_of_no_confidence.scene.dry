@@ -46,8 +46,8 @@ on-arrival: resources -= 3; coalition_dissent -= 1;
 By transferring resources to our coalition partners, we can reduce their dissent against our policies. This is a crude, but effective solution.
 
 @support_kpd
-choose-if: (in_grand_coalition and communist_coalition >= 3 and kpd_relation >= 50 and kpd_r >= lvp_r*0.5) or (in_weimar_coalition and kpd_relation >= 50 and kpd_r >= z_r and communist_coalition >= 3)
-unavailable-subtitle: [? if communist_coalition < 3 : The KPD won't take part in parliamentary government. ?] [? if kpd_relation < 50 : The KPD is not friendly enough with us. ?] [? if (in_grand_coalition and kpd_r < lvp_r) or (in_weimar_coalition and kpd_r < z_r): The KPD does not have enough votes. ?] [? if in_popular_front : We are already in a Popular Front with the KPD. ?]
+choose-if: (in_grand_coalition and communist_coalition >= 3 and kpd_relation >= 50 and kpd_r >= z_r) or (in_weimar_coalition and kpd_relation >= 50 and kpd_r >= z_r and communist_coalition >= 3)
+unavailable-subtitle: [? if communist_coalition < 3 : The KPD won't take part in parliamentary government. ?] [? if kpd_relation < 50 : The KPD is not friendly enough with us. ?] [? if (in_grand_coalition and kpd_r < z_r) or (in_weimar_coalition and kpd_r < z_r): The KPD does not have enough votes. ?] [? if in_popular_front : We are already in a Popular Front with the KPD. ?]
 
 If the Communists abstain, then we essentially can maintain a minority government[? if president=="Hindenburg":, although it would be very difficult to make policy without the support of President Hindenburg, which we do not have ?]. If this happens, then we will own a massive debt to the KPD. This could lead to broader cooperation in the future, for better or for worse.
 
