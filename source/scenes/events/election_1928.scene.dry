@@ -856,7 +856,7 @@ on-arrival: leverage += 10; in_weimar_coalition = 1; spd_in_government = 1; in_p
 achievement: weimar_coalition
 go-to: weimar_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 30) or president = "Braun"; weimar_coalition_z_lead if president != "Braun" and ((n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD"))
 
-We have enough votes to form a "Weimar Coalition" government consisting of the SPD, [? if z_party_name = "Z" : Center(Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?] and Liberal People's (LVP) parties! This has been our preferred governing coalition.
+We have enough votes to form a "Weimar Coalition" government consisting of the SPD, [? if z_party_name = "Z" : Center (Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?] and Liberal People's (LVP) parties! This has been our preferred governing coalition.
 
 Who should be the chancellor?
 
@@ -870,7 +870,7 @@ Who should be the chancellor?
 @weimar_coalition_z_lead
 go-to: weimar_coalition_z_lead_2 if lvp_relation and z_relation >= 35; weimar_coalition_failed if lvp_relation < 35 or z_relation < 35
 
-There are enough votes to form a majority coalition consisting of the SPD, [? if z_party_name = "Z" : Center(Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], and the Liberal People's Party (LVP). Given our rather weak electoral performance, [? if spd_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_spd = 1 : and the vote of no confidence against us, ?] President Hindenburg has asked the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] to take the lead role in forming a government.
+There are enough votes to form a majority coalition consisting of the SPD, [? if z_party_name = "Z" : Center (Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], and the Liberal People's Party (LVP). Given our rather weak electoral performance, [? if spd_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_spd = 1 : and the vote of no confidence against us, ?] President Hindenburg has asked the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] to take the lead role in forming a government.
 
 @weimar_coalition_z_lead_2
 
@@ -915,7 +915,7 @@ go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD")
 @grand_coalition_z_lead
 go-to: grand_coalition_z_lead_2 if lvp_relation and z_relation >= 35; grand_coalition_fail if lvp_relation < 35 or z_relation < 35
 
-There are enough votes to form a majority coalition consisting of the SPD, [? if z_party_name = "Z" : Center(Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], Bavarian People's (BVP) and the Liberal People's Party (LVP). Given our rather weak electoral performance, [? if spd_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_spd = 1 : and the vote of no confidence against us, ?] President Hindenburg has asked the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] to take the lead role in forming a government.
+There are enough votes to form a majority coalition consisting of the SPD, [? if z_party_name = "Z" : Center (Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], Bavarian People's (BVP) and the Liberal People's Party (LVP). Given our rather weak electoral performance, [? if spd_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_spd = 1 : and the vote of no confidence against us, ?] President Hindenburg has asked the [? if z_party_name = "Z" : Center Party ?][? if z_party_name = "CVP" : CVP?] to take the lead role in forming a government.
 
 # TODO: if the SPD participated in bringing down the previous government via a vote-of-no-confidence, or if we were essentially removed from government by our coalition partners, we should be more reluctant to participate in a new government.
 
@@ -1094,7 +1094,7 @@ As expected, the right LVP is too set in their anti-democratic ways.
 @grand_coalition_spd_lead
 on-arrival: leverage -= 15 if lvp_relation < 35 or z_relation < 35
 
-As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President [+ president +] has asked us to form a majority coalition with the [? if z_party_name = "Z" : Center(Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], Bavarian People's (BVP), and the Liberal People's Party (LVP).
+As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President [+ president +] has asked us to form a majority coalition with the [? if z_party_name = "Z" : Center (Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], Bavarian People's (BVP), and the Liberal People's Party (LVP).
 
 [? if lvp_relation < 35 or z_relation < 35 : As our relation with our more right-wing coalition partners are poor, they are demanding more minister posts in order to remain part of the coalition. ?]
 
@@ -1109,7 +1109,7 @@ Who should be the chancellor?
 @weimar_coalition_spd_lead
 on-arrival: leverage -= 10 if lvp_relation < 35 or z_relation < 35
 
-As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President [+ president +] has asked us to form a majority coalition with the [? if z_party_name = "Z" : Center(Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], Bavarian People's (BVP), and the Liberal People's Party (LVP).
+As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President [+ president +] has asked us to form a majority coalition with the [? if z_party_name = "Z" : Center (Z) ?][? if z_party_name = "CVP" : Christian People's (CVP) ?], Bavarian People's (BVP), and the Liberal People's Party (LVP).
 
 [? if lvp_relation < 35 or z_relation < 35 : As our relation with our more right-wing coalition partners are poor, they are demanding more minister posts in order to remain part of the coalition. ?]
 
