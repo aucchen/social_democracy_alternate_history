@@ -23,7 +23,7 @@ The SPD runs a veritable media empire, with many newspapers throughout every Ger
 @commercial
 title: Make our newspapers more commercialized by broadening their appeal beyond party supporters.
 subtitle: This might upset ideological purists, but it may bring in more funds and perhaps expose the middle class to socialist views.
-on-arrival: resources += 1; commercialized_media += 1; new_middle_spd += 4*(1 - dissent); old_middle_spd += 3*(1-dissent); left_dissent += 10; labor_dissent += 10
+on-arrival: resources += 1; commercialized_media += 1; new_middle_spd += 4*(1 - dissent); old_middle_spd += 3*(1-dissent); left_dissent += 10; labor_dissent += 10; pro_republic += 2;
 
 Our commercialized newspapers are able to bring in more funds. However, the left and labor factions express their displeasure.
 
