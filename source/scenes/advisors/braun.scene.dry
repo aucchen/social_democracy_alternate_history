@@ -21,7 +21,7 @@ choose-if: advisor_action_timer <= 0 and (spd_prussia or in_weimar_coalition or 
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if not spd_prussia : The SPD does not control the Prussian government. ?]
 on-arrival: advisor_action_timer = 6; coalition_dissent -= 1 if spd_in_government = 1; z_relation += 6; lvp_relation += 4;
 
-We have improved our relations with the [? if in_grand_coalition : [? if z_party_name = "Z" : Center (Zentrum) ?][? if z_party_name = "CVP" : Christian People's Party (CVP) ?], and the Liberal People's Party (LVP) ?][? if not in_grand_coalition: [? if z_party_name = "Z" : Center (Zentrum) ?][? if z_party_name = "CVP" : Christian People's Party (CVP) ?], and the Liberal People's Party (LVP) ?] and reduced tensions with the coalition.
+We have improved our relations with the [? if in_grand_coalition : [? if z_party_name = "Z" : Center (Zentrum) ?][? if z_party_name = "CVP" : Christian People's Party (CVP)?], and the Liberal People's Party (LVP) ?][? if not in_grand_coalition: [? if z_party_name = "Z" : Center (Zentrum) ?][? if z_party_name = "CVP" : Christian People's Party (CVP)?], and the Liberal People's Party (LVP) ?] and reduced tensions with the coalition.
 
 @prussian_bulwark
 title: The Prussian Bulwark
