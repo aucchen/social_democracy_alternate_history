@@ -95,7 +95,7 @@ Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
 // Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
 Q.hitler_right_coalition = Q.z_r + Q.dnvp_r + Q.nsdap_r;
 // Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
-Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.ddp_r;
+Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.ddp_r + Q.sapd_r;
 
 Q.leverage = Q.spd_r;
 
@@ -289,12 +289,12 @@ There are some potential coalition arrangements.
 - @grand_coalition
 - @new_grand_coalition
 - @unity_government
-- @right_coalition
 - @far_right_coalition
 - @no_majority
 - @brauns_dilemma
 - @left_coalition
 - @popular_front_coalition
+- @right_coalition
 
 # TODO: black-brown coalition
 
@@ -503,24 +503,33 @@ In response to the KPD's entrance into the government, the right-wing immediatel
 
 
 
-
 @right_coalition
-title: A right-wing coalition may be formed.
+title: Refuse to form a government, so that a right-wing coalition may be formed.
 subtitle: Z + BVP + DVP + DNVP + Others ([+ right_coalition +]%)
 unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
 view-if: right_coalition >= 50
 choose-if: year < 1929
-go-to: no_right_coalition if year >= 1930; right_coalition_2 if year <= 1929
 
-There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties.
+There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties. [? if largest_party == "SPD": However, this will be seen as abdicating responsibility for government, as we are the largest party. ?]
+
+- @right_coalition_sure: Yes, we will abdicate our responsibility for government formation, and let a right-wing coalition take power.
+- @grand_coalition: Actually, we wish to form a grand coalition after all.
 
 @no_right_coalition
 go-to: no_majority
 
 However, the DNVP and its leader Hugenberg is refusing to partake in a coalition with the "November criminals" in the Center Party. Thus, there is no clear path towards a Reichstag majority.
 
+@right_coalition_sure
+subtitle: This will be extremely unpopular within our party.
+on-arrival: pro_republic -= 5; center_dissent += 15; left_dissent += 10; labor_dissent += 25; reformist_dissent += 25; neorevisionist_dissent += 15; z_relation -= 5; ddp_relation -= 5; dvp_relation -= 5
+go-to: right_coalition_2
+
 
 @right_coalition_2
+unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
+view-if: right_coalition >= 50
+choose-if: year < 1929
 on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
 
 Even though the DNVP is very reluctant to participate in such a coalition, they still accede to President Hindenburg's wishes. Thus, a majority center-right coalition is formed, with Brüning as chancellor.
@@ -1021,7 +1030,7 @@ Unfortunately, the DVP and BVP are unwilling to enter into another coalition wit
 
 - @no_majority: Thus, there is no clear majority.
 - @brauns_dilemma
-- @right_coalition: Perhaps a right-wing coalition may form.
+- @right_coalition_2: Perhaps a right-wing coalition may form.
 - @beg_dvp: Perhaps we could ask the DVP to change their minds?
 - @unity_government
 - @coalition_menu: What are the other governing arrangements?
@@ -1163,11 +1172,11 @@ go-to: no_govt_2
 
 @no_govt_2
 on-arrival: reformist_dissent += 25; center_dissent += 10; labor_dissent += 25; neorevisionist_dissent += 25; in_weimar_coalition = 0; in_grand_coalition = 0; chancellor = "Brüning" if chancellor == "Marx"; spd_in_government = 0; grand_coalition_failed = 1
-go-to: right_coalition_post_spd if right_coalition >= 50 and president != "Braun"; new_elections_spd if right_coalition < 50 and president != "Braun"; brauns_dilemma if president == "Braun"
+go-to: right_coalition_post_spd if right_coalition >= 50 and president != "Braun" and year < 1929; new_elections_spd if (right_coalition < 50 or year >= 1929) and president != "Braun"; brauns_dilemma if president == "Braun"
 
 
 @right_coalition_post_spd
-go-to: right_coalition
+go-to: right_coalition_2
 
 @new_elections_spd
 on-arrival: next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; new_middle_spd -= 5; old_middle_spd -= 5; workers_spd -= 3; catholics_spd -= 3; in_election = 1

@@ -336,7 +336,10 @@ v0.17 - Conciliators and the SAPD
 Major changes:
 - The SAPD is introduced as a new party that receives Reichstag seats when both the Left and Center resign.
 - Internal manipulations of the KPD - scheming can allow the Conciliator faction to take over the KPD, making the party more friendly to the SPD and coalitions. This is a chain of events beginning with the Wittorf Affair, a scandal involving Ernst Thälmann of the KPD, as well as foreign relations with the Soviet Union.
-- New achievements: Versöhnler - have the conciliators take over the KPD; Große Volksfront - form a Popular Front with both Joos as Zentrum leader and the Conciliators as the KPD leaders.
+- New achievements: Versöhnler - have the conciliators take over the KPD; Große Volksfront - form a Popular Front with both Joos as Zentrum leader and the Conciliators as the KPD leaders; Katholischer Sozialismus - have over 50% support from Catholics.
+- Added two new pieces of music.
+- In order to build relations with the KPD, the SPD might have to face a reckoning with its own history.
+- A right-wing coalition in 1928 is possible.
 
 Minor changes:
 - Neorevisionism is more likely to be seen.
@@ -344,3 +347,7 @@ Minor changes:
 - In general, more uses for Joos as Zentrum leader.
 - The type of coalition is shown in the status sidebar.
 - A number of smaller tweaks.
+
+Backend changes:
+- updated dendrynexus version - now there is a `call:` scene attribute that allows another scene's `on-arrival:` to be called essentially as a function.
+
