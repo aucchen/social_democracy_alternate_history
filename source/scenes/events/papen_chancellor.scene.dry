@@ -1,6 +1,6 @@
 title: Chancellor [+ chancellor +] replaced by Franz von Papen
 subtitle: President Hindenburg dismisses the government.
-view-if: (chancellor = "Brüning" or chancellor = "Wirth") and ((year = 1932 and month >= 4) or year >= 1933) and president = "Hindenburg" and spd_in_government = 0 and (spd_r < 27 or unemployed > 15 or grand_coalition < 50 or largest_party == "NSDAP") and not presidential_powers
+view-if: (chancellor = "Brüning" or chancellor = "Wirth") and ((year = 1932 and month >= 4) or year >= 1933) and president = "Hindenburg" and spd_in_government = 0 and (unemployed > 18 or grand_coalition < 50 or largest_party == "NSDAP") and not presidential_powers
 on-arrival: old_chancellor = chancellor; spd_toleration = 0; chancellor = "Papen"; chancellor_party = "I"; next_election_time = time+3 if next_election_time >= time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; judicial_reform -= 2 if judicial_reform >= 2; finance_minister_party = "I"; interior_minister_party = "I"; economy_minister_party = "I"; labor_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "I"; reichswehr_minister = "I";
 new-page: true
 tags: event
