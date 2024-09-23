@@ -12,6 +12,7 @@ set-jump: pres_election
 @pres_election
 
 The presidential election is coming up soon. [? if spd_in_government = 0 : While the position of Chancellor is typically more important, recent governments have depended on the president's emergency decree powers, making the office vital. ?] [? if hitler_deported==0 : The Nazis will run Hitler, while the KPD will run Thälmann. A victory for Hitler would mean the end of parliamentary democracy, and the beginning of an era of unspeakable horrors. ?][? if hitler_deported==1 : Since Hitler has been deported, the Nazis will run Hermann Göring in his stead. He is widely seen as a proxy for Hitler, who, despite his legal persecution, retains a popular base who wishes to see him returned to Germany. Meanwhile, the KPD will run Ernst Thälmann. ?]
+[? if sapd_formed: The SAPD, our former leftists, are supporting Thälmann of the KPD, and will likely share an endorsement with the Communists. ?]
 
 # if hitler is deported, who would nsdap run? Duesterberg? or Goering?
 # Goering runs, essentially as a proxy for Hitler, who is now stateless.
@@ -19,6 +20,7 @@ The presidential election is coming up soon. [? if spd_in_government = 0 : While
 Many are calling for us to support the incumbent Hindenburg, despite his well-known reactionary tendencies. Is he truly the best bulwark against Hitler's ascension? On the other hand, many in our party are calling for Otto Braun to run again, but he is reluctant.
 
 [? if kpd_relation >= 50 : Another strange possibilty is an united front with the Communists, either to support Thälmann or our own candidate. ?]
+
 
 - @support_hindenburg: Support Hindenburg.
 - @support_braun: Run Otto Braun of the SPD.
@@ -72,7 +74,7 @@ choose-if: spd_votes >= z_votes
 unavailable-subtitle: The Center knows that they are more popular than us; they do not see a reason to support our candidate.
 on-arrival: {!
 Q.z_support_braun = 0;
-if (Q.z_relation >= 55) {
+if (Q.z_relation >= 55 || (Q.z_relation > 35 && Q.z_party_leader == "Joos")) {
     Q.z_support_braun = 1;
 } else if (Q.z_relation <= 35) {
     Q.z_support_braun = 0;
@@ -116,7 +118,7 @@ choose-if: spd_votes >= kpd_votes
 unavailable-subtitle: The KPD knows that they are more popular than us; they do not see a reason to support our candidate.
 max-visits: 1
 
-The KPD is supporting their own candidate, Ernst Thälmann. [? if kpd_relation >= 50 : However, they are willing to be convinced to drop their campaign and support Braun; how do we convince them? ?][? if kpd_relation < 50 : They do not seem willing to be convinced. ?]
+The KPD is supporting their own candidate, Ernst Thälmann. [? if kpd_relation >= 50 : However, they are willing to be convinced to drop their campaign and support Braun; how do we convince them? ?][? if kpd_relation < 50 or kpd_party_leader != "Conciliators" : They do not seem willing to be convinced. ?]
 
 - @kpd_resources: Use our resources.
 - @kpd_relations: Use our good relations.
@@ -133,7 +135,7 @@ go-to: braun_campaign
 The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
 
 @kpd_relations
-view-if: kpd_relation >= 60
+view-if: kpd_relation >= 60 or (kpd_party_leader == "Conciliators" and kpd_relation >= 45)
 unavailable-subtitle: Our relations are not good enough.
 on-arrival: kpd_support_braun = 1
 go-to: braun_campaign
@@ -190,8 +192,14 @@ if (Q.braun_campaign) {
     }
     if (Q.kpd_support_braun) {
         Q.braun_votes += Q.kpd_votes;
+        if (Q.sapd_formed && Q.sapd_votes) {
+            Q.braun_votes += Q.sapd_votes;
+        }
     } else {
         Q.thalmann_votes += Q.kpd_votes;
+        if (Q.sapd_formed && Q.sapd_votes) {
+            Q.thalmann_votes += Q.sapd_votes;
+        }
     }
     if (Q.dvp_support_braun) {
         Q.braun_votes += Q.dvp_votes;
@@ -277,7 +285,7 @@ unavailable-subtitle: The Center knows that they are more popular than us; they 
 on-arrival: {!
 Q.z_support_braun = 0;
 
-if (Q.z_relation >= 55) {
+if (Q.z_relation >= 55 || (Q.z_relation > 35 && Q.z_party_leader == "Joos")) {
     Q.z_support_braun = 1;
     if (Q.hitler_support_hindenburg) {
         Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
@@ -346,7 +354,7 @@ go-to: round2_menu
 The KPD now endorses Braun in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
 
 @r2_kpd_relations
-view-if: kpd_relation >= 60
+view-if: kpd_relation >= 60 or (kpd_party_leader == "Conciliators" and kpd_relation >= 45)
 unavailable-subtitle: Our relations are not good enough.
 on-arrival: kpd_support_braun = 1
 go-to: round2_menu

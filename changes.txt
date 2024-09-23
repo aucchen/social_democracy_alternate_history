@@ -329,3 +329,18 @@ As with many other major changes, there are a number of bugs introduced here...
 - On the electoral threshold reform, it is mentioned that a plurality in an electoral district would bypass the threshold requirement, so that the BVP can remain.
 - Radio is somewhat less effective later in the game.
 - Changes to KPD coalition events if a constructive VONC reform is passed.
+
+
+v0.17 - Conciliators and the SAPD
+
+Major changes:
+- The SAPD is introduced as a new party that receives Reichstag seats when both the Left and Center resign.
+- Internal manipulations of the KPD - scheming can allow the Conciliator faction to take over the KPD, making the party more friendly to the SPD and coalitions. This is a chain of events beginning with the Wittorf Affair, a scandal involving Ernst Thälmann of the KPD, as well as foreign relations with the Soviet Union.
+- New achievements: Versöhnler - have the conciliators take over the KPD; Große Volksfront - form a Popular Front with both Joos as Zentrum leader and the Conciliators as the KPD leaders.
+
+Minor changes:
+- Neorevisionism is more likely to be seen.
+- Can pay to campaign to support Joos as Zentrum leader.
+- In general, more uses for Joos as Zentrum leader.
+- The type of coalition is shown in the status sidebar.
+- A number of smaller tweaks.

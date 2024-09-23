@@ -33,7 +33,7 @@ Reichstag composition:
 
 # 1928: 30, 1930: 25, 1932: 22
 SPD: [+ spd_r +]%
-[? if sapd_formed and sapd_r > 0 : SAPD: [+ sapd_r +]% ?]
+[? if sapd_formed and sapd_r > 0: SAPD: [+ sapd_r +]% ?]
 # 1928: 15, 1930: 15, 1932: 
 Z + BVP: [+ z_r +]%
 # 1928: 10, 1930: 13
@@ -128,7 +128,7 @@ Prussian police loyalty: [+ prussian_police_loyalty : loyalty +]
 
 SPD: [+ spd_votes +]%
 
-[? if sapd_formed: [+ sapd_votes +]% ?]
+[? if sapd_formed: SAPD: [+ sapd_votes +]% ?]
 
 Z + BVP: [+ z_votes +]%
 

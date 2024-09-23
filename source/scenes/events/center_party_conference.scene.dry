@@ -15,6 +15,7 @@ The consensus candidate on the right is Ludwig Kaas, a Catholic priest who repre
 
 - @kaas: The Center Party elects Ludwig Kaas as the party chair.
 - @joos: Influence the Center Party to select Joseph Joos as the party chair.
+- @joos_campaign: We must hold a campaign in support of Joseph Joos as party chair.
 
 @kaas
 on-arrival: z_party_leader = "Kaas"; z_relation -= 5
@@ -28,3 +29,11 @@ choose-if: z_relation >= 70
 on-arrival: z_party_leader = "Joos"; catholics_spd += 5; workers_z += 3
 
 With our grassroots connections, we have been able to influence the Center delegates to support Joseph Joos as the new Center chairman. He has long been a friend of the SPD, and will be more inclined to collaborate with us compared to Kaas. He also increases the appeal of the Center Party to the working class.
+
+@joos_campaign
+choose-if: z_relation >= 65 and resources >= 1 
+unavailable-subtitle: [? if z_relation <= 65 : Our relations are not good enough. ?] [? if resources < 1 : We do not have enough resources. ?]
+subtitle: -1 resource. Joos is likely to be friendlier to us than Kaas.
+on-arrival: resources -= 1; z_party_leader = "Joos"; catholics_spd += 5; workers_z += 3
+
+With our grassroots connections as well as a professional campaign, we have been able to influence the Center delegates to support Joseph Joos as the new Center chairman. He has long been a friend of the SPD, and will be more inclined to collaborate with us compared to Kaas. He also increases the appeal of the Center Party to the working class.

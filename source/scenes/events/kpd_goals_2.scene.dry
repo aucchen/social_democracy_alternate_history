@@ -1,6 +1,6 @@
 title: The KPD presents its list of goals for the coalition.
 view-if: (in_popular_front = 1 or in_left_front = 1) and kpd_goals_seen = 0 and kpd_coalition_success = 1 and next_election_time - time > 12 and spd_in_government
-on-arrival: kpd_goals_seen = 1; agriculture_goal = 1; economy_goal = 1; labor_goal = 1; foreign_goal = 1; welfare_goal = 0; finance_goal = 0; kpd_ultimatum_timer = 16; kpd_ultimatum_timer = 20 if kpd_relation >= 60; kpd_ultimatum_timer = next_election_time - time - 1 if next_election_time - time <= 12;
+on-arrival: kpd_goals_seen = 1; agriculture_goal = 1; economy_goal = 1; labor_goal = 1; foreign_goal = 1; welfare_goal = 0; finance_goal = 0; kpd_ultimatum_timer = 16; kpd_ultimatum_timer = 20 if kpd_relation >= 60; kpd_ultimatum_timer = 24 if kpd_party_leader == "Conciliators"; kpd_ultimatum_timer = next_election_time - time - 1 if next_election_time - time <= 12;
 new-page: true
 tags: event
 
