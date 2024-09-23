@@ -1,6 +1,6 @@
 title: 1930
 subtitle: A new year 
-audio: clear shuffle music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1930_1933/Internationale-de_normalized.ogg music/1930_1933/ironfront_normalized.mp3 music/1930_1933/KommSusserTod.mp3 music/1930_1933/Warszawianka.mp3
+audio: clear shuffle music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1930_1933/Internationale-de_normalized.ogg music/1930_1933/ironfront_normalized.mp3 music/1930_1933/KommSusserTod.mp3 music/1930_1933/Warszawianka.mp3 music/Liebesleid_normalized.mp3
 on-arrival: {!
 // increase NSDAP vote share 
 Q.unemployed += 8; 
@@ -13,8 +13,8 @@ Q.rural_nsdap += 15;
 Q.rural_dnvp -= 15;
 Q.new_middle_dvp -= 5;
 Q.old_middle_dvp -= 5;
-Q.new_middle_ddp -= 10;
-Q.old_middle_ddp -= 10;
+Q.new_middle_ddp -= 5;
+Q.old_middle_ddp -= 5;
 Q.new_middle_nsdap += 10; 
 Q.old_middle_nsdap += 15;
 Q.new_middle_other += 5;

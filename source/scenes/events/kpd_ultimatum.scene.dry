@@ -1,5 +1,5 @@
 title: The KPD checks upon our progress in accomplishing the coalition's goals...
-view-if: (in_popular_front or in_left_front) and kpd_ultimatum_timer = 0 and kpd_goals_seen = 1 and kpd_ultimatum_seen = 0 and spd_in_government
+view-if: (in_popular_front or in_left_front) and (kpd_ultimatum_timer = 0 or (welfare_goal_completed and agriculture_goal_completed and economy_goal_completed and finance_goal_completed and labor_goal_completed and reichswehr_goal_completed)) and kpd_goals_seen = 1 and kpd_ultimatum_seen = 0 and spd_in_government
 on-arrival: {!
 Q.kpd_ultimatum_seen = 1;
 Q.kpd_goals_completed = 1;

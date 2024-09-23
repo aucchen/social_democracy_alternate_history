@@ -314,6 +314,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP. ?]
 
+[? if game_achievement_grosse_volksfront: **Große Volksfront** - With Joos leading the Center Party and the Conciliators leading the KPD, form a government consisting of the SPD, KPD, Z, and DDP. ?]
+
 [? if game_achievement_volksfront_2: **Sieg für die Volksfront** - Form a Popular Front that survives the KPD demands. ?]
 
 [? if game_achievement_constitutional_coalition: **Verfassungskoalition** - form a "constitutional coalition". ?]
@@ -327,6 +329,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if game_achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
 [? if game_achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
+
+[? if game_achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
 [? if game_achievement_deport_hitler : **Der österreichische Gefreiter** - deported Hitler ?]
 
@@ -401,6 +405,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP. ?]
 
+[? if achievement_grosse_volksfront: **Große Volksfront** - With Joos leading the Center Party and the Conciliators leading the KPD, form a government consisting of the SPD, KPD, Z, and DDP. ?]
+
 [? if achievement_volksfront_2: **Sieg für die Volksfront** - Form a Popular Front that survives the KPD demands. ?]
 
 [? if achievement_constitutional_coalition: **Verfassungskoalition** - form a "constitutional coalition". ?]
@@ -414,6 +420,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
 [? if achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
+
+[? if achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
 [? if achievement_deport_hitler : **Der österreichische Gefreiter** - deported Hitler ?]
 
@@ -486,6 +494,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_volksfront: **Volksfront** - Form a government consisting of the SPD, KPD, Z, and DDP. ?]
 
+[? if not achievement_grosse_volksfront: **Große Volksfront** - With Joos leading the Center Party and the Conciliators leading the KPD, form a government consisting of the SPD, KPD, Z, and DDP. ?]
+
 [? if not achievement_volksfront_2: **Sieg für die Volksfront** - Form a Popular Front that survives the KPD demands. ?]
 
 [? if not achievement_constitutional_coalition: **Verfassungskoalition** - form a "constitutional coalition". ?]
@@ -499,6 +509,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
 [? if not achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
+
+[? if not achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
 [? if not achievement_deport_hitler : **Der österreichische Gefreiter** - deported Hitler ?]
 

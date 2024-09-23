@@ -84,12 +84,12 @@ The Communist RFB is no longer banned.
 
 @negotiate_concordat
 view-if: prussian_concordat_progress < 1
-on-arrival: prussian_concordat_progress += 1
+on-arrival: prussian_concordat_progress += 1; z_relation += 2*(1-dissent);
 
 We are making progress towards negotiating a concordat between Prussia and the Catholic church.
 
 @sign_concordat
 view-if: prussian_concordat_progress >= 1 and prussian_concordat = 0
-on-arrival: prussian_concordat = 1; z_relation += 5; catholics_spd += 2
+on-arrival: prussian_concordat = 1; z_relation += 5; catholics_spd += 3*(1-dissent)
 
 We have signed a Concordat between the Free State of Prussia and the Roman Catholic Church, guaranteeing religious freedom for Catholics in Prussia. This sets the stage for the negotiation of a national Concordat covering all of Germany.

@@ -1,0 +1,2 @@
+title: next election time
+on-arrival: next_election_time = time+time_to_election if next_election_time >= time+time_to_election; next_election_month = month + 3 if next_election_time >= time+time_to_election; next_election_year = year if next_election_time >= time+time_to_election; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; 

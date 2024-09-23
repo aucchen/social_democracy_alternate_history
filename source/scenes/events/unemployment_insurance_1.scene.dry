@@ -39,7 +39,10 @@ But the crux of the matter is, what can we do?
 - @compromise: Surely there is some compromise to be had?
 
 @destroy
-on-arrival: spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; budget += 1; inflation -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; spd_no_confidence = 1; pro_republic -= 4; old_middle_spd -= 3; new_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 2
+call: set_next_election_time
+on-arrival: time_to_election = 3; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; budget += 1; inflation -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DDP"; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; spd_no_confidence = 1; pro_republic -= 4; old_middle_spd -= 3; new_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 2
+
+# TODO: if Braun is president, don't do this...
 
 Fine. If the bourgeoisie wish to blow up the government, let them do so. Socialists will not be complicit in the destruction of the working class.
 

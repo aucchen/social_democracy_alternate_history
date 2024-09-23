@@ -88,3 +88,14 @@ Let the factions bicker; perhaps dissent is healthy for the party.
 title: Expel the dissident reformists.
 view-if: reformist_dissent > 30
 
+@expel_left
+title: Expel the dissident leftists.
+view-if: left_dissent > 30
+
+@expel_center
+title: Expel the centrists.
+view-if: center_dissent > 30
+
+@expel_labor
+title: Expel the labor supporters.
+view-if: labor_dissent > 30

@@ -2,7 +2,7 @@ title: Young Plan
 new-page: true
 subtitle: A new agreement on reparations
 tags: event
-view-if: year = 1929 and month >= 7
+view-if: year = 1929 and month >= 7 and in_right_coalition = 0 and young_plan_seen = 0
 on-arrival: young_plan_seen = 1
 max-visits: 1
 
