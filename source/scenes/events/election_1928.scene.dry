@@ -894,12 +894,12 @@ We have won the vote of no confidence, and are currently ruling under an SPD min
 
 @weimar_coalition
 title: We can form a Weimar Coalition.
-subtitle: SPD + Z + DDP ([+ weimar_coalition +]%)
+subtitle: SPD + Z + DDP [? if sapd_formed and kpd_r >= 30 : + SAPD toleration ?] ([+ weimar_coalition +]%)
 view-if: weimar_coalition >= 50
-on-arrival: leverage += 10 if z_party_leader == "Joos"; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0
+on-arrival: leverage += 5; leverage += 5 if z_party_leader == "Joos"; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0
 achievement: weimar_coalition
 
-We have enough votes to form a "Weimar Coalition" government consisting of the SPD, Center (Z) and Democratic (DDP) parties! This has been our preferred governing coalition.
+We have enough votes to form a "Weimar Coalition" government consisting of the SPD, Center (Z) and Democratic (DDP) parties! This has been our preferred governing coalition since 1919.
 
 Who should be the chancellor?
 
@@ -908,6 +908,7 @@ Who should be the chancellor?
 - @breitscheid_coalition_chancellor
 - @wels
 - @z_chancellor
+- @z_chancellor_wirth
 
 @breitscheid_coalition_chancellor
 title: Rudolf Breitscheid for Chancellor
@@ -1091,6 +1092,7 @@ Who should be the chancellor?
 - @braun
 - @wels
 - @z_chancellor
+- @z_chancellor_wirth
 - @no_govt
 
 
@@ -1133,14 +1135,24 @@ We have promised to let the Center have more influence in the government in resp
 
 
 @z_chancellor
-title: Let the Center party have their chancellor.
-subtitle: This is unexpected and will cause internal dissent, but may give us a better position in negotiating for other cabinet positions.
+title: Let the Center Party have their chancellor.
+subtitle: Heinrich Brüning will be chancellor. This is unexpected and will cause internal dissent, but may give us a better position in negotiating for other cabinet positions.
 on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; z_relation += 10; dvp_relation += 5; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0; chancellor = "Brüning"; chancellor_party = "Z"; spd_in_government = 1; leverage += 5
 go-to: ministries
 
 This is highly unexpected, and many in the left and center of our party are criticizing this decision.
 
-Since Wilhelm Marx resigned, Heinrich Brüning has been appointed chancellor.
+[? if year == 1928 : Since Wilhelm Marx resigned, Heinrich Brüning has been appointed chancellor. ?]
+[? if year > 1928: Heinrich Brüning of the Center Party has been appointed chancellor. ?]
+
+@z_chancellor_wirth
+title: Let Joseph Wirth of the Center Party be chancellor.
+view-if: z_party_leader == "Joos"
+subtitle: Wirth is on the left wing of the Center Party. This may give us a better position in negotiating for other cabinet positions.
+on-arrival: left_dissent += 2; z_relation += 6; ddp_relation += 3; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0; chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 1; leverage += 5
+go-to: ministries
+
+
 
 
 @no_govt

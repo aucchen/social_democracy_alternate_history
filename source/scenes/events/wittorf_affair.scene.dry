@@ -1,7 +1,7 @@
 title: Wittorf Affair
 subtitle: A crisis in the KPD?
 new-page: true
-view-if: kpd_relation >= 35 and comintern_seen and year = 1928 and month >= 8 and month <= 10
+view-if: kpd_relation >= 30 and comintern_seen and year = 1928 and month >= 8 and month <= 10
 max-visits: 1
 on-arrival: wittorf_affair_seen = 1
 tags: event
