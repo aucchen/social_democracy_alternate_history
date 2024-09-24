@@ -351,3 +351,12 @@ Minor changes:
 Backend changes:
 - updated dendrynexus version - now there is a `call:` scene attribute that allows another scene's `on-arrival:` to be called essentially as a function.
 
+v0.17.1 - Conciliators, Wirth, Coalitions
+
+Changes:
+- Clarified right-wing coalition formation in the 1928 elections.
+- Slightly easier to form a Popular Front when Joos is Zentrum leader or the Conciliators are the KPD leaders
+- Threshold for seeing the Wittorf Affair slightly decreased
+- Fixed bug where foreign affairs option for the Wittorf Affair could only be seen in 1929.
+- Displaying KPD coalition dissent when the KPD is in the coalition.
+- More SAPD vote share displays in the polls.
