@@ -6,5 +6,5 @@
 (0.31..0.41) mostly disloyal
 (0.41..0.54) divided
 (0.54..0.71) mostly loyal
-(0.71..99) generally loyal
-(99..) completely loyal
+(0.71..0.99) generally loyal
+(0.99..) completely loyal

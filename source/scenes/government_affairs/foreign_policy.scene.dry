@@ -80,7 +80,7 @@ on-arrival: kpd_relation += 8*(1-dissent); communist_coalition += 1 if kpd_forei
 We also mention the KPD in our conversations with the Soviet ambassador. They claim that the KPD is entirely independent of the Soviet government, and that the conflict is Thälmann's doing. But, soon after our conversation we notice a slight improvement in attitudes from the KPD.
 
 @wittorf
-view-if: wittorf_secret = 1 and year <= 1929 and month < 6 and wittorf_soviet_union = 0
+view-if: wittorf_secret = 1 and ((year = 1929 and month < 6) or year = 1928) and wittorf_soviet_union = 0
 choose-if: historical_mode = 0
 unavailable-subtitle: It is impossible that Stalin and the Comintern could be moved on their policy.
 on-arrival: wittorf_soviet_union = 1; kpd_relation += 6*(1-dissent); kpd_foreign_seen = 1
