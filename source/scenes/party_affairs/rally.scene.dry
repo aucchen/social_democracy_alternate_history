@@ -26,8 +26,7 @@ go-to: main_rally
 The police successfully protected our rally, so it can go ahead as usual.
 
 @police_protect_lose
-on-arrival: strife += 1
-on-arrival: workers_nsdap += 3
+on-arrival: strife += 1; workers_nsdap += 3
 
 Unfortunately, the police were unable or unwilling to hold back the SA mob. The Nazis have won this show of strength.
 
