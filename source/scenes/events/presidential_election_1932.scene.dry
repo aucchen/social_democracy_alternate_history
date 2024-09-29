@@ -178,50 +178,50 @@ Q.hitler_votes = 0;
 Q.thalmann_votes = 0;
 
 // initial phase:
-Q.hitler_votes += Q.nsdap_votes;
-Q.hindenburg_votes += Q.other_votes;
-Q.hindenburg_votes += Q.dnvp_votes;
+Q.hitler_votes += Q.nsdap_normalized;
+Q.hindenburg_votes += Q.other_normalized;
+Q.hindenburg_votes += Q.dnvp_normalized;
 
 if (Q.braun_campaign) {
-    Q.braun_votes += Q.spd_votes;
-    Q.braun_votes += Q.ddp_votes;
+    Q.braun_votes += Q.spd_normalized;
+    Q.braun_votes += Q.ddp_normalized;
     if (Q.z_support_braun && Q.z_support_braun == 1) {
-        Q.braun_votes += Q.z_votes;
+        Q.braun_votes += Q.z_normalized;
     } else {
-        Q.hindenburg_votes += Q.z_votes;
+        Q.hindenburg_votes += Q.z_normalized;
     }
     if (Q.kpd_support_braun) {
-        Q.braun_votes += Q.kpd_votes;
+        Q.braun_votes += Q.kpd_normalized;
         if (Q.sapd_formed && Q.sapd_votes) {
-            Q.braun_votes += Q.sapd_votes;
+            Q.braun_votes += Q.sapd_normalized;
         }
     } else {
-        Q.thalmann_votes += Q.kpd_votes;
+        Q.thalmann_votes += Q.kpd_normalized;
         if (Q.sapd_formed && Q.sapd_votes) {
-            Q.thalmann_votes += Q.sapd_votes;
+            Q.thalmann_votes += Q.sapd_normalized;
         }
     }
     if (Q.dvp_support_braun) {
-        Q.braun_votes += Q.dvp_votes;
+        Q.braun_votes += Q.dvp_normalized;
     } else {
-        Q.hindenburg_votes += Q.dvp_votes;
+        Q.hindenburg_votes += Q.dvp_normalized;
     }
 } else if (Q.spd_support_thalmann) {
-    Q.thalmann_votes += Q.kpd_votes;
-    Q.thalmann_votes += Q.spd_votes;
-    Q.hindenburg_votes += Q.z_votes;
-    Q.hindenburg_votes += Q.ddp_votes;
-    Q.hindenburg_votes += Q.dvp_votes;
+    Q.thalmann_votes += Q.kpd_normalized;
+    Q.thalmann_votes += Q.spd_normalized;
+    Q.hindenburg_votes += Q.z_normalized;
+    Q.hindenburg_votes += Q.ddp_normalized;
+    Q.hindenburg_votes += Q.dvp_normalized;
 } else {
-    Q.hindenburg_votes += Q.spd_votes;
-    Q.hindenburg_votes += Q.z_votes;
-    Q.hindenburg_votes += Q.ddp_votes;
-    Q.hindenburg_votes += Q.dvp_votes;
-    Q.thalmann_votes += Q.kpd_votes;
+    Q.hindenburg_votes += Q.spd_normalized;
+    Q.hindenburg_votes += Q.z_normalized;
+    Q.hindenburg_votes += Q.ddp_normalized;
+    Q.hindenburg_votes += Q.dvp_normalized;
+    Q.thalmann_votes += Q.kpd_normalized;
 }
 if (Q.hitler_support_hindenburg) {
-    Q.hitler_votes -= Q.nsdap_votes;
-    Q.hindenburg_votes += Q.nsdap_votes;
+    Q.hitler_votes -= Q.nsdap_normalized;
+    Q.hindenburg_votes += Q.nsdap_normalized;
 }
 
 if (Q.hindenburg_to_braun_bonus) {
@@ -234,6 +234,11 @@ if (Q.thalmann_to_braun_bonus) {
 }
 
 // check for majority
+Q.hindenburg_votes = Math.round(Q.hindenburg_votes*100);
+Q.braun_votes = Math.round(Q.braun_votes*100);
+Q.hitler_votes = Math.round(Q.hitler_votes*100);
+Q.thalmann_votes = Math.round(Q.thalmann_votes*100);
+
 Q.hindenburg_majority = (Q.hindenburg_votes >= 50);
 Q.thalmann_majority = (Q.thalmann_votes >= 50);
 Q.hitler_majority = (Q.hitler_votes >= 50);
@@ -284,16 +289,17 @@ choose-if: spd_votes >= z_votes
 unavailable-subtitle: The Center knows that they are more popular than us; they do not see a reason to support our candidate.
 on-arrival: {!
 Q.z_support_braun = 0;
+// TODO: if Hindenburg support is greater than Hitler and Braun support, this should be much harder
 
-if (Q.z_relation >= 55 || (Q.z_relation > 35 && Q.z_party_leader == "Joos")) {
+if ((Q.z_relation >= 55 && Q.braun_votes >= Q.hindenburg_votes) || (Q.z_relation > 35 && Q.z_party_leader == "Joos")) {
     Q.z_support_braun = 1;
     if (Q.hitler_support_hindenburg) {
-        Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
+        Q.hindenburg_to_braun_bonus += Q.other_normalized/2;
     }
 } else if (Q.z_relation >= 50 && Q.hitler_support_hindenburg) {
     Q.z_support_braun = 1;
-    Q.hindenburg_to_braun_bonus += Math.round(Q.other_votes/2);
-} else if (Q.z_relation <= 35) {
+    Q.hindenburg_to_braun_bonus += Q.other_normalized/2;
+} else if (Q.z_relation <= 35 || (Q.z_relation <= 45 && Q.braun_votes < Q.hindenburg_votes && Q.hindenburg_votes > Q.hitler_votes)) {
     Q.z_support_braun = 0;
 } else {
     Q.z_support_braun = 2;
@@ -326,7 +332,7 @@ With our resources, the Center are convinced to support Braun over Hindenburg.
 @r2_z_failed
 go-to: round2_menu
 
-Unfortunately, we fail to turn them away from Hindenburg.
+Unfortunately, we fail to turn them away from Hindenburg. [? if hindenburg_votes > braun_votes : Given that Hindenburg received more votes than Braun, they believe that we should turn to Hindenburg, not the other way around. ?]
 
 
 

@@ -17,7 +17,7 @@ The Nazi SA has disrupted our rally! Their street troops are preventing us from 
 
 @police_protect
 view-if: spd_prussia == 1
-on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength - sa_militancy*sa_strength;
+on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - sa_militancy*sa_strength;
 go-to: police_protect_win if police_protect_success >= 0; police_protect_lose if police_protect_success < 0
 
 @police_protect_win
@@ -26,12 +26,13 @@ go-to: main_rally
 The police successfully protected our rally, so it can go ahead as usual.
 
 @police_protect_lose
+on-arrival: strife += 1
 on-arrival: workers_nsdap += 3
 
 Unfortunately, the police were unable or unwilling to hold back the SA mob. The Nazis have won this show of strength.
 
 @rb_protect
-on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy;
+on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy; strife += 1
 go-to: rb_protect_win if rb_success >= 0; rb_protect_lose if rb_success < 0
 
 @rb_protect_win

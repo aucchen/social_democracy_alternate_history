@@ -9,7 +9,9 @@ Herein contains relevant information about the government and politics of the Ge
 
 @menu
 
-- @government: Government
+- @government: Germany's system of government
+- @weimar_timeline: Timeline of the Weimar Republic before 1928
+- @curr_gov: Current government details
 - @demographics: Demographics
 - @parties: Parties
 - @public_opinion: Public opinion (and projected election results)
@@ -28,6 +30,93 @@ The Reichstag is elected based on a proportional representation system, giving p
 The President is elected by a national direct vote, in two rounds. The second round is used if the first round does not result in a majority for one candidate; the candidate who receives a plurality in the second round becomes president (there is no obligation for weaker candidates to drop out). The role of the president is mostly to represent Germany, but he also has some crucial governing powers. The president and chancellor can together use emergency decrees to govern, bypassing the Reichstag. The president can also appoint or remove a chancellor when a parliamentary majority is unable to be established, and can thus influence the formation of a government.
 
 Germany is divided into a number of states, each of which have their own governments with some responsibilities. By far the largest and most important state is Prussia.
+
+@weimar_timeline
+go-to: menu
+
+= Timeline of the SPD and the Republic (until 1928)
+
+**1875**: The SPD is formed as a merger of the General German Workers' Association, founded by Ferdinand Lassalle, and the Social Democratic Workers' Party of Germany, led by Wilhelm Liebknecht and August Bebel. Eventually, the SPD grows to become the largest party in the German Empire.
+
+**1914**: The Great War begins. The SPD votes in favor of war credits, with substantial internal dissent. This begins a policy of *Burgfriedenspolitik*, a general peace between all political parties and trade unions.
+
+**1917**: The USPD, a left-wing anti-war split from the SPD, is formed.
+
+**1918**: Following defeats in the war and uprisings by soldiers, sailors, and workers, SPD leader Philip Scheidemann proclaims the German Republic, and Kaiser Wilhelm II abdicates from his throne. An armistice is declared, ending the Great War. Conflict between center-left social democrats and far-left radicals erupts in the streets of Berlin and elsewhere.
+
+**1919**: The Spartacist Uprising, in which communist workers attempt to seize control of government, is launched. The uprising is defeated by the Social Democratic government, now led by President Friedrich Ebert and Chancellor Philipp Scheidemann, with the support of the far-right Freikorps militas. The two key leaders of the uprising, Rosa Luxemburg and Karl Liebknecht, are murdered by the Freikorps. The Treaty of Versailles is signed under great protest from all political factions in Germany, officially ending the Great War. The Weimar Constitution is signed. The first "Weimar Coalition" government is formed, led by the SPD, DDP, and Center (Z) parties.
+
+**1920**: The Kapp Putsch, an attempt by reactionary actors within the military to take power, is launched, and is defeated by the workers with a general strike. This is followed by left-wing uprisings in the Ruhr, which are defeated by the Reichswehr and Freikorps. The Weimar Coalition is defeated in the elections, with the right and far left increasing in vote share. Elected governments in this period are very unstable, often only lasting a matter of months. There is a split in the USPD, with the majority faction joining with the KPD and the Soviet Union's Communist International (Comintern) alliance.
+
+**1921**: Communist uprisings in Saxony and Hamburg are defeated. Matthias Erzberger, the Center Party leader who signed the Versailles Treaty, is assassinated.
+
+**1922**: Walther Rathenau, the DDP Foreign Minister, is assassinated. The SPD reunites with most of the remaining USPD.
+
+**1923**: Hyperinflation begins, largely due to the economic policy of "passive resistance" against the French occupation of the Ruhr and the Versailles reparations. The currency is rapidly devalued as prices for necessities rise to billions of Reichsmarks. The government launches a *Reichsexekution* against Saxony, which was led by a joint SPD-KPD government. The Nazi "Beer Hall Putsch" is launched in Munich, and fails, with the arrest of Hitler. Eventually, new policies manage to stabilize the currency, and the French occupation ends.
+
+**1924**: Parliamentary elections are held in May and December, the latter leading to the bourgeois-right governments that last until 1928. Germany begins to enter a period of relative stability, with the end of the hyperinflation crisis. Hitler is released from prison.
+
+**1925**:  President Friedrich Ebert dies, and new presidential elections are held, leading to the narrow election of Paul von Hindenburg in the second round. Hindenburg is a war hero and a right-wing reactionary. The SPD adopts the Heidelberg Program as its party platform. 
+
+**1926**: A referendum on the expropriation of the princes, supported by the SPD and KPD, fails.
+
+@curr_gov
+go-to: cabinet if spd_in_government; menu if not spd_in_government
+
+= Current Government
+
+President: [+ president +]
+
+Chancellor: [+ chancellor +] ([+ chancellor_party +])
+
+Reichstag composition:
+
+# 1928: 30, 1930: 25, 1932: 22
+SPD: [+ spd_r +]%
+[? if sapd_formed and sapd_r > 0: SAPD: [+ sapd_r +]% ?]
+# 1928: 15, 1930: 15, 1932: 
+Z + BVP: [+ z_r +]%
+# 1928: 10, 1930: 13
+KPD: [+ kpd_r +]%
+# 1928: 5, 1930: 4 (as DstP)
+DDP: [+ ddp_r +]%
+# 1928: 9, 1930: 5
+DVP: [+ dvp_r +]%
+# 1928: 14, 1930: 7
+DNVP: [+ dnvp_r +]%
+# 1928: 3, 1930: 18
+NSDAP: [+ nsdap_r +]%
+# 1928: 9, 1930: 10
+Others: [+ other_r +]%
+
+SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in government - ?][? if spd_toleration == 0 and spd_in_government == 0 and spd_caretaker == 0 : opposition ?][? if spd_caretaker : caretaker government ?]
+[? if in_weimar_coalition and spd_in_government: Weimar Coalition ?][? if in_grand_coalition and spd_in_government: Grand Coalition ?][? if in_popular_front and spd_in_government: Popular Front ?][? if in_left_front and spd_in_government: Left Front ?][? if in_spd_majority and spd_in_government: SPD majority ?][? if in_minority_government and spd_in_government: minority government ?][? if in_emergency_government and spd_in_government: emergency government ?]
+
+[? if spd_in_government and not in_spd_majority and not in_left_front : Coalition dissent: [+ coalition_dissent : coalition_dissent +] ?]
+
+[? if spd_in_government and (in_left_front or in_popular_front): KPD coalition dissent: [+ kpd_coalition_dissent : coalition_dissent +] ?]
+
+@cabinet
+go-to: menu
+
+Current cabinet:
+
+Labor: [+ labor_minister_party +]
+
+Interior: [+ interior_minister_party +]
+
+Finance: [+ finance_minister_party +]
+
+Economic: [+ economic_minister_party +]
+
+Justice: [+ justice_minister_party +]
+
+Foreign: [+ foreign_minister_party +]
+
+Reichswehr: [+ reichswehr_minister_party +]
+
+Agriculture: [+ agriculture_minister_party +]
+
 
 @demographics
 go-to: menu
