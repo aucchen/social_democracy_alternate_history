@@ -3,6 +3,7 @@ subtitle: A political question
 tags: event, govt_affairs
 is-card: true
 on-arrival: panzerkreuzer_seen = 1
+face-image: img/panzerkreuzer.jpg
 view-if: panzerkreuzer_seen = 0 and year = 1928 and month >= 8 and reichswehr_minister_party != "SPD" and spd_in_government = 1
 
 = Panzerkreuzer
