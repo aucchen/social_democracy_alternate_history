@@ -378,15 +378,17 @@ a.card:focus .card-tooltip, a.card:hover .card-tooltip {
 .face-figure {
   /*vertical-align: top;*/
   display: inline-block;
-  /*border: 10px solid #ccc;*/
+  border: 5px solid #ccc;
   float: left;
-  max-width: 33%;
+  max-width: 35%;
   /*max-height: 180px;*/
   margin-right: 1em;
   margin-bottom: 0.5em;
+  overflow: hidden;
 }
 .face-img {
   /*max-width: 150px;*/
+  vertical-align: bottom;
   object-fit: cover;
 }
 

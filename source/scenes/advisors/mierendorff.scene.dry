@@ -2,9 +2,9 @@ title: Carlo Mierendorff
 is-pinned-card: true
 tags: advisor
 card-image: img/portraits/MierendorffCarlo.jpg
-face-image: img/portraits/MierendorffCarlo.jpg
 view-if: mierendorff_advisor = 1
 new-page: true
+#face-image: img/portraits/MierendorffCarlo.jpg
 
 = Carlo Mierendorff
 

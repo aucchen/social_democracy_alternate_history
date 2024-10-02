@@ -221,7 +221,7 @@
   console.log("Modifying stats: see dendryUI.dendryEngine.state.qualities");
 
   window.onload = function() {
-    window.dendryUI.loadSettings();
+    window.dendryUI.loadSettings({show_portraits: false});
     window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months.";
   };
 

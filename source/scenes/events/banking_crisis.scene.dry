@@ -5,6 +5,7 @@ on-arrival: banking_crisis_seen = 1; workers_kpd += 5; workers_nsdap += 3; new_m
 tags: event
 view-if: customs_union = 1 and banking_crisis_timer = 0
 max-visits: 1
+face-image: img/danat_bank.jpg
 
 = Banking Crisis
 

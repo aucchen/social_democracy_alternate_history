@@ -8,6 +8,7 @@ on-arrival: braun_campaign = 0; hitler_support_hindenburg = 0; presidential_elec
 tags: event
 go-to: election_algorithm
 set-jump: pres_election
+face-image: img/hindenburg_election.jpg
 
 @pres_election
 

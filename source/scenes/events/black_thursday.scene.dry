@@ -5,6 +5,7 @@ on-arrival: black_thursday_seen = 1; workers_kpd += 10; workers_nsdap += 5; unem
 tags: event
 view-if: year = 1929 and month >= 10
 max-visits: 1
+face-image: img/bankrun.jpg
 
 = Black Thursday
 

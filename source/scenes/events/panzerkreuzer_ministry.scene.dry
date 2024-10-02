@@ -4,6 +4,8 @@ tags: event, govt_affairs
 is-card: true
 on-arrival: panzerkreuzer_seen = 1
 view-if: panzerkreuzer_seen = 0 and year = 1928 and month >= 8 and reichswehr_minister_party = "SPD" and spd_in_government = 1
+new-page: true
+face-image: img/panzerkreuzer.jpg
 
 = Panzerkreuzer
 

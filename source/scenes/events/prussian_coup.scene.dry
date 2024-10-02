@@ -5,6 +5,7 @@ on-arrival: prussian_coup_seen = 1
 new-page: true
 tags: event
 max-visits: 1
+face-image: img/Reichswehr.jpg
 
 = Coup in Prussia
 

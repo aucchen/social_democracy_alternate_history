@@ -3,7 +3,7 @@ new-page: true
 view-if: year = 1929 and month >= 11 and spd_in_government = 1 and finance_minister = "Hilferding" and finance_minister_party = "SPD"
 tags: event
 max-visits: 1
-card-image: img/portraits/SchachtHjalmar.jpg
+face-image: img/portraits/SchachtHjalmar.jpg
 
 = Schacht against Hilferding
 
