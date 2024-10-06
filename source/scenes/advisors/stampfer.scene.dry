@@ -40,28 +40,28 @@ Which faction should we support?
 - @support_neorev: Neorevisionists
 
 @support_left
-on-arrival: left_dissent -= 6; left_strength += 5
+on-arrival: left_dissent -= 8; left_strength += 8
 
 Vorwärts prints editorials in support of Left positions.
 
 @support_center
-on-arrival: center_dissent -= 6; center_strength += 5
+on-arrival: center_dissent -= 8; center_strength += 8
 
 Vorwärts prints editorials in support of centrist positions.
 
 @support_labor
-on-arrival: labor_dissent -= 6; labor_strength += 5
+on-arrival: labor_dissent -= 8; labor_strength += 8
 
 Vorwärts prints editorials in support of the policies of the trade unions.
 
 @support_reform
-on-arrival: reformist_dissent -= 6; reformist_strength += 5;
+on-arrival: reformist_dissent -= 8; reformist_strength += 8;
 
 Vorwärts prints editorials in support of the reformist policies.
 
 @support_neorev
 view-if: neorevisionism
-on-arrival: neorevisionist_dissent -= 6; neorevisionist_strength += 5
+on-arrival: neorevisionist_dissent -= 8; neorevisionist_strength += 8
 
 Vorwärts prints editorials in support of neorevisionist ideas.
 

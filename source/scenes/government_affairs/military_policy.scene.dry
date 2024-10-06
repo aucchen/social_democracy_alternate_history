@@ -28,7 +28,7 @@ The military and the center-right parties are pleasantly surprised that we would
 subtitle: +1 budget
 unavailable-subtitle: There is nothing left to cut.
 choose-if: reichswehr_strength > 0
-on-arrival: budget += 1; coalition_dissent += 1 if in_grand_coalition == 1; dvp_relation -= 8; reichswehr_militancy -= 1; reichswehr_strength -= 20; sh_strength += 10; sa_strength += 10; sh_militancy += 0.05; reichswehr_loyalty -= 0.05 if reichswehr_loyalty > 0; coup_progress += 1; coup_progress += 1 if reichswehr_loyalty < 0.2; coup_progress += 1 if reichswehr_loyalty < 0.1; reichswehr_goal_completed = 1;
+on-arrival: budget += 1; coalition_dissent += 1 if in_grand_coalition == 1; dvp_relation -= 8; reichswehr_militancy -= 1; reichswehr_strength -= 20; sh_strength += 10; sa_strength += 10; sh_militancy += 0.05; reichswehr_loyalty -= 0.05 if reichswehr_loyalty > 0; coup_progress += 1; coup_progress += 1 if reichswehr_loyalty < 0.2; coup_progress += 1 if reichswehr_loyalty <= 0.1; reichswehr_goal_completed = 1;
 
 The military has fewer guns and fewer soldiers. There is no hint of a coup yet, but we do not know where the line will be drawn. The center-right parties are committed to the military and deeply opposed to our budget cuts.
 
