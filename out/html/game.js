@@ -32,6 +32,15 @@
         window.dendryUI.dendryEngine.goToScene('library');
     }
   };
+
+  window.showMods = function() {
+    window.hideOptions();
+    if (window.dendryUI.dendryEngine.state.sceneId.startsWith('mod_loader')) {
+        window.dendryUI.dendryEngine.goToScene('backSpecialScene');
+    } else {
+        window.dendryUI.dendryEngine.goToScene('mod_loader');
+    }
+  };
   
   window.showOptions = function() {
       var save_element = document.getElementById('options');
