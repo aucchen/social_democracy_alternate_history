@@ -360,3 +360,22 @@ Changes:
 - Fixed bug where foreign affairs option for the Wittorf Affair could only be seen in 1929.
 - Displaying KPD coalition dissent when the KPD is in the coalition.
 - More SAPD vote share displays in the polls.
+
+v0.18 - Event images, mod loader
+
+Major changes:
+- Event images are added! These are currently disabled by default, but can be enabled in the options menu. I find that while playing online, there's a bit of lag in loading the images, so they're disabled by default for now, but they should look better in one of the downloaded versions.
+- Mod loader: This uses the target mod's `game.json` file, and the base game's music and images.
+- Curated mod list: If you want to add a mod, send a pull request adding a line to `mod_list.tsv` at https://github.com/aucchen/social_democracy_mods.
+- New event: Exodus from the Reichsbanner (high militarization leads to Center and DDP exit from the Reichsbanner).
+- New achievement: Klassenkampf (high worker support, low middle-class support)
+
+Minor changes:
+- UI change for the options menu
+- various tweaks to effects and thresholds
+- Wirth is an option for chancellor after the death of Müller if Joseph Joos is the Zentrum leader.
+- Defunding the Reichswehr increases coup progress more, and increases paramilitary strength.
+
+
+Backend changes:
+- a bunch of dendrynexus updates for event images (called `face-image` in the code).
