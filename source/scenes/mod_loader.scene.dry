@@ -8,6 +8,7 @@ var table = document.createElement('table');
 table.style.border = '1px solid';
 table.style['border-collapse'] = 'collapse';
 table.style['font-size'] = '0.8em';
+Q.mods_table = {};
 fetch(mods_url)
 .then(response => response.text())
 .then(text => {
@@ -27,9 +28,16 @@ fetch(mods_url)
             td.style.border = '1px solid';
             td.style.padding = '0.5em';
             td.textContent = line_data[j];
-            if (j == 2) {
-            }
+
             tr.appendChild(td);
+        }
+        if (i > 0) {
+            Q.mods_table[line_data[2]] = {
+                name: line_data[0],
+                author: line_data[1],
+                description: line_data[3],
+            };
+
         }
         table.appendChild(tr);
     }
@@ -40,6 +48,14 @@ fetch(mods_url)
 var submit = document.getElementById('submit');
 submit.onclick = function() {
     var mod_url = document.getElementById('mod_url').value;
+    // if it's a known mod, set the game's titlebar and author.
+    if (Q.mods_table[mod_url]) {
+        var mod_data = Q.mods_table[mod_url];
+        var title = document.getElementById('game-title');
+        title.textContent = mod_data.name;
+        var author = document.getElementById('game-author');
+        author.textContent = mod_data.author;
+    }
     window.loadMod(mod_url);
 };
 !}
