@@ -3,7 +3,7 @@ subtitle: Right-wing militants are taking action...
 view-if: (spd_in_government = 1 and coup_progress >= 10 and year >= 1930 and (sa_banned=0 or sh_banned=0)) or (year >= 1933 and month >= 2 and nsdap_normalized + dnvp_normalized >= 0.5)
 new-page: true
 max-visits: 1
-on-arrival: march_on_berlin_seen = 1; sa_strength += 80; sh_strength += 80
+on-arrival: march_on_berlin_seen = 1; sa_strength += 80; sh_strength += 80; strife += 1
 go-to: ask_resign if spd_in_government and president != "Braun"; govt_menu if president = "Braun"; non_govt_menu if spd_in_government = 0 and president != "Braun"
 tags: event
 

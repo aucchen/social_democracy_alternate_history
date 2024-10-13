@@ -47,7 +47,7 @@ As part of the Iron Front, we are increasing coordination between the Reichsbann
 
 @prussian_police_training
 view-if: spd_prussia == 1 and prussian_police_loyalty > 0.5
-on-arrival: rb_militancy += 0.05; sa_strength += 50; 
+on-arrival: rb_militancy += 0.05; sa_strength += 50; prussian_police_training += 1
 
 The loyal sections of the Prussian police can help train the Reichsbanner.
 

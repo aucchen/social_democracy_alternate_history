@@ -13,6 +13,7 @@ The Nazi SA has disrupted our rally! Their street troops are preventing us from 
 
 - @police_protect: Call the police to protect our rally.
 - @rb_protect: Use the Reichsbanner to protect our rally.
+- @both_protect: The police and Reichsbanner should work together to protect our rally.
 - @cancel: Cancel the rally.
 
 @police_protect
@@ -37,12 +38,30 @@ go-to: rb_protect_win if rb_success >= 0; rb_protect_lose if rb_success < 0
 @rb_protect_win
 go-to: main_rally
 
-The Reichsbanner has successfully protected our rally against the SA! Our meeting can go head as usual.
+The Reichsbanner has successfully protected our rally against the SA! Our meeting can go ahead as usual.
 
 @rb_protect_lose
 on-arrival: workers_nsdap += 3; rb_strength -= 50
 
 Unfortunately, the Reichsbanner was not able to hold back the SA mob. The Nazis have won this show of strength.
+
+@both_protect
+view-if: spd_prussia
+choose-if: prussian_police_training > 0
+unavailable-subtitle: The loyal sections of the police have never coordinated with the Reichsbanner before.
+on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy + prussian_police_loyalty*prussian_police_militancy*prussian_police_strength*2; strife += 1
+go-to: both_protect_win if rb_success >= 0; both_protect_lose if rb_success < 0
+
+@both_protect_win
+go-to: main_rally
+
+The police and Reichsbanner have successfully protected our rally against the SA! Our meeting can go ahead as usual.
+
+@both_protect_lose
+on-arrival: workers_nsdap += 3; rb_strength -= 50
+
+Unfortunately, the police and Reichsbanner were not able to hold back the SA mob. The Nazis have won this show of strength.
+
 
 @cancel
 on-arrival: workers_nsdap += 3;
