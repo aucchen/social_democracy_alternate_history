@@ -300,7 +300,7 @@ if ((Q.z_relation >= 55 && Q.braun_votes >= Q.hindenburg_votes) || (Q.z_relation
 } else if (Q.z_relation >= 50 && Q.hitler_support_hindenburg) {
     Q.z_support_braun = 1;
     Q.hindenburg_to_braun_bonus += Q.other_normalized/2;
-} else if (Q.z_relation <= 35 || (Q.z_relation <= 45 && Q.braun_votes < Q.hindenburg_votes && Q.hindenburg_votes > Q.hitler_votes)) {
+} else if (Q.z_relation <= 35 || (Q.z_relation <= 45 && Q.braun_votes < Q.hindenburg_votes && Q.hindenburg_votes > Q.hitler_votes && Q.difficulty >= 0)) {
     Q.z_support_braun = 0;
 } else {
     Q.z_support_braun = 2;

@@ -379,3 +379,14 @@ Minor changes:
 
 Backend changes:
 - a bunch of dendrynexus updates for event images (called `face-image` in the code).
+
+
+v0.18.1 - Cabinets, protecting rallies, mod loading, difficulties
+
+Changes:
+
+- Changing some of the default names and party assignments for the Weimar Coalition, so that you don't get DVP ministers.
+- There is an option to use both the police and Reichsbanner to protect rallies, after using the Prussian police to train the Reichsbanner.
+- When loading a mod, the game title and author are set to the title and author of the mod.
+- Conciliators are no longer disabled in historical mode.
+- There is a new hidden variable, "strife", that increases when there is streetfighting or other conflict. It doesn't have a lot of uses yet...

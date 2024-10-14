@@ -7,7 +7,7 @@ tags: event
 max-visits: 1
 face-image: img/portraits/PapenFranz.jpg
 
-President Hindenburg's secretive group of advisors (often called the "camarilla") has turned against [+ old_chancellor +], and Hindenburg his dismissed the Chancellor, replacing him with the more reactionary Franz von Papen, an independent formerly of the Center Party. [? if year == 1932 and old_chancellor == "Brüning": Brüning's final straw was his "agricultural settlement" policy, sending unemployed workers to homestead in underutilized lands (that happen to be owned by aristocrats). ?] [? if strife > 6 : Seeing the chaos that has gripped the country, Hindenburg's advisors seem to believe that the country needs stronger, more authoritarian rulers. ?]
+President Hindenburg's secretive group of advisors (often called the "camarilla") has turned against [+ old_chancellor +], and Hindenburg his dismissed the Chancellor, replacing him with the more reactionary Franz von Papen, an independent formerly of the Center Party. [? if year == 1932 and old_chancellor == "Brüning": Brüning's final straw was his "agricultural settlement" policy, sending unemployed workers to homestead in underutilized lands (that happen to be owned by aristocrats). ?] [? if strife > 6 : Seeing the chaos that has gripped the country, Hindenburg's advisors seem to believe that the country needs stronger, more authoritarian rulers, and they see Papen as that kind of ruler. ?]
 
 Papen is immediately faced with a vote of no confidence, given his unpopularity. However the SPD votes, he is guaranteed to fall, due to the unanimous hatred against him from all other parties. Meanwhile, he is governing via emergency powers with Hindenburg. His first policy is to legalize the Nazi SA, but this does not win their loyalty.
 
