@@ -13,35 +13,7 @@ if (Q.works_program && Q.works_program > 1) {
     Q.unemployed -= 2;
     Q.inflation += 2;
 }
-Q.catholics_z += 5;
-Q.rural_dvp -= 5;
-Q.old_middle_dvp -= 5;
-Q.new_middle_dvp -= 5;
-Q.old_middle_ddp -= 10;
-Q.new_middle_ddp -= 10;
-Q.sa_strength += 50;
-Q.sh_strength += 50;
-Q.sa_militancy += 0.1;
-Q.old_middle_nsdap += 5;
-Q.rural_nsdap += 5;
-// TODO: economic policies should reduce NSDAP rurals
-if (!Q.works_program) {
-    Q.workers -= 5;
-    Q.unemployed_nsdap += 8;
-    Q.rural_nsdap += 10; 
-    Q.new_middle_nsdap += 10; 
-    Q.old_middle_nsdap += 10;
-    Q.workers_nsdap += 5;
-    Q.workers_kpd += 5;
-    Q.sa_strength += 100;
-    Q.sh_strength += 50;
-    Q.crisis_urgency += 1;
-} else if (Q.unemployed > 15) {
-    Q.unemployed_nsdap += 4;
-    Q.old_middle_nsdap += 4;
-    Q.new_middle_nsdap += 4;
-    Q.rural_nsdap += 4;
-}
+// moved demographic changes to post_event
 !}
 tags: event
 view-if: year = 1931 and month = 1 

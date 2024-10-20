@@ -5,33 +5,10 @@ on-arrival: {!
 // increase NSDAP vote share 
 Q.unemployed += 8; 
 Q.inflation -= 4;
-if (Q.old_demographics) {
-    Q.catholics += 3;
-    Q.catholics_z += 3;
-}
-Q.rural_nsdap += 15; 
-Q.rural_dnvp -= 15;
-Q.new_middle_dvp -= 5;
-Q.old_middle_dvp -= 5;
-Q.new_middle_ddp -= 5;
-Q.old_middle_ddp -= 5;
-Q.new_middle_nsdap += 10; 
-Q.old_middle_nsdap += 15;
-Q.new_middle_other += 5;
-Q.old_middle_other += 5;
-Q.unemployed_nsdap += 7;
-Q.rural_other += 5;
-Q.workers_other += 5;
-Q.workers_kpd += 3;
-Q.workers_z += 3;
-Q.old_middle_z += 2;
-Q.new_middle_z += 2;
-Q.workers_nsdap += 3;
-Q.sa_strength += 100;
-Q.sh_strength += 100;
 if (Q.budget > 0) {
     Q.budget -= 1;
 }
+// moved demographic changes to post_event
 !}
 tags: event
 view-if: year = 1930 and month = 1 
