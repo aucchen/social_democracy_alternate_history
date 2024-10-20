@@ -10,7 +10,9 @@ tags: govt_affairs
 
 The Judiciary is one of the most reactionary components of the government, along with the military. Many jurists have held office since the days of the Emperor. They give violent fascists like Adolf Hitler laughably light sentences, while ruthlessly persecuting leftists and pacifists for lesser crimes.
 
-There is great demand in our membership for reforming the judiciary, although this may bring us into a collision course with our coalition allies.
+[? if judicial_reform <= 0 : There is great demand in our membership for reforming the judiciary, although this may bring us into a collision course with our coalition allies. ?]
+[? if judicial_reform == 1 : We have started on the path to judicial reform. While some of the most antideluvian and biased justices have been replaced, many still remain. More should be done. ?]
+[? if judicial_reform >= 2 : We have successfully reformed the judiciary, to some extent. At the very least, the courts will not actively obstruct our attempts to prosecute crimes committed by the far-right. ?]
 
 - @reform: Carry out substantial judicial reforms,
 - @minor_reforms: Carry out minor judicial reforms.

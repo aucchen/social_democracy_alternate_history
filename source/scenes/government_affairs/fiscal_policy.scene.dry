@@ -5,16 +5,26 @@ tags: govt_affairs
 on-arrival: fiscal_policy_timer += 6; month_actions += 1
 view-if: spd_in_government = 1 and finance_minister_party = "SPD" and fiscal_policy_timer = 0
 card-image: img/portraits/HilferdingRudolf.jpg
+go-to: fiscal_menu
 
 = Fiscal Policy
 
 Fiscal policy involves issues of taxation and budget.
+
+# TODO: add indications of current taxation status
+
+@fiscal_menu
+
+Upper-income tax rates: [+ upper_tax_rates : taxation +]
+
+Lower-income tax rates: [+ lower_tax_rates : taxation +]
 
 - @raise_progressive: Make the tax system more progressive by raising taxes on the rich and cutting them for the poor.
 - @raise_rich: Increase taxes on the rich.
 - @raise_overall: Increase overall taxes.
 - @cut_overall: Cut overall taxes.
 - @regressive
+- @tariffs
 - @root: Do not change the tax system.
 - @easy_discard
 
@@ -49,3 +59,38 @@ subtitle: This does not change overall revenue.
 on-arrival: workers_spd -= 6; new_middle_spd += 5*(1-dissent); old_middle_spd += 4*(1-dissent); dvp_relation += 5; z_relation += 4; coalition_dissent -= 1 if in_grand_coalition and coalition_dissent > 0; kpd_coalition_dissent += 1; upper_tax_rates -= 1; lower_tax_rates += 1; workers_spd -= 5 if lower_tax_rates >= 2; capital_strike_progress -= 1 if upper_tax_rates < 0
 
 Our regressive taxation policy benefits the rich while hurting the poor and working-class. Our bourgeois coalition partners approve of this orthodox economic course.
+
+
+@tariffs
+title: Change tariffs instead.
+
+Tariffs, or taxes on international imports, are another way to finance our government.
+
+Historically, socialists have been in favor of free trade and a low-tariff regime. Workers in export-oriented industries benefit from free trade, and they also benefit from lower prices for imported necessities. Do the present economic circumstances change these calculations?
+
+Current tariff level: [+ tariffs : taxation +]
+
+- @raise_tariffs
+- @lower_tariffs
+- @fiscal_menu: Change domestic taxes instead of tariffs.
+- @root: Do not change tariffs or taxes.
+- @easy_discard
+
+@raise_tariffs
+title: Raise tariffs on imports.
+subtitle: +2 budget. Other countries will retaliate by increasing tariffs of their own.
+on-arrival: tariffs += 1; inflation += 1 if inflation > 0; inflation += 0.5 if inflation <= 0; unemployed += 1.5; budget += 2; workers_spd -= 5; unemployed_spd -= 5; rural_spd += 4*(1-dissent); old_middle_spd += 3*(1-dissent); ddp_relation -= 5; dvp_relation -= 2; west_relation -= 1; east_relation -= 1; reparations_negotiation -= 1; eu_progress -= 1 if eu_progress > 0; peoples_party_support += 1
+
+Increasing tariffs leads to higher prices for basic goods, increasing inflation and hurting consumption among the working class. Retaliatory tariffs reduce the competitiveness of German exports, raising unemployment among workers. They also lead to an atmosphere of international suspicion, reducing our ability to negotiate with other countries.
+
+On the other hand, agricultural producers and some small businesses benefit from higher tariffs, as farmers can now command higher prices for grain, and formerly uncompetitive businesses are now able to function.
+
+@lower_tariffs
+title: Lower tariffs on imports.
+choose-if: budget >= 2
+subtitle: -2 budget.
+on-arrival: tariffs -= 1; budget -= 2; inflation -= 0.5; workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); rural_spd -= 5; old_middle_spd -= 3; west_relation += 1; east_relation += 1; eu_progress += 1 if eu_progress > 0
+
+Lowering tariffs helps workers and the urban poor by reducing prices for basic necessities. In addition, other countries are pleased by lower tariffs, and are more willing to negotiate on many issues.
+
+Farmers are hurt by this policy, as cheap imported grain leads to ruin for some small producers. In general, cheap imports are detrimental for small-scale industries aimed at the domestic market.
