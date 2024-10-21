@@ -2,10 +2,9 @@ title: Labor Affairs
 new-page: true
 is-card: true
 tags: govt_affairs
-on-arrival: labor_affairs_timer = 6; month_actions += 1; labor_affairs_seen = 1
-view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_affairs_timer = 0
+on-arrival: labor_affairs_timer = 6; month_actions += 1; labor_affairs_seen = 1; strike_term_seen = 1
+view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_affairs_timer = 0 and strike_term_seen = 0
 card-image: img/portraits/WissellRudolf.jpg
-max-visits: 4
 
 # TODO: separate labor affairs and labor policy into two cards - implement Economic Democracy
 

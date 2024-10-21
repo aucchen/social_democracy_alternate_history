@@ -1,0 +1,52 @@
+title: Labor Rights
+new-page: true
+is-card: true
+tags: govt_affairs
+on-arrival: labor_rights_timer += 10; month_actions += 1
+view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_rights_timer = 0 and labor_affairs_seen = 1
+card-image: img/portraits/WissellRudolf.jpg
+max-visits: 6
+
+= Labor Rights
+
+With control of the Labor Ministry, we can set national standards for labor. Our supporters expect us to enforce a 40-hour work week and enforce safety regulations, as well as fully fund the unemployment insurance program.
+
+# enforce a 40-hour work week
+# develop and enforce safety regulations in mines and industries
+# works councils are part of another card...
+# 
+
+- @working_hours: Enforce the 40-hour work week.
+- @shorten_hours: Shorten work hours less than 40 hours.
+- @safety: Develop and enforce safety regulations.
+- @unemployment_insurance: Fund the unemployment insurance program by increasing employer contributions.
+- @root: Do not enact any policies.
+- @easy_discard
+
+@working_hours
+view-if: working_hours < 2
+on-arrival: working_hours += 1; labor_dissent -= 8; left_dissent -= 5; labor_strength += 5; workers_spd += 7*(1-dissent); dvp_relation -= 4; coalition_dissent += 1; capital_strike_progress += 1 if dvp_relation <= 30; labor_goal_completed = 1; inflation += 0.1
+
+While a 40-hour work week was declared during the German Revolution in 1918, enforcement has become increasingly porous over the years. The capitalists have successfully added numerous exceptions and loopholes, returning to the old regime of forced overtime for workers.
+
+Now, with the force of the Labor Ministry, we are finally enforcing the rights of workers to their own time. The bourgeoisie and their political representatives are displeased.
+
+@shorten_hours
+view-if: working_hours >= 2 and black_thursday_seen = 1
+subtitle: Could we induce more hiring and reduce unemployment by reducing work hours?
+on-arrival: working_hours += 1; labor_dissent -= 8; left_dissent -= 5; labor_strength += 5; workers_spd += 7*(1-dissent); dvp_relation -= 4; coalition_dissent += 1; capital_strike_progress += 1; labor_goal_completed = 1; unemployed -= 0.3;
+
+Some in the labor movement argue that by reducing the maximum number of hours worked, employers would be induced to hire more workers, reducing unemployment. The argument also goes that this would be complementary to deflation, maintaining the same purchasing power for workers by cutting hours without cutting wages. Employers, however, resist this policy, arguing for more flexibility in hiring and firing.
+
+
+@safety
+on-arrival: workers_safety += 1; labor_dissent -= 5; labor_strength += 2; workers_spd += 5*(1-dissent); capital_strike_progress += 1 if workers_safety >= 3
+
+The Labor Ministry works on developing and enforcing safety regulations, in order to ensure healty working conditions for the proletariat. [? if workers_safety >= 3 : Businesses have begun to argue that our focus on safety is overbearing and unnecessary, interfering with the economy. ?]
+
+@unemployment_insurance
+view-if: unemployed >= 15
+subtitle: With increasing unemployment, we must find new ways to fund our signature program.
+on-arrival: capital_strike_progress += 1; coalition_dissent += 2 if in_grand_coalition and (chancellor == "Müller" or chancellor == "Brüning"); coalition_dissent += 1; welfare += 1; workers_spd += 6*(1-dissent); unemployed_spd += 6*(1-dissent); old_middle_spd -= 6*(1-dissent);
+
+With the onset of the Depression, 
