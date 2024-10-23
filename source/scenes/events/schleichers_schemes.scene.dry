@@ -1,0 +1,12 @@
+title: Schleicher's Schemes
+subtitle: Chancellor Schleicher claims to have a plan to save Germany...
+view-if: year >= 1932 and president = "Hindenburg" and chancellor = "Schleicher" and spd_in_government = 0 and largest_party = "NSDAP" and hitler_deported = 0 and not presidential_powers
+tags: event
+new-page: true
+max-visits: 1
+
+= Schleicher's Schemes
+
+Chancellor Kurt von Schleicher claims to have a plan to save Germany, and he has reached out to the Social Democrats with vague promises. He claims that in order to govern, the Reichstag must be temporarily suspended to prevent the Nazis and Communists from disrupting government. He argues that his public works program and job creation plans will stabilize the economy, 
+
+Rumors are that he is also reaching out to the Nazis with similar promises of cooperation. In addition, working with Schleicher would essentially mean the end of our claim to be a "democratic" party.

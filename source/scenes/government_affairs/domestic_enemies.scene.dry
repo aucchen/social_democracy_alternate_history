@@ -1,12 +1,11 @@
 title: Investigating Domestic Enemies
-new-page: true
-is-card: true
-on-arrival: domestic_enemies_timer = 6; month_actions += 1
-view-if: spd_in_government = 1 and interior_minister_party = "SPD" and domestic_enemies_timer = 0
-card-image: img/portraits/SeveringCarl.jpg
-# tags: govt_affairs
+on-arrival: month_actions += 1
+view-if: spd_in_government = 1 and interior_minister_party = "SPD"
+#card-image: img/portraits/SeveringCarl.jpg
+#is-card: true
+#new-page: true
 
-# TODO: abandoning this scene for now... work something out here.
+# this is not a card...
 
 = Investigating Domestic Enemies
 

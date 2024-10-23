@@ -82,7 +82,7 @@ if (Q.rural_spd_normalized && Q.rural_spd_normalized >= 50) {
 if (Q.catholics_spd_normalized && Q.catholics_spd_normalized >= 50) {
     this.achieve('katholischer_sozialismus');
 }
-if (Q.workers_spd_normalized >= 80 && Q.new_middle_spd_normalized <= 10 && Q.old_middle_spd_normalized <= 10) {
+if (Q.workers_spd_normalized >= 80 && Q.new_middle_spd_normalized <= 20 && Q.old_middle_spd_normalized <= 20 && Q.rural_spd <= 20) {
     this.achieve('klassenkampf');
 }
 // Räterepublik - begin the transformation to a socialist economy.
@@ -361,7 +361,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
 
-[? if game_achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class support is less than 10%. ?]
+[? if game_achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
 [? if game_achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
@@ -454,7 +454,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
 
-[? if achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class support is less than 10%. ?]
+[? if achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
 [? if achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
@@ -545,7 +545,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
 
-[? if not achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class support is less than 10%. ?]
+[? if not achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
 [? if not achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 

@@ -93,22 +93,36 @@ Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_d
 
 
 @paramilitaries
+on-arrival: {!
+if (Q.rb_strength) {
+    Q.rb_strength_2 = Q.rb_strength.toFixed(1);
+}
+if (Q.rfb_strength) {
+    Q.rfb_strength_2 = Q.rfb_strength.toFixed(1);
+}
+if (Q.sh_strength) {
+    Q.sh_strength_2 = Q.sh_strength.toFixed(1);
+}
+if (Q.sa_strength) {
+    Q.sa_strength_2 = Q.sa_strength.toFixed(1);
+}
+!}
 
 = Paramilitaries
 
-Reichsbanner Strength: [+ rb_strength +] thousand
+Reichsbanner Strength: [+ rb_strength_2 +] thousand
 
 Reichsbanner Militarization: [+ rb_militancy : militancy +]
 
-RFB Strength: [+ rfb_strength +] thousand
+RFB Strength: [+ rfb_strength_2 +] thousand
 
 RFB Militarization: [+ rfb_militancy : militancy +]
 
-Stahlhelm Strength: [+ sh_strength +] thousand
+Stahlhelm Strength: [+ sh_strength_2 +] thousand
 
 Stahlhelm Militarization: [+ sh_militancy : militancy +]
 
-SA Strength: [+ sa_strength +] thousand
+SA Strength: [+ sa_strength_2 +] thousand
 
 SA Militarization: [+ sa_militancy : militancy +]
 

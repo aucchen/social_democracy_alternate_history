@@ -386,6 +386,8 @@ Q.panzerkreuzer_seen = 0;
 Q.panzerkreuzer_funded = 0;
 Q.panzerkreuzer_failed = 0;
 Q.unemployment_insurance_seen = 0;
+// unemployment insurance event is seen if the unemployment level is at least 4 more than the threshold...
+Q.unemployment_insurance_threshold = 10;
 Q.blutmai = 0;
 
 // have we reformed these institutions to be more democratic?
@@ -544,6 +546,7 @@ Q.baade_advisor = 0; // Fritz Baade
 Q.leipart_advisor = 0; // Theodor Leipart
 Q.aufhauser_advisor = 0; // Siegfried Aufhäuser
 Q.woytinsky_advisor = 0; // Wladimir Woytinsky (post-1930)
+Q.wissell_advisor = 0; // Rudolf Wissell
 
 // Revisionist advisors
 Q.mierendorff_advisor = 0; // Carlo Mierendorf (post-1930)
