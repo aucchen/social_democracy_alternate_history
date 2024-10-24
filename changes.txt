@@ -390,3 +390,15 @@ Changes:
 - When loading a mod, the game title and author are set to the title and author of the mod.
 - Conciliators are no longer disabled in historical mode.
 - There is a new hidden variable, "strife", that increases when there is streetfighting or other conflict. It doesn't have a lot of uses yet...
+
+
+v0.19 - Labor rights and unemployment insurance, more gradual support changes
+
+Major changes:
+- New government affairs card: Labor Rights
+- The unemployment insurance crisis can be handled preemptively using Labor Rights. In general, some of the flow around unemployment insurance has been changed.
+- New advisor: Rudolf Wissell (labor)
+- Party support changes are now more gradual, happening monthly instead of always at the start of the year. There are some tweaks to party support, with more support from middle-class and rural demographics flowing from Others and the DVP to the NSDAP to better account for historical election results.
+
+Minor changes:
+- Some bug fixes and many minor tweaks.
