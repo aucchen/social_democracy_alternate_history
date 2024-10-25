@@ -402,3 +402,10 @@ Major changes:
 
 Minor changes:
 - Some bug fixes and many minor tweaks.
+
+v0.19.1 - Bug fixes
+
+Changes:
+- Fixed return to hand for Labor Affairs
+- Fixed an issue with unemployment insurance and President Hindenburg/Braun
+- Removed ending slides about unemployment when the game ends before 1930
