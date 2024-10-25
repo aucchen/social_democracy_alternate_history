@@ -219,7 +219,7 @@ Our government has enacted a public works program!
 
 @unemployment_reduced
 title: Unemployment has been successfully reduced!
-view-if: unemployed <= 20 and unemployed >= 10
+view-if: unemployed <= 20 and unemployed >= 10 and black_thursday_seen
 tags: endings
 go-to: eg_menu
 
@@ -227,7 +227,7 @@ While still uncomfortably high, unemployment levels are nowhere near their peak.
 
 @unemployment_reduced_2
 title: Unemployment has been successfully reduced!
-view-if: unemployed < 10
+view-if: unemployed < 10 and black_thursday_seen
 tags: endings
 go-to: eg_menu
 

@@ -1,7 +1,7 @@
 title: Unemployment Insurance Crisis
 subtitle: The right wing of our coalition presents an ultimatum.
 new-page: true
-view-if: spd_in_government = 1 and (year = 1930 or year = 1931 or year = 1932) and (month >= 3) and in_grand_coalition = 1 and unemployment_insurance_timer = 0 and (unemployed >= unemployment_insurance_threshold + 4 or (unemployed >= 20 and unemployed >= unemployment_insurance_threshold)) and not constructive_vonc
+view-if: spd_in_government = 1 and (year = 1930 or year = 1931 or year = 1932) and (month >= 3) and in_grand_coalition = 1 and unemployment_insurance_timer = 0 and (unemployed >= unemployment_insurance_threshold + 4 or (unemployed >= 20 and unemployed >= unemployment_insurance_threshold)) and not constructive_vonc and president == "Hindenburg"
 on-arrival: unemployment_insurance_crisis += 1; budget -= 1 if budget >= 1; unemployment_insurance_timer = 10; crisis_urgency += 1; unemployment_insurance_threshold = unemployed
 tags: event
 max-visits: 2

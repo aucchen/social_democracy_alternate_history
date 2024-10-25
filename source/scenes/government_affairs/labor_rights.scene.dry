@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 tags: govt_affairs
 on-arrival: labor_rights_timer += 10; month_actions += 1
-view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_rights_timer = 0 and labor_affairs_seen = 1
+view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_rights_timer <= 0 and labor_affairs_seen = 1
 card-image: img/portraits/WissellRudolf.jpg
 max-visits: 6
 go-to: labor_rights_menu
@@ -15,7 +15,7 @@ With control of the Labor Ministry, we can set national standards for labor. Our
 # enforce a 40-hour work week
 # develop and enforce safety regulations in mines and industries
 # works councils are part of another card...
-# 
+
 @labor_rights_menu
 
 - @working_hours: Enforce the 40-hour work week.
