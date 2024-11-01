@@ -6,6 +6,7 @@ view-if: reichsbanner_timer <= 0
 card-image: img/reichsbanner.jpg
 on-arrival: month_actions += 1; reichsbanner_timer += 6; rb_militarization_cost = 2 if rb_militancy > 0.1 else rb_militarization_cost = 1; rb_militarization_cost = 3 if rb_militancy > 0.25
 max-visits: 5
+#subtitle: Paramilitary organizing in defense of the republic.
 
 = Reichsbanner
 

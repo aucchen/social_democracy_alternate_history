@@ -6,6 +6,7 @@ view-if: international_relations_timer <= 0
 on-arrival: month_actions += 1; international_relations_timer += 12;
 card-image: img/international.jpg
 max-visits: 3
+#subtitle: Building ties with our fraternal socialist parties.
 
 At the Labor and Socialist International, we can forge contacts with our fraternal socialist parties in Europe and across the world.
 

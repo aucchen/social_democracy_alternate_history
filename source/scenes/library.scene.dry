@@ -430,7 +430,7 @@ if (d3 && window) {
     //document.getElementById('election_history').innerHTML = svg.outerHTML;
 
     // party support records should not have so many ticks
-    if (!Q.historical_mode) {
+    if (!Q.historical_mode && !Q.game_over) {
         var lines_2 = d3.linegraph(true, true,
             Q.parties,
             {'spd': '#E3000F', 'kpd': '#8B0000', 'ddp': '#DCCA4A', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3f7bc1', 'nsdap': '#954B00', 'other': '#a0a0a0', 'sapd': '#c40000'},

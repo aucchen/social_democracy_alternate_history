@@ -7,6 +7,7 @@ view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_rights
 card-image: img/portraits/WissellRudolf.jpg
 max-visits: 6
 go-to: labor_rights_menu
+#subtitle: Working hours, safety regulations, and unemployment insurance.
 
 = Labor Rights
 

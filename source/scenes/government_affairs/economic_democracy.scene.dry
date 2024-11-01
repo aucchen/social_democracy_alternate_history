@@ -6,6 +6,7 @@ view-if: spd_in_government and (economic_minister_party == "SPD" or finance_mini
 card-image: img/portraits/HilferdingRudolf.jpg
 max-visits: 8
 tags: govt_affairs
+#subtitle: How can we give workers more control over the means of production?
 
 = Economic Democracy
 

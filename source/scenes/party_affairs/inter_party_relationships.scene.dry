@@ -6,6 +6,7 @@ is-card: true
 on-arrival: month_actions += 1; inter_party_relationships_timer = 6;
 card-image: img/weimar_coalition_2.jpg
 max-visits: 12
+#subtitle: Building relations with the other political parties of Germany.
 
 = Inter-Party Relationships
 

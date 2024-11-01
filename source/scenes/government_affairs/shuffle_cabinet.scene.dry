@@ -2,7 +2,7 @@ title: Shuffle Cabinet
 new-page: true
 is-card: true
 tags: govt_affairs
-on-arrival: shuffle_cabinet_timer = 6; month_actions += 1
+on-arrival: shuffle_cabinet_timer = 6;
 view-if: spd_in_government == 1 and shuffle_cabinet_timer == 0 and chancellor_party == "SPD" and not in_spd_majority and not in_emergency_government and not in_left_front
 card-image: img/muller_cabinet.jpg
 
@@ -31,5 +31,5 @@ Agriculture: [+ agriculture_minister_party +]
 - @easy_discard
 
 @shuffle
-on-arrival: coalition_dissent += 1
+on-arrival: coalition_dissent += 1; month_actions += 1
 go-to: election_1928.ministries

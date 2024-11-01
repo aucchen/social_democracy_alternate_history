@@ -6,6 +6,7 @@ on-arrival: month_actions += 1; foreign_policy_timer += 8
 view-if: spd_in_government = 1 and foreign_minister_party = "SPD" and  foreign_policy_timer <= 0
 card-image: img/portraits/BreitscheidRudolf.jpg
 go-to: fp_menu
+#subtitle: International relations and dealing with Versailles.
 
 = Foreign Policy
 

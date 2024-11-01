@@ -5,6 +5,7 @@ tags: govt_affairs
 on-arrival: economic_policy_timer += 12; month_actions += 1; nationalize_budget = 4; nationalize_budget -= 1 if works_councils >= 2; nationalize_budget -= 1 if works_councils >= 3; nationalize_budget -= 1 if socializations + nationalization_progress >= 2; wtb_budget = 4; wtb_budget -= 1 if works_councils >= 2 or socializations >= 1 or pro_labor >= 2
 view-if: spd_in_government = 1 and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and economic_policy_timer <= 0 and economic_plan > 0
 card-image: img/portraits/SchmidtRobert.jpg
+#subtitle: Policies to address the economic crisis.
 
 = Economic Policy
 

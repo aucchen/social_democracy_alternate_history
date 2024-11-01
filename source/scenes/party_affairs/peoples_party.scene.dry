@@ -5,7 +5,8 @@ card-image: img/poster_0.jpg
 view-if: neorevisionism > 0 and peoples_party_support >= 3 and peoples_party = 0 and peoples_party_timer == 0
 on-arrival: peoples_party_timer = 6
 tags: party_affairs
-max-visits: 3
+max-visits: 4
+#subtitle: Can the SPD move beyond the working class?
 
 = Building a People's Party
 

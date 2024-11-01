@@ -6,6 +6,7 @@ view-if: ideology_timer = 0
 on-arrival: month_actions += 1; old_ideology = ideology; ideology_timer = 18
 card-image: img/arbeiterbew.jpg
 max-visits: 3
+#subtitle: Setting the party's ideological direction.
 
 = Questions of Ideology
 

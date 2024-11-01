@@ -5,6 +5,7 @@ tags: govt_affairs
 on-arrival: military_policy_timer += 6; month_actions += 1
 view-if: spd_in_government = 1 and reichswehr_minister_party = "SPD" and military_policy_timer <= 0
 card-image: img/portraits/LeberJulius.jpg
+#subtitle: Dealing with the Reichswehr.
 
 = Military Policy
 
