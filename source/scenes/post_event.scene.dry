@@ -13,23 +13,7 @@ for (var c of Q.classes) {
 Q.pro_republic = Math.round(Q.pro_republic);
 Q.nationalism = Math.round(Q.nationalism);
 Q.socialism = Math.round(Q.socialism);
-if (polsim == 1) {
-    if ((Q.centrists_resign !== 1) || (Q.left_split !== 1) || (Q.reformists_resign !== 1) || (Q.unions_independent !== 1)) {
-        Q.left_strength = 15;
-        Q.left_dissent = 60;
-        Q.center_strength = 30;
-        Q.center_dissent = 60;
-        Q.labor_strength = 25;
-        Q.labor_dissent = 60;
-        Q.reformist_strength = 25;
-        Q.reformist_dissent = 60;
-        Q.neorevisionist_strength = 5;
-        Q.neorevisionist_dissent = 10;
-    }
-}
-if (Q.agenda_2010 == 1) {
-    Q.workers_spd = 0;
-}
+
 if (Q.pro_republic < 0) {
     Q.pro_republic = 0;
 }
@@ -339,6 +323,7 @@ if (this.ui && this.ui.show_portraits) {
         }
     }
 }
+
 if (typeof window !== "undefined" && window.generateBar) {
 }
 !}
