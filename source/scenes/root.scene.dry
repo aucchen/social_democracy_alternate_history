@@ -572,13 +572,13 @@ For more information on the politics and government of the German Republic, see 
 
 Here, you can activate different custom difficulty settings. 
 
-- @2010: Agenda 2010
+- @agenda__2010: Agenda 2010
 - @polsim: Polsim mode
 - @sapd: SAPD mode
 - @end
 - @start_menu_2: Go back to the main menu.
 
-@2010
+@agenda__2010
 view-if: agenda_2010 = 0
 subtitle: Worker support for the SPD is permanently set to 0.
 on-arrival: agenda_2010 = 1;
