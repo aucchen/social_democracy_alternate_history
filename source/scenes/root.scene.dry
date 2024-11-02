@@ -9,14 +9,6 @@ go-to: start_menu_2
 = Social Democracy: An Alternate History
 
 @start_menu_2
-
-- @start: Start game
-- @election_simulation: Election simulation
-- @credits: Credits
-- @game_over.achievements
-
-
-@start
 on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
@@ -570,10 +562,66 @@ This is a game of alternate history. While historical accuracy is a major concer
 
 For more information on the politics and government of the German Republic, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
 
+- @custom: Custom game settings
 - @1928_easy: Begin (easy difficulty)
 - @1928_main: Begin (normal difficulty)
 - @1928_hard: Begin (hard difficulty)
 - @1928_historical: Begin (historical mode)
+
+@custom 
+
+Here, you can activate different custom difficulty settings. 
+
+- @2010: Agenda 2010
+- @polsim: Polsim mode
+- @sapd: SAPD mode
+- @end
+- @start: Go back to the main menu.
+
+@2010
+view-if: agenda_2010 = 0
+subtitle: Worker support for the SPD is permanently set to 0.
+on_arrival: agenda_2010 = 1;
+go-to: custom 
+
+@polsim
+view-if: polsim = 0
+subtitle: All factions break away at the start of the game.
+on_arrival: polsim = 1;
+go-to: custom 
+
+@sapd
+view-if: sapd_formed = 0
+subtitle: The SAPD starts with the same amount of support as the SPD.
+on-arrival: {!
+// set up the infrastructure
+Q.sapd_formed = 1;
+Q.parties.push('sapd');
+
+for (var c of Q.classes) {
+    Q[c+'_sapd'] = Q[c+'_spd'];
+}
+
+// update all records
+Q.sapd_r = 0;
+Q.old_sapd_r = 0;
+for (var record of Q.election_records) {
+    record['sapd'] = 0;
+}
+for (var record of Q.party_support_records) {
+    record['sapd'] = 0;
+}
+!}
+go-to: custom 
+
+@end
+title: <img src="img/end.png">
+on_arrival: {!
+for (var c of Q.classes) {
+    Q[c+'_spd'] = 0;
+}
+!}
+go-to: custom 
 
 @1928_easy
 on-arrival: difficulty = -1; resources = 4; dues = 3; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49;
@@ -601,6 +649,14 @@ Q.dvp_relation = 31;
 Q.budget = 2;
 this.state.disableSaves = true;
 !}
+
+- @start: Start game
+- @election_simulation: Election simulation
+- @credits: Credits
+- @game_over.achievements
+
+
+@start
 go-to: 1928_main
 
 @1928_main
