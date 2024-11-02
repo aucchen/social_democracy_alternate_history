@@ -9,7 +9,7 @@ for (var c of Q.classes) {
         }
     }
 }
-
+Q.resources += 1;
 Q.pro_republic = Math.round(Q.pro_republic);
 Q.nationalism = Math.round(Q.nationalism);
 Q.socialism = Math.round(Q.socialism);
@@ -339,7 +339,6 @@ if (this.ui && this.ui.show_portraits) {
         }
     }
 }
-
 if (typeof window !== "undefined" && window.generateBar) {
 }
 !}
