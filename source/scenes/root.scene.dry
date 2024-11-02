@@ -4,11 +4,6 @@ go-to: post_event if started = 1; start_menu if started = 0
 
 @start_menu
 new-page: true
-go-to: start_menu_2
-
-= Social Democracy: An Alternate History
-
-@start_menu_2
 on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
@@ -551,6 +546,11 @@ Q.hirschfeld_advisor = 0; // Magnus Hirschfeld
 Q.radbruch_advisor = 0; // Gustav Radbruch
 Q.stampfer_advisor = 0; // Friedrich Stampfer
 !}
+go-to: start_menu_2
+
+= Social Democracy: An Alternate History
+
+@start_menu_2
 set-bg: img/map_2.jpg
 new-page: true
 
@@ -576,7 +576,7 @@ Here, you can activate different custom difficulty settings.
 - @polsim: Polsim mode
 - @sapd: SAPD mode
 - @end
-- @start: Go back to the main menu.
+- @start_menu_2: Go back to the main menu.
 
 @2010
 view-if: agenda_2010 = 0
@@ -615,8 +615,10 @@ for (var record of Q.party_support_records) {
 go-to: custom 
 
 @end
+view-if: end_ = 0
 title: <img src="img/end.png">
 on_arrival: {!
+Q.end_ = 1;
 for (var c of Q.classes) {
     Q[c+'_spd'] = 0;
 }
