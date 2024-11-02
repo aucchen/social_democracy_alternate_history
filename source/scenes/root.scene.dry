@@ -617,7 +617,7 @@ go-to: custom
 @end
 view-if: end_ = 0
 title: <img src="img/end.png">
-on_arrival: {!
+on-arrival: {!
 Q.end_ = 1;
 for (var c of Q.classes) {
     Q[c+'_spd'] = 0;

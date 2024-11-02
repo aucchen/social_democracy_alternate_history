@@ -341,7 +341,6 @@ if (this.ui && this.ui.show_portraits) {
 }
 if (typeof window !== "undefined" && window.generateBar) {
 }
-Q.resources += 1;
 !}
 go-to: events_choice if has_event = 1; main if has_event = 0 and difficulty >= 0; main.main_easy if has_event = 0 and difficulty < 0
 
