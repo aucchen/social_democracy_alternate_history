@@ -581,13 +581,13 @@ Here, you can activate different custom difficulty settings.
 @2010
 view-if: agenda_2010 = 0
 subtitle: Worker support for the SPD is permanently set to 0.
-on_arrival: agenda_2010 = 1;
+on-arrival: agenda_2010 = 1;
 go-to: custom 
 
 @polsim
 view-if: polsim = 0
 subtitle: All factions break away at the start of the game.
-on_arrival: polsim = 1;
+on-arrival: polsim = 1;
 go-to: custom 
 
 @sapd
