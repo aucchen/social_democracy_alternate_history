@@ -34,7 +34,7 @@ Fine. We no longer control the government of Prussia. The vote has been called o
 
 @austerity
 view-if: welfare >= 0
-on-arrival: coalition_dissent = 0; workers_spd -= 10; umemployed_spd -= 10; workers_kpd += 7; workers_nsdap += 3; unemployed_kpd += 5; unemployed_nsdap += 5; left_dissent += 15; center_dissent += 10; labor_dissent += 15; reformist_dissent += 5; welfare -= 2; budget += 1; unemployed += 3; kpd_coalition_dissent += 1; kpd_relation -= 10 if in_popular_front
+on-arrival: coalition_dissent = 0; workers_spd -= 10; unemployed_spd -= 10; workers_kpd += 7; workers_nsdap += 3; unemployed_kpd += 5; unemployed_nsdap += 5; left_dissent += 15; center_dissent += 10; labor_dissent += 15; reformist_dissent += 5; welfare -= 2; budget += 1; unemployed += 3; kpd_coalition_dissent += 1; kpd_relation -= 10 if in_popular_front
 
 Fine. We enacted a massive austerity program to cut welfare, in order to maintain the stability of our coalition. The vote has been called off.
 
