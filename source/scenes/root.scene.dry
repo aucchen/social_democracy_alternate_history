@@ -545,6 +545,38 @@ Q.schumacher_advisor = 0; // Kurt Schumacher (post-1930)
 Q.hirschfeld_advisor = 0; // Magnus Hirschfeld
 Q.radbruch_advisor = 0; // Gustav Radbruch
 Q.stampfer_advisor = 0; // Friedrich Stampfer
+
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
+        }
+        class_votes += Q[c+'_'+party];
+    }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    }
+}
+// calculate support for each of the parties
+var total_support = 0; 
+for (var party of Q.parties) {
+    var party_support = 0;
+    for (var c of Q.classes) {
+        if (Q.old_demographics) { 
+            party_support += Q[c]*Q[c+'_'+party];
+        } else  { 
+            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+        } 
+    }
+    Q[party + '_support'] = party_support;
+    total_support += party_support; 
+}
+// 2. normalize support (fraction)
+for (var party of Q.parties) {
+    Q[party+'_normalized'] = Q[party + '_support']/total_support;
+    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
+}
 !}
 go-to: start_menu_2
 
@@ -581,7 +613,41 @@ Here, you can activate different custom difficulty settings.
 @agenda__2010
 view-if: agenda_2010 = 0
 subtitle: Worker support for the SPD is permanently set to 0.
-on-arrival: agenda_2010 = 1;
+on-arrival: {!
+Q.workers_spd = 0;
+Q.agenda_2010 = 1;
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
+        }
+        class_votes += Q[c+'_'+party];
+    }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    }
+}
+// calculate support for each of the parties
+var total_support = 0; 
+for (var party of Q.parties) {
+    var party_support = 0;
+    for (var c of Q.classes) {
+        if (Q.old_demographics) { 
+            party_support += Q[c]*Q[c+'_'+party];
+        } else  { 
+            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+        } 
+    }
+    Q[party + '_support'] = party_support;
+    total_support += party_support; 
+}
+// 2. normalize support (fraction)
+for (var party of Q.parties) {
+    Q[party+'_normalized'] = Q[party + '_support']/total_support;
+    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
+}
+!}
 go-to: custom 
 
 @polsim
@@ -611,6 +677,37 @@ for (var record of Q.election_records) {
 for (var record of Q.party_support_records) {
     record['sapd'] = 0;
 }
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
+        }
+        class_votes += Q[c+'_'+party];
+    }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    }
+}
+// calculate support for each of the parties
+var total_support = 0; 
+for (var party of Q.parties) {
+    var party_support = 0;
+    for (var c of Q.classes) {
+        if (Q.old_demographics) { 
+            party_support += Q[c]*Q[c+'_'+party];
+        } else  { 
+            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+        } 
+    }
+    Q[party + '_support'] = party_support;
+    total_support += party_support; 
+}
+// 2. normalize support (fraction)
+for (var party of Q.parties) {
+    Q[party+'_normalized'] = Q[party + '_support']/total_support;
+    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
+}
 !}
 go-to: custom 
 
@@ -621,6 +718,37 @@ on-arrival: {!
 Q.end_ = 1;
 for (var c of Q.classes) {
     Q[c+'_spd'] = 0;
+}
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c+'_'+party] < 0) {
+            Q[c+'_'+party] = 0;
+        }
+        class_votes += Q[c+'_'+party];
+    }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
+    }
+}
+// calculate support for each of the parties
+var total_support = 0; 
+for (var party of Q.parties) {
+    var party_support = 0;
+    for (var c of Q.classes) {
+        if (Q.old_demographics) { 
+            party_support += Q[c]*Q[c+'_'+party];
+        } else  { 
+            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+        } 
+    }
+    Q[party + '_support'] = party_support;
+    total_support += party_support; 
+}
+// 2. normalize support (fraction)
+for (var party of Q.parties) {
+    Q[party+'_normalized'] = Q[party + '_support']/total_support;
+    Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
 }
 !}
 go-to: custom 
