@@ -99,7 +99,9 @@ West Relations: [+ west_relation +]
 
 East Relations: [+ east_relation +]
 
-[? if eu_progress > 0 : EU Formation Progress: [+ eu_progress +] ?]
+[? if eu_progress > 0 and eu = 0 : EU Formation Progress: [+ eu_progress +] ?]
+
+[? if reichskonkordat_progress > 0 and reichskonkordat = 0 : Reichsconcordat Progress: [+ reichskonkordat_progress : coalition_dissent +] ?]
 
 @paramilitaries
 on-arrival: {!
