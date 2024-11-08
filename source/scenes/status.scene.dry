@@ -195,7 +195,7 @@ Support for Nationalism: [+ nationalism +]%
 
 = Paramilitary Statistics
 
-[? if strife > 0 : Strife: [+ strife +] ?]
+[? if strife > 0 : Strife: [+ strife : coalition_dissent +] ?]
 
 Reichsbanner Power: [+ rb_power +]
 
