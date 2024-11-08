@@ -7,6 +7,7 @@ new-page: true
 on-arrival: {!
 Q.rb_power = 0;
 Q.sa_power = 0;
+Q.sh_power = 0;
 Q.rfb_power = 0;
 Q.rw_power = 0;
 Q.police_power = 0;

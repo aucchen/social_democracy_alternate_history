@@ -203,6 +203,8 @@ Sturmabteilung Power: [+ sa_power +]
 
 Stahlhelm Power: [+ sh_power +]
 
+RFB Power: [+ rfb_power +]
+
 [? if rw_power > 0 : Reichswehr Power: [+ rw_power +] ?]
 
 [? if spd_prussia > 0 : Police Power: [+ police_power +] ?]
