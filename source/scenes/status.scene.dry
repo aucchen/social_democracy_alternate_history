@@ -75,6 +75,8 @@ DVP: [+ dvp_relation : relationships +]
 
 KPD: [+ kpd_relation : relationships +]
 
+KPD Coalition Support: [+ communist_coalition : coalition_dissent +]
+
 DNVP: [+ dnvp_relation : relationships +]
 
 NSDAP: [+ nsdap_relation : relationships +]
@@ -91,6 +93,13 @@ Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_d
 
 [? if neorevisionism > 0 : Neorevisionist strength: [+ neorevisionist_strength : strength +], dissent: [+ neorevisionist_dissent : dissent +] ?]
 
+= International Relations
+
+West Relations: [+ west_relation +]
+
+East Relations: [+ east_relation +]
+
+[? if eu_progress > 0 : EU Formation Progress: [+ eu_progress +] ?]
 
 @paramilitaries
 on-arrival: {!
@@ -175,3 +184,13 @@ Unemployed: SPD: [+ unemployed_spd_normalized +]%, Z: [+ unemployed_z_normalized
 Catholics: SPD: [+ catholics_spd_normalized +]%, Z: [+ catholics_z_normalized +]%, KPD: [+ catholics_kpd_normalized +]%, DDP: [+ catholics_ddp_normalized +]%, DVP: [+ catholics_dvp_normalized +]%; DNVP: [+ catholics_dnvp_normalized +]%, NSDAP: [+ catholics_nsdap_normalized +]%, Others: [+ catholics_other_normalized +]% [? if sapd_formed: SAPD: [+ catholics_sapd_normalized +]% ?]
 
 Support for the Republic: [+ pro_republic +]%
+
+= Public Opinion
+
+Pacifism: [+ pacifism : coalition_dissent +]
+
+Democratization: [+ democratization : coalition_dissent +]
+
+Support for Socialism: [+ socialism +]%
+
+Support for Nationalism: [+ nationalism +]%
