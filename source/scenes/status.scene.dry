@@ -211,11 +211,15 @@ RFB Power: [+ rfb_power +]
 
 = Party Affairs
 
+Ideology: [? if not ideology : Centrist ?][? if ideology : [+ ideology +]?]
+
 Pacifism: [+ pacifism : coalition_dissent +]
 
 Democratization: [+ democratization : coalition_dissent +]
 
 Radicalism: [+ radicalism : coalition_dissent +]
+
+[? if peoples_party_support > 0 and peoples_party = 0 : Volkspartei Support: [+ peoples_party_support : peoples_party +]?]
 
 = [? if black_thursday_seen = 1 : Black Thursday Response ?]
 
