@@ -868,7 +868,7 @@ Q.old_middle_nsdap += 3;
 Q.new_middle_nsdap += 3;
 Q.rural_nsdap += 3;
 Q.unemployed_nsdap += 5;
-if (pro_republic < 45 && pro_republic >= 40) {
+if (Q.pro_republic < 45 && Q.pro_republic >= 40) {
     Q.workers_spd -= 6;
 }
 if (Q.pro_republic < 40) {
