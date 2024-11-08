@@ -95,9 +95,9 @@ Reformist strength: [+ reformist_strength : strength +], dissent: [+ reformist_d
 
 = International Relations
 
-West Relations: [+ west_relation +]
+West Relations: [+ west_relation : international_relations +]
 
-East Relations: [+ east_relation +]
+East Relations: [+ east_relation : international_relations +]
 
 [? if eu_progress > 0 and eu = 0 : EU Formation Progress: [+ eu_progress +] ?]
 
