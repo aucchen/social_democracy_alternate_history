@@ -219,7 +219,7 @@ Radicalism: [+ radicalism : coalition_dissent +]
 
 = [? if black_thursday_seen = 1 : Black Thursday Response ?]
 
-[? if black_thursday_seen = 1 and economic_plan = 0 : Crisis Urgency: [+ crisis_urgency : coalition_dissent +] ?]
+[? if black_thursday_seen = 1 and economic_plan = 0 : Crisis Urgency: [? if crisis_urgency = 0 : Not urgent ?][? if crisis_urgency = 1 : Urgent ?] ?]
 
 [? if black_thursday_seen = 1 and nationalization_adopted = 0 : Nationalization Support: [+ nationalization_support : coalition_dissent +] ?]
 
