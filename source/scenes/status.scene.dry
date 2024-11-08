@@ -219,7 +219,7 @@ Pacifism: [+ pacifism : coalition_dissent +]
 
 Democratization: [+ democratization : coalition_dissent +]
 
-Radicalism: [+ radicalism : coalition_dissent +]
+Radicalism: [+ radicalization : coalition_dissent +]
 
 [? if peoples_party_support > 0 and peoples_party = 0 : Volkspartei Support: [+ peoples_party_support : peoples_party +]?]
 
