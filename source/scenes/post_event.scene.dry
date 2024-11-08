@@ -9,7 +9,7 @@ for (var c of Q.classes) {
         }
     }
 }
-if (polsim == 1) {
+if (Q.polsim == 1) {
     if ((Q.centrists_resign !== 1) || (Q.left_split !== 1) || (Q.reformists_resign !== 1) || (Q.unions_independent !== 1)) {
         Q.left_strength = 15;
         Q.left_dissent = 60;
