@@ -75,7 +75,7 @@ DVP: [+ dvp_relation : relationships +]
 
 KPD: [+ kpd_relation : relationships +]
 
-KPD Coalition Support: [+ communist_coalition : coalition_dissent +]
+[? if communist_coalition > 0 : KPD Coalition Support: [+ communist_coalition : coalition_dissent +] ?]
 
 DNVP: [+ dnvp_relation : relationships +]
 
@@ -217,3 +217,14 @@ Democratization: [+ democratization : coalition_dissent +]
 
 Radicalism: [+ radicalism : coalition_dissent +]
 
+= [? if black_thursday_seen = 1 : Black Thursday Response ?]
+
+[? if black_thursday_seen = 1 and economic_plan = 0 : Crisis Urgency: [+ crisis_urgency : coalition_dissent +] ?]
+
+[? if black_thursday_seen = 1 and nationalization_adopted = 0 : Nationalization Support: [+ nationalization_support : coalition_dissent +] ?]
+
+[? if black_thursday_seen = 1 and wtb_adopted = 0 : WTB-Plan Support: [+ wtb_support : coalition_dissent +] ?]
+
+[? if black_thursday_seen = 1 and moderate_plan_adopted = 0 : Moderate Plan Support: [+ moderate_plan_support : coalition_dissent +] ?]
+
+[? if economic_plan = 1 : Implemented Economic Plans: [? if moderate_plan_progress = 0 and nationalization_progress = 0 and wtb_implemented = 0 : None?][? if nationalization_progress > 0 : Nationalization ?][? if wtb_implemented > 0 or moderate_plan_progress > 0 : , ?][? if wtb_implemented > 0 : WTB-Plan ?][? if moderate_plan_progress > 0 and wtb_implemented > 0 : , ?][? if moderate_plan_progress > 0 : Moderate ?] ?]
