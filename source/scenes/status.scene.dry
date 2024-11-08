@@ -227,4 +227,4 @@ Radicalism: [+ radicalism : coalition_dissent +]
 
 [? if black_thursday_seen = 1 and moderate_plan_adopted = 0 : Moderate Plan Support: [+ moderate_plan_support : coalition_dissent +] ?]
 
-[? if economic_plan > 0 : Implemented Economic Plans: [? if moderate_plan_progress = 0 and nationalization_progress = 0 and wtb_implemented = 0 : None?][? if nationalization_progress > 0 : Nationalization ?][? if wtb_implemented > 0 or moderate_plan_progress > 0 : , ?][? if wtb_implemented > 0 : WTB-Plan ?][? if moderate_plan_progress > 0 and wtb_implemented > 0 : , ?][? if moderate_plan_progress > 0 : Moderate ?] ?]
+[? if economic_plan > 0 : Implemented Economic Plans: [? if moderate_plan_progress = 0 and nationalization_progress = 0 and wtb_implemented = 0 : None?][? if nationalization_progress > 0 : Nationalization?][? if wtb_implemented > 0 or moderate_plan_progress > 0 : , ?][? if wtb_implemented > 0 : WTB-Plan?][? if moderate_plan_progress > 0 and wtb_implemented > 0 : , ?][? if moderate_plan_progress > 0 : Moderate?] ?]
