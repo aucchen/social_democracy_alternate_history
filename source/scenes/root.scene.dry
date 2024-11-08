@@ -5,6 +5,11 @@ go-to: post_event if started = 1; start_menu if started = 0
 @start_menu
 new-page: true
 on-arrival: {!
+Q.rb_power = 0;
+Q.sa_power = 0;
+Q.rfb_power = 0;
+Q.rw_power = 0;
+Q.police_power = 0;
 Q.started = 1;
 // time elapsed (in months)
 Q.time = 1;
