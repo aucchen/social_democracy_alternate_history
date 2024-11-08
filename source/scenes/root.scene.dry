@@ -11,6 +11,12 @@ Q.sh_power = 0;
 Q.rfb_power = 0;
 Q.rw_power = 0;
 Q.police_power = 0;
+Q.rb_power = Math.round(Q.rb_strength*Q.rb_militancy);
+Q.sa_power = Math.round(Q.sa_strength*Q.sa_militancy);
+Q.sh_power = Math.round(Q.sh_strength*Q.sh_militancy);
+Q.rfb_power = Math.round(Q.rfb_strength*Q.rfb_militancy);
+Q.rw_power = Math.round(Q.reichswehr_strength*Q.reichswehr_militancy*Q.reichswehr_loyalty);
+Q.police_power = Math.round(Q.prussian_police_strength*Q.prussian_police_militancy*Q.prussian_police_loyalty);
 Q.started = 1;
 // time elapsed (in months)
 Q.time = 1;
