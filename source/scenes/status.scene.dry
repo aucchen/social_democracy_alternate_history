@@ -234,3 +234,11 @@ Radicalism: [+ radicalization : coalition_dissent +]
 [? if black_thursday_seen = 1 and moderate_plan_adopted = 0 : Moderate Plan Support: [+ moderate_plan_support : coalition_dissent +] ?]
 
 [? if economic_plan > 0 : Implemented Economic Plans: [? if moderate_plan_progress = 0 and nationalization_progress = 0 and wtb_implemented = 0 : None?][? if nationalization_progress > 0 : Nationalization?][? if wtb_implemented > 0 or moderate_plan_progress > 0 : , ?][? if wtb_implemented > 0 : WTB-Plan?][? if moderate_plan_progress > 0 and wtb_implemented > 0 : , ?][? if moderate_plan_progress > 0 : Moderate?] ?]
+
+= [? if nazi_urgency > 0 or investigate_far_right > 0 : Antifascist Actions ?]
+
+[? if nazi_urgency > 0 : Nazi Urgency: [+ nazi_urgency : coalition_dissent +] ?]
+
+[? if investigate_far_right > 0 : Far-Right Investigations: [+ investigate_far_right : coalition_dissent +] ?]
+
+[? if nazi_urgency > 0 : Iron Front: [? if iron_front_formed = 0: Not Formed ?][? if iron_front_formed = 1 : Formed ?] ?]
