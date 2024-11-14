@@ -74,7 +74,7 @@ for (var c of Q.classes) {
         Q.grosse_volkspartei = 0;
     }
 }
-if (Q.grosse_volkspartei == 1 and Q.peoples_party == 1) {
+if (Q.grosse_volkspartei == 1 && Q.peoples_party == 1) {
     this.achieve('grosse_volkspartei')
 }
 // Die Rote Fahne - join the KPD in the May Day march.
