@@ -552,3 +552,7 @@ table {
     fill: #C40000;
 }
 
+.tooltip-text {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
