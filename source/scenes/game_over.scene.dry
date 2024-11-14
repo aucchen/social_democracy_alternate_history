@@ -68,7 +68,15 @@ for (var c of Q.classes) {
         Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
     }
 }
-
+Q.grosse_volkspartei = 1;
+for (var c of Q.classes) {
+    if (Q[c+'_spd_normalized'] < 40) {
+        Q.grosse_volkspartei = 0;
+    }
+}
+if (Q.grosse_volkspartei == 1 and Q.peoples_party == 1) {
+    this.achieve('grosse_volkspartei')
+}
 // Die Rote Fahne - join the KPD in the May Day march.
 // Mehrheitspartei - form an SPD majority government in the Reichstag.
 // Panik im Mittelstand - have over 50% of New Middle Class support.
@@ -84,6 +92,12 @@ if (Q.catholics_spd_normalized && Q.catholics_spd_normalized >= 50) {
 }
 if (Q.workers_spd_normalized >= 80 && Q.new_middle_spd_normalized <= 20 && Q.old_middle_spd_normalized <= 20 && Q.rural_spd <= 20) {
     this.achieve('klassenkampf');
+}
+if (Q.workers_spd_normalized >= 80 && Q.new_middle_spd_normalized <= 20 && Q.old_middle_spd_normalized <= 20 && Q.rural_spd <= 20 && Q.civil_war_won == 1 && Q.kpd_relation >= 60) {
+    this.achieve('klassenkampfunion');
+}
+if (Q.rb_stay == 1 && Q.z_support_braun == 1 && Q.civil_war_won == 1) {
+    this.achieve('schutzbund');
 }
 // Räterepublik - begin the transformation to a socialist economy.
 if (Q.spd_in_government && ((Q.nationalization_progress >= 2 && Q.economic_democracy >= 3) || (Q.nationalization_progress >= 1 && Q.economic_democracy >= 4))) {
@@ -108,6 +122,9 @@ if ((Q.chancellor_party == "NSDAP" || Q.chancellor == "Hitler" || Q.president ==
 // Heidelberger Programm - fulfill the goals of the Heidelberg programm - increase welfare, reform justice, support women's rights, progressive taxation, works councils, build a European Union.
 if ((Q.welfare > 0 && Q.judicial_reform >= 2 && Q.womens_work >= 1 && Q.family_law >= 1 && Q.upper_tax_rates > Q.lower_tax_rates && Q.works_councils > 0 && Q.eu > 0)) {
     this.achieve('heidelberger_programm');
+}
+if (Q.working_hours >= 3 && Q.workers_safety > 0 && Q.pro_labor > 0 && Q.works_councils >= 3 && Q.tariffs < 0 && Q.pro_consumer > 1 && Q.wtb_implemented >= 3 && Q.peoples_party == 0) {
+    this.achieve('arbeiterpartei')
 }
 !}
 
@@ -331,6 +348,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
+[? if game_achievement_grosse_volkspartei: **Große Volkspartei** - form a People's Party and have at least 40% support from every demographic. ?]
+
 [? if game_achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
 
 [? if game_achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
@@ -363,11 +382,17 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
+[? if game_achievement_klassenkampfunion: **Klassenkampfunion** - Achieve the prerequisites for Klassenkampf, while winning the civil war with full KPD support. ?]
+
+[? if game_achievement_schutzbund: **Schutzbund** - Convince Zentrum and the DDP to remain in the Reichsbanner, have Zentrum support Braun in the presidential elections, and win the civil war. ?]
+
 [? if game_achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if game_achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
 
 [? if game_achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
+
+[? if game_achievement_arbeiterpartei: **Arbeiterpartei** - without forming a People's Party, enforce the 40-hour work week and shorter working hours, improve safety regulations, support workers' demands, empower works councils, reduce tariffs, implement food procurement and fully enact the WTB Plan. ?]
 
 [? if game_achievement_drei_pfeile: **Drei Pfeile** - defeat a coup without a civil war. ?]
 
@@ -424,6 +449,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
+[? if achievement_grosse_volkspartei: **Große Volkspartei** - form a People's Party and have at least 40% support from every demographic. ?]
+
 [? if achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
 
 [? if achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
@@ -456,11 +483,17 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
+[? if achievement_klassenkampfunion: **Klassenkampfunion** - Achieve the prerequisites for Klassenkampf, while winning the civil war with full KPD support. ?]
+
+[? if achievement_schutzbund: **Schutzbund** - Convince Zentrum and the DDP to remain in the Reichsbanner, have Zentrum support Braun in the presidential elections, and win the civil war. ?]
+
 [? if achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
 
 [? if achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
+
+[? if achievement_arbeiterpartei: **Arbeiterpartei** - without forming a People's Party, enforce the 40-hour work week and shorter working hours, improve safety regulations, support workers' demands, empower works councils, reduce tariffs, implement food procurement and fully enact the WTB Plan. ?]
 
 [? if achievement_drei_pfeile: **Drei Pfeile** - defeat a coup without a civil war. ?]
 
@@ -515,6 +548,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
+[? if not achievement_grosse_volkspartei: **Große Volkspartei** - form a People's Party and have at least 40% support from every demographic. ?]
+
 [? if not achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
 
 [? if not achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
@@ -547,11 +582,17 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
+[? if not achievement_klassenkampfunion: **Klassenkampfunion** - Achieve the prerequisites for Klassenkampf, while winning the civil war with full KPD support. ?]
+
+[? if not achievement_schutzbund: **Schutzbund** - Convince Zentrum and the DDP to remain in the Reichsbanner, have Zentrum support Braun in the presidential elections, and win the civil war. ?]
+
 [? if not achievement_raterepublik: **Räterepublik** - begin the transformation to a socialist economy. ?]
 
 [? if not achievement_polykrise: **Polykrise** - survive a capital strike and a fascist coup. ?]
 
 [? if not achievement_syndikalismus: **Syndikalismus** - support factory takeovers by the workers. ?]
+
+[? if not achievement_arbeiterpartei: **Arbeiterpartei** - without forming a People's Party, enforce the 40-hour work week and shorter working hours, improve safety regulations, support workers' demands, empower works councils, reduce tariffs, implement food procurement and fully enact the WTB Plan. ?]
 
 [? if not achievement_drei_pfeile: **Drei Pfeile** - defeat a coup without a civil war. ?]
 
