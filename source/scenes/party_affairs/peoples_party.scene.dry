@@ -20,6 +20,7 @@ In order to build a socialist majority, many reformists and neorevisionists are 
 - @no_new_ideas: No, we will always be a party of the working class.
 - @root: Perhaps we can discuss this at a later time.
 - @easy_discard
+- @cancel_advisor_action
 
 @build_support
 view-if: (neorevisionist_strength + reformist_strength < left_strength + center_strength) or peoples_party_support < 5

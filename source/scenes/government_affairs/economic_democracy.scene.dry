@@ -21,6 +21,7 @@ As we control the Labor [? if economic_minister_party == "SPD" : and Economic ?]
 - @cooperatives_1
 - @return: Do not enact any policies for now.
 - @easy_discard
+- @cancel_advisor_action
 
 @expand_councils
 title: Support works councils.

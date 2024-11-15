@@ -26,6 +26,7 @@ We can enact policies in Prussia.
 - @sign_concordat: Sign a concordat with the Vatican.
 - @root: No new policies are needed.
 - @easy_discard
+- @cancel_advisor_action
 
 @police_loyalty
 view-if: prussian_police_loyalty < 1

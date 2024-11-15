@@ -1,0 +1,18 @@
+title: Cancel action.
+view-if: last_advisor_action = 1
+go-to: root
+on-arrival: {!
+if (Q.month_actions > 0) {
+    Q.month_actions -= 1;
+}
+Q.advisor_action_timer = 0;
+// Canceling an advisor action
+// reset the timer...
+if (Q[card.id + "_timer"]) {
+    Q[card.id + "_timer"] = 0;
+}
+// reduce visit count
+if (this.state.visits[card.id]) {
+    this.state.visits[card.id] -= 1;
+}
+!}

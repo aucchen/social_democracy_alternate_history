@@ -16,6 +16,7 @@ The Reichswehr is a deeply reactionary institution that has been generally hosti
 - @reform: Conduct a thorough reform of the ranks, reducing the influence of reactionaries and making it more hospitable to us.
 - @root: No change to military policy.
 - @easy_discard
+- @cancel_advisor_action
 
 @increase_funding
 subtitle: -1 budget

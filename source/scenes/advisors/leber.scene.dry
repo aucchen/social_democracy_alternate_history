@@ -30,7 +30,7 @@ title: Military affairs
 subtitle: We can set our military policy.
 choose-if: advisor_action_timer == 0 and spd_in_government and reichswehr_minister_party == "SPD"
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The SPD is not in government. ?][? if reichswehr_minister_party != "SPD": The SPD does not have the Reichswehr ministry. ?]
-on-arrival: advisor_action_timer = 6;
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1
 go-to: military_policy
 
 @support_peoples_party
@@ -49,7 +49,7 @@ subtitle: Can we expand our party beyond the industrial working class?
 view-if: peoples_party == 0
 choose-if: peoples_party_support >= 3 and advisor_action_timer = 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if peoples_party_support < 3: There is not enough support for this policy within the party. ?]
-on-arrival: advisor_action_timer = 6;
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1
 go-to: peoples_party
 
 @campaigning_peoples_party

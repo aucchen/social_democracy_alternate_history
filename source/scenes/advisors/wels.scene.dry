@@ -12,6 +12,7 @@ Wels is the long-time chairman of the SPD. He is a gifted organizer and a member
 - @clear_agenda
 - @party_discipline
 - @emergency_fundraising
+- @snap_election
 - @root: Return to main
 
 @clear_agenda
@@ -48,3 +49,13 @@ unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +
 on-arrival: advisor_action_timer = 6; resources += dues
 
 We have gained +[+ dues +] resources.
+
+@snap_election
+title: Snap Election
+subtitle: Call a snap election.
+unavailable-subtitle: [? if chancellor != "Wels" : Wels must be Chancellor or President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and (chancellor == "Wels")
+on-arrival: advisor_action_timer = 6; time_to_election = 3
+call: set_next_election_time
+
+We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].

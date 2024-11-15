@@ -1,8 +1,10 @@
 title: Return card to hand.
-view-if: difficulty <= 0
+view-if: difficulty <= 0 and last_advisor_action = 0
 go-to: root
 on-arrival: {!
-Q.month_actions -= 1;
+if (Q.month_actions > 0) {
+    Q.month_actions -= 1;
+}
 // return card to hand
 var card = this.state.lastPlayedCard;
 card.image = card.cardImage;
