@@ -41,4 +41,4 @@ choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
 on-arrival: advisor_action_timer = 6; labor_dissent -= 5; labor_strength += 5
 
-We have reduced tensions with the Labor faction.
+We have reduced tensions with the Labor faction, and increased its strength in the party.

@@ -7,6 +7,7 @@ Q.sh_power = Math.round(Q.sh_strength*Q.sh_militancy);
 Q.rfb_power = Math.round(Q.rfb_strength*Q.rfb_militancy);
 Q.rw_power = Math.round(Q.reichswehr_strength*Q.reichswehr_militancy*Q.reichswehr_loyalty);
 Q.police_power = Math.round(Q.prussian_police_strength*Q.prussian_police_militancy*Q.prussian_police_loyalty);
+Q.last_advisor_action = 0;
 // make sure no stat is below 0.
 for (var c of Q.classes) {
     for (var party of Q.parties) {

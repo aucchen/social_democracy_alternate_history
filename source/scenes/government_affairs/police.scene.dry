@@ -19,6 +19,7 @@ As with the state police units and the Reichswehr, the internal police tends to 
 - @deport_hitler
 - @root: Take no action for now.
 - @easy_discard
+- @cancel_advisor_action
 
 @loyalty
 on-arrival: interior_police_loyalty += 0.1

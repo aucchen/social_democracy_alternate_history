@@ -28,6 +28,7 @@ Lower-income tax rates: [+ lower_tax_rates : taxation +]
 - @tariffs
 - @root: Do not change the tax system.
 - @easy_discard
+- @cancel_advisor_action
 
 @raise_progressive
 subtitle: This does not change overall revenue.

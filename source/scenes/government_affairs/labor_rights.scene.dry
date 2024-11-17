@@ -25,6 +25,7 @@ With control of the Labor Ministry, we can set national standards for labor. Our
 - @unemployment_insurance: Fund the unemployment insurance program.
 - @root: Do not enact any policies.
 - @easy_discard
+- @cancel_advisor_action
 
 @working_hours
 view-if: working_hours < 2

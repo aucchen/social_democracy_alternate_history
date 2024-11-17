@@ -424,7 +424,7 @@ if (d3 && window) {
             {'spd': 'SPD', 'kpd': 'KPD', 'ddp': 'DDP', 'z': 'Z + BVP', 'dvp': 'DVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others', 'sapd': 'SAPD'});
     lines.width(width).height(400);
     //var svg = lines(Q.election_records);
-    if (Q.election_records) {
+    if (Q.election_records.length > 0) {
         d3.select("#election_history").datum(Q.election_records).call(lines);
     }
     //document.getElementById('election_history').innerHTML = svg.outerHTML;
@@ -478,6 +478,8 @@ if (d3 && window) {
 {!</table>!}
 
 = Election history
+
+[? if year = 1928 and month < 5 : No new elections yet. ?]
 
 {!<svg id="election_history" style="width: 500px; height: 400px;"> </svg>!}
 

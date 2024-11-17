@@ -18,6 +18,7 @@ The Judiciary is one of the most reactionary components of the government, along
 - @minor_reforms: Carry out minor judicial reforms.
 - @as_is: Leave the judiciary as it is.
 - @easy_discard
+- @cancel_advisor_action
 
 @reform
 subtitle: -1 budget
