@@ -10,7 +10,8 @@ for (var c of Q.classes) {
         class_votes += Q[c+'_'+party];
     }
     for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] = Math.round(100*Q[c+'_'+party]/class_votes);
+        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
+        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
     }
 }
 
@@ -43,6 +44,8 @@ for (var party of Q.parties) {
     Q[party+'_votes_dec'] = Math.round(Q[party+'_normalized']*1000)/10;
     Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
     //Q[party+'_votes'] = Q[party+'_votes_dec'];
+    // display
+    Q[party + '_votes_disp'] = Q[party+'_votes_dec'].toFixed(1);
 }
 !}
 go-to: jumpScene

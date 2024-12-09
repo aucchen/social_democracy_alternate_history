@@ -41,6 +41,8 @@ on-arrival: pro_republic += 5*(1-dissent); democratization += 1; workers_spd += 
 The Iron Front rallies in defense of the democratic republic and against dictatorship.
 
 @wtb
+choose-if: return_to_normalcy = 0
+unavailable-subtitle: The economic crisis is largely over now, and the public is no longer interested in hearing about it.
 view-if: wtb_adopted == 1
 on-arrival: workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); new_middle_spd += 5*(1-dissent); old_middle_spd += 3*(1-dissent); rural_spd += 3*(1-dissent);
 

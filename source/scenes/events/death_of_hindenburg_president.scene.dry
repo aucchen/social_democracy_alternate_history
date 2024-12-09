@@ -1,0 +1,297 @@
+title: The Death of Hindenburg
+subtitle: The President has died...
+new-page: true
+view-if: year = 1934 and month >= 7 and president = "Hindenburg"
+on-arrival: round = 0; hindenburg_dead = 1; president = "Bumke (acting)"; preisdent = "Großmann (acting)" if judicial_reform >= 4; spd_candidate = "Eckener"; kpd_candidate = "Thälmann"; kpd_candidate = "Münzenberg" if kpd_party_leader = "Conciliators"; z_candidate = "Adenauer"; ddp_candidate = "Gessler"; nsdap_candidate = "Hitler"; nsdap_candidate = "Göring" if hitler_deported; dnvp_candidate = "Seldte"; dvp_candidate = "Gessler"; other_candidate = "Seldte"
+max-visits: 1
+tags: event
+
+= The Death of Hindenburg
+
+President Paul von Hindenburg has passed away at age 86. An era of history is closing, and the future remains to be seen.
+
+The nation engages in an outpouring of grief for its war hero and president, with even some sympathy among committed republicans and socialists. After all, Hindenburg steered the republic through some of its most challenging times, without giving in to extremists on the far right. Perhaps he is one reason democracy remains alive.
+
+New presidential elections are to be held as soon as possible. The German political landscape is wide open, with contenders from all over the political space. In the meantime, Supreme Court chief justice [? if judicial_reform < 4 : Erwin Bumke ?][? if judicial_reform >= 4 : Hermann Großmann ?] serves as the acting president.
+
+# Hermann Großmann is the supreme court chief justice in judicial reform.
+
+- @candidates: Who are the candidates so far?
+
+@candidates
+
+[? if not hitler_deported : Of course, Adolf Hitler will be running for the Nazis, in his third run. We have kept him out of power so far, but nothing is certain. ?]
+[? if hitler_deported : With Hitler deported, the Nazis will be running Hermann Göring as their candidate. ?]
+
+The DNVP will nominate Franz Seldte, leader of the Stahlhelm paramilitary group. He will be endorsed by many of Hindenburg's most right-wing supporters.
+
+[? if kpd_party_leader = "Conciliators" : Given the failure of Thälmann's previous runs for president, and his declining stature in the party, the KPD will be running Willi Münzenberg, a controversial figure sometimes called the "Red millionaire". He is a media magnate who leads a number of Communist front organizations. ?]
+[? if kpd_party_leader != "Conciliators" : This will be Ernst Thälmann's third run for president as leader of the KPD. Despite his previous electoral defeats, he retains the loyalty of the party as well as Stalin's Soviet Union. ?]
+
+Many republicans of the Center, [+ ddp_name +], and SPD float the idea of running Hugo Eckener, a nationally renowed Zeppelin captain, as a unity candidate. While he has some nationalistic views, he is also ardently opposed to Nazism.
+
+Currently, the Center and [+ ddp_name +] are planning to run separate candidates in the first round if the SPD runs its own candidate. The Center is considering nominating Konrad Adenauer, mayor of Köln and member of the Prussian state legislature. He calls for an alliance of conservative Christian democrats that encompasses both Catholics and Protestants. The [+ ddp_name +] might nominate Otto Gessler, former defense minister, who has crossover appeal to conservatives in the DVP and other parties who dislike the Stahlhelm.
+
+As for the SPD, we could try to run a joint Weimar Coalition candidate or run our own candidate. [? if braun_campaign : Otto Braun had run and failed in the previous two presidential elections, and no longer wishes to run. His wife is ill enough that he wishes to stay by her side. ?][? if braun_campaign = 0 and spd_prussia : Otto Braun does not wish to run, but he is willing to be convinced that he is needed at this moment. His wife is terminally ill, and he does not want more responsibilities. ?] Kurt Schumacher is an ambitious rising star in the party, and would be all too willing to run. He was a hero in the Great War, but his relatively young age might be relevant. [? if womens_rights >= 6 and family_law >= 1 and womens_work >= 1: Or, perhaps it is time for a woman to become president. Germany and the SPD have been leading on women's rights for years, and it is only fitting that we should elect the world's first female president. Perhaps Marie Juchacz could be seen as the "mother of the nation". ?]
+
+# if Otto Braun ran last time: he can only run if he controls Prussia. Otherwise, it's Kurt Schumacher.
+
+# options: 
+# - Otto Braun (only if spd_prussia)
+# - Kurt Schumacher
+# - Marie Juchacz (The mother of the nation, only available if women's rights is full)
+
+- @eckener_r1: Support Hugo Eckener as a joint Weimar Coalition candidate.
+- @adenauer_r1: Support Konrad Adenauer of the Center Party.
+- @gessler_r1: Support Otto Gessler of the [+ ddp_name +].
+- @thalmann_r1: Support Ernst Thälmann of the KPD.
+- @munzenberg_r1: Support Willi Münzenberg of the KPD.
+- @braun_r1: Support Otto Braun.
+- @schumacher_r1: Support Kurt Schumacher.
+- @juchacz_r1: Support Marie Juchacz.
+
+@eckener_r1
+subtitle: We still have to convince the other parties to support him.
+on-arrival: spd_candidate = "Eckener"
+go-to: r1_menu
+
+
+@adenauer_r1
+on-arrival: spd_candidate = "Adenauer"; z_relation += 4; Adenauer_bonus -= 2.5; Seldte_bonus +=2.5;
+go-to: r1_menu
+
+We have endorsed Konrad Adenauer of the Center Party.
+
+With our support of Adenauer, the Bavarian People's Party has once again broken away from the Center Party, shifting their support to the Stahlhelm leader Seldte.
+
+@gessler_r1
+on-arrival: spd_candidate = "Gessler"; ddp_relation += 4; dvp_candidate = "Seldte";
+go-to: r1_menu
+
+We have endorsed Otto Gessler, independent formerly of the DDP.
+
+With our support of Gessler, the DVP components supporting him have broken away and are now shifting their support to Seldte.
+
+@thalmann_r1
+view-if: kpd_candidate = "Thälmann" 
+choose-if: kpd_relation >= 50 and reformist_strength < left_strength
+unavailable-subtitle: [? if kpd_relation < 50 : We do not have good enough relations with the Communists, so they are not even willing to accept our support. ?] [? if reformist_strength >= left_strength : The reformist faction is able to dissuade the party from supporting this arrangement. ?]
+on-arrival: spd_candidate = "Thälmann"; kpd_relation += 5; reformist_dissent += 6; ddp_relation -= 5; dvp_relation -= 8; z_relation -= 6
+go-to: r1_menu
+
+
+@munzenberg_r1
+view-if: kpd_candidate = "Münzenberg" 
+choose-if: kpd_relation >= 40 and reformist_strength < left_strength
+unavailable-subtitle: [? if kpd_relation < 40 : We do not have good enough relations with the Communists, so they are not even willing to accept our support. ?] [? if reformist_strength >= left_strength : The reformist faction is able to dissuade the party from supporting this arrangement. ?]
+on-arrival: spd_candidate = "Münzenberg"; kpd_relation += 5; reformist_dissent += 5; ddp_relation -= 3; dvp_relation -= 5; z_relation -= 5
+go-to: r1_menu
+
+
+@braun_r1
+subtitle: -2 resources.
+unavailable-subtitle: [? if resources < 2 : -2 resources - Not enough resources. ?][? if braun_campaign != 0 or not spd_prussia : Braun no longer wants to run. ?]
+choose-if: braun_campaign = 0 and spd_prussia and resources >= 2
+on-arrival: spd_candidate = "Braun"; resources -= 2
+go-to: r1_menu
+
+
+@schumacher_r1
+subtitle: -2 resources.
+unavailable-subtitle: [? if resources < 2 : -2 resources - Not enough resources. ?]
+choose-if: resources >= 2
+go-to: r1_menu
+
+
+@juchacz_r1
+subtitle: -2 resources.
+unavailable-subtitle: [? if resources < 2 : -2 resources - Not enough resources. ?]
+view-if: womens_rights >= 6 and family_law >= 1 and womens_work >= 1
+choose-if: resources >= 2
+go-to: r1_menu
+
+
+@r1_menu
+
+- @convince_z_unity
+- @convince_z_spd
+- @convince_ddp_unity
+- @convince_ddp_spd
+- @convince_kpd_spd
+- @round_1: Let the voting begin.
+
+
+# convincing Z to support a unity candidate
+@convince_z_unity
+title: Convince the Center Party to support [+ spd_candidate +]
+view-if: spd_candidate = "Eckener" or spd_candidate = "Gessler"
+on-arrival: {!
+!}
+go-to: r1_menu
+max-visits: 1
+
+The Bavarian People's Party refuses to join the coalition.
+
+# convincing Z to support an SPD candidate
+@convince_z_spd
+title: Convince the Center Party to support [+ spd_candidate +]
+view-if: spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz"
+on-arrival: {!
+
+!}
+go-to: r1_menu
+max-visits: 1
+
+@convince_ddp_unity
+title: Convince the [+ ddp_name +] to support [+ spd_candidate +]
+view-if: spd_candidate = "Eckener" or spd_candidate = "Adenauer"
+go-to: r1_menu
+max-visits: 1
+
+@convince_ddp_spd
+title: Convince the [+ ddp_name +] to support [+ spd_candidate +]
+view-if: spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz"
+go-to: r1_menu
+max-visits: 1
+
+@convince_kpd_spd
+title: Convince the KPD to support [+ spd_candidate +]
+view-if: spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz"
+go-to: r1_menu
+max-visits: 1
+
+
+@round_1
+go-to: election_algorithm
+set-jump: post_election
+
+
+@post_election
+on-arrival: {!
+var candidate_descs = {
+Hitler: "Adolf Hitler of the NSDAP",
+Goring: "Hermann Göring of the NSDAP",
+Seldte: "Franz Seldte of the Stahlhelm/DNVP",
+Eckener: "the independent republican candidate Hugo Eckener",
+Adenauer: "Konrad Adenauer of the Center Party",
+Gessler: "Otto Gessler, independent formerly of the DDP",
+Thalmann: "Ernst Thälmann of the KPD",
+Munzenberg: "Willi Münzenberg of the KPD",
+Braun: "Otto Braun of the SPD",
+Schumacher: "Kurt Schumacher of the SPD",
+Juchacz: "Marie Juchacz of the SPD"
+}
+var candidate_votes = {};
+for (var i = 0; i < Q.parties.length; i++) {
+    var party = Q.parties[i];
+    var supported_candidate = Q[party + '_candidate'];
+    supported_candidate = supported_candidate.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    Q[supported_candidate + '_running'] = 1;
+    if (supported_candidate in candidate_votes) {
+        candidate_votes[supported_candidate] += Q[party+'_normalized'];
+    } else {
+        candidate_votes[supported_candidate] = Q[party+'_normalized'];
+    }
+}
+var total_votes = 0;
+Q.winner = "";
+Q.winner_votes = 0;
+Q.has_majority = 0;
+for (var k in candidate_votes) {
+    if (Q[k + '_bonus']) {
+        candidate_votes[k] += Q[k + '_bonus']/100;
+    }
+    total_votes += candidate_votes[k];
+    if (candidate_votes[k] > Q.winner_votes) {
+        Q.winner = k;
+        Q.winner_votes = candidate_votes[k];
+    }
+    if (candidate_votes[k] >= 0.5) {
+        Q.has_majority = 1;
+    }
+}
+for (var k in candidate_votes) {
+    Q[k + '_votes'] = Math.round(1000*candidate_votes[k]/total_votes)/10;
+    Q[k + '_votes_disp'] = Q[k + '_votes'].toFixed(1);
+}
+Q.winner_votes = Math.round(1000*Q.winner_votes/total_votes)/10;
+Q.winner_votes_disp = Q.winner_votes.toFixed(1);
+Q.winner_desc = candidate_descs[Q.winner];
+
+Q.round += 1
+!}
+go-to: r2_start if round = 1 and not has_majority; election_end if round > 1; r1_winner if has_majority
+
+Election results:
+
+[? if Hitler_running : Hitler - [+ Hitler_votes_disp +]% ?]
+
+[? if Seldte_running : Seldte - [+ Seldte_votes_disp +]% ?]
+
+[? if Thalmann_running : Thälmann - [+ Thalmann_votes_disp +]% ?]
+[? if Munzenberg_running : Münzenberg - [+ Munzenberg_votes_disp +]% ?]
+
+[? if Adenauer_running : Adenauer - [+ Adenauer_votes_disp +]% ?]
+
+[? if Gessler_running : Gessler - [+ Gessler_votes_disp +]% ?]
+
+[? if Braun_running : Braun - [+ Braun_votes_disp +]% ?]
+[? if Schumacher_running : Schumacher - [+ Schumacher_votes_disp +]% ?]
+[? if Juchacz_running : Juchacz - [+ Juchacz_votes_disp +]% ?]
+
+@r2_start
+on-arrival: {!
+// 1. coordination between the right/far-right
+if (Q.Hitler_votes && Q.Seldte_votes) {
+    if (Q.Hitler_votes > Q.Seldte_votes) {
+        Q.dnvp_candidate = "Hitler";
+        Q.other_candidate = "Hitler";
+        Q.Hitler_bonus = -0.25*Q.other_votes;
+    } else {
+        Q.nsdap_candidate = "Seldte";
+    }
+} else if (Q.Goring_votes && Q.Seldte_votes) {
+    if (Q.Goring_votes > Q.Seldte_votes) {
+        Q.dnvp_candidate = "Göring";
+        Q.other_candidate = "Göring";
+    } else {
+        Q.nsdap_candidate = "Seldte";
+    }
+}
+!}
+go-to: r2_menu
+
+In the lead is [+ winner_desc +]. There is no majority in the first round. In the second round, any candidate who wins a plurality will win overall.
+
+[? if dnvp_candidate = "Hitler" : The DNVP and NSDAP have consolidated their electoral efforts, with the DNVP now endorsing Hitler for the second round. Some right-wing voters are uncomfortable with this arrangement, and might not vote. ?]
+[? if dnvp_candidate = "Göring" : The DNVP and NSDAP have consolidated their electoral efforts, with the DNVP now endorsing Göring for the second round. ?]
+[? if nsdap_candidate = "Seldte" : The DNVP and NSDAP have consolidated their electoral efforts, with the NSDAP now endorsing Seldte for the second round. ?]
+
+What should we do?
+
+@r2_menu
+
+# convince DDP/DVP/Z/KPD to endorse our candidate
+# change the endorsement, if they aren't endorsing our candidate
+# campaign
+
+- @r2_vote: Let the voting begin.
+
+@r2_vote
+go-to: election_algorithm
+set-jump: post_election
+
+
+
+@r1_winner
+
+The election is over in the first round, won by [+ winner_desc +].
+
+# TODO: different paths for the different outcomes...
+
+
+
+@election_end
+
+The election has been won by [+ winner_desc +].
+

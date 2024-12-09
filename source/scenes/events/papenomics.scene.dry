@@ -1,0 +1,11 @@
+title: Chancellor Papen's Economic Plan
+subtitle: Tax cuts for the rich
+view-if: papenomics_timer = 0 and chancellor = "Papen"
+max-visits: 1
+
+
+= Papen's Economic Plan
+
+Papen and his "Cabinet of Barons" are pushing forward an economic plan
+
+- @root: There is nothing we can do...

@@ -5,6 +5,7 @@ view-if: year >= 1931 and month >= 2 and unemployed >= 18 and welfare < 0 and wo
 on-arrival: workers_spd *= 0.9 if chancellor_party == "SPD"; workers_spd *= 0.9 if spd_in_government == 1; workers_nsdap += 5 if spd_in_government; workers_kpd += 5 if spd_in_government; unemployed_nsdap += 5 if spd_in_government
 tags: event
 max-visits: 1
+face-image: Kollwitz_Hospital.jpg
 
 People are calling Chancellor [+ chancellor +] the Hunger Chancellor because of his perceived callousness in the face of the depression. [? if chancellor_party == "SPD" : This is obviously a very bad sign for us. ?]
 

@@ -1,0 +1,33 @@
+title: The conclusion of the Weltbühne case
+subtitle: Carl von Ossietzky and collaborators are finally sentenced.
+new-page: true
+view-if: year = 1931 and month >= 11 and weltbuhne_seen = 1 and not weltbuhne_dropped
+max-visits: 1
+on-arrival: weltbuhne_conclusion = 1
+face-image: img/weltbune.jpg
+tags: event
+go-to: weltbuhne_dropped if judicial_reform >= 3; weltbuhne_convicted if judicial_reform < 3
+
+= The Weltbühne Trial, Conclusion
+
+@weltbuhne_convicted
+on-arrival: west_relation -= 1; east_relation -= 1; reparations_negotiation -= 1; nationalism += 5; pacifism -= 1
+
+Finally, a court has made a decision in the Weltbühne case, sentencing the editor Carl von Ossietzky and journalist Walter Kreiser to prison for 18 months for revealing military secrets. There is outrage in the international community, who see this as yet another example of Germany's slide into militarism.
+
+- @drop_case: Wait! Maybe we can pardon the journalists?
+- @root: Accept the court's decision.
+
+@drop_case
+choose-if: justice_minister_party = "SPD"
+view-if: spd_in_government
+unavailable-subtitle: We do not control the Justice Ministry.
+on-arrival: west_relation += 1; east_relation += 1; reparations_negotiation += 1; pacifism += 1
+
+With our control of the Justice Ministry, we are able to pardon von Ossietzky and Kreiser. This restores some of our reputation with pacifists and the international community.
+
+
+@weltbuhne_dropped
+on-arrival: west_relation += 1; east_relation += 1; reparations_negotiation += 1; ddp_relation += 3; pacifism += 1
+
+Finally, a judge has made a decision in the Weltbühne case, clearing the editor Carl von Ossietzky and journalist Walter Kreiser of all charges! The international community and pacifists within Germany are rejoicing in the verdict. Finally Germany can be said to have overcome its old imperial militarism.

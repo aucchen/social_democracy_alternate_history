@@ -108,6 +108,8 @@ Our speakers denounce the military establishment and all the spending entering t
 
 @wtb
 view-if: wtb_adopted = 1
+choose-if: return_to_normalcy = 0
+unavailable-subtitle: The economic crisis is largely over now, and the public is no longer interested in hearing about it.
 on-arrival: wtb_support += 1; workers_spd += 6*(1-dissent); unemployed_spd += 6*(1-dissent); rural_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent); old_middle_spd += 3*(1-dissent);
 
 The WTB plan has become a popular rallying cry for our party. The workers are eager to go back to work, and that is exactly what the plan promises.

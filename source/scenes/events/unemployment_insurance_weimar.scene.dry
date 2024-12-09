@@ -5,6 +5,7 @@ view-if: spd_in_government = 1 and (year = 1930 or year = 1931 or year = 1932) a
 on-arrival: unemployment_insurance_crisis += 1; budget -= 1 if budget >= 1; unemployment_insurance_timer = 8; crisis_urgency += 1; unemployment_insurance_threshold = unemployed
 tags: event
 max-visits: 2
+face-image: img/Kollwitz_Arbeitslosigkeit.jpg
 
 = Unemployment Insurance Crisis
 

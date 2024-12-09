@@ -6,6 +6,7 @@ on-arrival: unemployment_insurance_crisis += 1; budget -= 1 if budget >= 1; unem
 tags: event
 max-visits: 2
 go-to: what_do if unemployment_insurance_crisis = 2
+face-image: img/Kollwitz_Arbeitslosigkeit.jpg
 
 = Unemployment Insurance Crisis
 

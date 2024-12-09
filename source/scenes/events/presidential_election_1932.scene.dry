@@ -149,7 +149,7 @@ The KPD now endorses Braun in the presidential election! We ask them to keep the
 max-visits: 1
 go-to: convince_liberals_success if dvp_relation >= 50; convince_liberals_fail if dvp_relation < 50
 
-The liberal vote (DDP and DVP) has been falling over time, so they will probably be of minimal help to us. For what it's worth, the DDP is already willing to support Braun.
+The liberal vote ([+ ddp_name +] and DVP) has been falling over time, so they will probably be of minimal help to us. For what it's worth, the [+ ddp_name +] is already willing to support Braun.
 
 @convince_liberals_success
 on-arrival: dvp_support_braun = 1
@@ -235,10 +235,10 @@ if (Q.thalmann_to_braun_bonus) {
 }
 
 // check for majority
-Q.hindenburg_votes = Math.round(Q.hindenburg_votes*100);
-Q.braun_votes = Math.round(Q.braun_votes*100);
-Q.hitler_votes = Math.round(Q.hitler_votes*100);
-Q.thalmann_votes = Math.round(Q.thalmann_votes*100);
+Q.hindenburg_votes = Math.round(Q.hindenburg_votes*1000)/10;
+Q.braun_votes = Math.round(Q.braun_votes*1000)/10;
+Q.hitler_votes = Math.round(Q.hitler_votes*1000)/10;
+Q.thalmann_votes = Math.round(Q.thalmann_votes*1000)/10;
 
 Q.hindenburg_majority = (Q.hindenburg_votes >= 50);
 Q.thalmann_majority = (Q.thalmann_votes >= 50);
@@ -253,18 +253,24 @@ Q.hitler_plurality = (Q.hitler_votes >= Q.hindenburg_votes && Q.hitler_votes >= 
 Q.braun_plurality = (Q.braun_votes >= Q.hindenburg_votes && Q.braun_votes >= Q.hitler_votes && Q.braun_votes >= Q.thalmann_votes);
 // If no candidate gets above 50%, then there's a second round. In the second round, a plurality wins. 
 Q.election_round += 1;
+
+// making the vote numbers nicer for the display
+Q.hindenburg_votes_disp = Q.hindenburg_votes.toFixed(1);
+Q.braun_votes_disp = Q.braun_votes.toFixed(1);
+Q.hitler_votes_disp = Q.hitler_votes.toFixed(1);
+Q.thalmann_votes_disp = Q.thalmann_votes.toFixed(1);
 !}
 go-to: hindenburg_wins if hindenburg_majority == 1; thalmann_wins if thalmann_majority == 1; hitler_wins if hitler_majority == 1; braun_wins if braun_majority == 1; no_majority_round1 if any_majority == 0 and election_round == 1; round2_results if election_round >= 2
 
 Results:
 
-Hindenburg - [+ hindenburg_votes +]%
+Hindenburg - [+ hindenburg_votes_disp +]%
 
-[+ nsdap_candidate +] - [+ hitler_votes +]%
+[+ nsdap_candidate +] - [+ hitler_votes_disp +]%
 
-[? if kpd_support_braun == 0 : Thälmann - [+ thalmann_votes +]% ?]
+[? if kpd_support_braun == 0 : Thälmann - [+ thalmann_votes_disp +]% ?]
 
-[? if braun_campaign > 0 : Braun - [+ braun_votes +]% ?]
+[? if braun_campaign > 0 : Braun - [+ braun_votes_disp +]% ?]
 
 @no_majority_round1
 on-arrival: hitler_support_hindenburg = 1 if (braun_plurality or thalmann_plurality)
@@ -311,8 +317,11 @@ max-visits: 1
 
 @r2_z_success
 go-to: round2_menu
+on-departure: hitler_support_hindenburg = 1 if braun_votes + z_votes > hitler_votes
 
 [? if hitler_support_hindenburg : The Center's opinion is affected by the Nazis' support of Hindenburg, and is willing to turn away from him. ?] The Center are convinced! They will be part of the Braun coalition. [? if hitler_support_hindenburg : In addition, they will also bring in some minor parties who will support us. ?]
+
+[? if  braun_votes + z_votes > hitler_votes: With the Center Party supporting Braun, [+ nsdap_candidate +] has dropped out of the race, and the Nazis have endorsed Hindenburg to prevent a socialist from becoming president. ?]
 
 @r2_z_partial
 
@@ -326,9 +335,12 @@ choose-if: resources >= 2
 subtitle: -2 resources
 unavailable-subtitle: Not enough resources (need 2)
 on-arrival: resources -= 2; z_support_braun = 1
+on-departure: hitler_support_hindenburg = 1 if braun_votes + z_votes > hitler_votes
 go-to: round2_menu
 
 With our resources, the Center are convinced to support Braun over Hindenburg.
+
+[? if  braun_votes + z_votes > hitler_votes: With the Center Party supporting Braun, [+ nsdap_candidate +] has dropped out of the race, and the Nazis have endorsed Hindenburg to prevent a socialist from becoming president. ?]
 
 @r2_z_failed
 go-to: round2_menu

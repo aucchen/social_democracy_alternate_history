@@ -1,0 +1,11 @@
+title: London Economic Conference
+subtitle: The League of Nations unites to tackle the Great Depression...
+view-if: year = 1933 and month >= 6
+on-arrival: london_economic_conference_seen = 1
+new-page: true
+max-visits: 1
+#tags: event
+
+= London Economic Conference
+
+# TODO:
