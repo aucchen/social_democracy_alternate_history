@@ -2,7 +2,7 @@ title: The Death of Hindenburg
 subtitle: The President has died...
 new-page: true
 view-if: year = 1934 and month >= 7 and president = "Hindenburg"
-on-arrival: round = 0; hindenburg_dead = 1; president = "Bumke (acting)"; preisdent = "Großmann (acting)" if judicial_reform >= 4; spd_candidate = "Eckener"; kpd_candidate = "Thälmann"; kpd_candidate = "Münzenberg" if kpd_party_leader = "Conciliators"; z_candidate = "Adenauer"; ddp_candidate = "Gessler"; nsdap_candidate = "Hitler"; nsdap_candidate = "Göring" if hitler_deported; dnvp_candidate = "Seldte"; dvp_candidate = "Gessler"; other_candidate = "Seldte"; is_unity_candidate = 0
+on-arrival: round = 0; hindenburg_dead = 1; president = "Bumke (acting)"; preisdent = "Großmann (acting)" if judicial_reform >= 4; spd_candidate = "Eckener"; kpd_candidate = "Thälmann"; kpd_candidate = "Münzenberg" if kpd_party_leader = "Conciliators"; z_candidate = "Adenauer"; ddp_candidate = "Gessler"; nsdap_candidate = "Hitler"; nsdap_candidate = "Göring" if hitler_deported; dnvp_candidate = "Seldte"; dvp_candidate = "Gessler"; other_candidate = "Seldte"; is_unity_candidate = 0; sapd_candidate = kpd_candidate;
 max-visits: 1
 face-image: img/Hindenburg_head.jpg
 tags: event
@@ -279,7 +279,7 @@ view-if: kpd_relation >= 50 and not historical_mode
 choose-if: resources >= 3
 subtitle: -3 resources
 unavailable-subtitle: Not enough resources (need 3).
-on-arrival: resources -= 3; kpd_candidate = spd_candidate
+on-arrival: resources -= 3; kpd_candidate = spd_candidate; sapd_candidate = spd_candidate;
 go-to: r1_menu if round = 0; r2_campaigning if round > 0
 
 The KPD now endorses [+ spd_candidate +] in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
@@ -287,7 +287,7 @@ The KPD now endorses [+ spd_candidate +] in the presidential election! We ask th
 @kpd_relations
 view-if: kpd_relation >= 60 or (kpd_party_leader == "Conciliators" and kpd_relation >= 45)
 unavailable-subtitle: Our relations are not good enough.
-on-arrival: kpd_candidate = spd_candidate
+on-arrival: kpd_candidate = spd_candidate; sapd_candidate = spd_candidate;
 go-to: r1_menu if round = 0; r2_campaigning if round > 0
 
 The KPD now endorses [+ spd_candidate +] in the presidential election! We ask them to keep their support low-key, so as to not alienate the bourgeois voters.
@@ -344,6 +344,7 @@ var candidate_votes = {};
 for (var i = 0; i < Q.parties.length; i++) {
     var party = Q.parties[i];
     var supported_candidate = Q[party + '_candidate'];
+    console.log(party, supported_candidate);
     supported_candidate = supported_candidate.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     Q[supported_candidate + '_running'] = 1;
     if (supported_candidate in candidate_votes) {
@@ -620,4 +621,4 @@ go-to: nazis_lose
 
 @nazis_lose
 
-With the defeat of the NSDAP-DNVP coalition, the far-right is collapsing into infighting and financial insolvency as their backers begin to flee. The far-right's moment has seemingly ended, at least for now.
+After its electoral defeat, the NSDAP-DNVP coalition is collapsing into infighting and financial insolvency. The far-right's moment has seemingly ended, at least for now.
