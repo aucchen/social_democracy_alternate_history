@@ -38,7 +38,7 @@ Barring that, the Center and [+ ddp_name +] are planning to run separate candida
 As for the SPD, we could support a joint Weimar Coalition candidate or run our own.
 [? if braun_campaign : Otto Braun is tired. He ran and failed in the previous two presidential elections, and no longer wishes to run. His wife is ill enough that he wishes to stay by her side. ?][? if braun_campaign = 0 and not spd_prussia: Otto Braun is tired. After being deposed in Prussia, he has largely retired from politics, and is devoting his time to caring for his dying wife. ?][? if braun_campaign = 0 and spd_prussia : Otto Braun is tired. He does not wish to run, but he is willing to be convinced that he is needed at this moment. His wife is terminally ill, and he does not want more responsibilities. ?]
 Kurt Schumacher is an ambitious rising star in the party, and would be all too willing to run. He was a hero in the Great War, but his relatively young age might be relevant.
-[? if womens_rights >= 6 and family_law >= 1 and womens_work >= 1 and (family_law >= 2 or womens_work >= 2): Or, perhaps it is time for a woman to become president. Germany and the SPD have been leading on women's rights for years, and it is only fitting that we should elect the world's first female president. Perhaps Marie Juchacz could be seen as the "mother of the nation". However, her divorce 28 years ago might make it difficult for the Catholics to support her. ?]
+[? if womens_rights >= 6 and family_law >= 2 and womens_work >= 2 and welfare > 0: Or, perhaps it is time for a woman to become president. Germany and the SPD have been leading on women's rights for years, and it is only fitting that we should elect the world's first female president. Perhaps Marie Juchacz could be seen as the "mother of the nation" for her work in social welfare. However, her divorce 28 years ago might make it difficult for the Catholics to support her. ?]
 
 # if Otto Braun ran last time: he can only run if he controls Prussia. Otherwise, it's Kurt Schumacher.
 
@@ -135,7 +135,7 @@ We have nominated Kurt Schumacher to be our presidential candidate.
 @juchacz_r1
 subtitle: -2 resources.
 unavailable-subtitle: [? if resources < 2 : -2 resources - Not enough resources. ?]
-view-if: womens_rights >= 6 and family_law >= 1 and womens_work >= 1 and (family_law >= 2 or womens_work >= 2)
+view-if: womens_rights >= 6 and family_law >= 2 and womens_work >= 2 and welfare > 0
 choose-if: resources >= 2
 on-arrival: spd_candidate = "Juchacz"; resources -= 2; is_unity_candidate = 0
 go-to: r1_menu
@@ -385,6 +385,7 @@ go-to: r2_start if round = 1 and not has_majority; election_end if round > 1; r1
 Election results:
 
 [? if Hitler_running : Hitler - [+ Hitler_votes_disp +]% ?]
+[? if Goring_running : Göring - [+ Goring_votes_disp +]% ?]
 
 [? if Seldte_running : Seldte - [+ Seldte_votes_disp +]% ?]
 
@@ -409,7 +410,7 @@ if (Q.Hitler_votes && Q.Seldte_votes) {
         Q.dnvp_candidate = "Hitler";
         Q.other_candidate = "Hitler";
         Q.Hitler_bonus = -0.25*Q.other_votes;
-        if (Q.z_candidate = "Adenauer") {
+        if (Q.z_candidate == "Adenauer") {
             Q.Adenauer_bonus += 0.25*Q.other_votes;
         }
     } else {
@@ -594,13 +595,32 @@ Despite the Nazi threats, supporters of the SPD and the democratic parties refus
 
 
 @election_end
-go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring"; seldte_victory if winner = "Seldte"; kpd_victory if winner = "Münzenberg" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"
+go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring"; seldte_victory if winner = "Seldte"; munzenberg_victory if winner = "Münzenberg"; thalmann_victory if winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"
 on-arrival: president = winner
 
 The election has been won by [+ winner_desc +].
 
-@kpd_victory
+@thalmann_victory
+go-to: thalmann_democrat if presidential_powers; thalmann_civil_war if not presidential_powers
 
+@thalmann_civil_war
+on-arrival: kpd_relation = 80
+
+# TODO: depose the chancellor?
+
+Ernst Thälmann wastes no time in consolidating power, using all means available to reshape the government. In response, the far-right immediately launches a coup attempt. We have no choice but to unite with the KPD against the fascists...
+
+- @civil_war: This is civil war.
+
+@thalmann_democrat
+
+Despite the victory of the anti-constitutionalist Thälmann, he appears to be respecting the constitutional constraints on presidential power, at least for now. There is no appetite on the right for a coup at this moment. The bourgeoisie have to live with a communist president, at least for now.
+
+
+@munzenberg_victory
+achievement: rote_millionar
+
+The bourgeois and right-wing parties are up in arms about the prospect of a Communist president, although Münzenberg and the KPD conciliators take pains to assure Germany of their commitment to the democratic republic. There is no energy for a coup against the new president. The bourgeoisie will have to live with whatever comes.
 
 @eckener_win
 achievement: zeppelin_kapitan
@@ -608,6 +628,7 @@ go-to: nazis_lose
 
 
 @juchacz_win
+achievement: wahlrechts
 go-to: nazis_lose
 
 This is a historic victory - Marie Juchacz is the first woman to be elected president in any republic, anywhere in the world.

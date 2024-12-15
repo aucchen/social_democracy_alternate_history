@@ -354,6 +354,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
 
+[? if game_achievement_rote_millionar: **Der rote Millionär** - Willi Münzenberg is president. ?]
+
 [? if game_achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
 [? if game_achievement_deport_hitler : **Der österreichische Gefreiter** - deported Hitler ?]
@@ -404,6 +406,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_zeppelin_kapitan : **Zeppelinkapitän** - Hugo Eckener has been elected president. ?]
 
+[? if game_achievement_wahlrechts : **Wahlrechts für Frauen** - Marie Juchacz has been elected president. ?]
+
 [? if game_achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
 
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
@@ -452,6 +456,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
 [? if achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
+
+[? if achievement_rote_millionar: **Der rote Millionär** - Willi Münzenberg is president. ?]
 
 [? if achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
@@ -503,6 +509,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_zeppelin_kapitan : **Zeppelinkapitän** - Hugo Eckener has been elected president. ?]
 
+[? if achievement_wahlrechts : **Wahlrechts für Frauen** - Marie Juchacz has been elected president. ?]
+
 [? if achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
 
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
@@ -549,6 +557,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_volkspartei: **Volkspartei** - the SPD is a People's Party. ?]
 
 [? if not achievement_sohn_seiner_klasse: **Sohn seiner Klasse** - Ernst Thälmann is either president or chancellor. ?]
+
+[? if not achievement_rote_millionar: **Der rote Millionär** - Willi Münzenberg is president. ?]
 
 [? if not achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
@@ -599,6 +609,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
 
 [? if not achievement_zeppelin_kapitan : **Zeppelinkapitän** - Hugo Eckener has been elected president. ?]
+
+[? if not achievement_wahlrechts : **Wahlrechts für Frauen** - Marie Juchacz has been elected president. ?]
 
 [? if not achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
 
