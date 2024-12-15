@@ -431,7 +431,23 @@ Major changes:
 
 Minor changes:
 - The "second round" trick for winning the 1932 presidential election should no longer be possible.
+- High inflation threshold is lower.
+- March on Berlin can happen multiple times.
 - Finally, the DDP becoming the DStP is visible.
 - Decimals for presidential elections.
 - Bourgeois party support begins to rise after Return to Normalcy is seen.
 - Various other tweaks...
+
+v1.1.1 - Death of Hindenburg bugfixes, more achievements
+
+As usual, there are some bugs and stuff...
+
+- Fixed bug where Göring's results were not shown
+- Zentrum no longer supports Adenauer when the DNVP supports Hitler in the second round
+- Slightly harder to get Marie Juchacz as a candidate
+- Added content for a KPD presidential victory (different endings for Thälmann and Münzenberg)
+
+New achievements:
+
+- Der rote Millionär - Münzenberg wins the presidency
+- Wahlrechts für Frauen - Juchacz wins the presidency
