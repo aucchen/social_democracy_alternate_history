@@ -409,3 +409,29 @@ Changes:
 - Fixed return to hand for Labor Affairs
 - Fixed an issue with unemployment insurance and President Hindenburg/Braun
 - Removed ending slides about unemployment when the game ends before 1930
+
+
+v1.0.1 - Tooltips, bug fixes, advisor actions
+
+Changes:
+- Add tooltips to the party abbreviations, factions, and paramilitary names in the sidebar. Hovering over these should show some more information.
+- In Shuffle Leadership, potential advisors now show their action set.
+- Fixed bug with some graphs not showing before the first election.
+- If an advisor action goes to a government/party affairs card, then there is a new option to cancel the action without taking up an advisor action.
+
+v1.1 - The Death of Hindenburg
+
+Major changes:
+- The end of the game has been extended to August 1934, ending with the death of Paul von Hindenburg (and the new presidential elections, if that were to happen). The 1934 presidential election is now one of the largest events in the game.
+- New events: Weltbühne Trial, DDP Reformation, London Economic Conference
+- Several late-game events have been altered or replaced; "Nazis in Crisis" has been replaced by "Return to Normalcy", and "Global Economic Recovery" has been replaced by "London Economic Conference".
+- New achievements: Große Volkspartei, Zeppelinkapitän, Bundesrepublik
+- Some new event images (turn on event images in the options!)
+- New music added for homosexual rights (Das Lila Lied)
+
+Minor changes:
+- The "second round" trick for winning the 1932 presidential election should no longer be possible.
+- Finally, the DDP becoming the DStP is visible.
+- Decimals for presidential elections.
+- Bourgeois party support begins to rise after Return to Normalcy is seen.
+- Various other tweaks...

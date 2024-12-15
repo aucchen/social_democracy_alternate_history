@@ -6,6 +6,10 @@ priority: 2
 view-if: year >= 1934 and month >= 1
 max-visits: 1
 on-arrival: {!
+if (Q.unemployed >= 20) {
+    Q.unemployed -= 2;
+    Q.inflation += 1;
+}
 !}
 
 = 1934
