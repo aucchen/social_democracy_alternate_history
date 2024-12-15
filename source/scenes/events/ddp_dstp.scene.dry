@@ -1,0 +1,26 @@
+title: DDP Reformation
+subtitle: The German Democratic Party is becoming the German State Party.
+view-if: year == 1930 and month >= 6
+new-page: true
+max-visits: 1
+on-arrival: ddp_name = "DStP"; ddp_dstp_seen = 1; new_middle_ddp -= 5; old_middle_ddp -= 3; rural_ddp -= 3; ddp_relation -= 5
+tags: event
+
+= DDP Reformation
+
+Leaders of the German Democratic Party, seeing the party's vote share fall over time, has decided that now is the time to completely reform the party. The party leader, Erich Koch-Weser, has engineered a merger with the political arm of the Young German Order, a nationalist paramilitary group. Now, the party will be called the German State Party, or DStP.
+
+This has led to outcry from the left wing of the party, progressives who would rather not work with antisemites and conservative nationalists.
+
+- @advantage: We can recruit disaffected progressives to the SPD.
+- @nothing: This is none of our concern.
+
+@advantage
+on-arrival: new_middle_spd += 5; peoples_party_support += 1; left_dissent += 5; reformist_strength += 3; neorevisionist_strength += 3; reformist_dissent -= 2; neorevisionist_dissent -= 2
+
+With turmoil in the DDP, we have an opportunity to recruit middle-class progressives and portions of the liberal intelligensia into our party. The left of the SPD is opposed to this path, seeing it as diluting the class character of the party. On the other hand, revisionists support this course.
+
+
+@nothing
+
+The DDP's internal affairs are none of our concern.

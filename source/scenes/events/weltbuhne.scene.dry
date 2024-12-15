@@ -36,9 +36,9 @@ The Western powers and all countries that feel threatened by German militarism a
 
 @let_persecute
 view-if: spd_in_government
-on-arrival: weltbuhne_dropped = 0; dvp_relation += 4; reichswehr_loyalty += 0.05; west_relation -= 1; east_relation -= 1; reparations_negotiation -= 1; pacifism -= 1; nationalism += 4
+on-arrival: weltbuhne_dropped = 0; dvp_relation += 4; reichswehr_loyalty += 0.05; west_relation -= 1; east_relation -= 1; reparations_negotiation -= 1; pacifism -= 1; nationalism += 4; left_dissent += 5
 
-The case progresses slowly, given the military secrets involved, and there will be no determination made for a while. The Reichswehr is pleased of our loyalty. However, the affair has made the Western powers suspicious of our resurgent militarism.
+The case progresses slowly, given the military secrets involved, and there will be no determination made for a while. The Reichswehr is pleased of our loyalty. However, the affair has made the Western powers suspicious of our resurgent militarism, as well as displeasing the left wing of the party.
 
 @pressure_drop
 view-if: spd_in_government and justice_minister_party != "SPD"

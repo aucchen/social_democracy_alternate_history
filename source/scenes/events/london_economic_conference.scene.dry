@@ -4,8 +4,47 @@ view-if: year = 1933 and month >= 6
 on-arrival: london_economic_conference_seen = 1
 new-page: true
 max-visits: 1
-#tags: event
+go-to: economic_recovery if unemployed < 15; no_recovery if unemployed >= 15
+tags: event
 
 = London Economic Conference
 
-# TODO:
+# TODO: if you've recovered, you get economic recovery
+# if you haven't recovered, you can either support Roosevelt or support the UK/France
+
+The League of Nations is hosting a conference to discuss the state of the global economy and potential solutions to the ongoing depression. All parties want to reduce tariffs to encourage trade. However, the Western powers are at an impasse; France and to a lesser extent Britain are calling for fixed currency exchange rates, while President Roosevelt of the United States wants to print new money to stimulate demand, calling for "controlled inflation".
+
+@economic_recovery
+
+[? if wtb_adopted or budget <= 0: Germany has largely recovered from the crisis, owing in large part to the same sorts of economic policies that Roosevelt is pursuing. ?]
+[? if not wtb_adopted and budget > 0: Germany has largely recovered from the crisis, without having to resort to budget deficits or devaling the currency. ?]
+
+
+@no_recovery
+
+Germany, like the rest of the world, is still deep in the economic crisis, even if it has appeared to bottom out.
+
+- @stable_currency_out_of_gov
+
+
+@stable_currency_out_of_gov
+title: German representatives call for stable currency, along with Britain and France.
+view-if: not spd_in_government
+on-arrival: west_relation += 1
+
+As expected, the conservative German bankers support Britain and France's plan to stabilize currency exchange rates. In response, the Americans pull out of the conference, leaving it with no agreements whatsoever.
+
+[? if unemployed >= 15 : Nevertheless, the world economy is slowly improving due in part to the economic stimulus and more liberal trade policies of the Roosevelt administration. ?]
+[? if unemployed < 15 : Nevertheless, the world economy is slowly improving due in part to the economic stimulus and more liberal trade policies of the Roosevelt administration as well as our own economic plan. ?]
+
+@support_roosevelt
+title: Support Roosevelt's ideas - we must devalue currency.
+view-if: spd_in_government
+
+@support_uk
+title: Support France and Britain - we must have stable currency.
+view-if: spd_in_government
+on-arrival: west_relation += 1; eu_progress += 1
+
+@agreement
+title: Can we try to salvage the negotiations?

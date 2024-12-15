@@ -85,6 +85,9 @@ if (Q.catholics_spd_normalized && Q.catholics_spd_normalized >= 50) {
 if (Q.workers_spd_normalized >= 80 && Q.new_middle_spd_normalized <= 20 && Q.old_middle_spd_normalized <= 20 && Q.rural_spd <= 20) {
     this.achieve('klassenkampf');
 }
+if (Q.workers_spd_normalized >= 40 && Q.new_middle_spd_normalized >= 40 && Q.old_middle_spd_normalized >= 40 && Q.rural_spd >= 40) {
+    this.achieve('grosse_volkspartei');
+}
 // Räterepublik - begin the transformation to a socialist economy.
 if (Q.spd_in_government && ((Q.nationalization_progress >= 2 && Q.economic_democracy >= 3) || (Q.nationalization_progress >= 1 && Q.economic_democracy >= 4))) {
     this.achieve('raterepublik');
@@ -191,7 +194,25 @@ view-if: president == "Braun"
 tags: endings
 go-to: eg_menu
 
-Otto Braun has been elected as President of Germany. He had never desired to be the most powerful man in Germany, but now he is. 
+Otto Braun has been elected as President of Germany. He had never desired to be the most powerful man in Germany, but now he is.
+
+@president_schumacher
+title: Kurt Schumacher victorious
+view-if: president == "Schumacher"
+tags: endings
+go-to: eg_menu
+
+Kurt Schumacher has been elected as President of Germany. As a young and ambitious SPD member, he will be shaping Germany for years to come.
+
+@president_juchacz
+title: Marie Juchacz is President
+view-if: president == "Juchacz"
+tags: endings
+go-to: eg_menu
+
+Marie Juchacz has been elected as President of Germany. She is the first woman to be elected as the head of state of any republic, and will contribute to shaping Germany for years to come.
+
+
 
 @spd_victorious
 title: SPD still in government
@@ -297,13 +318,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_civil_war : **Bürgerkrieg** - enter a long civil war. ?]
 
-[? if game_achievement_einigkeit : **Einigkeit** - reach the end of 1933 without a civil war on easy. ?]
+[? if game_achievement_einigkeit : **Einigkeit** - reach the end of the game without a civil war on easy. ?]
 
-[? if game_achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of 1933 without a civil war on normal. ?]
+[? if game_achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of the game without a civil war on normal. ?]
 
-[? if game_achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of 1933 without a civil war on hard. ?]
+[? if game_achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of the game without a civil war on hard. ?]
 
-[? if game_achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of 1933 without a civil war on historical mode. ?]
+[? if game_achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of the game without a civil war on historical mode. ?]
 
 [? if game_achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
@@ -339,11 +360,11 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
-[? if game_achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
+[? if game_achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
 
 [? if game_achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
 
-[? if game_achievement_freie_marktwirtschaft: **Freie Marktwirtschaft** - survive to 1933 without adopting an economic plan. ?]
+[? if game_achievement_freie_marktwirtschaft: **Freie Marktwirtschaft** - survive to the end of the game without adopting an economic plan. ?]
 
 [? if game_achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
@@ -360,6 +381,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if game_achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
 
 [? if game_achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
+
+[? if game_achievement_grosse_volkspartei: **Große Volkspartei** - All classes have at least 40% SPD support. ?]
 
 [? if game_achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
@@ -379,6 +402,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
 
+[? if game_achievement_zeppelin_kapitan : **Zeppelinkapitän** - Hugo Eckener has been elected president. ?]
+
+[? if game_achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
+
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -390,13 +417,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_civil_war : **Bürgerkrieg** - enter a long civil war. ?]
 
-[? if achievement_einigkeit : **Einigkeit** - reach the end of 1933 without a civil war on easy. ?]
+[? if achievement_einigkeit : **Einigkeit** - reach the end of the game without a civil war on easy. ?]
 
-[? if achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of 1933 without a civil war on normal. ?]
+[? if achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of the game without a civil war on normal. ?]
 
-[? if achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of 1933 without a civil war on hard. ?]
+[? if achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of the game without a civil war on hard. ?]
 
-[? if achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of 1933 without a civil war on historical mode. ?]
+[? if achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of the game without a civil war on historical mode. ?]
 
 [? if achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
@@ -432,11 +459,11 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
-[? if achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
+[? if achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
 
 [? if achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
 
-[? if achievement_freie_marktwirtschaft: **Freie Marktwirtschaft** - survive to 1933 without adopting an economic plan. ?]
+[? if achievement_freie_marktwirtschaft: **Freie Marktwirtschaft** - survive to the end of the game without adopting an economic plan. ?]
 
 [? if achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
@@ -453,6 +480,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
 
 [? if achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
+
+[? if achievement_grosse_volkspartei: **Große Volkspartei** - All classes have at least 40% SPD support. ?]
 
 [? if achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
@@ -472,6 +501,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
 
+[? if achievement_zeppelin_kapitan : **Zeppelinkapitän** - Hugo Eckener has been elected president. ?]
+
+[? if achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
+
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -481,13 +514,13 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_civil_war : **Bürgerkrieg** - enter a long civil war. ?]
 
-[? if not achievement_einigkeit : **Einigkeit** - reach the end of 1933 without a civil war on easy. ?]
+[? if not achievement_einigkeit : **Einigkeit** - reach the end of the game without a civil war on easy. ?]
 
-[? if not achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of 1933 without a civil war on normal. ?]
+[? if not achievement_einigkeit_und_recht : **Einigkeit und Recht** - reach the end of the game without a civil war on normal. ?]
 
-[? if not achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of 1933 without a civil war on hard. ?]
+[? if not achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of the game without a civil war on hard. ?]
 
-[? if not achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of 1933 without a civil war on historical mode. ?]
+[? if not achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of the game without a civil war on historical mode. ?]
 
 [? if not achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
@@ -523,11 +556,11 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
-[? if not achievement_wirtschaftswunder: **Wirtschaftswunder** - In 1933, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
+[? if not achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
 
 [? if not achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
 
-[? if not achievement_freie_marktwirtschaft: **Freie Marktwirtschaft** - survive to 1933 without adopting an economic plan. ?]
+[? if not achievement_freie_marktwirtschaft: **Freie Marktwirtschaft** - survive to the end of the game without adopting an economic plan. ?]
 
 [? if not achievement_equality: **Gleichheit** - pass reforms for women's rights. ?]
 
@@ -544,6 +577,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_bauernrevolution: **Bauernrevolution** - SPD rural support is at least 50%. ?]
 
 [? if not achievement_katholischer_sozialismus: **Katholischer Sozialismus** - SPD Catholic support is at least 50%. ?]
+
+[? if not achievement_grosse_volkspartei: **Große Volkspartei** - All classes have at least 40% SPD support. ?]
 
 [? if not achievement_klassenkampf: **Klassenkampf** - SPD worker support is at least 80%, while middle-class and rural supports are less than 20%. ?]
 
@@ -562,6 +597,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_heidelberger_programm: **Heidelberger Programm** - achieve the goals of the SPD's Heidelberg Program: social welfare, judicial reform, women's rights in the workplace and family, progressive taxation, works councils, and the formation of a European Union. ?]
 
 [? if not achievement_verfassungsreform: **Verfassungsreform** - pass a constitutional amendment. ?]
+
+[? if not achievement_zeppelin_kapitan : **Zeppelinkapitän** - Hugo Eckener has been elected president. ?]
+
+[? if not achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 

@@ -57,7 +57,7 @@ Supporting Thälmann is rather unpopular in our party, even if the Communists ac
 - @support_hindenburg: Support Hindenburg instead.
 
 @support_thalmann_2
-on-arrival: spd_support_thalmann = 1; reformist_dissent += 15; center_dissent += 10; labor_dissent += 5; neorevisionist_dissent += 10; catholics_spd -= 5; workers_spd -= 3; kpd_relation += 10; communist_coalition += 2; z_relation -= 15; dvp_relation -= 15
+on-arrival: spd_support_thalmann = 1; reformist_dissent += 15; center_dissent += 10; labor_dissent += 5; neorevisionist_dissent += 10; catholics_spd -= 5; workers_spd -= 3; kpd_relation += 10; communist_coalition += 2; z_relation -= 15; dvp_relation -= 15; ddp_relation -= 10
 
 Fine. We have thrown our support to Chairman Thälmann of the KPD.
 
@@ -296,7 +296,7 @@ choose-if: spd_votes >= z_votes
 unavailable-subtitle: The Center knows that they are more popular than us; they do not see a reason to support our candidate.
 on-arrival: {!
 Q.z_support_braun = 0;
-// TODO: if Hindenburg support is greater than Hitler and Braun support, this should be much harder
+// if Hindenburg support is greater than Hitler and Braun support, this should be much harder
 
 if ((Q.z_relation >= 55 && Q.braun_votes >= Q.hindenburg_votes) || (Q.z_relation > 35 && Q.z_party_leader == "Joos")) {
     Q.z_support_braun = 1;
@@ -321,7 +321,7 @@ on-departure: hitler_support_hindenburg = 1 if braun_votes + z_votes > hitler_vo
 
 [? if hitler_support_hindenburg : The Center's opinion is affected by the Nazis' support of Hindenburg, and is willing to turn away from him. ?] The Center are convinced! They will be part of the Braun coalition. [? if hitler_support_hindenburg : In addition, they will also bring in some minor parties who will support us. ?]
 
-[? if  braun_votes + z_votes > hitler_votes: With the Center Party supporting Braun, [+ nsdap_candidate +] has dropped out of the race, and the Nazis have endorsed Hindenburg to prevent a socialist from becoming president. ?]
+[? if not hitler_support_hindenburg and braun_votes + z_votes > hitler_votes: With the Center Party supporting Braun, [+ nsdap_candidate +] has dropped out of the race, and the Nazis have endorsed Hindenburg to prevent a socialist from becoming president. ?]
 
 @r2_z_partial
 
@@ -340,7 +340,7 @@ go-to: round2_menu
 
 With our resources, the Center are convinced to support Braun over Hindenburg.
 
-[? if  braun_votes + z_votes > hitler_votes: With the Center Party supporting Braun, [+ nsdap_candidate +] has dropped out of the race, and the Nazis have endorsed Hindenburg to prevent a socialist from becoming president. ?]
+[? if not hitler_support_hindenburg and braun_votes + z_votes > hitler_votes: With the Center Party supporting Braun, [+ nsdap_candidate +] has dropped out of the race, and the Nazis have endorsed Hindenburg to prevent a socialist from becoming president. ?]
 
 @r2_z_failed
 go-to: round2_menu

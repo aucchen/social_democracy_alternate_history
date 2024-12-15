@@ -65,7 +65,7 @@ The Reichsbanner number at [+ rb_strength +] thousand; many are in Berlin to cou
 
 
 @fight_2_win
-on-arrival: coup_progress = 0; sa_strength *= 0.6; sh_strength *= 0.6; workers_nsdap -= 12*(1-dissent); unemployed_nsdap -= 10*(1-dissent); new_middle_nsdap -= 6*(1-dissent); workers_spd += 8*(1-dissent); unemployed_spd += 6*(1-dissent); pro_republic += 15
+on-arrival: coup_progress = 0; sa_strength *= 0.6; sh_strength *= 0.6; rb_strength *= 0.9; workers_nsdap -= 12*(1-dissent); unemployed_nsdap -= 10*(1-dissent); new_middle_nsdap -= 6*(1-dissent); workers_spd += 8*(1-dissent); unemployed_spd += 6*(1-dissent); pro_republic += 15
 achievement: drei_pfeile
 
 Our forces confront the fascists, and somehow, the fascists retreat! They were overwhelmed by our display of strength, and have chosen to slink away. The attempted coup is over, at least for now.

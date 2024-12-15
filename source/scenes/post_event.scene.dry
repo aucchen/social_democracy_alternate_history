@@ -306,6 +306,35 @@ if (Q.month_actions >= 1) {
             Q.new_middle_nsdap += 2/12;
         }
     }
+    if (Q.year >= 1933) {
+        if (Q.return_to_normalcy) {
+            // return to normalcy -> voters return to the base
+            if (Q.new_middle_ddp_normalized < 40) {
+                Q.new_middle_ddp += 6/12;
+            }
+            if (Q.new_middle_dvp_normalized < 25) {
+                Q.new_middle_dvp += 2/12;
+            }
+            if (Q.old_middle_dvp_normalized < 40) {
+                Q.old_middle_dvp += 6/12;
+            }
+            if (Q.rural_dnvp_normalized < 40) {
+                Q.rural_dnvp += 6/12;
+            }
+            if (Q.catholics_z_normalized < 40) {
+                Q.catholics_z += 6/12;
+            }
+        }
+        if (Q.unemployed > 20) {
+            Q.rural_nsdap += 2/12;
+            Q.unemployed_nsdap += 3/12;
+            Q.old_middle_nsdap += 3/12;
+            Q.new_middle_nsdap += 2/12;
+            if (Q.spd_in_government) {
+                Q.workers_spd -= 4/12;
+            }
+        }
+    }
 }
 Q.has_event = 0;
 // check if there are any cards in #event, and then go to main if not.
