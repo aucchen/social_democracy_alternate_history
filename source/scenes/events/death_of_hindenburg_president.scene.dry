@@ -595,8 +595,8 @@ Despite the Nazi threats, supporters of the SPD and the democratic parties refus
 
 
 @election_end
-go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring"; seldte_victory if winner = "Seldte"; munzenberg_victory if winner = "Münzenberg"; thalmann_victory if winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"
-on-arrival: president = winner
+go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring"; seldte_victory if winner = "Seldte"; munzenberg_victory if winner = "Munzenberg" or winner = "Münzenberg"; thalmann_victory if winner = "Thalmann" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"
+on-arrival: president = winner; president = "Thälmann" if president == "Thalmann"; president = "Münzenberg" if president = "Munzenberg"
 
 The election has been won by [+ winner_desc +].
 
@@ -608,7 +608,7 @@ on-arrival: kpd_relation = 80
 
 # TODO: depose the chancellor?
 
-Ernst Thälmann wastes no time in consolidating power, using all means available to reshape the government. In response, the far-right immediately launches a coup attempt. We have no choice but to unite with the KPD against the fascists...
+Thälmann wastes no time in consolidating power, using all means available to reshape the government. In response, the far-right immediately launches a coup attempt. We have no choice but to unite with the KPD against the fascists...
 
 - @civil_war: This is civil war.
 
@@ -619,6 +619,7 @@ Despite the victory of the anti-constitutionalist Thälmann, he appears to be re
 
 @munzenberg_victory
 achievement: rote_millionar
+go-to: nazis_lose
 
 The bourgeois and right-wing parties are up in arms about the prospect of a Communist president, although Münzenberg and the KPD conciliators take pains to assure Germany of their commitment to the democratic republic. There is no energy for a coup against the new president. The bourgeoisie will have to live with whatever comes.
 
