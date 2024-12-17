@@ -27,7 +27,7 @@ choose-if: progressive_coalition >= 50
 on-arrival: repealed_175 = 1; homosexual_rights += 1; z_relation -= 5; kpd_relation += 4*(1-dissent); ddp_relation += 4*(1-dissent); coalition_dissent += 1 if (in_grand_coalition or in_weimar_coalition); catholics_spd -= 4;
 audio: shuffle music/1928_1933/Das_lila_lied_normalized.mp3
 
-Together with the progressives in the KPD and DDP, we have effectively decriminalized homosexual sex in Germany. Persecution of homosexuals for their private acts will stop, as long as the police are loyal to the republic.
+Together with the progressives in the KPD and [+ ddp_name +], we have effectively decriminalized homosexual sex in Germany. Persecution of homosexuals for their private acts will stop, as long as the police are loyal to the republic.
 
 Of course, conservatives and the far right accuse us of "degeneracy".
 
@@ -40,7 +40,7 @@ choose-if: progressive_coalition >= 50
 on-arrival: reformed_183 = 1; homosexual_rights += 1; z_relation -= 5; kpd_relation += 4*(1-dissent); ddp_relation += 4*(1-dissent); coalition_dissent += 1 if (in_grand_coalition or in_weimar_coalition); catholics_spd -= 4;
 audio: shuffle music/1928_1933/Das_lila_lied_normalized.mp3
 
-Voting together with the progressives in the KPD and DDP, we have reformed Paragraph 183 so that it no longer criminalizes public homosexuality and cross-dressing.
+Voting together with the progressives in the KPD and [+ ddp_name +], we have reformed Paragraph 183 so that it no longer criminalizes public homosexuality and cross-dressing.
 
 
 @change_sex
