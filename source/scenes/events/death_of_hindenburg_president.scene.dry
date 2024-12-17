@@ -424,6 +424,24 @@ if (Q.Hitler_votes && Q.Seldte_votes) {
         Q.nsdap_candidate = "Seldte";
     }
 }
+// 2. If Adenauer & Gessler are both running and neither are part of the SPD coalition, the smaller of these drops out.
+Q.adenauer_drops_out = 0;
+Q.gessler_drops_out = 0;
+if (Q.z_candidate == "Adenauer" && Q.ddp_candidate == "Gessler" && Q.z_candidate != Q.spd_candidate && Q.ddp_candidate != Q.spd_candidate) {
+    if (Q.Adenauer_votes > Q.Gessler_votes) {
+        Q.gessler_drops_out = 1;
+        Q.ddp_candidate = "Adenauer";
+        if (Q.dvp_candidate != Q.spd_candidate) {
+            Q.dvp_candidate = "Adenauer";
+        }
+    } else {
+        Q.adenauer_drops_out = 1;
+        Q.z_candidate = "Gessler";
+    }
+}
+// DVP drops out to favor the center candidate
+if (Q.dvp_candidate != Q.spd_candidate && Q.dvp_candidate != Q.ddp_candidate && Q.dvp_candidate != Q.z_candidate) {
+}
 !}
 go-to: r2_menu
 
@@ -432,6 +450,9 @@ In the lead is [+ winner_desc +]. There is no majority in the first round. In th
 [? if dnvp_candidate = "Hitler" : The DNVP and NSDAP have consolidated their electoral efforts, with the DNVP now endorsing Hitler for the second round. Some right-wing voters are uncomfortable with this arrangement, and might not vote. ?]
 [? if dnvp_candidate = "Göring" : The DNVP and NSDAP have consolidated their electoral efforts, with the DNVP now endorsing Göring for the second round. ?]
 [? if nsdap_candidate = "Seldte" : The DNVP and NSDAP have consolidated their electoral efforts, with the NSDAP now endorsing Seldte for the second round. ?]
+
+[? if gessler_drops_out : The liberal candidate Otto Gessler has dropped out in favor of the Center Party's Konrad Adenauer. This consolidates the votes of the moderate bürgerblock. ?]
+[? if adenauer_drops_out : The Center Party candidate Konrad Adenauer has dropped out in favor of the DStP-DVP candidate Otto Gessler. This consolidates the votes of the moderate bürgerblock. ?]
 
 What should we do?
 
@@ -481,24 +502,27 @@ We have switched our endorsement to Willi Münzenberg of the KPD. [? if z_candid
 @r2_endorse_adenauer
 title: Switch our support to Konrad Adenauer of the Center Party.
 view-if: z_candidate = "Adenauer" and spd_candidate != z_candidate
-on-arrival: spd_candidate = "Adenauer"; z_relation += 4; Adenauer_bonus -= 2.5 if z_relation < 40; Seldte_bonus += 2.5 if z_relation < 40; is_unity_candidate = 1
+on-departure: kpd_candidate = "Thälmann" if kpd_candidate == spd_candidate and kpd_party_leader != "Conciliators"; kpd_candidate = "Münzenberg" if kpd_candidate == spd_candidate and kpd_party_leader == "Conciliators"; sapd_candidate = kpd_candidate; spd_candidate = "Adenauer"; z_relation += 4; Adenauer_bonus -= 2.5 if z_relation < 40; Seldte_bonus += 2.5 if z_relation < 40; is_unity_candidate = 1
 go-to: r2_campaigning
 
 We have endorsed Konrad Adenauer of the Center Party.
 
 [? if z_relation < 40 : With our support of Adenauer, some of the most conservative parts of the Bavarian People's Party have broken away from the Center Party, shifting their support to the Stahlhelm leader Seldte. ?]
 
+[? if kpd_candidate = spd_candidate: The KPD is now breaking from our previous coalition and supporting their own candidate. ?]
 
 
 @r2_endorse_gessler
 title: Switch our support to Otto Gessler.
 view-if: ddp_candidate = "Gessler" and spd_candidate != ddp_candidate
-on-arrival: spd_candidate = "Gessler"; ddp_relation += 4; dvp_candidate = "Seldte" if dvp_relation < 40; is_unity_candidate = 1
+on-departure: kpd_candidate = "Thälmann" if kpd_candidate == spd_candidate and kpd_party_leader != "Conciliators"; kpd_candidate = "Münzenberg" if kpd_candidate == spd_candidate and kpd_party_leader == "Conciliators"; sapd_candidate = kpd_candidate; spd_candidate = "Gessler"; ddp_relation += 4; dvp_candidate = "Seldte" if dvp_relation < 40; is_unity_candidate = 1
 go-to: r2_campaigning
 
 We have endorsed Otto Gessler, independent formerly of the DDP.
 
 [? if dvp_relation < 40 : With our support of Gessler, the DVP components supporting him have broken away and are now shifting their support to Seldte. ?]
+
+[? if kpd_candidate = spd_candidate: The KPD is now breaking from our previous coalition and supporting their own candidate. ?]
 
 
 
@@ -508,7 +532,7 @@ subtitle: -2 resources
 unavailable-subtitle: [? if resources < 2 : -2 resources - Not enough resources. ?]
 choose-if: resources >= 2 and ((z_relation >= 50 and z_leader = "Kaas") or (z_relation >= 30 and z_leader = "Joos")) and ddp_relation >= 40
 view-if: z_candidate = "Adenauer" and ddp_candidate = "Gessler" and spd_candidate != "Eckener"
-on-arrival: spd_candidate = "Eckener"; z_candidate = "Eckener"; ddp_candidate = "Eckener"; resources -= 2; is_unity_candidate = 1
+on-arrival: kpd_candidate = "Thälmann" if kpd_candidate == spd_candidate and kpd_party_leader != "Conciliators"; kpd_candidate = "Münzenberg" if kpd_candidate == spd_candidate and kpd_party_leader == "Conciliators"; sapd_candidate = kpd_candidate; spd_candidate = "Eckener"; z_candidate = "Eckener"; ddp_candidate = "Eckener"; resources -= 2; is_unity_candidate = 1
 go-to: r2_campaigning
 
 We have successfully united all of the parties of the Weimar Coalition behind Hugo Eckener!
