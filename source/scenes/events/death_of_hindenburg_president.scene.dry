@@ -599,7 +599,7 @@ Do we realize that this means civil war, against the full force of the state?
 @defeat_democratic
 on-arrival: {!
 Q.pro_democracy_votes = Q.spd_votes + Q.ddp_votes + Q.z_votes - (Q.sa_strength*Q.sa_militancy/10) + (Q.rb_strength*Q.rb_militancy/10);
-if (Q.pro_democracy >= 60) {
+if (Q.pro_republic >= 60) {
     Q.pro_democracy_votes += Q.kpd_votes;
     Q.pro_democracy_votes += Q.dvp_votes;
 }
