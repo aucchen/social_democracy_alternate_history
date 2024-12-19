@@ -87,7 +87,7 @@ President: [+ president +]
 
 Prime Minister: [+ chancellor +] ([+ chancellor_party +])
 
-Reichstag composition:
+Sejm composition:
 
 # 1928: 30, 1930: 25, 1932: 22
 SPD: [+ spd_r +]%
