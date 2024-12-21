@@ -451,3 +451,11 @@ New achievements:
 
 - Der rote Millionär - Münzenberg wins the presidency
 - Wahlrechts für Frauen - Juchacz wins the presidency
+
+v1.1.3 - Bugfixing
+
+- In the second round of the 1934 presidential election, the Center, DStP, and DVP will consolidate if the SPD is not aligned with them.
+- Fixed bug with the achievement Brüder, zur Sonne, zur Freiheit not appearing.
+- Repeated occurrences of March on Berlin don't reduce paramilitary strength as much.
+- All DDP name occurrences should change to DStP when the time comes.
+- Reduction in coalition dissent from persecuting the RFB only happens once.

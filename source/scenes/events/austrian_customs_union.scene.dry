@@ -43,7 +43,7 @@ go-to: end_toleration_success if spd_r + kpd_r + ddp_r >= 50; end_toleration_fai
 on-arrival: time_to_election = 3; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0;
 call: set_next_election_time
 
-With the support of the KPD and DDP/DStP, we have successfully stopped the formation of the customs union. This results in the fall of the [+ chancellor +] government.
+With the support of the KPD and [+ ddp_name +], we have successfully stopped the formation of the customs union. This results in the fall of the [+ chancellor +] government.
 
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
 
