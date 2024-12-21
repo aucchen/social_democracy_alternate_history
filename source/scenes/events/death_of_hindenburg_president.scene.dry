@@ -142,6 +142,48 @@ go-to: r1_menu
 
 We have nominated Marie Juchacz as our presidential candidate, the first woman ever to be nominated for this position!
 
+@cultural_figure
+view-if: presidential_powers >= 1 and pro_democracy >= 60 and pacifism >= 3
+
+Since the presidency has been made a largely ceremonial figure by our reforms, we might set a precedent by nominating a nonpartisan pro-democracy figure from the cultural, scientific, or literary worlds. There are many potential candidates...
+
+- @einstein_r1: Albert Einstein, scientist.
+- @mann_r1: Heinrich Mann, left-wing writer.
+- @ossietzky_r1: Carl von Ossietzky, left-wing journalist.
+- @candidate_menu: Actually, we should nominate someone else.
+
+@einstein_r1
+subtitle: -2 resources
+choose-if: resources >= 2
+on-arrival: spd_candidate = "Einstein"; ddp_candidate = "Einstein"; resources -= 2; is_unity_candidate = 0; is_cultural_candidate = 1;
+go-to: r1_menu
+
+Albert Einstein is a Nobel Prize-winning scientist, director of the Kaiser Wilhelm Institute for Physics, and international advocate for peace. He was a founding member of the German Democratic Party (whose successor would support him in the election), but has also expressed sympathy towards socialism.
+
+He did not wish to run for president, disliking the public nature of campaigning, but we have somehow convinced him that his candidacy will be crucial to the future of Germany and the world. As a Jewish German pacifist, his becoming president would be a repudiation of everything the Nazis stand for.
+
+The [+ ddp_name +] will endorse Einstein's candidacy.
+
+@mann_r1
+subtitle: -2 resources - He might be too far left for the bourgeois parties.
+choose-if: resources >= 2
+on-arrival: spd_candidate = "Mann"; resources -= 2; is_unity_candidate = 0; is_cultural_candidate = 1;
+go-to: r1_menu
+
+Heinrich Mann is a world-renowned novelist and poet who is also known to be a left-wing activist. His sympathies lie with . He has long lived in the shadow of his better-known brother, Thomas Mann.
+
+
+@ossietzky_r1
+view-if: weltbuhne_dropped = 1
+subtitle: -2 resources - He might be too far left for the bourgeois parties.
+choose-if: resources >= 2
+on-arrival: spd_candidate = "Ossietzky"; resources -= 2; is_unity_candidate = 0; is_cultural_candidate = 1;
+go-to: r1_menu
+
+Carl von Ossietzky is a left-wing journalist who is the publisher of the Weltbühne, a news magazine. He is most known for exposing the secret German rearmament program in 1929, which brought him international renown. In the 1932 presidential election, he endorsed the Communist Thälmann.
+
+Von Ossietzky is extremely reluctant to become a politician.
+
 
 @r1_menu
 view-if: round = 0
@@ -335,7 +377,10 @@ Thalmann: "Ernst Thälmann of the KPD",
 Munzenberg: "Willi Münzenberg of the KPD",
 Braun: "Otto Braun of the SPD",
 Schumacher: "Kurt Schumacher of the SPD",
-Juchacz: "Marie Juchacz of the SPD"
+Juchacz: "Marie Juchacz of the SPD",
+Einstein: "Albert Einstein, scientist",
+Mann: "Heinrich Mann, writer",
+Ossietzky: "Carl von Ossietzky, journalist"
 }
 for (var k in candidate_descs) {
     Q[k + '_running'] = 0;
@@ -344,7 +389,7 @@ var candidate_votes = {};
 for (var i = 0; i < Q.parties.length; i++) {
     var party = Q.parties[i];
     var supported_candidate = Q[party + '_candidate'];
-    console.log(party, supported_candidate);
+    //console.log(party, supported_candidate);
     supported_candidate = supported_candidate.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     Q[supported_candidate + '_running'] = 1;
     if (supported_candidate in candidate_votes) {
@@ -409,9 +454,9 @@ if (Q.Hitler_votes && Q.Seldte_votes) {
     if (Q.Hitler_votes > Q.Seldte_votes) {
         Q.dnvp_candidate = "Hitler";
         Q.other_candidate = "Hitler";
-        Q.Hitler_bonus = -0.25*Q.other_votes;
+        Q.Hitler_bonus = (Q.Hitler_bonus || 0) - 0.25*Q.other_votes;
         if (Q.z_candidate == "Adenauer") {
-            Q.Adenauer_bonus += 0.25*Q.other_votes;
+            Q.Adenauer_bonus = (Q.Adenauer_bonus || 0) + 0.25*Q.other_votes;
         }
     } else {
         Q.nsdap_candidate = "Seldte";
@@ -434,9 +479,16 @@ if (Q.z_candidate == "Adenauer" && Q.ddp_candidate == "Gessler" && Q.z_candidate
         if (Q.dvp_candidate != Q.spd_candidate) {
             Q.dvp_candidate = "Adenauer";
         }
+        Q.Adenauer_bonus = (Q.Adenauer_bonus || 0) + 0.25*Q.other_votes;
     } else {
         Q.adenauer_drops_out = 1;
         Q.z_candidate = "Gessler";
+        Q.Gessler_bonus = 0.25*Q.other_votes;
+    }
+    if (Q.nsdap_candidate == 'Seldte') {
+        Q.Seldte_bonus = (Q.Seldte_bonus || 0) - 0.25*Q.other_votes;
+    } else if (Q.nsdap_candidate == "Hitler") {
+        Q.Hitler_bonus = (Q.Hitler_bonus || 0) - 0.25*Q.other_votes;
     }
 }
 // DVP drops out to favor the center candidate
@@ -451,8 +503,8 @@ In the lead is [+ winner_desc +]. There is no majority in the first round. In th
 [? if dnvp_candidate = "Göring" : The DNVP and NSDAP have consolidated their electoral efforts, with the DNVP now endorsing Göring for the second round. ?]
 [? if nsdap_candidate = "Seldte" : The DNVP and NSDAP have consolidated their electoral efforts, with the NSDAP now endorsing Seldte for the second round. ?]
 
-[? if gessler_drops_out : The liberal candidate Otto Gessler has dropped out in favor of the Center Party's Konrad Adenauer. This consolidates the votes of the moderate bürgerblock. ?]
-[? if adenauer_drops_out : The Center Party candidate Konrad Adenauer has dropped out in favor of the DStP-DVP candidate Otto Gessler. This consolidates the votes of the moderate bürgerblock. ?]
+[? if gessler_drops_out : The liberal candidate Otto Gessler has dropped out in favor of the Center Party's Konrad Adenauer. This consolidates the votes of the moderate bürgerblock, and attracts some votes from the right-wing minor parties. ?]
+[? if adenauer_drops_out : The Center Party candidate Konrad Adenauer has dropped out in favor of the DStP-DVP candidate Otto Gessler. This consolidates the votes of the moderate bürgerblock, and attracts some votes from the right-wing minor parties. ?]
 
 What should we do?
 
