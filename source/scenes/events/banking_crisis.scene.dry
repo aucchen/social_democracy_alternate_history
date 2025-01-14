@@ -30,7 +30,7 @@ subtitle: -1 budget
 choose-if: budget >= 1
 on-arrival: workers_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent); old_middle_spd += 2*(1-dissent); rural_spd += 2*(1-dissent); unemployed -= 2; inflation += 1 if inflation < 0; budget -= 1; workers_nsdap -= 3
 
-In the face of the banking crisis, we have taken emergency action to stabilize the economy. It might not be not enough.
+In the face of the banking crisis, we have taken emergency action to stabilize the economy by injecting money into the banking system. It might not be enough, but it temporarily staunches the bleeding.
 
 @austerity
 view-if: spd_in_government = 0

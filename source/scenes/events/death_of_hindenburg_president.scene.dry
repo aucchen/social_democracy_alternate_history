@@ -269,6 +269,7 @@ The Center are not satisfied with our arguments, but they are open to being conv
 
 - @pay_z: Give them the resources they need.
 - @r1_menu: Forget about the Center.
+- @r2_campaigning: Forget about the Center.
 
 @pay_z
 choose-if: resources >= 2

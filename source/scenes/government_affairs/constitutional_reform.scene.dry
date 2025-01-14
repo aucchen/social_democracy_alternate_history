@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 view-if: spd_in_government = 1 and justice_minister_party = "SPD" and constitutional_reform_timer = 0 and judicial_reform >= 4 and neorevisionism and ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front)) and constitutional_reform < 3
 frequency: 25
-on-arrival: month_actions += 1; constitutional_reform_timer = 12; pass_threshold = 0.51; pass_threshold = 0.6 if pro_republic < 65;
+on-arrival: month_actions += 1; constitutional_reform_timer += 12; pass_threshold = 0.51; pass_threshold = 0.6 if pro_republic < 65;
 card-image: img/portraits/RadbruchGustav.jpg
 go-to: reforms_menu
 tags: govt_affairs
@@ -28,6 +28,7 @@ A constitutional reform requires either a two-thirds supermajority in the Reichs
 - @presidential_powers: Reduce presidential powers.
 - @as_is: Do not pursue constitutional reform.
 - @easy_discard
+- @cancel_advisor_action
 #- @constitutional_bans: Allow the banning of anti-constitutional parties.
 
 @vote_threshold
