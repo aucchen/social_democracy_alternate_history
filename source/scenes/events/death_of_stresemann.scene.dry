@@ -4,5 +4,8 @@ frequency: 1000
 max-visits: 1
 tags: event
 on-arrival: stresemann_dead = 1; dvp_relation -= 5
+face-image: img/portraits/StresemannGustav.jpg
 
-Gustav Stresemann, leader of the DVP, has died. He was the primary force driving the party to support democracy; without him, the democratic forces in the Republic will be so much weaker.
+= The Death of Gustav Stresemann
+
+Gustav Stresemann, leader of the DVP and longtime foreign minister, has died at the tragically young age of 51. He was the primary force driving his party to support democracy; without him, the democratic forces in the Republic will be so much weaker.

@@ -1,0 +1,9 @@
+title: Austrian Civil War 
+new-page: true
+subtitle: In response to police attacks, the Austrian socialists are rising up...
+view-if: year = 1934 and (month = 2 or month = 3) and austrian_parliament_seen
+max-visits: 1
+on-arrival: austrian_civil_war_seen = 1
+face-image: img/schutzbund.png
+#tags: event
+

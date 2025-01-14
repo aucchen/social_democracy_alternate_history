@@ -1,0 +1,11 @@
+title: Education & Science
+new-page: true
+is-card: true
+view-if: spd_in_government and spd_prussia and economy_minister_party = "SPD" and chancellor_party = "SPD" and education_science_timer = 0 and (black_thursday_seen = 0 or return_to_normalcy = 1)
+on-arrival: education_science_timer += 9
+card-image: img/portraits/einstein.jpg
+
+# options:
+# - fund research (basic science research at the KWI, medical research, applied and industrial research to benefit Germany's economy)
+# - democratic education - focus on critical thinking and democratic values rather than authoritarian teaching.
+# - increase educational opportunities for working-class families.
