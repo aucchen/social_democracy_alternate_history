@@ -149,6 +149,28 @@ if (Q.month_actions >= 1) {
     if (Q.inflation <= -5 && Q.unemployed < 20) {
         Q.unemployed += 0.3;
     }
+    // economic growth
+    if (Q.economic_growth < -0.5 && Q.unemployed < 15) {
+        Q.unemployed += 0.1;
+    }
+    if (Q.economic_growth < -5 && Q.unemployed < 25) {
+        Q.unemployed += 0.1;
+    }
+    if (Q.economic_growth > 2 && Q.unemployed > 10) {
+        Q.unemployed -= 0.1;
+    }
+    if (Q.economic_growth > 5 && Q.unemployed > 5) {
+        Q.unemployed -= 0.1;
+    }
+    if (Q.economic_growth > 3 && Q.inflation > 8) {
+        Q.economic_growth -= 0.1;
+    }
+    if (Q.economic_growth < 0 && Q.inflation < -4) {
+        Q.economic_growth -= 0.1;
+    }
+    if (Q.economic_growth > 8) {
+        Q.economic_growth -= 0.1;
+    }
     /////////////////////////////// update opinions based on economy
     if (Q.unemployed > 15 && Q.pro_republic > 40) {
         Q.pro_republic -= 1;
@@ -163,27 +185,27 @@ if (Q.month_actions >= 1) {
     // if pro_republic is less than the support of the Weimar coalition, reduce SPD support...
     if (Q.pro_republic < (Q.spd_votes + Q.ddp_votes + Q.z_votes - 3)) {
         if (Q.new_middle_spd > 0) {
-            Q.new_middle_spd -= 1;
-            Q.new_middle_nsdap += 1;
+            Q.new_middle_spd -= 6/12;
+            Q.new_middle_nsdap += 6/12;
         }
         if (Q.rural_spd > 0) {
-            Q.rural_spd -= 1;
-            Q.rural_nsdap += 1;
+            Q.rural_spd -= 6/12;
+            Q.rural_nsdap += 6/12;
         }
         if (Q.workers_spd_normalized > 20) {
-            Q.workers_spd -= 1;
+            Q.workers_spd -= 6/12;
         }
         if (Q.new_middle_ddp > 0) {
-            Q.new_middle_ddp -= 1;
-            Q.new_middle_nsdap += 1;
+            Q.new_middle_ddp -= 6/12;
+            Q.new_middle_nsdap += 6/12;
         }
         if (Q.old_middle_ddp > 0) {
-            Q.old_middle_ddp -= 1;
-            Q.old_middle_nsdap += 1;
+            Q.old_middle_ddp -= 6/12;
+            Q.old_middle_nsdap += 6/12;
         }
         if (Q.rural_ddp > 0) {
-            Q.rural_ddp -= 1;
-            Q.rural_nsdap += 1;
+            Q.rural_ddp -= 6/12;
+            Q.rural_nsdap += 6/12;
         }
     }
     ////////////////////////// annual support changes

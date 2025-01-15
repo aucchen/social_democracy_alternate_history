@@ -4,8 +4,48 @@ is-card: true
 view-if: spd_in_government and spd_prussia and economy_minister_party = "SPD" and chancellor_party = "SPD" and education_science_timer = 0 and (black_thursday_seen = 0 or return_to_normalcy = 1)
 on-arrival: education_science_timer += 9
 card-image: img/portraits/einstein.jpg
+go-to: ed_menu
 
 # options:
 # - fund research (basic science research at the KWI, medical research, applied and industrial research to benefit Germany's economy)
-# - democratic education - focus on critical thinking and democratic values rather than authoritarian teaching.
+# - change the educational curriculum (only once per 3 years) - will have a "major" and "minor" option:
+# - democratic education - focus on critical thinking and democratic values rather than authoritarian teaching. (+ democratization, pro_republic)
+# - scientific education - focus on the sciences, mathematics, and technical skills (+ NMC, science)
+# - humanistic education - focus on literature, history, and philosophy. (+ NMC, pro_republic if democratization is high)
+# - traditional education (reduces relations with DDP)
+
 # - increase educational opportunities for working-class families.
+# - Secularize education (+ DVP, instant Zentrum vonc)
+
+# science increases economic growth...
+
+= Education and Science
+
+Education in Germany is mostly the responsibility of the states, but with our control of Prussia and the Economy Ministry, we can set policy for a large part of the country.
+
+Many socialists believe that education in Germany is not fit for the modern era. Much of the educational system still follows imperial-era traditions of militaristic discipline, and far-right professors and students rule the universities. Nevertheless, there have been strides in bringing working-class children into the schools.
+
+@ed_menu
+
+- @increase_science
+- @curriculum
+
+@increase_science
+title: Increase funding for scientific research.
+
+Socialism has always stood for science and rationality. Despite the setbacks of the Great War, hyperinflation, and the politicized and reactionary attitudes of many academics, science in the German Republic is still the envy of the world. With a great expansion of funding, we hope to keep it that way, and expand on our achievements. 
+
+@kwg
+title: Fund the Kaiser Wilhelm Society for basic scientific research.
+subtitle: -1 budget
+choose-if: budget >= 1
+
+@applied
+title: Fund applied research in economically useful technologies.
+
+@medical
+title: Fund biomedical research at the hospitals and medical schools.
+
+@curriculum
+title: Change the educational curriculum.
+
