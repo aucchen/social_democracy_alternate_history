@@ -1,9 +1,9 @@
 title: Education & Science
 new-page: true
 is-card: true
-view-if: spd_in_government and spd_prussia and economy_minister_party = "SPD" and chancellor_party = "SPD" and education_science_timer = 0 and (black_thursday_seen = 0 or return_to_normalcy = 1)
+view-if: spd_in_government and spd_prussia and economic_minister_party = "SPD" and chancellor_party = "SPD" and education_science_timer = 0 and (black_thursday_seen = 0 or return_to_normalcy = 1)
 on-arrival: education_science_timer += 9
-card-image: img/portraits/einstein.jpg
+card-image: img/portraits/EinsteinAlbert.jpg
 go-to: ed_menu
 
 # options:
@@ -32,6 +32,8 @@ Many socialists believe that education in Germany is not fit for the modern era.
 
 @increase_science
 title: Increase funding for scientific research.
+choose-if: economic_minister_party = "SPD"
+unavailable-subtitle: This requires the Economy Ministry.
 
 Socialism has always stood for science and rationality. Despite the setbacks of the Great War, hyperinflation, and the politicized and reactionary attitudes of many academics, science in the German Republic is still the envy of the world. With a great expansion of funding, we hope to keep it that way, and expand on our achievements. 
 
@@ -39,6 +41,8 @@ Socialism has always stood for science and rationality. Despite the setbacks of 
 title: Fund the Kaiser Wilhelm Society for basic scientific research.
 subtitle: -1 budget
 choose-if: budget >= 1
+
+The Kaiser-Wilhelm-Society is one of the most respected scientific research institutions in the world, with physicist Albert Einstein as its most famous employee.
 
 @applied
 title: Fund applied research in economically useful technologies.
@@ -48,4 +52,36 @@ title: Fund biomedical research at the hospitals and medical schools.
 
 @curriculum
 title: Change the educational curriculum.
+choose-if: curriculum_timer = 0
+
+What should be the major focus of our new curriculum?
+
+@dem_major
+title: Democratic curriculum
+subtitle: Critical thinking, democratic citizenship, and collaboration
+
+We should teach students how to be citizens of a democratic republic, by teaching them to question the 
+
+Traditionalists of all stripes are critical of this.
+
+
+@science_major
+title: Scientific curriculum
+subtitle: Modern science, mathematics, and technical skills
+
+Science is 
+
+@human_major
+title: Humanistic curriculum
+subtitle: Arts, literature, history, and philosophy
+
+
+@vocational_major
+title: Vocational curriculum
+subtitle: Useful technical skills for future careers
+
+
+@trad_major
+title: Traditional curriculum
+subtitle: Classics, discipline, and nationalism
 

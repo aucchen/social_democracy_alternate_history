@@ -31,7 +31,7 @@ These policies mean that our party is increasing in popularity among the "new wo
 
 @family
 subtitle: Change family and inheritance law to treat women more equally.
-on-arrival: family_law += 1; womens_rights += 1; new_middle_spd += 2*(1-dissent); workers_spd += 3*(1-dissent); old_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 4; coalition_dissent += 1
+on-arrival: family_law += 1; womens_rights += 1; new_middle_spd += 2*(1-dissent); workers_spd += 3*(1-dissent); old_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 4; coalition_dissent += 1; z_relation -= 4;
 max-visits: 2
 
 These policies aim to ensure that women have equal rights within a marriage, including the right to divorce. The more conservative segments of society treat our reforms as deleterious to the social fabric.
@@ -40,7 +40,7 @@ These policies aim to ensure that women have equal rights within a marriage, inc
 @welfare
 subtitle: -1 budget
 choose-if: budget > 0
-on-arrival: welfare += 1; workers_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent); budget -= 1; womens_rights += 1; coalition_dissent += 1 if welfare >= 1 and unemployed >= 15; unemployed -= 0.4; inflation += 0.2; economic_growth += 0.2;
+on-arrival: welfare += 1; workers_spd += 5*(1-dissent); unemployed_spd += 5*(1-dissent); budget -= 1; womens_rights += 1; coalition_dissent += 1 if welfare >= 1 and unemployed >= 15; unemployed -= 0.4; inflation += 0.2; economic_growth += 0.3;
 
 We have increased welfare spending on women and children. [? if welfare >= 1 and unemployed >= 15 : Some of our coalition partners consider increased welfare spending profligate at this time. ?]
 
