@@ -1,6 +1,6 @@
-title: Kellog-Briand Pact
+title: Kellogg-Briand Pact
 new-page: true
-subtitle: An internationa treaty for peace.
+subtitle: An international treaty for peace
 view-if: year = 1928 and (month = 8 or month = 9)
 max-visits: 1
 on-arrival: kellogg_briand_seen = 1; kellogg_briand_signed = 1 if foreign_minister_party = "DVP"
@@ -27,11 +27,13 @@ Foreign Minister Breitscheid will sign the treaty, of course. The reaction is ge
 - @not_enough
 
 @step_forward
+view-if: kellogg_briand_signed
 title: The treaty is a step forward for peace.
 
 Despite our misgivings about the treaty, it still represents a step forward for the cause of international peace.
 
 @not_enough
+view-if: kellogg_briand_signed
 title: The treaty is not enough.
 
 Despite the idealism behind the treaty, it is inadequate for its goal of preventing wars. There must be some enforcement mechanism, perhaps automatic trade sanctions, or an intervention force controlled by the League of Nations. As it stands, the League of Nations and this treaty is toothless.
