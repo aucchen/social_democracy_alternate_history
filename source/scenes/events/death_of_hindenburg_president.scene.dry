@@ -57,6 +57,7 @@ Kurt Schumacher is an ambitious rising star in the party, and would be all too w
 - @braun_r1: Support Otto Braun.
 - @schumacher_r1: Support Kurt Schumacher.
 - @juchacz_r1: Support Marie Juchacz.
+- @cultural_figure: Support a nonpartisan cultural figure?
 
 @eckener_r1
 subtitle: -1 resource - After nominating him, we still have to convince the other parties to support him.
@@ -149,11 +150,12 @@ Since the presidency has been made a largely ceremonial figure by our reforms, w
 
 - @einstein_r1: Albert Einstein, scientist.
 - @mann_r1: Heinrich Mann, left-wing writer.
-- @ossietzky_r1: Carl von Ossietzky, left-wing journalist.
+- @ossietzky_r1: Carl von Ossietzky, pacifist journalist.
 - @candidate_menu: Actually, we should nominate someone else.
 
 @einstein_r1
 subtitle: -2 resources
+view-if: science >= 2 and kwg_research >= 1 and (major_curriculum = "scientific" or minor_curriculum = "scientific")
 choose-if: resources >= 2
 on-arrival: spd_candidate = "Einstein"; ddp_candidate = "Einstein"; resources -= 2; is_unity_candidate = 0; is_cultural_candidate = 1;
 go-to: r1_menu
@@ -672,7 +674,7 @@ Despite the Nazi threats, supporters of the SPD and the democratic parties refus
 
 
 @election_end
-go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring" or winner = "Goring"; seldte_victory if winner = "Seldte"; munzenberg_victory if winner = "Munzenberg" or winner = "Münzenberg"; thalmann_victory if winner = "Thalmann" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"
+go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring" or winner = "Goring"; seldte_victory if winner = "Seldte"; munzenberg_victory if winner = "Munzenberg" or winner = "Münzenberg"; thalmann_victory if winner = "Thalmann" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"; cultural_victory if winner = "Ossietzky" or winner = "Mann"; einstein_victory if winner = "Einstein"
 on-arrival: president = winner; president = "Thälmann" if president == "Thalmann"; president = "Münzenberg" if president = "Munzenberg"; president = "Göring" if president = "Goring"
 
 The election has been won by [+ winner_desc +].
@@ -710,6 +712,15 @@ achievement: wahlrechts
 go-to: nazis_lose
 
 This is a historic victory - Marie Juchacz is the first woman to be elected president in any republic, anywhere in the world.
+
+@einstein_victory
+achievement: republik_der_wissenschaft
+go-to: nazis_lose
+
+@cultural_victory
+go-to: nazis_lose
+
+
 
 @bundesrepublik_win
 go-to: bundesrepublik_achieve if presidential_powers; nazis_lose if not presidential_powers

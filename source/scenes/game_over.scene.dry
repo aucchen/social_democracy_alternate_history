@@ -410,6 +410,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
 
+[? if game_achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
+
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -513,6 +515,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
 
+[? if achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
+
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -613,6 +617,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_wahlrechts : **Wahlrechts für Frauen** - Marie Juchacz has been elected president. ?]
 
 [? if not achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
+
+[? if not achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
