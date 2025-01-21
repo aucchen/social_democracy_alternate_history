@@ -138,9 +138,9 @@ go-to: menu
 
 @public_opinion
 on-arrival: {!
-Q.pro_republic = Math.round(Q.pro_republic);
-Q.nationalism = Math.round(Q.nationalism);
-Q.socialism = Math.round(Q.socialism);
+Q.pro_republic_disp = Math.round(Q.pro_republic);
+Q.nationalism_disp = Math.round(Q.nationalism);
+Q.socialism_disp = Math.round(Q.socialism);
 !}
 view-if: (not historical_mode) or game_over
 go-to: election_algorithm
@@ -152,7 +152,7 @@ set-jump: election_projections
 
 #Support for Nationalism: [+ nationalism +]%
 
-Support for the Republic: [+ pro_republic +]%
+Support for the Republic: [+ pro_republic_disp +]%
 
 
 @election_projections

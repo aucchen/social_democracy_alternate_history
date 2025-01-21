@@ -8,6 +8,10 @@ if (Q.unemployed) {
 if (Q.inflation) {
     Q.inflation_2 = Q.inflation.toFixed(1);
 }
+Q.economic_growth_2 = '0';
+if (Q.economic_growth) {
+    Q.economic_growth_2 = Q.economic_growth.toFixed(1);
+}
 !}
 
 = Status
@@ -53,11 +57,16 @@ Others: [+ other_r +]%
 
 [? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
+Next election: [+ next_election_month : month +] [+ next_election_year +]
+
+= Economics
+
 Inflation: [+ inflation_2 +]%
 
 [? if black_thursday_seen = 1 : Unemployment: [+ unemployed_2 +]% ?]
 
-Next election: [+ next_election_month : month +] [+ next_election_year +]
+Economic growth: [+ economic_growth_2 +]%
+
 
 
 # = Public Opinion
@@ -139,6 +148,11 @@ Prussian police loyalty: [+ prussian_police_loyalty : loyalty +]
 [? if spd_in_government : Interior police loyalty: [+ interior_police_loyalty : loyalty +] ?]
 
 @polls
+on-arrival: {!
+Q.pro_republic_disp = Math.round(Q.pro_republic);
+Q.nationalism_disp = Math.round(Q.nationalism);
+Q.socialism_disp = Math.round(Q.socialism);
+!}
 
 = Projected election results
 
@@ -176,4 +190,4 @@ Unemployed: SPD: [+ unemployed_spd_display +]%, Z: [+ unemployed_z_display +]%, 
 
 Catholics: SPD: [+ catholics_spd_display +]%, Z: [+ catholics_z_display +]%, KPD: [+ catholics_kpd_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ catholics_ddp_display +]%, DVP: [+ catholics_dvp_display +]%; DNVP: [+ catholics_dnvp_display +]%, NSDAP: [+ catholics_nsdap_display +]%, Others: [+ catholics_other_display +]% [? if sapd_formed: SAPD: [+ catholics_sapd_display +]% ?]
 
-Support for the Republic: [+ pro_republic +]%
+Support for the Republic: [+ pro_republic_disp +]%

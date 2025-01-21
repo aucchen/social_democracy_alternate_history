@@ -11,8 +11,9 @@ if (Q.works_program && Q.works_program >= 2) {
 if (!Q.works_program) {
     Q.unemployed += 5; 
     Q.inflation -= 2;
-
+    Q.economic_growth -= 1;
 }
+// historical growth: -7.5%
 // moved demographic changes to post_event
 !}
 tags: event

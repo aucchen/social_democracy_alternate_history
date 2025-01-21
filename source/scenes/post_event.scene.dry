@@ -156,16 +156,16 @@ if (Q.month_actions >= 1) {
     if (Q.economic_growth < -5 && Q.unemployed < 28) {
         Q.unemployed += 0.1;
     }
-    if (Q.economic_growth > 2 && Q.unemployed > 10) {
+    if (Q.economic_growth >= 2 && Q.unemployed > 12) {
         Q.unemployed -= 0.1;
     }
-    if (Q.economic_growth > 5 && Q.unemployed > 5) {
+    if (Q.economic_growth >= 5 && Q.unemployed > 5) {
         Q.unemployed -= 0.1;
     }
     if (Q.economic_growth > 3 && Q.inflation > 8) {
         Q.economic_growth -= 0.1;
     }
-    if (Q.economic_growth < 0 && Q.inflation < -4) {
+    if (Q.economic_growth > -2.5 && Q.inflation <= -5) {
         Q.economic_growth -= 0.1;
     }
     if (Q.economic_growth > 8) {
@@ -173,6 +173,49 @@ if (Q.month_actions >= 1) {
     }
 
     //////////////////////////////// Education & Science support/economic changes
+    // science bonus to economic growth
+    Q.science_bonus = 0;
+    if (Q.major_curriculum && Q.major_curriculum == "democratic") {
+        if (Q.pro_republic < 55) {
+            Q.pro_republic += 0.5;
+        } 
+    }
+    if (Q.minor_curriculum && Q.minor_curriculum == "democratic") {
+        if (Q.pro_republic < 55) {
+            Q.pro_republic += 0.3;
+        } 
+    }
+    if (Q.major_curriculum && Q.major_curriculum == "vocational") {
+    }
+    if ((Q.major_curriculum && Q.major_curriculum == "scientific") || (Q.minor_curriculum && Q.minor_curriculum == "scientific")) {
+        Q.science_bonus += Q.educational_science;
+    }
+    if (Q.science) {
+        Q.science_bonus = 0;
+        if (Q.science >= 1) {
+            Q.science_bonus += 1;
+        } else if (Q.science >= 3) {
+            Q.science_bonus += 2;
+        } else if (Q.science >= 5) {
+            Q.science_bonus += 3;
+        }
+    }
+    if (Q.applied_research && Q.applied_research >= 1) {
+        Q.science_bonus += 0.5*Q.applied_research;
+    }
+    // this is kinda messy but basically more science -> higher levels of baseline growth
+    if (Q.science_bonus >= 1) {
+        if (Q.economic_growth < Q.science_bonus + 3) {
+            Q.economic_growth += 0.1;
+        }
+        if (economic_growth < Q.science_bonus) {
+            Q.economic_growth += 0.1;
+        }
+        if (Q.economic_growth < Q.science_bonus - 3) {
+            Q.economic_growth += 0.1;
+        }
+    }
+
     /////////////////////////////// update opinions based on economy
     if (Q.unemployed > 15 && Q.pro_republic > 40) {
         Q.pro_republic -= 1;
@@ -183,6 +226,7 @@ if (Q.month_actions >= 1) {
     if (Q.inflation > 8 && Q.pro_republic > 40) {
         Q.pro_republic -= 1;
     }
+
     ///////////////////////////// change party support based on pro_republic
     // if pro_republic is less than the support of the Weimar coalition, reduce SPD support...
     if (Q.pro_republic < (Q.spd_votes + Q.ddp_votes + Q.z_votes - 3)) {
@@ -324,7 +368,7 @@ if (Q.month_actions >= 1) {
         Q.rural_nsdap += 7/12;
         Q.unemployed_nsdap += 4/12;
         if (!Q.works_program) {
-            Q.unemployed += 6/12;
+            Q.unemployed += 5/12;
             Q.inflation -= 2/12;
             Q.catholics_z += 2/12;
             Q.workers -= 4/12;
@@ -362,7 +406,7 @@ if (Q.month_actions >= 1) {
                 Q.new_middle_ddp += 6/12;
             }
             if (Q.new_middle_dvp_normalized < 25) {
-                Q.new_middle_dvp += 2/12;
+                Q.new_middle_dvp += 3/12;
             }
             if (Q.old_middle_dvp_normalized < 40) {
                 Q.old_middle_dvp += 6/12;

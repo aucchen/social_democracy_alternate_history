@@ -8,6 +8,7 @@ Q.inflation -= 4;
 if (Q.budget > 0) {
     Q.budget -= 1;
 }
+// historical: -1.4
 Q.economic_growth -= 1;
 // moved demographic changes to post_event
 !}
