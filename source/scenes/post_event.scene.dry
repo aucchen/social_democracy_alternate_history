@@ -162,7 +162,10 @@ if (Q.month_actions >= 1) {
     if (Q.economic_growth >= 5 && Q.unemployed > 5) {
         Q.unemployed -= 0.1;
     }
-    if (Q.economic_growth > 3 && Q.inflation > 8) {
+    if (Q.economic_growth >= 8 && Q.unemployed > 3) {
+        Q.unemployed -= 1;
+    }
+    if (Q.economic_growth > 4 && Q.inflation > 8) {
         Q.economic_growth -= 0.1;
     }
     if (Q.economic_growth > -2.5 && Q.inflation <= -5) {
@@ -171,7 +174,12 @@ if (Q.month_actions >= 1) {
     if (Q.economic_growth > 8) {
         Q.economic_growth -= 0.1;
     }
-
+    if (Q.economic_growth > 10) {
+        Q.economic_growth -= 0.2;
+    }
+    if (Q.economic_growth > 12) {
+        Q.economic_growth -= 0.3;
+    }
     //////////////////////////////// Education & Science support/economic changes
     // science bonus to economic growth
     Q.science_bonus = 0;
@@ -185,10 +193,11 @@ if (Q.month_actions >= 1) {
             Q.pro_republic += 0.3;
         } 
     }
+    // TODO: vocational curriculum
     if (Q.major_curriculum && Q.major_curriculum == "vocational") {
     }
     if ((Q.major_curriculum && Q.major_curriculum == "scientific") || (Q.minor_curriculum && Q.minor_curriculum == "scientific")) {
-        Q.science_bonus += Q.educational_science;
+        Q.science_bonus += Q.education_science;
     }
     if (Q.science) {
         Q.science_bonus = 0;
@@ -203,9 +212,13 @@ if (Q.month_actions >= 1) {
     if (Q.applied_research && Q.applied_research >= 1) {
         Q.science_bonus += 0.5*Q.applied_research;
     }
+    // cap the science bonus at 6
+    if (Q.science_bonus > 6) {
+        Q.science_bonus = 6;
+    }
     // this is kinda messy but basically more science -> higher levels of baseline growth
     if (Q.science_bonus >= 1) {
-        if (Q.economic_growth < Q.science_bonus + 3) {
+        if (Q.return_to_normalcy && Q.economic_growth < Q.science_bonus + 3) {
             Q.economic_growth += 0.1;
         }
         if (economic_growth < Q.science_bonus) {
