@@ -184,12 +184,12 @@ if (Q.month_actions >= 1) {
     // science bonus to economic growth
     Q.science_bonus = 0;
     if (Q.major_curriculum && Q.major_curriculum == "democratic") {
-        if (Q.pro_republic < 55) {
+        if (Q.pro_republic < 60) {
             Q.pro_republic += 0.5;
         } 
     }
     if (Q.minor_curriculum && Q.minor_curriculum == "democratic") {
-        if (Q.pro_republic < 55) {
+        if (Q.pro_republic < 60) {
             Q.pro_republic += 0.3;
         } 
     }
@@ -200,7 +200,6 @@ if (Q.month_actions >= 1) {
         Q.science_bonus += Q.education_science;
     }
     if (Q.science) {
-        Q.science_bonus = 0;
         if (Q.science >= 1) {
             Q.science_bonus += 1;
         } else if (Q.science >= 3) {
@@ -221,7 +220,7 @@ if (Q.month_actions >= 1) {
         if (Q.return_to_normalcy && Q.economic_growth < Q.science_bonus + 3) {
             Q.economic_growth += 0.1;
         }
-        if (economic_growth < Q.science_bonus) {
+        if (Q.return_to_normalcy && Q.economic_growth < Q.science_bonus) {
             Q.economic_growth += 0.1;
         }
         if (Q.economic_growth < Q.science_bonus - 3) {
@@ -272,8 +271,8 @@ if (Q.month_actions >= 1) {
         }
     }
     // prevent forever support if things are bad
-    if (Q.year >= 1934 && (Q.inflation >= 10 || Q.unemployed >= 25) && Q.pro_republic <= 40 && Q.spd_in_government) {
-        if (Q.workers_spd_normalized > 30) {
+    if (Q.year >= 1934 && (Q.inflation >= 10 || Q.unemployed >= 25) && Q.pro_republic <= 45 && Q.spd_in_government) {
+        if (Q.workers_spd_normalized > 40) {
             Q.workers_spd -= 6/12;
         }
         if (Q.unemployed_spd_normalized > 20) {

@@ -889,10 +889,10 @@ Q.old_middle_nsdap += 3;
 Q.new_middle_nsdap += 3;
 Q.rural_nsdap += 3;
 Q.unemployed_nsdap += 5;
-if (Q.pro_republic < 45 && Q.pro_republic >= 40) {
+if (Q.pro_republic < 45 && Q.pro_republic >= 38) {
     Q.workers_spd -= 6;
 }
-if (Q.pro_republic < 40) {
+if (Q.pro_republic < 38) {
     Q.workers_spd *= 0.85;
     Q.new_middle_spd -= 5;
     Q.old_middle_spd -= 5;
@@ -1024,7 +1024,11 @@ Q.old_middle_nsdap += 6;
 Q.new_middle_nsdap += 6;
 Q.rural_nsdap += 6;
 Q.unemployed_nsdap += 5;
-if (Q.pro_republic < 45) {
+// Thresholds are kind of arbitrary - adjusted because of negative economic effects on pro_republic
+if (Q.pro_republic < 45 && Q.pro_republic >= 36) {
+    Q.workers_spd -= 6;
+}
+if (Q.pro_republic < 36) {
     // TODO: if you pursue a consistently revolutionary course, you might avoid this? But you might also cause a coalition between Hitler and the Center.
     Q.z_relation -= 5;
     Q.dvp_relation -= 5;
@@ -1034,11 +1038,11 @@ if (Q.pro_republic < 45) {
     Q.old_middle_spd -= 5;
     Q.rural_spd -= 5;
     Q.catholics_spd -= 3;
-    Q.workers_nsdap += 10;
-    Q.old_middle_nsdap += 10;
-    Q.new_middle_nsdap += 10;
-    Q.rural_nsdap += 10;
-    Q.unemployed_nsdap += 10;   
+    Q.workers_nsdap += 8;
+    Q.old_middle_nsdap += 8;
+    Q.new_middle_nsdap += 8;
+    Q.rural_nsdap += 8;
+    Q.unemployed_nsdap += 8;   
 }
 !}
 
