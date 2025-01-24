@@ -41,7 +41,7 @@ jobs:
       - name: Copy game.json to output
         run: cp out/game.json out/html/
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'out/html'
       - name: Deploy to GitHub Pages
