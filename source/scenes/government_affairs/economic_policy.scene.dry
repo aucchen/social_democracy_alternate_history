@@ -62,7 +62,7 @@ subtitle: -[+ wtb_budget +] budget. [? if wtb_budget == 3 : Our pro-labor polici
 unavailable-subtitle: Unemployment is low enough that the time for the WTB-Plan has passed.
 view-if: budget >= wtb_budget and wtb_implemented == 0 and wtb_adopted == 1
 choose-if: unemployed > 8
-on-arrival: budget -= wtb_budget; works_program += 1; unemployed -= 4; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 5 if in_popular_front or in_left_front; inflation += 2; economic_growth += 2.8;
+on-arrival: budget -= wtb_budget; works_program += 1; unemployed -= 4; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 5 if in_popular_front or in_left_front; inflation += 2; economic_growth += 2.8; pro_republic += 3*(1-dissent);
 achievement: wirtschaftspolitik
 
 We have started to enact the WTB plan. Money is beginning to flow through the economy via investments in large-scale public works.
@@ -75,7 +75,7 @@ subtitle: -[+ wtb_budget +] budget - we will enter deficit spending. [? if wtb_b
 unavailable-subtitle: Unemployment is low enough that the time for the WTB-Plan has passed.
 view-if: budget < wtb_budget and wtb_implemented == 0 and wtb_adopted == 1
 choose-if: unemployed > 8
-on-arrival: coalition_dissent += 1; coalition_dissent += 1 if historical_mode; coalition_dissent += 1 if chancellor == "Brüning"; works_program += 1; budget -= wtb_budget; unemployed -= 4; workers += 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); capital_strike_progress += 1; wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 5 if in_popular_front or in_left_front; inflation += 3; economic_growth += 3;
+on-arrival: coalition_dissent += 1; coalition_dissent += 1 if historical_mode; coalition_dissent += 1 if chancellor == "Brüning"; works_program += 1; budget -= wtb_budget; unemployed -= 4; workers += 3; workers_spd += 8*(1-dissent); unemployed_spd += 8*(1-dissent); capital_strike_progress += 1; wtb_implemented += 1; kpd_coalition_dissent += 1; kpd_relation -= 5 if in_popular_front or in_left_front; inflation += 3; economic_growth += 3; pro_republic += 3*(1-dissent);
 achievement: wirtschaftspolitik
 
 We have entered the realm of deficit spending. Our coalition partners are disgusted, but the works plan is enacted anyway. Money is beginning to flow through the economy via investments in large-scale public works.
@@ -170,7 +170,7 @@ subtitle: -2 budget.
 unavailable-subtitle: -2 budget. [? if budget < 2 : We do not have the necessary budget. ?] [? if unemployed < 8 : Unemployment is low enough that job creation is not necessary. ?]
 view-if: moderate_plan_adopted == 1
 choose-if: budget >= 2 and unemployed >= 8
-on-arrival: budget -= 2; works_program += 1; unemployed -= 3 if unemployed >= 8; inflation += 1.5; workers_spd += 6*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 3*(1-dissent); old_middle_spd += 2*(1-dissent); rural_spd += 2*(1-dissent); moderate_plan_progress += 1; kpd_coalition_dissent += 1; inflation += 1 if unemployed < 10; kpd_relation -= 5 if in_popular_front or in_left_front; economic_growth += 1.6;
+on-arrival: budget -= 2; works_program += 1; unemployed -= 3 if unemployed >= 8; inflation += 1.5; workers_spd += 6*(1-dissent); unemployed_spd += 4*(1-dissent); new_middle_spd += 3*(1-dissent); old_middle_spd += 2*(1-dissent); rural_spd += 2*(1-dissent); moderate_plan_progress += 1; kpd_coalition_dissent += 1; inflation += 1 if unemployed < 10; kpd_relation -= 5 if in_popular_front or in_left_front; economic_growth += 1.6; pro_republic += 3*(1-dissent);
 achievement: wirtschaftspolitik
 
 [? if moderate_plan_progress == 1 : We have started to implement the job-creation plan! Funds are sent to build public works projects across Germany, reducing unemployment. ?]
@@ -189,7 +189,7 @@ subtitle: -1 budget.
 unavailable-subtitle: -1 budget. [? if budget < 1 : We do not have the necessary budget. ?] [? if unemployed < 8 : Unemployment is low enough that job creation is not necessary. ?]
 view-if: moderate_plan_adopted == 1
 choose-if: budget >= 1 and unemployed >= 8
-on-arrival: budget -= 1; works_program += 1; unemployed -= 2 if unemployed >= 8; inflation += 1; workers_spd += 4*(1-dissent); unemployed_spd += 2*(1-dissent); new_middle_spd += 2*(1-dissent); old_middle_spd += 1*(1-dissent); rural_spd += 1*(1-dissent); moderate_plan_progress += 1; kpd_coalition_dissent += 1; inflation += 1 if unemployed < 10; kpd_relation -= 5 if in_popular_front or in_left_front; economic_growth += 0.7;
+on-arrival: budget -= 1; works_program += 1; unemployed -= 2 if unemployed >= 8; inflation += 1; workers_spd += 4*(1-dissent); unemployed_spd += 2*(1-dissent); new_middle_spd += 2*(1-dissent); old_middle_spd += 1*(1-dissent); rural_spd += 1*(1-dissent); moderate_plan_progress += 1; kpd_coalition_dissent += 1; inflation += 1 if unemployed < 10; kpd_relation -= 5 if in_popular_front or in_left_front; economic_growth += 0.7; pro_republic += 3*(1-dissent);
 achievement: wirtschaftspolitik
 
 [? if moderate_plan_progress == 1 : We have started to implement the job-creation plan! Funds are sent to build public works projects across Germany, reducing unemployment. ?]

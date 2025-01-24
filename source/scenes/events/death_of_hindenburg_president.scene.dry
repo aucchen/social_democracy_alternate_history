@@ -144,7 +144,7 @@ go-to: r1_menu
 We have nominated Marie Juchacz as our presidential candidate, the first woman ever to be nominated for this position!
 
 @cultural_figure
-view-if: presidential_powers >= 1 and pro_democracy >= 60 and pacifism >= 3
+view-if: presidential_powers >= 1 and pro_republic >= 60 and pacifism >= 3
 
 Since the presidency has been made a largely ceremonial figure by our reforms, we might set a precedent by nominating a nonpartisan pro-democracy figure from the cultural, scientific, or literary worlds. There are many potential candidates...
 

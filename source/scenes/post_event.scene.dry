@@ -150,34 +150,37 @@ if (Q.month_actions >= 1) {
         Q.unemployed += 0.3;
     }
     // economic growth
-    if (Q.economic_growth < -0.5 && Q.unemployed < 18) {
+    if (Q.economic_growth < -0.5 && Q.unemployed <= 18) {
         Q.unemployed += 0.1;
     }
-    if (Q.economic_growth < -5 && Q.unemployed < 28) {
+    if (Q.economic_growth < -5 && Q.unemployed <= 28) {
         Q.unemployed += 0.1;
     }
-    if (Q.economic_growth >= 2 && Q.unemployed > 12) {
+    if (Q.economic_growth >= 2 && Q.unemployed >= 17) {
         Q.unemployed -= 0.1;
     }
-    if (Q.economic_growth >= 5 && Q.unemployed > 5) {
+    if (Q.economic_growth >= 4 && Q.unemployed >= 12) {
         Q.unemployed -= 0.1;
     }
-    if (Q.economic_growth >= 8 && Q.unemployed > 3) {
-        Q.unemployed -= 1;
+    if (Q.economic_growth >= 6 && Q.unemployed >= 7) {
+        Q.unemployed -= 0.1;
     }
-    if (Q.economic_growth > 4 && Q.inflation > 8) {
+    if (Q.economic_growth >= 8 && Q.unemployed >= 3) {
+        Q.unemployed -= 0.1;
+    }
+    if (Q.economic_growth >= 4 && Q.inflation >= 7.5) {
         Q.economic_growth -= 0.1;
     }
-    if (Q.economic_growth > -2.5 && Q.inflation <= -5) {
+    if (Q.economic_growth >= -2.5 && Q.inflation <= -5) {
         Q.economic_growth -= 0.1;
     }
-    if (Q.economic_growth > 8) {
+    if (Q.economic_growth >= 8) {
         Q.economic_growth -= 0.1;
     }
-    if (Q.economic_growth > 10) {
+    if (Q.economic_growth >= 10) {
         Q.economic_growth -= 0.2;
     }
-    if (Q.economic_growth > 12) {
+    if (Q.economic_growth >= 12) {
         Q.economic_growth -= 0.3;
     }
     //////////////////////////////// Education & Science support/economic changes
@@ -235,7 +238,7 @@ if (Q.month_actions >= 1) {
     if (Q.unemployed > 30 && Q.pro_republic > 20) {
         Q.pro_republic -= 1;
     }
-    if (Q.inflation > 8 && Q.pro_republic > 40) {
+    if (Q.inflation >= 8 && Q.pro_republic > 40) {
         Q.pro_republic -= 1;
     }
 
@@ -270,27 +273,7 @@ if (Q.month_actions >= 1) {
             Q.rural_nsdap += 3/12;
         }
     }
-    // prevent forever support if things are bad
-    if (Q.year >= 1934 && (Q.inflation >= 10 || Q.unemployed >= 25) && Q.pro_republic <= 45 && Q.spd_in_government) {
-        if (Q.workers_spd_normalized > 40) {
-            Q.workers_spd -= 6/12;
-        }
-        if (Q.unemployed_spd_normalized > 20) {
-            Q.unemployed_spd -= 6/12;
-        }
-        if (Q.new_middle_spd_normalized > 20) {
-            Q.new_middle_spd -= 6/12;
-        }
-        if (Q.old_middle_spd_normalized > 20) {
-            Q.old_middle_spd -= 6/12;
-        }
-        if (Q.rural_spd_normalized > 20) {
-            Q.rural_spd -= 6/12;
-        }
-        if (Q.catholics_spd_normalized > 20) {
-            Q.catholics_spd -= 6/12;
-        }
-    }
+
     ////////////////////////// annual support changes
     if (Q.year == 1929) {
         Q.unemployed += 3/12;
@@ -306,8 +289,7 @@ if (Q.month_actions >= 1) {
         Q.rural_dnvp -= 15/12;
         Q.rural_nsdap += 10/12;
         Q.unemployed_nsdap += 18/12;
-    }
-    if (Q.year == 1930) {
+    } else if (Q.year == 1930) {
         Q.rural_nsdap += 10/12;
         Q.rural_dnvp -= 15/12;
         Q.new_middle_dvp -= 5/12;
@@ -333,8 +315,7 @@ if (Q.month_actions >= 1) {
         }
         Q.sa_strength += 100/12;
         Q.sh_strength += 100/12;
-    }
-    if (Q.year == 1931) {
+    } else if (Q.year == 1931) {
         Q.catholics_z += 2/12;
         Q.rural_dvp -= 8/12;
         Q.old_middle_dvp -= 8/12;
@@ -372,8 +353,7 @@ if (Q.month_actions >= 1) {
             Q.new_middle_nsdap += 4/12;
             Q.rural_nsdap += 4/12;
         }
-    }
-    if (Q.year == 1932) {
+    } else if (Q.year == 1932) {
         Q.old_middle_other -= 7/12;
         Q.rural_other -= 7/12;
         Q.old_middle_nsdap += 7/12;
@@ -410,8 +390,7 @@ if (Q.month_actions >= 1) {
             Q.old_middle_nsdap += 3/12;
             Q.new_middle_nsdap += 2/12;
         }
-    }
-    if (Q.year >= 1933) {
+    } else if (Q.year >= 1933) {
         if (Q.return_to_normalcy) {
             // return to normalcy -> voters return to the base
             if (Q.new_middle_ddp_normalized < 40) {
@@ -438,6 +417,27 @@ if (Q.month_actions >= 1) {
             if (Q.spd_in_government) {
                 Q.workers_spd -= 4/12;
             }
+        }
+    }
+    // prevent forever support if the economy is bad
+    if (Q.year >= 1934 && (Q.inflation >= 8 || Q.unemployed >= 20) && Q.pro_republic <= 45 && Q.spd_in_government) {
+        if (Q.workers_spd_normalized > 40) {
+            Q.workers_spd -= 6/12;
+        }
+        if (Q.unemployed_spd_normalized > 20) {
+            Q.unemployed_spd -= 6/12;
+        }
+        if (Q.new_middle_spd_normalized > 20) {
+            Q.new_middle_spd -= 6/12;
+        }
+        if (Q.old_middle_spd_normalized > 20) {
+            Q.old_middle_spd -= 6/12;
+        }
+        if (Q.rural_spd_normalized > 20) {
+            Q.rural_spd -= 6/12;
+        }
+        if (Q.catholics_spd_normalized > 20) {
+            Q.catholics_spd -= 6/12;
         }
     }
 }
