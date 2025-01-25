@@ -11,7 +11,7 @@ tags: event
 
 = Suspension of the Austrian Parliament
 
-Due to a controversial proposal regarding a railroad strike in the Austrian National Council, all three presidents of the National Council resigned, leaving it without any presiding officers. This is a constitutional crisis. Austrian chancellor Engelbert Dollfuß has taken advantage of this crisis by suspending the parliament and ruling by emergency decree. Dollfuß consolidates his power by persecuting his political opponents, especially our fellow Social Democrats in the SDAPÖ (Social Democratic Worker's Party of Austria).
+Due to a controversial proposal regarding a railroad strike in the Austrian National Council, all three presidents of the National Council resigned, leaving it without any presiding officers. This is a constitutional crisis. Austrian chancellor Engelbert Dollfuß has taken advantage of this crisis by suspending the parliament and ruling by emergency decree, forming an "Austrofascist" government. Dollfuß consolidates his power by persecuting his political opponents, especially our fellow Social Democrats in the SDAPÖ (Social Democratic Worker's Party of Austria).
 
 Is there anything we could do?
 
@@ -27,7 +27,7 @@ Is there anything we could do?
 
 @eu_sanctions
 view-if: eu = 1
-on-arrival: sdapo_strength += 3; sdapo_strength += 1 if customs_union
+on-arrival: sdapo_strength += 3; sdapo_strength += 1 if customs_union; eu_austria = 1
 
 The European Union is a largely untested body, and from the beginning contained members that are at best quasi-democratic. Most of its members are more concerned by power politics than democratic values. However, as its founder, Germany holds a special influence in the EU, and we manage to persuade the other members to join in the pressure against Austrofascism.
 
@@ -48,7 +48,7 @@ choose-if: resources >= 1
 
 It is somewhat of a breach of diplomatic protocol for the SPD to so directly interfere in another country's affairs, supporting the Austrian social democrats.
 
-The Dollfuß regime does not give in, but its opponents have an added advantage.
+The Dollfuß regime does not give in, but its opponents have an added advantage. That may not be enough when dealing with the total force of the fascist state.
 
 @nothing
 

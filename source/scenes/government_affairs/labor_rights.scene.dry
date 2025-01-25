@@ -29,7 +29,7 @@ With control of the Labor Ministry, we can set national standards for labor. Our
 
 @working_hours
 view-if: working_hours < 2
-on-arrival: working_hours += 1; labor_dissent -= 8; left_dissent -= 5; labor_strength += 5; workers_spd += 7*(1-dissent); dvp_relation -= 4; coalition_dissent += 1; capital_strike_progress += 1 if dvp_relation <= 30; labor_goal_completed = 1; inflation += 0.1
+on-arrival: working_hours += 1; labor_dissent -= 8; left_dissent -= 5; labor_strength += 5; workers_spd += 7*(1-dissent); dvp_relation -= 4; coalition_dissent += 1; capital_strike_progress += 1 if dvp_relation <= 30; labor_goal_completed = 1; inflation += 0.1; economic_growth -= 0.1
 
 While a 40-hour work week was declared during the German Revolution in 1918, enforcement has become increasingly porous over the years. The capitalists have successfully added numerous exceptions and loopholes, returning to the old regime of forced overtime for workers.
 
@@ -38,7 +38,7 @@ Now, with the force of the Labor Ministry, we are finally enforcing the rights o
 @shorten_hours
 view-if: working_hours >= 2 and black_thursday_seen = 1
 subtitle: Could we induce more hiring and reduce unemployment by reducing work hours?
-on-arrival: working_hours += 1; labor_dissent -= 8; left_dissent -= 5; labor_strength += 5; workers_spd += 7*(1-dissent); dvp_relation -= 4; coalition_dissent += 1; capital_strike_progress += 1; labor_goal_completed = 1; unemployed -= 0.3; economic_growth -= 0.1;
+on-arrival: working_hours += 1; labor_dissent -= 8; left_dissent -= 5; labor_strength += 5; workers_spd += 7*(1-dissent); dvp_relation -= 4; coalition_dissent += 1; capital_strike_progress += 1; labor_goal_completed = 1; unemployed -= 0.3; economic_growth -= 0.2;
 
 Some in the labor movement argue that by reducing the maximum number of hours worked, employers would be induced to hire more workers, reducing unemployment. The argument also goes that this would be complementary to deflation, maintaining the same purchasing power for workers by cutting hours without cutting wages. Employers, however, resist this policy, arguing for more flexibility in hiring and firing.
 

@@ -466,6 +466,7 @@ Q.timers = ['advisor_action', 'confronting_nazis', 'crisis_program',
             'war_guilt', 'womens_rights', 'economic_democracy',
             'dealing_with_toleration',
             'constitutional_reform', 'labor_rights',
+            'education_science', 'curriculum',
             // events
             'emergency_cuts', 'unemployment_insurance',
             'sa_ban', 'sh_ban', 'papen_chancellor',

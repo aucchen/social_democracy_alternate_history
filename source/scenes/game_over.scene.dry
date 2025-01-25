@@ -212,6 +212,14 @@ go-to: eg_menu
 
 Marie Juchacz has been elected as President of Germany. She is the first woman to be elected as the head of state of any republic, and will contribute to shaping Germany for years to come.
 
+@president_einstein
+title: Albert Einstein is President
+view-if: president == "Einstein"
+tags: endings
+go-to: eg_menu
+
+Albert Einstein, possibly the most famous scientist in the world, has been elected as President of Germany. As a German Jew and a pacifist, he is the repudiation of everything the Nazis stood for, and a symbol of a new German Republic that has moved beyond its checkered past.
+
 
 
 @spd_victorious
@@ -412,6 +420,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
 
+[? if game_achievement_arbeiter_von_wien : **Arbeiter von Wien** - The SDAPÖ succeeds in Austria. ?]
+
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -517,6 +527,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
 
+[? if achievement_arbeiter_von_wien : **Arbeiter von Wien** - The SDAPÖ succeeds in Austria. ?]
+
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
 
@@ -619,6 +631,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
 
 [? if not achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
+
+[? if not achievement_arbeiter_von_wien : **Arbeiter von Wien** - The SDAPÖ succeeds in Austria. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 

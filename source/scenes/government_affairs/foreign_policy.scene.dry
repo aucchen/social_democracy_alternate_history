@@ -25,6 +25,8 @@ What should our foreign policy priority be?
 - @european_union_2
 - @concordat_negotiate
 - @concordat
+- @support_austria
+- @support_austria_2
 - @root: Do not enact any policies for now.
 - @easy_discard
 - @cancel_advisor_action
@@ -160,7 +162,21 @@ achievement: reichskonkordat
 
 We have successfully signed a Concordat between Germany and the Roman Catholic Church! This treaty defines a formal relationship between the Church and the German state, guaranteeing freedom of worship for Catholics, and the right of the church to appoint their own clergy. Catholics in Germany are pleased, as are their representatives in the Center Party.
 
+@support_austria
+title: Diplomatically support Austrian democracy against the Dollfuß dictatorship.
+view-if: austrian_parliament_seen = 1 and austrian_civil_war_seen = 0
+on-arrival: sdapo_strength += 1; left_dissent -= 3; center_dissent -= 3
 
+We provide verbal backing to Austrian democracy, wage a war of words against Austrofascism, and promulgate additional trade sanctions. Time will tell if it will be enough.
+
+@support_austria_2
+title: Provide material support to Austrian democracy against the Dollfuß dictatorship.
+subtitle: -1 budget
+choose-if: budget >= 1
+view-if: austrian_parliament_seen = 1 and austrian_civil_war_seen = 0
+on-arrival: budget -= 1; sdapo_strength += 3; left_dissent -= 6; center_dissent -= 6
+
+In public, we provide verbal backing to Austrian democracy, wage a war of words against Austrofascism, and promulgate additional trade sanctions. Privately, we provide financial and various forms of "support" to our comrades in Austria in their struggle against dictatorship.
 
 @european_union
 title: Take steps to form a "European Union".
