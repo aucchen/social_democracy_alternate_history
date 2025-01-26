@@ -246,23 +246,29 @@ if (Q.month_actions >= 1) {
     // if pro_republic is less than the support of the Weimar coalition, reduce SPD support...
     if (Q.pro_republic < (Q.spd_votes + Q.ddp_votes + Q.z_votes - 3)) {
         if (Q.new_middle_spd > 0) {
-            Q.new_middle_spd -= 4/12;
-            Q.new_middle_nsdap += 2/12;
+            Q.new_middle_spd -= 5/12;
+            Q.new_middle_nsdap += 3/12;
         }
         if (Q.old_middle_spd > 0) {
-            Q.old_middle_spd -= 4/12;
-            Q.old_middle_nsdap += 2/12;
+            Q.old_middle_spd -= 5/12;
+            Q.old_middle_nsdap += 3/12;
         }
         if (Q.rural_spd > 0) {
-            Q.rural_spd -= 4/12;
-            Q.rural_nsdap += 2/12;
+            Q.rural_spd -= 5/12;
+            Q.rural_nsdap += 3/12;
         }
         if (Q.workers_spd_normalized > 30) {
-            Q.workers_spd -= 3/12;
+            Q.workers_spd -= 4/12;
+        }
+        if (Q.catholics_spd > 0) {
+            Q.catholics_spd -= 4/12;
+        }
+        if (Q.unemployed_spd_normalized > 10) {
+            Q.unemployed_spd -= 4/12;
         }
         if (Q.new_middle_ddp > 0) {
-            Q.new_middle_ddp -= 5/12;
-            Q.new_middle_nsdap += 2/12;
+            Q.new_middle_ddp -= 4/12;
+            Q.new_middle_nsdap += 3/12;
         }
         if (Q.old_middle_ddp > 0) {
             Q.old_middle_ddp -= 5/12;
@@ -270,7 +276,7 @@ if (Q.month_actions >= 1) {
         }
         if (Q.rural_ddp > 0) {
             Q.rural_ddp -= 5/12;
-            Q.rural_nsdap += 3/12;
+            Q.rural_nsdap += 4/12;
         }
     }
 
