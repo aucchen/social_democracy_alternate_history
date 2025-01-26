@@ -174,7 +174,7 @@ if (Q.month_actions >= 1) {
     if (Q.economic_growth >= -2.5 && Q.inflation <= -5) {
         Q.economic_growth -= 0.1;
     }
-    if (Q.economic_growth >= 8) {
+    if (Q.economic_growth >= 7) {
         Q.economic_growth -= 0.1;
     }
     if (Q.economic_growth >= 10) {
@@ -184,8 +184,6 @@ if (Q.month_actions >= 1) {
         Q.economic_growth -= 0.3;
     }
     //////////////////////////////// Education & Science support/economic changes
-    // science bonus to economic growth
-    Q.science_bonus = 0;
     if (Q.major_curriculum && Q.major_curriculum == "democratic") {
         if (Q.pro_republic < 60) {
             Q.pro_republic += 0.5;
@@ -196,11 +194,12 @@ if (Q.month_actions >= 1) {
             Q.pro_republic += 0.3;
         } 
     }
-    // TODO: vocational curriculum
-    if (Q.major_curriculum && Q.major_curriculum == "vocational") {
-    }
-    if ((Q.major_curriculum && Q.major_curriculum == "scientific") || (Q.minor_curriculum && Q.minor_curriculum == "scientific")) {
+    // science bonus to economic growth
+    // education bonus
+    Q.science_bonus = 0;
+    if (Q.education_science) {
         Q.science_bonus += Q.education_science;
+        console.log(Q.science_bonus);
     }
     if (Q.science) {
         if (Q.science >= 1) {
@@ -218,6 +217,7 @@ if (Q.month_actions >= 1) {
     if (Q.science_bonus > 6) {
         Q.science_bonus = 6;
     }
+    console.log(Q.science_bonus);
     // this is kinda messy but basically more science -> higher levels of baseline growth
     if (Q.science_bonus >= 1) {
         if (Q.return_to_normalcy && Q.economic_growth < Q.science_bonus + 3) {

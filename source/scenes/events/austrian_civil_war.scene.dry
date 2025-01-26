@@ -67,13 +67,15 @@ view-if: spd_in_government and foreign_minister_party = "SPD" and sdapo_strength
 on-arrival: austria_peace = 1; pro_republic += 3; coup_progress -= 1
 achievement: arbeiter_von_wien
 
-The Austrian government obviously sees us as biased, so there is no way they will let us host peace negotiations. However, negotiations begin nonetheless. In Switzerland, with Fascist Italy as the Austrofascists' protector and Germany as the SDAPÖ's, something like a peace deal is hammered out. The socialists are disarmed and give up all pretense of revolution, while the dictatorship ends and normal government is restored, with free elections. Now begins the long work of reconstruction.
+The Austrian government obviously sees us as biased, so there is no way they will let us host peace negotiations. However, negotiations begin nonetheless. In Switzerland, with Fascist Italy as the Austrofascists' protector and Germany as the SDAPÖ's, a peace deal is hammered out. The socialists are disarmed and give up all pretense of revolution, while the right-wing paramilitaries are also disarmed. Dictatorship ends, and normal government is restored, with free elections.
+
+Given the SDAPÖ's starting position, this is treated as a victory. Now begins the long work of reconstruction...
 
 @long_war_2
 title: There is nothing we can do.
-on-arrival: z_relation -= 6; dvp_relation -= 6; coalition_dissent += 1
+on-arrival: z_relation -= 6; dvp_relation -= 6; ddp_relation -= 3; catholics_spd -= 5; old_middle_spd -= 5; coalition_dissent += 1; economic_growth -= 0.5
 
-No matter our efforts, the war continues. Too many lives are extinguished. Domestically, many are calling our interference a mistake.
+No matter our efforts, the war continues. Too many lives are extinguished. Refugees begin to flow into Germany, and trade suffers. Many are calling our Austrian interference a mistake.
 
 
 @sdapo_victory

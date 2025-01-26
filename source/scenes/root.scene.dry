@@ -432,6 +432,9 @@ Q.moderate_plan_progress = 0;
 // European Union negotiation process
 Q.eu = 0;
 Q.eu_progress = 0;
+// science/education
+Q.science = 0;
+Q.education_science = 0;
 
 // Tax rates relative to 1928 baseline
 Q.lower_tax_rates = 0;
