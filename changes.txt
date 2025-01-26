@@ -459,3 +459,21 @@ v1.1.3 - Bugfixing
 - Repeated occurrences of March on Berlin don't reduce paramilitary strength as much.
 - All DDP name occurrences should change to DStP when the time comes.
 - Reduction in coalition dissent from persecuting the RFB only happens once.
+
+
+v1.2 - Austrian Civil War, Education and Science, Economic Growth
+
+Major changes:
+- New events for the rise of Austrofascism and the Austrian Civil War in 1933-1934, in which the SPD and Germany may intervene.
+- New event: Kellogg-Briand Pact
+- New Government Affairs card: Education and Science - change the educational curriculum or fund scientific research.
+- New statistic - economic growth. Higher growth leads to lower unemployment, while negative growth will increase unemployment.
+- New advisor: Anna Siemsen (Left, education), new advisor action for Hirschfeld (Science funding)
+- New achievements: Republik der Wissenschaft (Albert Einstein is elected president in 1934), Arbeiter von Wien (SDAPÖ victory in Austria)
+
+Minor changes:
+- Constitutional reforms with Radbruch no longer requires neorevisionism to be seen.
+- Vote threshold causes a redistribution of "Other" votes primarily towards the right-wing parties.
+- High Inflation card is no longer limited to a single visit.
+- Some support change tuning.
+- Various bugfixes.
