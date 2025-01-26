@@ -115,12 +115,12 @@ Are you sure about this? The Weimar Coalition had an agreement to not touch reli
 - @cancel_advisor_action
 
 @secularize_2
-on-arrival: secularized = 1; catholics_spd -= 15; z_relation -= 15; dvp_relation += 6*(1-dissent); ddp_relation += 6*(1-dissent); kpd_relation += 6*(1-dissent); new_middle_spd += 3*(1-dissent); workers_spd += 3*(1-dissent); education_science += 0.5;
+on-arrival: secularized = 1; catholics_spd -= 15; z_relation -= 15; dvp_relation += 6*(1-dissent); ddp_relation += 6*(1-dissent); kpd_relation += 6*(1-dissent); new_middle_spd += 3*(1-dissent); workers_spd += 3*(1-dissent); education_science += 0.5; new_middle_ddp += 4; new_middle_dvp += 4
 go-to: vote_of_no_confidence.vonc_menu if in_weimar_coalition or in_grand_coalition or in_popular_front or in_emergency_government
 
 # instant VONC from zentrum
 
-The SPD, DDP, DVP, and KPD vote in favor of secular education, overcoming the opposition of the religiously-oriented Center Party and DNVP. We have funded secular community schools to replace some previous denominational schools.
+The SPD, [+ ddp_name +], DVP, and KPD vote in favor of secular education, overcoming the opposition of the religiously-oriented Center Party and DNVP. We have funded secular community schools to replace some previous denominational schools.
 
 [? if in_weimar_coalition or in_grand_coalition or in_popular_front or in_emergency_government: Of course, the Center Party is in revolt at this proposal, and have called for a vote of no confidence in our government. ?]
 
@@ -130,7 +130,7 @@ The SPD, DDP, DVP, and KPD vote in favor of secular education, overcoming the op
 title: Increase educational opportunities for the working class by funding public high schools.
 subtitle: -1 budget
 choose-if: budget >= 1
-on-arrival: budget -= 1; public_hs += 1; workers_spd += 6*(1-dissent); unemployed_spd += 3*(1-dissent); prussian_police_loyalty += 0.04; education_science += 0.5; unemployed -= 0.1; economic_growth += 0.2
+on-arrival: budget -= 1; public_hs += 1; workers_spd += 6*(1-dissent); unemployed_spd += 3*(1-dissent); prussian_police_loyalty += 0.04; education_science += 0.5; unemployed -= 0.2; economic_growth += 0.2; pro_republic += 4*(1-dissent);
 max-visits: 3
 
 # this makes the bureaucracy more proletarian
