@@ -490,7 +490,7 @@ on-arrival: siemsen_advisor = 1; n_advisors += 1; left_strength += 5
 go-to: advisor_menu
 tags: left_advisor
 
-Max Seydewitz is now an advisor.
+Anna Siemsen is now an advisor.
 
 
 
