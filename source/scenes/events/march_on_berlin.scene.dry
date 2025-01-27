@@ -22,7 +22,7 @@ It appears that President [+ president +] is looking favorably upon the fascist 
 
 @accept
 title: There is nothing we can do.
-go-to: accept_election if nsdap_normalized + dnvp_normalized >= 0.45; accept_hitler if nsdap_normalized + dnvp_normalized < 0.45
+go-to: accept_election if (nsdap_normalized + dnvp_normalized >= 0.5 and far_right_coalition < 50); accept_hitler if (nsdap_normalized + dnvp_normalized < 0.5 or far_right_coalition >= 50)
 
 @accept_election
 on-arrival: next_election_time = time + 1 if next_election_time > time+1; next_election_month = month + 1 if next_election_time >= time+1; next_election_year = year if next_election_time >= time+1; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; old_middle_nsdap += 10; new_middle_nsdap += 10; workers_nsdap += 10; rural_nsdap += 10; unemployed_nsdap += 8; workers_spd -= 10; workers_kpd -= 10; sa_strength += 100;
@@ -50,6 +50,7 @@ President [+ president +] has asked our government to resign.
 # if Reichsbanner + Prussian Police >= SA + Stahlhelm, then the fascists retreat.
 
 @govt_menu
+
 
 - @fight
 - @new_elections
@@ -103,16 +104,18 @@ The courts agree that President [+ president +] is wrong to dismiss us, and that
 @new_elections
 title: Call for new snap elections.
 subtitle: We will not resign at gunpoint, and we will attempt to maintain the integrity of the elections.
-go-to: new_elections_braun if president == "Braun"; new_elections_hindenburg if president != "Braun" and z_relation >= 40; new_elections_hindenburg_reject if president != "Braun" and z_relation < 40
+go-to: new_elections_braun if president == "Braun"; new_elections_hindenburg if president != "Braun" and z_relation >= 40 and far_right_coalition < 50; new_elections_hindenburg_reject if president != "Braun" and (z_relation < 40 or far_right_coalition >= 50)
 
 
 @new_elections_braun
-go-to: new_elections_braun_2 if nsdap_normalized + dnvp_normalized >= 0.5; new_elections_braun_reject if nsdap_normalized + dnvp_normalized < 0.5
+go-to: new_elections_braun_2 if nsdap_normalized + dnvp_normalized >= 0.5 and far_right_coalition < 50; new_elections_braun_reject if (nsdap_normalized + dnvp_normalized < 0.5 or far_right_coalition >= 50)
+
+# if the Nazis + DNVP have a current majority in the Reichstag, then they'll instantly launch the coup.
 
 
 @new_elections_braun_reject
 
-The fascists reject our offer of free and fair elections. They are demanding that President [+ president +] dismisses the current government and appoints Hitler chancellor.
+The fascists reject our offer of free and fair elections. They are demanding that President [+ president +] dismisses the current government and appoints Hitler chancellor. [? if far_right_coalition >= 50 : They claim that since the far-right coalition has the majority in the Reichstag, they are constitutionally justified in appointing the chanellor. Unfortunately, their argument is not exactly wrong. ?]
 
 - @braun_appoints_hitler
 - @fight

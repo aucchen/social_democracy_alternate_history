@@ -3,6 +3,7 @@ subtitle: Why did the Nazis gain so many votes?
 view-if: year >= 1929 and year <= 1932 and nsdap_r >= 15 and understanding_enemy_seen = 0 and understanding_enemy_timer = 0 and neorevisionism = 0
 on-arrival: understanding_enemy_seen = 1
 max-visits: 1
+new-page: true
 tags: event
 
 = Understanding the Enemy
@@ -31,6 +32,7 @@ It is possible that all or none of these hypotheses are correct. Whatever the ca
 - @p1: The Nazis are the fault of the petit bourgeoisie. It is not our responsibility as a working-class party to stop them.
 - @p2: We can combat the Nazis by adopting a "People's Party" posture that might compete for support among the middle class.
 - @p3: We should use new Mierendorff's new propaganda methods to fight the the Nazis.
+- @p4: We must focus our work among the working class to prevent Nazi in-roads.
 
 @p1
 
@@ -48,3 +50,8 @@ We can combat the Nazis by adopting a "People's Party" posture that might compet
 on-arrival: neorevisionist_strength += 10; nazi_urgency += 1; neorevisionism += 1;
 
 Working together with other "neorevisionists" such as Sergei Chakhotin, Mierendorff has developed new propaganda methods to fight the rise of the Nazis. They focus on visually striking symbols and repetitious slogans. Time will tell how effective they are.
+
+@p4
+on-arrival: left_strength += 4; center_strength += 4; labor_strength += 4; left_dissent -= 3; center_dissent -= 3; labor_dissent -= 3; workers_spd += 2*(1-dissent); unemployed_spd += 2*(1-dissent)
+
+The Nazis' appeals are making in-roads even among the working class, so we must redouble our propaganda campaigns among our base in order to prevent any Nazi attachment.
