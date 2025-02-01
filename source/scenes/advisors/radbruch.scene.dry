@@ -27,8 +27,8 @@ go-to: judiciary
 @constitutional_reform_
 title: Constitutional Reform
 subtitle: Pursue reforms of the inadequate Weimar Constitution.
-choose-if: advisor_action_timer = 0 and spd_in_government and justice_minister_party = "SPD" and neorevisionism and ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front))
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The SPD is not currently in government. ?] [? if justice_minister_party != "SPD" : We do not have the Justice Ministry. ?] [? if not neorevisionism: We do not have ideological support for constitutional reform yet - new ideas are needed. ?] [? if not ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front)) : Our current governing coalition will not support constitutional reforms. ?]
-on-arrival: advisor_action_timer = 6; last_advisor_action = 1
+choose-if: advisor_action_timer = 0 and spd_in_government and justice_minister_party = "SPD" and ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front)) and judicial_reform >= 2
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The SPD is not currently in government. ?] [? if justice_minister_party != "SPD" : We do not have the Justice Ministry. ?] [? if judicial_reform < 2: The judiciary is unlikely to tolerate progressive constitutional changes. ?] [? if not ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front)) : Our current governing coalition will not support constitutional reforms. ?]
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; constitutional_reform_timer -= 12
 go-to: constitutional_reform
 

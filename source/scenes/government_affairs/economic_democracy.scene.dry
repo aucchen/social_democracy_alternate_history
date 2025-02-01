@@ -37,7 +37,7 @@ The works councils, elected by workers at each major business, have been in plac
 title: Support national and sectorial works councils.
 subtitle: This is a step towards workers' control over the entire economy.
 view-if: works_councils == 1
-on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition; economic_growth += 0.1 if economic_growth < 3
 max-visits: 1
 
 National and sectorial workers councils have been part of the Weimar Constitution, but they were disempowered in the past, acting as nothing more than advisory bodies. We can change that.
@@ -47,7 +47,7 @@ National and sectorial workers councils have been part of the Weimar Constitutio
 title: Empower sectorial works councils.
 subtitle: Give works councils a role in setting wage and price policy for entire industrial sectors.
 view-if: works_councils == 2
-on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition; unemployed -= 2 if unemployed > 5; workers += 2
+on-arrival: economic_democracy += 1; workers_spd += 7*(1-dissent); capital_strike_progress += 1; works_councils += 1; labor_dissent -= 6; labor_strength += 8; dvp_relation -= 5; coalition_dissent +=1 if in_grand_coalition; unemployed -= 2 if unemployed > 5; workers += 2; economic_growth += 0.1 if economic_growth < 3
 max-visits: 1
 
 Sectorial works councils can now negotiate wage and price policies for entire economic sectors, helping to both give workers more of a voice, and to rationalize the economy, smoothing over the anarchy of the market.
@@ -56,7 +56,7 @@ Sectorial works councils can now negotiate wage and price policies for entire ec
 @nationalize_1
 title: Begin to socialize key industries.
 subtitle: -1 budget - we should buy out industries and govern them together with workers and consumers.
-on-arrival: economic_democracy += 1; capital_strike_progress += 1; budget -= 1; socializations += 1; workers_spd += 6*(1-dissent); unemployed_spd += 3*(1-dissent); coalition_dissent += 1 if in_grand_coalition; capital_strike_progress += 1 if black_thursday_seen; unemployed -= 1 if unemployed > 9
+on-arrival: economic_democracy += 1; capital_strike_progress += 1; budget -= 1; socializations += 1; workers_spd += 6*(1-dissent); unemployed_spd += 3*(1-dissent); coalition_dissent += 1 if in_grand_coalition; capital_strike_progress += 1 if black_thursday_seen; unemployed -= 1 if unemployed > 9; economic_growth += 0.2 if economic_growth < 5
 choose-if: budget >= 1
 max-visits: 3
 
@@ -65,7 +65,7 @@ We have begun to socialize key industries by buying out the capitalist owners, a
 @cooperatives_1
 title: Support worker and consumer cooperatives.
 subtitle: -1 budget
-on-arrival: economic_democracy += 1; cooperatives += 1; workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); budget -= 1; unemployed -= 1 if unemployed > 9
+on-arrival: economic_democracy += 1; cooperatives += 1; workers_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); budget -= 1; unemployed -= 1 if unemployed > 9; economic_growth += 0.2
 choose-if: budget >= 1
 max-visits: 3
 

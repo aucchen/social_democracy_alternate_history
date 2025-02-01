@@ -16,7 +16,7 @@ The mining and metals industry of the Ruhr region is beset by a wave of strikes 
 
 @support_labor
 subtitle: This will alienate the bourgeoisie.
-on-arrival: labor_strength += 5; labor_dissent -= 5; left_dissent -= 5; workers_spd += 6*(1-dissent); coalition_dissent += 1; dvp_relation -= 4; capital_strike_progress += 1 if dvp_relation <= 30; capital_strike_progress += 1 if unemployed > 15; capital_strike_progress += 1 if unemployed > 24; labor_goal_completed += 1; inflation += 0.1
+on-arrival: labor_strength += 5; labor_dissent -= 5; left_dissent -= 5; workers_spd += 6*(1-dissent); coalition_dissent += 1; dvp_relation -= 4; capital_strike_progress += 1 if dvp_relation <= 30; capital_strike_progress += 1 if unemployed > 15; capital_strike_progress += 1 if unemployed > 24; labor_goal_completed += 1; inflation += 0.1; economic_growth -= 0.2
 
 Supporting labor is always popular in the SPD, although many of our coalition partners represent employers, and they are less enthused.
 

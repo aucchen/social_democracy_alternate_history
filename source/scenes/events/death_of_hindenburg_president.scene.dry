@@ -40,6 +40,7 @@ As for the SPD, we could support a joint Weimar Coalition candidate or run our o
 Kurt Schumacher is an ambitious rising star in the party, and would be all too willing to run. He was a hero in the Great War, but his relatively young age might be relevant.
 [? if womens_rights >= 6 and family_law >= 2 and womens_work >= 2 and welfare > 0: Or, perhaps it is time for a woman to become president. Germany and the SPD have been leading on women's rights for years, and it is only fitting that we should elect the world's first female president. Perhaps Marie Juchacz could be seen as the "mother of the nation" for her work in social welfare. However, her divorce 28 years ago might make it difficult for the Catholics to support her. ?]
 
+[? if presidential_powers >= 1 and pro_republic >= 60 and pacifism >= 3: Since Germany has been largely democratized and presidential powers reduced, we can also support another non-traditional political figure, someone from the cultural, scientific, or literary spheres. They will perhaps be the symbol of a new Germany that has moved beyond its past. ?]
 # if Otto Braun ran last time: he can only run if he controls Prussia. Otherwise, it's Kurt Schumacher.
 
 # options: 
@@ -57,6 +58,7 @@ Kurt Schumacher is an ambitious rising star in the party, and would be all too w
 - @braun_r1: Support Otto Braun.
 - @schumacher_r1: Support Kurt Schumacher.
 - @juchacz_r1: Support Marie Juchacz.
+- @cultural_figure: Support a nonpartisan cultural figure?
 
 @eckener_r1
 subtitle: -1 resource - After nominating him, we still have to convince the other parties to support him.
@@ -142,6 +144,53 @@ go-to: r1_menu
 
 We have nominated Marie Juchacz as our presidential candidate, the first woman ever to be nominated for this position!
 
+@cultural_figure
+view-if: presidential_powers >= 1 and pro_republic >= 60 and pacifism >= 3
+subtitle: The next president should be a symbol of the new Germany...
+
+Since the presidency has been made a largely ceremonial figure by our reforms, we might set a precedent by nominating a nonpartisan pro-democracy figure from the cultural, scientific, or literary worlds. There are many potential candidates...
+
+- @einstein_r1: Albert Einstein, physicist.
+- @mann_r1: Heinrich Mann, left-wing writer.
+- @ossietzky_r1: Carl von Ossietzky, pacifist journalist.
+- @candidate_menu: Actually, we should nominate someone else.
+
+@einstein_r1
+subtitle: -2 resources
+view-if: science >= 2 and kwg_research >= 1 and (major_curriculum = "scientific" or minor_curriculum = "scientific")
+choose-if: resources >= 2
+on-arrival: spd_candidate = "Einstein"; ddp_candidate = "Einstein"; resources -= 2; is_unity_candidate = 0; is_cultural_candidate = 1;
+go-to: r1_menu
+
+Albert Einstein is a Nobel Prize-winning scientist, director of the Kaiser Wilhelm Institute for Physics, and international advocate for peace. He was a founding member of the German Democratic Party (whose successor would support him in the election), but has also expressed sympathy towards socialism.
+
+He did not wish to run for president, disliking the public nature of campaigning, but we have somehow convinced him that his candidacy will be crucial to the future of Germany and the world. As a Jewish German pacifist, his becoming president would be a repudiation of everything the Nazis stand for.
+
+The [+ ddp_name +] will endorse Einstein's candidacy.
+
+@mann_r1
+subtitle: -2 resources - He might be too far left for the bourgeois parties.
+view-if: kpd_relation >= 50
+choose-if: resources >= 2
+on-arrival: spd_candidate = "Mann"; resources -= 2; is_unity_candidate = 0; is_cultural_candidate = 1;
+go-to: r1_menu
+
+Heinrich Mann is a world-renowned novelist and poet who is also known to be a left-wing activist. His political sympathy lies with the far left, and he supported the revolutions in 1918 and 1919. He has long lived in the shadow of his better-known brother, Thomas Mann.
+
+Mann is willing to accept the nomination for president.
+
+
+@ossietzky_r1
+view-if: weltbuhne_dropped = 1
+subtitle: -2 resources - He might be too far left for the bourgeois parties.
+choose-if: resources >= 2
+on-arrival: spd_candidate = "Ossietzky"; resources -= 2; is_unity_candidate = 0; is_cultural_candidate = 1;
+go-to: r1_menu
+
+Carl von Ossietzky is a left-wing journalist who is the publisher of the Weltbühne, a news magazine. He is most known for exposing the secret German rearmament program in 1929, which brought him international renown. In the 1932 presidential election, he endorsed the Communist Thälmann.
+
+Ossietzky is extremely reluctant to become a politician, and has been an iconoclastic figure his entire life, criticizing the SPD as being part of the establishment. It is with a sense of irony that he accepts our nomination.
+
 
 @r1_menu
 view-if: round = 0
@@ -159,7 +208,7 @@ view-if: round = 0
 # convincing Z to support a unity candidate
 @convince_z_unity
 title: Convince the Center Party to support [+ spd_candidate +].
-view-if: spd_candidate = "Eckener" or spd_candidate = "Gessler"
+view-if: (spd_candidate = "Eckener" or spd_candidate = "Gessler") and z_candidate != spd_candidate
 on-arrival: {!
 Q.z_support_braun = 0;
 if (Q.z_relation >= 40 || (Q.z_relation > 20 && Q.z_party_leader == "Joos")) {
@@ -182,7 +231,7 @@ We implore the Center Party to support [+ spd_candidate +] as a unity candidate 
 title: Convince the Center Party to support [+ spd_candidate +].
 choose-if: spd_votes >= z_votes
 unavailable-subtitle: [? if spd_votes < z_votes: The Center knows that they are more popular than us; they do not see a reason to support our candidate. ?]
-view-if: spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz"
+view-if: (spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz" or is_cultural_candidate) and z_candidate != spd_candidate
 on-arrival: {!
 Q.z_support_braun = 0;
 if (Q.spd_candidate == "Juchacz") {
@@ -227,6 +276,7 @@ The Center are not satisfied with our arguments, but they are open to being conv
 
 - @pay_z: Give them the resources they need.
 - @r1_menu: Forget about the Center.
+- @r2_campaigning: Forget about the Center.
 
 @pay_z
 choose-if: resources >= 2
@@ -252,7 +302,7 @@ max-visits: 1
 
 @convince_ddp_spd
 title: Convince the [+ ddp_name +] to support [+ spd_candidate +].
-view-if: (spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz") and ddp_candidate != spd_candidate
+view-if: (spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz"or is_cultural_candidate) and ddp_candidate != spd_candidate
 on-arrival: ddp_candidate = spd_candidate if ddp_relation >= 40
 go-to: r1_menu if round = 0; r2_campaigning if round > 0
 max-visits: 1
@@ -262,7 +312,7 @@ max-visits: 1
 
 @convince_kpd_spd
 title: Convince the KPD to support [+ spd_candidate +].
-view-if: spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz"
+view-if: (spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz" or is_cultural_candidate) and kpd_candidate != spd_candidate
 choose-if: spd_votes >= kpd_votes
 unavailable-subtitle: The KPD knows that they are more popular than us; they do not see a reason to support our candidate.
 max-visits: 1
@@ -296,7 +346,7 @@ The KPD now endorses [+ spd_candidate +] in the presidential election! We ask th
 @convince_dvp_spd
 title: Convince the DVP to support [+ spd_candidate +].
 unavailable-subtitle: The DVP is not willing to support our candidate.
-view-if: spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz"
+view-if: spd_candidate = "Braun" or spd_candidate = "Schumacher" or spd_candidate = "Juchacz" or is_cultural_candidate
 choose-if: (dvp_relation >= 50 and candidate != "Juchacz") or (dvp_relation >= 60 and candidate = "Juchacz")
 on-arrival: dvp_candidate = spd_candidate
 go-to: r1_menu if round = 0; r2_campaigning if round > 0
@@ -335,7 +385,10 @@ Thalmann: "Ernst Thälmann of the KPD",
 Munzenberg: "Willi Münzenberg of the KPD",
 Braun: "Otto Braun of the SPD",
 Schumacher: "Kurt Schumacher of the SPD",
-Juchacz: "Marie Juchacz of the SPD"
+Juchacz: "Marie Juchacz of the SPD",
+Einstein: "Albert Einstein, scientist",
+Mann: "Heinrich Mann, writer",
+Ossietzky: "Carl von Ossietzky, journalist"
 }
 for (var k in candidate_descs) {
     Q[k + '_running'] = 0;
@@ -344,7 +397,7 @@ var candidate_votes = {};
 for (var i = 0; i < Q.parties.length; i++) {
     var party = Q.parties[i];
     var supported_candidate = Q[party + '_candidate'];
-    console.log(party, supported_candidate);
+    //console.log(party, supported_candidate);
     supported_candidate = supported_candidate.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     Q[supported_candidate + '_running'] = 1;
     if (supported_candidate in candidate_votes) {
@@ -401,6 +454,10 @@ Election results:
 [? if Braun_running : Braun - [+ Braun_votes_disp +]% ?]
 [? if Schumacher_running : Schumacher - [+ Schumacher_votes_disp +]% ?]
 [? if Juchacz_running : Juchacz - [+ Juchacz_votes_disp +]% ?]
+# cultural candidates
+[? if Einstein_running : Einstein - [+ Einstein_votes_disp +]% ?]
+[? if Ossietzky_running : Ossietzky - [+ Ossietzky_votes_disp +]% ?]
+[? if Mann_running : Mann - [+ Mann_votes_disp +]% ?]
 
 @r2_start
 on-arrival: {!
@@ -409,9 +466,9 @@ if (Q.Hitler_votes && Q.Seldte_votes) {
     if (Q.Hitler_votes > Q.Seldte_votes) {
         Q.dnvp_candidate = "Hitler";
         Q.other_candidate = "Hitler";
-        Q.Hitler_bonus = -0.25*Q.other_votes;
+        Q.Hitler_bonus = (Q.Hitler_bonus || 0) - 0.25*Q.other_votes;
         if (Q.z_candidate == "Adenauer") {
-            Q.Adenauer_bonus += 0.25*Q.other_votes;
+            Q.Adenauer_bonus = (Q.Adenauer_bonus || 0) + 0.25*Q.other_votes;
         }
     } else {
         Q.nsdap_candidate = "Seldte";
@@ -427,16 +484,25 @@ if (Q.Hitler_votes && Q.Seldte_votes) {
 // 2. If Adenauer & Gessler are both running and neither are part of the SPD coalition, the smaller of these drops out.
 Q.adenauer_drops_out = 0;
 Q.gessler_drops_out = 0;
-if (Q.z_candidate == "Adenauer" && Q.ddp_candidate == "Gessler" && Q.z_candidate != Q.spd_candidate && Q.ddp_candidate != Q.spd_candidate) {
+if (Q.z_candidate == "Adenauer" && (Q.ddp_candidate == "Gessler" || Q.dvp_candidate == "Gessler") && Q.z_candidate != Q.spd_candidate && (Q.ddp_candidate != Q.spd_candidate || Q.dvp_candidate != Q.spd_candidate)) {
     if (Q.Adenauer_votes > Q.Gessler_votes) {
         Q.gessler_drops_out = 1;
-        Q.ddp_candidate = "Adenauer";
+        if (Q.ddp_candidate != Q.spd_candidate) {
+            Q.ddp_candidate = "Adenauer";
+        }
         if (Q.dvp_candidate != Q.spd_candidate) {
             Q.dvp_candidate = "Adenauer";
         }
+        Q.Adenauer_bonus = (Q.Adenauer_bonus || 0) + 0.25*Q.other_votes;
     } else {
         Q.adenauer_drops_out = 1;
         Q.z_candidate = "Gessler";
+        Q.Gessler_bonus = 0.25*Q.other_votes;
+    }
+    if (Q.nsdap_candidate == 'Seldte') {
+        Q.Seldte_bonus = (Q.Seldte_bonus || 0) - 0.25*Q.other_votes;
+    } else if (Q.nsdap_candidate == "Hitler") {
+        Q.Hitler_bonus = (Q.Hitler_bonus || 0) - 0.25*Q.other_votes;
     }
 }
 // DVP drops out to favor the center candidate
@@ -451,8 +517,8 @@ In the lead is [+ winner_desc +]. There is no majority in the first round. In th
 [? if dnvp_candidate = "Göring" : The DNVP and NSDAP have consolidated their electoral efforts, with the DNVP now endorsing Göring for the second round. ?]
 [? if nsdap_candidate = "Seldte" : The DNVP and NSDAP have consolidated their electoral efforts, with the NSDAP now endorsing Seldte for the second round. ?]
 
-[? if gessler_drops_out : The liberal candidate Otto Gessler has dropped out in favor of the Center Party's Konrad Adenauer. This consolidates the votes of the moderate bürgerblock. ?]
-[? if adenauer_drops_out : The Center Party candidate Konrad Adenauer has dropped out in favor of the DStP-DVP candidate Otto Gessler. This consolidates the votes of the moderate bürgerblock. ?]
+[? if gessler_drops_out : The liberal candidate Otto Gessler has dropped out in favor of the Center Party's Konrad Adenauer. This consolidates the votes of the moderate bürgerblock, and attracts some votes from the right-wing minor parties. ?]
+[? if adenauer_drops_out : The Center Party candidate Konrad Adenauer has dropped out in favor of the DStP-DVP candidate Otto Gessler. This consolidates the votes of the moderate bürgerblock, and attracts some votes from the right-wing minor parties. ?]
 
 What should we do?
 
@@ -619,7 +685,7 @@ Despite the Nazi threats, supporters of the SPD and the democratic parties refus
 
 
 @election_end
-go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring" or winner = "Goring"; seldte_victory if winner = "Seldte"; munzenberg_victory if winner = "Munzenberg" or winner = "Münzenberg"; thalmann_victory if winner = "Thalmann" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"
+go-to: eckener_win if winner = "Eckener"; juchacz_win if winner = "Juchacz"; bundesrepublik_win if winner = "Schumacher" or winner = "Adenauer"; hitler_victory if winner = "Hitler" or winner = "Göring" or winner = "Goring"; seldte_victory if winner = "Seldte"; munzenberg_victory if winner = "Munzenberg" or winner = "Münzenberg"; thalmann_victory if winner = "Thalmann" or winner = "Thälmann"; nazis_lose if winner = "Braun" or winner = "Gessler"; cultural_victory if winner = "Ossietzky" or winner = "Mann"; einstein_victory if winner = "Einstein"
 on-arrival: president = winner; president = "Thälmann" if president == "Thalmann"; president = "Münzenberg" if president = "Munzenberg"; president = "Göring" if president = "Goring"
 
 The election has been won by [+ winner_desc +].
@@ -657,6 +723,15 @@ achievement: wahlrechts
 go-to: nazis_lose
 
 This is a historic victory - Marie Juchacz is the first woman to be elected president in any republic, anywhere in the world.
+
+@einstein_victory
+achievement: republik_der_wissenschaft
+go-to: nazis_lose
+
+@cultural_victory
+go-to: nazis_lose
+
+
 
 @bundesrepublik_win
 go-to: bundesrepublik_achieve if presidential_powers; nazis_lose if not presidential_powers

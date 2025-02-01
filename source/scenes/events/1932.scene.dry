@@ -5,13 +5,15 @@ on-arrival: {!
 // TODO: if a public works program has started, unemployment is not so bad.
 if (Q.works_program && Q.works_program >= 2) {
     Q.unemployed -= 1;
-    Q.inflation += 1
+    Q.inflation += 1;
+    Q.economic_growth += 1;
 }
 if (!Q.works_program) {
-    Q.unemployed += 6; 
+    Q.unemployed += 5; 
     Q.inflation -= 2;
-
+    Q.economic_growth -= 1;
 }
+// historical growth: -7.5%
 // moved demographic changes to post_event
 !}
 tags: event

@@ -25,6 +25,8 @@ What should our foreign policy priority be?
 - @european_union_2
 - @concordat_negotiate
 - @concordat
+- @support_austria
+- @support_austria_2
 - @root: Do not enact any policies for now.
 - @easy_discard
 - @cancel_advisor_action
@@ -126,7 +128,7 @@ Negotiations procede smoothly for the most part. The Western powers are convince
 title: The Western Allies are finally willing to pause our reparations payments!
 subtitle: Our negotiations have been successful.
 view-if: reparations_negotiation >= 3 and black_thursday_seen == 1 and reparations > -2
-on-arrival: west_relation += 1; reparations = -2; budget += 2 if hoover_memorandum_seen == 0; budget += 1 if hoover_memorandum_seen == 1; coalition_dissent -= 1 if coalition_dissent > 0; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); coup_progress -= 2 if coup_progress > 2
+on-arrival: west_relation += 1; reparations = -2; budget += 2 if hoover_memorandum_seen == 0; budget += 1 if hoover_memorandum_seen == 1; coalition_dissent -= 1 if coalition_dissent > 0; workers_spd += 8*(1-dissent); old_middle_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); rural_spd += 5*(1-dissent); coup_progress -= 2 if coup_progress > 2; economic_growth += 0.7; economic_growth += 0.5 if economic_growth < 0
 max-visits: 1
 
 Finally, given both the economic circumstances and our continued negotiations, the Western Allies are willing to pause our reparations payments! Much of the credit must go to American president Hoover, who has been friendlier towards us than the Europeans.
@@ -141,15 +143,6 @@ on-arrival: west_relation += 2; east_relation += 1; nationalism -= 5*(1-dissent)
 The previous foreign ministry, despite its benevolent and peaceful face, was secretly helping the Reichswehr to build up its forces, in contravention of the Treaty of Versailles.
 
 The Allies are grateful of our exposure and repudiation of militarism. Our partners in the coalition are less supportive.
-
-
-@economic_conference
-title: Organize an international economic conference to deal with the Depression.
-unavailable-subtitle: [? if west_relation < 4 : Our relations with the West are not good enough. ?]
-view-if: black_friday_seen == 1 and crisis_urgency >= 1 and reparations <= -2
-choose-if: west_relation >= 4
-on-arrival: economic_conference = 1; west_relation += 1; east_relation += 1
-max-visits: 1
 
 
 @concordat_negotiate
@@ -169,7 +162,21 @@ achievement: reichskonkordat
 
 We have successfully signed a Concordat between Germany and the Roman Catholic Church! This treaty defines a formal relationship between the Church and the German state, guaranteeing freedom of worship for Catholics, and the right of the church to appoint their own clergy. Catholics in Germany are pleased, as are their representatives in the Center Party.
 
+@support_austria
+title: Diplomatically support Austrian democracy against the Dollfuß dictatorship.
+view-if: austrian_parliament_seen = 1 and austrian_civil_war_seen = 0
+on-arrival: sdapo_strength += 1; left_dissent -= 3; center_dissent -= 3
 
+We provide verbal backing to Austrian democracy, wage a war of words against Austrofascism, and promulgate additional trade sanctions. Time will tell if it will be enough.
+
+@support_austria_2
+title: Provide material support to Austrian democracy against the Dollfuß dictatorship.
+subtitle: -1 budget
+choose-if: budget >= 1
+view-if: austrian_parliament_seen = 1 and austrian_civil_war_seen = 0
+on-arrival: budget -= 1; sdapo_strength += 3; left_dissent -= 6; center_dissent -= 6
+
+In public, we provide verbal backing to Austrian democracy, wage a war of words against Austrofascism, and promulgate additional trade sanctions. Privately, we provide financial and various forms of "support" to our comrades in Austria in their struggle against dictatorship.
 
 @european_union
 title: Take steps to form a "European Union".
@@ -185,7 +192,7 @@ Forming a "United States of Europe" has long been part of the Social Democratic 
 @european_union_2
 title: We can sign a treaty to form a European Union!
 view-if: west_relation >= 5 and east_relation >= 4 and eu_progress >= 2
-on-arrival: eu = 1; unemployed -= 2 if unemployed >= 10; inflation += 2 if inflation <= -2; inflation -= 1 if inflation >= 4.5; workers_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); old_middle_spd += 5*(1-dissent); rural_spd += 4*(1-dissent); catholics_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); pro_republic += 5; nationalism -= 5; budget += 1
+on-arrival: eu = 1; unemployed -= 2 if unemployed >= 10; inflation += 2 if inflation <= -2; inflation -= 1 if inflation >= 4.5; workers_spd += 5*(1-dissent); new_middle_spd += 5*(1-dissent); old_middle_spd += 5*(1-dissent); rural_spd += 4*(1-dissent); catholics_spd += 4*(1-dissent); unemployed_spd += 4*(1-dissent); pro_republic += 5; nationalism -= 5; budget += 1; economic_growth += 1; economic_growth += 1 if economic_growth < 3
 max-visits: 1
 achievement: eu
 

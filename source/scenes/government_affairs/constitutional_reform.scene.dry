@@ -3,7 +3,7 @@ new-page: true
 is-card: true
 view-if: spd_in_government = 1 and justice_minister_party = "SPD" and constitutional_reform_timer = 0 and judicial_reform >= 4 and neorevisionism and ((in_weimar_coalition) or (in_spd_majority) or (in_left_front) or (in_popular_front)) and constitutional_reform < 3
 frequency: 25
-on-arrival: month_actions += 1; constitutional_reform_timer = 12; pass_threshold = 0.51; pass_threshold = 0.6 if pro_republic < 65;
+on-arrival: month_actions += 1; constitutional_reform_timer += 12; pass_threshold = 0.51; pass_threshold = 0.6 if pro_republic < 65;
 card-image: img/portraits/RadbruchGustav.jpg
 go-to: reforms_menu
 tags: govt_affairs
@@ -28,6 +28,7 @@ A constitutional reform requires either a two-thirds supermajority in the Reichs
 - @presidential_powers: Reduce presidential powers.
 - @as_is: Do not pursue constitutional reform.
 - @easy_discard
+- @cancel_advisor_action
 #- @constitutional_bans: Allow the banning of anti-constitutional parties.
 
 @vote_threshold
@@ -61,7 +62,7 @@ The SPD Left opposes this change, as they believe it to be anti-democratic.
 @vote_threshold_2
 choose-if: reform_support >= pass_threshold
 unavailable-subtitle: We do not have enough support for this policy. [? if pro_republic < 65 : We should have an additional margin for the referendum since we need a majority of voters, and many voters who do not support the republic will not participate. ?] [? if z_relation <= 30 : The Center Party does not trust us enough to support this policy. ?]
-on-arrival: constitutional_reform += 1; electoral_threshold = 5; ddp_relation -= 25; dvp_relation -= 25; left_dissent += 20; workers_other *= 0.1; new_middle_other *= 0.1; old_middle_other *= 0.1; rural_other *= 0.2; unemployed_other *= 0.2; catholics_other *= 0.1;
+on-arrival: constitutional_reform += 1; electoral_threshold = 5; ddp_relation -= 25; dvp_relation -= 25; left_dissent += 20; workers_dnvp += workers_other*0.4; workers_nsdap += workers_other*0.4; workers_other *= 0.1; new_middle_dvp += new_middle_other*0.3; new_middle_nsdap += new_middle_other*0.3; new_middle_other *= 0.1; old_middle_dvp += 0.3*old_middle_other; old_middle_nsdap += 0.3*old_middle_other; old_middle_dnvp += 0.3*old_middle_other; old_middle_other *= 0.1; rural_dnvp += 0.5*rural_other; rural_nsdap += 0.4*rural_other; rural_other *= 0.1; unemployed_nsdap += 0.3*unemployed_other; unemployed_kpd += 0.4*unemployed_other; unemployed_other *= 0.2; catholics_z += 0.6*catholics_other; catholics_other *= 0.1;
 achievement: verfassungsreform
 
 # this should result in a redistribution of votes - other parties should not get so many votes anymore. maybe ddp and dvp get a recovery of middle-class votes? or maybe they flow to the others.

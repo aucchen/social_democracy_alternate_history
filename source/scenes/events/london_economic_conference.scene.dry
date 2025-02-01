@@ -75,14 +75,14 @@ How should we try to salvage the negotiations?
 @salvage_currency
 choose-if: woytinsky_advisor = 1 and wtb_implemented > 1
 unavailable-subtitle: Wladimir Woytinsky would be extremely helpful right now.
-on-arrival: unemployed -= 2 if unemployed >= 10; unemployed -= 1.5 if unemployed >= 5; inflation += 1.5; workers_spd += 4*(1-dissent); new_middle_spd += 3*(1-dissent)
+on-arrival: unemployed -= 2 if unemployed >= 10; unemployed -= 1.5 if unemployed >= 5; inflation += 1.5; workers_spd += 4*(1-dissent); new_middle_spd += 3*(1-dissent); economic_growth += 1.5 if economic_growth < 3
 
 Wladimir Woytinsky, now part of our delegation to the conference, uses our successful implementation of the WTB-plan in order to argue for loosening currency valuation. The argument is at least somewhat convincing, and an agreement is reached, leading to increased inflation and demand stimulus throughout the world.
 
 @salvage_debts
 choose-if: reparations <= -2 and pacifism >= 3 and (rearmament_exposed or west_relation >= 3)
 unavailable-subtitle: We cannot argue for pacifism in our current state.
-on-arrival: budget += 1; unemployed -= 1 if unemployed >= 10; unemployed -= 1 if unemployed >= 5; inflation += 1; new_middle_spd += 4*(1-dissent); workers_spd += 3*(1-dissent)
+on-arrival: budget += 1; unemployed -= 1 if unemployed >= 10; unemployed -= 1 if unemployed >= 5; inflation += 1 if inflation < 0; new_middle_spd += 4*(1-dissent); workers_spd += 3*(1-dissent); economic_growth += 1 if economic_growth < 3
 
 We try to argue that reducing war debts will reduce the risk of a future European war, using our successful disarmament and the reduction in Versailles reparation payments as an argument. The argument is at least somewhat convincing to the Americans, leading to an agreement to reduce debts from the Great War. This indirectly also improves our economy.
 

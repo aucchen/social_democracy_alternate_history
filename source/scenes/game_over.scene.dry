@@ -31,7 +31,7 @@ if (Q.republic_victory) {
 // Verfassungskoalition - form a Constitutional Coalition.
 // Wirtschaftspolitik - enact an economic plan.
 // Wirtschaftswunder - reduce unemployment below 10% and have a non-negative budget by 1933.
-if (Q.year >= 1932  && Q.unemployed < 10 && Q.budget > 0 && Q.inflation < 5) {
+if (Q.year >= 1932  && Q.unemployed < 8.6 && Q.budget > 0 && Q.inflation < 5) {
     this.achieve('wirtschaftswunder');
 }
 // Bollwerk der Demokratie - resist the Prussian Coup, and win.
@@ -212,6 +212,14 @@ go-to: eg_menu
 
 Marie Juchacz has been elected as President of Germany. She is the first woman to be elected as the head of state of any republic, and will contribute to shaping Germany for years to come.
 
+@president_einstein
+title: Albert Einstein is President
+view-if: president == "Einstein"
+tags: endings
+go-to: eg_menu
+
+Albert Einstein, possibly the most famous scientist in the world, has been elected as President of Germany. As a German Jew and a pacifist, he is the repudiation of everything the Nazis stood for, and a symbol of a new German Republic that has moved beyond its checkered past.
+
 
 
 @spd_victorious
@@ -239,7 +247,7 @@ go-to: eg_menu
 Our government has enacted a public works program!
 
 @unemployment_reduced
-title: Unemployment has been successfully reduced!
+title: Unemployment has been reduced from its peak.
 view-if: unemployed <= 20 and unemployed >= 10 and year >= 1930
 tags: endings
 go-to: eg_menu
@@ -258,7 +266,7 @@ Unemployment levels have fallen substantially! This is a success of our economic
 
 @unemployment_high
 title: Unemployment is still too high.
-view-if: unemployed >= 30 and (chancellor != "Hitler" and president != "Hitler") and (total_defeat == 0) and long_war == 0
+view-if: unemployed >= 20 and (chancellor != "Hitler" and president != "Hitler") and (total_defeat == 0) and long_war == 0
 tags: endings
 go-to: eg_menu
 
@@ -362,7 +370,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
-[? if game_achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
+[? if game_achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than in 1928, inflation below 5%, and a budget surplus. ?]
 
 [? if game_achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
 
@@ -409,6 +417,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if game_achievement_wahlrechts : **Wahlrechts für Frauen** - Marie Juchacz has been elected president. ?]
 
 [? if game_achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
+
+[? if game_achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
+
+[? if game_achievement_arbeiter_von_wien : **Arbeiter von Wien** - SDAPÖ victory in Austria. ?]
 
 [? if game_achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
@@ -465,7 +477,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
-[? if achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
+[? if achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than in 1928, inflation below 5%, and a budget surplus. ?]
 
 [? if achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
 
@@ -512,6 +524,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if achievement_wahlrechts : **Wahlrechts für Frauen** - Marie Juchacz has been elected president. ?]
 
 [? if achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
+
+[? if achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
+
+[? if achievement_arbeiter_von_wien : **Arbeiter von Wien** - SDAPÖ victory in Austria. ?]
 
 [? if achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 
@@ -566,7 +582,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
-[? if not achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than 10%, inflation below 5%, and a budget surplus. ?]
+[? if not achievement_wirtschaftswunder: **Wirtschaftswunder** - After 1932, have unemployment less than in 1928, inflation below 5%, and a budget surplus. ?]
 
 [? if not achievement_wirtschaftsexperiment: **Wirtschaftsexperiment** - enact two different economic plans. ?]
 
@@ -613,6 +629,10 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_wahlrechts : **Wahlrechts für Frauen** - Marie Juchacz has been elected president. ?]
 
 [? if not achievement_bundesrepublik : **Bundesrepublik** - Konrad Adenauer or Kurt Schumacher has been elected president, and constitutional reforms have reduced presidential power. ?]
+
+[? if not achievement_republik_der_wissenschaft : **Republik der Wissenschaft** - Albert Einstein has been elected president. ?]
+
+[? if not achievement_arbeiter_von_wien : **Arbeiter von Wien** - SDAPÖ victory in Austria. ?]
 
 [? if not achievement_stolperstein: **Stolperstein** - we lost, but history might memorialize us... ?]
 

@@ -17,6 +17,8 @@ on-arrival: rb_strength *= 0.9; z_relation -= 5; ddp_relation -= 5; rb_exit = 1;
 
 We have judged that the Reichsbanner's militancy is more important than maintaining a coalition with the Center Party and [+ ddp_name +]. The Reichsbanner members affiliated with these parties leave, while the left of the SPD is strengthened.
 
+# TODO: this should make it harder to form Weimar coalitions
+
 
 @lower_militancy
 on-arrival: rb_militancy *= 0.5

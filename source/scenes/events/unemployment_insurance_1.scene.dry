@@ -41,7 +41,7 @@ But the crux of the matter is, what can we do?
 
 @destroy
 call: set_next_election_time
-on-arrival: time_to_election = 3; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; budget += 1; inflation -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = ddp_name; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; spd_no_confidence = 1; pro_republic -= 4; old_middle_spd -= 3; new_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 2
+on-arrival: time_to_election = 3; spd_in_government = 0; in_grand_coalition = 0; spd_toleration = 0; z_relation -= 8; dvp_relation -= 10; chancellor = "Brüning"; chancellor_party = "Z "; welfare -= 2; budget += 1; inflation -= 2; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = ddp_name; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; spd_no_confidence = 1; pro_republic -= 4; old_middle_spd -= 3; new_middle_spd -= 2; rural_spd -= 2; catholics_spd -= 2; economic_growth -= 0.6
 
 # TODO: if Braun is president, don't do this...
 
@@ -52,7 +52,7 @@ Fine. If the bourgeoisie wish to blow up the government, let them do so. Sociali
 New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
 
 @accept
-on-arrival: workers_spd -= 0.15*workers_spd; unemployed_spd -= 0.3*unemployed_spd; workers_kpd += 7; workers_nsdap += 7; unemployed_kpd += 5; unemployed_nsdap += 5; left_dissent += 15; center_dissent += 10; labor_dissent += 15; reformist_dissent += 5; welfare -= 2; budget += 1; unemployed += 3; month += 1; pro_republic -= 4; kpd_relation -= 8; inflation -= 2
+on-arrival: workers_spd -= 0.15*workers_spd; unemployed_spd -= 0.3*unemployed_spd; workers_kpd += 7; workers_nsdap += 7; unemployed_kpd += 5; unemployed_nsdap += 5; left_dissent += 15; center_dissent += 10; labor_dissent += 15; reformist_dissent += 5; welfare -= 2; budget += 1; unemployed += 3; month += 1; pro_republic -= 4; kpd_relation -= 8; inflation -= 2; economic_growth -= 0.6
 
 Unfortunately, we must accept this ultimatum if we are to maintain this coalition. The Nazis and Communists are waiting in the wings for us to fail, ready to pounce upon the instability that would result from a breakup of the governing coalition.
 
@@ -69,6 +69,6 @@ Thanks to our good relations, the DVP have offered a compromise that raises some
 - @destroy: Reject the compromise and let this government fall.
 
 @accept_compromise
-on-arrival: workers_spd -= 5; unemployed_spd -= 6; workers_kpd += 5; unemployed_kpd += 3; unemployed_nsdap += 3; left_dissent += 10; labor_dissent += 8; center_dissent += 5; welfare -= 1; budget += 1; month += 1; kpd_relation -= 4; inflation -= 1
+on-arrival: workers_spd -= 5; unemployed_spd -= 6; workers_kpd += 5; unemployed_kpd += 3; unemployed_nsdap += 3; left_dissent += 10; labor_dissent += 8; center_dissent += 5; welfare -= 1; budget += 1; month += 1; kpd_relation -= 4; inflation -= 1; economic_growth -= 0.3
 
 We have accepted the compromise offered by the bourgeoisie. Many of the workers and unemployed see this as a betrayal, although we present it as the successful aversion of a much worse alternative.

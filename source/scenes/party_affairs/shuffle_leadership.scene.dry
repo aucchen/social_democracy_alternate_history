@@ -187,6 +187,16 @@ go-to: rm_main
 
 Seydewitz has been removed as an advisor. The Leftist faction disapproves.
 
+@remove_siemsen
+title: Remove Siemsen
+view-if: siemsen_advisor = 1
+tags: remove_advisor
+on-arrival: siemsen_advisor = 0; left_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Siemsen has been removed as an advisor. The Leftist faction disapproves.
+
+
 
 
 # neorevisionists
@@ -470,6 +480,19 @@ tags: left_advisor
 
 Max Seydewitz is now an advisor.
 
+@add_siemsen
+title: Anna Siemsen
+subtitle: Anna Siemsen is an and educational reform advocate and pacifist, who was one of the few German women to receive a PhD in the pre-war period. {!<br><br>!}[? if difficulty < 0 : Actions - Rally for Pacifism, Educational Curriculum, Educational Structure ?]
+is-card: true
+card-image: img/portraits/SiemsenAnna.jpg
+view-if: siemsen_advisor = 0 and n_advisors < 3 and left_split = 0
+on-arrival: siemsen_advisor = 1; n_advisors += 1; left_strength += 5
+go-to: advisor_menu
+tags: left_advisor
+
+Anna Siemsen is now an advisor.
+
+
 
 # labor
 
@@ -578,7 +601,7 @@ Fritz Baade is now an advisor.
 
 @add_hirschfeld
 title: Magnus Hirschfeld
-subtitle: Magnus Hirschfeld is the founder of the Institut für Sexualwissenschaft and an advocate for the rights of sexual minorities. {!<br><br>!}[? if difficulty < 0 : Actions - Homosexual Rights, Women's Rights ?]
+subtitle: Magnus Hirschfeld is the founder of the Institut für Sexualwissenschaft and an advocate for the rights of sexual minorities. {!<br><br>!}[? if difficulty < 0 : Actions - Homosexual Rights, Women's Rights, Science Funding ?]
 is-card: true
 card-image: img/portraits/HirschfeldMagnus.jpg
 view-if: hirschfeld_advisor = 0 and n_advisors < 3

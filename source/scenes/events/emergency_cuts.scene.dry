@@ -18,7 +18,7 @@ Due to the crisis of the Great Depression, government budgets have fallen and we
 
 @nothing_to_do
 view-if: spd_toleration == 0
-on-arrival: welfare -= 1; unemployed += 2; unemployed_nsdap += 4; unemployed_kpd += 3; unemployed_spd += 2; pro_republic -= 4; budget += 1; inflation -= 2
+on-arrival: welfare -= 1; unemployed += 2; unemployed_nsdap += 4; unemployed_kpd += 3; unemployed_spd += 2; pro_republic -= 4; budget += 1; inflation -= 2; economic_growth -= 0.5;
 
 The emergency policy passes under emergency rules, as the Reichstag is currently dissolved. The Nazis use this as a recruiting tool, and so do we.
 
@@ -37,6 +37,6 @@ New elections have been set for [+ next_election_month : month +] [+ next_electi
 @vote_yes
 title: Vote in favor of this measure to continue the toleration agreement.
 view-if: spd_toleration
-on-arrival: welfare -= 1; unemployed += 2; left_dissent += 10; labor_dissent += 10; workers_spd *= 0.9; unemployed_spd *= 0.9; unemployed_nsdap += 5; unemployed_kpd += 5; workers_nsdap += 5; workers_kpd += 5; workers_spd -= 4 if welfare < 0; unemployed_spd -= 5 if welfare < 0; pro_republic -= 4; kpd_relation -= 8; budget += 1; inflation -= 2
+on-arrival: welfare -= 1; unemployed += 2; left_dissent += 10; labor_dissent += 10; workers_spd *= 0.9; unemployed_spd *= 0.9; unemployed_nsdap += 5; unemployed_kpd += 5; workers_nsdap += 5; workers_kpd += 5; workers_spd -= 4 if welfare < 0; unemployed_spd -= 5 if welfare < 0; pro_republic -= 4; kpd_relation -= 8; budget += 1; inflation -= 2; economic_growth -= 0.5;
 
 We try to convince the workers that this policy is necessary in order to maintain a stable parliamentary government, and to deal with the fiscal consequences of the depression. Still, this policy provides excellent recruiting fodder for Nazis and Communists.
