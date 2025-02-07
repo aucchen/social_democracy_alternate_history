@@ -477,3 +477,10 @@ Minor changes:
 - High Inflation card is no longer limited to a single visit.
 - Some support change tuning.
 - Various bugfixes.
+
+v1.2.1 - March on Berlin changes, Understanding the Enemy
+
+Changes:
+- March on Berlin: if the far-right coalition has a majority in the Reichstag and the President does not allow them to form a government, they will always launch a civil war.
+- Understanding the Enemy has a new option.
+- Some more notes in the historical background.
