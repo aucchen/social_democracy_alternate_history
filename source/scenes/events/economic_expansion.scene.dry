@@ -1,0 +1,10 @@
+title: Economic Expansion
+subtitle: The economy is growing steadily.
+new-page: true
+view-if: economic_expansion >= 85 and unemployed <= 6 and inflation < 5 and spd_in_government
+on-arrival: economic_expansion = 0; capital_strike_progress -= 2 if capital_strike_progress >= 2; budget += 1; workers_spd += 3*(1-dissent) if spd_in_government; new_middle_spd += 2*(1-dissent) if spd_in_government; old_middle_spd += 2*(1-dissent) if spd_in_government; rural_spd += 2*(1-dissent) if spd_in_government; new_middle_ddp += 5 if in_weimar_coalition or in_grand_coalition or in_popular_front; workers_kpd += 3 if in_popular_front or in_left_front; old_middle_dvp += 4 if in_grand_coalition; new_middle_dvp += 3 if in_grand_coalition
+tags: event
+
+= Economic Expansion
+
+The German economy has been growing steadily for an extended period of time, and has low inflation and unemployment. The government is rewarded by additional tax revenue from the same tax rates. Even the capitalists find that they have little to complain about when it comes to government policies.

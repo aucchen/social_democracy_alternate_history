@@ -183,6 +183,7 @@ if (Q.month_actions >= 1) {
     if (Q.economic_growth >= 12) {
         Q.economic_growth -= 0.3;
     }
+
     //////////////////////////////// Education & Science support/economic changes
     if (Q.major_curriculum && Q.major_curriculum == "democratic") {
         if (Q.pro_republic < 60) {
@@ -230,7 +231,20 @@ if (Q.month_actions >= 1) {
             Q.economic_growth += 0.1;
         }
     }
-
+    // accumulated economic growth/decline
+    // Maybe there should be differences for positive/negative growth?
+    if (Q.economic_growth < 0) {
+        if (Q.economic_expansion > 0) {
+            Q.economic_expansion = 0;
+        } else {
+            Q.economic_expansion += Q.economic_growth;
+        }
+    }
+    if (Q.economic_growth > 0 && Q.reparations <= -2 && Q.spd_in_government) {
+        Q.economic_expansion += Q.economic_growth;
+    } else if (Q.economic_growth > 0 && Q.spd_in_government) {
+        Q.economic_expansion += Q.economic_growth/2;
+    }
     /////////////////////////////// update opinions based on economy
     if (Q.unemployed > 15 && Q.pro_republic > 40) {
         Q.pro_republic -= 1;
