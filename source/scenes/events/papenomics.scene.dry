@@ -1,6 +1,7 @@
 title: Chancellor Papen's Economic Plan
 subtitle: Tax cuts for the rich
 view-if: papenomics_timer = 0 and chancellor = "Papen"
+on-arrival: old_middle_dnvp += 5; new_middle_dnvp += 3;
 max-visits: 1
 
 

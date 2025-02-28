@@ -5,7 +5,7 @@ view-if: spd_in_government and spd_prussia and chancellor_party = "SPD" and educ
 on-arrival: education_science_timer += 9; month_actions += 1
 card-image: img/portraits/EinsteinAlbert.jpg
 go-to: ed_menu
-tags: govt_affairs
+tags: govt_affairs, cabinet
 
 # options:
 # - fund research (basic science research at the KWI, medical research, applied and industrial research to benefit Germany's economy)

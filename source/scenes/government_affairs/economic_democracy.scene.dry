@@ -5,7 +5,7 @@ on-arrival: economic_democracy_timer += 10; month_actions += 1
 view-if: spd_in_government and (economic_minister_party == "SPD" or finance_minister_party == "SPD") and (labor_minister_party == "SPD") and economic_democracy_timer <= 0
 card-image: img/portraits/HilferdingRudolf.jpg
 max-visits: 8
-tags: govt_affairs
+tags: govt_affairs, cabinet
 #subtitle: How can we give workers more control over the means of production?
 
 = Economic Democracy

@@ -1,7 +1,7 @@
 title: Foreign Policy
 new-page: true
 is-card: true
-tags: govt_affairs
+tags: govt_affairs, cabinet
 on-arrival: month_actions += 1; foreign_policy_timer += 8
 view-if: spd_in_government = 1 and foreign_minister_party = "SPD" and  foreign_policy_timer <= 0
 card-image: img/portraits/BreitscheidRudolf.jpg

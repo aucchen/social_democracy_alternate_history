@@ -1,7 +1,7 @@
 title: Labor Rights
 new-page: true
 is-card: true
-tags: govt_affairs
+tags: govt_affairs, cabinet
 on-arrival: labor_rights_timer += 10; month_actions += 1
 view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_rights_timer <= 0 and labor_affairs_seen = 1
 card-image: img/portraits/WissellRudolf.jpg

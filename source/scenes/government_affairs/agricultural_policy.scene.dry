@@ -4,7 +4,7 @@ is-card: true
 on-arrival: agricultural_policy_timer += 6; month_actions += 1
 view-if: spd_in_government = 1 and (agriculture_minister_party = "SPD") and agricultural_policy_timer == 0
 card-image: img/portraits/BaadeFritz.jpg
-tags: govt_affairs
+tags: govt_affairs, cabinet
 #subtitle: Issues of farmer financing, grain purchasing, and land reform.
 
 = Agricultural Policy

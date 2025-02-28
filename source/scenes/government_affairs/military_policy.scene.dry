@@ -1,7 +1,7 @@
 title: Military Policy
 new-page: true
 is-card: true
-tags: govt_affairs
+tags: govt_affairs, cabinet
 on-arrival: military_policy_timer += 6; month_actions += 1
 view-if: spd_in_government = 1 and reichswehr_minister_party = "SPD" and military_policy_timer <= 0
 card-image: img/portraits/LeberJulius.jpg

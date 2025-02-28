@@ -1,7 +1,7 @@
 title: Women's Rights
 new-page: true
 is-card: true
-tags: govt_affairs
+tags: govt_affairs, cabinet
 view-if: spd_in_government = 1 and womens_rights_timer = 0 and chancellor_party == "SPD"
 on-arrival: womens_rights_timer += 10; month_actions += 1
 card-image: img/portraits/PfülfAntonie.jpg

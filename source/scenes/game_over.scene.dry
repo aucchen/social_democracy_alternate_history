@@ -366,7 +366,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
-[? if game_achievement_deport_hitler : **Der österreichische Gefreiter** - deported Hitler ?]
+[? if game_achievement_deport_hitler : **Der österreichische Gefreite** - deported Hitler ?]
 
 [? if game_achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
@@ -382,7 +382,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_women_reichsbanner: **Mädchen in Uniform** - a woman's place is in the Reichsbanner. ?]
 
-[? if game_achievement_bruder_zur_sonne: **Brüder, zur Sonne, zur Freiheit** - reduce unemployment, pause reparations, increase women's rights, elect Otto Braun president, and deport Hitler in one playthrough on at least normal difficulty. ?]
+[? if game_achievement_bruder_zur_sonne: **Brüder, zur Sonne, zur Freiheit** - reduce unemployment, pause reparations, increase women's rights, elect an SPD president, and deport Hitler in one playthrough on at least normal difficulty. ?]
 
 [? if game_achievement_die_rote_fahne: **Die Rote Fahne** - join the KPD in their May Day march. ?]
 
@@ -473,7 +473,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
-[? if achievement_deport_hitler : **Der österreichische Gefreiter** - deported Hitler ?]
+[? if achievement_deport_hitler : **Der österreichische Gefreite** - deported Hitler ?]
 
 [? if achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
@@ -489,7 +489,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_women_reichsbanner: **Mädchen in Uniform** - a woman's place is in the Reichsbanner. ?]
 
-[? if achievement_bruder_zur_sonne: **Brüder, zur Sonne, zur Freiheit** - reduce unemployment, pause reparations, increase women's rights, elect Otto Braun president, and deport Hitler in one playthrough on at least normal difficulty. ?]
+[? if achievement_bruder_zur_sonne: **Brüder, zur Sonne, zur Freiheit** - reduce unemployment, pause reparations, increase women's rights, elect an SPD president, and deport Hitler in one playthrough on at least normal difficulty. ?]
 
 [? if achievement_die_rote_fahne: **Die Rote Fahne** - join the KPD in their May Day march. ?]
 
@@ -578,7 +578,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_versohnler: **Versöhnler** - the Conciliators lead the KPD. ?]
 
-[? if not achievement_deport_hitler : **Der österreichische Gefreiter** - deported Hitler ?]
+[? if not achievement_deport_hitler : **Der österreichische Gefreite** - deported Hitler ?]
 
 [? if not achievement_wirtschaftspolitik: **Wirtschaftspolitik** - enact an economic plan. ?]
 
@@ -594,7 +594,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if not achievement_women_reichsbanner: **Mädchen in Uniform** - a woman's place is in the Reichsbanner. ?]
 
-[? if not achievement_bruder_zur_sonne: **Brüder, zur Sonne, zur Freiheit** - reduce unemployment, pause reparations, increase women's rights, elect Otto Braun president, and deport Hitler in one playthrough on at least normal difficulty. ?]
+[? if not achievement_bruder_zur_sonne: **Brüder, zur Sonne, zur Freiheit** - reduce unemployment, pause reparations, increase women's rights, elect an SPD president, and deport Hitler in one playthrough on at least normal difficulty. ?]
 
 [? if not achievement_die_rote_fahne: **Die Rote Fahne** - join the KPD in their May Day march. ?]
 
