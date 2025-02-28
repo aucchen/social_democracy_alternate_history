@@ -29,6 +29,7 @@ Agriculture: [+ agriculture_minister_party +]
 - @shuffle: Yes, do it.
 - @root: No, there is no need.
 - @easy_discard
+- @cancel_advisor_action
 
 @shuffle
 on-arrival: coalition_dissent += 1; month_actions += 1

@@ -1,7 +1,7 @@
 title: Labor Affairs
 new-page: true
 is-card: true
-tags: govt_affairs
+tags: govt_affairs, cabinet
 on-arrival: labor_affairs_timer = 6; month_actions += 1; labor_affairs_seen = 1
 view-if: spd_in_government = 1 and labor_minister_party = "SPD" and labor_affairs_timer = 0 and strike_term_seen = 0
 card-image: img/portraits/WissellRudolf.jpg
@@ -15,6 +15,7 @@ The industrial Ruhr region is aflame with labor unrest. The employers have start
 - @support_employers: Support the employers in their demands.
 - @balance: Try to strike a compromise between the sides.
 - @easy_discard
+#- @cancel_advisor_action
 
 @support_labor
 subtitle: Popular among the workers, this will alienate the bourgeoisie.

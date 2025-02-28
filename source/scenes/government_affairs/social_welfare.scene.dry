@@ -16,6 +16,7 @@ The social welfare program, including unemployment insurance, healthcare, and ol
 - @spending_same_pre_depression: Keep spending the same.
 - @spending_same_post_depression: Keep spending the same (effectively a service cut).
 - @easy_discard
+#- @cancel_advisor_action
 
 @reduce_spending
 subtitle: This will hurt our proletarian base. +1 Budget

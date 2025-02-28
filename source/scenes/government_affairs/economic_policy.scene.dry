@@ -22,6 +22,7 @@ We have already formulated an economic plan. Now we have to implement it.
 - @moderate_plan_limited_budget
 - @root: Do not implement the economic plan.
 - @easy_discard
+- @cancel_advisor_action
 
 @wtb_2
 title: Continue the implementation of the WTB-Plan.
