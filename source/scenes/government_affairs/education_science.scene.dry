@@ -139,7 +139,7 @@ We have funded more public secondary schools so that proletarian children may re
 
 @school_boards
 title: Create elected school boards to give local areas more control over education.
-on-arrival: school_boards += 1; workers_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent); old_middle += 2*(1-dissent); education_science += 0.2;
+on-arrival: school_boards += 1; workers_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent); old_middle_spd += 2*(1-dissent); education_science += 0.2;
 view-if: school_boards = 0
 
 We have created local elected school boards, and delegated some of the decision-making for local schools to them.
