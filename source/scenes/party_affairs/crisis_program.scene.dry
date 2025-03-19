@@ -84,7 +84,7 @@ We attempt to convince the party to support a moderate program of job creation w
 We have not yet adopted the plan. More work needs to be done.
 
 @adopt_moderate
-on-arrival: reformst_strength += 10; reformist_dissent -= 10; left_dissent += 8; labor_dissent += 6; moderate_plan_adopted = 1; economic_plan = 2; coalition_dissent -= 1 if unemployed > 15; z_relation += 5;
+on-arrival: reformist_strength += 10; reformist_dissent -= 10; left_dissent += 8; labor_dissent += 6; moderate_plan_adopted = 1; economic_plan = 2; coalition_dissent -= 1 if unemployed > 15; z_relation += 5;
 
 With our hard work, we have convinced the majority of the party to adopt the moderate job creation plan! [? if spd_in_government == 1 : We can begin implementing the plan as soon as possible, as long as we have the Economic or Finance ministries. ?]
 
