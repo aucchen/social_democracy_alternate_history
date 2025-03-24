@@ -35,7 +35,7 @@ Price controls are very unpopular with the bourgeoisie and their representatives
 @bank
 on-arrival: capital_strike_progress += 2
 
-Unfortunately, but perhaps expectedly, the Reichsbank is refusing to help the government, claiming that our socialist policies are solely to blame. Reichsbank president Hjalmar Schacht is all but calling for the fall of the government.
+Unfortunately, but perhaps expectedly, the Reichsbank is refusing to help the government, claiming that our socialist policies are solely to blame. Reichsbank president [? if year <= 1930 : Hjalmar Schacht ?][? if year > 1930 : Hans Luther ?] is all but calling for the fall of the government.
 
 @nothing
 on-arrival: capital_strike_progress += 1

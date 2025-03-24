@@ -1,12 +1,23 @@
 title: Schleicher's Schemes
 subtitle: Chancellor Schleicher claims to have a plan to save Germany...
 view-if: year >= 1932 and president = "Hindenburg" and chancellor = "Schleicher" and spd_in_government = 0 and largest_party = "NSDAP" and hitler_deported = 0 and not presidential_powers
+on-arrival: economic_growth += 1; budget -= 1; unemployed -= 3 if unemployed > 10; rural_dnvp += 3; old_middle_dnvp += 3; new_middle_dnvp += 3; workers_dnvp += 3
 new-page: true
 max-visits: 1
 #tags: event
 
 = Schleicher's Schemes
 
-Chancellor Kurt von Schleicher claims to have a plan to save Germany, and he has reached out to the Social Democrats with vague promises. He claims that in order to govern, the Reichstag must be temporarily suspended to prevent the Nazis and Communists from disrupting government. He argues that his public works program and job creation plans will stabilize the economy, 
+Chancellor Kurt von Schleicher claims to have a plan to save Germany, and he has reached out to the Social Democrats with vague promises. He claims that in order to govern, the Reichstag must be temporarily suspended to prevent the Nazis and Communists from disrupting government. In the meantime, he is enacting a public works program and job creation plan, which he claims will stabilize the economy, 
 
-Rumors are that he is also reaching out to the Nazis with similar promises of cooperation. In addition, working with Schleicher would essentially mean the end of our claim to be a "democratic" party.
+Rumors are that Schleicher is also reaching out to the Nazis with similar promises of cooperation; he seems to believe that he can "tame" the Nazis. Most in our party do not trust him to not bring the Nazis to power. In addition, working with him would essentially mean the end of our claim to be a "democratic" party.
+
+# if this works: delay elections by 1 year (requires over 50% support - need Z and DVP and others to join as well based on relations; DNVP might support? Also should depend on Hindenburg relations).
+
+@accept
+title: Accept Schleicher's schemes.
+subtitle: We will support the suspension of the Reichstag.
+
+@reject
+title: Reject Schleicher's schemes.
+subtitle: The Reichstag will continue to meet.
