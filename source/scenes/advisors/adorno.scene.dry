@@ -10,13 +10,18 @@ new-page: true
 Ya' know Adorno.
 
 
-- @
-- @
+- @left_unity
+- @clear_agenda
 - @science_funding
 - @root: Return to main
 
 
-@
+@left_unity
+title: Left-Center Unity
+subtitle: Encourage cooperation between the left and center wings of the party.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; left_dissent -= 10; labor_dissent -= 5; center_dissent -= 10; reformist_dissent -= 10; neorevisionist_dissent -= 5
 
 @clear_agenda
 title: Clear the agenda
