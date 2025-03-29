@@ -1,0 +1,49 @@
+title: Theodor W. Adorno
+is-pinned-card: true
+tags: advisor
+card-image: theodor-adorno-in-19251.jpg
+view-if: adorno_advisor = 1
+new-page: true 
+
+= Theodor W. Adorno
+
+Ya know Adorno.
+
+
+- @left_unity
+- @clear_agenda
+- @science_funding
+- @root: Return to main
+
+
+@left_unity
+title: Left-Center Unity
+subtitle: Encourage cooperation between the left and center wings of the party.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; left_dissent -= 10; labor_dissent -= 5; center_dissent -= 10; reformist_dissent -= 10; neorevisionist_dissent -= 5
+
+@clear_agenda
+title: Clear the agenda
+subtitle: Removes all cards from the hand.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+if (Q.difficulty >= 0) {
+    window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+} else {
+    window.dendryUI.dendryEngine.state.currentHands['main.main_easy'] = [];
+}
+!}
+
+All items from our agenda have been cleared.
+
+@science_funding
+title: Science funding
+subtitle: Increase funding for scientific research.
+choose-if: advisor_action_timer = 0 and spd_in_government and economic_minister_party = "SPD" and chancellor_party = "SPD"
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The SPD is not currently in government. ?][? if economic_minister_party != "SPD": This requires the Economic Ministry. ?][? if chancellor_party != "SPD": The Chancellor must be an SPD member. ?]
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1
+go-to: education_science.increase_science
+

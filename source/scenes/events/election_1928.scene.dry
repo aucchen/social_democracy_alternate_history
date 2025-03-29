@@ -101,11 +101,12 @@ if (Q.kpd_r >= Q.spd_r && Q.kpd_r >= Q.nsdap_r) {
 // coalitions
 Q.weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r - 3;
 Q.grand_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r;
+Q.modern_coalition = Q.spd_r + Q.z_r + Q.sbp_r + Q.ddp_r;
 Q.bourgeois_coalition = Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
 Q.center_right_coalition = Q.z_r + Q.ddp_r + Q.dvp_r + Q.other_r + Q.dnvp_r;
 Q.right_coalition = Q.z_r + Q.dvp_r + Q.other_r + Q.dnvp_r;
 Q.far_right_coalition = Q.dnvp_r + Q.nsdap_r;
-Q.left_coalition = Q.spd_r + Q.kpd_r + Q.sapd_r;
+Q.left_coalition = Q.spd_r + Q.kpd_r + Q.sapd_r + Q.sbp_r;
 // this is an absurd concept lol
 Q.popular_front_coalition = Q.spd_r + Q.kpd_r + Q.z_r + Q.ddp_r - 3 + Q.sapd_r;
 Q.anti_democratic_coalition = Q.kpd_r + Q.nsdap_r + Q.dnvp_r;
@@ -114,7 +115,7 @@ Q.neo_weimar_coalition = Q.spd_r + Q.ddp_r + Q.z_r + Q.dvp_r + Q.other_r;
 // Hitler + Right-wing parties (only comes into effect if you've alienated Z too badly)
 Q.hitler_right_coalition = Q.z_r + Q.dnvp_r + Q.nsdap_r;
 // Progressive coalition isn't going to be implemented as a distinct coalition but it's the coalition that lets you pass improved women's rights/gay rights
-Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.ddp_r + Q.sapd_r;
+Q.progressive_coalition = Q.spd_r + Q.kpd_r + Q.ddp_r + Q.sapd_r + Q.sbp_r;
 
 if (Q.kpd_relation >= 30) {
     Q.weimar_coalition += Q.sapd_r;
@@ -205,6 +206,12 @@ data = data.concat([
         "legend": "SPD",
         "name": "SPD",
         "seats": Math.round(Q.spd_r*5),
+    },
+    { 
+       "id": "sbp",
+       "legend": "SBP",
+       "name": "SBP",
+       "seats": Math.round(Q.sbp_r*5)
     },
     {
         "id": "ddp",
