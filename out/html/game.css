@@ -526,6 +526,9 @@ table {
     fill: #E3000F;
     stroke: #000;
     stroke-width: 1.5px;
+}  
+.seat.sbp {
+    fill: #487229;
 }
 .seat.ddp {
     fill: #DCCA4A;
