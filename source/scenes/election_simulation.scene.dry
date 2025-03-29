@@ -30,7 +30,7 @@ Q.workers_ddp = 0;
 Q.workers_dvp = 0;
 Q.workers_dnvp = 4;
 Q.workers_nsdap = 0;
-Q.workers_other = 9;
+Q.workers_other = 8;
 
 Q.old_middle_spd = 5;
 Q.old_middle_kpd = 0;
@@ -310,6 +310,7 @@ The electoral system is essentially proportional, with the proportion of Reichst
 SPD: [+ spd_r +]
 
 # 1928: 2, 1930: 2, 1932: 1
+SBP: [+ sbp_r +]
 
 # 1928: 15, 1930: 15, 1932: 
 Z + BVP: [+ z_r +]
