@@ -1,0 +1,57 @@
+title: Lynda Ennion-Janssen
+is-pinned-card: true
+tags: advisor, centrist
+card-image: img/portraits/EnnionJanssenLynda.jpg
+view-if: ennionjanssen_advisor = 1
+new-page: true 
+
+= Lynda Ennion-Janssen
+
+Ennion-Janssen was the Governor of North Elysium, the third-largest state on Mars. She is the longtime leader of the Democratic Party and a member of its centrist faction.
+
+- @clear_agenda
+- @party_discipline
+- @elysian_bulwark
+- @snap_election
+- @root: Return to main
+
+@clear_agenda
+title: Clear the agenda
+subtitle: Removes all cards from the hand.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+if (Q.difficulty >= 0) {
+    window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+} else {
+    window.dendryUI.dendryEngine.state.currentHands['main.main_easy'] = [];
+}
+!}
+
+All items from our agenda have been cleared.
+
+@party_discipline
+title: Party Discipline
+subtitle: Reduce dissent across the party.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; left_dissent -= 5; labor_dissent -= 10; center_dissent -= 10; reformist_dissent -= 10; neorevisionist_dissent -= 5
+
+@elysian_bulwark
+title: The Elysian Bulwark
+subtitle: As the former Governor of North Elysium, Ennion-Janssen has significant influence over the Elysian government and security services.
+choose-if: advisor_action_timer <= 0 and spd_prussia = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if spd_prussia == 0 : The SPD does not control Prussia. ?]
+on-arrival: advisor_action_timer = 6; prussian_affairs_timer -= 6; last_advisor_action = 1
+go-to: prussian_affairs
+
+@snap_election
+title: Snap Election
+subtitle: Call a snap election.
+unavailable-subtitle: [? if chancellor != "Wels" : Wels must be Chancellor or President. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and (chancellor == "Wels")
+on-arrival: advisor_action_timer = 6; time_to_election = 3
+call: set_next_election_time
+
+We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].
