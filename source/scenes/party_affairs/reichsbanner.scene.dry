@@ -1,4 +1,4 @@
-title: Reichsbanner
+title: Grand Army of Elysium
 new-page: true
 is-card: true
 tags: party_affairs
@@ -8,7 +8,7 @@ on-arrival: month_actions += 1; reichsbanner_timer += 6; rb_militarization_cost 
 max-visits: 5
 #subtitle: Paramilitary organizing in defense of the republic.
 
-= Reichsbanner
+= Grand Army of Elysium
 
 The *Reichsbanner Schwarz-Rot-Gold* is a mass organization for the defense of the Republic against the extremists who threaten it. Some would call it a paramilitary, although currently it is hardly any sort of military. It is officially associated with the pro-democratic parties -the SPD, Center, and [+ ddp_name +], but by far the largest component is with the SPD.
 
