@@ -45,7 +45,7 @@ World Assembly composition:
 # 1928: 10, 1930: 13
 {!<span class="tooltip-text" title="Democratic Union of Communists and Progressives on Mars">DUCPM</span>!}: [+ kpd_r +]%
 # 1928: 5, 1930: 4 (as DstP)
-{!<span class="tooltip-text" title="Luminous Organization for Values and Ecology">!}[? if not ddp_name: LOVE?][? if ddp_name != 0 : [+ ddp_name +]?]{!</span>!}: [+ ddp_r +]%
+{!<span class="tooltip-text" title="Luminous Organization for Values and Ecology + Pan-Solar Instrumental Occult Movement">!}[? if not ddp_name: LOVE + PSIOM?][? if ddp_name != 0 : [+ ddp_name +]?]{!</span>!}: [+ ddp_r +]%
 # 1928: 9, 1930: 5
 {!<span class="tooltip-text" title="Party of Conservatives on Mars">PCM</span>!}: [+ dvp_r +]%
 # 1928: 14, 1930: 7
@@ -94,13 +94,13 @@ Economic growth: [+ economic_growth_2 +]%
 
 = Internal Factions of the SPD
 
-{!<span class="tooltip-text" title="The Left is interested in radical, transformative policies and cooperation with the KPD.">Left</span>!} strength: [+ left_strength : strength +], dissent: [+ left_dissent : dissent +]
+{!<span class="tooltip-text" title="The Iron Front is interested in radical, transformative policies and cooperation with the D-UCPM.">Iron Front</span>!} strength: [+ left_strength : strength +], dissent: [+ left_dissent : dissent +]
 
-{!<span class="tooltip-text" title="The Center is a faction of Center Marxists, between reform and revolution.">Center</span>!} strength: [+ center_strength : strength +], dissent: [+ center_dissent : dissent +]
+{!<span class="tooltip-text" title="The Young Elysians are at the party's center, between liberalism and socialism.">Young Elysians</span>!} strength: [+ center_strength : strength +], dissent: [+ center_dissent : dissent +]
 
-{!<span class="tooltip-text" title="Labor's goal is economic reform and benefits for organized workers.">Labor</span>!} strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
+{!<span class="tooltip-text" title="Sangha's goal is the promotion of regional interests, with a religious bent.">Sangha</span>!} strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
 
-{!<span class="tooltip-text" title="Reformists are pragmatic participants in government, and seek to expand the welfare state and defend democracy.">Reformist</span>!} strength: [+ reformist_strength : strength +], dissent: [+ reformist_dissent : dissent +]
+{!<span class="tooltip-text" title="The Orange Dogs are pragmatic moderates, focused on budgetary reform and cooperating with the political center.">Orange Dogs</span>!} strength: [+ reformist_strength : strength +], dissent: [+ reformist_dissent : dissent +]
 
 [? if neorevisionism > 0 : Neorevisionist strength: [+ neorevisionist_strength : strength +], dissent: [+ neorevisionist_dissent : dissent +] ?]
 
