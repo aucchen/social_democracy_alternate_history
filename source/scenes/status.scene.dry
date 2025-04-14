@@ -1,4 +1,4 @@
- title: Status
+title: Status
 new-page: true
 is-special: true
 on-arrival: {!
@@ -14,7 +14,7 @@ if (Q.economic_growth) {
 }
 !}
 
-= Status
+= State
 
 [+ month : month +] [+ year +]
 
