@@ -44,7 +44,7 @@ subtitle: As a senior member of the party's Young Elysians, Cannon can issue dir
 choose-if: advisor_action_timer <= 0 and spd_prussia = 1
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if dem_elysium == 0 : The Democratic Party of Mars does not have enough control in Elysium. ?]
 on-arrival: advisor_action_timer = 6; prussian_affairs_timer -= 6; last_advisor_action = 1
-go-to: elysian_affairs
+go-to: prussian_affairs
 
 @against_right_and_left
 title: Against Right and Left
