@@ -47,7 +47,7 @@ max-cards: 4
 
 @party
 title: Party Affairs
-card-image: img/Vorwaerts_nr_1.png
+card-image: img/NewMilwaukeeTimes.jpg
 is-deck: true
 
 - #party_affairs
