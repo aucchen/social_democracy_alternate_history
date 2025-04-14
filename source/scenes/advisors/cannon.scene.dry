@@ -1,0 +1,56 @@
+title: Connor Cannon
+is-pinned-card: true
+tags: advisor, centrist
+card-image: img/portraits/CannonConnor.jpg
+view-if: cannon_advisor = 1
+new-page: true 
+
+= Connor Cannon
+
+Connor Cannon is a stalwart member of the party's center, with a specialty in defense policy and management. His unflinching adherence to party dogma has been particularly noted by those close to him. 
+
+- @military_affairs
+- @elysian_bulwark
+- @against_right_and_left
+- @root: Return to main
+
+@clear_agenda
+title: Clear the agenda
+subtitle: Removes all cards from the hand.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+if (Q.difficulty >= 0) {
+    window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+} else {
+    window.dendryUI.dendryEngine.state.currentHands['main.main_easy'] = [];
+}
+!}
+
+All items from our agenda have been cleared.
+
+@military_affairs
+title: Military affairs
+subtitle: We can set our defense policy.
+choose-if: advisor_action_timer == 0 and spd_in_government and reichswehr_minister_party == "DEM"
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government : The SPD is not in government. ?][? if reichswehr_minister_party != "DEM": The Democratic Party of Mars does not have the Defense agency. ?]
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1
+go-to: military_policy
+
+@elysian_bulwark
+title: The Elysian Bulwark
+subtitle: As a senior member of the party's Young Elysians, Cannon can issue directives on behalf of the party in the region.
+choose-if: advisor_action_timer <= 0 and spd_prussia = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if dem_elysium == 0 : The Democratic Party of Mars does not have enough control in Elysium. ?]
+on-arrival: advisor_action_timer = 6; prussian_affairs_timer -= 6; last_advisor_action = 1
+go-to: elysian_affairs
+
+@against_right_and_left
+title: Against Right and Left
+subtitle: As a centrist, Cannon seeks to steer a course between the party's factions.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer = 0
+on-arrival: advisor_action_timer = 5; advisor_action_time = time; center_strength += 10; left_strength -= 5; labor_strength -= 5; neorevisionist_strength -= 5; center_dissent -= 10
+
+We have reduced the strength of the dissident factions in the party.
