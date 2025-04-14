@@ -1,0 +1,46 @@
+title: Ferruccio Falafame
+is-pinned-card: true
+tags: advisor, centrist
+card-image: img/portraits/FalafameFerruccio.jpg
+view-if: falafame_advisor = 1
+new-page: true 
+
+= Ferruccio Falafame
+
+Ferruccio Falafame is the secretary of the Christian Democrats in Nuovo Piemonte and an engineer by trade, with rail expansion and infrastructure work as his primary concerns. His closeness to the Nuovo Piemonte branch of the Hail to Schwab party could be useful should we wish to draw closer to them.
+
+- @hts_cooperation
+- @root: Return to main
+
+@clear_agenda
+title: Clear the agenda
+subtitle: Removes all cards from the hand.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+if (Q.difficulty >= 0) {
+    window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+} else {
+    window.dendryUI.dendryEngine.state.currentHands['main.main_easy'] = [];
+}
+!}
+
+All items from our agenda have been cleared.
+
+@hts_cooperation
+title: Cooperation with HTS
+subtitle: Any cooperation between the parties requires compromise from HTS as well as the Democrats.
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer = 0
+on-arrival: advisor_action_timer = 6; left_strength += 5; kpd_relation += 6*(1-dissent); reformist_dissent += 3; communist_coalition += 1 if kpd_cooperation_seen <= 1; kpd_cooperation_seen += 1
+
+Falafame attempts to reach out to his colleagues in the Hail to Schwab party, in order to get them to move away from rightist economics and towards a more centrist platform.
+
+@public_works
+title: Public Works
+subtitle: As Public Works Administrator, Falafame can help to direct public works infrastructure construction and deal with any problems that arise from these programs.
+choose-if: advisor_action_timer <= 0 and dem_in_government and labor_minister_party = "DEM"
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if development_minister_party != "DEM" : The Democratic Party does not control the Development Ministry. ?]
+on-arrival: advisor_action_timer = 6; labor_rights_timer -= 10; last_advisor_action = 1
+go-to: public_works
