@@ -331,10 +331,10 @@ Q.economic_records = [];
 
 
 // State of the government
-Q.president = "Hindenburg";
+Q.president = "D'Artagnal Qiu";
 // starting chancellor: Wilhelm Marx
-Q.chancellor = "Marx";
-Q.chancellor_party = 'Z';
+Q.chancellor = "N/A";
+Q.chancellor_party = 'N/A';
 Q.spd_in_government = 0;
 Q.z_in_government = 1;
 Q.ddp_in_government = 0;
