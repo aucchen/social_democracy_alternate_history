@@ -296,24 +296,24 @@ Q.catholics_other = 12;
 // note: the Z figures also include the BVP (Bavarian people's party)
 // since they were ideologically similar, but they were separate parties.
 // They did not have a CDU/CSU-style relationship.
-Q.spd_r = 26;
-Q.kpd_r = 9;
-Q.z_r = 17;
-Q.ddp_r = 6;
-Q.dvp_r = 10;
-Q.dnvp_r = 20;
-Q.nsdap_r = 3;
-Q.other_r = 9;
+Q.spd_r = 0;
+Q.kpd_r = 0;
+Q.z_r = 0;
+Q.ddp_r = 0;
+Q.dvp_r = 0;
+Q.dnvp_r = 0;
+Q.nsdap_r = 0;
+Q.other_r = 0;
 
 // diff from prev
-Q.old_spd_r = 26;
-Q.old_kpd_r = 9;
-Q.old_z_r = 17;
-Q.old_ddp_r = 6;
-Q.old_dvp_r = 10;
-Q.old_dnvp_r = 20;
-Q.old_nsdap_r = 3;
-Q.old_other_r = 9;
+Q.old_spd_r = 0;
+Q.old_kpd_r = 0;
+Q.old_z_r = 0;
+Q.old_ddp_r = 0;
+Q.old_dvp_r = 0;
+Q.old_dnvp_r = 0;
+Q.old_nsdap_r = 0;
+Q.old_other_r = 0;
 
 // sapd isn't formed yet, but it may be formed
 Q.sapd_r = 0;
@@ -336,10 +336,10 @@ Q.president = "D'Artagnal Qiu";
 Q.chancellor = "N/A";
 Q.chancellor_party = 'N/A';
 Q.spd_in_government = 0;
-Q.z_in_government = 1;
+Q.z_in_government = 0;
 Q.ddp_in_government = 0;
-Q.dvp_in_government = 1;
-Q.dnvp_in_government = 1;
+Q.dvp_in_government = 0;
+Q.dnvp_in_government = 0;
 Q.kpd_in_government = 0;
 Q.nsdap_in_government = 0;
 
@@ -625,10 +625,11 @@ audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_
 new-page: true
 go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
 
-= 1928
+= 2249
 
-It is a bright time for German democracy. After a period of struggle, inflation is finally under control, and the economy is expanding steadily. In foreign policy, we have reached agreements with the Western powers and the Soviet Union that might make genuine peace a reality. 
+It is an inflection point for Martian democracy. The last planetary elections in 2225 saw the planet torn apart in a brutal civil war between separatists and autonomist-unionists over the question of the planet's relationship to the United Nations, which only ended with the dissolution of the Martian Free State and the enactment of the UNTAM in 2241. 
 
-Now, the task of Social Democracy is to prepare for the next election. The bourgeois-right government of Wilhelm Marx is unpopular, and we stand to gain. Perhaps the next government will have a socialist majority.
+Since that time, the planet has been run by D'Artagnal Qiu and a technocratic administration, generally supported for its moderate and stabilizing role. However, the 2248 Executorial election saw a surprising upswing in oppositionist votes, and as such the United Nations has decided to give Mars her third democratic experiment, set for 2250.
 
+The role of the Democratic Party of Mars will be to prepare for this election as the preeminent center-left political force on the planet, attempt to enact its plans for large-scale political and economic reform, and steer the planet through its first hesitating steps returning to democratic governance.
 
