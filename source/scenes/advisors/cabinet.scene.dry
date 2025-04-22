@@ -3,7 +3,7 @@ is-pinned-card: true
 tags: advisor
 card-image: img/muller_cabinet.jpg
 view-if: difficulty < 0 and spd_in_government and chancellor_party = "SPD"
-on-arrival: last_advisor_action = 1
+on-arrival: last_cabinet_action = 1
 new-page: true 
 
 = Cabinet
@@ -14,5 +14,5 @@ With an SPD chancellor and SPD cabinet members, we can direct the affairs of the
 - @back: Return to main
 
 @back
-on-arrival: last_advisor_action = 0
+on-arrival: last_cabinet_action = 0
 go-to: root
