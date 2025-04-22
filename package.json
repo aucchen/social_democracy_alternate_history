@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/aucchen/social_democracy_alternate_history",
   "dependencies": {
-    "dendrynexus": "^0.0.1",
+    "dendrynexus": "github:aucchen/dendrynexus",
     "parliament-svg": "^3.0.0"
   }
 }
