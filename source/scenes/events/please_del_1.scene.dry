@@ -5,23 +5,21 @@ max-visits: 1
 tags: event
 new-page: true
 
-= Primarias de Unión Demócrata Cristiana
+= Primarias de <span style="color: #545454;">**Unión Demócrata Cristiana**</span> 
 
 
-Debido a las vacantes provocadas por la salida de varios miembros del partido y a inactividad general Sofía Dubois Henderson ha convocado a primarias adelantadas.
+Debido a las vacantes provocadas por la salida de varios miembros del partido y a inactividad general, la Presidente Sofía Dubois Henderson ha convocado a primarias adelantadas.
 
-El cargo más importante a elegir es el de Secretario General. Los dos candidatos son: Pra. Marcela Cubillos, una <span style="color: #57E4D5;">evangélica</span> defensora de volver al "rumbo clásico del partido", tiene también ciertas tendencias <span style="color: #BAC5C4;">autoritarias</span>, y opuesta a la colaboración con el <span style="color: #EF314B;">**PSD**</span>; y Antonio Fernández Castillos, un <span style="color: #171716;">católico</span> defensor de reformar el partido y <span style="color: #F1EE30;">**catolificarlo**</span> y que además ve con mejores ojos los pactos con el <span style="color: #EF314B;">**PSD**</span>.
-
+El cargo más importante a elegir es el de Secretario General. Los dos candidatos son: Pra. Marcela Cubillos, una <span style="color: #57E4D5;">evangélica</span> defensora de volver al "rumbo clásico del partido", tiene también ciertas tendencias <span style="color: #BAC5C4;">autoritarias</span>, y opuesta a la colaboración con el <span style="color: #EF314B;">**PSD**</span>; y Antonio Fernández Castillos, un <span style="color: #F09432;">católico</span> defensor de reformar el partido y <span style="color: #E48219;">**catolificarlo**</span> y que además ve con mejores ojos los pactos con el <span style="color: #EF314B;">**PSD**</span>.
 
 - @Pra_Mar_Cub: Pra. Marcela sale electa sin complicaciones mayores
 - @Ant_Fer_Cas: Antonio logra calar con sus ideas
 
-
 @Pra_Mar_Cub
-on-arrival: z_party_leader = "Kaas"; z_relation -= 5
+on-arrival: z_party_leader = "Kaas"; z_relation -= 10
 subtitle: Pra. Marcela Cubillos no gobernará con nosotros bajo ningún concepto.
 
-Pra. Marcela Cubillos ha sido electa Secretaria General del partido, con su victoria las posibilidades de catolificación del partido se han perdido, al menos por ahora.
+Pra. Marcela Cubillos ha sido electa Secretaria General del partido, con su victoria las posibilidades de <span style="color: #E48219;">**catolificación**</span> del partido se han perdido, al menos por ahora.
 
 Esta victoria ha deteriorado nuestras relaciones con <span style="color: #545454;">**UDC**</span>.
 
@@ -29,6 +27,6 @@ Esta victoria ha deteriorado nuestras relaciones con <span style="color: #545454
 subtitle: Antonio está dispuesto a gobernar con nosotros :D .
 on-arrival: z_party_leader = "Joos"; catholics_spd += 5; workers_z += 3
 
-Los esfuerzos de Antonio por reactivar el partido han dado sus frutos y sus ideas de reforma y catolificación del partido han cuajado dentro del mismo logrando ser electo Secretario General.
+Los esfuerzos de Antonio por reactivar el partido han dado sus frutos y sus ideas de reforma y  <span style="color: #E48219;">**catolificación**</span> del partido han cuajado dentro del mismo logrando ser electo Secretario General.
 
-Hemos recibido una mejora de relaciones con la <span style="color: #545454;">**UDC**</span> gracias a la victoria de Antonio.
+Como consecuencia de esta victoria hemos recibido una mejora de relaciones con la <span style="color: #545454;">**UDC**</span>.
