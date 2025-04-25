@@ -484,3 +484,14 @@ Changes:
 - March on Berlin: if the far-right coalition has a majority in the Reichstag and the President does not allow them to form a government, they will always launch a civil war.
 - Understanding the Enemy has a new option.
 - Some more notes in the historical background.
+
+v1.3 - Economic Expansion, Cabinet, bugfixes and minor updates
+
+Major changes:
+- New event: Economic Expansion (if economic growth is high enough for long enough)
+- New events: Papen's Economic Plan, Schleicher's Schemes (when Papen or Schleicher are chancellor)
+- New feature: pinned Cabinet card that exposes government actions (only on Easy difficulty with an SPD chancellor)
+- New music (Sozialisten-Marsch)
+
+Minor changes:
+- some bugs should be fixed now...

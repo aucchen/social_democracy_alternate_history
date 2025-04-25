@@ -1,5 +1,5 @@
 title: Return card to hand.
-view-if: difficulty <= 0 and last_advisor_action = 0
+view-if: difficulty <= 0 and last_advisor_action = 0 and last_cabinet_action = 0
 go-to: root
 on-arrival: {!
 if (Q.month_actions > 0) {

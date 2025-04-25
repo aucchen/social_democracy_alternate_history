@@ -1,12 +1,14 @@
-title: Chancellor Papen's Economic Plan
+title: Papen's Economic Plan
 subtitle: Tax cuts for the rich
 view-if: papenomics_timer = 0 and chancellor = "Papen" and unemployed > 20
-on-arrival: old_middle_dnvp += 5; new_middle_dnvp += 3; rural_dnvp += 3; upper_tax_rates -= 1; budget -= 1; unemployed -= 2; economic_growth += 0.6; inflation += 1.2 if inflation < 0
+on-arrival: old_middle_dnvp += 5; new_middle_dnvp += 3; rural_dnvp += 3; upper_tax_rates -= 1; budget -= 1; unemployed -= 2; economic_growth += 0.6; inflation += 1.2 if inflation < 0; budget -= 1
 max-visits: 1
 face-image: img/portraits/PapenFranz.jpg
+tags: event
+new-page: true
 
 = Papen's Economic Plan
 
-Papen and his "Cabinet of Barons" are pushing forward an economic plan consisting of tax cuts  for the very wealthy.
+Chancellor Franz von Papen and his "Cabinet of Barons" are pushing forward an economic plan consisting of tax cuts for the very wealthy. This plan has the potential to lead to more economic growth, especially in comparison to Brüning's austerity program, but it also enriches the upper class and does nothing directly for the needy workers and unemployed.
 
-- @root: There is nothing we can do...
+- @root: The policy passes due to the emergency government; there is nothing we can do...

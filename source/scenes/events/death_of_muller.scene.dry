@@ -5,6 +5,10 @@ max-visits: 1
 tags: event
 go-to: pm if chancellor = "Müller"; not_pm if chancellor != "Müller"
 on-arrival: muller_dead = 1; n_advisors -= 1 if muller_advisor == 1; muller_advisor = 0;
+new-page: true
+face-image: img/portraits/MüllerHermann.jpg
+
+= The Death of Hermann Müller
 
 @pm
 on-arrival: muller_died_in_office = 1
@@ -49,7 +53,6 @@ view-if: z_party_leader = "Joos"
 subtitle: As a moderate member of the Center Party, he could represent unity.
 
 Our coalition partners accept Joseph Wirth of the Center Party as the new Chancellor.
-
 
 
 @not_pm
