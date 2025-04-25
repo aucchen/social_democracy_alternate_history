@@ -6,20 +6,20 @@ view-if: international_relations_timer <= 0
 on-arrival: month_actions += 1; international_relations_timer += 12;
 card-image: img/international.jpg
 max-visits: 4
-#subtitle: Building ties with our fraternal socialist parties.
+#subtitle: Building ties with organizations on other intrasolar bodies.
 
-At the Labor and Socialist International, we can forge contacts with our fraternal socialist parties in Europe and across the world.
-
-- @fr_uk: Build relationships with the French SFIO and British Labour Party to move their governments in Germany's favor.
-- @austria: Learn organization and street fighting from the Austrian SDAPÖ.
-- @scandi: Learn the path of economics and reform from the Scandinavian social democrats.
-- @comintern: Forget the second international - embed a spy in the Comintern's conference.
-- @america: Contact the Socialist party of America.
+At the Solar Alliance of Progressives and Socialists or with our contacts in other bodies, we can forge contacts with like-minded groups across the solar system.
+- @un_earth: Build relationships with the United Nations and its myriad organizations on Earth.
+- @phobos: Learn bureaucratic management and civil service integration from the Phobosian Labour Party.
+- @venus: Learn economic management and political maneuvering from Venerean social-democratic parties.
+- @mercury: Learn streetfighting techniques and direct action strategies from the Hermian labor movements.
+- @intrasolar: Forget the Solar Alliance - embed agents in the attempts to form a Third Intrasolar.
+- @belt: Coordinate efforts with the Democratic Party of the Belt.
 - @return: We do not need international contacts at the moment.
 - @easy_discard
 - @cancel_advisor_action
 
-@fr_uk
+@un_earth
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
@@ -27,7 +27,18 @@ on-arrival: resources -= 1; west_relation += 1; reformist_strength += 5; pacifis
 
 The socialists of France and Britain can influence their governments to be friendlier towards Germany. Hopefully they will reduce our reparations burden.
 
-@austria
+@phobos
+subtitle: -1 resources [? if austrian_parliament_seen and not austrian_civil_war_seen: - We will also help the Austrians oppose their dictatorship. ?]
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+audio: shuffle music/communist/workers_of_vienna_normalized.mp3
+on-arrival: left_strength += 5; radicalization += 1; rb_militancy += 0.03; resources -= 1; austria_relation += 1; sdapo_strength += 1 if austrian_parliament_seen = 1
+
+Our Reichsbanner can learn much in paramilitary organization and training from the Austrian Republikanischer Schutzbund (Republican Protection Units), the paramilitary branch of the Austrian social democrats.
+
+[? if austrian_parliament_seen and not austrian_civil_war_seen: We are also helping the Austrian Social Democratic Worker's Party build up their resources in preparation for a future struggle, legally and illegally. ?]
+
+@mercury
 subtitle: -1 resources [? if austrian_parliament_seen and not austrian_civil_war_seen: - We will also help the Austrians oppose their dictatorship. ?]
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
@@ -39,7 +50,7 @@ Our Reichsbanner can learn much in paramilitary organization and training from t
 [? if austrian_parliament_seen and not austrian_civil_war_seen: We are also helping the Austrian Social Democratic Worker's Party build up their resources in preparation for a future struggle, legally and illegally. ?]
 
 
-@scandi
+@venus
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
@@ -47,7 +58,7 @@ on-arrival: reformist_strength += 8; wtb_support += 1; resources -= 1; moderate_
 
 The programs of the Nordic socialists involve active government intervention in the economy. We can learn from their economic strategies, and how they moved beyond their working-class base to attract a broader set of constituents.
 
-@comintern
+@intrasolar
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
@@ -55,7 +66,7 @@ on-arrival: resources -= 1; kpd_relation += 5*(1-dissent); communist_coalition +
 
 The Stalinists of the KPD insists on calling us "social fascists", suggesting that we social democrats are as bad or worse than actual fascists. Needless to say, this is not good for our relationship with the Communists. By observing the Comintern, we can better understand the KPD, enabling us to potentially improve relations, or counter the KPD if it may come to that.
 
-@america
+@belt
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
