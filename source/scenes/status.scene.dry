@@ -84,13 +84,13 @@ Economic growth: [+ economic_growth_2 +]%
 
 {!<span class="tooltip-text" title="Luminous Organization for Values and Ecology + Pan-Solar Instrumental Occult Movement">!}[? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]{!</span>!}: [+ ddp_relation : relationships +]
 
-{!<span class="tooltip-text" title="German People's Party">DVP</span>!}: [+ dvp_relation : relationships +]
+{!<span class="tooltip-text" title="Party of Conservatives on Mars">PCM</span>!}: [+ dvp_relation : relationships +]
 
-{!<span class="tooltip-text" title="Communist Party of Germany">KPD</span>!}: [+ kpd_relation : relationships +]
+{!<span class="tooltip-text" title="Democratic Union of Communists and Progressives on Mars">DUCPM</span>!}: [+ kpd_relation : relationships +]
 
-{!<span class="tooltip-text" title="German National People's Party">DNVP</span>!}: [+ dnvp_relation : relationships +]
+{!<span class="tooltip-text" title="Joseph Smith People's Party">JSPP</span>!}: [+ dnvp_relation : relationships +]
 
-{!<span class="tooltip-text" title="National-Socialist German Worker's Party (Nazis)">NSDAP</span>!}: [+ nsdap_relation : relationships +]
+{!<span class="tooltip-text" title="Martian Frontiers Party">MFP</span>!}: [+ nsdap_relation : relationships +]
 
 = Internal Factions of the Democratic Party
 
