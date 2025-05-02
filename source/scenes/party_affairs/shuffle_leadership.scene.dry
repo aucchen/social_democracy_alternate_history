@@ -51,6 +51,24 @@ go-to: rm_main
 
 Ennion-Janssen has been removed as an advisor. The Centrist faction disapproves.
 
+@remove_cannon
+title: Remove Connor Cannon
+view-if: cannon_advisor = 1
+on-arrival: cannon_advisor = 0; center_dissent += 5; n_advisors -= 1
+tags: remove_advisor
+go-to: rm_main
+
+Connor Cannon has been removed as an advisor. The Centrist faction disapproves.
+
+@remove_falafame
+title: Remove Ferruccio Falafame
+view-if: falamale_advisor = 1
+on-arrival: falamale_advisor = 0; center_dissent += 5; n_advisors -= 1
+tags: remove_advisor
+go-to: rm_main
+
+Ferruccio Falafame has been removed as an advisor. The Centrist faction disapproves.
+
 @remove_wels
 title: Remove Wels
 view-if: wels_advisor = 1
@@ -347,51 +365,7 @@ view-if: n_advisors < 3
 
 - #nonfactional_advisor
 
-@add_hilferding
-title: Rudolf Hilferding
-subtitle: Rudolf Hilferding is an economist and one of our chief Marxist theoreticians. {!<br><br>!}[? if difficulty < 0 : Actions - Against Right and Left, Defending Toleration, Fiscal Policy, Economic Democracy ?]
-is-card: true
-card-image: img/portraits/HilferdingRudolf.jpg
-tags: center_advisor
-view-if: hilferding_advisor = 0 and n_advisors < 3 and centrists_resign = 0
-on-arrival: hilferding_advisor = 1; n_advisors += 1
-go-to: advisor_menu
 
-Rudolf Hilferding is now an advisor.
-
-@add_wels
-title: Otto Wels
-subtitle: Otto Wels is a long-time party organizer and member of the leadership, serving under Friedrich Ebert. {!<br><br>!}[? if difficulty < 0 : Actions -  Clear the Agenda, Party Discipline, Emergency Fundraising ?]
-is-card: true
-card-image: img/portraits/WelsRudolf.jpg
-tags: center_advisor
-view-if: wels_advisor = 0 and n_advisors < 3 and centrists_resign = 0
-on-arrival: wels_advisor = 1; n_advisors += 1
-go-to: advisor_menu
-
-Otto Wels is now an advisor.
-
-@add_muller
-title: Hermann Müller
-subtitle: Hermann Müller is the last Social Democratic Chancellor. {!<br><br>!}[? if difficulty < 0 : Actions - Negotiating with the Coalition, Defending Toleration ?]
-is-card: true
-card-image: img/portraits/MüllerHermann.jpg
-tags: center_advisor
-view-if: muller_advisor = 0 and muller_dead = 0 and n_advisors < 3 and centrists_resign = 0
-on-arrival: muller_advisor = 1; n_advisors += 1
-go-to: advisor_menu
-
-Hermann Müller is now an advisor.
-
-@add_breitscheid
-title: Rudolf Breitscheid
-subtitle: Rudolf Breitscheid comes from a well-educated background and is one of our foreign policy leaders. {!<br><br>!}[? if difficulty < 0 : Actions - International Relations, Foreign Policy, Party Discipline ?]
-is-card: true
-card-image: img/portraits/BreitscheidRudolf.jpg
-view-if: breitscheid_advisor = 0 and n_advisors < 3
-on-arrival: breitscheid_advisor = 1; n_advisors += 1
-go-to: advisor_menu
-tags: center_advisor
 
 Rudolf Breitscheid is now an advisor.
 
@@ -405,10 +379,44 @@ on-arrival: ennionjanssen_advisor = 1; n_advisors += 1
 go-to: advisor_menu
 tags: center_advisor
 
+@add_falafame
+title:  Ferruccio Falafame
+subtitle: Ferruccio Falafame is the secretary of the Christian Democrats in Nuovo Piemonte and an engineer by trade, with rail expansion and infrastructure work as his primary concerns {!<br><br>!}[? if difficulty < 0 : Actions - International Relations, Foreign Policy, Party Discipline ?]
+is-card: true
+card-image: img/portraits/FalafameFerruccio.jpg
+view-if: falafame_advisor = 0 and n_advisors < 3
+on-arrival: falafame_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: center_advisor
+
 Lynda Ennion-Janssen is now an advisor.
+
+@add_cannon
+title: Connor Cannon
+subtitle: Connor Cannon is a stalwart member of the party's center, with a specialty in defense policy and management. {!<br><br>!}[? if difficulty < 0 : Actions - International Relations, Foreign Policy, Party Discipline ?]
+is-card: true
+card-image: img/portraits/CannonConnor.jpg
+view-if: cannon_advisor = 0 and n_advisors < 3
+on-arrival: cannon_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: center_advisor
+
+Connor Cannon is now an advisor.
 
 # reformist
 
+
+@add_bahool
+title: Matthias von Bahool
+subtitle: Matthias von Bahool is The Orange Dogs leader. {!<br><br>!}[? if difficulty < 0 : Actions - Support a People's Party, Women's Rights ?]
+is-card: true
+card-image: img/portraits/MatthiasVonBahool.jpg
+view-if: bahool_advisor = 0 and n_advisors < 3
+on-arrival: bahool_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: reformist_advisor
+
+Matthias von Bahool is now an advisor.
 
 @add_severing
 title: Carl Severing
@@ -458,17 +466,7 @@ tags: reformist_advisor
 
 Antonie Pfülf is now an advisor.
 
-@add_bahool
-title: Matthias von Bahool
-subtitle: Matthias von Bahool is The Orange Dogs leader. {!<br><br>!}[? if difficulty < 0 : Actions - Support a People's Party, Women's Rights ?]
-is-card: true
-card-image: img/portraits/MatthiasVonBahool.jpg
-view-if: bahool_advisor = 0 and n_advisors < 3
-on-arrival: bahool_advisor = 1; n_advisors += 1
-go-to: advisor_menu
-tags: reformist_advisor
 
-Matthias von Bahool is now an advisor.
 
 # left
 
