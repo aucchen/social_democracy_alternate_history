@@ -47,7 +47,7 @@ go-to: peoples_party_campaigning
 
 @finance_ministry_
 title: Fiscal Policy
-subtitle: As Budget and Income Minister, von Bahool can enact tax policies.
+subtitle: As Budget and Income Minister, Bahool can enact tax policies.
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if spd_in_government = 0 : SPD not in government: ?] [? if finance_minister_party != "SPD" : The SPD does not control the finance ministry. ?]
 choose-if: advisor_action_timer == 0 and spd_in_government == 1 and finance_minister_party == "SPD"
 on-arrival: advisor_action_timer = 6; fiscal_policy_timer -= 6; last_advisor_action = 1
@@ -56,7 +56,7 @@ go-to: fiscal_policy
 
 @coalition
 title: Negotiating with the Unionist
-subtitle: von Bahool can improve our relationships with our Unionist coalition partners in World Assembly
+subtitle: Bahool can improve our relationships with our Unionist coalition partners in World Assembly
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] 
 on-arrival: advisor_action_timer = 6; coalition_dissent -= 1 if spd_in_government = 1 and coalition_dissent > 0; z_relation += 6; ddp_relation += 6; dvp_relation += 2; dvp_relation += 3 if in_grand_coalition
