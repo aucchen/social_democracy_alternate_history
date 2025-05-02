@@ -52,7 +52,7 @@ go-to: rm_main
 Ennion-Janssen has been removed as an advisor. The Centrist faction disapproves.
 
 @remove_cannon
-title: Remove Connor Cannon
+title: Remove Cannon
 view-if: cannon_advisor = 1
 on-arrival: cannon_advisor = 0; center_dissent += 5; n_advisors -= 1
 tags: remove_advisor
@@ -61,7 +61,7 @@ go-to: rm_main
 Cannon has been removed as an advisor. The Centrist faction disapproves.
 
 @remove_falafame
-title: Remove Ferruccio Falafame
+title: Remove Falafame
 view-if: falafame_advisor = 1
 on-arrival: falafame_advisor = 0; center_dissent += 5; n_advisors -= 1
 tags: remove_advisor
