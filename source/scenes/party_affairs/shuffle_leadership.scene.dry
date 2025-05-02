@@ -42,6 +42,15 @@ go-to: rm_main
 
 Hilferding has been removed as an advisor. The Centrist faction disapproves.
 
+@remove_Ennion-Janssen
+title: Remove Ennion-Janssen
+view-if: ennionjanssen_advisor = 1
+on-arrival: ennionjanssen_advisor = 0; center_dissent += 5; n_advisors -= 1
+tags: remove_advisor
+go-to: rm_main
+
+Ennion-Janssen has been removed as an advisor. The Centrist faction disapproves.
+
 @remove_wels
 title: Remove Wels
 view-if: wels_advisor = 1
@@ -376,6 +385,18 @@ go-to: advisor_menu
 tags: center_advisor
 
 Rudolf Breitscheid is now an advisor.
+
+@add_Ennion-Janssen
+title: Ennion-Janssen
+subtitle: Rudolf Breitscheid comes from a well-educated background and is one of our foreign policy leaders. {!<br><br>!}[? if difficulty < 0 : Actions - International Relations, Foreign Policy, Party Discipline ?]
+is-card: true
+card-image: img/portraits/EnnionJanssenLynda.jpg
+view-if: ennionjanssen_advisor = 0 and n_advisors < 3
+on-arrival: ennionjanssen_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: center_advisor
+
+Lynda Ennion-Janssen is now an advisor.
 
 # reformist
 
