@@ -118,6 +118,15 @@ go-to: rm_main
 
 Pfülf has been removed as an advisor. The Reformist faction disapproves.
 
+@remove_bahool
+title: Remove Bahool
+view-if: bahool_advisor = 1
+tags: remove_advisor
+on-arrival: bahool_advisor = 0; reformist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Bahool has been removed as an advisor. The Reformist faction disapproves.
+
 
 # labor
 
@@ -449,7 +458,17 @@ tags: reformist_advisor
 
 Antonie Pfülf is now an advisor.
 
+@add_bahool
+title: Matthias von Bahool
+subtitle: Matthias von Bahool is The Orange Dogs leader. {!<br><br>!}[? if difficulty < 0 : Actions - Support a People's Party, Women's Rights ?]
+is-card: true
+card-image: img/portraits/MatthiasVonBahool.jpg
+view-if: bahool_advisor = 0 and n_advisors < 3
+on-arrival: bahool_advisor = 1; n_advisors += 1
+go-to: advisor_menu
+tags: reformist_advisor
 
+Matthias von Bahool is now an advisor.
 
 # left
 
