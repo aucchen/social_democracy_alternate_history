@@ -62,8 +62,8 @@ Connor Cannon has been removed as an advisor. The Centrist faction disapproves.
 
 @remove_falafame
 title: Remove Ferruccio Falafame
-view-if: falamale_advisor = 1
-on-arrival: falamale_advisor = 0; center_dissent += 5; n_advisors -= 1
+view-if: falafame_advisor = 1
+on-arrival: falafame_advisor = 0; center_dissent += 5; n_advisors -= 1
 tags: remove_advisor
 go-to: rm_main
 
@@ -377,6 +377,8 @@ on-arrival: ennionjanssen_advisor = 1; n_advisors += 1
 go-to: advisor_menu
 tags: center_advisor
 
+Lynda Ennion-Janssen is now an advisor.
+
 @add_falafame
 title:  Ferruccio Falafame
 subtitle: Ferruccio Falafame is the secretary of the Christian Democrats in Nuovo Piemonte and an engineer by trade, with rail expansion and infrastructure work as his primary concerns {!<br><br>!}[? if difficulty < 0 : Actions - International Relations, Foreign Policy, Party Discipline ?]
@@ -387,7 +389,7 @@ on-arrival: falafame_advisor = 1; n_advisors += 1
 go-to: advisor_menu
 tags: center_advisor
 
-Lynda Ennion-Janssen is now an advisor.
+Ferruccio Falafame is now an advisor.
 
 @add_cannon
 title: Connor Cannon
