@@ -201,7 +201,6 @@ if (Q.month_actions >= 1) {
     Q.science_bonus = 0;
     if (Q.education_science) {
         Q.science_bonus += Q.education_science;
-        console.log(Q.science_bonus);
     }
     if (Q.science) {
         if (Q.science >= 1) {
