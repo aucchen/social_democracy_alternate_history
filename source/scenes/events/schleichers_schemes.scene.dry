@@ -43,8 +43,10 @@ With the exception of the trade unions, every faction of the SPD is horrified by
 [? if kpd_relation <= 10 and left_strength + center_strength < labor_strength: Somehow, the DNVP has agreed to Schleicher's proposal, forming a temporary alliance with the general against Nazis and Communists. ?][? if z_relation >= 50 : The Center Party also supports Schleicher's plan. ?][? if dvp_relation >= 30 : In addition, the DVP and some other smaller parties support this proposal. ?][? if kpd_relation > 10 or left_strength + center_strength >= labor_strength: The DNVP, despite being courted by Schleicher, is not interested in joining this alliance. DNVP chairman Hugenberg seems to prefer working with Hitler to any alliance that includes the SPD. ?]
 
 @schleicher_success
-on-arrival: time_to_election = 13; schleichers_scheme_success = 1
+on-arrival: time_to_election = 13; schleichers_scheme_success = 1; next_election_time = 10000;
 call: set_next_election_time
+
+# hack to set next election time
 
 The scheme has succeeded - there is a majority in the Reichstag backing Schleicher. New elections have been tentatively set for [+ next_election_month : month +] [+ next_election_year +].
 
