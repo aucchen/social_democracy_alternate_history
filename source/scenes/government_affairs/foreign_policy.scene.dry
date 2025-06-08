@@ -182,7 +182,7 @@ In public, we provide verbal backing to Austrian democracy, wage a war of words 
 title: Take steps to form a "European Union".
 subtitle: Is a "United States of Europe" possible?
 unavailable-subtitle: [? if west_relation < 5 : Our relations with the West are not good enough. ?] [? if east_relation < 4 : Our relations with the East are not good enough. ?]
-view-if: reparations <= -2 and eu_progress < 2
+view-if: reparations <= -2 and eu_progress < 2 and eu = 0
 choose-if: west_relation >= 5 and east_relation >= 4
 on-arrival: eu_progress += 1; west_relation += 1
 
