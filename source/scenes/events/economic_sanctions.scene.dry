@@ -1,0 +1,13 @@
+title: Economic Sanctions
+subtitle: Our military buildup has caused sanctions from France and other countries.
+new-page: true
+on-arrival: workers_nsdap += 3; new_middle_nsdap += 3; old_middle_nsdap += 4; rural_nsdap += 3; unemployed += 3; workers_spd -= 4 if spd_in_government; new_middle_spd -= 5 if spd_in_government; old_middle_spd -= 5 if spd_in_government; rural_spd -= 4 if spd_in_government; economic_growth -= 1; nationalism += 5; pacifism -= 1
+tags: event
+view-if: reichswehr_strength > 140
+max-visits: 1
+
+= Economic Sanctions
+
+In response to our military rearmament in contravention of the Versailles Treaty, the Western Allies have imposed economic sanctions on Germany. The costs of the sanctions are largely borne by the proletariat; the people are facing increasing poverty.
+
+# options: 

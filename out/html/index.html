@@ -101,7 +101,26 @@
                         <input type="radio" id="audio_no" name="audio" value="0" onclick="window.disableAudio();">
                     </td>
                 </tr>
-
+                <tr>
+                    <td> <hr> </td>
+                </tr>
+                <tr>
+                    <td>
+                        Color scheme:
+                    </td>
+                    <td>
+                        <label for="light_mode">Light mode</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="light_mode" name="ld_mode" value="1" onclick="window.enableLightMode();">
+                    </td>
+                    <td>
+                        <label for="dark_mode">Dark mode</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="dark_mode" name="ld_mode" value="0" onclick="window.enableDarkMode();">
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <button onclick="window.hideOptions();">Close</button>

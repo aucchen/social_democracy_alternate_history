@@ -51,7 +51,7 @@ The bureaucracy is deeply reactionary, and many abuse their power to favor the p
 view-if: nazi_urgency >= 3 and sa_banned == 0
 on-arrival: sa_strength *= 0.9; sa_strength *= 0.75 if prussian_police_loyalty >= 0.75; sa_banned = 1; dvp_relation -= 3; prussian_police_loyalty -= 0.05; sa_militancy -= 0.05; sa_ban_timer = 6;
 
-As it turns out, the Nazi SA has many allies in the police and bureaucracy. Our relationship with the police weakens, and the SA can still organize illegally, right under the police's noses. [? if prussian_police_loyalty >= 0.7 : Nevertheless, the SA is substantially weakend by our ban. ?] 
+As it turns out, the Nazi SA has many allies in the police and bureaucracy. Our relationship with the police weakens, and the SA can still organize illegally, right under the police's noses. [? if prussian_police_loyalty >= 0.7 : Nevertheless, the SA is substantially weakened by our ban. ?] 
 
 @unban_sa
 view-if: sa_banned = 1

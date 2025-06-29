@@ -114,6 +114,17 @@
       window.dendryUI.saveSettings();
   };
 
+  window.enableLightMode = function() {
+      window.dendryUI.dark_mode = false;
+      document.body.classList.remove('dark-mode');
+      window.dendryUI.saveSettings();
+  };
+  window.enableDarkMode = function() {
+      window.dendryUI.dark_mode = true;
+      document.body.classList.add('dark-mode');
+      window.dendryUI.saveSettings();
+  };
+
   // populates the checkboxes in the options view
   window.populateOptions = function() {
     var disable_bg = window.dendryUI.disable_bg;
@@ -139,6 +150,11 @@
         $('#images_yes')[0].checked = true;
     } else {
         $('#images_no')[0].checked = true;
+    }
+    if (window.dendryUI.dark_mode) {
+        $('#dark_mode')[0].checked = true;
+    } else {
+        $('#light_mode')[0].checked = true;
     }
   };
 
@@ -231,6 +247,9 @@
 
   window.onload = function() {
     window.dendryUI.loadSettings({show_portraits: false});
+    if (window.dendryUI.dark_mode) {
+        document.body.classList.add('dark-mode');
+    }
     window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months.";
   };
 

@@ -1,0 +1,21 @@
+title: 1934
+subtitle: A new year
+new-page: true
+tags: event
+priority: 2
+view-if: year >= 1934 and month >= 1
+max-visits: 1
+on-arrival: {!
+if (Q.unemployed >= 20) {
+    Q.unemployed -= 2;
+    Q.inflation += 1;
+}
+!}
+
+= 1934
+
+A new year begins. [? if works_program = 0 : The economic depression seems to have bottomed out, but there is still much suffering. It is not too late to launch an economic rescue program. ?][? if works_program >= 1 and unemployment >= 15 : We have begun to launch a public works program, but the economy is still troubled. The recovery has begun, but more must be done. ?][? if works_program >= 1 and unemployment < 15 : Our public works program has successfully guided us through the worst of the crisis. The economy is improving, and finally people have optimism for the future. ?]
+
+[? if return_to_normalcy: With the return to normalcy, the political landscape in Germany is shifting. Liberalism is making a return among the middle classes, and the radical parties of the right are declining. ?]
+
+[? if president = "Hindenburg" : The president is in poor health; he is not expected to live out the year. ?]

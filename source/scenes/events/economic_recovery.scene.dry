@@ -4,7 +4,7 @@ view-if: year = 1933 and month >= 6
 on-arrival: unemployed -= 3 if unemployed > 25; unemployed -= 2 if unemployed > 15; unemployed -= 1 if unemployed > 8; workers_nsdap -= 5; unemployed_nsdap -= 5; inflation += 1.5 if inflation < 0
 new-page: true
 max-visits: 1
-tags: event
+#tags: event
 
 = Global Economic Recovery
 

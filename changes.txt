@@ -409,3 +409,94 @@ Changes:
 - Fixed return to hand for Labor Affairs
 - Fixed an issue with unemployment insurance and President Hindenburg/Braun
 - Removed ending slides about unemployment when the game ends before 1930
+
+
+v1.0.1 - Tooltips, bug fixes, advisor actions
+
+Changes:
+- Add tooltips to the party abbreviations, factions, and paramilitary names in the sidebar. Hovering over these should show some more information.
+- In Shuffle Leadership, potential advisors now show their action set.
+- Fixed bug with some graphs not showing before the first election.
+- If an advisor action goes to a government/party affairs card, then there is a new option to cancel the action without taking up an advisor action.
+
+v1.1 - The Death of Hindenburg
+
+Major changes:
+- The end of the game has been extended to August 1934, ending with the death of Paul von Hindenburg (and the new presidential elections, if that were to happen). The 1934 presidential election is now one of the largest events in the game.
+- New events: Weltbühne Trial, DDP Reformation, London Economic Conference
+- Several late-game events have been altered or replaced; "Nazis in Crisis" has been replaced by "Return to Normalcy", and "Global Economic Recovery" has been replaced by "London Economic Conference".
+- New achievements: Große Volkspartei, Zeppelinkapitän, Bundesrepublik
+- Some new event images (turn on event images in the options!)
+- New music added for homosexual rights (Das Lila Lied)
+
+Minor changes:
+- The "second round" trick for winning the 1932 presidential election should no longer be possible.
+- High inflation threshold is lower.
+- March on Berlin can happen multiple times.
+- Finally, the DDP becoming the DStP is visible.
+- Decimals for presidential elections.
+- Bourgeois party support begins to rise after Return to Normalcy is seen.
+- Various other tweaks...
+
+v1.1.1 - Death of Hindenburg bugfixes, more achievements
+
+As usual, there are some bugs and stuff...
+
+- Fixed bug where Göring's results were not shown
+- Zentrum no longer supports Adenauer when the DNVP supports Hitler in the second round
+- Slightly harder to get Marie Juchacz as a candidate
+- Added content for a KPD presidential victory (different endings for Thälmann and Münzenberg)
+
+New achievements:
+
+- Der rote Millionär - Münzenberg wins the presidency
+- Wahlrechts für Frauen - Juchacz wins the presidency
+
+v1.1.3 - Bugfixing
+
+- In the second round of the 1934 presidential election, the Center, DStP, and DVP will consolidate if the SPD is not aligned with them.
+- Fixed bug with the achievement Brüder, zur Sonne, zur Freiheit not appearing.
+- Repeated occurrences of March on Berlin don't reduce paramilitary strength as much.
+- All DDP name occurrences should change to DStP when the time comes.
+- Reduction in coalition dissent from persecuting the RFB only happens once.
+
+
+v1.2 - Austrian Civil War, Education and Science, Economic Growth
+
+Major changes:
+- New events for the rise of Austrofascism and the Austrian Civil War in 1933-1934, in which the SPD and Germany may intervene.
+- New event: Kellogg-Briand Pact
+- New Government Affairs card: Education and Science - change the educational curriculum or fund scientific research.
+- New statistic - economic growth. Higher growth leads to lower unemployment, while negative growth will increase unemployment.
+- New advisor: Anna Siemsen (Left, education), new advisor action for Hirschfeld (Science funding)
+- New achievements: Republik der Wissenschaft (Albert Einstein is elected president in 1934), Arbeiter von Wien (SDAPÖ victory in Austria)
+
+Minor changes:
+- Constitutional reforms with Radbruch no longer requires neorevisionism to be seen.
+- Vote threshold causes a redistribution of "Other" votes primarily towards the right-wing parties.
+- High Inflation card is no longer limited to a single visit.
+- Some support change tuning.
+- Various bugfixes.
+
+v1.2.1 - March on Berlin changes, Understanding the Enemy
+
+Changes:
+- March on Berlin: if the far-right coalition has a majority in the Reichstag and the President does not allow them to form a government, they will always launch a civil war.
+- Understanding the Enemy has a new option.
+- Some more notes in the historical background.
+
+v1.3 - Economic Expansion, Cabinet, bugfixes and minor updates
+
+Major changes:
+- New event: Economic Expansion (if economic growth is high enough for long enough)
+- New events: Papen's Economic Plan, Schleicher's Schemes (when Papen or Schleicher are chancellor)
+- New feature: pinned Cabinet card that exposes government actions (only on Easy difficulty with an SPD chancellor)
+- New music (Sozialisten-Marsch)
+
+Minor changes:
+- some bugs should be fixed now...
+
+v1.3.1 - Dark Mode, bug fixes
+
+- Dark mode is now available! See the Options menu to toggle between light mode and dark mode.
+- Fixed some bugs (Schleicher's Schemes, achievement condition)

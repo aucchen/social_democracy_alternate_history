@@ -1,0 +1,56 @@
+title: The Weltbühne Trial
+new-page: true
+subtitle: A magazine is tried for revealing military secrets...
+view-if: year = 1929 and (month = 8 or month = 9) and judicial_reform < 4
+max-visits: 1
+on-arrival: weltbuhne_seen = 1
+face-image: img/weltbune.jpg
+tags: event
+
+# if the SPD controls the judiciary then they can just cancel the trial (at the expense of DVP relations).
+# If in a grand coalition then the SPD can pressure the coalition to cancel the trial at the expense of dissent.
+# If the trial goes ahead, then reparations negotiation process gets set back by a few steps and relations with the west suffers.
+
+= The Weltbühne Trial
+
+The left-wing news and literary magazine Weltbühne has been targeted by the national authorities for allegedly revealing state secrets. The magazine published articles alleging a secret rearmament program by the Reichswehr, in contravention of the Treaty of Versailles. The military authorities obviously do not want this information to be known. It does not help that the magazine's editor, Carl von Ossietzky, is a well-known pacifist.
+
+[? if spd_in_government and justice_minister_party = "SPD" : With our control of the Justice Ministry, we could simply drop the case. ?]
+[? if spd_in_government and justice_minister_party != "SPD" : The Justice Ministry is seeking to persecute the editor and journalist of Weltbühne. We can try to persuade our coalition partners to drop the case, but they will likely resist. ?]
+
+- @drop_case: Drop the case.
+- @let_persecute: Let justice take its course.
+- @pressure_drop: Pressure our coalition partners to drop the case.
+- @nothing: There is nothing we can do.
+
+@drop_case
+view-if: spd_in_government
+choose-if: spd_in_government and justice_minister_party = "SPD"
+unavailable-subtitle: [? if not spd_in_government : SPD not in government. ?] [? if spd_in_government and justice_minister_party != "SPD": The SPD does not control the Justice Ministry. ?]
+on-arrival: weltbuhne_dropped = 1; dvp_relation -= 4; nationalism -= 3*(1-dissent); coalition_dissent += 1 if in_grand_coalition; reichswehr_loyalty -= 0.1; west_relation += 1; east_relation += 1; coup_progress += 1; reparations_negotiation += 1; pacifism += 1
+
+The Justice Ministry has dropped all persecution of Carl von Ossietzky and Walter Kreiser, the journalist responsible for the offending publication. In fact, some say that the Weltbühne journalists should be feted as heroes.
+
+The Western powers and all countries that feel threatened by German militarism are pleased that we have turned a chapter in our history.
+[? if in_grand_coalition: On the other hand, the right-wing members of our governing coalition disapprove of this action, as does the Reichswehr. ?][? if not in_grand_coalition : On the other hand, the Reichswehr disapproves of dropping the case. ?]
+
+@let_persecute
+view-if: spd_in_government
+on-arrival: weltbuhne_dropped = 0; dvp_relation += 4; reichswehr_loyalty += 0.05; west_relation -= 1; east_relation -= 1; reparations_negotiation -= 1; pacifism -= 1; nationalism += 4; left_dissent += 5
+
+The case progresses slowly, given the military secrets involved, and there will be no determination made for a while. The Reichswehr is pleased of our loyalty. However, the affair has made the Western powers suspicious of our resurgent militarism, as well as displeasing the left wing of the party.
+
+@pressure_drop
+view-if: spd_in_government and justice_minister_party != "SPD"
+on-arrival: weltbuhne_dropped = 1; dvp_relation -= 5; nationalism += 3*(1-dissent); coalition_dissent += 1; coalition_dissent += 1 if in_grand_coalition; reichswehr_loyalty -= 0.1; coup_progress += 1; west_relation += 1; east_relation += 1; reparations_negotiation += 1
+
+We have pressured the Justice Ministry to drop the case against the Weltbühne, raising tensions with our coalition.
+
+The Western powers and all countries that feel threatened by German militarism are pleased that we have turned a chapter in our history.
+On the other hand, the Reichswehr disapproves of dropping the case.
+
+@nothing
+view-if: not spd_in_government
+on-arrival: weltbuhne_dropped = 0; west_relation -= 1; east_relation -= 1; reparations_negotiation -= 1; pacifism -= 1; nationalism += 4
+
+The case progresses slowly, given the military secrets involved, and there will be no determination made for a while. However, the affair has made the Western powers suspicious of our resurgent militarism.

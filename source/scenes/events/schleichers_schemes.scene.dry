@@ -1,12 +1,62 @@
 title: Schleicher's Schemes
 subtitle: Chancellor Schleicher claims to have a plan to save Germany...
 view-if: year >= 1932 and president = "Hindenburg" and chancellor = "Schleicher" and spd_in_government = 0 and largest_party = "NSDAP" and hitler_deported = 0 and not presidential_powers
+on-arrival: economic_growth += 1; budget -= 1; unemployed -= 3 if unemployed > 10; rural_dnvp += 3; old_middle_dnvp += 3; new_middle_dnvp += 3; workers_dnvp += 3
 new-page: true
 max-visits: 1
-#tags: event
+face-image: img/portraits/SchleicherKurt.jpg
+tags: event
 
 = Schleicher's Schemes
 
-Chancellor Kurt von Schleicher claims to have a plan to save Germany, and he has reached out to the Social Democrats with vague promises. He claims that in order to govern, the Reichstag must be temporarily suspended to prevent the Nazis and Communists from disrupting government. He argues that his public works program and job creation plans will stabilize the economy, 
+Chancellor Kurt von Schleicher claims to have a plan to save Germany, and he has reached out to the Social Democrats with vague promises. He claims that in order to govern, the Reichstag must be temporarily suspended to prevent the Nazis and Communists from disrupting government, in effect giving him and Hindenburg dictatorial powers. In the meantime, he is enacting a public works program and job creation plan, which he claims will stabilize the economy, 
 
-Rumors are that he is also reaching out to the Nazis with similar promises of cooperation. In addition, working with Schleicher would essentially mean the end of our claim to be a "democratic" party.
+[? if works_program <= 0: The trade unions are somewhat favorable to Schleicher's plan, as they see a commonality between Schleicher's economic plan and the ADGB's WTB-plan for debt-funded job creation. However, the rest of our party is vehemently against Schleicher. ?]
+
+Rumors are that Schleicher is also reaching out to the Nazis with similar promises of cooperation; he seems to believe that he can "tame" the Nazis. Most in our party do not trust him to not bring the Nazis to power. In addition, working with him would essentially mean the end of our claim to be a "democratic" party.
+
+# if this works: delay elections by 1 year (requires over 50% support - need Z and DVP and others to join as well based on relations; DNVP might support? Also should depend on Hindenburg relations).
+
+
+- @accept
+- @reject
+
+@accept
+title: Accept Schleicher's schemes.
+subtitle: We will support the suspension of the Reichstag.
+
+Are we sure that we wish to do this? The vast majority of the party is against this proposal.
+
+- @accept_2
+- @reject
+
+@accept_2
+title: Accept Schleicher's schemes.
+subtitle: We will support the suspension of the Reichstag.
+on-arrival: schleicher_support = spd_r; workers_spd -= 3; new_middle_spd -= 3; reformist_dissent += 20; left_dissent += 30; center_dissent += 30; neorevisionist_dissent += 25; pro_republic -= 10; schleicher_support += z_r if z_relation >= 50; schleicher_support += other_r + dvp_r if dvp_relation >= 30; schleicher_support += dnvp_r if kpd_relation <= 10 and left_strength + center_strength < labor_strength; labor_dissent -= 10
+go-to: schleicher_success if schleicher_support >= 50; schleicher_failed if schleicher_support < 50
+
+# There isn't enough resolution in this game to create conditions for when the DNVP would support Schleicher. It's possible that SPD support for Schleicher would push Hugenberg to ally with Hitler.
+
+With the exception of the trade unions, every faction of the SPD is horrified by this betrayal of democracy.
+
+[? if kpd_relation <= 10 and left_strength + center_strength < labor_strength: Somehow, the DNVP has agreed to Schleicher's proposal, forming a temporary alliance with the general against Nazis and Communists. ?][? if z_relation >= 50 : The Center Party also supports Schleicher's plan. ?][? if dvp_relation >= 30 : In addition, the DVP and some other smaller parties support this proposal. ?][? if kpd_relation > 10 or left_strength + center_strength >= labor_strength: The DNVP, despite being courted by Schleicher, is not interested in joining this alliance. DNVP chairman Hugenberg seems to prefer working with Hitler to any alliance that includes the SPD. ?]
+
+@schleicher_success
+on-arrival: time_to_election = 13; schleichers_scheme_success = 1; next_election_time = 10000;
+call: set_next_election_time
+
+# hack to set next election time
+
+The scheme has succeeded - there is a majority in the Reichstag backing Schleicher. New elections have been tentatively set for [+ next_election_month : month +] [+ next_election_year +].
+
+@schleicher_failed
+
+Unfortunately, the coalition supporting the dissolution of the Reichstag does not constitute a majority. There will be elections as scheduled.
+
+@reject
+title: Reject Schleicher's schemes.
+subtitle: The Reichstag will continue to meet.
+on-arrival: labor_dissent += 10 if works_program = 0
+
+In the end, there is no uptake for Schleicher's schemes by any political party.

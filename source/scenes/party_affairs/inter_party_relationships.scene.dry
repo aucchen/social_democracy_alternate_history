@@ -92,7 +92,7 @@ unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1; ddp_relation += 5*(1 - dissent)
 go-to: dvp_stresemann if stresemann_dead = 0; dvp_loss if stresemann_dead = 1 and year <= 1930; dvp_moribound if year > 1930
 
-The DDP has been one of our closest allies through the course of the Republic.
+The [+ ddp_name +] has been one of our closest allies through the course of the Republic.
 
 @dvp_stresemann
 on-arrival: dvp_relation += 8*(1 - dissent)
@@ -109,7 +109,7 @@ However, given the influence of the DVP among the other right-leaning parties [?
 @dvp_moribound
 on-arrival: dvp_relation += 5*(1 - dissent)
 
-The liberal parties (both the DDP and DVP) are electorally moribund, so perhaps our efforts are best spent elsewhere.
+The liberal parties (both the [+ ddp_name +] and DVP) are electorally moribund, so perhaps our efforts are best spent elsewhere.
 
 However, given the influence of the DVP among the other right-leaning parties[? if president == "Hindenburg": and with President Hindenburg ?], it can still be helpful to influence them.
 

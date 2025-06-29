@@ -1,0 +1,15 @@
+title: A New Day in Germany
+subtitle: Has democracy finally triumphed?
+tags: event
+priority: 3
+view-if: hindenburg_dead = 1 and president != "Hitler" and president != "Göring" and president != "Seldte"
+max-visits: 1
+on-arrival: {!
+!}
+new-page: true
+go-to: game_over_1934
+
+= A New Day in Germany
+
+After the death of Hindenburg and the presidential election of 1934, it seems as if an era of history is closing. The worst years of political and economic crisis are over, and Nazism's days are numbered. Perhaps Germany will finally enter into a new era of genuine peace...
+

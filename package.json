@@ -19,7 +19,7 @@
     "steamworks.js": "^0.4.0"
   },
   "devDependencies": {
-    "dendrynexus": "^0.0.1",
+    "dendrynexus": "github:aucchen/dendrynexus",
     "electron": "^37.1.0",
     "electron-builder": "^26"
   },

@@ -14,6 +14,7 @@ The War Guilt Inquiry has been an intermittent Reichstag committee for investiga
 - @restart: Restart the inquiry.
 - @root: Do nothing.
 - @easy_discard
+- @cancel_advisor_action
 
 @restart
 on-arrival: war_guilt += 1
