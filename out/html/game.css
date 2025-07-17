@@ -257,6 +257,9 @@ blockquote + blockquote.attribution {
     z-index: 2;
     overflow: scroll;
 }
+.options {
+    text-align: right;
+}
 .overlay_top {
     position: relative;
     max-width: 540px;
