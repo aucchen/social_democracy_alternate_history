@@ -20,6 +20,7 @@ max-cards: 3
 - @govt
 - #advisor
 - @shuffle_leadership_pinned
+- @advance
 
 @main_easy
 set-bg: img/map_2.jpg
@@ -43,6 +44,7 @@ max-cards: 4
 - @govt
 - #advisor
 - @shuffle_leadership_pinned
+- @advance
 
 
 @party
@@ -59,3 +61,15 @@ card-image: img/reichstag_2.jpg
 is-deck: true
 
 - #govt_affairs
+
+@advance
+priority: -2
+title: Next Month
+card-image: img/asteroid.png
+is-card: true
+is-pinned-card: true
+go-to: post_event.events_choice
+on-arrival: {! 
+Q.month += 1;
+if (Q.month>12){ Q.year += 1; Q.month -=12;} 
+!}

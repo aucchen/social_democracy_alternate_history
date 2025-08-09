@@ -1,0 +1,61 @@
+title: Election
+on-arrival: {!
+for (var party of Q.parties) {
+    Q[party + '_total_seats'] = -1;
+}
+var shareholder_total_support = 0;
+var functional_total_support = 0;
+var geographic_total_support = 0;
+Q.drones_protest_factor = (Q.SDF_support_drones + Q.DCA_support_drones + Q.GOP_support_drones + Q.SRZP_support_drones + Q.LDPR_support_drones);
+var drones_total_support = 0;
+for (var c of Q.classes) {
+    for ( var party of Q.parties ){
+    geographic_total_support += Q[c]*Q[party+'_support_'+c];
+    }
+}
+for (var party of Q.parties) {
+    shareholder_total_support += Q[party + '_support_shareholders'];
+    drones_total_support += Q[party+'_support_drones'];
+    for (var c of Q.classes) {
+        functional_total_support += Q[party + '_support_' + c] * Q[c + '_guild'] * Q[c];
+    }
+}
+prerounding = Q.drones_protest_factor/functional_total_support;
+Q.absention = Math.round(10*prerounding)/1000;
+// then assign executive, functional and geographic, first for non corps (i.e. no drone votes)
+for (var party of Q.parties) {
+    prerounding =  Q.executive_seats * Q[party + '_support_shareholders'] / shareholder_total_support ;
+    Q[party + '_executive_seats'] = Math.round(prerounding);
+    var party_functional_power = 0;
+    var party_geographic_power = 0;
+    //functional seats
+    for (var c of Q.classes2) {
+        party_functional_power += Q[party + '_support_' + c] * Q[c + '_guild'] * Q[c];
+    }
+    if (party in Q.corp_parties) {
+        party_functional_power += Q[party + '_support_drones'] * Q.guild * Q.drones;
+    }
+    prerounding = Q.functional_seats * party_functional_power / functional_total_support;
+    Q[party + '_functional_seats'] = Math.round(prerounding);
+
+    //geographic seats
+    for (var c of Q.classes2) {
+        party_geographic_power += Q[party + '_support_' + c] * Q[c];
+    }
+    if (party in Q.corp_parties) {
+        party_geographic_power += Q[party + '_support_drones'] * Q.drones;
+    }
+    prerounding = Q.geographic_seats * party_geographic_power / geographic_total_support;
+    Q[party + '_geographic_seats'] = Math.round(prerounding);
+
+
+}
+// then total them
+for (var party of Q.parties) {
+    Q[party + '_total_seats'] = Q[party + '_executive_seats'] + Q[party + '_functional_seats'] + Q[party + '_geographic_seats'];
+}
+
+Q.shareholder_total = shareholder_total_support;
+Q.geographic_total_support = geographic_total_support;
+!}
+go-to: jumpScene

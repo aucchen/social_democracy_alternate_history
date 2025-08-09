@@ -1,0 +1,14 @@
+title: Corporate violence
+subtitle: Corporate Infighting Flares up
+on-arrival: {!
+// see post_event.scene.dry for changes.
+
+Q.drone_dissent -= 1
+
+!}
+tags: event
+view-if: year = 2300 and month = 1
+priority: 1
+max-visits: 1
+
+The corporations are fighting each other but it's mostly innocent bystanders getting hurt

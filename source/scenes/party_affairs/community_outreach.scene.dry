@@ -1,0 +1,58 @@
+title: Community Conflicts
+new-page: true
+is-card: true
+card-image: img/asteroid.jpg
+tags: party_affairs
+
+= Community Conflicts
+
+- @first_wave_community
+- @second_wave_community
+- @isolated_communities
+- @drones_community
+- @otherworlders_community
+
+@first_wave_community
+title: Calm the first wave settlers
+subtitle: Japanese, European, American
+on-arrival: first_wave_dissent -= 10; first_wave_strength += 1;
+
+The first settlers were Japanese, whose numbers were joined by European and American colonists.  They are some of the best established and most prosperous people of Mikasa but the rivalries created by the chaos on earth leads to resentments in space, both between each other and towards the more recent arrivals.
+
+By mediating and addressing private disputes and small conflicts, we have reduced unrest in this community.
+
+
+@second_wave_community
+title: Stabilize second wave communities
+subtitle: Bantu, Middle Eastern, Southeastern Asian
+on-arrival: second_wave_prosperity += 1; second_wave_dissent -= 5;
+
+Mikasa and the other transsolar waystations became refugee destinations as the conflicts on Earth and the Jovian Moons worsened.  Many of the refugees came from places that had no previous ties to Mikasa.  The corporations were eager to have them come to serve as cheap labor but unconcerned with sustainable living conditions.  Uprooted from their existing support networks they have struggled but over time new communities are emerging.
+
+Addressing shortfalls in Mikasa's infrastructure and making connections with local community leaders helps address the poor living conditions and conflicts among these groups.
+
+@ isolated_communities
+title: Outreach to isolated communities
+subtitle: Deepers and Tunnel Clans
+on-arrival: isolated_dissent -= 5;
+
+The deepers are a community that originally settled on a different site of the asteroid from the tether ground station.  They intensely resent their annexation and desire a return to autonomy.  The tunnel clans are communities that left the artificial gravity grid and hid themselves away deep in the embrace of the "mother".  Their technical savviness could be an asset if we could overcome their isolation but this will be difficult as they can take care of their own and have little need for us.
+
+@drones_community
+title: Make inroads among the corporate employees
+subtitle: Hereditary worker caste
+on-arrival: drones_dissent -= 5;
+
+Most corporate employees on Mikasa work for the Big Three, Community Soylent, Magrail Combine and Brazos Universal.  Corporate employeeship has become a hereditary caste that jealously guards their privledges and relative wealth over the underclass.
+
+Any efforts to reach out to this group will inevitably be called illegal labor organizing.  Still there are more daring employees who have learned to keep things off the bosses radar.
+
+
+@otherworlders_community
+title: Assimilate arrivals from the otherworld
+subtitle: Ruukish (otherworld humans), Fae, Orcs
+on-arrival: otherworld_assimilation += 1;
+
+Although small in number, the refugees from the mystic otherworld have extreme culture shock.  What's worse they have brought a bitter ethnic conflict with them, the Orci question.  The orcs are often conflated with the orci, magical immitations of life while the fae are accused of ensnaring others in their magics.  The otherworld humans who typically are at the bottom of the heirarchy in the otherworld resent both groups but have trouble adjusting to a technological existence when they rarely possess basic literacy.
+
+We can help educate the otherworlders in our ways, hopefullly learning from the times humanity has put aside it's conflicts instead of allowing them to fester.  And in turn we might learn more of the magical arts of the otherworld.  Even if few of the refugees were trained in the magical arts, they have seen far more magic then the vast majority of people from this world.

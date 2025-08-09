@@ -1,0 +1,14 @@
+title: New Year
+subtitle: The year [+ year +]
+on-arrival: {!
+// see post_event.scene.dry for changes.
+
+Q.hidden_funds += 1
+
+!}
+tags: event
+view-if: month = 1
+priority: 1
+max-visits: 1
+
+The year [+ year +] starts.  The corporations and gangs are at each other's throats.  Perhaps they will distract each other enough that the government could break free of their domination.
