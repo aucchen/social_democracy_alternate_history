@@ -1,3 +1,24 @@
 {
-  "author": "Araminty Whitesell"
+  "name": "social_democracy_alternate_history",
+  "version": "0.11.1",
+  "description": "Building the game:",
+  "main": "out/html/index.html",
+  "scripts": {
+    "dendrynexus": "dendrynexus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/araminty/mikasa.git"
+  },
+  "keywords": [],
+  "author": "Araminty Whitesell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/araminty/mikasa/issues"
+  },
+  "homepage": "https://github.com/araminty/mikasa",
+  "dependencies": {
+    "dendrynexus": "github:aucchen/dendrynexus",
+    "parliament-svg": "^3.0.0"
+  }
 }
