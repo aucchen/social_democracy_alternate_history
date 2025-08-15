@@ -8,19 +8,19 @@ The population of Mikasa has been growing, refilling the spaces that were abando
 
 Current Infastructure states:
 
- 1) The Docks   |Demand: [+ district1_pop : infrastructure +] |Status: [+ district1_infra : infrastructure +]
+ 1. The Docks |Demand: [+ district1_pop : infrastructure +] |Status: [+ district1_infra : infrastructure +]
 
- 2) Aurora      |Demand: [+ district2_pop : infrastructure +] |Status: [+ district2_infra : infrastructure +]
+ 2. Aurora |Demand: [+ district2_pop : infrastructure +] |Status: [+ district2_infra : infrastructure +]
 
- 3) Vats        |Demand: [+ district3_pop : infrastructure +] |Status: [+ district3_infra : infrastructure +]
+ 3. Vats |Demand: [+ district3_pop : infrastructure +] |Status: [+ district3_infra : infrastructure +]
 
- 4) Railyard    |Demand: [+ district4_pop : infrastructure +] |Status: [+ district4_infra : infrastructure +]
+ 4. Railyard |Demand: [+ district4_pop : infrastructure +] |Status: [+ district4_infra : infrastructure +]
 
- 5) The Pits    |Demand: [+ district5_pop : infrastructure +] |Status: [+ district5_infra : infrastructure +]
+ 5. The Pits |Demand: [+ district5_pop : infrastructure +] |Status: [+ district5_infra : infrastructure +]
 
- 6) Limelight   |Demand: [+ district6_pop : infrastructure +] |Status: [+ district6_infra : infrastructure +]
+ 6. Limelight |Demand: [+ district6_pop : infrastructure +] |Status: [+ district6_infra : infrastructure +]
  
- 7) The Deeps   |Demand: [+ district7_pop : infrastructure +] |Status: [+ district1_infra : infrastructure +]
+ 7. The Deeps |Demand: [+ district7_pop : infrastructure +] |Status: [+ district1_infra : infrastructure +]
 
 - @repair_docks
 - @repair_aurora
