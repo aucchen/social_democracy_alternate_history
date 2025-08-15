@@ -1,0 +1,106 @@
+title: Ward Infrastructure
+new-page: true
+is-card: true
+tags: govt_affairs, party_affairs
+card-image: img/asteroid.jpg
+
+The population of Mikasa has been growing, refilling the spaces that were abandoned after various corporate closures.  This is putting growing demands on the power network, air circulation, data relays and other infrastructure, some of which still date back to the original colony.  Can we afford to pay for infrastructure improvements?  Can we afford not to?
+
+Current Infastructure states:
+
+ 1) The Docks   |Demand: [+ district1_pop : infrastructure +] |Status: [+ district1_infra : infrastructure +]
+ 2) Aurora      |Demand: [+ district2_pop : infrastructure +] |Status: [+ district2_infra : infrastructure +]
+ 3) Vats        |Demand: [+ district3_pop : infrastructure +] |Status: [+ district3_infra : infrastructure +]
+ 4) Railyard    |Demand: [+ district4_pop : infrastructure +] |Status: [+ district4_infra : infrastructure +]
+ 5) The Pits    |Demand: [+ district5_pop : infrastructure +] |Status: [+ district5_infra : infrastructure +]
+ 6) Limelight   |Demand: [+ district6_pop : infrastructure +] |Status: [+ district6_infra : infrastructure +]
+ 7) The Deeps   |Demand: [+ district7_pop : infrastructure +] |Status: [+ district1_infra : infrastructure +]
+
+- @repair_docks
+- @repair_aurora
+- @repair_pits
+- @repair_deeps
+- @repair_vats
+- @repair_railyard
+- @repair_done
+
+@repair_docks
+title: The wealthy surface areas around the Docks
+subtitle: This could molify the corporations about other spending
+choose-if: (budget > 0) and (docks_selected == 0)
+on-arrival: docks_selected += 1; budget -= 1; district1_infra += 1
+go-to: ward_infrastructure
+
+@repair_aurora
+title: Aurora district and it's independent communities
+choose-if: (budget > 0) and  (aurora_selected == 0)
+subtitle:  Provide services to our base
+on-arrival: aurora_selected += 1; budget -= 1; civilian_selected += 1; district2_infra += 1
+go-to: ward_infrastructure
+
+@repair_pits
+title: Repair the wartorn Pits district
+choose-if: (budget > 0) and  (pitts_selected == 0)
+subtitle: Provide services where the gang wars hit hardest
+on-arrival: pits_selected += 1; budget -= 1; civilian_selected += 1; district5_infra += 1
+go-to: ward_infrastructure
+
+@repair_deeps
+title: Repair the Deeps despite their isolation
+choose-if: (budget > 0) and  (deeps_selected == 0)
+subtitle: Dont expect much gratitude
+on-arrival: deeps_selected += 1; budget -= 1; civilian_selected += 1; district7_infra += 1
+go-to: ward_infrastructure
+
+@repair_vats
+title: Repair the corporate Vats district
+choose-if: (budget > 0) and  (vats_selected == 0)
+subtitle: [? if corporate_selected > 0 and vats_selected ==0 : Community Soylent feels slighted ?][? if corporate_selected == 0 : Community Soylent would be pleased ?]
+on-arrival: vats_selected += 1; budget -= 1; corporate_selected += 1; district3_infra += 1
+go-to: ward_infrastructure
+
+@repair_limelight
+title: Repair the corporate Lightlight district
+choose-if: (budget > 0) and  (limelight_selected == 0)
+subtitle: [? if corporate_selected > 0 and limelight_selected==0 : Brazos Zaibatsu feels slighted ?][? if corporate_selected == 0 : Brazos Zaibatsu would be pleased ?]
+on-arrival: limelight_selected += 1; budget -= 1; corporate_selected += 1; district6_infra += 1
+go-to: ward_infrastructure
+
+@repair_railyard
+title: Repair the  corporate Railyard district
+choose-if: (budget > 0) and  (railyard_selected == 0)
+subtitle: [? if corporate_selected > 0 and railyard_selected==0 : Magrail Combine feels slighted ?][? if corporate_selected == 0 : Magrail Combine would be pleased ?]
+on-arrival: railyard_selected += 1; budget -= 1; corporate_selected += 1; district4_infra += 1
+go-to: ward_infrastructure
+
+
+@repair_done
+title: That's all
+on-arrival: {!
+if ( !vats_selected &&  corporate_selected > 0 ) soylent_relations -= 5;
+if ( !vats_selected &&  !docks_selected  ) soylent_relations -= (civilian_selected+corporate_selected);
+if ( vats_selected ) { soylent_relations += 5; }
+
+if ( !limelight_selected &&  corporate_selected > 0 ) magrail_relations -= 5;
+if ( !limelight_selected &&  !docks_selected  ) magrail_relations -= (civilian_selected+corporate_selected);
+if ( limelight_selected  ) { magrail_relations += 5; }
+
+if ( !railyard_selected &&  corporate_selected > 0 ) brazos_relations -= 5;
+if ( !railyard_selected &&  !docks_selected ) brazos_relations -= (civilian_selected+corporate_selected);
+if ( railyard_selected  ) brazos_relations += 5;
+
+if ( aurora_selected ) SDF_support_first_wave += 3;
+if ( deeps_selected ) SDF_support_deepers += 1;
+if ( deeps_selected ) SDF_support_second_wave += 3;
+
+vats_selected = 0;
+railyard_selected = 0;
+limelight_selected = 0;
+docks_selected = 0;
+aurora_selected = 0;
+pits_selected = 0;
+deeps_selected = 0;
+civilian_selected = 0;
+corporate_selected = 0;
+
+!}

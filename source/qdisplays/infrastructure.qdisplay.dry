@@ -1,0 +1,13 @@
+# infrastructure states, roughly equivalent to population sustainable in hundred thousands
+
+(..0.999) collapsed
+(0.999..1.999) few areas supported        
+(1.999..2.999) small areas supported      
+(2.999..3.999) large patches supported    
+(3.999..4.999) low capacity               
+(4.999..5.999) medium capacity            
+(5.999..6.999) above medium capacity      
+(6.999..7.999) somewhat large capacity    
+(7.999..8.999) large network capacity     
+(8.999..9.999) very large network capacity
+(9.999..) robust infrastructure           

@@ -12,3 +12,5 @@ priority: 1
 max-visits: 1
 
 The year [+ year +] starts.  The corporations and gangs are at each other's throats.  Perhaps they will distract each other enough that the government could break free of their domination.
+
+go-to: election_simulation

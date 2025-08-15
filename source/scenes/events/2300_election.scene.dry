@@ -1,0 +1,7 @@
+title: 2300 election
+subtitle: An opportunity?
+priority: 10
+max-visits: 1
+tags: event
+view-if: month = 2
+go-to: election_simulation

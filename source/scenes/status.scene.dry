@@ -35,29 +35,24 @@ President: [+ president +]
 
 Chancellor: [+ chancellor +] ([+ chancellor_party +])
 
-Reichstag composition:
 
-# 1928: 30, 1930: 25, 1932: 22
-{!<span class="tooltip-text" title="Social Democratic Party of Germany">SPD</span>!}: [+ spd_r +]%
-[? if sapd_formed and sapd_r > 0: SAPD: [+ sapd_r +]% ?]
-# 1928: 15, 1930: 15, 1932: 
-{!<span class="tooltip-text" title="Center Party + Bavarian People's Party">Z + BVP</span>!}: [+ z_r +]%
-# 1928: 10, 1930: 13
-{!<span class="tooltip-text" title="Communist Party of Germany">KPD</span>!}: [+ kpd_r +]%
-# 1928: 5, 1930: 4 (as DstP)
-{!<span class="tooltip-text" title="German Democratic Party">!}[? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]{!</span>!}: [+ ddp_r +]%
-# 1928: 9, 1930: 5
-{!<span class="tooltip-text" title="German People's Party">DVP</span>!}: [+ dvp_r +]%
-# 1928: 14, 1930: 7
-{!<span class="tooltip-text" title="German National People's Party">DNVP</span>!}: [+ dnvp_r +]%
-# 1928: 3, 1930: 18
-{!<span class="tooltip-text" title="National-Socialist German Worker's Party (Nazis)">NSDAP</span>!}: [+ nsdap_r +]%
-# 1928: 9, 1930: 10
-Others: [+ other_r +]%
+Council composition:
+Democrats:
+{!<span style="color: #1100cc;" class="tooltip-text" title="Social Democratic Forum">S</span>!}{!<span style="color: #b3b3b5;" class="tooltip-text" title="Social Democratic Forum">P</span>!}{!<span style="color: #c00000;" class="tooltip-text" title="Social Democratic Forum">F</span>!}: [+ SDF_total_seats +]
+{!<span style="color: #1100cc;" class="tooltip-text" title="Deeper Community Association">D</span>!}{!<span style="color: #404040;" class="tooltip-text" title="Deeper Community Association">C</span>!}{!<span style="color: #c00000;" class="tooltip-text" title="Deeper Community Association">A</span>!}: [+ DCA_total_seats +]
+Syndicates:
+{!<span style="color: #BFC8CC;" class="tooltip-text" title="Grand Old Party">GOP</span>!}: [+ GOP_total_seats +]
+{!<span style="color: #cf3119;" class="tooltip-text" title="Sozial Republik Zentrum Partie">SRZP</span>!}: [+ SRZP_total_seats +]
+{!<span style="color: #cf6e19;" class="tooltip-text" title="Liberal Democratic Party Registry">LDPR</span>!}: [+ LDPR_total_seats +]
+Corporate Proxies:
+{!<span style="color: #44b88f;" class="tooltip-text" title="New People's Party of Mikasa (Community Soylent Incorporated Proxy)">NPP</span>!}: [+ NPP_total_seats +]
+{!<span style="color: #1c9947;" class="tooltip-text" title="Mikasa Federation of Trade Union (Combined Magrail Trust Proxy)">FTU</span>!}: [+ FTU_total_seats +]
+{!<span style="color: #348a88;" class="tooltip-text" title="Business and Professionals Alliance for Mikasa (Brazos Zaibatsu Proxy)">BPA</span>!}: [+ BPA_total_seats +]
 
-[? if spd_in_government = 1 : Budget: [+ budget +] ?]
 
-Next election: [+ next_election_month : month +] [+ next_election_year +]
+
+
+Budget: [+ budget +]
 
 = Economics
 

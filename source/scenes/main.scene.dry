@@ -1,15 +1,6 @@
 title: Next month
 set-bg: img/map_2.jpg
 is-hand: true
-on-arrival: {!
-if (Q.advisor_action_timer <= 0) {
-    Q.pinnedCardsDescription = 'Advisors - an action is available.';
-} else if (Q.advisor_action_timer == 1) {
-    Q.pinnedCardsDescription = 'Advisors - next action available in 1 month.';
-} else {
-    Q.pinnedCardsDescription = 'Advisors - next action available in ' + Q.advisor_action_timer + ' months.';
-}
-!}
 max-cards: 3
 
 #Here, the main deck will be displayed. Clicking on the deck draws a card into your hand. Clicking on a card activates that card.
@@ -61,15 +52,3 @@ card-image: img/reichstag_2.jpg
 is-deck: true
 
 - #govt_affairs
-
-@advance
-priority: -2
-title: Next Month
-card-image: img/asteroid.png
-is-card: true
-is-pinned-card: true
-go-to: post_event.events_choice
-on-arrival: {! 
-Q.month += 1;
-if (Q.month>12){ Q.year += 1; Q.month -=12;} 
-!}
