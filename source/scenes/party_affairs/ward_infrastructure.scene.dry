@@ -40,7 +40,7 @@ go-to: ward_infrastructure
 
 @repair_pits
 title: Repair the wartorn Pits district
-choose-if: (budget > 0) and  (pitts_selected == 0)
+choose-if: (budget > 0) and  (pits_selected == 0)
 subtitle: Provide services where the gang wars hit hardest
 on-arrival: pits_selected += 1; budget -= 1; civilian_selected += 1; district5_infra += 1
 go-to: ward_infrastructure
