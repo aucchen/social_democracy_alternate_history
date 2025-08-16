@@ -1,0 +1,22 @@
+title: Jason Jacobs
+is-pinned-card: true
+tags: advisor, nerds
+card-image: img/asteroid.jpg
+new-page: true
+view-if: jacobs_advisor > 0
+
+= Jason Jacobs
+
+
+
+[+ jacobs_advisor +] actions
+
+
+- @jacobs_renovate
+
+@jacobs_renovate
+title: Streamline infrastructure
+subtitle: More with less.
+on-arrival: district1_infra+=0.1;district2_infra+=0.1;district3_infra+=0.1;district4_infra+=0.1;district5_infra+=0.1;district6_infra+=0.1;district7_infra+=0.1;
+
+Jacobs helps streamline our infrastructure maintenance keeping up with the demands of a rising population
