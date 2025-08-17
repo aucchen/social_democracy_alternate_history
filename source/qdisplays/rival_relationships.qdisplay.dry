@@ -1,0 +1,10 @@
+
+(..-99.999) {!<span style="color: #8c1700;" class="tooltip-text" title="Open use of corporate armies and warships">Total War</span>!}
+(-99.999..-49.999) {!<span style="color: #b86554;" class="tooltip-text" title="Widespread use of assassinations and terror">Bloody Conflict</span>!}
+(-49.999..-9.999) {!<span style="color: #c8c222;" class="tooltip-text" title="Trying to kill or destroy key assets">Conflict</span>!}
+(-9.999..9.999) {!<span style="color: #8dcff6;" class="tooltip-text" title="Only clashing where profitable">Detente</span>!}
+(9.999..49.999) {!<span style="color: #336aa8;" class="tooltip-text" title="Avoiding harming each other">Truce</span>!}
+(49.999..99.999) {!<span style="color: #021580;" class="tooltip-text" title="Finding agreements">Understanding</span>!}
+(99.999..) {!<span style="color: #198900;" class="tooltip-text" title="Far reaching cooperation">Alliance</span>!}
+
+

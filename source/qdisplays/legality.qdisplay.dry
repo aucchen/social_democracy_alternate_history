@@ -1,0 +1,8 @@
+
+(..-99.9) {!<span style="color: #8c1700;" class="tooltip-text" title="Seeking to erradicate group">Hunted</span>!}
+(-99.9..-49.9) {!<span style="color: #b86554;" class="tooltip-text" title="Targeting organization revenues and personal">Suppression</span>!}
+(-49.9..-9.9) {!<span style="color: #c8c222;" class="tooltip-text" title="Targeting key assets to send a message">Curtailing</span>!}
+(-9.9..9.9) {!<span style="color: #8dcff6;" class="tooltip-text" title="Unconcerned by activities">Indifferent</span>!}
+(9.9..49.9) {!<span style="color: #336aa8;" class="tooltip-text" title="Making opportunistic deals">Tolerated</span>!}
+(49.9..99.9) {!<span style="color: #021580;" class="tooltip-text" title="Turning a blind eye to all activities">Conencted</span>!}
+(99.9..) {!<span style="color: #198900;" class="tooltip-text" title="Openly using organization">Patronized</span>!}

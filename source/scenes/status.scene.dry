@@ -12,6 +12,7 @@ Q.economic_growth_2 = '0';
 if (Q.economic_growth) {
     Q.economic_growth_2 = Q.economic_growth.toFixed(1);
 }
+
 !}
 
 = Status
@@ -29,26 +30,21 @@ SPD position: [? if spd_toleration : toleration ?][? if spd_in_government : in g
 
 Internal dissent: [+ dissent_percent : dissent +]
 
-= Government
 
-President: [+ president +]
-
-Chancellor: [+ chancellor +] ([+ chancellor_party +])
-
-
-Council composition:
-Democrats:
+= Council composition:
+Democrats: [+ SDF_total_seats+DCA_total_seats +]
 {!<span style="color: #1100cc;" class="tooltip-text" title="Social Democratic Forum">S</span>!}{!<span style="color: #b3b3b5;" class="tooltip-text" title="Social Democratic Forum">P</span>!}{!<span style="color: #c00000;" class="tooltip-text" title="Social Democratic Forum">F</span>!}: [+ SDF_total_seats +]
 {!<span style="color: #1100cc;" class="tooltip-text" title="Deeper Community Association">D</span>!}{!<span style="color: #404040;" class="tooltip-text" title="Deeper Community Association">C</span>!}{!<span style="color: #c00000;" class="tooltip-text" title="Deeper Community Association">A</span>!}: [+ DCA_total_seats +]
-Syndicates:
-{!<span style="color: #BFC8CC;" class="tooltip-text" title="Grand Old Party">GOP</span>!}: [+ GOP_total_seats +]
-{!<span style="color: #cf3119;" class="tooltip-text" title="Sozial Republik Zentrum Partie">SRZP</span>!}: [+ SRZP_total_seats +]
-{!<span style="color: #cf6e19;" class="tooltip-text" title="Liberal Democratic Party Registry">LDPR</span>!}: [+ LDPR_total_seats +]
-Corporate Proxies:
+
+Corporate Proxies: [+ NPP_total_seats + FTU_total_seats + BPA_total_seats +]
 {!<span style="color: #44b88f;" class="tooltip-text" title="New People's Party of Mikasa (Community Soylent Incorporated Proxy)">NPP</span>!}: [+ NPP_total_seats +]
 {!<span style="color: #1c9947;" class="tooltip-text" title="Mikasa Federation of Trade Union (Combined Magrail Trust Proxy)">FTU</span>!}: [+ FTU_total_seats +]
 {!<span style="color: #348a88;" class="tooltip-text" title="Business and Professionals Alliance for Mikasa (Brazos Zaibatsu Proxy)">BPA</span>!}: [+ BPA_total_seats +]
 
+Syndicates: [+ GOP_total_seats+SRZP_total_seats+LDPR_total_seats +]
+{!<span style="color: #BFC8CC;" class="tooltip-text" title="Grand Old Party">GOP</span>!}: [+ GOP_total_seats +]
+{!<span style="color: #cf3119;" class="tooltip-text" title="State Republican Zenist Party">SRZP</span>!}: [+ SRZP_total_seats +]
+{!<span style="color: #cf6e19;" class="tooltip-text" title="Liberal Democratic Party Registry">LDPR</span>!}: [+ LDPR_total_seats +]
 
 
 
@@ -63,126 +59,27 @@ Inflation: [+ inflation_2 +]%
 Economic growth: [+ economic_growth_2 +]%
 
 
+= Conflicts
 
-# = Public Opinion
+Soylent<->Magrail: [+ soylent_magrail_rel : rival_relationships +]
+Magrail<->Brazos: [+ magrail_brazos_rel : rival_relationships +]
+Soylent<->Brazos: [+ soylent_brazos_rel : rival_relationships +]
 
-@politics
+= Policies on syndicates:
+= Five Families
+GOV: [+ government_families_rel : legality +]
+ComSoy: [+ soylent_families_rel : legality +]
+MagCom: [+ magrail_families_rel : legality +]
+BrzZai: [+ brazos_families_rel : legality +]
 
-= Inter-party Relations
+= Bleeding Edges
+GOV: [+ government_edges_rel : legality +]
+ComSoy: [+ soylent_edges_rel : legality +]
+MagCom: [+ magrail_edges_rel : legality +]
+BrzZai: [+ brazos_edges_rel : legality +]
 
-
-{!<span class="tooltip-text" title="Center Party">Z</span>!}: [+ z_relation : relationships +]
-
-{!<span class="tooltip-text" title="German Democratic Party">!}[? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]{!</span>!}: [+ ddp_relation : relationships +]
-
-{!<span class="tooltip-text" title="German People's Party">DVP</span>!}: [+ dvp_relation : relationships +]
-
-{!<span class="tooltip-text" title="Communist Party of Germany">KPD</span>!}: [+ kpd_relation : relationships +]
-
-{!<span class="tooltip-text" title="German National People's Party">DNVP</span>!}: [+ dnvp_relation : relationships +]
-
-{!<span class="tooltip-text" title="National-Socialist German Worker's Party (Nazis)">NSDAP</span>!}: [+ nsdap_relation : relationships +]
-
-= Internal Factions of the SPD
-
-{!<span class="tooltip-text" title="The Left is interested in radical, transformative policies and cooperation with the KPD.">Left</span>!} strength: [+ left_strength : strength +], dissent: [+ left_dissent : dissent +]
-
-{!<span class="tooltip-text" title="The Center is a faction of Center Marxists, between reform and revolution.">Center</span>!} strength: [+ center_strength : strength +], dissent: [+ center_dissent : dissent +]
-
-{!<span class="tooltip-text" title="Labor's goal is economic reform and benefits for organized workers.">Labor</span>!} strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
-
-{!<span class="tooltip-text" title="Reformists are pragmatic participants in government, and seek to expand the welfare state and defend democracy.">Reformist</span>!} strength: [+ reformist_strength : strength +], dissent: [+ reformist_dissent : dissent +]
-
-[? if neorevisionism > 0 : Neorevisionist strength: [+ neorevisionist_strength : strength +], dissent: [+ neorevisionist_dissent : dissent +] ?]
-
-
-@paramilitaries
-on-arrival: {!
-if (Q.rb_strength) {
-    Q.rb_strength_2 = Q.rb_strength.toFixed(1);
-}
-if (Q.rfb_strength) {
-    Q.rfb_strength_2 = Q.rfb_strength.toFixed(1);
-}
-if (Q.sh_strength) {
-    Q.sh_strength_2 = Q.sh_strength.toFixed(1);
-}
-if (Q.sa_strength) {
-    Q.sa_strength_2 = Q.sa_strength.toFixed(1);
-}
-!}
-
-= Paramilitaries
-
-{!<span class="tooltip-text" title="The Reichsbanner Schwarz-Rot-Gold is a popular organization for defending democracy, mostly affiliated with the SPD.">Reichsbanner</span>!} Strength: [+ rb_strength_2 +] thousand
-
-Reichsbanner Militarization: [+ rb_militancy : militancy +]
-
-{!<span class="tooltip-text" title="The RFB (Rotfrontkämpferbund) is a communist group associated with the KPD.">RFB</span>!} Strength: [+ rfb_strength_2 +] thousand
-
-RFB Militarization: [+ rfb_militancy : militancy +]
-
-{!<span class="tooltip-text" title="The Stahlhelm is a right-wing organization of war veterans associated with the DNVP.">Stahlhelm</span>!} Strength: [+ sh_strength_2 +] thousand
-
-Stahlhelm Militarization: [+ sh_militancy : militancy +]
-
-{!<span class="tooltip-text" title="The SA (Sturmabteilung) is the Nazi paramilitary.">SA</span>!} Strength: [+ sa_strength_2 +] thousand
-
-SA Militarization: [+ sa_militancy : militancy +]
-
-= Official military/paramilitaries
-
-Reichswehr: [+ reichswehr_strength +] thousand troops.
-
-Reichswehr Loyalty: [+ reichswehr_loyalty : loyalty +]
-
-Prussian police: [+ prussian_police_strength +] thousand members.
-
-Prussian police loyalty: [+ prussian_police_loyalty : loyalty +]
-
-[? if spd_in_government : Interior police loyalty: [+ interior_police_loyalty : loyalty +] ?]
-
-@polls
-on-arrival: {!
-Q.pro_republic_disp = Math.round(Q.pro_republic);
-Q.nationalism_disp = Math.round(Q.nationalism);
-Q.socialism_disp = Math.round(Q.socialism);
-!}
-
-= Projected election results
-
-(if the election were to be held now):
-
-SPD: [+ spd_votes +]%
-
-[? if sapd_formed: SAPD: [+ sapd_votes +]% ?]
-
-Z + BVP: [+ z_votes +]%
-
-KPD: [+ kpd_votes +]%
-
-[? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ ddp_votes +]%
-
-DVP: [+ dvp_votes +]%
-
-DNVP: [+ dnvp_votes +]%
-
-NSDAP: [+ nsdap_votes +]%
-
-Others: [+ other_votes +]%
-
-**Detailed results for each demographic**
-
-Workers: SPD: [+ workers_spd_display +]%, Z: [+ workers_z_display +]%, KPD: [+ workers_kpd_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ workers_ddp_display +]%, DVP: [+ workers_dvp_display +]%; DNVP: [+ workers_dnvp_display +]%, NSDAP: [+ workers_nsdap_display +]%, Others: [+ workers_other_display +]% [? if sapd_formed: SAPD: [+ workers_sapd_display +]% ?]
-
-New Middle Class: SPD: [+ new_middle_spd_display +]%, Z: [+ new_middle_z_display +]%, KPD: [+ new_middle_kpd_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ new_middle_ddp_display +]%, DVP: [+ new_middle_dvp_display +]%; DNVP: [+ new_middle_dnvp_display +]%, NSDAP: [+ new_middle_nsdap_display +]%, Others: [+ new_middle_other_display +]% [? if sapd_formed: SAPD: [+ new_middle_sapd_display +]% ?]
-
-Old Middle Class: SPD: [+ old_middle_spd_display +]%, Z: [+ old_middle_z_display +]%, KPD: [+ old_middle_kpd_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ old_middle_ddp_display +]%, DVP: [+ old_middle_dvp_display +]%; DNVP: [+ old_middle_dnvp_display +]%, NSDAP: [+ old_middle_nsdap_display +]%, Others: [+ old_middle_other_display +]% [? if sapd_formed: SAPD: [+ old_middle_sapd_display +]% ?]
-
-Rural: SPD: [+ rural_spd_display +]%, Z: [+ rural_z_display +]%, KPD: [+ rural_kpd_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ rural_ddp_display +]%, DVP: [+ rural_dvp_display +]%; DNVP: [+ rural_dnvp_display +]%, NSDAP: [+ rural_nsdap_display +]%, Others: [+ rural_other_display +]% [? if sapd_formed: SAPD: [+ rural_sapd_display +]% ?]
-
-Unemployed: SPD: [+ unemployed_spd_display +]%, Z: [+ unemployed_z_display +]%, KPD: [+ unemployed_kpd_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ unemployed_ddp_display +]%, DVP: [+ unemployed_dvp_display +]%; DNVP: [+ unemployed_dnvp_display +]%, NSDAP: [+ unemployed_nsdap_display +]%, Others: [+ unemployed_other_display +]% [? if sapd_formed: SAPD: [+ unemployed_sapd_display +]% ?]
-
-Catholics: SPD: [+ catholics_spd_display +]%, Z: [+ catholics_z_display +]%, KPD: [+ catholics_kpd_display +]%, [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ catholics_ddp_display +]%, DVP: [+ catholics_dvp_display +]%; DNVP: [+ catholics_dnvp_display +]%, NSDAP: [+ catholics_nsdap_display +]%, Others: [+ catholics_other_display +]% [? if sapd_formed: SAPD: [+ catholics_sapd_display +]% ?]
-
-Support for the Republic: [+ pro_republic_disp +]%
+= Sharkshins
+GOV: [+ government_sharks_rel : legality +]
+ComSoy: [+ soylent_sharks_rel : legality +]
+MagCom: [+ magrail_sharks_rel : legality +]
+BrzZai: [+ brazos_sharks_rel : legality +]

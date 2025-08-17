@@ -2,19 +2,6 @@ title: Advance a month
 new-page: true
 is-card: true
 is-pinned-card: true
-on-arrival: month_activities += 1; shuffle_leadership_timer = 6;
-card-image: img/vorwarts_2.jpg
-go-to: next_month
-
-
-@next_month
-priority: -2
-title: Next Month
-card-image: img/asteroid.png
-is-card: true
-is-pinned-card: true
+card-image: img/solar_system.png
+on-arrival: {! Q.month += 1; if (Q.month>12){ Q.year += 1; Q.month -=12;} !}
 go-to: post_event.events_choice
-on-arrival: {! 
-Q.month += 1;
-if (Q.month>12){ Q.year += 1; Q.month -=12;} 
-!}

@@ -1,0 +1,64 @@
+title: MSS Dundalk Affair
+subtitle: An opportunity?
+priority: 1
+max-visits: 1
+tags: event
+view-if: month = 3 and year = 2300
+
+The stars have aligned for the fledgling democratic movement of Mikasa.  An offworld corporation, Canterbary Logistics, has been caught red handed bribing the judiciary.  Normally they would simply refuse to pay any fines but they are uniquely vulnerable because their space liner MSS Dundalk is trapped at Mikasa for repairs.  For once a corporation could be held to account.
+
+Naturally Canterbary Logistics is trying to get the Dundalk out of port before the courts decide anything.  But mass protests outside the drydock could obstruct the delivery of repair parts and keep the Dundalk trapped.  The people are excited, the resident megacorps of Mikasa dont see the need to stop us.  The first political protests in a century are being organized, what will the topics of our speeches be?
+
+- @justice_reform
+- @anti_corp
+- @anti_crime
+- @mikasa_first
+
+@justice_reform
+title: Purge corruption from our legal system
+on-arrival: budget += 2; government_respect += 0.10;
+
+Attacking the corrupt judiciary is a safe course of action right now. The guilty parties resign and their replacements swiftly move to impound the Dundalk.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.
+
+We dont stir up any trouble but some wonder if we should have been more daring.
+
+@anti_corp
+title: Careful and circumspect criticism of the megacorps
+on-arrival: {!
+budget += 2; 
+government_respect += 0.05; 
+corp_backlash += 0.10; 
+soylent_anger +=0.10; 
+magrail_anger += 0.10; 
+brazos_anger += 0.10;
+martyrs.push("Aisha Lee");
+!}
+
+Overtly criticizing the megacorps would be a swift path to a slander trial.  But the proliferation of euphemisms leaves room for plausible deniability.  A common talking point is how we can't return to harmony until the people get what they are owed.  The people understand the oblique meaning and get whipped up into a frenzy.  The justice system imprisons several scapegoats and impounds the Dundalk.  The corporations understand the double meaning as well.  Several speakers suffer from street crime in the weeks after the rally.  A particularly inflamatory speaker named Aisha Lee dies in what is called a suicide and becomes immortalized as a martyr.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.
+
+@anti_crime
+title: Attack the criminal syndicates for eroding justice
+on-arrival: {!
+budget += 2; 
+government_respect += 0.05; 
+corp_backlash += 0.05; 
+crime_backlash += 0.20;
+martyrs.push("Platea Song");
+!}
+
+The speakers shout vitrol at the gangsters while many in the crowds mutter under their breath that the corporations are gangsters under a different name.  Syndicate hitmen attempt to publicly assassinate a particularly inflamatory speaker named Aisha Lee but are thwarted and lynched by members of the crowd.  A young person named Platea Song dies stopping the assassination and becomes immortalized as a martyr.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.
+
+@mikasa_first
+title: Stir up anger at offworld exploitation
+on-arrival: {!
+budget +=2;
+government_respect += 0.15; 
+soylent_anger -=0.10; 
+magrail_anger -= 0.10; 
+brazos_anger -= 0.10;
+xenophobia += 20;
+!}
+
+Stiring up anger about outsiders rallies the people behind the government in a way that the megacorps and syndicates can't object to.  The justice system imprisons several scapegoats and impounds the Dundalk.  But attacking outsiders stokes the fires of xenophobia, clashes between communities is on the rise.
+
+

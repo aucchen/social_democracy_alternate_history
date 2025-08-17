@@ -1,0 +1,21 @@
+title: Corporate Violence
+new-page: false
+on-arrival: {!
+
+if (soylent_magrail_rel < 0) {
+    district3_infra += soylent_magrail_rel/10;
+    district4_infra += soylent_magrail_rel/10;
+}
+
+if (soylent_brazos_rel < 0) {
+    district3_infra += soylent_magrail_rel/10;
+    district6_infra += soylent_magrail_rel/10;
+}
+
+if (magrail_brazos_rel < 0) {
+    district4_infra += soylent_magrail_rel/10;
+    district6_infra += soylent_magrail_rel/10;
+}
+
+!}
+

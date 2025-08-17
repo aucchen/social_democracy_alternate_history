@@ -135,7 +135,7 @@ NPP: [+ NPP_total_seats +] seats
 FTU: [+ FTU_total_seats +] seats
 BPA: [+ BPA_total_seats +] seats
 
-execcutive
+executive
 SDF: [+ SDF_executive_seats +] seats
 DCA: [+ DCA_executive_seats +] seats
 GOP: [+ GOP_executive_seats +] seats
