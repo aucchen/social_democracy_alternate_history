@@ -67,22 +67,19 @@ Soylent<->Brazos: [+ soylent_brazos_rel : rival_relationships +]
 
 = Policies on syndicates:
 
-= Five Families
-
+Five Families
 GOV: [+ government_families_rel : legality +]
 Com-Soy: [+ soylent_families_rel : legality +]
 Mag-Com: [+ magrail_families_rel : legality +]
 Brz-Zai: [+ brazos_families_rel : legality +]
 
-= Bleeding Edges
-
+Bleeding Edges
 GOV: [+ government_edges_rel : legality +]
 Com-Soy: [+ soylent_edges_rel : legality +]
 Mag-Com: [+ magrail_edges_rel : legality +]
 Brz-Zai: [+ brazos_edges_rel : legality +]
 
-= Sharkshins
-
+Sharkshins
 GOV: [+ government_sharks_rel : legality +]
 Com-Soy: [+ soylent_sharks_rel : legality +]
 Mag-Com: [+ magrail_sharks_rel : legality +]
