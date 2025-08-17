@@ -65,7 +65,7 @@ Soylent<->Magrail: [+ soylent_magrail_rel : rival_relationships +]
 Magrail<->Brazos: [+ magrail_brazos_rel : rival_relationships +]
 Soylent<->Brazos: [+ soylent_brazos_rel : rival_relationships +]
 
-= Policies on syndicates: 
+= Policies on syndicates
 
 Five Families 
 GOV: [+ government_families_rel : legality +]
