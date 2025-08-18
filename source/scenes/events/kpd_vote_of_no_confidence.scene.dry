@@ -21,7 +21,7 @@ How do we assuage the KPD?
 
 - @resources: Use our resources to reduce dissent within the coalition.
 - @thalmann: Appoint Thälmann as chancellor instead of [+ chancellor +].
-- @support_center: Could we form a new government based on the Center Party and [+ ddp_name +] (and possibly DVP)?
+- @support_center: Could we form a new government?
 - @let_it_happen: Never mind. Let the vote happen.
 
 @thalmann
@@ -52,8 +52,9 @@ By transferring resources to our coalition partners, we can reduce their dissent
 choose-if: (weimar_coalition >= 50 and z_relation >= 40) or (grand_coalition >= 50 and z_relation >= 45 and dvp_relation >= 30)
 unavailable-subtitle: [? if grand_coalition < 50 : This would not give us a majority. ?] [? if z_relation < 45 : After working with the Communists, the Center Party does not wish to form a coalition with us. ?] [? if dvp_relation < 30 : The DVP would rather see the government fall than rescue us from the Communists. ?]
 
-We could try to boot the KPD from our governing coalition, and form a new government with the bourgeois parties.
+We could try to boot the KPD from our governing coalition, and form a new government[? if spd_r <= 50 : with the bourgeois parties ?].
 
+- @election_1928.spd_majority: Form an SPD government, without the KPD?
 - @election_1928.weimar_coalition: Form a Weimar Coalition?
 - @election_1928.grand_coalition: Form a Grand Coalition?
 - @let_it_happen: There is nothing we can do.

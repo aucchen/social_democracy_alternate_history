@@ -14,7 +14,7 @@ The Judiciary is one of the most reactionary components of the government, along
 [? if judicial_reform == 1 : We have started on the path to judicial reform. While some of the most antideluvian and biased justices have been replaced, many still remain. More should be done. ?]
 [? if judicial_reform >= 2 : We have successfully reformed the judiciary, to some extent. At the very least, the courts will not actively obstruct our attempts to prosecute crimes committed by the far-right. ?]
 
-- @reform: Carry out substantial judicial reforms,
+- @reform: Carry out substantial judicial reforms.
 - @minor_reforms: Carry out minor judicial reforms.
 - @as_is: Leave the judiciary as it is.
 - @easy_discard
