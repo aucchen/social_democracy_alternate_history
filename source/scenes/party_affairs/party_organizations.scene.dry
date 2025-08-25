@@ -5,7 +5,7 @@ tags: party_affairs
 view-if: party_organizations_timer <= 0
 on-arrival: month_actions += 1; party_organizations_timer = 6;
 card-image: img/Mann_der_Arbeit.jpg
-max-visits: 5
+max-visits: 6
 #subtitle: Outside of electoral politics, the SPD runs a social world onto itself.
 
 = Party Organizations
