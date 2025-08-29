@@ -2,7 +2,7 @@ title: Syndicate violence
 subtitle: Gang wars cause mayhem
 on-arrival: {!Q.second_wave_prosperity -= 1;!}
 tags: event
-view-if: year == 2300 and month == 2
+view-if: year == 2300 and month == 6
 priority: 1
 max-visits: 1
 
