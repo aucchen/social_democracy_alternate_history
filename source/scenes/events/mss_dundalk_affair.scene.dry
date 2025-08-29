@@ -1,5 +1,4 @@
 title: MSS Dundalk Affair
-subtitle: An opportunity?
 priority: 1
 max-visits: 1
 tags: event
@@ -16,7 +15,8 @@ Naturally Canterbary Logistics is trying to get the Dundalk out of port before t
 
 @justice_reform
 title: Purge corruption from our legal system
-on-arrival: budget += 2; government_respect += 0.10;
+on-arrival: budget += 2; excitement += 1;
+go-to: after_message
 
 Attacking the corrupt judiciary is a safe course of action right now. The guilty parties resign and their replacements swiftly move to impound the Dundalk.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.
 
@@ -26,39 +26,49 @@ We dont stir up any trouble but some wonder if we should have been more daring.
 title: Careful and circumspect criticism of the megacorps
 on-arrival: {!
 budget += 2; 
-government_respect += 0.05; 
-corp_backlash += 0.10; 
+excitement += 1; 
+anti_corp += 2;
 soylent_anger +=0.10; 
 magrail_anger += 0.10; 
 brazos_anger += 0.10;
 martyrs.push("Aisha Lee");
 !}
+go-to: after_message
 
-Overtly criticizing the megacorps would be a swift path to a slander trial.  But the proliferation of euphemisms leaves room for plausible deniability.  A common talking point is how we can't return to harmony until the people get what they are owed.  The people understand the oblique meaning and get whipped up into a frenzy.  The justice system imprisons several scapegoats and impounds the Dundalk.  The corporations understand the double meaning as well.  Several speakers suffer from street crime in the weeks after the rally.  A particularly inflamatory speaker named Aisha Lee dies in what is called a suicide and becomes immortalized as a martyr.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.
+Overtly criticizing the megacorps would be a swift path to a slander trial.  But the proliferation of euphemisms leaves room for plausible deniability.  A common talking point is how we can't return to harmony until the people get what they are owed.  The people understand the oblique meaning and get whipped up into a frenzy.  The courts imprison several scapegoats and impound the Dundalk.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.  
+
+The corporations understand the double meaning as well.  Several speakers suffer from street crime in the weeks after the rally.  A particularly inflamatory speaker named Aisha Lee dies in what is called a suicide and becomes immortalized as a martyr.
+
 
 @anti_crime
 title: Attack the criminal syndicates for eroding justice
 on-arrival: {!
 budget += 2; 
-government_respect += 0.05; 
-corp_backlash += 0.05; 
-crime_backlash += 0.20;
+excitement += 1; 
+anti_corp += 1; 
+anti_syndicate += 2;
 martyrs.push("Platea Song");
 !}
+go-to: after_message
 
-The speakers shout vitrol at the gangsters while many in the crowds mutter under their breath that the corporations are gangsters under a different name.  Syndicate hitmen attempt to publicly assassinate a particularly inflamatory speaker named Aisha Lee but are thwarted and lynched by members of the crowd.  A young person named Platea Song dies stopping the assassination and becomes immortalized as a martyr.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.
+The speakers shout vitrol at the gangsters while many in the crowds mutter under their breath that the corporations are gangsters under a different name.  The courts cave and impound the vessel.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.  
+
+Syndicate hitmen attempt to publicly assassinate a particularly inflamatory speaker named Aisha Lee but are thwarted and lynched by members of the crowd.  A young person named Platea Song dies stopping the assassination and becomes immortalized as a martyr.
 
 @mikasa_first
 title: Stir up anger at offworld exploitation
 on-arrival: {!
 budget +=2;
-government_respect += 0.15; 
+excitement += 2; 
 soylent_anger -=0.10; 
 magrail_anger -= 0.10; 
 brazos_anger -= 0.10;
-xenophobia += 20;
+xenophobia += 2;
 !}
+go-to: after_message
 
-Stiring up anger about outsiders rallies the people behind the government in a way that the megacorps and syndicates can't object to.  The justice system imprisons several scapegoats and impounds the Dundalk.  But attacking outsiders stokes the fires of xenophobia, clashes between communities is on the rise.
+Stiring up anger about outsiders rallies the people behind the government in a way that the megacorps and syndicates can't object to.  The courts imprison several scapegoats and impound the Dundalk.  But attacking outsiders stokes the fires of xenophobia, clashes between communities is on the rise.
 
 
+@after_message
+go-to: post_event.events_choice
