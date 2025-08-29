@@ -14,7 +14,10 @@ go-to: start_menu_2
 - @election_simulation: Election simulation
 - @credits: Credits
 - @game_over.achievements
+- @test_function: Test function
 
+@test_function
+go-to: election_calculations
 
 @start
 on-arrival: {!
@@ -44,9 +47,6 @@ Q.brazos_anger = 0.05;
 
 Q.martyrs = [];
 
-// Suspicious towards outsiders but no problems... for now
-Q.backlash = -.50;
-
 // Syndicate policies
 Q.government_families_rel = -75;
 Q.government_edges_rel = 10;
@@ -64,17 +64,38 @@ Q.brazos_families_rel = 10;
 Q.brazos_edges_rel = -50;
 Q.brazos_sharks_rel = 50;
 
-// percentage of people who think the control of the government would be worth anything
-Q.government_respect = 0.05;
-// percentage who aren't resigned to corporate control
-Q.corp_backlash = 0.05;
-// percentage who aren't resigned to organized crime
-Q.crime_backlash = 0.05;
-
+// political trends
+Q.anti_corp = 0.05;
+Q.anti_syndicate = 0.05;
 Q.xenophobia = .40;
 
+// Social Democratic Forum (SDF) - main democracy movement
+// Deeper-Democrats: Deeper Community Association (DCA) - deepers obviously
+// Young Academic Circle: local organization for students in 1st district
+Q.demo_parties = ['SPF', 'DCA', 'YAC'];
+
+// Populations 1st/2nd/drones/deepers/clans/otherworlders/shareholders in ten thousands
+Q.district_demos = [ "first_wave", "second_wave", "drones", "deepers", "clans", "otherworlders", "shareholders"];
+Q.district1_pop = [ 42 , 13 , 10 ,   1 , 1 , 1 , 17];
+Q.district2_pop = [ 38 , 57 ,  2 ,   1 , 1 , 9 , 0];
+Q.district3_pop = [ 28 , 71 ,  2 ,   1 , 1 , 0 , 0];
+Q.district4_pop = [ 12 ,  3 ,  3 , 166 , 1 , 0 , 0];
+Q.district5_pop = [ 28 , 19 , 48 ,   1 , 1 , 0 , 1];
+Q.district6_pop = [ 19 , 21 , 55 ,   1 , 1 , 0 , 1];
+Q.district7_pop = [ 24 , 17 , 52 ,   1 , 1 , 0 , 1];
+
+// district differences from asteroid wide demographics
+Q.district1_pro_corp = 3;
+Q.district1_anti_corp = 3; // champagne socialist factor polarizes views
+Q.district1_pro_syndicate = -5;
+Q.district1_anti_syndicate = 8;
+Q.district1_xenophobia = -4;
+Q.district1_prosperity = 15;
+Q.district1_loyalty_YAC = 12; // local academic political group
+Q.district1_loyalty_DFA = -1; 
+Q.shareholders_apathy = -10; // invested in the system that keeps them rich
 !}
-set-bg: img/map_2.jpg
+set-bg: img/solar_system.jpg
 new-page: true
 
 > *"They named it Mikasa, 'Beauty'"*
@@ -94,7 +115,7 @@ This is a game of future history. While historical accuracy is a major concern, 
 new-page: true
 go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
 
-= 2300
+= 2300 
 
 It is a dark time for humanity.  Earth is mired in endless national conflicts while the off planet colonies are torn by violence between lawless corporations.
 
