@@ -53,7 +53,7 @@ on-arrival: rural_spd += 5*(1-dissent); rural_spd -= 3*(1-dissent) if peoples_pa
 We have increased our campaigning among farmers. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?]
 
 @unemployed
-subtitle: -1 resources
+subtitle: -2 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: unemployed_spd += 6*(1-dissent); resources -= 1; unemployed_spd -= 3 if welfare < 0; unemployed_spd += 6*(1-dissent) if wtb_adopted = 1; unemployed_spd += 3*(1-dissent) if welfare >= 2;
