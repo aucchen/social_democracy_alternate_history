@@ -346,50 +346,45 @@ function generic_vote(electorate = Q.electorates[8], district = 0, nseats = 100)
 }
 
 function update_projections(){
-
-        
-    function logistic_convert(x, u, s) {
-        // logistic cdf function
-        return 1 / (1 + Math.exp((u - x) / s));
-    }
-
-
-    piecewise_mult = (a, b) => a.map((x, i) => (a[i] || 0) * (b[i] || 0))
-    piecewise_add = (a, b) => a.map((x, i) => (a[i] || 0) + (b[i] || 0))
-    piecewise_sub = (a, b) => a.map((x, i) => a[i] - b[i])
-
-    sum_list = (numbers) => numbers.reduce((sum, num) => (sum || 0) + (num || 0));
-
-    function piecewise_sum(...lists_to_sum) {
-        total = lists_to_sum[0]
-        for (var i = 1; i < lists_to_sum.length; i++) {
-            next_list = lists_to_sum[i] ?? [0] * total.length;
-            total = piecewise_add(total, next_list);
-        }
-        return total
-    }
-
+    
     // executive seats
     executive_seats = Q.executive_seats ?? 140;
     result = generic_vote(electorate=8, district=0, nseats=executive_seats);
     Q.projections.executive = result[0];
+    Q.projections_executive_C=result[0][0];
+    Q.projections_executive_G=result[0][1];
+    Q.projections_executive_D=result[0][2];
+    Q.projections_executive_H=result[0][3];
+    Q.projections_executive_I=result[0][4];
 
     //guild seats
     for (var i = 0; i < 8; i++){
         color = Q.guild_colors[i];
         result = generic_vote(electorate=i, district=0, nseats=Q.guild_seats[i]);
         Q.projections['guild_'+color]=result[0];
+        Q['projections_guild_'+color+'_C']=result[0][0];
+        Q['projections_guild_'+color+'_G']=result[0][1];
+        Q['projections_guild_'+color+'_D']=result[0][2];
+        Q['projections_guild_'+color+'_H']=result[0][3];
+        Q['projections_guild_'+color+'_I']=result[0][4];
     }
 
     //geographic seats
     for (var i = 1; i < 8; i++){
         result = generic_vote(electorate=9, district=i, nseats=20);
         Q.projections['district_'+i]=result[0];
+        Q['projections_district_'+i+'_C']=result[0][0]
+        Q['projections_district_'+i+'_G']=result[0][1]
+        Q['projections_district_'+i+'_D']=result[0][2]
+        Q['projections_district_'+i+'_H']=result[0][3]
+        Q['projections_district_'+i+'_I']=result[0][4]
     }
 }
 
 setup_demographics();
 update_projections();
+
+Q.update_projections = update_projections;
 
 !}
 
@@ -405,9 +400,9 @@ go-to: start_menu_2
 - @election_simulation: Election simulation
 - @credits: Credits
 - @game_over.achievements
-- @test_function: Test function
 
 @test_function
+set-Jump: root
 go-to: election_calculations
 
 @start

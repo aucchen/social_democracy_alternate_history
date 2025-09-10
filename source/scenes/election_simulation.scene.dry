@@ -5,120 +5,8 @@ set-jump: post_election
 
 
 @2300
-on-arrival: {!
-
-Q.classes = ['first_wave', 'second_wave', 'drones', 'otherworlder', 'deepers', 'clans', 'shareholders'];
-Q.classes2 = ['first_wave', 'second_wave', 'otherworlder', 'deepers', 'clans', 'shareholders'];
-Q.parties = ['SDF', 'DCA', 'GOP', 'SRZP', 'LDPR', 'NPP', 'FTU', 'BPA'];
-Q.corp_parties = ['NPP', 'FTU', 'BPA'];
-Q.non_corp_parties = ['SDF', 'DCA', 'GOP', 'SRZP', 'LDPR'];
-
-
-// Democrats: Social Democratic Forum (SDF)
-// Deeper-Democrats: Deeper Community Association (DCA)
-// Syndicates
-// Five Families: Grand Old Party (GOP)
-// Bleeding Edges: Sozial Republik Zentrum Partie (SRZP)
-// Sharkskins: Liberal Democratic Party Registry (LDPR)
-// Corporate United Front
-// Soylent: New People's Party (NPP)
-// Magrail: Mikasa Federation of Trade Unions (FTU)
-// Brazos: Business and Professionals Alliance for Mikasa (BPA)
-
-// In hundred thousands
-Q.first_wave = 19;
-Q.second_wave = 22;
-Q.drones = 17;
-Q.otherworlder = 1;
-Q.deepers = 5;
-Q.clans = 3;
-Q.shareholders = 0.2;
-
-// Idea is to have three kinds of constituancies.  Committee are basically static and go to the corporations, "functional" are professional qualification based with small populations and high turnouts and mixed, "geographical" are location based and mostly favor the syndicates in low turnout areas without heavy drone levels
-
-Q.first_wave_guild = 10;
-Q.second_wave_guild = 3;
-Q.otherworlder_guild = 1;
-Q.drones_guild = 10;
-Q.deepers_guild = 20;
-Q.clans_guild = 3;
-Q.shareholders_guild = .1;
-
-Q.executive_seats = 40;
-Q.functional_seats = 30;
-Q.geographic_seats = 20;
-
-Q.SDF_executive_seats = 1;
-Q.SDF_functional_seats = 1;
-Q.SDF_geographic_seats = 1;
-Q.SDF_total_seats = -3;
-
-Q.SDF_support_first_wave = 10;
-Q.SDF_support_second_wave = 15;
-Q.SDF_support_drones = 5;
-Q.SDF_support_otherworlder = 50;
-Q.SDF_support_deepers = 10;
-Q.SDF_support_clans = 10;
-Q.SDF_support_shareholders = 1;
-
-Q.DCA_support_first_wave = 1;
-Q.DCA_support_second_wave = 1;
-Q.DCA_support_drones = 1;
-Q.DCA_support_otherworlder = 1;
-Q.DCA_support_deepers = 50;
-Q.DCA_support_clans = 50;
-Q.DCA_support_shareholders = 1;
-
-Q.GOP_support_first_wave = 10;
-Q.GOP_support_second_wave = 25;
-Q.GOP_support_drones = 5;
-Q.GOP_support_otherworlder = 1;
-Q.GOP_support_deepers = 1;
-Q.GOP_support_clans = 1;
-Q.GOP_support_shareholders = 1;
-
-Q.SRZP_support_first_wave = 20;
-Q.SRZP_support_second_wave = 15;
-Q.SRZP_support_drones = 5;
-Q.SRZP_support_otherworlder = 1;
-Q.SRZP_support_deepers = 10;
-Q.SRZP_support_clans = 10;
-Q.SRZP_support_shareholders = 1;
-
-Q.LDPR_support_first_wave = 20;
-Q.LDPR_support_second_wave = 20;
-Q.LDPR_support_drones = 5;
-Q.LDPR_support_otherworlder = 1;
-Q.LDPR_support_deepers = 1;
-Q.LDPR_support_clans = 1;
-Q.LDPR_support_shareholders = 1;
-
-Q.NPP_support_first_wave = 20;
-Q.NPP_support_second_wave = 2;
-Q.NPP_support_drones = 25;
-Q.NPP_support_otherworlder = 1;
-Q.NPP_support_deepers = 1;
-Q.NPP_support_clans = 1;
-Q.NPP_support_shareholders = 30;
-
-Q.FTU_support_first_wave = 10;
-Q.FTU_support_second_wave = 20;
-Q.FTU_support_drones = 25;
-Q.FTU_support_otherworlder = 1;
-Q.FTU_support_deepers = 1;
-Q.FTU_support_clans = 1;
-Q.FTU_support_shareholders = 35;
-
-Q.BPA_support_first_wave = 10;
-Q.BPA_support_second_wave = 10;
-Q.BPA_support_drones = 30;
-Q.BPA_support_otherworlder = 2;
-Q.BPA_support_deepers = 1;
-Q.BPA_support_clans = 1;
-Q.BPA_support_shareholders = 25;
-!}
-go-to: election_calculations
 set-jump: post_election
+go-to: election_calculations
 
 @post_election
 
@@ -126,61 +14,25 @@ The results are based on executive (oligarchic), functional (professional) and g
 
 **Election results:**
 
-total
-SDF: [+ SDF_total_seats +] seats
-DCA: [+ DCA_total_seats +] seats
-GOP: [+ GOP_total_seats +] seats
-SRZP: [+ SRZP_total_seats +] seats
-LDPR: [+ LDPR_total_seats +] seats
-NPP: [+ NPP_total_seats +] seats
-FTU: [+ FTU_total_seats +] seats
-BPA: [+ BPA_total_seats +] seats
 
-executive
-SDF: [+ SDF_executive_seats +] seats
-DCA: [+ DCA_executive_seats +] seats
-GOP: [+ GOP_executive_seats +] seats
-SRZP: [+ SRZP_executive_seats +] seats
-LDPR: [+ LDPR_executive_seats +] seats
-NPP: [+ NPP_executive_seats +] seats
-FTU: [+ FTU_executive_seats +] seats
-BPA: [+ BPA_executive_seats +] seats
+Executive: 
+ {!<span style="color: #44b88f;">C</span>!}: [+ projections_executive_C +]  {!<span style="color: #cf6e19;">G</span>!}: [+ projections_executive_G +]  {!<span style="color: #1100cc;">D</span>!}: [+ projections_executive_D +]  {!<span style="color: #c00000;">H</span>!}: [+ projections_executive_H +]  {!<span style="color: #404040;">I</span>!}: [+ projections_executive_I +]
 
-functional
-SDF: [+ SDF_functional_seats +] seats
-DCA: [+ DCA_functional_seats +] seats
-GOP: [+ GOP_functional_seats +] seats
-SRZP: [+ SRZP_functional_seats +] seats
-LDPR: [+ LDPR_functional_seats +] seats
-NPP: [+ NPP_functional_seats +] seats
-FTU: [+ FTU_functional_seats +] seats
-BPA: [+ BPA_functional_seats +] seats
+Guilds:
+"Gold":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_gold_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_gold_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_gold_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_gold_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_gold_I +]
+"Pink":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_pink_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_pink_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_pink_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_pink_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_pink_I +]
+"Plat":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_platinum_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_platinum_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_platinum_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_platinum_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_platinum_I +]
+"Blue":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_blue_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_blue_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_blue_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_blue_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_blue_I +]
+"White":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_white_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_white_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_white_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_white_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_white_I +]
+"Grey":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_grey_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_grey_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_grey_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_grey_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_grey_I +]
+"Green":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_green_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_green_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_green_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_green_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_green_I +]
+"Biege":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_biege_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_biege_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_biege_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_biege_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_biege_I +]
 
-geographic
-SDF: [+ SDF_geographic_seats +] seats
-DCA: [+ DCA_geographic_seats +] seats
-GOP: [+ GOP_geographic_seats +] seats
-SRZP: [+ SRZP_geographic_seats +] seats
-LDPR: [+ LDPR_geographic_seats +] seats
-NPP: [+ NPP_geographic_seats +] seats
-FTU: [+ FTU_geographic_seats +] seats
-BPA: [+ BPA_geographic_seats +] seats
-
-Corporate employee absention rate: [+ absention +]
-
-Party descriptions:
-
-Democratic: 
-Social Democratic Forum (SDF)
-Deeper-Democrats:
-Deeper Community Association (DCA)
-
-Links to Criminal Syndicates:
-Five Families: Grand Old Party (GOP)
-Bleeding Edges: Sozial Republik Zentrum Partie (SRZP)
-Sharkskins: Liberal Democratic Party Registry (LDPR)
-
-Corporate "United" Front
-Community Soylent Incorperated: New People's Party of Mikasa (NPP)
-Combined Magrail Trust: Mikasa Federation of Trade Unions (FTU)
-Brazos Zaibatsu: Business and Professionals Alliance for Mikasa (BPA)
+Districts:
+D1: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_1_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_1_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_1_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_1_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_1_I +]
+D2: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_2_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_2_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_2_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_2_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_2_I +]
+D3: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_3_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_3_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_3_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_3_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_3_I +]
+D4: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_4_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_4_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_4_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_4_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_4_I +]
+D5: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_5_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_5_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_5_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_5_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_5_I +]
+D6: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_6_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_6_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_6_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_6_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_6_I +]
+D7: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_7_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_7_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_7_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_7_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_7_I +]

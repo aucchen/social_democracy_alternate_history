@@ -3,5 +3,5 @@ subtitle: An opportunity?
 priority: -1
 max-visits: 1
 tags: event
-view-if: Fmonth = 12 and year = 2300
+view-if: month = 12 and year = 2300
 go-to: election_simulation

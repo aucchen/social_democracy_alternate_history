@@ -15,7 +15,7 @@ Naturally Canterbary Logistics is trying to get the Dundalk out of port before t
 
 @justice_reform
 title: Purge corruption from our legal system
-on-arrival: budget += 2; excitement += 1;
+on-arrival: budget += 2; progress_meme_strength += 1;
 go-to: after_message
 
 Attacking the corrupt judiciary is a safe course of action right now. The guilty parties resign and their replacements swiftly move to impound the Dundalk.  At the impromptu celebrations afterwards people wonder if this might be the start of something more.
@@ -26,8 +26,8 @@ We dont stir up any trouble but some wonder if we should have been more daring.
 title: Careful and circumspect criticism of the megacorps
 on-arrival: {!
 budget += 2; 
-excitement += 1; 
-anti_corp += 2;
+progress_meme_strength += 1; 
+stake_meme_strength += 2;
 soylent_anger +=0.10; 
 magrail_anger += 0.10; 
 brazos_anger += 0.10;
@@ -44,9 +44,9 @@ The corporations understand the double meaning as well.  Several speakers suffer
 title: Attack the criminal syndicates for eroding justice
 on-arrival: {!
 budget += 2; 
-excitement += 1; 
-anti_corp += 1; 
-anti_syndicate += 2;
+progress_meme_strength += 1; 
+stake_meme_strength += 1; 
+vigil_meme_strength += 2;
 martyrs.push("Platea Song");
 !}
 go-to: after_message
@@ -59,11 +59,13 @@ Syndicate hitmen attempt to publicly assassinate a particularly inflamatory spea
 title: Stir up anger at offworld exploitation
 on-arrival: {!
 budget +=2;
-excitement += 2; 
+progress_meme_strength += 20; 
 soylent_anger -=0.10; 
 magrail_anger -= 0.10; 
 brazos_anger -= 0.10;
-xenophobia += 2;
+patriot_meme_strength += 2;
+isolate_meme_strength += 2;
+update_projections();
 !}
 go-to: after_message
 

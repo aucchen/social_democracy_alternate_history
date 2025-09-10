@@ -1,14 +1,9 @@
 title: Status
 new-page: true
 is-special: true
-on-arrival: {!
+on-arrival:  {!
 
-C_exec = Q.projections.executive[0];
-G_exec = Q.projections.executive[1];
-D_exec = Q.projections.executive[2];
-H_exec = Q.projections.executive[3];
-I_exec = Q.projections.executive[4];
-
+Q.update_projections();
 
 !}
 
@@ -18,11 +13,24 @@ I_exec = Q.projections.executive[4];
 
 = Seat Projections:
 
-Executive
-{!<span style="color: #44b88f;">corp</span>!}: [+ C_exec +]
-{!<span style="color: #cf6e19;">Gang</span>!}: [+ G_exec +]
-{!<span style="color: #1100cc;">Democrat</span>!}: [+ D_exec +]
-{!<span style="color: #c00000;">Hate</span>!}: [+ H_exec +]
-{!<span style="color: #404040;">Ind</span>!}: [+ I_exec +]
+Executive: 
+ {!<span style="color: #44b88f;">C</span>!}: [+ projections_executive_C +]  {!<span style="color: #cf6e19;">G</span>!}: [+ projections_executive_G +]  {!<span style="color: #1100cc;">D</span>!}: [+ projections_executive_D +]  {!<span style="color: #c00000;">H</span>!}: [+ projections_executive_H +]  {!<span style="color: #404040;">I</span>!}: [+ projections_executive_I +]
 
+Guilds:
+"Gold":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_gold_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_gold_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_gold_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_gold_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_gold_I +]
+"Pink":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_pink_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_pink_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_pink_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_pink_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_pink_I +]
+"Plat":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_platinum_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_platinum_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_platinum_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_platinum_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_platinum_I +]
+"Blue":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_blue_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_blue_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_blue_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_blue_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_blue_I +]
+"White":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_white_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_white_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_white_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_white_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_white_I +]
+"Grey":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_grey_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_grey_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_grey_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_grey_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_grey_I +]
+"Green":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_green_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_green_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_green_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_green_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_green_I +]
+"Biege":  {!<span style="color: #44b88f;">C</span>!}:[+ projections_guild_biege_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_guild_biege_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_guild_biege_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_guild_biege_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_guild_biege_I +]
 
+Districts:
+D1: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_1_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_1_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_1_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_1_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_1_I +]
+D2: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_2_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_2_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_2_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_2_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_2_I +]
+D3: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_3_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_3_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_3_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_3_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_3_I +]
+D4: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_4_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_4_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_4_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_4_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_4_I +]
+D5: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_5_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_5_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_5_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_5_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_5_I +]
+D6: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_6_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_6_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_6_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_6_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_6_I +]
+D7: {!<span style="color: #44b88f;">C</span>!}:[+ projections_district_7_C +] {!<span style="color: #cf6e19;">G</span>!}:[+ projections_district_7_G +] {!<span style="color: #1100cc;">D</span>!}:[+ projections_district_7_D +] {!<span style="color: #c00000;">H</span>!}:[+ projections_district_7_H +] {!<span style="color: #404040;">I</span>!}:[+ projections_district_7_I +]
