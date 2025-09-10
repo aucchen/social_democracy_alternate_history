@@ -23,3 +23,13 @@ unavailable-subtitle: We lack the funds
 on-arrival: rebel_militancy += .05; callista_advisor -= 1;
 
 We are gathering supplies
+
+
+@callista_demons
+title: Purge Demons
+subtitle: The clans of the mother describe their IT practices in a mystical fashion
+choose-if: hidden_funds > 0
+unavailable-subtitle: We lack the funds
+on-arrival: rebel_militancy += .05; callista_advisor -= 1;
+
+The dead internet is now a little less dead

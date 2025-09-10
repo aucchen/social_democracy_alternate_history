@@ -6,6 +6,7 @@ set-jump: post_election
 
 @2300
 on-arrival: {!
+
 Q.classes = ['first_wave', 'second_wave', 'drones', 'otherworlder', 'deepers', 'clans', 'shareholders'];
 Q.classes2 = ['first_wave', 'second_wave', 'otherworlder', 'deepers', 'clans', 'shareholders'];
 Q.parties = ['SDF', 'DCA', 'GOP', 'SRZP', 'LDPR', 'NPP', 'FTU', 'BPA'];

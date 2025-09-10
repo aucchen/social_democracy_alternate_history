@@ -2,11 +2,14 @@ title: Status
 new-page: true
 is-special: true
 on-arrival: {!
+
 C_exec = Q.projections.executive[0];
 G_exec = Q.projections.executive[1];
 D_exec = Q.projections.executive[2];
 H_exec = Q.projections.executive[3];
 I_exec = Q.projections.executive[4];
+
+
 !}
 
 = Status
@@ -16,10 +19,10 @@ I_exec = Q.projections.executive[4];
 = Seat Projections:
 
 Executive
-{!<span style="color: #44b88f;">Corporate Proxies</span>!}: [+ C_exec +]
-{!<span style="color: #cf6e19;">Criminal Proxies</span>!}: [+ G_exec +]
-{!<span style="color: #1100cc;">Democrats</span>!}: [+ D_exec +]
-{!<span style="color: #c00000;">Hate Groups</span>!}: [+ H_exec +]
-{!<span style="color: #404040;">Independents</span>!}: [+ I_exec +]
+{!<span style="color: #44b88f;">corp</span>!}: [+ C_exec +]
+{!<span style="color: #cf6e19;">Gang</span>!}: [+ G_exec +]
+{!<span style="color: #1100cc;">Democrat</span>!}: [+ D_exec +]
+{!<span style="color: #c00000;">Hate</span>!}: [+ H_exec +]
+{!<span style="color: #404040;">Ind</span>!}: [+ I_exec +]
 
 

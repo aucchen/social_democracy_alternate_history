@@ -31,7 +31,6 @@ function setup_demographics() {
 
     Q.u = 5; // the value that gives 50% on the logistic cdf
     Q.s = 3; // the standard deviation on the logistic cdf
-    Q.fudge_factor = .8729; // just mucking with the numbers a little bit to give the illusion of imprecision
 
     // in total 315 seats
     Q.executive_seats = 140;
@@ -174,9 +173,6 @@ function setup_demographics() {
 
 }
 
-
-
-setup_demographics()
 
 
 function logistic_convert(x, u, s) {
@@ -392,6 +388,7 @@ function update_projections(){
     }
 }
 
+setup_demographics();
 update_projections();
 
 !}

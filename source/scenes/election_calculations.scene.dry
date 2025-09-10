@@ -10,8 +10,18 @@ function logistic_convert(x, u, s) {
 piecewise_mult = (a, b) => a.map((x, i) => (a[i] || 0) * (b[i] || 0))
 piecewise_add = (a, b) => a.map((x, i) => (a[i] || 0) + (b[i] || 0))
 piecewise_sub = (a, b) => a.map((x, i) => a[i] - b[i])
-
 sum_list = (numbers) => numbers.reduce((sum, num) => (sum || 0) + (num || 0));
+
+function piecewise_sum(...lists_to_sum) {
+    total = lists_to_sum[0]
+    for (var i = 1; i < lists_to_sum.length; i++) {
+        next_list = lists_to_sum[i] ?? [0] * total.length;
+        total = piecewise_add(total, next_list);
+    }
+    return total
+}
+
+
 
 function motivation_percentages(interest_strength, ideology_strength, demo_adjust) {
 
@@ -193,5 +203,24 @@ function update_projections(){
 }
 
 update_projections();
+
+Q.foobar = Q.projections.executive;
+Q.C_exec = Q.projections.executive[0];
+Q.G_exec = Q.projections.executive[1];
+Q.D_exec = Q.projections.executive[2];
+Q.H_exec = Q.projections.executive[3];
+Q.I_exec = Q.projections.executive[4];
+
 !}
-go-to: jumpScene
+
+
+= Seat Projections:
+
+Executive:
+{!<span style="color: #44b88f;">Corporate Proxies</span>!}: [+ C_exec +]
+{!<span style="color: #cf6e19;">Criminal Proxies</span>!}: [+ G_exec +]
+{!<span style="color: #1100cc;">Democrats</span>!}: [+ D_exec +]
+{!<span style="color: #c00000;">Hate Groups</span>!}: [+ H_exec +]
+{!<span style="color: #404040;">Independents</span>!}: [+ I_exec +]
+
+

@@ -3,18 +3,26 @@ new-page: true
 on-arrival: {!
 
 
-
 function logistic_convert(x, u, s) {
     // logistic cdf function
     return 1 / (1 + Math.exp((u - x) / s));
 }
-
 
 piecewise_mult = (a, b) => a.map((x, i) => (a[i] || 0) * (b[i] || 0))
 piecewise_add = (a, b) => a.map((x, i) => (a[i] || 0) + (b[i] || 0))
 piecewise_sub = (a, b) => a.map((x, i) => a[i] - b[i])
 
 sum_list = (numbers) => numbers.reduce((sum, num) => (sum || 0) + (num || 0));
+
+
+function piecewise_sum(...lists_to_sum) {
+    total = lists_to_sum[0]
+    for (var i = 1; i < lists_to_sum.length; i++) {
+        next_list = lists_to_sum[i] ?? [0] * total.length;
+        total = piecewise_add(total, next_list);
+    }
+    return total
+}
 
 function motivation_percentages(interest_strength, ideology_strength, demo_adjust) {
 
@@ -43,8 +51,6 @@ function ideology_strengths() {
         Q.rebel_meme_strength, Q.stake_meme_strength, Q.vigil_meme_strength
     ]
 }
-
-
 
 
 function cdf_normalize(strengths) {
