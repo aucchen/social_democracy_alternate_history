@@ -1,6 +1,400 @@
 title: Root Scene
 new-page: true
 go-to: post_event if started = 1; start_menu if started = 0
+on-arrival: {!
+
+let empty = new Object;
+Q.projections = empty
+
+function logistic_convert(x, u, s) {
+    // logistic cdf function
+    return 1 / (1 + Math.exp((u - x) / s));
+}
+
+
+piecewise_mult = (a, b) => a.map((x, i) => (a[i] || 0) * (b[i] || 0))
+piecewise_add = (a, b) => a.map((x, i) => (a[i] || 0) + (b[i] || 0))
+piecewise_sub = (a, b) => a.map((x, i) => a[i] - b[i])
+
+sum_list = (numbers) => numbers.reduce((sum, num) => (sum || 0) + (num || 0));
+
+function piecewise_sum(...lists_to_sum) {
+    total = lists_to_sum[0]
+    for (var i = 1; i < lists_to_sum.length; i++) {
+        next_list = lists_to_sum[i] ?? [0] * total.length;
+        total = piecewise_add(total, next_list);
+    }
+    return total
+}
+
+function setup_demographics() {
+
+    Q.u = 5; // the value that gives 50% on the logistic cdf
+    Q.s = 3; // the standard deviation on the logistic cdf
+    Q.fudge_factor = .8729; // just mucking with the numbers a little bit to give the illusion of imprecision
+
+    // in total 315 seats
+    Q.executive_seats = 140;
+    Q.guild_seats_total = 105;
+    Q.geography_seats = 70;
+
+
+    let interests = "share,moneyed,nerd,drone,coop,poor,gang,magic,faith".split(",");
+    Q.interests = interests;
+
+    let memes = "progress,patriot,trade,autark,rebel,stake,vigil,reaction".split(",");
+    Q.memes = memes;
+
+    districts = "docks,aurora,vats,railyard,the pits,limelight,the deeps,exurbs".split(",");
+    Q.districts = districts;
+
+    let regional_parties = ("Academic Circle,Independents,Independents,Community Welfare,"
+        + "Independents,Deeper Union,Clan Leaders").split(",");
+
+    // demos '1st','2nd','drone','deeper','clan','otherworld','rich'
+    // the share of each demographic in each interest groups
+    interest_group_memberships = [
+        [0.01, 0, 0, 0.001, 0, 0, 50],//		share
+        [0.01, 0, 0, 0.001, 0, 0, 25],//		money
+        [0, 0, 80, 0, 0, 0, 0],//		drone
+        [10, 5, 1, 1, 90, 1, 1],//		nerd
+        [30, 15, 0, 30, 0, 1, 0],//		coop
+        [15, 30, 0, 5, 0, 50,],//		poor
+        [2, 5, 1, 1, 0, 10, 1],//		gang
+        [0.01, 0.01, 0.01, 0.01, 0.01, 10, 1],//		magic
+        [10, 15, 5, 10, 0, 5, 5],//		faith
+
+    ]
+    Q.interest_group_memberships = interest_group_memberships
+
+    electorate_names = ['1st', '2nd', 'drone', 'deeper', 'clan', 'otherworld', 'rich', 'share', 'money', 'drone', 'nerd', 'coop', 'poor', 'gang', 'magic', 'faith', 'weight_method']
+    electorates = [
+        [20, 0, 0, 0, 0, 0, 50, 0, 0, 0, 20, 0, 0, 1, 1, 0, "s"],//			gold	,	finance+legal
+        [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 1, 0, "s"],//			pink	,	medical
+        [5, 0, 0, 0, 0, 0, 15, 20, 0, 0, 0, 0, 0, 0, 0, 0, "s"],//			platinum	,	owners
+        [10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, "s"],//			blue	,	industry work
+        [5, 5, 90, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, "s"],//			white	,	corp work
+        [2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 10, 5, 0, 0, 0, 0, "s"],//			grey	,	fine craft
+        [10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, "s"],//			green	,	tourism+retail
+        [5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, "s"],//			biege	,	gov
+        [0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, "s"],//			comittee	,	executive
+        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "p"],//			public	,	public
+    ]
+    Q.electorates = electorates
+
+    Q.guild_colors = ['gold', 'pink', 'platinum', 'blue', 'white', 'grey', 'green', 'biege']
+    Q.guild_seats = [ 15, 15, 10, 10, 15, 20, 10, 10]
+
+    // how each interest group is inclined to vote
+    // corp,gang,demo,hate,ind tendencies (these get logcdf converted)
+    Q.interest_group_voting_habits = [
+        [20, -10, -1, 2, -10],//	share
+        [5, -5, 5, -5, -5],//	money
+        [10, 0, 0, 1, -5],//	drone
+        [1, -5, 5, -5, -5],//	nerd
+        [-10, -10, -10, 1, 10],//	coop
+        [-2, 1, -2, 1, -5],//	poor
+        [-10, 20, -10, -10, -10],//	gang
+        [-2, 1, -2, -2, 2],//	magic
+        [0, 1, 0, 1, 2]//	faith
+    ]
+    Q.interest_names = ['share', 'money', 'drone', 'nerd', 'coop', 'poor', 'gang', 'magic', 'faith'];
+
+    // how each ideology is inclined to vote
+    // corp,gang,demo,hate,ind tendencies (these get logcdf converted)
+    Q.ideology_voting_habits = [
+        [-3,-5,-4,-5,1],//	progress
+        [2,2,2,2,10],//	patriot
+        [2,-10,0,-10,-10],//	trade
+        [-10,2,0,2,0],//	isolate
+        [-20,-20,10,0,0],//	rebel
+        [-20,0,5,0,0],//	stakeholder
+        [0,-20,5,0,0],//	vigil
+        [10,5,-20,5,-10],//	reactionary
+
+    ]
+
+
+    demo_names = "1st,2nd,drone,deeper,coop,otherworld,rich".split(",")
+    demo1=[42,13,10,1,1,1,17];
+    demo2=[38,57,2,1,1,9,0];
+    demo3=[28,71,2,1,1,0,0];
+    demo4=[12,3,3,166,1,0,0];
+    demo5=[28,19,48,1,1,0,1];
+    demo6=[19,21,55,1,1,0,1];
+    demo7=[24,17,52,1,1,0,1];
+    demo_sums = piecewise_sum(demo1, demo2, demo3, demo4, demo5, demo6, demo7);
+    dvar_list = [demo1, demo2, demo3, demo4, demo5, demo6, demo7];
+
+    Q.demo_sums = demo_sums;
+    Q.demo_names = demo_names;
+    Q.dvar_list = dvar_list;
+
+    // demo8="0,0,0,50,0,0,0,0".split(","); // clans of the mother aren't gonna be voting anyways
+    // dvar_list = [demo1, demo2, demo3, demo4, demo5,demo6, demo7,demo8]
+
+
+
+    for (var district = 0; district < dvar_list.length; district++) {
+        dname = "district_" + district + "_demographics";
+        dvar = dvar_list[district];
+        Q[dname] = Q[dname] ?? new Object;
+
+        for (var j = 0; j < 8; j++) {
+            demo_name = demo_names[j];
+            Q[dname][demo_name] = dvar[j];
+        }
+    }
+
+    // Q.demo_sums = demo1.map((v, i) => (v+demo2+demo3+demo4+demo5+demo6+demo7));
+
+    Q.shareholder_interest_adjustment = 5;
+    Q.deeper_interest_adjustment = 3;
+    Q.drones_interest_adjustment = -2;
+
+    // factor to make certain demographics be more or less motivated by interest groups
+    // 1st,2nd,drone,deeper,coop,otherworld,rich
+    interest_adjustments = [0, 0, -2, 3, 0, 0, 0, 0, 5];
+    Q.interest_adjustments = interest_adjustments;
+
+    Q.interest_strength = 20 // 20%
+    // Q.ideology_strength = 10 // 10%
+
+    // progress,patriot|trade,autark|rebel,stake,vigil
+    Q.progress_meme_strength = 2;
+    Q.patriot_meme_strength = 2;
+    Q.trade_meme_strength = 1;
+    Q.autark_meme_strength = 1;
+    Q.rebel_meme_strength = .1;
+    Q.stake_meme_strength = .1;
+    Q.vigil_meme_strength = .1;
+    Q.reactionary_meme_strength = 0;
+
+    Q.meme_names = ['progress','patriot','trade','isolate','rebel','stakeholder','vigil','reactionary']
+
+}
+
+
+
+setup_demographics()
+
+
+function logistic_convert(x, u, s) {
+    // logistic cdf function
+    return 1 / (1 + Math.exp((u - x) / s));
+}
+
+
+piecewise_mult = (a, b) => a.map((x, i) => (a[i] || 0) * (b[i] || 0))
+piecewise_add = (a, b) => a.map((x, i) => (a[i] || 0) + (b[i] || 0))
+piecewise_sub = (a, b) => a.map((x, i) => a[i] - b[i])
+
+sum_list = (numbers) => numbers.reduce((sum, num) => (sum || 0) + (num || 0));
+
+function motivation_percentages(interest_strength, ideology_strength, demo_adjust) {
+
+    if (demo_adjust >= 0) {
+        interest_percent = 1 - (1 - interest_strength / 100) * .9 ** demo_adjust;
+    } else {
+        interest_percent = (interest_strength / 100) * .9 ** (-demo_adjust);
+    }
+
+    ideology_percent = (1 - interest_percent) * ideology_strength / 100
+
+    if (interest_percent + ideology_percent > 1) {
+        interest_percent = interest_percent / (interest_percent + ideology_percent)
+        ideology_percent = ideology_percent / (interest_percent + ideology_percent)
+    }
+    apathy_percent = 1 - interest_percent - ideology_percent;
+
+    return [interest_percent, ideology_percent, apathy_percent]
+}
+
+function ideology_strengths() {
+    // how strong each ideology is in the current political scene
+    return [
+        Q.progress_meme_strength, Q.patriot_meme_strength,
+        Q.trade_meme_strength, Q.autark_meme_strength,
+        Q.rebel_meme_strength, Q.stake_meme_strength, Q.vigil_meme_strength
+    ]
+}
+
+
+
+
+function cdf_normalize(strengths) {
+    sum = 0;
+    u = Q.u ?? 5;// the value that gives 50% on the logistic cdf
+    s = Q.s ?? 3;// the standard deviation on the logistic cdf
+
+    adjusted = []
+    total = 0;
+    for (var i=0; i<strengths.length; i++) {
+        converted = logistic_convert(strengths[i],u,s)
+        adjusted.push(converted)
+        total += converted;
+    }
+
+    return adjusted.map(i => i/total)
+}
+
+
+
+function assign_percentages (raw_votes, n_seats) {
+
+    total_votes = sum_list(raw_votes);
+    votes_per_seat = total_votes/n_seats;
+
+    remainders = raw_votes.map(i => i % votes_per_seat)
+    whole_seats = piecewise_sub(raw_votes, remainders).map(i => i/votes_per_seat)
+
+    unassigned = n_seats - sum_list(whole_seats)
+
+    for (var i=0; i<unassigned; i++){
+        var idx = remainders.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+        whole_seats[idx]+=1;
+        remainders[idx]=0;
+    }
+    return whole_seats.map(i => Math.round(i));
+}
+
+function generic_vote(electorate = Q.electorates[8], district = 0, nseats = 100) {
+    // Q.fudge_factor
+    // 1. get interest + ideology strengths by demographic
+    // 2. get size of interest group
+    // 3. get size of ideologies 
+    if (typeof electorate === 'number') {
+        electorate = Q.electorates[electorate];
+    }
+
+    demo_groups = electorate.slice(0, Q.demo_names.length);
+    votes_in_interest_groups = electorate.slice(Q.demo_names.length, electorate.length - 1);
+    votes_in_ideologies = [ 0,0,0,0,0,0,0,0,0 ] ;
+    total_apathy_votes = 0;
+    party_votes = [ 0,0,0,0,0 ];
+
+    if (electorate[electorate.length] = "p") {
+        if (district != 0){demo_groups = Q.dvar_list[district-1];
+        } else {demo_groups =piecewise_sum(Q.dvar_list)}
+    }
+
+
+    // 1. get interest + ideology strengths by demographic
+
+    interest_strength = Q.interest_strength ?? 20; // baseline strength of interest groups, shouldn't change too much but might
+    meme_strengths = ideology_strengths();
+    meme_total_strength = sum_list(meme_strengths) ?? 0;
+
+    // first we assign all the demographic vote into interest groups or ideologies
+    for (var i = 0; i < demo_groups.length; i++) {
+        electorate_size = demo_groups[i];
+        if (electorate_size > 0) {
+            interest_adjustment = Q.interest_adjustments[i] // how much interest group drives the demo
+            // TODO: replace this with a prosperity adjusted guild affinities
+            interest_group_memberships = Q.interest_group_memberships[i];
+            strengths = motivation_percentages(interest_strength, meme_total_strength, interest_adjustment);
+
+            demo_all_interest_votes = strengths[0] * electorate_size;
+            demo_all_ideology_votes = strengths[1] * electorate_size;
+            demo_all_apathy_votes = strengths[2] * electorate_size;
+
+            // assign to different interest groups
+            new_interest_votes = interest_group_memberships.map(i => i * demo_all_interest_votes);
+            // assign to different ideology types
+            new_ideology_votes = meme_strengths.map(i => i * demo_all_ideology_votes);
+
+            votes_in_interest_groups = piecewise_add(votes_in_interest_groups, new_interest_votes);
+            votes_in_ideologies = piecewise_add(votes_in_ideologies, new_ideology_votes);
+            total_apathy_votes = total_apathy_votes + demo_all_apathy_votes;
+        }
+    }
+
+    // then we go through each interest group and each ideology and assign them to the five different parties
+    
+    for (var i = 0; i < Q.interest_group_voting_habits.length; i++) {
+        habits = Q.interest_group_voting_habits[i]
+        group_votes = votes_in_interest_groups[i]
+
+        if (group_votes>0) {
+        ideology_percentages = cdf_normalize(habits);
+        new_votes = ideology_percentages.map( i => i * group_votes)
+        party_votes = piecewise_add(party_votes, new_votes)
+
+        // interest_name = Q.interest_names[i];
+        // console.log(interest_name, habits, group_votes)
+        // console.log(interest_name, new_votes)
+
+        }
+    }
+
+    for (var i = 0; i < Q.meme_names.length; i++) {
+        habits = Q.ideology_voting_habits[i]
+        group_votes = votes_in_ideologies[i]
+
+        if (group_votes>0) {
+        ideology_percentages = cdf_normalize(habits);
+        new_votes = ideology_percentages.map( i => i * group_votes)
+        party_votes = piecewise_add(party_votes, new_votes)
+        
+        // ideology_name = Q.meme_names[i];
+        // console.log(ideology_name, habits, group_votes)
+        // console.log(ideology_name, new_votes)
+        }
+    }
+
+    seats = assign_percentages(party_votes, nseats);
+
+    return [seats, party_votes, votes_in_interest_groups, votes_in_ideologies]
+
+
+}
+
+function update_projections(){
+
+        
+    function logistic_convert(x, u, s) {
+        // logistic cdf function
+        return 1 / (1 + Math.exp((u - x) / s));
+    }
+
+
+    piecewise_mult = (a, b) => a.map((x, i) => (a[i] || 0) * (b[i] || 0))
+    piecewise_add = (a, b) => a.map((x, i) => (a[i] || 0) + (b[i] || 0))
+    piecewise_sub = (a, b) => a.map((x, i) => a[i] - b[i])
+
+    sum_list = (numbers) => numbers.reduce((sum, num) => (sum || 0) + (num || 0));
+
+    function piecewise_sum(...lists_to_sum) {
+        total = lists_to_sum[0]
+        for (var i = 1; i < lists_to_sum.length; i++) {
+            next_list = lists_to_sum[i] ?? [0] * total.length;
+            total = piecewise_add(total, next_list);
+        }
+        return total
+    }
+
+    // executive seats
+    executive_seats = Q.executive_seats ?? 140;
+    result = generic_vote(electorate=8, district=0, nseats=executive_seats);
+    Q.projections.executive = result[0];
+
+    //guild seats
+    for (var i = 0; i < 8; i++){
+        color = Q.guild_colors[i];
+        result = generic_vote(electorate=i, district=0, nseats=Q.guild_seats[i]);
+        Q.projections['guild_'+color]=result[0];
+    }
+
+    //geographic seats
+    for (var i = 1; i < 8; i++){
+        result = generic_vote(electorate=9, district=i, nseats=20);
+        Q.projections['district_'+i]=result[0];
+    }
+}
+
+update_projections();
+
+!}
 
 @start_menu
 new-page: true
@@ -64,36 +458,6 @@ Q.brazos_families_rel = 10;
 Q.brazos_edges_rel = -50;
 Q.brazos_sharks_rel = 50;
 
-// political trends
-Q.anti_corp = 0.05;
-Q.anti_syndicate = 0.05;
-Q.xenophobia = .40;
-
-// Social Democratic Forum (SDF) - main democracy movement
-// Deeper-Democrats: Deeper Community Association (DCA) - deepers obviously
-// Young Academic Circle: local organization for students in 1st district
-Q.demo_parties = ['SPF', 'DCA', 'YAC'];
-
-// Populations 1st/2nd/drones/deepers/clans/otherworlders/shareholders in ten thousands
-Q.district_demos = [ "first_wave", "second_wave", "drones", "deepers", "clans", "otherworlders", "shareholders"];
-Q.district1_pop = [ 42 , 13 , 10 ,   1 , 1 , 1 , 17];
-Q.district2_pop = [ 38 , 57 ,  2 ,   1 , 1 , 9 , 0];
-Q.district3_pop = [ 28 , 71 ,  2 ,   1 , 1 , 0 , 0];
-Q.district4_pop = [ 12 ,  3 ,  3 , 166 , 1 , 0 , 0];
-Q.district5_pop = [ 28 , 19 , 48 ,   1 , 1 , 0 , 1];
-Q.district6_pop = [ 19 , 21 , 55 ,   1 , 1 , 0 , 1];
-Q.district7_pop = [ 24 , 17 , 52 ,   1 , 1 , 0 , 1];
-
-// district differences from asteroid wide demographics
-Q.district1_pro_corp = 3;
-Q.district1_anti_corp = 3; // champagne socialist factor polarizes views
-Q.district1_pro_syndicate = -5;
-Q.district1_anti_syndicate = 8;
-Q.district1_xenophobia = -4;
-Q.district1_prosperity = 15;
-Q.district1_loyalty_YAC = 12; // local academic political group
-Q.district1_loyalty_DFA = -1; 
-Q.shareholders_apathy = -10; // invested in the system that keeps them rich
 !}
 set-bg: img/solar_system.jpg
 new-page: true
