@@ -119,6 +119,8 @@ Q.nsdap_leader = "Hitler";
 
 // hmm... maybe we can play nice with Hindenburg???
 Q.hindenburg_relation = 25;
+// whether or not hindenburg can dismiss the government.
+Q.hindenburg_enabled = 0;
 
 
 // Does the SPD lead in Prussia?

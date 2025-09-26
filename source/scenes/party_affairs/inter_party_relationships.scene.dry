@@ -24,7 +24,7 @@ subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1; kpd_inter_party_seen += 1
-go-to: kpd_blutmai if blutmai = 1; kpd_1 if blutmai = 0 and kpd_coalition_success = 0 and (kpd_relation < 40 or kpd_rectifed_history = 1); kpd_rectification_of_history if kpd_relation >= 40 and kpd_rectifed_history = 0; kpd_2 if kpd_coalition_success = 1 and kpd_rectified_history = 1
+go-to: kpd_blutmai if blutmai = 1; kpd_1 if blutmai = 0 and kpd_coalition_success = 0 and (kpd_relation < 40 or kpd_rectified_history = 1); kpd_rectification_of_history if kpd_relation >= 40 and kpd_rectified_history = 0; kpd_2 if kpd_coalition_success = 1 and kpd_rectified_history = 1
 
 @kpd_1
 on-arrival: kpd_relation += 6*(1 - dissent); communist_coalition += 1 if kpd_inter_party_seen <= 1; reformist_dissent += 2; z_relation -= 2; dvp_relation -= 3
