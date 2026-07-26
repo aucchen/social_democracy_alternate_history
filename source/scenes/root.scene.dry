@@ -1,6 +1,6 @@
 title: Root Scene
 new-page: true
-go-to: OevkDataInit
+go-to: oevk_data
 
 @start_menu
 new-page: true
