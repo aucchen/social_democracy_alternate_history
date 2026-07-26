@@ -44,16 +44,6 @@ on-arrival: {!
 var new_party_sum = 0;
 for (var party of Q.parties) {
     Q['old_' + party + '_r'] = Q[party + '_r'];
-    if (Q.constitutional_reform > 0) {
-        if (Q[party + '_votes'] < Q.electoral_threshold || (Q.electoral_threshold > 1 && party == 'other') || Q[party + '_banned']) {
-            Q[party + '_r'] = 0;
-        } else {
-            Q[party + '_r'] = Q[party + '_votes'];
-        }
-        new_party_sum += Q[party + '_r'];
-    } else {
-        Q[party + '_r'] = Q[party + '_votes'];
-    }
     // if we use decimals, then we might want to truncate the numbers
     if (Q.use_decimals) {
         Q[party + '_r_disp'] = Q[party+'_r'].toFixed(1);
@@ -63,26 +53,6 @@ for (var party of Q.parties) {
     Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
     var sign = Q['change_' + party + '_r'] > 0 ? '+'  : '';
     Q['str_change_' + party] = sign + Q['change_' + party + '_r'];//.toFixed(1);
-}
-// calculate new party sum if electoral reform
-if (Q.electoral_threshold && Q.electoral_threshold > 0) {
-    for (var party of Q.parties) {
-        if (Q[party + '_r'] > 0) {
-            if (Q.use_decimals) {
-                Q[party + '_r'] = Math.round(Q[party + '_r']*1000/new_party_sum)/10;
-            } else {
-                Q[party + '_r'] = Math.round(Q[party + '_r']*100/new_party_sum);
-            }
-        }
-        if (Q.use_decimals) {
-            Q[party + '_r_disp'] = Q[party+'_r'].toFixed(1);
-        } else {
-            Q[party + '_r_disp'] = Q[party+'_r'];
-        }
-        Q['change_' + party + '_r'] = Q[party + '_r'] - Q['old_' + party + '_r'];
-        var sign = Q['change_' + party + '_r'] > 0 ? '+'  : '';
-        Q['str_change_' + party] = sign + Q['change_' + party + '_r'];//.toFixed(1);
-    }
 }
 
 // get change arrows and signs
