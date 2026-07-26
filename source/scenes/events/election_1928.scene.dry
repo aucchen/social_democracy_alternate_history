@@ -36,6 +36,148 @@ Fine. President [+ president +] has taken the unprecedented step of canceling th
 
 Let us hope this does not backfire.
 
+@election_algorithm
+on-arrival: {!
+
+D.OEVK = [{"id": "BUDAPEST_I.ker_1", "oevk_number": 1, "region": "Budapest", "classes": {"workers": 24.82, "old_middle": 0.97, "new_middle": 10.68, "rural": 8.67, "unemployed": 28.59, "catholics": 26.27}}, {"id": "BUDAPEST_II.ker_2", "oevk_number": 2, "region": "Budapest", "classes": {"workers": 41.41, "old_middle": 4.03, "new_middle": 19.58, "rural": 1.38, "unemployed": 10.15, "catholics": 23.45}}, {"id": "BUDAPEST_III.ker_3", "oevk_number": 3, "region": "Budapest", "classes": {"workers": 1.18, "old_middle": 8.92, "new_middle": 29.14, "rural": 24.44, "unemployed": 9.89, "catholics": 26.43}}, {"id": "BUDAPEST_III.ker_4", "oevk_number": 4, "region": "Budapest", "classes": {"workers": 28.75, "old_middle": 0.23, "new_middle": 28.62, "rural": 24.8, "unemployed": 12.08, "catholics": 5.52}}, {"id": "BUDAPEST_IV.ker_5", "oevk_number": 5, "region": "Budapest", "classes": {"workers": 32.62, "old_middle": 11.47, "new_middle": 3.16, "rural": 3.3, "unemployed": 28.88, "catholics": 20.57}}, {"id": "BUDAPEST_IV.ker_6", "oevk_number": 6, "region": "Budapest", "classes": {"workers": 20.3, "old_middle": 18.35, "new_middle": 13.48, "rural": 24.47, "unemployed": 9.52, "catholics": 13.88}}, {"id": "BUDAPEST_V.ker_7", "oevk_number": 7, "region": "Budapest", "classes": {"workers": 22.81, "old_middle": 17.0, "new_middle": 23.69, "rural": 15.87, "unemployed": 19.37, "catholics": 1.26}}, {"id": "BUDAPEST_VI.ker_8", "oevk_number": 8, "region": "Budapest", "classes": {"workers": 18.85, "old_middle": 23.94, "new_middle": 6.6, "rural": 19.26, "unemployed": 8.36, "catholics": 22.99}}, {"id": "BUDAPEST_VII.ker_9", "oevk_number": 9, "region": "Budapest", "classes": {"workers": 22.82, "old_middle": 13.11, "new_middle": 13.3, "rural": 7.53, "unemployed": 9.59, "catholics": 33.65}}, {"id": "BUDAPEST_VIII.ker_10", "oevk_number": 10, "region": "Budapest", "classes": {"workers": 24.0, "old_middle": 22.56, "new_middle": 6.34, "rural": 27.0, "unemployed": 6.05, "catholics": 14.05}}, {"id": "BUDAPEST_VIII.ker_11", "oevk_number": 11, "region": "Budapest", "classes": {"workers": 22.05, "old_middle": 14.25, "new_middle": 12.4, "rural": 15.25, "unemployed": 18.77, "catholics": 17.28}}, {"id": "BUDAPEST_IX.ker_12", "oevk_number": 12, "region": "Budapest", "classes": {"workers": 11.45, "old_middle": 1.61, "new_middle": 15.79, "rural": 13.4, "unemployed": 10.56, "catholics": 47.19}}, {"id": "BUDAPEST_XX.ker_13", "oevk_number": 13, "region": "Budapest", "classes": {"workers": 24.24, "old_middle": 8.7, "new_middle": 18.13, "rural": 10.94, "unemployed": 25.3, "catholics": 12.69}}, {"id": "BUDAPEST_X.ker_14", "oevk_number": 14, "region": "Budapest", "classes": {"workers": 9.41, "old_middle": 8.75, "new_middle": 19.92, "rural": 9.32, "unemployed": 20.74, "catholics": 31.86}}, {"id": "BUDAPEST_XI.ker_15", "oevk_number": 15, "region": "Budapest", "classes": {"workers": 17.64, "old_middle": 9.69, "new_middle": 44.06, "rural": 22.51, "unemployed": 4.02, "catholics": 2.08}}, {"id": "BUDAPEST_XI.ker_16", "oevk_number": 16, "region": "Budapest", "classes": {"workers": 4.58, "old_middle": 26.18, "new_middle": 33.05, "rural": 17.62, "unemployed": 2.65, "catholics": 15.92}}, {"id": "BUDAPEST_XI.ker_17", "oevk_number": 17, "region": "Budapest", "classes": {"workers": 24.36, "old_middle": 12.94, "new_middle": 23.75, "rural": 21.05, "unemployed": 0.28, "catholics": 17.62}}, {"id": "BUDAPEST_XII.ker_18", "oevk_number": 18, "region": "Budapest", "classes": {"workers": 25.51, "old_middle": 20.09, "new_middle": 9.98, "rural": 23.98, "unemployed": 4.17, "catholics": 16.27}}, {"id": "BUDAPEST_XIII.ker_19", "oevk_number": 19, "region": "Budapest", "classes": {"workers": 14.06, "old_middle": 29.57, "new_middle": 27.15, "rural": 8.16, "unemployed": 15.52, "catholics": 5.54}}, {"id": "BUDAPEST_XIII.ker_20", "oevk_number": 20, "region": "Budapest", "classes": {"workers": 26.2, "old_middle": 25.0, "new_middle": 8.57, "rural": 18.35, "unemployed": 17.49, "catholics": 4.39}}, {"id": "BUDAPEST_XIV.ker_21", "oevk_number": 21, "region": "Budapest", "classes": {"workers": 25.98, "old_middle": 18.37, "new_middle": 26.52, "rural": 18.07, "unemployed": 0.02, "catholics": 11.04}}, {"id": "BUDAPEST_XIV.ker_22", "oevk_number": 22, "region": "Budapest", "classes": {"workers": 0.64, "old_middle": 30.72, "new_middle": 29.05, "rural": 27.5, "unemployed": 10.17, "catholics": 1.92}}, {"id": "BUDAPEST_XV.ker_23", "oevk_number": 23, "region": "Budapest", "classes": {"workers": 27.22, "old_middle": 29.35, "new_middle": 2.65, "rural": 15.06, "unemployed": 2.15, "catholics": 23.57}}, {"id": "BUDAPEST_XVI.ker_24", "oevk_number": 24, "region": "Budapest", "classes": {"workers": 25.05, "old_middle": 4.2, "new_middle": 15.55, "rural": 17.99, "unemployed": 8.67, "catholics": 28.54}}, {"id": "BUDAPEST_XVII.ker_25", "oevk_number": 25, "region": "Budapest", "classes": {"workers": 17.51, "old_middle": 8.76, "new_middle": 22.31, "rural": 30.2, "unemployed": 8.32, "catholics": 12.9}}, {"id": "BUDAPEST_XVIII.ker_26", "oevk_number": 26, "region": "Budapest", "classes": {"workers": 33.76, "old_middle": 22.06, "new_middle": 14.87, "rural": 17.57, "unemployed": 4.11, "catholics": 7.63}}, {"id": "BUDAPEST_XVIII.ker_27", "oevk_number": 27, "region": "Budapest", "classes": {"workers": 16.26, "old_middle": 28.3, "new_middle": 11.07, "rural": 10.59, "unemployed": 3.42, "catholics": 30.36}}, {"id": "BUDAPEST_XIX.ker_28", "oevk_number": 28, "region": "Budapest", "classes": {"workers": 7.7, "old_middle": 30.47, "new_middle": 28.93, "rural": 2.38, "unemployed": 8.01, "catholics": 22.51}}, {"id": "BUDAPEST_XX.ker_29", "oevk_number": 29, "region": "Budapest", "classes": {"workers": 6.88, "old_middle": 4.25, "new_middle": 30.08, "rural": 18.36, "unemployed": 15.2, "catholics": 25.23}}, {"id": "BUDAPEST_XXI.ker_30", "oevk_number": 30, "region": "Budapest", "classes": {"workers": 33.41, "old_middle": 7.88, "new_middle": 4.01, "rural": 17.84, "unemployed": 17.53, "catholics": 19.33}}, {"id": "BUDAPEST_XXI.ker_31", "oevk_number": 31, "region": "Budapest", "classes": {"workers": 22.59, "old_middle": 20.87, "new_middle": 30.5, "rural": 3.05, "unemployed": 12.48, "catholics": 10.51}}, {"id": "BUDAPEST_XXII.ker_32", "oevk_number": 32, "region": "Budapest", "classes": {"workers": 35.19, "old_middle": 10.15, "new_middle": 7.76, "rural": 18.31, "unemployed": 17.22, "catholics": 11.37}}, {"id": "PÉCS_33", "oevk_number": 33, "region": "Baranya", "classes": {"workers": 8.12, "old_middle": 29.99, "new_middle": 14.39, "rural": 27.98, "unemployed": 17.88, "catholics": 1.64}}, {"id": "PÉCS_34", "oevk_number": 34, "region": "Baranya", "classes": {"workers": 21.06, "old_middle": 17.62, "new_middle": 20.42, "rural": 19.52, "unemployed": 17.88, "catholics": 3.5}}, {"id": "PÉCS_35", "oevk_number": 35, "region": "Baranya", "classes": {"workers": 19.25, "old_middle": 8.47, "new_middle": 15.89, "rural": 2.32, "unemployed": 15.02, "catholics": 39.05}}, {"id": "KOMLÓ_36", "oevk_number": 36, "region": "Baranya", "classes": {"workers": 6.83, "old_middle": 20.21, "new_middle": 11.73, "rural": 10.9, "unemployed": 24.67, "catholics": 25.66}}, {"id": "MOHÁCS_37", "oevk_number": 37, "region": "Baranya", "classes": {"workers": 16.98, "old_middle": 21.95, "new_middle": 4.73, "rural": 9.06, "unemployed": 29.59, "catholics": 17.69}}, {"id": "SIKLÓS_38", "oevk_number": 38, "region": "Baranya", "classes": {"workers": 16.5, "old_middle": 22.75, "new_middle": 1.74, "rural": 17.77, "unemployed": 15.3, "catholics": 25.94}}, {"id": "SZIGETVÁR_39", "oevk_number": 39, "region": "Baranya", "classes": {"workers": 5.92, "old_middle": 36.2, "new_middle": 3.02, "rural": 7.0, "unemployed": 22.42, "catholics": 25.44}}, {"id": "KECSKEMÉT_40", "oevk_number": 40, "region": "Bacs-Kiskun", "classes": {"workers": 8.7, "old_middle": 4.43, "new_middle": 32.91, "rural": 9.1, "unemployed": 21.97, "catholics": 22.89}}, {"id": "KECSKEMÉT_41", "oevk_number": 41, "region": "Bacs-Kiskun", "classes": {"workers": 12.41, "old_middle": 17.26, "new_middle": 15.46, "rural": 27.65, "unemployed": 6.04, "catholics": 21.18}}, {"id": "TISZAKÉCSKE_42", "oevk_number": 42, "region": "Bacs-Kiskun", "classes": {"workers": 8.92, "old_middle": 14.8, "new_middle": 25.12, "rural": 11.22, "unemployed": 11.82, "catholics": 28.12}}, {"id": "KUNSZENTMIKLÓS_43", "oevk_number": 43, "region": "Bacs-Kiskun", "classes": {"workers": 2.57, "old_middle": 16.3, "new_middle": 35.51, "rural": 35.43, "unemployed": 2.61, "catholics": 7.58}}, {"id": "KISKUNFÉLEGYHÁZA_44", "oevk_number": 44, "region": "Bacs-Kiskun", "classes": {"workers": 7.61, "old_middle": 26.77, "new_middle": 25.27, "rural": 25.22, "unemployed": 10.6, "catholics": 4.53}}, {"id": "KISKŐRÖS_45", "oevk_number": 45, "region": "Bacs-Kiskun", "classes": {"workers": 21.95, "old_middle": 18.52, "new_middle": 16.11, "rural": 25.99, "unemployed": 17.22, "catholics": 0.21}}, {"id": "KALOCSA_46", "oevk_number": 46, "region": "Bacs-Kiskun", "classes": {"workers": 27.52, "old_middle": 10.09, "new_middle": 22.35, "rural": 31.63, "unemployed": 4.52, "catholics": 3.89}}, {"id": "KISKUNHALAS_47", "oevk_number": 47, "region": "Bacs-Kiskun", "classes": {"workers": 4.35, "old_middle": 22.5, "new_middle": 11.08, "rural": 24.6, "unemployed": 29.19, "catholics": 8.28}}, {"id": "BAJA_48", "oevk_number": 48, "region": "Bacs-Kiskun", "classes": {"workers": 19.64, "old_middle": 8.17, "new_middle": 15.12, "rural": 28.02, "unemployed": 26.19, "catholics": 2.86}}, {"id": "BÁCSALMÁS_49", "oevk_number": 49, "region": "Bacs-Kiskun", "classes": {"workers": 17.85, "old_middle": 11.65, "new_middle": 0.15, "rural": 32.48, "unemployed": 26.84, "catholics": 11.03}}, {"id": "BÉKÉSCSABA_50", "oevk_number": 50, "region": "Bekes", "classes": {"workers": 27.56, "old_middle": 20.52, "new_middle": 15.91, "rural": 0.36, "unemployed": 2.8, "catholics": 32.85}}, {"id": "GYULA_51", "oevk_number": 51, "region": "Bekes", "classes": {"workers": 28.77, "old_middle": 17.36, "new_middle": 26.56, "rural": 18.54, "unemployed": 4.71, "catholics": 4.06}}, {"id": "BÉKÉS_52", "oevk_number": 52, "region": "Bekes", "classes": {"workers": 7.75, "old_middle": 22.63, "new_middle": 20.04, "rural": 21.66, "unemployed": 22.63, "catholics": 5.29}}, {"id": "SZEGHALOM_53", "oevk_number": 53, "region": "Bekes", "classes": {"workers": 8.2, "old_middle": 3.38, "new_middle": 25.63, "rural": 29.05, "unemployed": 13.35, "catholics": 20.39}}, {"id": "SZARVAS_54", "oevk_number": 54, "region": "Bekes", "classes": {"workers": 3.35, "old_middle": 20.14, "new_middle": 18.72, "rural": 21.14, "unemployed": 17.56, "catholics": 19.09}}, {"id": "OROSHÁZA_55", "oevk_number": 55, "region": "Bekes", "classes": {"workers": 0.67, "old_middle": 19.96, "new_middle": 9.0, "rural": 25.22, "unemployed": 21.74, "catholics": 23.41}}, {"id": "MEZŐKOVÁCSHÁZA_56", "oevk_number": 56, "region": "Bekes", "classes": {"workers": 21.89, "old_middle": 7.2, "new_middle": 21.26, "rural": 2.92, "unemployed": 23.55, "catholics": 23.18}}, {"id": "MISKOLC_57", "oevk_number": 57, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 7.87, "old_middle": 28.88, "new_middle": 16.28, "rural": 10.79, "unemployed": 28.13, "catholics": 8.05}}, {"id": "MISKOLC_58", "oevk_number": 58, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 0.9, "old_middle": 7.27, "new_middle": 12.36, "rural": 32.55, "unemployed": 36.41, "catholics": 10.51}}, {"id": "MISKOLC_59", "oevk_number": 59, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 17.75, "old_middle": 11.06, "new_middle": 27.16, "rural": 14.84, "unemployed": 26.0, "catholics": 3.19}}, {"id": "MISKOLC_60", "oevk_number": 60, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 33.24, "old_middle": 6.12, "new_middle": 32.96, "rural": 9.09, "unemployed": 3.71, "catholics": 14.88}}, {"id": "ÓZD_61", "oevk_number": 61, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 23.34, "old_middle": 10.05, "new_middle": 19.42, "rural": 16.38, "unemployed": 12.34, "catholics": 18.47}}, {"id": "SAJÓSZENTPÉTER_62", "oevk_number": 62, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 8.09, "old_middle": 22.51, "new_middle": 0.05, "rural": 29.4, "unemployed": 17.1, "catholics": 22.85}}, {"id": "KAZINCBARCIKA_63", "oevk_number": 63, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 26.12, "old_middle": 23.6, "new_middle": 12.82, "rural": 2.46, "unemployed": 23.38, "catholics": 11.62}}, {"id": "EDELÉNY_64", "oevk_number": 64, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 10.82, "old_middle": 29.25, "new_middle": 24.82, "rural": 10.36, "unemployed": 10.67, "catholics": 14.08}}, {"id": "ENCS_65", "oevk_number": 65, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 14.05, "old_middle": 10.33, "new_middle": 4.45, "rural": 14.68, "unemployed": 32.84, "catholics": 23.65}}, {"id": "SÁTORALJAÚJHELY_66", "oevk_number": 66, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 34.0, "old_middle": 23.19, "new_middle": 11.34, "rural": 20.64, "unemployed": 0.02, "catholics": 10.81}}, {"id": "SZERENCS_67", "oevk_number": 67, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 15.45, "old_middle": 20.82, "new_middle": 23.5, "rural": 16.69, "unemployed": 15.87, "catholics": 7.67}}, {"id": "LENINVÁROS_68", "oevk_number": 68, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 16.1, "old_middle": 30.65, "new_middle": 27.07, "rural": 5.77, "unemployed": 2.88, "catholics": 17.53}}, {"id": "MEZŐKÖVESD_69", "oevk_number": 69, "region": "Borsod-Abauj-Zemplen", "classes": {"workers": 18.41, "old_middle": 9.76, "new_middle": 23.83, "rural": 21.87, "unemployed": 19.59, "catholics": 6.54}}, {"id": "SZEGED_70", "oevk_number": 70, "region": "Csongrad", "classes": {"workers": 10.67, "old_middle": 1.31, "new_middle": 13.12, "rural": 25.46, "unemployed": 45.54, "catholics": 3.9}}, {"id": "SZEGED_71", "oevk_number": 71, "region": "Csongrad", "classes": {"workers": 15.5, "old_middle": 23.56, "new_middle": 7.27, "rural": 26.05, "unemployed": 18.49, "catholics": 9.13}}, {"id": "SZEGED_72", "oevk_number": 72, "region": "Csongrad", "classes": {"workers": 24.17, "old_middle": 0.2, "new_middle": 27.67, "rural": 28.37, "unemployed": 3.93, "catholics": 15.66}}, {"id": "CSONGRÁD_73", "oevk_number": 73, "region": "Csongrad", "classes": {"workers": 6.29, "old_middle": 34.22, "new_middle": 18.5, "rural": 1.79, "unemployed": 8.9, "catholics": 30.3}}, {"id": "SZENTES_74", "oevk_number": 74, "region": "Csongrad", "classes": {"workers": 10.24, "old_middle": 17.97, "new_middle": 14.97, "rural": 22.16, "unemployed": 13.35, "catholics": 21.31}}, {"id": "HÓDMEZŐVÁSÁRHELY_75", "oevk_number": 75, "region": "Csongrad", "classes": {"workers": 21.7, "old_middle": 14.92, "new_middle": 17.52, "rural": 12.29, "unemployed": 20.23, "catholics": 13.34}}, {"id": "MAKÓ_76", "oevk_number": 76, "region": "Csongrad", "classes": {"workers": 27.54, "old_middle": 22.81, "new_middle": 14.56, "rural": 7.95, "unemployed": 7.58, "catholics": 19.56}}, {"id": "SZÉKESFEHÉRVÁR_77", "oevk_number": 77, "region": "Fejer", "classes": {"workers": 30.01, "old_middle": 20.43, "new_middle": 24.56, "rural": 10.76, "unemployed": 3.04, "catholics": 11.2}}, {"id": "SZÉKESFEHÉRVÁR_78", "oevk_number": 78, "region": "Fejer", "classes": {"workers": 12.38, "old_middle": 14.56, "new_middle": 24.61, "rural": 6.3, "unemployed": 10.54, "catholics": 31.61}}, {"id": "DUNAÚJVÁROS_79", "oevk_number": 79, "region": "Fejer", "classes": {"workers": 30.15, "old_middle": 2.74, "new_middle": 17.39, "rural": 23.15, "unemployed": 17.74, "catholics": 8.83}}, {"id": "GÁRDONY_80", "oevk_number": 80, "region": "Fejer", "classes": {"workers": 9.94, "old_middle": 21.41, "new_middle": 13.82, "rural": 16.45, "unemployed": 20.27, "catholics": 18.11}}, {"id": "MÓR_81", "oevk_number": 81, "region": "Fejer", "classes": {"workers": 11.54, "old_middle": 0.18, "new_middle": 10.66, "rural": 22.84, "unemployed": 25.87, "catholics": 28.91}}, {"id": "SÁRBOGÁRD_82", "oevk_number": 82, "region": "Fejer", "classes": {"workers": 15.21, "old_middle": 27.12, "new_middle": 19.82, "rural": 21.89, "unemployed": 8.0, "catholics": 7.96}}, {"id": "BICSKE_83", "oevk_number": 83, "region": "Fejer", "classes": {"workers": 21.26, "old_middle": 1.42, "new_middle": 16.4, "rural": 33.14, "unemployed": 19.73, "catholics": 8.05}}, {"id": "GYŐR_84", "oevk_number": 84, "region": "Gyor-Moson-Sopron", "classes": {"workers": 21.23, "old_middle": 5.79, "new_middle": 28.25, "rural": 1.22, "unemployed": 17.89, "catholics": 25.62}}, {"id": "GYŐR_85", "oevk_number": 85, "region": "Gyor-Moson-Sopron", "classes": {"workers": 1.61, "old_middle": 37.88, "new_middle": 8.0, "rural": 27.21, "unemployed": 2.96, "catholics": 22.34}}, {"id": "GYŐR_86", "oevk_number": 86, "region": "Gyor-Moson-Sopron", "classes": {"workers": 6.48, "old_middle": 10.02, "new_middle": 23.33, "rural": 11.62, "unemployed": 23.05, "catholics": 25.5}}, {"id": "MOSONMAGYARÓVÁR_87", "oevk_number": 87, "region": "Gyor-Moson-Sopron", "classes": {"workers": 11.26, "old_middle": 3.65, "new_middle": 0.86, "rural": 24.05, "unemployed": 44.58, "catholics": 15.6}}, {"id": "CSORNA_88", "oevk_number": 88, "region": "Gyor-Moson-Sopron", "classes": {"workers": 16.31, "old_middle": 19.6, "new_middle": 16.35, "rural": 18.92, "unemployed": 23.82, "catholics": 5.0}}, {"id": "KAPUVÁR_89", "oevk_number": 89, "region": "Gyor-Moson-Sopron", "classes": {"workers": 1.16, "old_middle": 8.71, "new_middle": 7.21, "rural": 38.25, "unemployed": 32.22, "catholics": 12.45}}, {"id": "SOPRON_90", "oevk_number": 90, "region": "Gyor-Moson-Sopron", "classes": {"workers": 22.53, "old_middle": 24.71, "new_middle": 5.41, "rural": 19.56, "unemployed": 24.1, "catholics": 3.69}}, {"id": "DEBRECEN_91", "oevk_number": 91, "region": "Hajdu-Bihar", "classes": {"workers": 28.19, "old_middle": 33.18, "new_middle": 3.72, "rural": 0.88, "unemployed": 10.73, "catholics": 23.3}}, {"id": "DEBRECEN_92", "oevk_number": 92, "region": "Hajdu-Bihar", "classes": {"workers": 27.67, "old_middle": 11.45, "new_middle": 20.64, "rural": 2.19, "unemployed": 19.94, "catholics": 18.11}}, {"id": "DEBRECEN_93", "oevk_number": 93, "region": "Hajdu-Bihar", "classes": {"workers": 2.98, "old_middle": 22.52, "new_middle": 24.79, "rural": 17.5, "unemployed": 3.53, "catholics": 28.68}}, {"id": "HAJDÚHADHÁZTÉGLÁS_94", "oevk_number": 94, "region": "Hajdu-Bihar", "classes": {"workers": 28.19, "old_middle": 12.51, "new_middle": 15.43, "rural": 13.35, "unemployed": 18.23, "catholics": 12.29}}, {"id": "BERETTYÓÚJFALU_95", "oevk_number": 95, "region": "Hajdu-Bihar", "classes": {"workers": 20.22, "old_middle": 19.57, "new_middle": 2.51, "rural": 22.86, "unemployed": 15.12, "catholics": 19.72}}, {"id": "PÜSPÖKLADÁNY_96", "oevk_number": 96, "region": "Hajdu-Bihar", "classes": {"workers": 18.03, "old_middle": 11.11, "new_middle": 18.72, "rural": 24.63, "unemployed": 6.89, "catholics": 20.62}}, {"id": "HAJDÚSZOBOSZLÓ_97", "oevk_number": 97, "region": "Hajdu-Bihar", "classes": {"workers": 16.27, "old_middle": 14.61, "new_middle": 13.17, "rural": 22.1, "unemployed": 8.11, "catholics": 25.74}}, {"id": "BALMAZÚJVÁROS_98", "oevk_number": 98, "region": "Hajdu-Bihar", "classes": {"workers": 26.65, "old_middle": 2.78, "new_middle": 28.28, "rural": 7.82, "unemployed": 14.9, "catholics": 19.57}}, {"id": "HAJDÚBÖSZÖRMÉNY_99", "oevk_number": 99, "region": "Hajdu-Bihar", "classes": {"workers": 15.46, "old_middle": 1.17, "new_middle": 34.73, "rural": 7.42, "unemployed": 8.66, "catholics": 32.56}}, {"id": "EGER_100", "oevk_number": 100, "region": "Heves", "classes": {"workers": 10.78, "old_middle": 27.89, "new_middle": 22.22, "rural": 8.75, "unemployed": 0.32, "catholics": 30.04}}, {"id": "PÉTERVÁSÁRA_101", "oevk_number": 101, "region": "Heves", "classes": {"workers": 2.52, "old_middle": 21.25, "new_middle": 14.42, "rural": 22.37, "unemployed": 20.38, "catholics": 19.06}}, {"id": "GYÖNGYÖS_102", "oevk_number": 102, "region": "Heves", "classes": {"workers": 18.92, "old_middle": 30.54, "new_middle": 3.58, "rural": 8.53, "unemployed": 26.64, "catholics": 11.79}}, {"id": "HATVAN_103", "oevk_number": 103, "region": "Heves", "classes": {"workers": 18.83, "old_middle": 15.33, "new_middle": 17.19, "rural": 13.78, "unemployed": 24.16, "catholics": 10.71}}, {"id": "HEVES_104", "oevk_number": 104, "region": "Heves", "classes": {"workers": 42.39, "old_middle": 16.34, "new_middle": 15.16, "rural": 7.28, "unemployed": 11.62, "catholics": 7.21}}, {"id": "FÜZESABONY_105", "oevk_number": 105, "region": "Heves", "classes": {"workers": 18.42, "old_middle": 26.21, "new_middle": 6.37, "rural": 7.44, "unemployed": 16.65, "catholics": 24.91}}, {"id": "TATABÁNYA_106", "oevk_number": 106, "region": "Komarom-Esztergom", "classes": {"workers": 42.34, "old_middle": 22.75, "new_middle": 12.27, "rural": 4.36, "unemployed": 8.42, "catholics": 9.86}}, {"id": "TATA_107", "oevk_number": 107, "region": "Komarom-Esztergom", "classes": {"workers": 7.11, "old_middle": 0.56, "new_middle": 21.11, "rural": 10.84, "unemployed": 38.51, "catholics": 21.87}}, {"id": "KISBÉR_108", "oevk_number": 108, "region": "Komarom-Esztergom", "classes": {"workers": 19.21, "old_middle": 3.48, "new_middle": 23.93, "rural": 13.52, "unemployed": 24.04, "catholics": 15.82}}, {"id": "KOMÁROM_109", "oevk_number": 109, "region": "Komarom-Esztergom", "classes": {"workers": 18.3, "old_middle": 17.18, "new_middle": 7.19, "rural": 2.0, "unemployed": 36.7, "catholics": 18.63}}, {"id": "ESZTERGOM_110", "oevk_number": 110, "region": "Komarom-Esztergom", "classes": {"workers": 38.61, "old_middle": 18.82, "new_middle": 3.48, "rural": 29.56, "unemployed": 2.52, "catholics": 7.01}}, {"id": "SALGÓTARJÁN_111", "oevk_number": 111, "region": "Nograd", "classes": {"workers": 16.8, "old_middle": 9.07, "new_middle": 29.67, "rural": 3.54, "unemployed": 22.82, "catholics": 18.1}}, {"id": "PÁSZTÓ_112", "oevk_number": 112, "region": "Nograd", "classes": {"workers": 24.02, "old_middle": 6.85, "new_middle": 15.87, "rural": 13.68, "unemployed": 13.45, "catholics": 26.13}}, {"id": "SZÉCSÉNY_113", "oevk_number": 113, "region": "Nograd", "classes": {"workers": 23.49, "old_middle": 7.25, "new_middle": 14.74, "rural": 14.47, "unemployed": 17.56, "catholics": 22.49}}, {"id": "BALASSAGYARMAT_114", "oevk_number": 114, "region": "Nograd", "classes": {"workers": 14.0, "old_middle": 14.21, "new_middle": 44.47, "rural": 10.57, "unemployed": 11.7, "catholics": 5.05}}, {"id": "SZOB_115", "oevk_number": 115, "region": "Pest", "classes": {"workers": 0.12, "old_middle": 19.79, "new_middle": 26.08, "rural": 12.79, "unemployed": 10.17, "catholics": 31.05}}, {"id": "VÁC_116", "oevk_number": 116, "region": "Pest", "classes": {"workers": 16.81, "old_middle": 10.86, "new_middle": 16.44, "rural": 22.1, "unemployed": 18.84, "catholics": 14.95}}, {"id": "DUNAKESZI_117", "oevk_number": 117, "region": "Pest", "classes": {"workers": 16.03, "old_middle": 22.66, "new_middle": 10.32, "rural": 13.22, "unemployed": 15.72, "catholics": 22.05}}, {"id": "GÖDÖLLŐ_118", "oevk_number": 118, "region": "Pest", "classes": {"workers": 30.74, "old_middle": 2.65, "new_middle": 6.17, "rural": 11.44, "unemployed": 27.84, "catholics": 21.16}}, {"id": "ASZÓD_119", "oevk_number": 119, "region": "Pest", "classes": {"workers": 8.89, "old_middle": 3.83, "new_middle": 21.23, "rural": 21.57, "unemployed": 29.05, "catholics": 15.43}}, {"id": "NAGYKÁTA_120", "oevk_number": 120, "region": "Pest", "classes": {"workers": 30.5, "old_middle": 4.97, "new_middle": 2.46, "rural": 26.69, "unemployed": 19.91, "catholics": 15.47}}, {"id": "MONOR_121", "oevk_number": 121, "region": "Pest", "classes": {"workers": 2.06, "old_middle": 21.79, "new_middle": 18.94, "rural": 13.03, "unemployed": 21.54, "catholics": 22.64}}, {"id": "ÉRD_122", "oevk_number": 122, "region": "Pest", "classes": {"workers": 23.5, "old_middle": 9.42, "new_middle": 1.41, "rural": 26.44, "unemployed": 16.45, "catholics": 22.78}}, {"id": "BUDAÖRS_123", "oevk_number": 123, "region": "Pest", "classes": {"workers": 31.58, "old_middle": 6.26, "new_middle": 20.18, "rural": 21.88, "unemployed": 16.95, "catholics": 3.15}}, {"id": "PILISVÖRÖSVÁR_124", "oevk_number": 124, "region": "Pest", "classes": {"workers": 10.77, "old_middle": 10.31, "new_middle": 20.73, "rural": 26.53, "unemployed": 10.2, "catholics": 21.46}}, {"id": "SZENTENDRE_125", "oevk_number": 125, "region": "Pest", "classes": {"workers": 8.56, "old_middle": 28.08, "new_middle": 24.17, "rural": 16.34, "unemployed": 13.51, "catholics": 9.34}}, {"id": "SZIGETSZENTMIKLÓS_126", "oevk_number": 126, "region": "Pest", "classes": {"workers": 8.37, "old_middle": 25.15, "new_middle": 10.48, "rural": 13.34, "unemployed": 25.61, "catholics": 17.05}}, {"id": "RÁCKEVE_127", "oevk_number": 127, "region": "Pest", "classes": {"workers": 18.8, "old_middle": 14.31, "new_middle": 6.5, "rural": 12.53, "unemployed": 26.2, "catholics": 21.66}}, {"id": "DABAS_128", "oevk_number": 128, "region": "Pest", "classes": {"workers": 21.24, "old_middle": 5.69, "new_middle": 15.36, "rural": 25.94, "unemployed": 12.25, "catholics": 19.52}}, {"id": "CEGLÉD_129", "oevk_number": 129, "region": "Pest", "classes": {"workers": 4.58, "old_middle": 36.7, "new_middle": 22.96, "rural": 9.02, "unemployed": 5.97, "catholics": 20.77}}, {"id": "NAGYKŐRÖS_130", "oevk_number": 130, "region": "Pest", "classes": {"workers": 17.65, "old_middle": 2.98, "new_middle": 31.71, "rural": 29.17, "unemployed": 14.74, "catholics": 3.75}}, {"id": "KAPOSVÁR_131", "oevk_number": 131, "region": "Somogy", "classes": {"workers": 22.71, "old_middle": 13.6, "new_middle": 19.56, "rural": 13.89, "unemployed": 7.46, "catholics": 22.78}}, {"id": "KAPOSVÁR_132", "oevk_number": 132, "region": "Somogy", "classes": {"workers": 27.31, "old_middle": 6.79, "new_middle": 15.36, "rural": 10.69, "unemployed": 25.69, "catholics": 14.16}}, {"id": "SIÓFOK_133", "oevk_number": 133, "region": "Somogy", "classes": {"workers": 21.14, "old_middle": 20.78, "new_middle": 6.64, "rural": 19.0, "unemployed": 9.98, "catholics": 22.46}}, {"id": "BOGLÁRLELLE_134", "oevk_number": 134, "region": "Somogy", "classes": {"workers": 14.53, "old_middle": 23.47, "new_middle": 8.09, "rural": 8.54, "unemployed": 16.79, "catholics": 28.58}}, {"id": "MARCALI_135", "oevk_number": 135, "region": "Somogy", "classes": {"workers": 18.7, "old_middle": 5.68, "new_middle": 20.58, "rural": 13.19, "unemployed": 21.09, "catholics": 20.76}}, {"id": "NAGYATÁD_136", "oevk_number": 136, "region": "Somogy", "classes": {"workers": 18.46, "old_middle": 13.03, "new_middle": 7.64, "rural": 28.25, "unemployed": 23.16, "catholics": 9.46}}, {"id": "NYÍREGYHÁZA_137", "oevk_number": 137, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 22.37, "old_middle": 1.26, "new_middle": 21.48, "rural": 20.34, "unemployed": 23.41, "catholics": 11.14}}, {"id": "NYÍREGYHÁZA_138", "oevk_number": 138, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 18.97, "old_middle": 23.45, "new_middle": 28.02, "rural": 14.15, "unemployed": 1.06, "catholics": 14.35}}, {"id": "TISZAVASVÁRI_139", "oevk_number": 139, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 15.7, "old_middle": 23.15, "new_middle": 23.27, "rural": 11.72, "unemployed": 14.0, "catholics": 12.16}}, {"id": "NAGYKÁLLÓ_140", "oevk_number": 140, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 21.37, "old_middle": 12.13, "new_middle": 19.37, "rural": 4.57, "unemployed": 13.89, "catholics": 28.67}}, {"id": "BAKTALÓRÁNTHÁZA_141", "oevk_number": 141, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 7.97, "old_middle": 16.32, "new_middle": 15.31, "rural": 20.07, "unemployed": 20.08, "catholics": 20.25}}, {"id": "NYÍRBÁTOR_142", "oevk_number": 142, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 12.33, "old_middle": 10.27, "new_middle": 23.31, "rural": 24.63, "unemployed": 28.3, "catholics": 1.16}}, {"id": "KISVÁRDA_143", "oevk_number": 143, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 1.8, "old_middle": 16.62, "new_middle": 24.24, "rural": 26.26, "unemployed": 19.66, "catholics": 11.42}}, {"id": "VÁSÁROSNAMÉNY_144", "oevk_number": 144, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 2.7, "old_middle": 17.38, "new_middle": 23.93, "rural": 12.17, "unemployed": 19.04, "catholics": 24.78}}, {"id": "MÁTÉSZALKA_145", "oevk_number": 145, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 2.1, "old_middle": 36.4, "new_middle": 13.41, "rural": 17.14, "unemployed": 6.66, "catholics": 24.29}}, {"id": "FEHÉRGYARMAT_146", "oevk_number": 146, "region": "Szabolcs-Szatmar-Bereg", "classes": {"workers": 18.27, "old_middle": 25.58, "new_middle": 5.49, "rural": 2.55, "unemployed": 28.11, "catholics": 20.0}}, {"id": "JÁSZBERÉNY_147", "oevk_number": 147, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 10.63, "old_middle": 40.26, "new_middle": 6.31, "rural": 20.34, "unemployed": 11.2, "catholics": 11.26}}, {"id": "JÁSZAPÁTI_148", "oevk_number": 148, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 0.31, "old_middle": 26.89, "new_middle": 30.12, "rural": 22.64, "unemployed": 5.28, "catholics": 14.76}}, {"id": "SZOLNOK_149", "oevk_number": 149, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 11.18, "old_middle": 19.0, "new_middle": 20.67, "rural": 13.72, "unemployed": 8.09, "catholics": 27.34}}, {"id": "SZOLNOK_150", "oevk_number": 150, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 8.14, "old_middle": 15.69, "new_middle": 19.71, "rural": 9.68, "unemployed": 23.33, "catholics": 23.45}}, {"id": "KUNSZENTMÁRTON_151", "oevk_number": 151, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 26.37, "old_middle": 7.84, "new_middle": 25.98, "rural": 17.49, "unemployed": 7.29, "catholics": 15.03}}, {"id": "MEZŐTÚR_152", "oevk_number": 152, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 19.66, "old_middle": 21.36, "new_middle": 1.41, "rural": 17.39, "unemployed": 14.25, "catholics": 25.93}}, {"id": "KUNHEGYES_153", "oevk_number": 153, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 8.67, "old_middle": 24.19, "new_middle": 18.39, "rural": 10.67, "unemployed": 19.28, "catholics": 18.8}}, {"id": "KARCAG_154", "oevk_number": 154, "region": "Jasz-Nagykun-Szolnok", "classes": {"workers": 15.31, "old_middle": 16.28, "new_middle": 14.89, "rural": 18.93, "unemployed": 14.19, "catholics": 20.4}}, {"id": "SZEKSZÁRD_155", "oevk_number": 155, "region": "Tolna", "classes": {"workers": 23.11, "old_middle": 11.04, "new_middle": 15.75, "rural": 20.71, "unemployed": 26.17, "catholics": 3.22}}, {"id": "PAKS_156", "oevk_number": 156, "region": "Tolna", "classes": {"workers": 10.32, "old_middle": 26.12, "new_middle": 6.14, "rural": 4.62, "unemployed": 18.85, "catholics": 33.95}}, {"id": "BONYHÁD_157", "oevk_number": 157, "region": "Tolna", "classes": {"workers": 13.83, "old_middle": 23.8, "new_middle": 21.64, "rural": 6.69, "unemployed": 21.49, "catholics": 12.55}}, {"id": "DOMBÓVÁR_158", "oevk_number": 158, "region": "Tolna", "classes": {"workers": 25.92, "old_middle": 24.0, "new_middle": 10.89, "rural": 3.7, "unemployed": 30.96, "catholics": 4.53}}, {"id": "TAMÁSI_159", "oevk_number": 159, "region": "Tolna", "classes": {"workers": 18.23, "old_middle": 16.22, "new_middle": 13.66, "rural": 18.48, "unemployed": 18.24, "catholics": 15.17}}, {"id": "SZOMBATHELY_160", "oevk_number": 160, "region": "Vas", "classes": {"workers": 12.91, "old_middle": 27.89, "new_middle": 0.49, "rural": 18.93, "unemployed": 16.04, "catholics": 23.74}}, {"id": "SZOMBATHELY_161", "oevk_number": 161, "region": "Vas", "classes": {"workers": 20.0, "old_middle": 17.39, "new_middle": 24.46, "rural": 27.97, "unemployed": 3.22, "catholics": 6.96}}, {"id": "KŐSZEG_162", "oevk_number": 162, "region": "Vas", "classes": {"workers": 0.94, "old_middle": 33.11, "new_middle": 21.02, "rural": 34.27, "unemployed": 8.29, "catholics": 2.37}}, {"id": "SÁRVÁR_163", "oevk_number": 163, "region": "Vas", "classes": {"workers": 23.34, "old_middle": 25.76, "new_middle": 8.56, "rural": 11.57, "unemployed": 3.96, "catholics": 26.81}}, {"id": "KÖRMEND_164", "oevk_number": 164, "region": "Vas", "classes": {"workers": 12.83, "old_middle": 20.78, "new_middle": 4.1, "rural": 37.43, "unemployed": 5.72, "catholics": 19.14}}, {"id": "AJKA_165", "oevk_number": 165, "region": "Veszprem", "classes": {"workers": 18.25, "old_middle": 20.22, "new_middle": 25.74, "rural": 11.4, "unemployed": 20.19, "catholics": 4.2}}, {"id": "BALATONFÜRED_166", "oevk_number": 166, "region": "Veszprem", "classes": {"workers": 17.31, "old_middle": 4.13, "new_middle": 20.43, "rural": 17.04, "unemployed": 39.72, "catholics": 1.37}}, {"id": "PÁPA_167", "oevk_number": 167, "region": "Veszprem", "classes": {"workers": 10.88, "old_middle": 13.02, "new_middle": 27.92, "rural": 25.12, "unemployed": 2.92, "catholics": 20.14}}, {"id": "TAPOLCA_168", "oevk_number": 168, "region": "Veszprem", "classes": {"workers": 21.01, "old_middle": 37.74, "new_middle": 13.84, "rural": 15.37, "unemployed": 7.33, "catholics": 4.71}}, {"id": "VÁRPALOTA_169", "oevk_number": 169, "region": "Veszprem", "classes": {"workers": 26.29, "old_middle": 14.1, "new_middle": 20.55, "rural": 19.89, "unemployed": 18.51, "catholics": 0.66}}, {"id": "VESZPRÉM_170", "oevk_number": 170, "region": "Veszprem", "classes": {"workers": 30.8, "old_middle": 9.53, "new_middle": 4.93, "rural": 22.1, "unemployed": 2.69, "catholics": 29.95}}, {"id": "VESZPRÉM_171", "oevk_number": 171, "region": "Veszprem", "classes": {"workers": 7.76, "old_middle": 8.09, "new_middle": 32.58, "rural": 12.31, "unemployed": 5.53, "catholics": 33.73}}, {"id": "ZALAEGERSZEG_172", "oevk_number": 172, "region": "Zala", "classes": {"workers": 0.17, "old_middle": 54.99, "new_middle": 9.27, "rural": 8.33, "unemployed": 16.06, "catholics": 11.18}}, {"id": "NAGYKANIZSA_173", "oevk_number": 173, "region": "Zala", "classes": {"workers": 32.19, "old_middle": 1.26, "new_middle": 0.72, "rural": 38.47, "unemployed": 11.59, "catholics": 15.77}}, {"id": "KESZTHELY_174", "oevk_number": 174, "region": "Zala", "classes": {"workers": 6.41, "old_middle": 1.93, "new_middle": 27.31, "rural": 19.37, "unemployed": 27.45, "catholics": 17.53}}, {"id": "LENTI_175", "oevk_number": 175, "region": "Zala", "classes": {"workers": 26.89, "old_middle": 17.74, "new_middle": 3.77, "rural": 17.42, "unemployed": 32.68, "catholics": 1.5}}, {"id": "ZALASZENTGRÓT_176", "oevk_number": 176, "region": "Zala", "classes": {"workers": 21.44, "old_middle": 23.72, "new_middle": 14.27, "rural": 12.53, "unemployed": 26.38, "catholics": 1.66}}];
+D.Region = [{"id": "Budapest", "oevk_count": 32, "mandates": 28}, {"id": "Baranya", "oevk_count": 7, "mandates": 6}, {"id": "Bacs-Kiskun", "oevk_count": 10, "mandates": 8}, {"id": "Bekes", "oevk_count": 7, "mandates": 6}, {"id": "Borsod-Abauj-Zemplen", "oevk_count": 13, "mandates": 11}, {"id": "Csongrad", "oevk_count": 7, "mandates": 6}, {"id": "Fejer", "oevk_count": 7, "mandates": 6}, {"id": "Gyor-Moson-Sopron", "oevk_count": 7, "mandates": 6}, {"id": "Hajdu-Bihar", "oevk_count": 9, "mandates": 8}, {"id": "Heves", "oevk_count": 6, "mandates": 5}, {"id": "Jasz-Nagykun-Szolnok", "oevk_count": 8, "mandates": 6}, {"id": "Komarom-Esztergom", "oevk_count": 5, "mandates": 5}, {"id": "Nograd", "oevk_count": 4, "mandates": 4}, {"id": "Pest", "oevk_count": 16, "mandates": 14}, {"id": "Somogy", "oevk_count": 6, "mandates": 5}, {"id": "Szabolcs-Szatmar-Bereg", "oevk_count": 10, "mandates": 9}, {"id": "Tolna", "oevk_count": 5, "mandates": 4}, {"id": "Vas", "oevk_count": 5, "mandates": 4}, {"id": "Veszprem", "oevk_count": 7, "mandates": 6}, {"id": "Zala", "oevk_count": 5, "mandates": 5}];
+
+D.oevkgain = {};
+D.reggain = {};
+for (var p of Q.parties) {
+    D.oevkgain[p] = 0;
+    D.reggain[p] = 0;
+}
+
+//Calculate Individual Constituency Party Preferences
+
+for (var c1 of D.OEVK) {
+    c1.support = {};
+    for (var c2 of Q.parties) {
+        c1.support[c2] = 0;
+        for (var c3 of Q.classes) {
+            c1.support[c2] += Q[c3 + "_" + c2] * c1.classes[c3];
+        }
+    }
+}
+
+//Calculate Regional Lists, by aggregating Individual Constituencies on a Regional level
+
+for (var r1 of D.Region) {
+    r1.support = {};
+    for (var r2 of Q.parties) {
+        r1.support[r2] = 0;
+        for (var r3 of D.OEVK) {
+            if (r3.region == r1.id) {
+                r1.support[r2] += r3.support[r2];
+            }
+        }
+    }
+}
+
+//Calculate the winners of the Individual Constituencies
+
+for (var c1 of D.OEVK) {
+    var maxValue = -Infinity;
+    var maxParty = null;
+    for (var c2 of Q.parties) {
+        if (c1.support[c2] > maxValue) {
+            maxValue = c1.support[c2];
+            maxParty = c2;
+        }
+    }
+    c1.winner = maxParty;
+    c1.winner_value = maxValue;
+    D.oevkgain[maxParty] += 1;
+}
+
+//To aquire compensatory votes we eleminate the winning parties compensatory vote in the constituency
+
+for (var c1 of D.OEVK) {
+    c1.comp = {};
+    for (var c2 of Q.parties) {
+        c1.comp[c2] = (c1.winner == c2) ? 0 : c1.support[c2];
+    }
+}
+
+//Calculate Regional List mandates by applying the Hagenbach-Bischoff formula
+
+//First we calculate the regular qouta
+
+for (var d1 of D.Region) {
+    d1.total = 0;
+    for (var d2 of Q.parties) {
+        d1.total += d1.support[d2];
+    }
+    d1.cutoff = d1.total / (d1.mandates + 1);
+}
+
+//Then we apply the this qouta
+
+for (var f1 of D.Region) {
+    f1.gain = {};
+    f1.comp = {};
+    for (var f2 of Q.parties) {
+        f1.gain[f2] = Math.floor(f1.support[f2] / f1.cutoff);
+        D.reggain[f2] += f1.gain[f2];
+        f1.comp[f2] = f1.support[f2] - f1.gain[f2] * f1.cutoff;
+    }
+}
+
+D.comp = {};
+for (var c1 of Q.parties) {
+    D.comp[c1] = 0;
+    for (var c2 of D.OEVK) {
+        D.comp[c1] += c2.comp[c1];
+    }
+    for (var c3 of D.Region) {
+        D.comp[c1] += c3.comp[c1];
+    }
+}
+
+//Then we calculate how many mandates can be given out for the National compensatory List
+//Assume the highest of amount of national mandates which is 386 minues 176 aka 210
+
+D.Natmand = 210;
+for (var c1 of D.Region) {
+    for (var c2 of Q.parties) {
+        D.Natmand -= c1.gain[c2];
+    }
+}
+
+//Finally we distribute the national mandates with the D'hont formula
+
+D.natgain = {};
+for (var p1 of Q.parties) D.natgain[p1] = 0;
+
+for (var i = 0; i < D.Natmand; i++) {
+    var bestParty = null;
+    var bestQuotient = -1;
+    for (var p2 of Q.parties) {
+        var quotient = D.comp[p2] / (D.natgain[p2] + 1);
+        if (quotient > bestQuotient) {
+            bestQuotient = quotient;
+            bestParty = p2;
+        }
+    }
+    D.natgain[bestParty] += 1;
+}
+
+Q.seats = {}
+
+for (var p of Q.parties) {
+    Q.seats[p] = D.oevkgain[p] + D.reggain[p] + D.natgain[p];
+}
+
+for (var p of Q.parties) {
+    Q[p + "_r"] = Q.seats[p] / 3.86;
+}
+
+!}
+go-to: jumpScene
+
+# note: this is a helpful utility to deal with elections and so on.
+
 @post_election_1928
 on-arrival: {!
 // set old results
@@ -295,1083 +437,3 @@ There are some potential coalition arrangements.
 - @left_coalition
 - @popular_front_coalition
 - @right_coalition
-
-# TODO: black-brown coalition
-
-
-@popular_front_coalition
-title: A new "Popular Front" coalition?
-subtitle: SPD + KPD + Z + [+ ddp_name +]  [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%)
-unavailable-subtitle: SPD + KPD + Z + [+ ddp_name +] [? if sapd_formed: + SAPD ?]([+ popular_front_coalition +]%) - [? if ((kpd_relation < 65 and kpd_party_leader == "Thälmann") or (kpd_relation < 45 and kpd_party_leader == "Conciliators")): We do not have good enough relations with the KPD. ?][? if (z_relation < 45 and z_party_leader == "Joos") or (z_relation < 65 and z_party_leader != "Joos" and kpd_party_leader != "Conciliators") or (z_relation < 55 and z_party_leader != "Joos" and kpd_party_leader == "Conciliators"): We do not have good enough relations with the Center Party. ?][? if communist_coalition < 3 : The Communists are unwilling to compromise at all. ?]
-view-if: popular_front_coalition >= 50
-choose-if: (((kpd_relation >= 65 and kpd_party_leader == "Thälmann") or (kpd_relation >= 45 and kpd_party_leader == "Conciliators")) and ((z_relation >= 45 and z_party_leader == "Joos") or (z_relation >= 65 and z_party_leader != "Joos" and kpd_party_leader != "Conciliators") or (z_relation >= 55 and z_party_leader != "Joos" and kpd_party_leader == "Conciliators")) and ddp_relation >= 50 and communist_coalition >= 3) or (z_party_leader == "Joos" and kpd_party_leader == "Conciliators" and z_relation >= 30 and kpd_relation >= 30)
-
-Could we really form a coalition that included both the Center and the Communists? It seems like an absurd concept, but given our good relationships with both sides, it is not an impossibility.
-
-The far-right might attempt a coup, if such a coalition were formed.
-
-- @popular_front_2: Form the Popular Front!
-- @great_popular_front: Form the Popular Front!
-
-@popular_front_2
-view-if: z_party_leader != "Joos" or kpd_party_leader != "Conciliators"
-
-Somehow, both the Communists and Center are at the very least willing to entertain negotiations. Of course, KPD radicals and Center conservatives derail the negotiations almost immediately. The KPD demands leadership of the coalition for themselves and their chairman Ernst Thälmann, [? if spd_r > kpd_r : despite our higher vote share, ?]while the Center is offended by the prospect of helping Bolsheviks enter government. *Something* must be done to restore balance.
-
-- @popular_front_resources
-- @popular_front_democracy
-- @popular_front_braun
-- @coalition_menu: This is impossible. Try another governing arrangement.
-
-@popular_front_resources
-title: Use our resources to smooth things over.
-unavailable-subtitle: Required: 4 resources
-subtitle: -4 resources
-choose-if: resources >= 4
-on-arrival: resources -= 4
-go-to: popular_front_success
-
-@popular_front_democracy
-title: Convince the KPD to accept democracy.
-subtitle: [? if kpd_party_leader == "Conciliators" : The Conciliator leadership of the KPD at least claim to support the Popular Front. ?]
-unavailable-subtitle: Our relationship with the KPD is not high enough.
-choose-if: (kpd_relation >= 60 and communist_coalition >= 3) or kpd_party_leader == "Conciliators"
-go-to: popular_front_success
-
-@popular_front_braun
-title: Use pressure from President Braun to force the parties to cooperate.
-view-if: president == "Braun"
-go-to: popular_front_success
-
-@great_popular_front
-view-if: z_party_leader == "Joos" and kpd_party_leader == "Conciliators"
-on-arrival: spd_in_government = 1; in_popular_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation += 10; coup_progress += 2; in_left_front = 0; in_weimar_coalition = 0; in_grand_coalition = 0; coalition_dissent = 0;
-achievement: grosse_volksfront
-go-to: popular_front_civil_war if coup_progress >= 10; popular_front_no_civil_war if coup_progress < 10
-
-Somehow, the coalition is successfully formed! The conciliatory leadership of the Center Party and KPD helped make the negotiations possible. We still need a chancellor; the only acceptable choice among the parties was Rudolf Breitscheid of the SPD, acceptable to the Center and KPD [? if president == "Hindenburg" : as well as President Hindenburg, albeit extremely reluctantly ?].
-
-@popular_front_success
-on-arrival: spd_in_government = 1; in_popular_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; kpd_relation += 10; coup_progress += 2; in_left_front = 0; in_weimar_coalition = 0; in_grand_coalition = 0; coalition_dissent = 0;
-go-to: popular_front_civil_war if coup_progress >= 10; popular_front_no_civil_war if coup_progress < 10
-achievement: volksfront
-
-Somehow, surprisingly, the coalition is successfully formed! We still need a chancellor; the only acceptable choice among the parties was Rudolf Breitscheid of the SPD, acceptable to the Center and KPD [? if president == "Hindenburg" : as well as President Hindenburg, albeit extremely reluctantly ?].
-
-@popular_front_no_civil_war
-on-arrival: kpd_goals_seen = 0; finance_minister_party = "Z"; interior_minister_party = "Z"; economic_minister_party = "Z"; labor_minister_party = "Z"; foreign_minister_party = "Z"; agriculture_minister_party = "Z"; reichswehr_minister = "I"; leverage = spd_r + kpd_r;
-achievement: volksfront
-
-In response to the KPD's entrance into the government, the right-wing takes a "wait-and-see" approach for now. They expect that the Popular Front government will be unstable and incompetent, and will collapse of its own accord, discrediting the left and center and eventually enabling the destruction of the Weimar Republic. Our task is to prove them wrong.
-
-The KPD has taken an abstentionist position with regards to ministries. They claim to be participating as the "loyal opposition" within the Popular Front government, supporting us from the outside while also running their own propaganda campaigns to turn workers to their side. They seem to expect that the Popular Front would inevitably fail, and that our failure would benefit them.
-
-- @ministries: First, we must select our ministries.
-
-
-@popular_front_civil_war
-on-arrival: kpd_relation = 80; reichswehr_loyalty += 0.25;
-
-In response to the KPD's entrance into the government, the right-wing immediately launches a coup attempt. Troops of the Stahlhelm and Nazi SA enter Berlin and immediately begin clashing with our supporters! Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop us from taking power.
-
-The Center manages to diffuse some of the hostility from the Reichswehr and the Stahlhelm, but fail to prevent the outbreak of fighting. We are forced to fight on the same side as the KPD, whether we want to or not.
-
-- @civil_war: A civil war, then.
-
-
-
-@far_right_coalition
-title: Far-right coalition
-subtitle: NSDAP + DNVP ([+ far_right_coalition +]%)
-view-if: far_right_coalition >= 50
-go-to: far_right_win if (year >= 1932 or nsdap_r >= 44) and president != "Braun"; far_right_fail if (year < 1932 and nsdap_r < 44) and president != "Braun"; far_right_braun if president == "Braun"
-priority: 2
-
-There are enough votes for the Nazis and the DNVP to form a coalition. [+ nsdap_leader +] has made his participation in government contingent on being appointed chancellor. It is up to President [+ president +] to decide.
-
-@far_right_win
-on-arrival: chancellor = nsdap_leader; chancellor_party = "NSDAP"
-
-[? if president == "Hindenburg" : President Hindenburg's camarilla ?][? if president == "Braun" : President Braun somehow ?] has decided that [+ nsdap_leader +] must be chancellor [? if president == "Hindenburg": , and the aging president accepts their recommendations. ?][? if president == "Braun" : because it is what the constitution would stipulate. ?]
-
-- @hitler_takes_power: What do we do now?
-
-
-@far_right_fail
-on-arrival: chancellor = "Schleicher"; chancellor_party = "I"; pro_republic -= 10; next_election_time = time+5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
-
-The reactionary establishment is still very skeptical of the Nazis, so instead, [+ president +] appoints Kurt von Schleicher, a former general, as chancellor, to try to "tame" the Nazis.
-
-Schleicher's government is deeply unpopular among all parties of the Reichstag. Despite his support for a coalition with the NSDAP, the Nazis want power all to themselves, without Schleicher.
-
-New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
-
-@far_right_braun
-on-arrival: coup_progress += 2
-
-President Braun faces a dilemma. Is it "democratic" to let democracy be destroyed, if the majority of voters have willed it so? Some, even on the left, suggest that the Nazis would not *truly* be as horrific as their platform suggests, and that giving them power would let them discredit themselves in the eyes of the public.
-
-Alternatively, Braun could use the emergency powers of the presidency. Article 48 has been used by Hindenburg to promulgate anti-democratic and anti-worker policies; can Article 48 be used for good as well as evil?
-
-- @emergency_braun: We will form an emergency government with Braun's support.
-- @new_elections: We will have new elections.
-- @far_right_win: Let the Nazis form their government.
-
-
-@left_coalition
-title: Is a United Left coalition possible?
-subtitle: SPD + KPD [? if sapd_formed: + SAPD ?] ([+ left_coalition +]%)
-unavailable-subtitle: SPD + KPD [? if sapd_formed: + SAPD ?] ([+ left_coalition +]%). [? if kpd_relation < 50 : We do not have adequate relations with the KPD. ?][? if communist_coalition < 3 : The Communists are too committed to their radical ways to partake in government. ?]
-view-if: left_coalition >= 50
-choose-if: (kpd_relation >= 50 or (kpd_party_leader == "Conciliators" and kpd_relation >= 40)) and communist_coalition >= 3
-
-There are enough votes for a SPD + KPD coalition government, if such a thing were actually possible.
-
-The far-right might attempt a coup, if such a coalition were formed.
-
-- @left_coalition_impossible: This is impossible.
-- @left_coalition_possible: This could be possible.
-
-@left_coalition_impossible
-go-to: coalition_menu
-
-A far left coalition is impossible.
-
-
-@left_coalition_possible
-
-The KPD is still very reluctant to join a coalition, despite grassroots friendliness between our memberships. The Stalinist leadership is vehemently against such a thing. They demand the appointment of Ernst Thälmann as chancellor in exchange for a coalition. [? if president == "Hindenburg" : There is no chance whatsoever that President Hindenburg would approve of the appointment of a die-hard communist as chancellor. ?] Alternatively, if our relations with them are good enough, we could convince them to support the appointment of one of our centrist or left-leaning members as chancellor.
-
-- @thalmann_chancellor: Appoint Thälmann as chancellor.
-- @left_coalition_resources
-- @left_coalition_relations
-- @coalition_menu: Try a different governing arrangement.
-
-@thalmann_chancellor
-choose-if: president == "Braun" and reformist_strength + neorevisionist_strength < left_strength
-unavailable-subtitle: [? if president != "Braun": President [+ president +] would never allow such a thing. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
-on-arrival: chancellor = "Thälmann"; chancellor_party = "KPD"; kpd_relation = 80; in_left_front = 1; spd_in_government = 1 
-
-With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
-
-Immediately, [+ chancellor +] goes to work building a "Soviet Germany": consolidating as much power as possible in the KPD, purging state institutions of anti-communists, and sending street fighters against the "enemies of the people".
-
-In response to [+ chancellor +] being appointed Chancellor, the right-wing forces launches almost immediately launch an attempted coup. Troops of the Stahlhelm and Nazi SA enter Berlin and immediately begin clashing with our supporters! Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop the KPD from taking power. We are forced to be on the same side as the KPD, whether we want to or not.
-
-- @civil_war
-
-
-@left_coalition_resources
-title: Use our resources to smooth things over.
-unavailable-subtitle: Required: 3 resources
-subtitle: -3 resources
-choose-if: resources >= 3
-on-arrival: resources -= 3
-go-to: left_coalition_success
-
-@left_coalition_relations
-title: Convince the KPD to accept democracy.
-unavailable-subtitle: Our relationships with the KPD are not good enough.
-choose-if: kpd_relation >= 60 or kpd_party_leader == "Conciliators"
-go-to: left_coalition_success
-
-
-@left_coalition_success
-on-arrival: spd_in_government = 1; in_left_front = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; coup_progress += 3; capital_strike_progress += 2; in_popular_front = 0; in_grand_coalition = 0; in_weimar_coalition = 0; kpd_relation += 10
-go-to: left_coalition_civil_war if coup_progress >= 10; left_coalition_no_civil_war if coup_progress < 10
-achievement: einheitsfront
-
-Somehow, surprisingly, the left coalition is successfully formed, without appointing Thälmann as chancellor. The consensus choice for chancellor, accepted by the SPD, KPD, and President [+ president +], is Rudolf Breitscheid, who belongs to the centrist faction of the SPD, but was acceptable to the left due to his previous membership in the left-wing anti-war USPD.
-
-# just raise the coup limit, don't immediately go to civil war
-
-@left_coalition_no_civil_war
-on-arrival: kpd_goals_seen = 0; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD"; reichswehr_loyalty -= 0.05
-
-In response to the KPD's entrance into the government, the right-wing takes a "wait-and-see" approach for now. They expect that our government will be unstable and incompetent, and will collapse of its own accord, discrediting the left and eventually enabling the destruction of the Weimar Republic. Our task is to prove them wrong.
-
-The KPD has taken an abstentionist position with regards to ministries. They claim to be participating as the "loyal opposition" in the worker's government, supporting us from the outside while also running their own propaganda campaigns to turn workers to their side. They seem to expect that we would inevitably fail, and that our failure would benefit them. 
-
-Whatever their reasoning is, the SPD has control over the ministries of government.
-
-@left_coalition_civil_war
-on-arrival: reichswehr_loyalty += 0.1
-
-In response to the KPD's entrance into the government, the right-wing immediately launches a coup attempt. Troops of the Stahlhelm and Nazi SA enter Berlin and begin clashing with our supporters. Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop us from taking power.
-
-- @civil_war: A civil war, then.
-
-
-
-@right_coalition
-title: Refuse to form a government, so that a right-wing coalition may be formed.
-subtitle: Z + BVP + DVP + DNVP + Others ([+ right_coalition +]%)
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
-view-if: right_coalition >= 50
-choose-if: year < 1929
-
-There are enough votes for a right-wing coalition of the Center (+ BVP), DVP, DNVP, and minor conservative parties. [? if largest_party == "SPD": However, this will be seen as abdicating responsibility for government, as we are the largest party. ?]
-
-- @right_coalition_sure: Yes, we will abdicate our responsibility for government formation, and let a right-wing coalition take power.
-- @grand_coalition: Actually, we wish to form a grand coalition after all.
-
-@no_right_coalition
-go-to: no_majority
-
-However, the DNVP and its leader Hugenberg is refusing to partake in a coalition with the "November criminals" in the Center Party. Thus, there is no clear path towards a Reichstag majority.
-
-@right_coalition_sure
-subtitle: This will be extremely unpopular within our party.
-on-arrival: pro_republic -= 5; center_dissent += 15; left_dissent += 10; labor_dissent += 25; reformist_dissent += 25; neorevisionist_dissent += 15; z_relation -= 5; ddp_relation -= 5; dvp_relation -= 5
-go-to: right_coalition_2
-
-
-@right_coalition_2
-unavailable-subtitle: The DNVP is not interested in a coalition with the Center.
-view-if: right_coalition >= 50
-choose-if: year < 1929
-on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "DNVP"; justice_minister_party = "DNVP"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "DVP"; finance_minister_party = "Z"; agriculture_minister_party = "DNVP"; in_right_coalition = 1;
-
-Even though the DNVP is very reluctant to participate in such a coalition, they still accede to President Hindenburg's wishes. Thus, a majority center-right coalition is formed, with Brüning as chancellor.
-
-
-
-@no_majority
-title: There is no clear governing majority.
-view-if: weimar_coalition < 50 and (grand_coalition < 50 or grand_coalition_failed == 1) and president = "Hindenburg" and far_right_coalition < 50
-on-arrival: no_majority_elections += 1
-go-to: no_majority_bruning if chancellor = "Brüning" or chancellor = "Wirth"; no_majority_papen if chancellor = "Papen" and no_majority_papen_elections == 0; no_majority_papen_2 if chancellor == "Papen" and no_majority_papen_elections > 0; no_majority_schleicher if chancellor = "Schleicher"; no_majority_spd if chancellor_party = "SPD" or chancellor == "Marx"
-
-# TODO: if there is an anti-democratic coalition majority, you should appoint Papen.
-
-# either new elections, or Hindenburg appoints either Brüning, Papen, Schleicher, or Hitler.
-
-@no_majority_spd
-on-arrival: chancellor = "Brüning"; chancellor_party = "Z"
-
-There is no path to an obviously workable majority. Since President Hindenburg is unwilling to work with a minority or caretaker SPD government, his preferred chancellor is Heinrich Brüning of the Center Party, who could lead a "presidential" government.
-
-- @toleration_bruning: We will tolerate Brüning.
-- @new_grand_coalition: We will try to form a new grand coalition.
-- @new_elections: We will have new elections.
-
-# - if NSDAP is the largest party and the 
-
-@no_majority_bruning
-go-to: no_majority_bruning_toleration if (no_majority_elections <= 3 and anti_democratic_coalition <= 50); hindenburg_appoints_papen if no_majority_elections > 3 or anti_democratic_coalition > 50
-
-
-@hindenburg_appoints_papen
-on-arrival: chancellor = "Papen"; chancellor_party = "I"; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; sa_banned = 0; pro_republic -= 8; finance_minister_party = "I"; interior_minister_party = "I"; economic_minister_party = "I"; labor_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "I"; reichswehr_minister = "I";
-
-There is no path to a majority government. President Hindenburg is tired of the chaos, and appoints Franz von Papen as chancellor instead of Brüning. Papen is a indenpendent formerly from the Center Party, and is significantly to the right of the majority of the Center Party.
-
-Papen is immediately faced with a vote of no confidence, given his unpopularity. However the SPD votes, he is guaranteed to fall, due to the unanimous hatred against him from all other parties.
-
-New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
-
-@no_majority_bruning_toleration
-on-arrival: no_majority_bruning_elections += 1
-
-There is no path to a majority government. One option would be to have a continuation of the current Brüning government; if we tolerate it, then it would retain a majority vote against no-confidence.
-
-Alternatively, we could try to form a "new grand coalition" of all constitutional parties except the NSDAP, KPD, and DNVP. The stumbling block are the minor conservative parties such as the "Economic Party of the Middle Class", who detest any hint of socialism and would ruin the country before working with Marxists.
-
-The third option is to have new elections.
-
-- @toleration_bruning: We will tolerate Brüning.
-- @new_grand_coalition: We will try to form a new grand coalition.
-- @new_elections: We will have new elections.
-- @unity_government
-
-
-@new_grand_coalition
-title: A "New Grand Coalition" of all the constitutional parties?
-subtitle: SPD + Z + BVP + [+ ddp_name +] + DVP + Others ([+ neo_weimar_coalition +]%)
-view-if: neo_weimar_coalition >= 50 and grand_coalition < 50
-choose-if: z_relation >= 50 and dvp_relation >= 30
-unavailable-subtitle: SPD + Z + BVP + [+ ddp_name +] + DVP + Others ([+ neo_weimar_coalition +]%) - [? if z_relation < 50 : We do not have adequate relations with the Center Party. ?][? if dvp_relation < 30 : We do not have adequate relations with the DVP. ?]
-
-How do we convince vehemently anti-socialist parties to allow us to form a majority coalition? Our largely benevolent relations with the Center and DVP may allow us some leverage.
-
-- @use_resources
-- @toleration_bruning: No. We will tolerate a minority government.
-- @new_elections: No. We will have new elections.
-- @unity_government
-
-@use_resources
-title: Use our resources to smooth over the creation of a coalition.
-subtitle: -2 resources
-unavailable-subtitle: Not enough resources (need 2).
-choose-if: resources >= 2
-on-arrival: resources -= 2; spd_in_government = 1; in_grand_coalition = 1; left_dissent += 4;
-achievement: constitutional_coalition
-
-We transfer some of our campaign funds to our putative coalition partners. Some would call this corruption, but perhaps it is necessary to save our democracy.
-
-Now, we have a new grand coalition, a "Constitutional Coalition" of all the non-fascist and non-communist parties. Leftists in our party are somewhat skeptical of this arrangement. 
-
-
-Who should be chancellor?
-
-- @join_bruning: For better or for worse, it must be Heinrich Brüning of the Center.
-- @braun_chancellor_new: Otto Braun for Chancellor?
-
-@braun_chancellor_new
-subtitle: This will reduce our leverage in the ministries.
-view-if: not historical_mode or not spd_prussia
-on-arrival: leverage -= 10; chancellor = "Braun"; chancellor_party = "SPD"
-go-to: ministries
-
-We have assembled a new coalition under Otto Braun.
-
-
-@unity_government
-title: The Center Party offers a "Government of National Unity" under Chancellor Joseph Wirth.
-subtitle: SPD + Z + BVP + [+ ddp_name +] + DVP + Others ([+ neo_weimar_coalition +]%)
-view-if: z_party_leader == "Joos" and neo_weimar_coalition >= 50 and weimar_coalition < 50 and z_relation >= 10
-
-The Center Party leader, Joseph Joos, clearly sees the threat from the ascension of the anti-democratic extremist parties, and thus tries to negotiate a "Government of National Unity" to save the republic. This coalition would be led by Joseph Wirth, a left-leaning member of the Center Party and former chancellor, and would encompass all of the constitutional parties. Our role in this government might be limited, however.
-
-- @unity_government_2
-- @reject_unity_government: No, we will not accept this offer.
-
-@unity_government_2
-title: Accept the offer!
-on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 1; in_grand_coalition = 1; in_unity_government = 1; leverage = 15; z_relation += 5; dvp_relation += 4
-achievement: constitutional_coalition
-go-to: ministries
-
-We have formed a new unity government of all the constitutional parties! We have a limited choice in ministries for this government.
-
-
-@reject_unity_government
-on-arrival: z_relation -= 8; ddp_relation -= 5; dvp_relation -= 5
-
-Our rejection of the unity government has hurt our relations with the bourgeois and center-right parties.
-
-- @brauns_dilemma
-- @toleration_bruning: We will tolerate a minority government led by Brüning.
-- @toleration_wirth: We will tolerate a minority government led by Joseph Wirth.
-- @new_elections: There will be new elections.
-
-
-@toleration_wirth
-view-if: z_party_leader = "Joos"
-choose-if: president == "Braun"
-unavailable-subtitle: President Hindenburg will not support a minority government led by Joseph Wirth.
-on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 0; spd_toleration = 1; z_relation += 5; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = ddp_name; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; pro_republic -= 2;
-
-We have supported a minority government led by the Center Party under Chancellor Joseph Wirth.
-
-
-
-@no_majority_papen
-on-arrival: pro_republic -= 10; next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 6; unemployed_nsdap += 6; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 5; no_majority_papen_elections += 1; workers_spd -= 8 if pro_republic < 45; workers_spd *= 0.85 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40;
-
-After the elections, Papen is still deeply unpopular, without any hint of coalition support, and there is a vote of no confidence called against him almost immediately. No matter how we vote, the measure would pass. The Reichstag is dissolved once more.
-
-New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
-
-
-@no_majority_papen_2
-on-arrival: chancellor = "Schleicher"; pro_republic -= 10; next_election_time = time+5; next_election_month = month + 5; next_election_year = year; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12; workers_nsdap += 5; unemployed_nsdap += 10; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_nsdap += 10; workers_spd -= 8 if pro_republic < 45; workers_spd *= 0.85 if pro_republic < 40; workers_nsdap += 5 if pro_republic < 40; finance_minister_party = "I"; interior_minister_party = "I"; economic_minister_party = "I"; labor_minister_party = "I"; foreign_minister_party = "I"; agriculture_minister_party = "I"; reichswehr_minister = "I";
-
-There is no path to a majority government. Hindenburg is displeased with Papen, and calls on him to resign. Now, former army general Kurt von Schleicher has been appointed chancellor, again as part of a presidential government.
-
-Schleicher's government is deeply unpopular among all parties of the Reichstag. Despite his support for a coalition with the NSDAP, the Nazis want power all to themselves, without Schleicher.
-
-New elections have been set for [+ next_election_month : month +] [+ next_election_year +].
-
-
-@no_majority_schleicher
-go-to: hitler_chancellor
-
-# TODO: there should be a second Schleicher option if the NSDAP isn't the strongest
-
-
-@hitler_chancellor
-on-arrival: chancellor = "Hitler"; chancellor_party = "NSDAP"
-
-There is no path to a majority government for now. The scheming around President Hindenburg is leading to only one path - that of Chancellor Adolf Hitler. [? if largest_party == "NSDAP" : Since they are the largest party, it is not exactly contrary to parliamentary procedure, so it is difficult to raise objections solely on procedural grounds. ?] [? if hitler_deported: Despite his earlier deportation, the Nazi leaders and their reactionary allies have connived for the president to give him German citizenship after all. ?]
-
-- @hitler_takes_power: What now?
-
-# if NSDAP is largest party and Hindenburg is president, then Hindenburg appoints Hitler chancellor.
-
-@spd_majority
-title: SPD majority alone
-subtitle: SPD: [+ spd_r +]%
-view-if: spd_r >= 50
-on-arrival: chancellor = "Empty"; chancellor_party = "SPD"; spd_in_government = 1; in_spd_majority = 1; pro_republic += 5; foreign_minister_party = "SPD"; foreign_minister = "Breitscheid"; interior_minister_party = "SPD"; interior_minister = "Severing"; justice_minister_party = "SPD"; justice_minister = "Radbruch"; labor_minister_party = "SPD"; labor_minister = "Wissell"; reichswehr_minister_party = "SPD"; reichswehr_minister = "Leber"; economic_minister_party = "SPD"; economic_minister = "Schmidt"; finance_minister_party = "SPD"; finance_minister = "Hilferding"; agriculture_minister_party = "SPD"; agriculture_minister = "Baade"; reichswehr_loyalty -= 0.05; 
-achievement: majority_party
-
-Finally, the SPD can govern alone! Our long campaign of electioneering has paid off. We do not need to worry about coalition government; anything is possible. 
-
-Who should be chancellor?
-
-- @braun_majority_chancellor: Otto Braun for Chancellor.
-- @breitscheid_majority_chancellor: Rudolf Breitscheid for Chancellor.
-- @muller_majority_chancellor: Hermann Müller for Chancellor.
-- @wels_majority_chancellor: Otto Wels for Chancellor.
-
-@braun_majority_chancellor
-view-if: not historical_mode or not spd_prussia
-on-arrival: chancellor = "Braun"
-
-[? if president == "Braun": Our experts have checked the constitution, and have discovered that there is no specific prohibition against the Chancellor also being the President (the President may not be a member of the Reichstag; there is no law saying that the Chancellor must be a member of the Reichstag). Thus, we have Chancellor-President Otto Braun. ?]
-[? if president != "Braun": Otto Braun has become chancellor of the SPD majority. ?]
-
-@breitscheid_majority_chancellor
-on-arrival: chancellor = "Breitscheid"
-
-Rudolf Breitscheid has become chancellor of the SPD majority.
-
-@muller_majority_chancellor
-view-if: muller_dead = 0
-on-arrival: chancellor = "Müller"
-
-Hermann Müller has become chancellor of the SPD majority.
-
-@wels_majority_chancellor
-view-if: muller_dead = 1
-on-arrival: chancellor = "Wels"
-
-Otto Wels has become chancellor of the SPD majority.
-
-# TODO: Otto Wels should be able to be chancellor of a Grand Coalition, Weimar Coalition, or SPD majority after Müller dies.
-
-
-@brauns_dilemma
-title: There is no clear governing majority.
-subtitle: President Braun faces a dilemma.
-view-if: president == "Braun" and (grand_coalition < 50 or grand_coalition_failed == 1)
-
-President Braun faces a dilemma. He desperately desires a socialist or at least democratic government, but the electoral results are not there for such. Article 48 has been used by Hindenburg to promulgate anti-democratic and anti-worker policies; can Article 48 be used for good as well as evil?
-
-- @emergency_braun: We will form an emergency government with Braun's support.
-- @new_elections: We will have new elections.
-- @new_grand_coalition
-- @left_coalition
-- @popular_front_coalition
-- @far_right_coalition
-
-
-
-@emergency_braun
-title: We will form an emergency government with Braun's support.
-subtitle: This may have the effect of inflamming public sentiment against us, and the reactionaries will be against us each step of the way.
-on-arrival: sa_strength += 100; sh_strength += 100; in_emergency_government = 1
-
-Yes, an emergency minority government, with the support of the SPD. Who should lead this emergency minority government?
-
-- @braun_emergency_chancellor: Otto Braun for Chancellor-President!
-- @breitscheid_emergency_chancellor: Rudolf Breitscheid for emergency Chancellor.
-- @bruning_emergency_chancellor: Brüning of the Center Party, as a goodwill gesture toward the bourgeoisie.
-- @wirth_emergency_chancellor: Joseph Wirth of the Center Party, as a gesture of republican unity.
-
-@braun_emergency_chancellor
-subtitle: This is unprecedented.
-view-if: not historical_mode or not spd_prussia
-on-arrival: chancellor = "Braun"; chancellor_party = "SPD"; spd_in_government = 1; pro_republic -= 5; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD"; reichswehr_loyalty -= 0.1; 
-
-Our experts have checked the constitution, and have discovered that there is no specific prohibition against the Chancellor also being the President (the President may not be a member of the Reichstag; there is no law saying that the Chancellor *must* be a member of the Reichstag).
-
-Thus, we have Chancellor-President Otto Braun. He claims that he will resign as soon as the economic-political crisis is over. The right-wing parties, who were once clamoring to replace parliamentary rule with dictatorship or monarchy, are now clamoring for the restoration of democracy.
-
-- @far_right_coup
-- @emergency_no_confidence: The Nazis immediately call a no-confidence vote against us...
-
-@breitscheid_emergency_chancellor
-subtitle: The Communists are warming to him...
-on-arrival: chancellor = "Breitscheid"; chancellor_party = "SPD"; spd_in_government = 1; kpd_relation += 5; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD"; reichswehr_loyalty -= 0.1;
-
-We have appointed Rudolf Breitscheid as emergency chancellor. The Communists consider him less objectionable than the alternatives, although it is unclear whether they will tolerate this government.
-
-- @far_right_coup
-- @emergency_no_confidence
-
-
-@bruning_emergency_chancellor
-on-arrival: chancellor = "Brüning"; chancellor_party = "Z"; spd_in_government = 1; z_relation += 10; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD" 
-
-The Center Party is pleased, and somewhat surprised, that we have appointed [+ chancellor +] as chancellor.
-
-- @far_right_coup
-- @emergency_no_confidence
-
-@wirth_emergency_chancellor
-view-if: z_party_leader == "Joos"
-on-arrival: chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 1; z_relation += 10; foreign_minister_party = "SPD"; interior_minister_party = "SPD"; justice_minister_party = "SPD"; labor_minister_party = "SPD"; reichswehr_minister_party = "SPD"; economic_minister_party = "SPD"; finance_minister_party = "SPD"; agriculture_minister_party = "SPD" 
-
-The Center Party is pleased that we have appointed [+ chancellor +] as chancellor.
-
-- @far_right_coup
-- @emergency_no_confidence
-
-
-
-@far_right_coup
-title: The far-right parties immediately launch a military coup against us...
-view-if: far_right_coalition >= 45
-on-arrival: sh_strength += 150; sa_strength += 150; sh_militancy += 0.05; sa_militancy += 0.05
-
-The far-right parties, seeing that we are willing to deny them government by questionably democratic means, have decided that they can only take power by undemocratic means, and have risen up in force against the sitting government.
-
-Their numbers are bolstered by the many government workers who are against the prospect of a unified Socialist government. Police and soldiers defect to the SA and Stahlhelm.
-
-- @civil_war: It is war.
-
-
-@emergency_no_confidence
-title: The Nazis immediately call a no-confidence vote against us...
-view-if: far_right_coalition < 45
-on-arrival: z_no_confidence = 1 if z_relation < 45; kpd_no_confidence = 1 if kpd_relation < 45; other_no_confidence = 1 if (z_relation + dvp_relation)/2 < 45; dvp_no_confidence = 1 if dvp_relation < 45; sa_strength += 200; sh_strength += 200; no_confidence_votes = nsdap_r + dnvp_r; no_confidence_votes += z_r if z_no_confidence; no_confidence_votes += dvp_r if dvp_no_confidence; no_confidence_votes += kpd_r if kpd_no_confidence; no_confidence_votes += other_r if other_no_confidence; no_confidence_succeeds = 1 if no_confidence_votes > 50
-
-The NSDAP and DNVP will vote against us, of course. The other parties vote their conscience. [? if z_no_confidence: The Center Party is voting against us. ?] [? if kpd_no_confidence: The KPD votes against us. ?] [? if other_no_confidence: The assortment of minor parties are voting against us. ?]
-
-In total, [+ no_confidence_votes +]% of the Reichstag is against us. [? if no_confidence_succeeds : We have lost the vote of no confidence. ?]
-
-- @no_confidence_elections_new: There will be new elections, which we will try to delay.
-- @no_confidence_win: We have won, for now.
-
-
-@no_confidence_elections_new
-on-arrival: {!
-Q.in_emergency_government = 1;
-Q.no_majority_elections += 1;
-Q.next_election_month = Q.month + 6;
-Q.next_election_time = Q.time + 6;
-if (Q.next_election_month > 12) {
-    Q.next_election_month -= 12;
-    Q.next_election_year = Q.year + 1;
-} else {
-    Q.next_election_year = Q.year;
-}
-Q.pro_republic -= 5;
-Q.workers_spd -= 3;
-Q.new_middle_spd -= 3;
-Q.old_middle_spd -= 3;
-Q.rural_spd -= 3;
-Q.catholics_spd -= 3;
-Q.workers_nsdap += 5;
-Q.old_middle_nsdap += 3;
-Q.new_middle_nsdap += 3;
-Q.rural_nsdap += 3;
-Q.unemployed_nsdap += 5;
-if (Q.pro_republic < 45 && Q.pro_republic >= 38) {
-    Q.workers_spd -= 6;
-}
-if (Q.pro_republic < 38) {
-    Q.workers_spd *= 0.85;
-    Q.new_middle_spd -= 5;
-    Q.old_middle_spd -= 5;
-    Q.rural_spd -= 5;
-    Q.catholics_spd -= 3;
-    Q.workers_nsdap += 5;
-    Q.old_middle_nsdap += 5;
-    Q.new_middle_nsdap += 5;
-    Q.rural_nsdap += 5;
-    Q.unemployed_nsdap += 5;   
-}
-!}
-view-if: no_confidence_votes > 50
-
-The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
-
-
-@no_confidence_win
-view-if: no_confidence_votes <= 50
-on-arrival: in_minority_government = 1; in_emergency_government = 0;
-achievement: minderheitsregierung
-
-We have won the vote of no confidence, and are currently ruling under an SPD minority government. Now our task is to fix the country.
-
-
-@weimar_coalition
-title: We can form a Weimar Coalition.
-subtitle: SPD + Z + [+ ddp_name +] [? if sapd_formed and kpd_relation >= 30 : + SAPD toleration ?] ([+ weimar_coalition +]%)
-view-if: weimar_coalition >= 50
-on-arrival: leverage += 5; leverage += 5 if z_party_leader == "Joos"; in_weimar_coalition = 1; spd_in_government = 1; in_popular_front = 0; in_left_front = 0; foreign_minister_party = "Z"; interior_minister_party = "Z"; justice_minister_party = ddp_name; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = ddp_name; finance_minister_party = "Z"; agriculture_minister_party = "Z"; foreign_minister = "Wirth"; interior_minister = "Wirth"; justice_minister = "Koch-Weser"; labor_minister = "Stegerwald"; reichswehr_minister = "Groener"; economic_minister = "Dietrich"; finance_minister = "Köhler"; agriculture_minister = "Hermes";
-achievement: weimar_coalition
-
-We have enough votes to form a "Weimar Coalition" government consisting of the SPD, Center (Z) and Democratic ([+ ddp_name +]) parties! This has been our preferred governing coalition since 1919.
-
-Who should be the chancellor?
-
-- @muller
-- @braun
-- @breitscheid_coalition_chancellor
-- @wels
-- @z_chancellor
-- @z_chancellor_wirth
-
-@breitscheid_coalition_chancellor
-title: Rudolf Breitscheid for Chancellor
-subtitle: Breitscheid is viewed as friendlier towards the left of the SPD.
-view-if: year >= 1930
-on-arrival: chancellor = "Breitscheid"; chancellor_party = "SPD";
-go-to: ministries
-
-Rudolf Breitscheid has been appointed chancellor.
-
-
-@grand_coalition
-title: We can form a Grand Coalition.
-view-if: grand_coalition >= 50 and grand_coalition_failed == 0
-subtitle: SPD + Z + BVP + [+ ddp_name +] + DVP ([+ grand_coalition +]%)
-on-arrival: in_grand_coalition = 1; in_popular_front = 0; in_left_front = 0
-go-to: grand_coalition_spd_lead if (n_elections <= 1 and largest_party == "SPD") or (largest_party == "SPD" and spd_r >= 30) or president = "Braun"; grand_coalition_z_lead if president != "Braun" and ((n_elections > 1 and spd_r < 30) or (n_elections <= 1 and largest_party != "SPD"))
-
-# TODO: if there are enough votes to form a grand coalition, who leads? Does the SPD lead or does Brüning (Z) lead? In reality this depended on Hindenburg's will, basically, which in turn depended on what his camarilla supported.
-# In the first election, SPD always leads. In subsequent elections, if spd_r >= 29 then SPD leads, otherwise Z leads?
-
-@grand_coalition_z_lead
-go-to: grand_coalition_z_lead_2 if dvp_relation >= 30; grand_coalition_fail if dvp_relation < 30
-
-There are enough votes to form a majority coalition consisting of the SPD, Center (Z), Bavarian People's (BVP), Democratic ([+ ddp_name +]), and People's (DVP) parties. Given our rather weak electoral performance, [? if spd_no_confidence = 1 : and our previous vote of no confidence against the government, ?][? if no_confidence_against_spd = 1 : and the vote of no confidence against us, ?] President Hindenburg has asked the Center Party to take the lead role in forming a government.
-
-# TODO: if the SPD participated in bringing down the previous government via a vote-of-no-confidence, or if we were essentially removed from government by our coalition partners, we should be more reluctant to participate in a new government.
-
-@grand_coalition_z_lead_2
-
-The Center chancellor is likely to be Heinrich Brüning of the Center Party [? if chancellor = "Brüning" : again. ?][? if chancellor != "Brüning": . ?] He is known for his conservatism and sympathy for monarchism, being on the right wing of the Center. [? if austerity >= 2 : Due to the government's austerity policies, many of our members are reluctant to participate in this coalition again. Some support a "toleration" arrangement in which we will provide outside support to prevent the far-right from either entering government or calling a successful no-confidence vote. Others support entering into pure opposition, and letting the right do what it wishes. ?]
-
-Brüning is not opposed to a coalition with us. Alternatively, we could enter a "toleration" agreement.
-
-- @join_bruning: Join the Brüning coalition.
-- @bruning_oppo: Join the opposition.
-- @toleration_bruning: We will "tolerate" a minority Brüning government.
-- @unity_government
-
-@join_bruning
-view-if: grand_coalition >= 50 or neo_weimar_coalition >= 50
-on-arrival: spd_in_government = 1; spd_toleration = 0; in_grand_coalition = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; leverage = 25 if leverage >= 25;
-go-to: ministries
-
-Heinrich Brüning welcomes us into his new cabinet. Now, we have our pick of ministries.
-
-@bruning_oppo
-on-arrival: spd_in_government = 0; spd_toleration = 0; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "Z"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = "Z"; finance_minister_party = "Z"; agriculture_minister_party = "Z"; grand_coalition_failed = 1
-
-By refusing to join the grand coalition or tolerating it, we essentially throw the balance of government to the right wing. [? if right_coalition >= 50 : There are enough votes to form a right-wing coalition that includes the DNVP. However, the DNVP leader, Hugenberg, is opposed to a coalition with the "November criminals" of the Center Party. And of course, the NSDAP is not interested in coalition government. This means that there will not be enough votes to form a majority coalition. ?][? if right_coalition < 50 : There are not enough votes to form a right-wing coalition that includes the DNVP, and they are not interested in joining in a coalition with the "November criminals" of the Center Party, anyhow. And of course, the NSDAP is not interested in coalition government. This means that there is no route to a majority coalition. ?]
-
-If we do not at least "tolerate" the government, there will be new elections in a few months. In the meantime, the President and Chancellor may use the emergency powers granted by Article 48 of the constitution to essentially govern by decree. And it is not at all clear that we will do any better in the next election.
-
-- @join_bruning: Join the Brüning coalition.
-- @toleration_bruning: We will tolerate Brüning after all.
-- @brauns_dilemma
-- @new_elections: New elections, it is!
-
-
-@new_elections
-on-arrival: {!
-Q.next_election_month = Q.month + 3;
-Q.next_election_time = Q.time + 3;
-if (Q.next_election_month > 12) {
-    Q.next_election_month -= 12;
-    Q.next_election_year = Q.year + 1;
-} else {
-    Q.next_election_year = Q.year;
-}
-if (Q.chancellor == "Brüning") {
-    Q.z_relation -= 5;
-    Q.dvp_relation -= 5;
-}
-Q.pro_republic -= 8;
-Q.workers_spd -= 5;
-Q.new_middle_spd -= 5;
-Q.old_middle_spd -= 5;
-Q.rural_spd -= 5;
-Q.catholics_spd -= 3;
-Q.new_middle_dvp -= 8;
-Q.old_middle_dvp -= 8;
-Q.new_middle_ddp -= 5;
-Q.old_middle_ddp -= 10;
-Q.rural_dnvp -= 5;
-Q.workers_nsdap += 5;
-Q.old_middle_nsdap += 6;
-Q.new_middle_nsdap += 6;
-Q.rural_nsdap += 6;
-Q.unemployed_nsdap += 5;
-// Thresholds are kind of arbitrary - adjusted because of negative economic effects on pro_republic
-if (Q.pro_republic < 45 && Q.pro_republic >= 36) {
-    Q.workers_spd -= 6;
-}
-if (Q.pro_republic < 36) {
-    // TODO: if you pursue a consistently revolutionary course, you might avoid this? But you might also cause a coalition between Hitler and the Center.
-    Q.z_relation -= 5;
-    Q.dvp_relation -= 5;
-    Q.workers_spd *= 0.85;
-    Q.unemployed_spd -= 2;
-    Q.new_middle_spd -= 5;
-    Q.old_middle_spd -= 5;
-    Q.rural_spd -= 5;
-    Q.catholics_spd -= 3;
-    Q.workers_nsdap += 8;
-    Q.old_middle_nsdap += 8;
-    Q.new_middle_nsdap += 8;
-    Q.rural_nsdap += 8;
-    Q.unemployed_nsdap += 8;   
-}
-if (Q.far_right_coalition >= 50) {
-    Q.sa_strength += 100;
-    Q.sh_strength += 100;
-    Q.coup_progress += 3;
-}
-!}
-
-There is no path to a workable Reichstag majority or minority government. The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
-
-The people's faith in democracy is shaken by this ordeal. Of course, the Nazis are exploiting the instability to claim that democracy is unworkable, and that Germany needs a strong leader.
-
-
-@toleration_bruning
-choose-if: neo_weimar_coalition >= 50
-unavailable-subtitle: The parties supporting Brüning do not have a majority.
-on-arrival: spd_in_government = 0; spd_toleration = 1; minority_government = 1; chancellor = "Brüning"; chancellor_party = "Z"; foreign_minister_party = "DVP"; interior_minister_party = "Z"; justice_minister_party = "I"; labor_minister_party = "Z"; reichswehr_minister_party = "I"; economic_minister_party = ddp_name; finance_minister_party = "DVP"; agriculture_minister_party = "Z"; pro_republic -= 4; new_middle_dvp -= 5; new_middle_ddp -= 5; old_middle_dvp -= 5; old_middle_ddp -= 5; old_middle_nsdap += 5; new_middle_nsdap += 5; rural_dnvp -= 5;
-
-We have decided to tolerate Brüning's government. This means that we will vote against no-confidence votes to make sure they fail, but also that we will not be directly participating as ministers in the government. Thus, we can prevent a new election and stop the far right from entering government.
-
-@grand_coalition_fail
-on-arrival: grand_coalition_failed = 1
-
-Unfortunately, the DVP and BVP are unwilling to enter into another coalition with the SPD, so the grand coalition is unable to be formed.
-
-- @no_majority: Thus, there is no clear majority.
-- @brauns_dilemma
-- @right_coalition_2: Perhaps a right-wing coalition may form.
-- @beg_dvp: Perhaps we could ask the DVP to change their minds?
-- @unity_government
-- @coalition_menu: What are the other governing arrangements?
-
-
-@beg_dvp
-view-if: dvp_relation >= 15
-go-to: dvp_conservative if stresemann_dead == 1; dvp_majority if stresemann_dead == 0
-
-@dvp_majority
-go-to: join_bruning
-
-Under the influence of Gustav Stresemann, the DVP agrees to allow us into the coalition, and so does the BVP.
-
-
-@dvp_conservative
-
-The DVP asks us to adhere to their conservative economic policies (that is, extreme austerity and labor discipline) in exchange for us joining the coalition.
-
-- @beg_dvp_2: But they would not have a majority without the SPD! The DNVP and NSDAP have no interest in participating in government.
-- @no_majority: There is no chance that we would agree.
-- @brauns_dilemma
-- @coalition_menu: What are the other governing arrangements?
-
-
-@beg_dvp_2
-go-to: beg_dvp_succeed; beg_dvp_fail
-
-We make the case that without the SPD, there is no parliamentary majority, given the DNVP and NSDAP's hostility to constitutional government.
-
-@beg_dvp_succeed
-go-to: join_bruning
-
-Somehow, we succeed in convincing them! We are now in a coalition.
-
-
-@beg_dvp_fail
-go-to: no_majority
-
-As expected, the DVP is too set in their anti-democratic ways.
-
-
-
-@grand_coalition_spd_lead
-on-arrival: leverage -= 15 if dvp_relation < 20
-
-As expected, the SPD is the largest party, and this time, we are expected to take the lead role in the formation of the next government, including selecting the chancellor. President [+ president +] has asked us to form a majority coalition with the Center (Z), Bavarian People's (BVP), Democratic ([+ ddp_name +]), and People's (DVP) parties.
-
-[? if dvp_relation < 20 : As our relation with the DVP is poor, they are demanding more minister posts in order to remain part of the coalition. ?]
-
-Who should be the chancellor?
-
-- @muller
-- @braun
-- @wels
-- @z_chancellor
-- @z_chancellor_wirth
-- @no_govt
-
-
-@muller
-title: Hermann Müller for Chancellor
-view-if: muller_dead = 0
-subtitle: Müller is popular within the party, and is the preferred candidate of the Center and other parties.
-on-arrival: spd_in_government = 1; chancellor = "Müller"; chancellor_party = "SPD"; in_grand_coalition = 1 if in_weimar_coalition == 0
-go-to: ministries
-
-Müller's appointment as chancellor is approved by all our potential allies.
-
-@wels
-title: Otto Wels for Chancellor
-view-if: muller_dead = 1
-subtitle: Otto Wels is a party leader, but can he also be chancellor?
-on-arrival: spd_in_government = 1; chancellor = "Wels"; chancellor_party = "SPD"; in_grand_coalition = 1 if in_weimar_coalition == 0
-go-to: ministries
-
-Otto Wels's appointment as chancellor is approved by our potential allies.
-
-@braun
-title: Otto Braun for Chancellor
-view-if: not historical_mode or not spd_prussia
-subtitle: Braun is currently the Minister-President of Prussia, and is one of our most popular leaders. However, other parties may have qualms about concentrating too much power in one man.
-
-The Center party has significant qualms about appointing Braun as chancellor, given that he is already Minister-President of Prussia. They ask for either more cabinet positions, or for Braun to resign his state government role. The latter is completely unacceptable.
-
-- @muller
-- @wels
-- @braun_2: Let the Center have their cabinet positions.
-
-@braun_2
-subtitle: Otto Braun will be Chancellor.
-view-if: not historical_mode
-on-arrival: spd_in_government = 1; chancellor = "Braun"; chancellor_party = "SPD"; leverage -= 10; in_grand_coalition = 1 if in_weimar_coalition == 0
-go-to: ministries
-
-We have promised to let the Center have more influence in the government in response to the appointment of Braun as chancellor.
-
-
-@z_chancellor
-title: Let the Center Party have their chancellor.
-subtitle: Heinrich Brüning will be chancellor. This is unexpected and will cause internal dissent, but may give us a better position in negotiating for other cabinet positions.
-on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; z_relation += 10; dvp_relation += 5; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0; chancellor = "Brüning"; chancellor_party = "Z"; spd_in_government = 1; leverage += 5
-go-to: ministries
-
-This is highly unexpected, and many in the left and center of our party are criticizing this decision.
-
-[? if year == 1928 : Since Wilhelm Marx resigned, Heinrich Brüning has been appointed chancellor. ?]
-[? if year > 1928: Heinrich Brüning of the Center Party has been appointed chancellor. ?]
-
-@z_chancellor_wirth
-title: Let Joseph Wirth of the Center Party be chancellor.
-view-if: z_party_leader == "Joos"
-subtitle: Wirth is on the left wing of the Center Party. This may give us a better position in negotiating for other cabinet positions.
-on-arrival: left_dissent += 2; z_relation += 6; ddp_relation += 3; kpd_relation -= 5; in_grand_coalition = 1 if in_weimar_coalition == 0; chancellor = "Wirth"; chancellor_party = "Z"; spd_in_government = 1; leverage += 5
-go-to: ministries
-
-
-
-
-@no_govt
-title: We do not form the government.
-subtitle: This will cause significant internal dissent, and will lead to increased distrust from the bourgeois parties.
-on-arrival: reformist_dissent += 5; center_dissent += 5; labor_dissent += 5; neorevisionist_dissent += 5
-
-Are we sure about not participating in government? This will cause significant internal dissent, and will lead to increased distrust from the bourgeois parties. Even debating this option causes internal backlash. In addition, it is possible that the bourgeois and right-wing parties will also be unable to form a coalition government, leading to a regime appointed by President [+ president +].
-
-- @muller
-- @braun
-- @z_chancellor
-- @no_govt_goals: Yes, we're sure.
-
-@no_govt_goals
-
-What are our goals here, exactly?
-
-- @majority: We hope to reach a socialist majority in the next election.
-- @trap: It is a trap to form a government now. We would be unable to accomplish our goals.
-- @socialism: Revolutionary socialism is our goal.
-
-@majority
-go-to: no_govt_2
-
-@trap
-on-arrival: radicalization += 1
-go-to: no_govt_2
-
-@socialism
-go-to: no_govt_2
-
-
-@no_govt_2
-on-arrival: reformist_dissent += 25; center_dissent += 10; labor_dissent += 25; neorevisionist_dissent += 25; in_weimar_coalition = 0; in_grand_coalition = 0; chancellor = "Brüning" if chancellor == "Marx"; spd_in_government = 0; grand_coalition_failed = 1
-go-to: right_coalition_post_spd if right_coalition >= 50 and president != "Braun" and year < 1929; new_elections_spd if (right_coalition < 50 or year >= 1929) and president != "Braun"; brauns_dilemma if president == "Braun"
-
-
-@right_coalition_post_spd
-go-to: right_coalition_2
-
-@new_elections_spd
-on-arrival: next_election_time = time+3; next_election_month = month + 3; next_election_year = year; next_election_year = year + 1 if next_election_month > 12; next_election_month = next_election_month - 12 if next_election_month > 12; new_middle_spd -= 5; old_middle_spd -= 5; workers_spd -= 3; catholics_spd -= 3; in_election = 1
-
-Since the remaining bourgeois and right-wing parties cannot form a tolerable governing agreement, new elections have been called for [+ next_election_month : month +] [+ next_election_year +]. The previous chancellor has resigned, and has been replaced by Heinrich Brüning, also of the Center Party, ruling as part of a presidential cabinet. 
-
-We are seen as responsible for the failure to form a government, and many of our middle-class and even some working-class supporters have deserted the party.
-
-
-@ministries
-
-We can pick from any number of ministries. Controlling a ministry allows us to directly effect policy in that area. [? if in_left_front : Any ministry that we do not take will be given to the KPD. ?] [? if in_left_front and reichswehr_minister_party == "KPD" : If the KPD controls the Reichswehr Ministry, the army will most likely revolt. ?]
-
-- #mins_1928
-- #drop_mins_1928
-
-@labor
-title: Labor Ministry
-subtitle: Taking the Labor Ministry is expected of us.
-unavailable-subtitle: We do not have enough leverage.
-tags: mins_1928
-choose-if: leverage >= 5
-view-if: labor_minister_party != "SPD"
-on-arrival: leverage -= 5; labor_minister_party = "SPD"; labor_minister = "Wissell"
-go-to: ministries
-
-Rudolf Wissell of the SPD has been appointed labor minister.
-
-@interior
-title: Interior Ministry
-subtitle: Taking the Interior Ministry is expected of us. The Interior Ministry controls domestic security.
-unavailable-subtitle: We do not have enough leverage.
-tags: mins_1928
-choose-if: leverage >= 5
-view-if: interior_minister_party != "SPD"
-on-arrival: leverage -= 5; interior_minister_party = "SPD"; interior_minister = "Severing"
-go-to: ministries
-
-Carl Severing of the SPD has been appointed Interior Minister.
-
-@finance
-title: Finance Ministry
-subtitle: The Finance Ministry controls the government budget and taxes.
-unavailable-subtitle: We do not have enough leverage.
-tags: mins_1928
-choose-if: leverage >= 10 
-view-if: finance_minister_party != "SPD"
-on-arrival: leverage -= 10; finance_minister_party = "SPD"; finance_minister = "Hilferding"
-go-to: ministries
-
-Rudolf Hilferding of the SPD has been appointed Finance Minister.
-
-@economic
-title: Economic Ministry
-subtitle: The Economic Ministry controls broader economic policy.
-unavailable-subtitle: We do not have enough leverage.
-tags: mins_1928
-choose-if: leverage >= 10 
-view-if: economic_minister_party != "SPD"
-on-arrival: leverage -= 10; economic_minister_party = "SPD"; economic_minister = "Schmidt"
-go-to: ministries
-
-Robert Schmidt of the SPD has been appointed Economic Minister.
-
-@justice
-title: Justice Ministry
-subtitle: The Justice Ministry controls the courts.
-unavailable-subtitle: We do not have enough leverage.
-tags: mins_1928
-choose-if: leverage >= 10 
-view-if: justice_minister_party != "SPD"
-on-arrival: leverage -= 10; justice_minister_party = "SPD"; justice_minister = "Radbruch"
-go-to: ministries
-
-Gustav Radbruch of the SPD has been appointed Justice Minister.
-
-@foreign
-title: Foreign Ministry
-subtitle: This is usually the domain of Gustav Stresemann of the DVP.
-unavailable-subtitle: We do not have enough leverage.
-tags: mins_1928
-choose-if: leverage >= 10 
-view-if: foreign_minister_party != "SPD"
-on-arrival: leverage -= 10; foreign_minister_party = "SPD"; foreign_minister = "Breitscheid"
-go-to: ministries
-
-Rudolf Breitscheid of the SPD has been appointed Foreign Minister.
-
-
-@agriculture
-title: Agricultural Ministry
-subtitle: This is not our usual domain.
-unavailable-subtitle: We do not have enough leverage.
-choose-if: leverage >= 10 
-view-if: agriculture_minister_party != "SPD"
-on-arrival: leverage -= 10; agriculture_minister_party = "SPD"; agriculture_minister = "Baade"
-go-to: ministries
-tags: mins_1928
-
-Fritz Baade of the SPD has been appointed Agriculture Minister.
-
-@reichswehr
-title: Reichswehr Ministry
-subtitle: The Ministry responsible for the armed forces is not typically our domain; General Groener and the bourgeois-conservatives will be displeased.
-unavailable-subtitle: We do not have enough leverage.
-tags: mins_1928
-choose-if: leverage >= 15 
-view-if: reichswehr_minister_party != "SPD"
-on-arrival: leverage -= 15; reichswehr_minister_party = "SPD"; reichswehr_minister = "Leber"
-go-to: ministries
-
-Julius Leber of the SPD has been appointed Reichswehr Minister.
-
-
-
-@no_more
-title: No more ministries.
-subtitle: [? if leverage >= 10 : We still have some more leverage to gain ministries. ?][? if leverage < 10 : We do not have much leverage left. ?]
-tags: mins_1928
-
-This coalition arrangement is tolerable to all.
-
-@drop_labor
-title: Drop the Labor Ministry.
-view-if: labor_minister_party = "SPD"
-on-arrival: labor_minister_party = "Z"; labor_minister = "Stegerwald"; leverage += 5;
-tags: drop_mins_1928
-go-to: ministries
-
-@drop_interior
-title: Drop the Interior Ministry.
-view-if: interior_minister_party = "SPD"
-on-arrival: interior_minister_party = "Z"; interior_minister = "Wirth"; leverage += 5;
-tags: drop_mins_1928
-go-to: ministries
-
-@drop_finance
-title: Drop the Finance Ministry.
-view-if: finance_minister_party = "SPD"
-on-arrival: finance_minister_party = "DVP"; finance_minister = "Moldenhauer"; leverage += 10; finance_minister_party = "Z" if in_weimar_coalition or in_popular_front; finance_minister = "Köhler" if in_weimar_coalition or in_popular_front
-tags: drop_mins_1928
-go-to: ministries
-
-@drop_economic
-title: Drop the Economic Ministry.
-view-if: economic_minister_party = "SPD"
-on-arrival: economic_minister_party = "DVP"; economic_minister = "Curtius"; leverage += 10; economic_minister_party = ddp_name if in_weimar_coalition or in_popular_front; economic_minister = "Dietrich" if in_weimar_coalition or in_popular_front;
-tags: drop_mins_1928
-go-to: ministries
-
-@drop_justice
-title: Drop the Justice Ministry.
-view-if: justice_minister_party = "SPD"
-on-arrival: justice_minister_party = ddp_name; justice_minister = "Koch-Weser"; leverage += 10;
-tags: drop_mins_1928
-go-to: ministries
-
-@drop_foreign
-title: Drop the Foreign Ministry.
-view-if: foreign_minister_party = "SPD"
-on-arrival: foreign_minister_party = "DVP"; foreign_minister = "Stresemann"; foreign_minister = "Curtius" if streseman_dead; leverage += 10; foreign_minister_party = "Z" if in_weimar_coalition or in_popular_front; foreign_minister = "Wirth" if in_weimar_coalition or in_popular_front;
-tags: drop_mins_1928
-go-to: ministries
-
-@drop_agriculture
-title: Drop the Agriculture Ministry.
-view-if: agriculture_minister_party = "SPD"
-on-arrival: agriculture_minister_party = ddp_name; agriculture_minister = "Dietrich"; leverage += 10; agriculture_minister_party = "Z" if in_weimar_coalition; agriculture_minister = "Hermes" if in_weimar_coalition
-tags: drop_mins_1928
-go-to: ministries
-
-@drop_reichswehr
-title: Drop the Reichswehr Ministry.
-view-if: reichswehr_minister_party = "SPD"
-on-arrival: reichswehr_minister_party = "I"; reichswehr_minister = "Groener"; leverage += 15;
-tags: drop_mins_1928
-go-to: ministries
