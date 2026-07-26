@@ -1,5 +1,6 @@
 title: Root Scene
 new-page: true
+go-to: OevkDataInit
 go-to: post_event if started = 1; start_menu if started = 0
 
 @start_menu

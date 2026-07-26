@@ -1,57 +1,137 @@
 title: Election
 on-arrival: {!
-// calculate normalized class voting amounts (0 to 100)
-for (var c of Q.classes) {
-    var class_votes = 0;
-    for (var party of Q.parties) {
-        if (Q[c+'_'+party] < 0) {
-            Q[c+'_'+party] = 0;
+
+D.oevkgain = {};
+D.reggain = {};
+for (var p of Q.parties) {
+    D.oevkgain[p] = 0;
+    D.reggain[p] = 0;
+}
+
+//Calculate Individual Constituency Party Preferences
+
+for (var c1 of D.OEVK) {
+    c1.support = {};
+    for (var c2 of Q.parties) {
+        c1.support[c2] = 0;
+        for (var c3 of Q.classes) {
+            c1.support[c2] += Q[c3 + "_" + c2] * c1.classes[c3];
         }
-        class_votes += Q[c+'_'+party];
-    }
-    for (var party of Q.parties) {
-        Q[c + '_' + party + '_normalized'] = 100*Q[c+'_'+party]/class_votes;
-        Q[c + '_' + party + '_display'] = Math.round(100*Q[c+'_'+party]/class_votes);
     }
 }
 
-// 1. calculate support for each of the parties
-var total_support = 0;
-for (var party of Q.parties) {
-    var party_support = 0;
-    for (var c of Q.classes) {
-        // but this version is somewhat more entertaining and allows for wilder swings in votes.
-        // the other option basically necessitates a multi-class strategy. while the first option allows for a working-class-only strategy.
-        if (Q.old_demographics) {
-            // okay i'm pretty sure this is wrong, and the hard version is correct
-            // basically this allows for "spillover" effects in other demographics.
-            // so you can campaign among say the workers and 
-            party_support += Q[c]*Q[c+'_'+party];
-            // However, there should be a cap on how much party support you can get in a certain demo.
-        } else  {
-            party_support += Q[c]*Q[c+'_'+party+'_normalized'];
+//Calculate Regional Lists, by aggregating Individual Constituencies on a Regional level
+
+for (var r1 of D.Region) {
+    r1.support = {};
+    for (var r2 of Q.parties) {
+        r1.support[r2] = 0;
+        for (var r3 of D.OEVK) {
+            if (r3.region == r1.id) {
+                r1.support[r2] += r3.support[r2];
+            }
         }
     }
-    Q[party + '_support'] = party_support;
-    total_support += party_support;
 }
-// 2. normalize support (fraction)
-// 3. Round to integers
-// TODO: round to 1 decimal instead of rounding to integers
-// to do that, we multiply party_normalized*1000 and divide the rounded number by 10.
-for (var party of Q.parties) {
-    Q[party+'_normalized'] = Q[party + '_support']/total_support;
-    Q[party+'_votes_dec'] = Math.round(Q[party+'_normalized']*1000)/10;
-    if (Q.use_decimals) {
-        Q[party+'_votes'] = Q[party+'_votes_dec'];
-        Q[party + '_votes_disp'] = Q[party+'_votes'];
-    } else {
-        Q[party+'_votes'] = Math.round(Q[party+'_normalized']*100);
-        Q[party + '_votes_disp'] = Q[party+'_votes_dec'].toFixed(1);
+
+//Calculate the winners of the Individual Constituencies
+
+for (var c1 of D.OEVK) {
+    var maxValue = -Infinity;
+    var maxParty = null;
+    for (var c2 of Q.parties) {
+        if (c1.support[c2] > maxValue) {
+            maxValue = c1.support[c2];
+            maxParty = c2;
+        }
     }
-    //Q[party+'_votes'] = Q[party+'_votes_dec'];
-    // display
+    c1.winner = maxParty;
+    c1.winner_value = maxValue;
+    D.oevkgain[maxParty] += 1;
 }
+
+//To aquire compensatory votes we eleminate the winning parties compensatory vote in the constituency
+
+for (var c1 of D.OEVK) {
+    c1.comp = {};
+    for (var c2 of Q.parties) {
+        c1.comp[c2] = (c1.winner == c2) ? 0 : c1.support[c2];
+    }
+}
+
+//Calculate Regional List mandates by applying the Hagenbach-Bischoff formula
+
+//First we calculate the regular qouta
+
+for (var d1 of D.Region) {
+    d1.total = 0;
+    for (var d2 of Q.parties) {
+        d1.total += d1.support[d2];
+    }
+    d1.cutoff = d1.total / (d1.mandates + 1);
+}
+
+//Then we apply the this qouta
+
+for (var f1 of D.Region) {
+    f1.gain = {};
+    f1.comp = {};
+    for (var f2 of Q.parties) {
+        f1.gain[f2] = Math.floor(f1.support[f2] / f1.cutoff);
+        D.reggain[f2] += f1.gain[f2];
+        f1.comp[f2] = f1.support[f2] - f1.gain[f2] * f1.cutoff;
+    }
+}
+
+D.comp = {};
+for (var c1 of Q.parties) {
+    D.comp[c1] = 0;
+    for (var c2 of D.OEVK) {
+        D.comp[c1] += c2.comp[c1];
+    }
+    for (var c3 of D.Region) {
+        D.comp[c1] += c3.comp[c1];
+    }
+}
+
+//Then we calculate how many mandates can be given out for the National compensatory List
+//Assume the highest of amount of national mandates which is 386 minues 176 aka 210
+
+D.Natmand = 210;
+for (var c1 of D.Region) {
+    for (var c2 of Q.parties) {
+        D.Natmand -= c1.gain[c2];
+    }
+}
+
+//Finally we distribute the national mandates with the D'hont formula
+
+D.natgain = {};
+for (var p1 of Q.parties) D.natgain[p1] = 0;
+
+for (var i = 0; i < D.Natmand; i++) {
+    var bestParty = null;
+    var bestQuotient = -1;
+    for (var p2 of Q.parties) {
+        var quotient = D.comp[p2] / (D.natgain[p2] + 1);
+        if (quotient > bestQuotient) {
+            bestQuotient = quotient;
+            bestParty = p2;
+        }
+    }
+    D.natgain[bestParty] += 1;
+}
+
+Q.seats = {}
+
+for (var p of Q.parties) {
+    Q.seats[p] = D.oevkgain[p] + D.reggain[p] + D.natgain[p];
+}
+
+for (var p of Q.parties) {
+    Q[p + "_r"] = Q.seats[p] / 3.86;
+}
+
 !}
 go-to: jumpScene
 

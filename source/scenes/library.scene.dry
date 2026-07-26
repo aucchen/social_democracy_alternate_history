@@ -342,14 +342,14 @@ data = [
         "id": "kpd",
         "legend": "KPD",
         "name": "KPD",
-        "seats": Q.kpd_r*5,
+        "seats": Q.seats["kpd"],
     }];
 if (Q.sapd_formed && Q.sapd_r) {
     data.push({
             "id": "sapd",
             "legend": "SAPD",
             "name": "SAPD",
-            "seats": Math.round(Q.sapd_r*5),
+            "seats": Q.seats["sapd"],
             });
 }
 data = data.concat([
@@ -357,49 +357,49 @@ data = data.concat([
         "id": "spd",
         "legend": "SPD",
         "name": "SPD",
-        "seats": Q.spd_r*5,
+        "seats": Q.seats["spd"],
     },
     {
         "id": "ddp",
         "legend": "DDP",
         "name": "DDP",
-        "seats": Q.ddp_r*5,
+        "seats": Q.seats["ddp"],
     },
     {
         "id": "z",
         "legend": "Center",
         "name": "Center",
-        "seats": (Q.z_r - 3)*5,
+        "seats": Q.seats["z"],
     },
     {
         "id": "bvp",
         "legend": "BVP",
         "name": "BVP",
-        "seats": 3*5,
+        "seats": Q.seats["bvp"],
     },
     {
         "id": "dvp",
         "legend": "DVP",
         "name": "DVP",
-        "seats": Q.dvp_r*5,
+        "seats": Q.seats["dvp"],
     },
     {
         "id": "other",
         "legend": "Other",
         "name": "Other",
-        "seats": Q.other_r*5,
+        "seats": Q.seats["other"],
     },
     {
         "id": "dnvp",
         "legend": "DNVP",
         "name": "DNVP",
-        "seats": Q.dnvp_r*5,
+        "seats": Q.seats["dnvp"],
     },
     {
         "id": "nsdap",
         "legend": "NSDAP",
         "name": "NSDAP",
-        "seats": Q.nsdap_r*5,
+        "seats": Q.seats["nsdap"],
     },
 ]);
 if (d3 && window) {
