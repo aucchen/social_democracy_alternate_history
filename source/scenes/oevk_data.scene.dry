@@ -1,4 +1,4 @@
-@OevkDataInit
+title: OEVKDATA
 
 on-arrival: {!
 // D.Region mandatumszamai ES D.OEVK region-hozzarendelese VALOSAK (1989. evi XXXIV. torveny 2. mellekelt + a torvenyi OEVK-nevsor). Csak a D.OEVK 'classes' (demografiai) ertekei SZINTETIKUS/RANDOM teszt-adat.
