@@ -43,7 +43,7 @@ Reichstag composition:
 # 1928: 15, 1930: 15, 1932: 
 {!<span class="tooltip-text" title="Center Party + Bavarian People's Party">Z + BVP</span>!}: [+ z_r +]%
 # 1928: 10, 1930: 13
-{!<span class="tooltip-text" title="Radical Democratic Party">KPD</span>!}: [+ kpd_r +]%
+{!<span class="tooltip-text" title="Radical Democratic Party">RDP</span>!}: [+ kpd_r +]%
 # 1928: 5, 1930: 4 (as DstP)
 {!<span class="tooltip-text" title="German Democratic Party">!}[? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]{!</span>!}: [+ ddp_r +]%
 # 1928: 9, 1930: 5
@@ -82,7 +82,7 @@ Economic growth: [+ economic_growth_2 +]%
 
 {!<span class="tooltip-text" title="German People's Party">DVP</span>!}: [+ dvp_relation : relationships +]
 
-{!<span class="tooltip-text" title="Radical Democratic Party">KPD</span>!}: [+ kpd_relation : relationships +]
+{!<span class="tooltip-text" title="Radical Democratic Party">RDP</span>!}: [+ kpd_relation : relationships +]
 
 {!<span class="tooltip-text" title="German National People's Party">DNVP</span>!}: [+ dnvp_relation : relationships +]
 
@@ -164,7 +164,7 @@ SPD: [+ spd_votes +]%
 
 Z + BVP: [+ z_votes +]%
 
-KPD: [+ kpd_votes +]%
+RDP: [+ kpd_votes +]%
 
 [? if not ddp_name: DDP?][? if ddp_name != 0 : [+ ddp_name +]?]: [+ ddp_votes +]%
 
