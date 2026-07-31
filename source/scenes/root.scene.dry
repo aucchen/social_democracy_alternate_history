@@ -21,7 +21,7 @@ on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
 Q.time = 1;
-Q.year = 1928;
+Q.year = 1926;
 Q.month = 1;
 // how many actions have been taken this month?
 Q.month_actions = 0;
@@ -36,7 +36,7 @@ Q.old_demographics = 0;
 Q.use_decimals = 0;
 
 // party resources
-Q.resources = 2;
+Q.resources = 4;
 // party dues
 Q.dues = 2;
 
@@ -101,10 +101,10 @@ Q.moderate_plan_adopted = 0;
 // organizations
 
 // inter-party relations
-Q.z_relation = 50;
-Q.kpd_relation = 25;
-Q.ddp_relation = 60;
-Q.dvp_relation = 35;
+Q.z_relation = 15;
+Q.kpd_relation = 50;
+Q.ddp_relation = 30;
+Q.dvp_relation = 40;
 // DNVP and NSDAP are invariably hostile
 Q.DNVP_relation = 10;
 Q.NSDAP_relation = 0;
@@ -297,13 +297,13 @@ Q.catholics_other = 12;
 // since they were ideologically similar, but they were separate parties.
 // They did not have a CDU/CSU-style relationship.
 Q.spd_r = 26;
-Q.kpd_r = 9;
-Q.z_r = 17;
-Q.ddp_r = 6;
-Q.dvp_r = 10;
-Q.dnvp_r = 20;
-Q.nsdap_r = 3;
-Q.other_r = 9;
+Q.kpd_r = 11;
+Q.z_r = 12;
+Q.ddp_r = 36;
+Q.dvp_r = 0;
+Q.dnvp_r = 0;
+Q.nsdap_r = 0;
+Q.other_r = 15;
 
 // diff from prev
 Q.old_spd_r = 26;
