@@ -1,8 +1,8 @@
 
 # party faction dissent
 
-(..4.999) very low
-(4.999..14.999) low
-(14.999..30.999) medium
-(30.999..49.999) high
-(49.999..) very high
+(..4.999) <span style="color: #66BB6A;">very low</span>
+(4.999..14.999) <span style="color: #81C784;">low</span>
+(14.999..30.999) <span style="color: #FFD54F;">medium</span>
+(30.999..49.999) <span style="color: #FFB74D;">high</span>
+(49.999..) <span style="color: #d42f2f;">very high</span>

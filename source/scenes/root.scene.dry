@@ -20,9 +20,9 @@ go-to: start_menu_2
 on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
-Q.time = 1;
-Q.year = 1928;
-Q.month = 1;
+Q.time = 11;
+Q.year = 1918;
+Q.month = 11;
 // how many actions have been taken this month?
 Q.month_actions = 0;
 
@@ -31,14 +31,14 @@ Q.difficulty = 0;
 Q.historical_mode = 0;
 // old demographics
 Q.old_demographics = 0;
-// use decimals for reichstag seats
-// TODO: not yet implemented
-Q.use_decimals = 0;
 
 // party resources
 Q.resources = 2;
 // party dues
 Q.dues = 2;
+
+// pilsudski (placeholder stats)
+Q.p_influence = 80;
 
 // the state of the party
 // overall dissent reduces every increase in party support.
@@ -46,34 +46,14 @@ Q.dissent = 0.05;
 Q.dissent_percent = 5;
 
 // factions
-Q.factions = ['left', 'center', 'labor', 'reformist', 'neorevisionist'];
-// should this be normalized to 100%?
-Q.left_strength = 15;
-Q.left_dissent = 20;
-Q.center_strength = 30;
-Q.center_dissent = 0;
+Q.factions = ['revolutionary', 'labor', 'reformist'];
+Q.revolutionary_strength = 30;
+Q.revolutionary_dissent = 25;
 Q.labor_strength = 25;
-Q.labor_dissent = 5;
-Q.reformist_strength = 25;
-Q.reformist_dissent = 5;
-Q.neorevisionist_strength = 5;
-Q.neorevisionist_dissent = 10;
+Q.labor_dissent = 10;
+Q.reformist_strength = 45;
+Q.reformist_dissent = 15;
 
-// secret events...
-Q.unions_independent = 0;
-Q.centrists_resign = 0;
-Q.left_split = 0;
-Q.reformists_resigned = 0;
-
-// have we discovered neorevisionism?
-Q.neorevisionism = 0;
-
-// crisis_urgency indicates how seriously the SPD is taking the economic crisis - scale from 0 to 10.
-Q.crisis_urgency = 0;
-// nazi_urgency indicates how seriously the SPD takes the nazis - scale from 0 to 10.
-Q.nazi_urgency = 0;
-// radicalization indicates how radical the SPD's rhetoric is - scale from 0 to 10.
-Q.radicalization = 0;
 // Support for the WTB plan and proto-Keynesian works creation plans in general
 Q.wtb_support = 0;
 // Support for Pacifism within the SPD relative to 1928
@@ -101,10 +81,18 @@ Q.moderate_plan_adopted = 0;
 // organizations
 
 // inter-party relations
-Q.z_relation = 50;
-Q.kpd_relation = 25;
-Q.ddp_relation = 60;
-Q.dvp_relation = 35;
+Q.kprp_relation = 20;
+Q.npr_relation = 25;
+Q.psl_l_relation = 60;
+Q.chsr_relation = 30;
+Q.psl_w_relation = 35;
+Q.psl_p_relation = 30;
+Q.pu_relation = 50;
+Q.bmn_relation = 60;
+Q.pz_relation = 50;
+Q.pc_relation = 40;
+Q.chzjn_relation = 15;
+
 // DNVP and NSDAP are invariably hostile
 Q.DNVP_relation = 10;
 Q.NSDAP_relation = 0;
@@ -195,132 +183,138 @@ Q.capital_strike_progress = 0;
 Q.budget = 4;
 
 // Proportion of different social groups
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 45, table 3.4 - using 1925 figures
-Q.workers = 48; // industry and trade
-Q.old_middle = 13; // "old mittelstand"
-// 16.4 trade & commerce, 6.6 public and private services, 4.4 domestic help
-Q.new_middle = 14; // "new mittelstand"
-Q.rural = 25; // agriculture and forestry employment... but many of those are proletarians so...
-// source: https://surface.syr.edu/cgi/viewcontent.cgi?filename=3&article=1016&context=books&type=additional page 43, table 3.3
-Q.unemployed = 8.6;
-Q.catholics = 30;
+// source: Unfortunately I used chatgpt temporarily for these stats cus I can't read polish documents
+Q.peasants = 68;
+Q.workers = 15;
+Q.middle = 14;
+Q.upper = 3;
 
-// unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
+// Unemployment is technically low, but Rural Poverty is high
 
-// income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year; 1931 = 1440 Reichsmarks/year; 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
-Q.income = 1600;
-// what about incomes for different classes? rural workers? middle-class workers?
+Q.unemployed = 4;
+Q.minority = 9;
 
-// inflation (in %; 1928: 2.9; 1929: 0; 1930: -5%; 1931: -10%; 1932: -10%) - source: https://en.wikipedia.org/wiki/File:BSPDRWeltkriseEngl.PNG, derived from https://www.destatis.de/DE/Methoden/WISTA-Wirtschaft-und-Statistik/2009/03/rezession-betrachtung-032009.pdf?__blob=publicationFile
 Q.inflation = 2.9;
 
-// economic growth - same source as above, Table 2 (preisbereinigt) - this is also the source for the yearly changes in the great depression.
 Q.economic_growth = 4.4;
 
 // economic expansion timer
 Q.economic_expansion = 0;
 
-// quality of life (as % of 1928 - currently unused - should be welfare-adjusted.)
+// quality of life (will be used...)
+Q.peasants_qol = 100;
 Q.workers_qol = 100;
-Q.rural_qol = 100;
+Q.middle_qol = 100;
+Q.upper_qol = 100;
 Q.unemployed_qol = 100;
-Q.old_middle_qol = 100;
-Q.new_middle_qol = 100;
 
-Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
-Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
+Q.classes = ['peasants', 'workers', 'middle', 'upper', 'unemployed', 'minority'];
+Q.parties = ['pps', 'npr', 'psl_l', 'psl_w', 'psl_p', 'pu', 'pz', 'pc', 'other'];
 
-// TODO: add 'sapd' later on
-Q.sapd_formed = 0;
+// future parties
+Q.kprp_formed = 0;
+Q.bmn_formed = 0;
+Q.chsr_formed = 0;
+Q.chzjn_formed = 0;
+Q.kprp_boycott = 1;
+
+// for changing parties name
+Q.kprp_name = "KPRP";
+Q.chzjn_name = "NKWSD";
+Q.kprp_full_name = "Communist Workers Party of Poland";
+Q.chzjn_full_name = "The National Electoral Committee of Democratic Parties";
 
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_spd = 60;
-Q.workers_kpd = 20;
-Q.workers_z = 5;
-Q.workers_ddp = 0;
-Q.workers_dvp = 0;
-Q.workers_dnvp = 5;
-Q.workers_nsdap = 0;
-Q.workers_other = 10;
 
-Q.old_middle_spd = 5;
-Q.old_middle_kpd = 0;
-Q.old_middle_z = 5;
-Q.old_middle_ddp= 10;
-Q.old_middle_dvp = 25;
-Q.old_middle_dnvp = 25;
-Q.old_middle_nsdap = 10;
-Q.old_middle_other = 10;
+Q.peasants_pps = 0;
+Q.peasants_npr = 0;
+Q.peasants_psl_l = 10;
+Q.peasants_psl_w = 67;
+Q.peasants_psl_p = 20;
+Q.peasants_pu = 0;
+Q.peasants_pz = 0;
+Q.peasants_pc = 0;
+Q.peasants_other = 0;
 
-Q.new_middle_spd = 5;
-Q.new_middle_kpd = 1;
-Q.new_middle_z = 10;
-Q.new_middle_ddp= 25;
-Q.new_middle_dvp = 25;
-Q.new_middle_dnvp = 10;
-Q.new_middle_nsdap = 5;
-Q.new_middle_other = 15;
+Q.workers_pps = 67;
+Q.workers_npr = 0;
+Q.workers_psl_l = 0;
+Q.workers_psl_w = 0;
+Q.workers_psl_p = 6;
+Q.workers_pu = 7;
+Q.workers_pz = 0;
+Q.workers_pc = 0;
+Q.workers_other = 0;
 
-Q.rural_spd = 10;
-Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp= 5;
-Q.rural_dvp = 15;
-Q.rural_dnvp = 45;
-Q.rural_nsdap = 5;
-Q.rural_other = 10;
+Q.middle_pps = 0;
+Q.middle_npr = 0;
+Q.middle_psl_l = 0;
+Q.middle_psl_w = 0;
+Q.middle_psl_p = 0;
+Q.middle_pu = 0;
+Q.middle_pz = 0;
+Q.middle_pc = 0;
+Q.middle_other = 0;
 
-Q.unemployed_spd = 25;
-Q.unemployed_kpd = 55;
-Q.unemployed_z = 1;
-Q.unemployed_ddp = 0;
-Q.unemployed_dvp = 0;
-Q.unemployed_dnvp = 5;
-Q.unemployed_nsdap = 15;
-Q.unemployed_other = 9;
+Q.upper_pps = 0;
+Q.upper_npr = 0;
+Q.upper_psl_l = 0;
+Q.upper_psl_w = 0;
+Q.upper_psl_p = 0;
+Q.upper_pu = 0;
+Q.upper_pz = 0;
+Q.upper_pc =  0;
+Q.upper_other =  0;
 
-Q.catholics_spd = 15;
-Q.catholics_kpd = 2;
-Q.catholics_z = 50;
-Q.catholics_ddp = 0;
-Q.catholics_dvp = 5;
-Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 0;
-Q.catholics_other = 12;
+Q.unemployed_pps = 20;
+Q.unemployed_npr = 24;
+Q.unemployed_psl_l = 0;
+Q.unemployed_psl_w = 0;
+Q.unemployed_psl_p = 30;
+Q.unemployed_pu = 0;
+Q.unemployed_pz = 0;
+Q.unemployed_pc = 0;
+Q.unemployed_other = 0;
 
+Q.minority_pps = 4;
+Q.minority_npr = 1;
+Q.minority_psl_l = 3;
+Q.minority_psl_w = 6;
+Q.minority_psl_p = 5;
+Q.minority_pu = 0;
+Q.minority_pz = 65;
+Q.minority_pc = 2;
+Q.minority_other = 14;
 
-// Current Reichstag composition
-// % of Reichstag in Jan 1928
-// source: wikipedia
-// note: the Z figures also include the BVP (Bavarian people's party)
-// since they were ideologically similar, but they were separate parties.
-// They did not have a CDU/CSU-style relationship.
-Q.spd_r = 26;
-Q.kpd_r = 9;
-Q.z_r = 17;
-Q.ddp_r = 6;
-Q.dvp_r = 10;
-Q.dnvp_r = 20;
-Q.nsdap_r = 3;
-Q.other_r = 9;
+// Current Sejm Composition
+Q.kprp_sj = 0;
+Q.pps_sj = 0;
+Q.npr_sj = 0;
+Q.psl_l_sj = 0;
+Q.psl_w_sj = 0;
+Q.chsr_sj = 0;
+Q.psl_p_sj = 0;
+Q.pu_sj = 0;
+Q.bmn_sj = 0;
+Q.pz_sj = 0;
+Q.pc_sj = 0;
+Q.chzjn_sj = 0;
+Q.other_sj = 0;
 
-// diff from prev
-Q.old_spd_r = 26;
-Q.old_kpd_r = 9;
-Q.old_z_r = 17;
-Q.old_ddp_r = 6;
-Q.old_dvp_r = 10;
-Q.old_dnvp_r = 20;
-Q.old_nsdap_r = 3;
-Q.old_other_r = 9;
-
-// sapd isn't formed yet, but it may be formed
-Q.sapd_r = 0;
-Q.old_sapd_r = 0;
-
-// for changing the DDP's name to the DStP
-Q.ddp_name = "DDP";
+Q.old_kprp_sj = 0;
+Q.old_pps_sj = 0;
+Q.old_npr_sj = 0;
+Q.old_psl_l_sj = 0;
+Q.old_psl_w_sj = 0;
+Q.old_chsr_sj = 0;
+Q.old_psl_p_sj = 0;
+Q.old_pu_sj = 0;
+Q.old_bmn_sj = 0;
+Q.old_pz_sj = 0;
+Q.old_pc_sj = 0;
+Q.old_chzjn_sj = 0;
+Q.old_other_sj = 0;
 
 // array of objects of the form {date: Date(), spd: 10, kpd: 12, ...} for each election
 Q.election_records = [];
@@ -331,66 +325,60 @@ Q.economic_records = [];
 
 
 // State of the government
-Q.president = "Hindenburg";
-// starting chancellor: Wilhelm Marx
-Q.chancellor = "Marx";
-Q.chancellor_party = 'Z';
-Q.spd_in_government = 0;
-Q.z_in_government = 1;
-Q.ddp_in_government = 0;
-Q.dvp_in_government = 1;
-Q.dnvp_in_government = 1;
-Q.kpd_in_government = 0;
-Q.nsdap_in_government = 0;
+Q.kprp_in_government = 0;
+Q.pps_in_government = 0;
+Q.npr_in_government = 0;
+Q.psl_l_in_government = 0;
+Q.chsr_in_government = 0;
+Q.psl_w_in_government = 0;
+Q.psl_p_in_government = 0;
+Q.pu_in_government = 0;
+Q.bmn_in_government = 0;
+Q.pz_in_government = 0;
+Q.pc_in_government = 0;
+Q.chzjn_in_government = 0;
+Q.other_in_government = 0;
 
+Q.sejm_size = 3.91;
+
+// temporary
+// kprp to psl-p
+Q.in_left_coalition = 0;
+// psl-p to other ?
 Q.in_right_coalition = 0;
-// Weimar coalition = SPD + Z + DDP
-Q.in_weimar_coalition = 0;
-// Grand coalition = SPD + Z + BVP + DDP + DVP
-// also includes the "new grand coalition" of SPD + Z + BVP + DDP + DVP + Others
-Q.in_grand_coalition = 0;
-// Popular front = SPD + KPD + Z + DDP
-Q.in_popular_front = 0;
-// left coalition = SPD + KPD + left-splinters
-Q.in_left_front = 0;
-// emergency government containing the SPD: only president Braun can do this.
-Q.in_emergency_government = 0;
-Q.in_spd_majority = 0;
-Q.grand_coalition_failed = 0;
-// if the SPD is ruling as part of a minority government
-Q.in_minority_government = 0;
-// national unity governmet
 
 // if you're in a coalition, this is an incremental counter for how many times dissent has happened from the right.
 Q.coalition_dissent = 0;
-// dissent from the KPD, in a popular front or left front government
-Q.kpd_coalition_dissent = 0;
+// if not in gov
+Q.other_coalition_dissent = 0;
 
 // does the SPD tolerate the government even if it is not a participant?
-Q.spd_toleration = 0;
+Q.pps_toleration = 0;
 
 // is the current government a presidential minority government?
 Q.minority_government = 0;
 
 // ministries - which parties control the ministries?
-// starting with the 4th Marx cabinet https://en.wikipedia.org/wiki/Fourth_Marx_cabinet
-// is the agricultural ministry useful at all?
-Q.foreign_minister = 'Streseman';
-Q.foreign_minister_party = 'DVP';
-Q.interior_minister = 'von Keudell';
-Q.interior_minister_party = 'DNVP';
-Q.justice_minister = 'Hergt';
-Q.justice_minister_party = 'DNVP';
-Q.labor_minister = 'Brauns';
-Q.labor_minister_party = 'Z';
-Q.reichswehr_minister = 'Groener';
-Q.reichswehr_minister_party = 'I';
-Q.economic_minister = 'Curtius';
-Q.economic_minister_party = 'DVP';
-Q.finance_minister = 'Köhler';
-Q.finance_minister_party = 'Z';
-Q.agriculture_minister = 'Schiele';
-Q.agriculture_minister_party = 'DNVP';
+// https://pl.wikipedia.org/wiki/Rz%C4%85d_Ignacego_Jana_Paderewskiego
+// Simplified and clean ver.
+Q.prime_minister_party = 'Vacant';
+Q.prime_minister = 'Vacant';
+Q.labor_minister_party = 'Vacant';
+Q.labor_minister = 'Vacant';
+Q.treasury_minister_party = 'Vacant';
+Q.treasury_minister = 'Vacant';
+Q.agriculture_minister_party = 'Vacant';
+Q.agriculture_minister = 'Vacant';
+Q.exterior_minister_party = 'Vacant';
+Q.exterior_minister = 'Vacant';
+Q.interior_minister_party = 'Vacant'
+Q.interior_minister = 'Vacant';
+Q.military_minister_party = 'Vacant';
+Q.military_minister = 'Vacant';
+Q.justice_minister_party = 'Vacant';
+Q.justice_minister = 'Vacant';
+Q.education_minister_party = 'Vacant';
+Q.education_minister = 'Vacant';
 
 // Events: what has occurred?
 Q.panzerkreuzer_seen = 0;
@@ -414,12 +402,6 @@ Q.land_reform = 0;
 // works-creation programs (i.e. WTB-plan) - how much have they implemented?
 Q.works_program = 0;
 Q.wtb_implemented = 0;
-// Relations with the Western countries (France, UK).
-Q.west_relation = 0;
-// Relations with the Eastern countries (Poland, Czechoslovakia)
-Q.east_relation = 0;
-// Relations with the Soviet Union
-Q.soviet_relation = 0;
 // How much have we exposed the secret rearmament programs?
 Q.rearmament_exposed = 0;
 // reparations vs baseline: young plan is -1.
@@ -445,6 +427,12 @@ Q.education_science = 0;
 Q.lower_tax_rates = 0;
 Q.upper_tax_rates = 0;
 Q.tariffs = 0;
+
+// foreign
+Q.soviet_relation = 0;
+Q.german_relation = 0;
+// France, UK, USA
+Q.west_relation = 0;
 
 Q.electoral_threshold = 0;
 
@@ -504,9 +492,9 @@ Q.n_elections = 0;
 Q.no_majority_elections = 0;
 // elections are not on a timer, but rather there is an indicator for whether you're in an electoral cycle.
 Q.in_election = 1;
-Q.next_election_year = 1928;
-Q.next_election_month = 5;
-Q.next_election_time = 5;
+Q.next_election_year = 1919;
+Q.next_election_month = 1;
+Q.next_election_time = 1;
 // government affairs timers
 Q.agricultural_policy_timer = 0;
 Q.domestic_enemies_timer = 0;

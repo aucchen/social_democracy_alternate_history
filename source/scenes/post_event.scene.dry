@@ -11,6 +11,14 @@ for (var c of Q.classes) {
         }
     }
 }
+// parties formed
+if (Q.year == 1918 && Q.month == 12) {
+    Q.kprp_formed = 1;
+    Q.chzjn_formed = 1;
+}
+if (Q.year == 1919 && Q.month == 1) {
+    Q.chsr_formed = 1;
+}
 
 Q.pro_republic = Math.round(Q.pro_republic);
 Q.nationalism = Math.round(Q.nationalism);

@@ -37,7 +37,12 @@ max-cards: 4
 
 #Here, the main deck will be displayed. Clicking on the deck draws a card into your hand. Clicking on a card activates that card.
 
-[? if year = 1928 and month = 2 : The current bourgeois-right government has fallen. The next elections are slated for May of this year. ?]
+[?
+if year == 1918 and month == 12 : An Electoral Commttee has been formed, Its members included: the National Democratic Party, the Christian Democratic Party, the Polish Progressive Party, the National Union, and the National Suffrage Action of Polish Women.<br><br>
+After a few weeks, the following also joined: the Real Politics Party, the National Rebirth Party, the National Labor Party, the Political Circle of Workers' Associations, the Association of Christian Workers and the Economic Independence Union.<br><br>
+Additionally a far left party has been formed,<span style="color: #890000;">**The Communist Workers' Party of Poland</span> was formed after the following the merger of the <span style="color: #855000;">Social Democracy of the Kingdom of Poland and Lithuania (SDKPiL)</span><br><br>
+and <span style="color: #D03030;">PPS-Left</span>, the <span style="color: #890000;">Communist Workers' Party of Poland (KPRP) has been formally established. Additionally Party has decided to Boycott the January Elections.
+?]
 
 - @party
 - @govt
