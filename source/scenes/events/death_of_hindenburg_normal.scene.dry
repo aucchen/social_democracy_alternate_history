@@ -1,7 +1,7 @@
 title: The Death of Hindenburg
 subtitle: The Great War hero and one-time president has died...
 new-page: true
-view-if: year = 1934 and month >= 7 and president != "Hindenburg"
+view-if: year = 1934 and month >= 8 and president != "Hindenburg"
 on-arrival: hindenburg_dead = 1
 max-visits: 1
 tags: event
