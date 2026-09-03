@@ -72,6 +72,14 @@ Breitscheid has been removed as an advisor. The Centrist faction disapproves.
 
 # reformists
 
+@remove_hampl
+title: Remove Hampl
+view-if: hampl_advisor = 1
+tags: remove_advisor
+on-arrival: hampl_advisor = 0; reformist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Hampl has been removed as an advisor. The Reformist faction disapproves.
 
 @remove_severing
 title: Remove Severing
@@ -391,6 +399,17 @@ on-arrival: severing_advisor = 1; n_advisors += 1; reformist_strength += 5
 go-to: advisor_menu
 
 Carl Severing is now an advisor.
+
+@add_hampl
+title: Antonín Hampl
+subtitle: Antonín Hampl is long-time chairman of ČSSD. He is commited to work with other democratic parties.
+card-image: img/portraits/Hampl.jpg
+tags: reformist_advisor
+view-if: hampl_advisor = 0 and n_advisors < 3
+on-arrival: hampl_advisor = 1; n_advisors += 1; reformist_strength += 5
+go-to: advisor_menu
+
+Antonín Hampl is now an advisor.
 
 @add_braun
 title: Otto Braun
