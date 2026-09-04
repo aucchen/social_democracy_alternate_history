@@ -1,29 +1,28 @@
-title: Hermann Müller
+title: Manholy Suheil
 is-pinned-card: true 
 tags: advisor, centrist
 card-image: img/portraits/MüllerHermann.jpg
 new-page: true
 view-if: muller_advisor = 1
 
-= Herman Müller
+= Manholy Suheil
 
 
-Müller is a former [? if chancellor = "Müller": and current ?] Chancellor, and is a long-time Social Democratic leader.
+Suheil is the leader of the Left of the party, and is a long-time Social Democratic leader.
 
-- @coalition
+- @organizing_women
 - @toleration
 - @snap_election
 - @root: Return to main
 
-@coalition
-title: Negotiating with the Coalition
-subtitle: Müller can improve our relationships with our coalition partners.
-choose-if: advisor_action_timer <= 0 and spd_in_government = 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if not spd_in_government: The SPD is not in government. ?]
-on-arrival: advisor_action_timer = 6; coalition_dissent -= 1 if spd_in_government = 1 and coalition_dissent > 0; z_relation += 5; ddp_relation += 5; dvp_relation += 5
+@organizing_women
+title: Organizing women
+subtitle: lMül'sstrategies are aimed at more "traditional" women.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: womens_rights += 1; workers_spd += 4*(1-dissent); rural_spd += 3*(1-dissent); old_middle_spd += 3*(1-dissent); advisor_action_timer = 6
 
-We have improved our relations with the Z, [+ ddp_name +], and DVP, and reduced tensions with the coalition.
-
+Suheil's strategies for organizing women are aimed at working-class housewives, and acknowledge women's traditional household roles. We argue that our economic and social policies will improve the livelihoods of women and their families.
 
 @toleration
 title: Defending Toleration
@@ -37,8 +36,8 @@ We have reduced dissent among the anti-toleration factions.
 @snap_election
 title: Snap Election
 subtitle: Call a snap election.
-unavailable-subtitle: [? if chancellor != "Müller" : Müller must be Chancellor. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer == 0 and chancellor == "Müller"
+unavailable-subtitle: [? if chancellor != "Suheil" : Suheil must be Chancellor. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+choose-if: advisor_action_timer == 0 and president == "Suheil"
 on-arrival: advisor_action_timer = 6; next_election_time = time + 3 if next_election_time > time+3; next_election_month = month + 3 if next_election_time >= time+3; next_election_year = year if next_election_time >= time+3; next_election_year += 1 if next_election_month > 12; next_election_month -= 12 if next_election_month > 12;
 
 We have called for new elections, set for [+ next_election_month : month +] [+ next_election_year +].
