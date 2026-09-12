@@ -618,10 +618,9 @@ audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_
 new-page: true
 go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
 
-= 1928
+= 1972
 
-It is a bright time for German democracy. After a period of struggle, inflation is finally under control, and the economy is expanding steadily. In foreign policy, we have reached agreements with the Western powers and the Soviet Union that might make genuine peace a reality. 
-
-Now, the task of Social Democracy is to prepare for the next election. The bourgeois-right government of Wilhelm Marx is unpopular, and we stand to gain. Perhaps the next government will have a socialist majority.
-
+The golden west, a land of boundless prosperity from the industrious lumber mills of the Kootenays, to the idyllic farms of the Fraser Valley, to the neat gardens and prim houses of Oak Bay. Sacrifice and struggle during the hard years of depression and war have been rewarded by a quarter-century of continuous growth. Unemployment is low, wages high, and the dream of suburban tranquility achieved by a growing number of comfortable middle-class families. Businessmen across North America are happy to invest in the province's ever expanding industries. Great towers rise in Vancouver which is coming into its own as one of Canada's premier cities and a gateway to the Pacific world. New projects stitch BC's vast, beautiful landscape ever closer together. Here the promise of peace, order, and good government has truly been fulfilled.
+Alternatively...
+Canada's very own banana republic right down to mob connected luxury resorts and Nazi sympathizing aristocrats in the halls of power. BC might have been carried along by the post-war boom but in many ways it is a land out of time. The government is opaque, unaccountable, and deeply corrupt. When the press isn't knocking back beers with cabinet ministers it's writing press releases for the ruling party. Unlike the rest of Canada there has been no attempt at labour peace that hasn't come from court injunctions and the police baton. Children, the poor, and the marginalized are subject to systems Dickensian in their casual cruelty and seeming indifference to human suffering. Foreign companies exploit the province's resources at fire sale prices while its rulers receive kickbacks in return for looking the other way. This could be a beautiful place, but it is held down by powers intent on keeping it in subjugation.
 
