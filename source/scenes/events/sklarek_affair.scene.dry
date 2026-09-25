@@ -1,0 +1,13 @@
+title: Sklarek Affair
+subtitle: The investigation of a long-running scandal in Berlin
+new-page: true
+view-if: (year = 1929 and month >= 10) and spd_prussia
+max-visits: 1
+on-arrival: sklarek_affair_seen = 1
+# tags: event
+
+= Sklarek Affair
+
+# TODO
+
+# The Prussian committee of inquiry into the affair in 1929

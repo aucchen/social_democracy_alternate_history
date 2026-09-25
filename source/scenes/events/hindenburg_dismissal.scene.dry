@@ -1,0 +1,7 @@
+title: Hindenburg dismisses the government!
+subtitle: President Hindenburg has lost confidence in the present ministry.
+new-page: true
+view-if: president = "Hindenburg" and spd_in_government and hindenburg_relation <= 0 and hindenburg_dismissal_timer <= 0 and hindenburg_enabled = 1
+#tags: event
+
+= Hindenburg dismisses the government!

@@ -1,0 +1,22 @@
+title: Agricultural Revolt
+subtitle: Small farmers are in revolt over debts and taxes...
+view-if: ((year = 1929 and month >= 1)) and spd_in_government
+max-visits: 1
+on-arrival: agricultural_crisis_seen = 1
+new-page: true
+# tags: event
+
+= Agricultural Revolt
+
+# TODO
+
+# Schleswig-Holstein Landvolk
+# sources: https://www.journals.uchicago.edu/doi/10.2307/2125668 
+# https://www.jstor.org/stable/1405576?seq=11 - Landvolk Revolt, centered in Schleswig-Holstein
+
+The German peasantry is beginning to conduct a war against the government. Starting in the state of Schleswig-Holstein, the *Landvolkbewegung* has become increasingly brazen, conducting sabotage.
+
+# options:
+# 1. There is nothing we can do.
+# 2. The Landvolk must be suppressed.
+# 3. Increase agricultural financing

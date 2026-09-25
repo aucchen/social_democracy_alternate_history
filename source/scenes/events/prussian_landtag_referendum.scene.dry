@@ -1,0 +1,8 @@
+title: Prussian Landtag Referendum
+subtitle: The far-right [? if kpd_relation <= 30 and kpd_party_leader != "Conciliators" : and the KPD ?] hope to topple our government in Prussia...
+new-page: true
+view-if: (year = 1931 and month >= 8) and spd_prussia and pro_republic < 50 and (spd_votes + z_votes + ddp_votes < 42)
+max-visits: 1
+# tags: event
+
+# TODO
