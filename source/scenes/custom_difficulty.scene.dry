@@ -45,6 +45,9 @@ if (Q.starting_relations == 0) {
     Q.dvp_relation = 31;
 }
 
+Q.starting_rb_strength = Number.parseInt(document.getElementById("starting_rb_strength").value);
+Q.rb_strength = Q.starting_rb_strength;
+
 Q.hand_size = Number.parseInt(document.getElementById("hand_size").value);
 
 Q.historical_mode = Number.parseInt(document.getElementById("historical_mode").value);
@@ -96,6 +99,15 @@ Starting inter-party relations: {! <select name="starting_relations" id="startin
 <option value="1" selected>Normal</option>
 <option value="2">Hard</option>
 </select> !}
+
+# default: 1 (normal)
+Starting Reichsbanner strength: {! <select name="starting_rb_strength" id="starting_rb_strength"> 
+<option value="1000">1000</option>
+<option value="2000" selected>2000</option>
+<option value="2500">2500</option>
+</select> !}
+
+
 
 # historical mode
 Historical mode (makes certain actions more difficult): {! <select name="historical_mode" id="historical_mode"> 

@@ -11,9 +11,24 @@ on-arrival: sklarek_affair_seen = 1
 # TODO
 
 # The Prussian committee of inquiry into the affair in 1929
-A corruption scandal is being uncovered in Berlin and Prussia. In 1927, a business owned by members of the Sklarek family was contracted to provide uniforms for the Berlin government, but they absconded with the funds without providing the uniforms. It has now been discovered that the Sklareks are deeply embedded in Berlin politics, with family members in the SPD, DDP, and other parties. The Right has seized upon this affair and is using it to attack the "Weimar" parties and the governing system of the republic, as well as fanning the flames of antisemitism, since the Sklareks are of Eastern European Jewish descent.
+A great corruption scandal is being uncovered in Berlin and Prussia. In 1927, a business owned by members of the Sklarek family was contracted to provide uniforms for the Berlin government, but they absconded with the funds without providing the uniforms. It has now been discovered that the Sklareks are deeply embedded in Berlin politics, with family members in the SPD, DDP, and other parties, and have been bribing politicians in exchange for government contracts. The Right has seized upon this affair and is using it to attack the "Weimar" parties and the governing system of the republic, as well as fanning the flames of antisemitism, since the Sklareks are of Eastern European Jewish descent.
 
 The Prussian Landtag has formed a committee to investigate the affair. What should be our posture?
 
 # Corruption is unacceptable. Cooperate with the investigation fully to root out
 # The Sklareks also ingratiated themselves with the DNVP; turn the attacks back against the right. (requires judicial reform and either Prussian police reform or interior ministry reform  to succeed)
+
+- @corruption_unacceptable
+- @downplay
+- @turn_back
+
+@corruption_unacceptable
+title: Corruption is unacceptable. Cooperate with the investigation, even if it implicates the SPD.
+
+@downplay
+title: Downplay the affair.
+
+@turn_back
+title: The Sklareks also ingratiated themselves with the DNVP; turn the attacks back against the right.
+choose-if: judicial_reform > 1 and prussian_police_loyalty > 0.5
+unavailable-subtitle: The judiciary and police are set against us.
