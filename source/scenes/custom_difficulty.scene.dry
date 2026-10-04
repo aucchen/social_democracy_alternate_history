@@ -59,6 +59,11 @@ Q.saves_disabled = Number.parseInt(document.getElementById("saves_disabled").val
 if (Q.saves_disabled) {
     this.state.disableSaves = true;
 }
+
+if (Q.historical_mode && Q.annual_income == 0) {
+    alert("Annual income must be greater than 0 in historical mode - setting to 1.");
+    Q.annual_income = 1;
+}
 !}
 
 = Difficulty Settings

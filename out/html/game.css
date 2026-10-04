@@ -587,6 +587,10 @@ table {
 .seat.sapd {
     fill: #C40000;
 }
+/* Giving them NDP colors, idk */
+.seat.srpd {
+    fill: #F4A460;
+}
 
 .tooltip-text {
     text-decoration: underline;

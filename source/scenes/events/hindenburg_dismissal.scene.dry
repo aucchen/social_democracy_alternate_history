@@ -1,7 +1,14 @@
 title: Hindenburg dismisses the government!
 subtitle: President Hindenburg has lost confidence in the present ministry.
 new-page: true
-view-if: president = "Hindenburg" and spd_in_government and hindenburg_relation <= 0 and hindenburg_dismissal_timer <= 0 and hindenburg_enabled = 1
+view-if: president = "Hindenburg" and spd_in_government and hindenburg_dissent >= 3 and hindenburg_dissent > coalition_dissent and hindenburg_dismissal_timer <= 0 and hindenburg_enabled = 1 and presidential_powers = 0
 #tags: event
 
 = Hindenburg dismisses the government!
+
+# unfortunately, a new governing majority is unable to be formed, as the DNVP refuses to cooperate.
+#
+# options:
+# - we will have new snap elections. 
+# - tolerate a new government approved by Hindenburg.
+

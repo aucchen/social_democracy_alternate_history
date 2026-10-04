@@ -2,13 +2,11 @@ title: Agricultural Revolt
 subtitle: Small farmers are in revolt over debts and taxes...
 view-if: ((year = 1929 and month >= 1)) and spd_in_government and agricultural_finance < 2
 max-visits: 1
-on-arrival: agricultural_crisis_seen = 1
+on-arrival: agricultural_crisis_seen = 1; rural_dnvp -= 2
 new-page: true
 tags: event
 
 = Agricultural Revolt
-
-# TODO
 
 # Schleswig-Holstein Landvolk
 # sources: https://www.journals.uchicago.edu/doi/10.2307/2125668 
@@ -38,7 +36,7 @@ unavailable-subtitle: The police are largely unwilling to take the action needed
 choose-if: prussian_police_loyalty >= 0.6 or interior_police_loyalty >= 0.6
 on-arrival: rural_spd -= 4; rural_ddp -= 4;
 
-The police are able to suppress the farmer unrest, preventing them from threatening the state. However, their economic circumstances remain poor, and they will only curse the SPD more and more.
+The police are able to suppress the farmer unrest, preventing them from threatening the state. However, the peasants' economic circumstances remain poor, and they will only curse the SPD more and more.
 
 @financing_1
 subtitle: -1 budget - we have already funded agricultural credit, but more support is still needed.
