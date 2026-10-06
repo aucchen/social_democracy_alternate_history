@@ -4,17 +4,20 @@ Q.srpd_formed = 1;
 Q.parties.push('srpd');
 
 Q.workers_srpd = 6;
-Q.workers_spd -= 3;
-Q.new_middle_srpd = 6;
-Q.old_middle_srpd = 1;
+Q.workers_spd -= 10;
+Q.new_middle_srpd = 3 + Q.new_middle_spd*0.4;
+Q.new_middle_spd *= 0.4;
+Q.old_middle_srpd = 1 + Q.old_middle_spd*0.4;
+Q.old_middle_spd *= 0.4;
 Q.rural_srpd = 1;
+Q.rural_spd -= 2;
 Q.unemployed_srpd = 2;
+Q.unemployed_spd -= 3;
 Q.catholics_srpd = 1;
-
-Q.workers_other -= 2;
+Q.catholics_spd -= 2;
 
 if (Q.unions_independent) {
-    Q.workers_srpd += 8;
+    Q.workers_srpd += 5;
 }
 
 // update all records

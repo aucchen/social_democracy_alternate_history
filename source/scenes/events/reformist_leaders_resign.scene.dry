@@ -3,7 +3,7 @@ new-page: true
 subtitle: Reformist disagreements with our policies have grown too severe.
 tags: event
 view-if: reformist_dissent >= 60
-on-arrival: reformist_strength *= 0.3; workers_spd -= 10; workers_others += 5; n_advisors -= 1 if braun_advisor == 1; n_advisors -= 1 if severing_advisor == 1; braun_advisor = 0; severing_advisor = 0; rb_strength -= 250; reformists_resign = 1
+on-arrival: reformist_strength *= 0.3; n_advisors -= 1 if braun_advisor == 1; n_advisors -= 1 if severing_advisor == 1; braun_advisor = 0; severing_advisor = 0; rb_strength -= 250; reformists_resign = 1
 go-to: srpd_formed
 max-visits: 1
 
@@ -11,4 +11,4 @@ max-visits: 1
 
 Our policy choices have greatly offended the reformist faction. Many of our most experienced leaders have resigned.
 
-Many reformists have joined a new party, the Sozial-Republikanische Partei Deutschlands (Social-Republican Party of Germany), founded by former Reichsbanner leader Otto Hörsing.
+Many reformists have joined a new party, the *Sozial-Republikanische Partei Deutschlands* (Social-Republican Party of Germany), founded by former Reichsbanner leader Otto Hörsing. They proclaim their desire to defend the Republic, and see us as having strayed from a pure Republican path. The new party claims some worker and middle-class support.
