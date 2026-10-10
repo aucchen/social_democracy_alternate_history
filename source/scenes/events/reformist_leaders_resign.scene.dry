@@ -11,4 +11,5 @@ max-visits: 1
 
 Our policy choices have greatly offended the reformist faction. Many of our most experienced leaders have resigned.
 
-Many reformists have joined a new party, the *Sozial-Republikanische Partei Deutschlands* (Social-Republican Party of Germany), founded by former Reichsbanner leader Otto Hörsing. They proclaim their desire to defend the Republic, and see us as having strayed from a pure Republican path. The new party claims some worker and middle-class support.
+[? if year >= 1932 : Now, many reformists have joined a splinter party, the *Sozial-Republikanische Partei Deutschlands* (Social-Republican Party of Germany), founded by former Reichsbanner leader Otto Hörsing, transforming it from a rump party into a viable competitor. They proclaim their desire to defend the Republic and the Constitution, and see us as having strayed from a pure Republican path. The SRPD has support from the workers and progressive middle class. ?]
+[? if year < 1932:  Now, many reformists have formed a new splinter party, the *Sozial-Republikanische Partei Deutschlands* (Social-Republican Party of Germany), led by former Reichsbanner leader Otto Hörsing. They proclaim their desire to defend the Republic and the Constitution, and see us as having strayed from a pure Republican path. The SRPD has support from the workers and progressive middle class. ?]
