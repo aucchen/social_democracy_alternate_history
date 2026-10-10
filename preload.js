@@ -79,6 +79,7 @@ window.cloudLoad = function(filename, timestampFilename) {
 window.onSave = function(save_prefix, slot, saveString, timestamp) {
     // This is called from dendrynexus when a save is done, and this does a cloud save.
     // cloud saves make the game feel a little laggy - instead, only upload autosaves when exiting.
+    window.dendryUI.populateSaveSlots(slot + 1, 2);
     if (slot.includes('a')) {
         return;
     }
@@ -91,6 +92,7 @@ window.onSave = function(save_prefix, slot, saveString, timestamp) {
             console.log('Cloud save unsuccessful');
         }
     }
+    window.dendryUI.populateSaveSlots(this.max_slots, 2);
 };
 
 /////////////////////////
