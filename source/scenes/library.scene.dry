@@ -349,14 +349,14 @@ if (Q.sapd_formed && Q.sapd_r) {
             "id": "sapd",
             "legend": "SAPD",
             "name": "SAPD",
-            "seats": Math.round(Q.sapd_r*5),
+            "seats": Q.sapd_r*5,
             });
 }
 data.push({
         "id": "spd",
         "legend": "SPD",
         "name": "SPD",
-        "seats": Math.round(Q.spd_r*5),
+        "seats": Q.spd_r*5,
 });
 
 if (Q.srpd_formed && Q.srpd_r) {
@@ -364,7 +364,7 @@ if (Q.srpd_formed && Q.srpd_r) {
             "id": "srpd",
             "legend": "SRPD",
             "name": "SRPD",
-            "seats": Math.round(Q.srpd_r*5),
+            "seats": Q.srpd_r*5,
             });
 }
 

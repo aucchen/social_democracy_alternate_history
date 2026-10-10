@@ -41,6 +41,8 @@ Q.discard_disabled = 0;
 Q.hand_size = 3;
 Q.starting_dissent = 1; // default dissent = normal
 Q.starting_relations = 1;
+Q.shuffle_leadership_enabled = 0;
+Q.cabinet_enabled = 0;
 
 // whether or not hindenburg can dismiss the government.
 Q.hindenburg_enabled = 0;

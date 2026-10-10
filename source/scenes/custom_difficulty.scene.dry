@@ -56,6 +56,10 @@ Q.discard_disabled = Number.parseInt(document.getElementById("discard_disabled")
 
 Q.saves_disabled = Number.parseInt(document.getElementById("saves_disabled").value);
 
+Q.cabinet_enabled = Number.parseInt(document.getElementById("cabinet_enabled").value);
+
+Q.shuffle_leadership_enabled = Number.parseInt(document.getElementById("shuffle_leadership_enabled").value);
+
 if (Q.saves_disabled) {
     this.state.disableSaves = true;
 }
@@ -122,6 +126,18 @@ Historical mode (makes certain actions more difficult): {! <select name="histori
 
 # default: disabled
 #Hindenburg removing the government: {! <select name="hindenburg_enabled" id="hindenburg_enabled"> <option value="0" selected>Disabled</option> <option value="1">Enabled</option> </select> !}
+
+# Shuffle leadership card: disabled 
+Shuffle leadership pinned card: {! <select name="shuffle_leadership_enabled" id="shuffle_leadership_enabled"> 
+<option value="0" selected>Disabled</option>
+<option value="1">Enabled</option>
+</select> !}
+
+# cabinet card:
+Cabinet pinned card: {! <select name="cabinet_enabled" id="cabinet_enabled"> 
+<option value="0" selected>Disabled</option>
+<option value="1">Enabled</option>
+</select> !}
 
 # default: enabled
 Saving/loading: {! <select name="saves_disabled" id="saves_disabled"> 
