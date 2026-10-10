@@ -308,7 +308,7 @@ if (Q.month_actions >= 1) {
         Q.sh_strength += 100/12;
         Q.rural_dnvp -= 12/12;
         Q.rural_nsdap += 7/12;
-        Q.unemployed_nsdap += 18/12;
+        Q.unemployed_nsdap += 16/12;
     } else if (Q.year == 1930) {
         Q.rural_nsdap += 10/12;
         Q.rural_dnvp -= 15/12;
