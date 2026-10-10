@@ -334,6 +334,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of the game without a civil war on historical mode. ?]
 
+[? if game_achievement_in_kummernis_und_dunkelheit : **In Kümmernis und Dunkelheit** - reach the end of the game without a civil war on the hardest possible custom difficulty. ?]
+
 [? if game_achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
 [? if game_achievement_bollwerk_der_demokratie: **Bollwerk der Demokratie** - Resist the Prussian Coup and win. ?]
@@ -443,6 +445,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of the game without a civil war on historical mode. ?]
 
+[? if achievement_in_kummernis_und_dunkelheit : **In Kümmernis und Dunkelheit** - reach the end of the game without a civil war on the hardest possible custom difficulty. ?]
+
 [? if achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 
 [? if achievement_bollwerk_der_demokratie: **Bollwerk der Demokratie** - Resist the Prussian Coup and win. ?]
@@ -549,6 +553,8 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 [? if not achievement_einigkeit_und_recht_und_freiheit : **Einigkeit und Recht und Freiheit** - reach the end of the game without a civil war on hard. ?]
 
 [? if not achievement_schwarz_rot_gold : **Schwarz-Rot-Gold** - reach the end of the game without a civil war on historical mode. ?]
+
+[? if not achievement_in_kummernis_und_dunkelheit : **In Kümmernis und Dunkelheit** - reach the end of the game without a civil war on the hardest possible custom difficulty. ?]
 
 [? if not achievement_victory_for_the_republic: **Sieg für die Republik** - win the civil war. ?]
 

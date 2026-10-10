@@ -14,6 +14,7 @@ For better or for worse, the party cannot exist without money.
 - @maintain: Maintain our current dues.
 - @reduce: Reduce dues.
 - @increase: Increase dues.
+- @easy_discard
 
 @maintain
 subtitle: [+ dues +] resources gained.

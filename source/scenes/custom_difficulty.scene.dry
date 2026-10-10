@@ -1,4 +1,72 @@
 title: Customize Difficulty
+on-departure: {!
+Q.difficulty = 2;
+// TODO: use js to get all the things
+Q.starting_resources = Number.parseInt(document.getElementById("resources").value);
+Q.resources = Q.starting_resources;
+
+Q.starting_dues = Number.parseInt(document.getElementById("fundraising_income").value);
+Q.dues = Q.starting_dues;
+
+Q.annual_income = Number.parseInt(document.getElementById("annual_income").value);
+Q.starting_budget = Number.parseInt(document.getElementById("budget").value);
+Q.budget = Q.starting_budget;
+
+Q.starting_dissent = Number.parseInt(document.getElementById("starting_dissent").value); 
+if (Q.starting_dissent == 0) {
+    Q.left_dissent = 10;
+    Q.center_dissent = 0;
+    Q.labor_dissent = 5;
+    Q.reformist_dissent = 5;
+} else if (Q.starting_dissent == 1) {
+    Q.left_dissent = 20;
+    Q.center_dissent = 0;
+    Q.labor_dissent = 5;
+    Q.reformist_dissent = 5;
+} else {
+    Q.left_dissent = 30;
+    Q.center_dissent = 20;
+    Q.labor_dissent = 25;
+    Q.reformist_dissent = 25;
+}
+
+Q.starting_relations = Number.parseInt(document.getElementById("starting_relations").value); 
+if (Q.starting_relations == 0) {
+    Q.kpd_relation = 29;
+    Q.z_relation = 54;
+    Q.dvp_relation = 49;
+} else if (Q.starting_relations == 1) {
+    Q.kpd_relation = 25;
+    Q.z_relation = 50;
+    Q.dvp_relation = 35;
+} else {
+    Q.kpd_relation = 16;
+    Q.z_relation = 41;
+    Q.dvp_relation = 31;
+}
+
+Q.starting_rb_strength = Number.parseInt(document.getElementById("starting_rb_strength").value);
+Q.rb_strength = Q.starting_rb_strength;
+
+Q.hand_size = Number.parseInt(document.getElementById("hand_size").value);
+
+Q.historical_mode = Number.parseInt(document.getElementById("historical_mode").value);
+
+Q.discard_disabled = Number.parseInt(document.getElementById("discard_disabled").value);
+
+Q.saves_disabled = Number.parseInt(document.getElementById("saves_disabled").value);
+
+if (Q.saves_disabled) {
+    this.state.disableSaves = true;
+}
+
+if (Q.historical_mode && Q.annual_income == 0) {
+    alert("Annual income must be greater than 0 in historical mode - setting to 1.");
+    Q.annual_income = 1;
+}
+!}
+
+= Difficulty Settings
 
 # difficulty settings:
 # 1. Fundraising income:
@@ -9,3 +77,71 @@ title: Customize Difficulty
 # 6. Initial Hindenburg relations:
 # 7. WTB difficulty:
 # 8. Enable saving/loading:
+# 9. Initial budget
+
+Starting party resources: {! <input type="number" id="resources" name="resources" value="2" min="0" max="10"></input> !}
+
+# default: 2
+Fundraising income: {! <input type="number" id="fundraising_income" name="fundraising_income" value="2" min="0" max="5"></input> !}
+
+# default: 0
+Annual party income: {! <input type="number" id="annual_income" name="annual_income" value="0" min="0" max="5"></input>!}
+
+# default: 4
+Starting government budget: {! <input type="number" id="budget" name="budget" min="0" max="10" value="4"></input>!}
+
+# default: 1 (normal)
+Starting dissent: {! <select name="starting_dissent" id="starting_dissent"> 
+<option value="0">Easy</option>
+<option value="1" selected>Normal</option>
+<option value="2">Hard</option>
+</select> !}
+
+
+# default: 1 (normal)
+Starting inter-party relations: {! <select name="starting_relations" id="starting_relations"> 
+<option value="0">Easy</option>
+<option value="1" selected>Normal</option>
+<option value="2">Hard</option>
+</select> !}
+
+# default: 1 (normal)
+Starting Reichsbanner strength: {! <select name="starting_rb_strength" id="starting_rb_strength"> 
+<option value="1000">1000</option>
+<option value="2000" selected>2000</option>
+<option value="2500">2500</option>
+</select> !}
+
+
+
+# historical mode
+Historical mode (makes certain actions more difficult): {! <select name="historical_mode" id="historical_mode"> 
+<option value="0" selected>Disabled</option>
+<option value="1">Enabled</option>
+</select> !}
+
+# default: disabled
+#Hindenburg removing the government: {! <select name="hindenburg_enabled" id="hindenburg_enabled"> <option value="0" selected>Disabled</option> <option value="1">Enabled</option> </select> !}
+
+# default: enabled
+Saving/loading: {! <select name="saves_disabled" id="saves_disabled"> 
+<option value="1">Disabled</option>
+<option value="0" selected>Enabled</option>
+</select> !}
+
+# default: 1 (normal)
+Hand size: {! <select name="hand_size" id="hand_size"> 
+<option value="3" selected>3</option>
+<option value="4">4</option>
+</select> !}
+
+# default: enabled
+Returning cards to hand: {! <select name="discard_disabled" id="discard_disabled"> 
+<option value="1">Disabled</option>
+<option value="0" selected>Enabled</option>
+</select> !}
+
+- @done: Done
+
+@done
+go-to: root.1928_main

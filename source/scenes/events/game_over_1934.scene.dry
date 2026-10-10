@@ -2,12 +2,18 @@ on-arrival: {!
 // Einigkeit - survive on easy without a civil war.
 // Einigkeit und Recht - survive on medium without a civil war.
 // Einigkeit und Recht und Freiheit - survive on hard without a civil war.
-if (Q.difficulty < 0) {
+if (Q.difficulty == -1) {
     this.achieve('einigkeit');
 } else if (Q.difficulty == 0) {
     this.achieve('einigkeit_und_recht');
-} else if (Q.difficulty > 0) {
+} else if (Q.difficulty == 1) {
     this.achieve('einigkeit_und_recht_und_freiheit');
+} else if (Q.difficulty == 2 && Q.annual_income <= 1 && Q.saves_disabled == 1 && Q.discard_disabled == 1 && Q.starting_resources == 0 && Q.starting_budget == 0 && Q.hand_size == 3 && Q.starting_dissent == 2 && Q.starting_relations == 2 && Q.historical_mode && Q.starting_rb_strength < 1100) {
+    // TODO: custom difficutly max...
+    this.achieve('in_kummernis_und_dunkelheit');
+    if ((Q.president == "Braun" || Q.president == "Schumacher" || Q.president == "Juchacz") && !(Q.chancellor == "Hitler") && Q.unemployed < 20 && Q.year >= 1933 && !Q.civil_war_seen && Q.hitler_deported && Q.reparations <= -2 && Q.womens_rights >= 3) {
+        this.achieve('bruder_zur_sonne');
+    }
 }
 
 if (Q.historical_mode) {

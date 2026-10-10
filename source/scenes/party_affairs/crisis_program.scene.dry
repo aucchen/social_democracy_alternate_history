@@ -24,6 +24,7 @@ Meanwhile, moderates and reformists draw up proposals for a limited plan of job 
 - @support_left: Support the Left view.
 - @support_moderate: Support the Reformist view.
 - @defer: Defer making a decision until we have more information.
+- @easy_discard
 
 @support_centrist
 subtitle: Let the depression play itself out.

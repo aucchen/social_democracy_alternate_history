@@ -2,7 +2,41 @@ title: Prussian Landtag Referendum
 subtitle: The far-right [? if kpd_relation <= 30 and kpd_party_leader != "Conciliators" : and the KPD ?] hope to topple our government in Prussia...
 new-page: true
 view-if: (year = 1931 and month >= 8) and spd_prussia and pro_republic < 50 and (spd_votes + z_votes + ddp_votes < 42)
+on-arrival: prussian_landtag_referendum_seen = 1
 max-visits: 1
 # tags: event
 
+# yes votes: DNVP + NSDAP + DVP*0.8 + Others*0.8 + KPD/2 - 10
+
 # TODO
+
+= Prussian Landtag Referendum
+
+With the growing unpopularity of our government, our opponents have seized upon our weakness by calling for a referendum to dissolve the Prussian government. This referendum is supported by the DNVP, NSDAP, and other right-wing parties. [? if dvp_relation <= 30 : The DVP and minor right-wing parties also support this referendum. ?] [? if kpd_relation <= 30 and kpd_party_leader != "Conciliators" : The KPD, for whatever reason, has joined the far-right in supporting the referendum against us, although the ordinary KPD voters are less enthusiastic. ?]
+
+The referendum will only pass if a majority of all eligible voters vote yes, regardless of the margin.
+
+- @results: May we do our best...
+
+@results
+on-arrival: {!
+Q.prussian_landtag_turnout = Q.dnvp_votes + Q.nsdap_votes;
+// TODO: what if DVP is in government in Prussia? Or in a coalition nationally?
+if (Q.dvp_relation <= 30) {
+    Q.prussian_landtag_referendum += (Q.dvp_votes + Q.other_votes)*0.8;
+}
+if (Q.kpd_relation <= 30 && Q.kpd_party_leader != "Conciliators") {
+    Q.prussian_landtag_referendum += Q.kpd_votes*0.5;
+}
+Q.prussian_landtag_turnout -= 10;
+
+!}
+go-to: results_pass if prussian_landtag_turnout >= 50; results_fail if prussian_landtag_turnout < 50
+
+@results_pass
+on-arrival: prussian_landtag_dissolved = 1; spd_prussia = 0;
+
+# TODO:
+
+@results_fail
+

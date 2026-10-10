@@ -1,5 +1,5 @@
 title: Return card to hand.
-view-if: difficulty <= 0 and last_advisor_action = 0 and last_cabinet_action = 0
+view-if: (difficulty <= 0 or not discard_disabled) and last_advisor_action = 0 and last_cabinet_action = 0
 go-to: root
 on-arrival: {!
 if (Q.month_actions > 0) {
@@ -8,7 +8,7 @@ if (Q.month_actions > 0) {
 // return card to hand
 var card = this.state.lastPlayedCard;
 card.image = card.cardImage;
-if (Q.difficulty >= 0) {
+if (Q.difficulty >= 0 && (!Q.deck_size || Q.deck_size == 3)) {
     this.state.currentHands['main'].push(card);
 } else {
     this.state.currentHands['main.main_easy'].push(card);

@@ -106,8 +106,8 @@ if (Q.month_actions >= 1) {
     if (Q.month >= 13) {
         Q.month = 1;
         Q.year += 1;
-        if (Q.historical_mode) {
-            Q.resources += 2;
+        if (Q.annual_income > 0) {
+            Q.resources += Q.annual_income;
         }
     }
     // decrement timers
@@ -306,8 +306,8 @@ if (Q.month_actions >= 1) {
         Q.workers_kpd += 5/12;
         Q.sa_strength += 50/12;
         Q.sh_strength += 100/12;
-        Q.rural_dnvp -= 15/12;
-        Q.rural_nsdap += 10/12;
+        Q.rural_dnvp -= 12/12;
+        Q.rural_nsdap += 7/12;
         Q.unemployed_nsdap += 18/12;
     } else if (Q.year == 1930) {
         Q.rural_nsdap += 10/12;
@@ -484,7 +484,7 @@ if (this.ui && this.ui.show_portraits) {
 if (typeof window !== "undefined" && window.generateBar) {
 }
 !}
-go-to: events_choice if has_event = 1; main if has_event = 0 and difficulty >= 0; main.main_easy if has_event = 0 and difficulty < 0
+go-to: events_choice if has_event = 1; main if has_event = 0 and (difficulty >= 0 or hand_size == 3); main.main_easy if has_event = 0 and (difficulty < 0 or hand_size == 4)
 
 = [+ month : month +] [+ year +]
 

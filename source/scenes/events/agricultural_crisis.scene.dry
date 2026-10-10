@@ -1,22 +1,60 @@
 title: Agricultural Revolt
 subtitle: Small farmers are in revolt over debts and taxes...
-view-if: ((year = 1929 and month >= 1)) and spd_in_government
+view-if: ((year = 1929 and month >= 1)) and spd_in_government and agricultural_finance < 2
 max-visits: 1
-on-arrival: agricultural_crisis_seen = 1
+on-arrival: agricultural_crisis_seen = 1; rural_dnvp -= 2
 new-page: true
-# tags: event
+tags: event
 
 = Agricultural Revolt
-
-# TODO
 
 # Schleswig-Holstein Landvolk
 # sources: https://www.journals.uchicago.edu/doi/10.2307/2125668 
 # https://www.jstor.org/stable/1405576?seq=11 - Landvolk Revolt, centered in Schleswig-Holstein
 
-The German peasantry is beginning to conduct a war against the government. Starting in the state of Schleswig-Holstein, the *Landvolkbewegung* has become increasingly brazen, conducting sabotage.
+The German peasantry is beginning to conduct a war against the government. Starting in the state of Schleswig-Holstein, the *Landvolkbewegung* has become increasingly brazen, conducting sabotage against local government offices. The peasants claim that they are being crushed by taxes and debts, and insofar that they have coherent demands, they demand unconditional economic relief.
+
+What should we do?
+
+- @nothing: There is nothing we can do.
+- @suppress: The *Landvolkbewegung* must be suppressed!
+- @financing_1: We must increase financial support for the peasantry.
+- @financing_2: We must increase financial support for the peasantry.
 
 # options:
 # 1. There is nothing we can do.
 # 2. The Landvolk must be suppressed.
 # 3. Increase agricultural financing
+
+@nothing
+on-arrival: rural_nsdap += 7; rural_spd -= 4; rural_ddp -= 4; pro_republic -= 3
+
+There is nothing we can do. The peasant unrest rages on, only tempered by its own internal dissention. More and more, the peasant movement is being coopted by the growing Nazi party, who channel their grievances into demands for the overthrow of the Republic.
+
+@suppress
+unavailable-subtitle: The police are largely unwilling to take the action needed.
+choose-if: prussian_police_loyalty >= 0.6 or interior_police_loyalty >= 0.6
+on-arrival: rural_spd -= 4; rural_ddp -= 4;
+
+The police are able to suppress the farmer unrest, preventing them from threatening the state. However, the peasants' economic circumstances remain poor, and they will only curse the SPD more and more.
+
+@financing_1
+subtitle: -1 budget - we have already funded agricultural credit, but more support is still needed.
+choose-if: budget >= 1
+unavailable-subtitle: -1 budget - we do not have the funds.
+view-if: agricultural_finance == 1
+on-arrival: budget -= 1
+go-to: financing_done
+
+@financing_2
+subtitle: -2 budget
+choose-if: budget >= 2
+unavailable-subtitle: -2 budget - we do not have the funds.
+view-if: agricultural_finance < 1
+on-arrival: budget -= 2; rural_spd += 3
+go-to: financing_done
+
+@financing_done
+on-arrival: rural_spd += 3; rural_ddp += 3
+
+In response to the unrest, we have substantially increased financial support for small farmers. On the one hand, the *Landvolkbewegung* is largely appeased by the increased funding. However, some see it as a act of weakness and capitulation to terrorism.

@@ -4,7 +4,7 @@ Q.sapd_formed = 1;
 Q.parties.push('sapd');
 
 Q.workers_sapd = 10;
-Q.workers_spd -= 3;
+Q.workers_spd -= 4;
 Q.new_middle_sapd = 1;
 Q.old_middle_sapd = 0;
 Q.rural_sapd = 0;

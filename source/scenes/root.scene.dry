@@ -34,10 +34,24 @@ Q.old_demographics = 0;
 // use decimals for reichstag seats
 // TODO: not yet implemented
 Q.use_decimals = 0;
+// TODO: detailed difficulty settinigs
+Q.annual_income = 0;
+Q.saves_disabled = 0;
+Q.discard_disabled = 0;
+Q.hand_size = 3;
+Q.starting_dissent = 1; // default dissent = normal
+Q.starting_relations = 1;
+
+// whether or not hindenburg can dismiss the government.
+Q.hindenburg_enabled = 0;
+
+
 
 // party resources
+Q.starting_resources = 2;
 Q.resources = 2;
-// party dues
+// party dues - fundraising income
+Q.starting_dues = 2;
 Q.dues = 2;
 
 // the state of the party
@@ -119,9 +133,8 @@ Q.nsdap_leader = "Hitler";
 
 // hmm... maybe we can play nice with Hindenburg???
 Q.hindenburg_relation = 25;
-// whether or not hindenburg can dismiss the government.
-Q.hindenburg_enabled = 0;
-
+// similar to coalition dissent, this is how much Hindenburg is set against you.
+Q.hindenburg_dissent = 0;
 
 // Does the SPD lead in Prussia?
 Q.spd_prussia = 1;
@@ -131,6 +144,7 @@ Q.prussian_government = "SPD";
 // The array of forces - paramilitary groups
 // Number of members in 1928 (in thousands)
 // Reichsbanner, stahlhelm, SA, rotfrontkämpferbund
+Q.starting_rb_strength = 2000;
 Q.rb_strength = 2000;
 Q.rb_militancy = 0.01;
 Q.women_in_rb = 0;
@@ -192,6 +206,7 @@ Q.nsdap_banned = 0;
 Q.coup_progress = 0;
 Q.capital_strike_progress = 0;
 
+Q.starting_budget = 4;
 Q.budget = 4;
 
 // Proportion of different social groups
@@ -593,39 +608,50 @@ For more information on the politics and government of the German Republic, see 
 - @1928_main: Begin (normal difficulty)
 - @1928_hard: Begin (hard difficulty)
 - @1928_historical: Begin (historical mode)
+- @1928_custom: Customize difficulty settings
 
 @1928_easy
-on-arrival: difficulty = -1; resources = 4; dues = 3; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49; budget = 5;
+on-arrival: difficulty = -1; resources = 4; dues = 3; starting_rb_strength = 2500; rb_strength = 2500; left_dissent = 10; kpd_relation = 29; z_relation = 54; dvp_relation = 49; starting_budget = 5; budget = 5; hand_size = 4; starting_dissent = 0; starting_relations = 0;
 go-to: 1928_main
 
 @1928_hard
-on-arrival: difficulty = 1; resources = 0; dues = 1; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31; budget = 3;
+on-arrival: difficulty = 1; resources = 0; starting_resources = 0; dues = 1; starting_rb_strength = 1000; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31; starting_budget = 3; budget = 3; discard_disabled = 1; starting_dissent = 2; starting_relations = 2;
 go-to: 1928_main
 
 @1928_historical
 subtitle: Saving, loading, and polls will be disabled. [? if not achievement_game_completed: Not recommended for a first playthrough. ?]
 on-arrival: {!
+Q.hand_size = 3;
 Q.difficulty = 2;
+Q.discard_disabled = 1;
 Q.historical_mode = 1;
+Q.annual_income = 2;
 Q.resources = 2;
 Q.dues = 1;
 Q.rb_strength = 2000;
+Q.starting_dissent = 2;
 Q.reformist_dissent = 25;
 Q.left_dissent = 30;
 Q.labor_dissent = 25;
 Q.center_dissent = 25;
+Q.starting_relations = 2;
 Q.z_relation = 41;
 Q.kpd_relation = 16;
 Q.dvp_relation = 31;
 Q.budget = 2;
+Q.fundraising_disabled = 1;
+Q.saves_disabled = 1;
 this.state.disableSaves = true;
 !}
 go-to: 1928_main
 
+@1928_custom
+go-to: custom_difficulty
+
 @1928_main
 audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_HOHEN_BERGEN_noise_reduced.mp3 music/1928_1930/MarekWeber.mp3 music/1928_1930/BAUERNKAPELLE.mp3 music/1928_1933/DERLINDENBAUM_normalized.mp3 music/1928_1933/ZurSonne_zurFreiheit.mp3 music/1928_1933/arbeiter_marseille.mp3 music/1928_1933/Wann_wir_schreiten_Seit_an_Seit.mp3 music/1930_1933/Internationale-de_normalized.ogg music/1928_1930/LiedDerPompadour.mp3 music/1928_1933/SozialistenMarsch.mp3
 new-page: true
-go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
+go-to: main if hand_size == 3; main.main_easy if hand_size == 4
 
 = 1928
 
