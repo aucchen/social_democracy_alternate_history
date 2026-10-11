@@ -523,6 +523,7 @@ v1.4 - Custom difficulties, more events
 - New achievement: In Kümmernis und Dunkelheit (win in the hardest custom setting).
 - New events: Sklarek Affair, Agricultural Crisis (Landvolkbewegung).
 - If the reformists leave the SPD, they will form or join the Social-Republican Party, making it a viable competitor party.
+- Various minor tweaks
 
 Also, just in case you missed it, the Steam release is available for free at https://store.steampowered.com/app/3083910/Social_Democracy_An_Alternate_History/
 
