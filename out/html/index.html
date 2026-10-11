@@ -20,9 +20,9 @@
 
         <div class="overlay_top">
         <div class="music_player">
-            <h3>Music</h3>
-            <p>Currently playing: <span id="currently_playing"></span></p>
-            <p><label for="volume">Volume:</label><input style="vertical-align:-0.25em;" type="range" min="0" max="100" value="100" id="volume" name="volume" oninput="window.setVolume(this.value);"></p>
+            <h3 id="music_header_text">Music</h3>
+            <p><span id="currently_playing_text">Currently playing:</span> <span id="currently_playing"></span></p>
+            <p><label for="volume" id="volume_label">Volume:</label><input style="vertical-align:-0.25em;" type="range" min="0" max="100" value="100" id="volume" name="volume" oninput="window.setVolume(this.value);"></p>
 
             <!-- icon sources: https://icons.getbootstrap.com/ -->
             <p style="text-align: center;">
@@ -35,23 +35,41 @@
             <button class="icon-button" onclick="window.shuffle();"><span class="button-image"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-forward-fill" viewBox="0 0 16 16">
   <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.753l-6.267 3.636c-.54.313-1.233-.066-1.233-.697v-2.94l-6.267 3.636C.693 12.703 0 12.324 0 11.693V4.308c0-.63.693-1.01 1.233-.696L7.5 7.248v-2.94c0-.63.693-1.01 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5"/>
         </svg></span>
-        <span>Next song</span></button>
+        <span id="next_song_text">Next song</span></button>
             </p>
         </div>
-            <h3>Settings</h3>
+            <h3 id="settings_text">Settings</h3>
             <table>
                 <tr>
+                    <td id="language_text">Language (will restart game):</td>
                     <td>
+                        <label id="english_label" for="english">English</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="english" name="language" value="1" onclick="window.loadEnglish();">
+                    </td>
+                    <td>
+                        <label id="german_label" for="german">Deutsch</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="german" name="language" value="0" onclick="window.loadGerman();">
+                    </td>
+                </tr>
+                <tr>
+                    <td> <hr> </td>
+                </tr>
+                <tr>
+                    <td id="backgrounds_text">
                         Backgrounds:
                     </td>
                     <td>
-                        <label for="backgrounds_yes">On</label>
+                        <label class="label_on" for="backgrounds_yes">On</label>
                     </td>
                     <td>
                         <input type="radio" id="backgrounds_yes" name="backgrounds" value="1" onclick="window.enableBg();">
                     </td>
                     <td>
-                        <label for="backgrounds_no">Off</label>
+                        <label class="label_off" for="backgrounds_no">Off</label>
                     </td>
                     <td>
                         <input type="radio" id="backgrounds_no" name="backgrounds" value="0" onclick="window.disableBg();">
@@ -61,16 +79,16 @@
                     <td> <hr> </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="event_images_text">
                         Event images:
                     <td>
-                        <label for="images_yes">On</label>
+                        <label  class="label_on" for="images_yes">On</label>
                     </td>
                     <td>
                         <input type="radio" id="images_yes" name="images" value="1" onclick="window.enableImages();">
                     </td>
                     <td>
-                        <label for="images_no">Off</label>
+                        <label class="label_off" for="images_no">Off</label>
                     </td>
                     <td>
                         <input type="radio" id="images_no" name="images" value="0" onclick="window.disableImages();">
@@ -81,17 +99,17 @@
                 </tr>
  
                 <tr>
-                    <td>
+                    <td id="animations_text">
                         Animations:
                     </td>
                     <td>
-                        <label for="animate_yes">On</label>
+                        <label  class="label_on" for="animate_yes">On</label>
                     </td>
                     <td>
                         <input type="radio" id="animate_yes" name="animate" value="1" onclick="window.enableAnimate();">
                     </td>
                     <td>
-                        <label for="animate_no">Off</label>
+                        <label class="label_off" for="animate_no">Off</label>
                     </td>
                     <td>
                         <input type="radio" id="animate_no" name="animate" value="0" onclick="window.disableAnimate();">
@@ -101,17 +119,17 @@
                     <td> <hr> </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="music_text">
                         Music:
                     </td>
                     <td>
-                        <label for="audio_yes">On</label>
+                        <label  class="label_on" for="audio_yes">On</label>
                     </td>
                     <td>
                         <input type="radio" id="audio_yes" name="audio" value="1" onclick="window.enableAudio();">
                     </td>
                     <td>
-                        <label for="audio_no">Off</label>
+                        <label class="label_off" for="audio_no">Off</label>
                     </td>
                     <td>
                         <input type="radio" id="audio_no" name="audio" value="0" onclick="window.disableAudio();">
@@ -121,17 +139,17 @@
                     <td> <hr> </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="color_scheme_text">
                         Color scheme:
                     </td>
                     <td>
-                        <label for="light_mode">Light mode</label>
+                        <label id="light_mode_label" for="light_mode">Light mode</label>
                     </td>
                     <td>
                         <input type="radio" id="light_mode" name="ld_mode" value="1" onclick="window.enableLightMode();">
                     </td>
                     <td>
-                        <label for="dark_mode">Dark mode</label>
+                        <label id="dark_mode_label" for="dark_mode">Dark mode</label>
                     </td>
                     <td>
                         <input type="radio" id="dark_mode" name="ld_mode" value="0" onclick="window.enableDarkMode();">
@@ -141,15 +159,15 @@
                     <td> <hr> </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="font_size_text">
                         Font size:
                     </td>
 
                     <td colspan=2>
-                        <button onclick="window.decreaseFontSize();"><b>-</b> Decrease font size</button>
+                        <button onclick="window.decreaseFontSize();" id="decrease_font_button"><b>-</b> Decrease font size</button>
                     </td>
                     <td colspan=2>
-                        <button onclick="window.increaseFontSize();"><b>+</b> Increase font size</button>
+                        <button onclick="window.increaseFontSize();" id="increase_font_button"><b>+</b> Increase font size</button>
                     </td>
                     <td>
                         <span id="font_size_value"></span>
@@ -158,9 +176,10 @@
                 <tr>
                     <td> <hr> </td>
                 </tr>
+
                 <tr>
                     <td>
-                        <button onclick="window.hideOptions();">Close</button>
+                        <button onclick="window.hideOptions();" class="close_button">Close</button>
                     </td>
                     <td></td>
                     <td></td>
@@ -311,12 +330,12 @@
             </tr>
             <tr>
                 <td colspan="5">
-                    <label for="import_save">Import save file:</label> <input type="file" id="import_save" onchange="dendryUI.importSave('import_save');"></input>
+                    <label for="import_save" id="import_save_label">Import save file:</label> <input type="file" id="import_save" onchange="dendryUI.importSave('import_save');"></input>
                 </td>
             </tr> 
             <tr>
                 <td>
-                    <button onclick="dendryUI.hideSaveSlots();">Close</button>
+                    <button onclick="dendryUI.hideSaveSlots();" class="close_button">Close</button>
                 </td>
             </tr>
         </table>
@@ -339,10 +358,10 @@
 
                 <div id="header-links">
                     <a id="stats-link" onclick="window.showStats();" href="#">Library</a>
-                    <a onclick="dendryUI.showSaveSlots();" href="#">Save/Load</a>
-                    <a onclick="window.showOptions();" href="#">Options</a>
-                    <a onclick="window.restart();" href="#">Restart</a>
-                    <a onclick="window.exit();" href="#">Exit</a>
+                    <a id="save-link" onclick="dendryUI.showSaveSlots();" href="#">Save/Load</a>
+                    <a id="options-link"  onclick="window.showOptions();" href="#">Options</a>
+                    <a id="restart-link"  onclick="window.restart();" href="#">Restart</a>
+                    <a id="exit-link" onclick="window.exit();" href="#">Exit</a>
                 </div>
             </header>
             <div id="tools_wrapper">
