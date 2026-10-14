@@ -43,14 +43,22 @@ window.onAchieve = function(achievementName) {
 };
 
 window.restart = function() {
-  if (confirm("Do you wish to restart the game? Progress will not be saved.")) {
+  var confirm_text = "Do you wish to restart the game? Progress will not be saved.";
+  if (window.dendryUI.language && window.dendryUI.language == "de") {
+      confirm_text = "Bist du dir sicher, dass du das Spiel von vorne beginnen willst? Dein Spielstand wird nicht gespeichert.";
+  }
+  if (confirm(confirm_text)) {
     window.location.reload();
     return false;
   }
 };
 
 window.exit = function() {
-  if (confirm("Do you wish to exit the game? Progress will not be saved.")) {
+  var confirm_text = "Do you wish to exit the game? Progress will not be saved.";
+  if (window.dendryUI.language && window.dendryUI.language == "de") {
+      confirm_text = "Bist du dir sicher, dass du das Spiel beenden willst? Dein Spielstand wird nicht gespeichert.";
+  }
+  if (confirm(confirm_text)) {
     //const remote = require('electron').remote;
     //let w = remote.getCurrentWindow();
     //w.close();
@@ -123,7 +131,11 @@ window.populateCloudSaves = function() {
         var timestamp = result[1];
         if (localStorage[timestampFilename] && localStorage[timestampFilename] != timestamp) {
             if (localPriority == -1) {
-                if (confirm("Warning: cloud saves are different from local saves - overwrite local saves with cloud saves?")) {
+                var confirm_text = "Warning: cloud saves are different from local saves - overwrite local saves with cloud saves?";
+                if (window.dendryUI.language && window.dendryUI.language == "de") {
+                    confirm_text = "Warnung: Cloud-Speicherstände unterscheiden sich von den lokalen Speicherständen - willst du die lokalen Speicherstände mit denen aus der Cloud überschreiben?";
+                }
+                if (confirm(confirm_text)) {
                     localPriority = 0;
                     localStorage[filename] = data;
                     localStorage[timestampFilename] = timestamp;

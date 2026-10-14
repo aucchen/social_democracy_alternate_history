@@ -43,6 +43,8 @@
           'stats-link': "Bibliothek",
           'save-link': "Speichern/Laden",
           'options-link': "Einstellungen",
+          'restart-link': "Neustart",
+          'exit-link': "Beenden",
           // options
           "currently_playing_text": "Momentan spielt:",
           "music_header_text": "Musik",
@@ -93,6 +95,8 @@
           'stats-link': "Library",
           'save-link': "Save/Load",
           'options-link': "Options",
+          'restart-link': "Restart",
+          'exit-link': "Exit",
           // options
           "currently_playing_text": "Currently playing:",
           "music_header_text": "Music",
