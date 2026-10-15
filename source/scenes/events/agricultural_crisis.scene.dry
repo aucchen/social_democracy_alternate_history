@@ -5,6 +5,7 @@ max-visits: 1
 on-arrival: agricultural_crisis_seen = 1; rural_dnvp -= 2; rural_spd -= 2; rural_nsdap += 2
 new-page: true
 tags: event
+face-image: img/Kollwitz_bauernkrieg.jpg
 
 = Agricultural Revolt
 
