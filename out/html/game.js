@@ -433,13 +433,6 @@
       return bar;
   };
 
-  window.restart = function() {
-    if (confirm("Do you wish to restart the game? Progress will not be saved.")) {
-        window.location.reload();
-        return false;
-    }
-  };
-
   window.justLoaded = true;
   window.statusTab = "status";
   window.dendryModifyUI = main;
