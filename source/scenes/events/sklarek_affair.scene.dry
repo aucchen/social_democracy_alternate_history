@@ -5,6 +5,7 @@ view-if: (year = 1929 and month >= 11) and spd_prussia
 max-visits: 1
 on-arrival: sklarek_affair_seen = 1; workers_spd -= 1; new_middle_spd -= 1; old_middle_spd -= 1; rural_spd -= 1; catholics_spd -= 1; unemployed_spd -= 1; new_middle_ddp -= 2; pro_republic -= 2
 tags: event
+face-image: img/sklarek.jpg
 
 = Sklarek Affair
 
