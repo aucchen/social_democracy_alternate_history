@@ -10,11 +10,11 @@ Funds: [+ resources +]
 
 Members: [+ members_display +] thousand
 
-{!<div class="meter" data-q="unity" data-label="Unity"></div>!}
+Unity: [+ unity : level +]
 
 = The Party Line
 
-Zentrale: {!<span class="faction-name" data-q="leading_faction"></span>!}[? if junior_faction : , with {!<span class="faction-name" data-q="junior_faction"></span>!} ?]
+Zentrale: {!<span class="faction-name" data-q="leading_faction"></span>!}[? if junior_faction : , with the {!<span class="faction-name" data-q="junior_faction"></span>!} ?]
 
 {!<div class="line-row"><span>Elections</span><span class="lock" data-q="lock_elections"></span></div>!}
 {!<div class="line-row"><span>United front</span><span class="lock" data-q="lock_united_front"></span></div>!}
@@ -27,49 +27,60 @@ Zentrale: {!<span class="faction-name" data-q="leading_faction"></span>!}[? if j
 
 = Factions
 
-{!<p class="sidebar-note">Bar: share of members. Satisfaction below it.</p>!}
+{!<span class="tooltip-text faction-text f-luxemburgist" title="Luxemburg, Jogiches, Levi, Zetkin. A mass party, democracy inside the party, independence from Moscow.">Spartacists</span>!}: [+ luxemburgist_strength : strength +], [+ luxemburgist_satisfaction : satisfaction +]
 
-{!<div class="faction-block" data-faction="luxemburgist" title="Mass party, democracy inside the party, independence from Moscow."></div>!}
-{!<div class="faction-block" data-faction="offensive" title="Armed uprising soon: the theory of the offensive."></div>!}
-{!<div class="faction-block" data-faction="unionist" title="Work in the unions and alliances with the SPD and USPD."></div>!}
-{!<div class="faction-block" data-faction="ultraleft" title="Boycott parliament and the unions: councils only."></div>!}
+{!<span class="tooltip-text faction-text f-offensive" title="Later led by Ruth Fischer and Arkadi Maslow. Armed action soon: the theory of the offensive.">Left</span>!}: [+ offensive_strength : strength +], [+ offensive_satisfaction : satisfaction +]
+
+{!<span class="tooltip-text faction-text f-unionist" title="Later led by Heinrich Brandler and August Thalheimer. Union work and the united front with the SPD and USPD.">Right</span>!}: [+ unionist_strength : strength +], [+ unionist_satisfaction : satisfaction +]
+
+{!<span class="tooltip-text faction-text f-ultraleft" title="The Bremen and Hamburg radicals, later the KAPD. Boycott parliament and the unions: councils only.">Left Radicals</span>!}: [+ ultraleft_strength : strength +], [+ ultraleft_satisfaction : satisfaction +]
 
 @districts
 
 = Districts
 
-{!<p class="sidebar-note">Bar: loyalty to the Zentrale. Colour: the faction that runs the district.</p>!}
+Berlin-Brandenburg: {!<span class="faction-name" data-q="district_berlin_faction"></span>!}, [+ district_berlin_members_display +]k, [+ district_berlin_loyalty : loyalty +]
 
-{!<div class="district-block" data-district="berlin"></div>!}
-{!<div class="district-block" data-district="hamburg"></div>!}
-{!<div class="district-block" data-district="bremen"></div>!}
-{!<div class="district-block" data-district="ruhr"></div>!}
-{!<div class="district-block" data-district="saxony"></div>!}
-{!<div class="district-block" data-district="thuringia"></div>!}
-{!<div class="district-block" data-district="bavaria"></div>!}
-{!<div class="district-block" data-district="halle"></div>!}
+Hamburg: {!<span class="faction-name" data-q="district_hamburg_faction"></span>!}, [+ district_hamburg_members_display +]k, [+ district_hamburg_loyalty : loyalty +]
+
+Bremen: {!<span class="faction-name" data-q="district_bremen_faction"></span>!}, [+ district_bremen_members_display +]k, [+ district_bremen_loyalty : loyalty +]
+
+Rhineland-Westphalia: {!<span class="faction-name" data-q="district_ruhr_faction"></span>!}, [+ district_ruhr_members_display +]k, [+ district_ruhr_loyalty : loyalty +]
+
+Saxony: {!<span class="faction-name" data-q="district_saxony_faction"></span>!}, [+ district_saxony_members_display +]k, [+ district_saxony_loyalty : loyalty +]
+
+Thuringia: {!<span class="faction-name" data-q="district_thuringia_faction"></span>!}, [+ district_thuringia_members_display +]k, [+ district_thuringia_loyalty : loyalty +]
+
+Bavaria: {!<span class="faction-name" data-q="district_bavaria_faction"></span>!}, [+ district_bavaria_members_display +]k, [+ district_bavaria_loyalty : loyalty +]
+
+Halle-Merseburg: {!<span class="faction-name" data-q="district_halle_faction"></span>!}, [+ district_halle_members_display +]k, [+ district_halle_loyalty : loyalty +]
 
 @germany
 
 = Germany
 
-{!<div class="meter" data-q="militancy" data-label="Militancy" data-tone="neutral"></div>!}
-{!<div class="meter" data-q="worker_support" data-label="Worker support"></div>!}
-{!<div class="meter" data-q="repression" data-label="Repression" data-invert="1"></div>!}
-{!<div class="meter" data-q="stability" data-label="Republic stability" data-tone="neutral"></div>!}
+Militancy: [+ militancy : level +]
+
+Worker support: [+ worker_support : level +]
+
+Repression: [+ repression : level +]
+
+Republic stability: [+ stability : level +]
 
 = Relations
 
-{!<div class="meter" data-q="spd_relation" data-label="SPD"></div>!}
-{!<div class="meter" data-q="uspd_relation" data-label="USPD"></div>!}
+SPD: [+ spd_relation : relationship +]
 
-{!<p class="sidebar-note">The workers' militias, the Freikorps and the Reichswehr will be added here in a later build.</p>!}
+USPD: [+ uspd_relation : relationship +]
+
+The workers' militias, the Freikorps and the Reichswehr will be added here in a later build.
 
 @moscow
 
 = Moscow
 
-{!<div class="meter" data-q="independence" data-label="Independence" data-tone="neutral" title="High independence angers Moscow, which cuts funds and backs rival factions. Low independence lets Moscow decide for you."></div>!}
-{!<div class="meter" data-q="world_revolution" data-label="World revolution"></div>!}
+{!<span class="tooltip-text" title="High independence angers Moscow, which cuts funds and backs rival factions. Low independence lets Moscow decide for you.">Independence</span>!}: [+ independence : level +]
 
-{!<p class="sidebar-note">The Comintern's factions will be added here in a later build.</p>!}
+World revolution: [+ world_revolution : level +]
+
+The Comintern's factions will be added here in a later build.

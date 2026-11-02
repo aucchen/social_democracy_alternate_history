@@ -29,7 +29,7 @@ Luxemburg speaks and writes tirelessly. Even her opponents in the districts read
 
 @against_putsch
 title: Against Putschism
-subtitle: Lowers militancy; the ultra-left is offended.
+subtitle: Lowers militancy; the Left Radicals are offended.
 unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
 choose-if: advisor_action_timer <= 0
 on-arrival: advisor_action_timer = 4; last_advisor_action = 1; militancy -= 10; repression -= 5; ultraleft_satisfaction -= 8; luxemburgist_satisfaction += 5

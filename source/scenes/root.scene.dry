@@ -34,11 +34,22 @@ Q.dues = 1;
 // ------------------------------------------------------------ factions
 // Placeholder starting values: tune these in playtesting.
 Q.factions = ['luxemburgist', 'offensive', 'unionist', 'ultraleft'];
+// Display names follow the historical currents of the early KPD:
+// the Spartacist leadership (Luxemburg, Jogiches, Levi), the Left Radicals
+// (Bremen and Hamburg, later the KAPD), the Left (Fischer, Maslow) and
+// the Right (Brandler, Thalheimer). The internal ids stay the same.
 Q.faction_names = {
-    luxemburgist: 'Luxemburgists',
-    offensive: 'Offensive left',
-    unionist: 'Unionists',
-    ultraleft: 'Ultra-left'
+    luxemburgist: 'Spartacists',
+    offensive: 'Left',
+    unionist: 'Right',
+    ultraleft: 'Left Radicals'
+};
+// adjective form, used in "The ... line forbids ..."
+Q.faction_adj = {
+    luxemburgist: 'Spartacist',
+    offensive: 'Left',
+    unionist: 'Right',
+    ultraleft: 'Left Radical'
 };
 Q.luxemburgist_satisfaction = 60;
 Q.offensive_satisfaction = 50;
@@ -46,7 +57,7 @@ Q.unionist_satisfaction = 55;
 Q.ultraleft_satisfaction = 45;
 
 // The Zentrale elected at the founding congress is led by Luxemburg's
-// circle, while most delegates and districts lean ultra-left.
+// circle, while most delegates and districts lean towards the Left Radicals.
 Q.leading_faction = 'luxemburgist';
 Q.junior_faction = 0;
 

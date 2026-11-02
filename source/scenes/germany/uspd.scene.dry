@@ -18,7 +18,7 @@ The Independent Social Democrats (USPD) stand between Ebert's party and ours. Th
 @joint
 subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Improves relations with both social democratic parties.
 choose-if: lock_united_front < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids any united front.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any united front.
 on-arrival: {!
 if (Q.lock_united_front == 1) {
     Q.unity -= 10;

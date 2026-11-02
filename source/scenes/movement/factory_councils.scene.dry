@@ -17,7 +17,7 @@ The workers' and soldiers' councils of November are losing ground to the new rep
 @build
 subtitle: Slow gains in worker support, scaled by the districts that follow us.
 choose-if: lock_councils < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids council work.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council work.
 on-arrival: worker_support += 2 + 4*loyal_share; militancy += 3; unionist_satisfaction += 3
 
 Communist shop stewards win seats on council after council.
@@ -25,7 +25,7 @@ Communist shop stewards win seats on council after council.
 @occupy
 subtitle: Inspires the radicals, and brings the police.
 choose-if: lock_councils < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids council work.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council work.
 on-arrival: militancy += 12; repression += 8; worker_support += 3; ultraleft_satisfaction += 10; offensive_satisfaction += 5; unionist_satisfaction -= 5; stability -= 3
 
 Red flags fly over the factory gates, for now.

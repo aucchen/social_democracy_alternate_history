@@ -9,7 +9,7 @@ max-visits: 1
 
 On 4 January the government dismissed Emil Eichhorn, the left-wing police chief of Berlin. The next day hundreds of thousands of workers marched in protest. Armed men occupied the newspaper district, and a Revolutionary Committee, with Karl Liebknecht among its members, declared the Ebert government deposed.
 
-The Zentrale was not consulted. Luxemburg thinks the uprising is premature; the Berlin district, which follows the ultra-left, is already on the barricades. Noske is gathering the Freikorps outside the city.
+The Zentrale was not consulted. Luxemburg thinks the uprising is premature; the Berlin district, which follows the Left Radicals, is already on the barricades. Noske is gathering the Freikorps outside the city.
 
 - @overthrow: Back the Revolutionary Committee and try to overthrow Ebert.
 - @occupations: Defend the occupations, but refuse an armed insurrection.
@@ -18,7 +18,7 @@ The Zentrale was not consulted. Luxemburg thinks the uprising is premature; the 
 @overthrow
 subtitle: [? if lock_uprising = 1 : Against the party line: costs 10 Unity. ?] Thrills the radicals. The Freikorps will not forgive it.
 choose-if: lock_uprising < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids an uprising.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an uprising.
 on-arrival: {!
 if (Q.lock_uprising == 1) {
     Q.unity -= 10;
@@ -51,7 +51,7 @@ The party defends the occupied buildings, but refuses to call for the government
 @negotiate
 subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Avoids a massacre, perhaps. Berlin's workers will call it betrayal.
 choose-if: lock_united_front < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids negotiating with the social democrats.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids negotiating with the social democrats.
 on-arrival: {!
 if (Q.lock_united_front == 1) {
     Q.unity -= 10;

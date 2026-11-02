@@ -10,7 +10,7 @@ Early build: January to April 1919 is playable (the January Uprising, the Nation
 
 ## How the game works
 
-- **Factions set the party line.** The faction leading the Zentrale decides which actions are open, against the line (allowed, but costs Unity), or forbidden. An ultra-left Zentrale cannot propose a united front at all.
+- **Factions set the party line.** The faction leading the Zentrale decides which actions are open, against the line (allowed, but costs Unity), or forbidden. A Left Radical Zentrale cannot propose a united front at all.
 - **Districts can defy the Zentrale.** Each district has its own faction, members and loyalty. Loyal districts carry out your cards; defiant ones may act alone.
 - **Factions can split.** A faction whose satisfaction falls too low walks out with its districts' members.
 - **Meters:** Unity, Militancy, Worker support, Repression, SPD and USPD relations, Independence from Moscow, World revolution, plus Republic stability.
