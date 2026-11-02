@@ -2,7 +2,7 @@ title: Status
 new-page: true
 is-special: true
 
-= Status
+= The Party
 
 [+ month : month +] [+ year +]
 
@@ -10,88 +10,66 @@ Funds: [+ resources +]
 
 Members: [+ members_display +] thousand
 
-Unity: [+ unity : level +] ([+ unity_display +])
+{!<div class="meter" data-q="unity" data-label="Unity"></div>!}
 
 = The Party Line
 
-Zentrale: {!<span class="tooltip-text" title="The faction that leads the party decides which actions are open, against the line, or forbidden.">!}[+ leading_faction_name +]{!</span>!}[? if junior_faction : , with the [+ junior_faction_name +] ?]
+Zentrale: {!<span class="faction-name" data-q="leading_faction"></span>!}[? if junior_faction : , with {!<span class="faction-name" data-q="junior_faction"></span>!} ?]
 
-Elections: [+ lock_elections : lock +]
+{!<div class="line-row"><span>Elections</span><span class="lock" data-q="lock_elections"></span></div>!}
+{!<div class="line-row"><span>United front</span><span class="lock" data-q="lock_united_front"></span></div>!}
+{!<div class="line-row"><span>Union work</span><span class="lock" data-q="lock_union_work"></span></div>!}
+{!<div class="line-row"><span>Councils and occupations</span><span class="lock" data-q="lock_councils"></span></div>!}
+{!<div class="line-row"><span>Armed uprising</span><span class="lock" data-q="lock_uprising"></span></div>!}
+{!<div class="line-row"><span>Moscow's orders</span><span class="lock" data-q="lock_moscow_orders"></span></div>!}
 
-United front: [+ lock_united_front : lock +]
-
-Union work: [+ lock_union_work : lock +]
-
-Councils and occupations: [+ lock_councils : lock +]
-
-Armed uprising: [+ lock_uprising : lock +]
-
-Moscow's orders: [+ lock_moscow_orders : lock +]
-
-= Germany
-
-Militancy: [+ militancy : level +]
-
-Worker support: [+ worker_support : level +]
-
-Repression: [+ repression : level +]
-
-Republic stability: [+ stability : level +]
-
-= Moscow
-
-{!<span class="tooltip-text" title="High independence angers Moscow, which cuts funds and backs rival factions. Low independence lets Moscow decide for you.">Independence</span>!}: [+ independence : level +]
-
-World revolution: [+ world_revolution : level +]
-
-@politics
+@factions
 
 = Factions
 
-{!<span class="tooltip-text" title="Mass party, democracy inside the party, independence from Moscow.">Luxemburgists</span>!}: [+ luxemburgist_strength : strength +], [+ luxemburgist_satisfaction : satisfaction +]
+{!<p class="sidebar-note">Bar: share of members. Satisfaction below it.</p>!}
 
-{!<span class="tooltip-text" title="Armed uprising soon: the theory of the offensive.">Offensive left</span>!}: [+ offensive_strength : strength +], [+ offensive_satisfaction : satisfaction +]
+{!<div class="faction-block" data-faction="luxemburgist" title="Mass party, democracy inside the party, independence from Moscow."></div>!}
+{!<div class="faction-block" data-faction="offensive" title="Armed uprising soon: the theory of the offensive."></div>!}
+{!<div class="faction-block" data-faction="unionist" title="Work in the unions and alliances with the SPD and USPD."></div>!}
+{!<div class="faction-block" data-faction="ultraleft" title="Boycott parliament and the unions: councils only."></div>!}
 
-{!<span class="tooltip-text" title="Work in the unions and alliances with the SPD and USPD.">Unionists</span>!}: [+ unionist_strength : strength +], [+ unionist_satisfaction : satisfaction +]
-
-{!<span class="tooltip-text" title="Boycott parliament and the unions: councils only.">Ultra-left</span>!}: [+ ultraleft_strength : strength +], [+ ultraleft_satisfaction : satisfaction +]
+@districts
 
 = Districts
 
-Berlin-Brandenburg: [+ district_berlin_faction_name +], [+ district_berlin_members_display +]k, [+ district_berlin_loyalty : loyalty +]
+{!<p class="sidebar-note">Bar: loyalty to the Zentrale. Colour: the faction that runs the district.</p>!}
 
-Hamburg: [+ district_hamburg_faction_name +], [+ district_hamburg_members_display +]k, [+ district_hamburg_loyalty : loyalty +]
+{!<div class="district-block" data-district="berlin"></div>!}
+{!<div class="district-block" data-district="hamburg"></div>!}
+{!<div class="district-block" data-district="bremen"></div>!}
+{!<div class="district-block" data-district="ruhr"></div>!}
+{!<div class="district-block" data-district="saxony"></div>!}
+{!<div class="district-block" data-district="thuringia"></div>!}
+{!<div class="district-block" data-district="bavaria"></div>!}
+{!<div class="district-block" data-district="halle"></div>!}
 
-Bremen: [+ district_bremen_faction_name +], [+ district_bremen_members_display +]k, [+ district_bremen_loyalty : loyalty +]
+@germany
 
-Rhineland-Westphalia: [+ district_ruhr_faction_name +], [+ district_ruhr_members_display +]k, [+ district_ruhr_loyalty : loyalty +]
+= Germany
 
-Saxony: [+ district_saxony_faction_name +], [+ district_saxony_members_display +]k, [+ district_saxony_loyalty : loyalty +]
-
-Thuringia: [+ district_thuringia_faction_name +], [+ district_thuringia_members_display +]k, [+ district_thuringia_loyalty : loyalty +]
-
-Bavaria: [+ district_bavaria_faction_name +], [+ district_bavaria_members_display +]k, [+ district_bavaria_loyalty : loyalty +]
-
-Halle-Merseburg: [+ district_halle_faction_name +], [+ district_halle_members_display +]k, [+ district_halle_loyalty : loyalty +]
-
-@paramilitaries
-
-= Armed Forces
-
-The workers' militias, the Freikorps and the Reichswehr will be modelled here in a later build.
-
-Repression: [+ repression : level +]
-
-Militancy: [+ militancy : level +]
-
-@polls
+{!<div class="meter" data-q="militancy" data-label="Militancy" data-tone="neutral"></div>!}
+{!<div class="meter" data-q="worker_support" data-label="Worker support"></div>!}
+{!<div class="meter" data-q="repression" data-label="Repression" data-invert="1"></div>!}
+{!<div class="meter" data-q="stability" data-label="Republic stability" data-tone="neutral"></div>!}
 
 = Relations
 
-SPD: [+ spd_relation : relationship +]
+{!<div class="meter" data-q="spd_relation" data-label="SPD"></div>!}
+{!<div class="meter" data-q="uspd_relation" data-label="USPD"></div>!}
 
-USPD: [+ uspd_relation : relationship +]
+{!<p class="sidebar-note">The workers' militias, the Freikorps and the Reichswehr will be added here in a later build.</p>!}
 
-Worker support: [+ worker_support : level +]
+@moscow
 
-Elections are not yet modelled in this build.
+= Moscow
+
+{!<div class="meter" data-q="independence" data-label="Independence" data-tone="neutral" title="High independence angers Moscow, which cuts funds and backs rival factions. Low independence lets Moscow decide for you."></div>!}
+{!<div class="meter" data-q="world_revolution" data-label="World revolution"></div>!}
+
+{!<p class="sidebar-note">The Comintern's factions will be added here in a later build.</p>!}

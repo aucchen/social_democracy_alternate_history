@@ -31,10 +31,11 @@
       localStorage[game.title + '_language'] = "de";
       var text_label_map_ids = {
           // top-level
-          'main_tab': "Haupt",
-          'politics_tab': "Politik",
-          'paramilitary_tab': "Militär",
-          'poll_tab': "Wahl",
+          'main_tab': "Partei",
+          'factions_tab': "Strömungen",
+          'districts_tab': "Bezirke",
+          'germany_tab': "Deutschland",
+          'moscow_tab': "Moskau",
           'stats-link': "Bibliothek",
           'save-link': "Speichern/Laden",
           'options-link': "Einstellungen",
@@ -81,10 +82,11 @@
       localStorage[game.title + '_language'] = "en";
       var text_label_map_ids = {
           // top-level
-          'main_tab': "Main",
-          'politics_tab': "Politics",
-          'paramilitary_tab': "Defense",
-          'poll_tab': "Polls",
+          'main_tab': "Party",
+          'factions_tab': "Factions",
+          'districts_tab': "Districts",
+          'germany_tab': "Germany",
+          'moscow_tab': "Moscow",
           'stats-link': "Library",
           'save-link': "Save/Load",
           'options-link': "Options",
@@ -372,6 +374,108 @@
       dendryUI.dendryEngine._runActions(scene.onArrival);
       var displayContent = dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
       $('#qualities').append(dendryUI.contentToHTML.convert(displayContent));
+      window.renderSidebarWidgets();
+  };
+
+  // Sidebar widgets: the status scene writes empty placeholders
+  // (meters, lock tags, faction names, faction and district blocks)
+  // and they are filled in here from the current qualities.
+  var LOCK_LABELS = ['open', 'against the line', 'forbidden'];
+
+  // 0..100 -> red..amber..green
+  var meterColor = function(pct) {
+      var hue = Math.round(1.2 * Math.max(0, Math.min(100, pct)));
+      return 'hsl(' + hue + ', 55%, 45%)';
+  };
+
+  var makeMeter = function(label, value, opts) {
+      opts = opts || {};
+      var v = Math.round(value || 0);
+      var wrap = document.createElement('div');
+      wrap.className = 'meter-row';
+      if (opts.title) {
+          wrap.title = opts.title;
+      }
+      var head = document.createElement('div');
+      head.className = 'meter-head';
+      var name = document.createElement('span');
+      name.textContent = label;
+      if (opts.faction) {
+          name.className = 'faction-text f-' + opts.faction;
+      }
+      var num = document.createElement('span');
+      num.className = 'meter-num';
+      num.textContent = v + (opts.suffix || '');
+      head.appendChild(name);
+      head.appendChild(num);
+      var track = document.createElement('div');
+      track.className = 'meter-track';
+      var fill = document.createElement('div');
+      fill.className = 'meter-fill';
+      if (opts.faction) {
+          fill.className += ' bg-' + opts.faction;
+      } else if (opts.tone == 'neutral') {
+          fill.className += ' meter-neutral';
+      } else {
+          fill.style.backgroundColor = meterColor(opts.invert ? 100 - v : v);
+      }
+      fill.style.width = Math.max(0, Math.min(100, v)) + '%';
+      track.appendChild(fill);
+      wrap.appendChild(head);
+      wrap.appendChild(track);
+      return wrap;
+  };
+
+  var factionTag = function(Q, faction) {
+      var span = document.createElement('span');
+      span.className = 'faction-text f-' + faction;
+      span.textContent = (Q.faction_names && Q.faction_names[faction]) || faction;
+      return span;
+  };
+
+  window.renderSidebarWidgets = function() {
+      var Q = dendryUI.dendryEngine.state.qualities;
+      var root = document.getElementById('qualities');
+      if (!root || !Q.factions) {
+          return;
+      }
+      root.querySelectorAll('.meter').forEach(function(el) {
+          el.appendChild(makeMeter(el.dataset.label, Q[el.dataset.q], {
+              invert: el.dataset.invert == '1',
+              tone: el.dataset.tone,
+              title: el.title
+          }));
+      });
+      root.querySelectorAll('.lock').forEach(function(el) {
+          var lock = Q[el.dataset.q] || 0;
+          el.className = 'lock lock-' + lock;
+          el.textContent = LOCK_LABELS[lock];
+      });
+      root.querySelectorAll('.faction-name').forEach(function(el) {
+          var f = Q[el.dataset.q];
+          if (f) {
+              el.appendChild(factionTag(Q, f));
+          }
+      });
+      root.querySelectorAll('.faction-block').forEach(function(el) {
+          var f = el.dataset.faction;
+          el.appendChild(makeMeter(Q.faction_names[f], Q[f + '_strength'], {faction: f, title: el.title, suffix: '%'}));
+          var sat = makeMeter('Satisfaction', Q[f + '_satisfaction'], {});
+          sat.className += ' meter-sub';
+          el.appendChild(sat);
+      });
+      root.querySelectorAll('.district-block').forEach(function(el) {
+          var d = el.dataset.district;
+          var f = Q['district_' + d + '_faction'];
+          var m = Q['district_' + d + '_members'] || 0;
+          var row = makeMeter(Q.district_names[d], Q['district_' + d + '_loyalty'], {faction: f});
+          var info = document.createElement('div');
+          info.className = 'district-info';
+          info.appendChild(factionTag(Q, f));
+          info.appendChild(document.createTextNode(', ' + m.toFixed(1) + 'k members'));
+          row.appendChild(info);
+          el.appendChild(row);
+      });
   };
 
   window.changeTab = function(newTab, tabId) {
