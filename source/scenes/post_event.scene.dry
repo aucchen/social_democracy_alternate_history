@@ -120,6 +120,7 @@ for (var action of Q.line_actions) {
     Q['lock_' + action] = lock;
 }
 Q.leading_faction_name = Q.faction_names[Q.leading_faction];
+Q.leading_faction_adj = Q.faction_adj[Q.leading_faction];
 Q.junior_faction_name = Q.junior_faction ? Q.faction_names[Q.junior_faction] : 0;
 
 // ---------------------------------------------------------------- meters

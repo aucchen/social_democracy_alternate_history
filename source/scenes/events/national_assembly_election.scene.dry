@@ -22,7 +22,7 @@ Our posters call on workers to stay away. Most vote anyway, for the SPD and the 
 @candidates
 subtitle: [? if lock_elections = 1 : Against the party line: costs 10 Unity. ?] Overruling a congress costs a further 10 Unity, and it is very late to register lists.
 choose-if: lock_elections < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids taking part in bourgeois elections.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking part in bourgeois elections.
 on-arrival: {!
 if (Q.lock_elections == 1) {
     Q.unity -= 10;
@@ -37,9 +37,9 @@ Q.election_boycott = 0;
 Our lists appear in a handful of constituencies. We win few votes, but a principle has been set: the Zentrale, not the congress, has the last word. The districts will remember.
 
 @vote_uspd
-subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Helps the Independents; the ultra-left is appalled.
+subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Helps the Independents; the Left Radicals are appalled.
 choose-if: lock_united_front < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids any support for social democrats.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any support for social democrats.
 on-arrival: {!
 if (Q.lock_united_front == 1) {
     Q.unity -= 10;

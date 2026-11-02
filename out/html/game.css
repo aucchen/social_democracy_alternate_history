@@ -598,15 +598,13 @@ table {
 }
 
 /* ------------------------------------------------------------------ */
-/* Red Germany sidebar: factions, meters and party-line tags           */
+/* Red Germany sidebar: faction colours, party-line tags, tabs */
 
 body {
   --f-luxemburgist: #c0392b;
   --f-offensive: #7b1e4f;
   --f-unionist: #2c6fae;
   --f-ultraleft: #222222;
-  --meter-track: rgba(0, 0, 0, 0.1);
-  --meter-neutral: #8a7f72;
   --lock-open: #2e7d32;
   --lock-soft: #b7791f;
   --lock-hard: #b3261e;
@@ -616,8 +614,6 @@ body.dark-mode {
   --f-offensive: #d26aa0;
   --f-unionist: #6fa8dc;
   --f-ultraleft: #c8c8c8;
-  --meter-track: rgba(255, 255, 255, 0.12);
-  --meter-neutral: #a99f93;
   --lock-open: #66bb6a;
   --lock-soft: #e0a54a;
   --lock-hard: #ef6b5e;
@@ -627,29 +623,7 @@ body.dark-mode {
 .f-offensive { color: var(--f-offensive); }
 .f-unionist { color: var(--f-unionist); }
 .f-ultraleft { color: var(--f-ultraleft); }
-.bg-luxemburgist { background-color: var(--f-luxemburgist); }
-.bg-offensive { background-color: var(--f-offensive); }
-.bg-unionist { background-color: var(--f-unionist); }
-.bg-ultraleft { background-color: var(--f-ultraleft); }
 .faction-text { font-weight: bold; }
-
-.meter-row { margin: 0.45em 0 0.6em; }
-.meter-head { display: flex; justify-content: space-between; }
-.meter-num { opacity: 0.7; font-variant-numeric: tabular-nums; }
-.meter-track {
-  height: 8px;
-  background: var(--meter-track);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 2px;
-}
-.meter-fill { height: 100%; border-radius: 4px; }
-.meter-neutral { background-color: var(--meter-neutral); }
-.meter-sub { margin-top: -0.2em; font-size: 0.85em; }
-.meter-sub .meter-track { height: 5px; }
-.faction-block { margin-bottom: 0.9em; }
-.district-info { font-size: 0.85em; opacity: 0.85; }
-.sidebar-note { font-size: 0.85em; opacity: 0.75; }
 
 .line-row {
   display: flex;
@@ -669,4 +643,11 @@ body.dark-mode {
 .lock-2 { color: var(--lock-hard); }
 
 .tab_container.second_row { margin-top: 0; }
-#stats_sidebar .tab_button { padding: 8px 6px; font-size: 0.9em; }
+#stats_sidebar .tab_container { display: flex; }
+#stats_sidebar .tab_button {
+  flex: 1 1 auto;
+  padding: 8px 4px;
+  white-space: nowrap;
+  font-size: 13px;
+  text-align: center;
+}

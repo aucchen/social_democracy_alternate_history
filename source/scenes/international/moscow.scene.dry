@@ -24,7 +24,7 @@ Radek is generous. He is also taking notes.
 @advice
 subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs 10 Unity. ?] Draws us closer to the Bolsheviks.
 choose-if: lock_moscow_orders < 2
-unavailable-subtitle: The [+ leading_faction_name +] line forbids taking orders from Moscow.
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
 on-arrival: {!
 if (Q.lock_moscow_orders == 1) {
     Q.unity -= 10;
@@ -39,7 +39,7 @@ Q.luxemburgist_satisfaction -= 5;
 We follow Radek's advice. The Bolsheviks have made a revolution; we have not yet.
 
 @distance
-subtitle: Luxemburg's circle approves.
+subtitle: The Spartacists approve.
 on-arrival: independence += 5; luxemburgist_satisfaction += 5; offensive_satisfaction -= 5
 
 The German revolution will be made by German workers. We thank Radek for his interest.
