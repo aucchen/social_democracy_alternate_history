@@ -1,0 +1,47 @@
+title: Die Rote Fahne
+new-page: true
+view-if: rote_fahne_timer <= 0
+on-arrival: rote_fahne_timer = 3; month_actions += 1
+frequency: 300
+is-card: true
+tags: party_affairs
+
+= Die Rote Fahne
+
+The party paper reaches tens of thousands of readers. The Zentrale must decide what it will say this month.
+
+- @line: Argue for the Zentrale's line.
+- @debate: Open the paper to debate.
+- @attack: Attack the SPD leaders who sent the Freikorps.
+- @easy_discard
+
+@line
+subtitle: Districts move towards the Zentrale; other factions resent it.
+on-arrival: {!
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 5;
+}
+for (var f of Q.factions) {
+    if (f != Q.leading_faction) {
+        Q[f + '_satisfaction'] -= 3;
+    }
+}
+!}
+
+The paper explains the Zentrale's line, patiently and at length. Some districts are persuaded.
+
+@debate
+subtitle: Every faction feels heard.
+on-arrival: {!
+for (var f of Q.factions) {
+    Q[f + '_satisfaction'] += 4;
+}
+!}
+
+Letters and articles from every wing of the party fill the pages. Rosa Luxemburg would approve: freedom is always the freedom of those who think differently.
+
+@attack
+subtitle: Pleases the radicals; burns bridges with the SPD.
+on-arrival: spd_relation -= 10; militancy += 5; ultraleft_satisfaction += 5; offensive_satisfaction += 5; worker_support += 2
+
+Noske the bloodhound, Ebert the traitor. The words sell papers.

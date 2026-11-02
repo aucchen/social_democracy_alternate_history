@@ -1,32 +1,40 @@
 title: Paul Levi
 is-pinned-card: true
-tags: advisor, left
-card-image: img/portraits/LeviPaul.jpg
+tags: advisor
 view-if: levi_advisor = 1
-new-page: true 
+new-page: true
 
 = Paul Levi
 
-Levi is a former leader of the KPD who left over their devotion to violence and revolutionary adventurism.
+A lawyer and Luxemburg's close ally. Cool-headed and organised, he wants a disciplined party that can win the majority of workers.
 
-- @building_the_left
-- @kpd_cooperation
+- @organise
+- @funds
 - @root: Return to main
 
-@building_the_left
-title: Building the Left
-subtitle: Push the SPD to the left.
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer = 0
-on-arrival: advisor_action_timer = 6; left_strength += 10; left_dissent -= 8; reformist_dissent += 3
+@organise
+title: Organise the Apparatus
+subtitle: Raises the loyalty of the three least loyal districts.
+unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
+choose-if: advisor_action_timer <= 0
+on-arrival: {!
+Q.advisor_action_timer = 4;
+Q.last_advisor_action = 1;
+var sorted = Q.districts.slice().sort(function(a, b) {
+    return Q['district_' + a + '_loyalty'] - Q['district_' + b + '_loyalty'];
+});
+for (var i = 0; i < 3; i++) {
+    Q['district_' + sorted[i] + '_loyalty'] += 12;
+}
+!}
 
-We have increased the strength of the left faction with the SPD. This raised concern among the moderate reformists in the party.
+Levi builds a network of district secretaries who answer to the Zentrale.
 
-@kpd_cooperation
-title: Cooperation with the KPD
-subtitle: Any cooperation between the parties requires compromise from the KPD as well as the SPD.
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-choose-if: advisor_action_timer = 0
-on-arrival: advisor_action_timer = 6; left_strength += 5; kpd_relation += 6*(1-dissent); reformist_dissent += 3; communist_coalition += 1 if kpd_cooperation_seen <= 1; kpd_cooperation_seen += 1
+@funds
+title: Put the Finances in Order
+subtitle: 2 funds.
+unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; resources += 2
 
-Levi attempts to reach out to his former colleagues to dissuade the KPD from their current extreme Stalinist path. Some concessions are extracted.
+Dues are collected, debts are chased, and the accounts are balanced.

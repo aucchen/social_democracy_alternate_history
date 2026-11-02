@@ -1,0 +1,45 @@
+title: Word from Moscow
+new-page: true
+view-if: moscow_timer <= 0
+on-arrival: moscow_timer = 4; month_actions += 1
+frequency: 300
+is-card: true
+tags: international
+
+= Word from Moscow
+
+Karl Radek, the Bolsheviks' envoy, has slipped into Berlin. Lenin's party wants a say in how the German revolution is made, and it can offer money in return.
+
+- @funds: Ask for money.
+- @advice: Follow Moscow's advice.
+- @distance: Keep our distance.
+- @easy_discard
+
+@funds
+subtitle: 3 funds. Moscow's money comes with expectations.
+on-arrival: resources += 3; independence -= 10
+
+Radek is generous. He is also taking notes.
+
+@advice
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs 10 Unity. ?] Draws us closer to the Bolsheviks.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_name +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 5;
+Q.world_revolution += 3;
+Q.offensive_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 5;
+!}
+
+We follow Radek's advice. The Bolsheviks have made a revolution; we have not yet.
+
+@distance
+subtitle: Luxemburg's circle approves.
+on-arrival: independence += 5; luxemburgist_satisfaction += 5; offensive_satisfaction -= 5
+
+The German revolution will be made by German workers. We thank Radek for his interest.

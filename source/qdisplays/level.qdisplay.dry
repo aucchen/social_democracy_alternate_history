@@ -1,0 +1,7 @@
+# generic 0-100 meter
+
+(..9.999) very low
+(9.999..29.999) low
+(29.999..59.999) medium
+(59.999..84.999) high
+(84.999..) very high

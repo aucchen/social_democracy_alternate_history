@@ -1,0 +1,30 @@
+title: The Party Splits
+subtitle: A faction walks out.
+new-page: true
+tags: event
+view-if: split_flag = 1
+on-arrival: {!
+var f = Q.split_faction;
+Q.split_name_shown = Q.faction_names[f];
+Q.split_members_lost = 0;
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_faction'] == f) {
+        var lost = Q['district_' + d + '_members'] * 0.6;
+        Q.split_members_lost += lost;
+        Q['district_' + d + '_members'] -= lost;
+        Q['district_' + d + '_faction'] = Q.leading_faction;
+        Q['district_' + d + '_loyalty'] = 50;
+    }
+}
+Q.split_members_lost = Q.split_members_lost.toFixed(1);
+Q[f + '_satisfaction'] = 40;
+Q.worker_support -= 5;
+Q.unity += 10;
+Q.split_flag = 0;
+!}
+
+= The Party Splits
+
+The [+ split_name_shown +] have had enough. Their districts leave the party, taking about [+ split_members_lost +] thousand members with them. Those who stay accept the Zentrale's line.
+
+The party is smaller, and more united.

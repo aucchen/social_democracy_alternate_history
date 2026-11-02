@@ -1,0 +1,71 @@
+title: Mods
+is-special: true
+on-display: {!
+var mods_list = document.getElementById('mods_list');
+// load mods from url
+var mods_url = 'https://aucchen.github.io/social_democracy_mods/mod_list.tsv';
+var table = document.createElement('table');
+table.style.border = '1px solid';
+table.style['border-collapse'] = 'collapse';
+table.style['font-size'] = '0.8em';
+Q.mods_table = {};
+fetch(mods_url)
+.then(response => response.text())
+.then(text => {
+    // split text
+    var lines = text.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+        var line_data = lines[i].split('\t');
+        if (line_data.length < 5) {
+            continue;
+        }
+        var tr = document.createElement('tr');
+        for (var j = 0; j < 4; j++) {
+            var td = document.createElement('td');
+            if (i == 0) {
+                td = document.createElement('th');
+            }
+            td.style.border = '1px solid';
+            td.style.padding = '0.5em';
+            td.textContent = line_data[j];
+
+            tr.appendChild(td);
+        }
+        if (i > 0) {
+            Q.mods_table[line_data[2]] = {
+                name: line_data[0],
+                author: line_data[1],
+                description: line_data[3],
+            };
+
+        }
+        table.appendChild(tr);
+    }
+    mods_list.appendChild(table);
+})
+.catch(err => console.log(err));
+
+var submit = document.getElementById('submit');
+submit.onclick = function() {
+    var mod_url = document.getElementById('mod_url').value;
+    // if it's a known mod, set the game's titlebar and author.
+    if (Q.mods_table[mod_url]) {
+        var mod_data = Q.mods_table[mod_url];
+        var title = document.getElementById('game-title');
+        title.textContent = mod_data.name;
+        var author = document.getElementById('game-author');
+        author.textContent = mod_data.author;
+    }
+    window.loadMod(mod_url);
+};
+!}
+
+Curated mods:
+
+{!<div id="mods_list"></div>!}
+
+Enter a mod's URL:
+
+{!<input type="text" size="25" id="mod_url" name="mod_url"/> <button id="submit">Submit</button>!}
+
+- @backSpecialScene: Back

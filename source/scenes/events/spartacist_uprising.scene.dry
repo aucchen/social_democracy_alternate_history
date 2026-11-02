@@ -1,0 +1,123 @@
+title: The January Uprising
+subtitle: Berlin's workers are in the streets.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 1
+max-visits: 1
+
+= The January Uprising
+
+On 4 January the government dismissed Emil Eichhorn, the left-wing police chief of Berlin. The next day hundreds of thousands of workers marched in protest. Armed men occupied the newspaper district, and a Revolutionary Committee, with Karl Liebknecht among its members, declared the Ebert government deposed.
+
+The Zentrale was not consulted. Luxemburg thinks the uprising is premature; the Berlin district, which follows the ultra-left, is already on the barricades. Noske is gathering the Freikorps outside the city.
+
+- @overthrow: Back the Revolutionary Committee and try to overthrow Ebert.
+- @occupations: Defend the occupations, but refuse an armed insurrection.
+- @negotiate: Call for negotiations and a withdrawal from the buildings.
+
+@overthrow
+subtitle: [? if lock_uprising = 1 : Against the party line: costs 10 Unity. ?] Thrills the radicals. The Freikorps will not forgive it.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_name +] line forbids an uprising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.militancy += 20;
+Q.repression += 25;
+Q.stability -= 5;
+Q.worker_support += 3;
+Q.ultraleft_satisfaction += 15;
+Q.offensive_satisfaction += 15;
+Q.district_berlin_members -= 0.5;
+Q.district_berlin_loyalty += 15;
+Q.spd_relation -= 10;
+Q.leaders_risk = 60;
+!}
+
+The party throws itself into the fight. For a few days, the government's fate seems uncertain.
+
+- @hunt: Continue...
+
+@occupations
+subtitle: The middle course. Berlin is disappointed, and the Freikorps come anyway.
+on-arrival: militancy += 8; repression += 15; luxemburgist_satisfaction += 5; district_berlin_loyalty -= 5; spd_relation -= 5; leaders_risk = 40
+
+The party defends the occupied buildings, but refuses to call for the government's overthrow.
+
+- @hunt: Continue...
+
+@negotiate
+subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Avoids a massacre, perhaps. Berlin's workers will call it betrayal.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_name +] line forbids negotiating with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.militancy -= 5;
+Q.repression += 5;
+Q.uspd_relation += 10;
+Q.ultraleft_satisfaction -= 20;
+Q.district_berlin_loyalty -= 15;
+Q.leaders_risk = 20;
+!}
+
+With the USPD's help, the Zentrale proposes negotiations. Many fighters refuse to leave the buildings.
+
+- @hunt: Continue...
+
+@hunt
+title: The Freikorps Enter Berlin
+new-page: true
+
+= The Freikorps Enter Berlin
+
+From 11 January the Freikorps storm the occupied buildings with artillery and machine guns. Prisoners are shot. Posters across the city call for the murder of Liebknecht and Luxemburg.
+
+- @stay: Luxemburg and Liebknecht stay in Berlin, with the workers.
+- @leave: Get them out of Berlin.
+
+@stay
+subtitle: The radicals will respect it. The risk is great.
+on-arrival: leaders_risk += 25; ultraleft_satisfaction += 5
+go-to: fate
+
+@leave
+subtitle: Safer, but the Berlin workers will say their leaders ran.
+on-arrival: leaders_risk -= 30; unity -= 5; ultraleft_satisfaction -= 5; district_berlin_loyalty -= 5
+go-to: fate
+
+@fate
+title: 15 January
+new-page: true
+on-arrival: {!
+Q.luxemburg_alive = (100 * Math.random() >= Q.leaders_risk) ? 1 : 0;
+Q.liebknecht_alive = (100 * Math.random() >= Q.leaders_risk) ? 1 : 0;
+if (!Q.luxemburg_alive) {
+    Q.luxemburgist_satisfaction -= 10;
+    Q.unity -= 5;
+}
+if (!Q.liebknecht_alive) {
+    Q.militancy += 5;
+}
+if (!Q.luxemburg_alive && !Q.liebknecht_alive) {
+    Q.spd_relation -= 15;
+    Q.uspd_relation -= 5;
+}
+Q.spartacist_uprising_done = 1;
+!}
+
+= 15 January 1919
+
+[? if luxemburg_alive = 0 and liebknecht_alive = 0 : On the night of 15 January, officers of the Guards Cavalry Rifle Division capture Rosa Luxemburg and Karl Liebknecht. Both are murdered. Luxemburg's body is thrown into the Landwehr Canal. The party has lost its two best-known leaders, and it will never forgive the social democrats who called in the Freikorps. ?]
+
+[? if luxemburg_alive = 1 and liebknecht_alive = 0 : Karl Liebknecht is captured and shot "while trying to escape". Rosa Luxemburg escapes the manhunt. The history of the party, and perhaps of Germany, has changed. ?]
+
+[? if luxemburg_alive = 0 and liebknecht_alive = 1 : Rosa Luxemburg is captured and murdered, and her body is thrown into the Landwehr Canal. Karl Liebknecht escapes the manhunt. ?]
+
+[? if luxemburg_alive = 1 and liebknecht_alive = 1 : The officers who come for Luxemburg and Liebknecht find an empty flat. Both have escaped. The history of the party, and perhaps of Germany, has changed. ?]
+
+The uprising is over. Order prevails in Berlin.

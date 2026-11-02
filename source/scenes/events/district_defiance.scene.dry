@@ -1,0 +1,53 @@
+title: A District Acts Alone
+subtitle: The Zentrale's line is not being followed.
+new-page: true
+tags: event
+view-if: defiance_flag = 1
+frequency: 50
+on-arrival: {!
+Q.defiance_target = Q.defiant_district;
+Q.defiance_target_faction = Q['district_' + Q.defiant_district + '_faction'];
+Q.defiance_flag = 0;
+!}
+
+= A District Acts Alone
+
+The district of **[+ defiant_district_name +]**, led by the [+ defiant_faction_name +], has called its own armed demonstrations without asking the Zentrale. The police are already moving in.
+
+- @back: Back them publicly.
+- @disown: Disown the action.
+- @delegation: Send a delegation from the Zentrale.
+
+@back
+subtitle: The district is grateful; the line is weakened.
+on-arrival: {!
+Q.militancy += 8;
+Q.repression += 6;
+Q['district_' + Q.defiance_target + '_loyalty'] += 10;
+Q[Q.leading_faction + '_satisfaction'] -= 5;
+Q.unity -= 3;
+!}
+
+The Zentrale declares its solidarity. The district leaders take note: defiance pays.
+
+@disown
+subtitle: The line holds; the district and its faction are furious.
+on-arrival: {!
+Q['district_' + Q.defiance_target + '_loyalty'] -= 10;
+Q[Q.defiance_target_faction + '_satisfaction'] -= 10;
+Q.spd_relation += 2;
+!}
+
+The Zentrale declares the action unauthorised. The district calls it a stab in the back.
+
+@delegation
+subtitle: Costs 1 fund. Calms things down.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q['district_' + Q.defiance_target + '_loyalty'] += 5;
+Q.militancy -= 3;
+!}
+
+The delegation persuades the district to call off the action, this time.

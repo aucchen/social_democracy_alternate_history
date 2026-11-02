@@ -1,0 +1,21 @@
+title: Karl Liebknecht
+is-pinned-card: true
+tags: advisor
+view-if: liebknecht_advisor = 1 and liebknecht_alive = 1
+new-page: true
+
+= Karl Liebknecht
+
+The man who voted against war credits and proclaimed the socialist republic on 9 November. The streets love him; he is less patient than Luxemburg.
+
+- @rally
+- @root: Return to main
+
+@rally
+title: Rally the Streets
+subtitle: Raises militancy and worker support; pleases the radicals.
+unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; militancy += 8; worker_support += 4; repression += 4; ultraleft_satisfaction += 8; offensive_satisfaction += 5
+
+Tens of thousands come to hear Liebknecht speak.

@@ -1,0 +1,42 @@
+title: Recruitment Drive
+new-page: true
+view-if: recruitment_timer <= 0
+on-arrival: recruitment_timer = 3; month_actions += 1
+frequency: 300
+is-card: true
+tags: party_affairs
+
+= Recruitment Drive
+
+Thousands of workers are disappointed in Ebert's republic. A recruitment drive could bring them into the party, but only the districts loyal to the Zentrale will put real effort into it.
+
+Members in loyal districts: [+ loyal_share_display +]%.
+
+- @drive: Fund a recruitment drive.
+- @local: Leave recruitment to the districts.
+- @easy_discard
+
+@drive
+subtitle: Costs 1 fund. Loyal districts grow faster than defiant ones.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+for (var d of Q.districts) {
+    var grow = Q['district_' + d + '_loyalty'] >= 50 ? 0.15 : 0.05;
+    Q['district_' + d + '_members'] *= 1 + grow;
+}
+Q.worker_support += 2;
+!}
+
+Organisers fan out to factories and labour exchanges. The loyal districts report a stream of new members; the others take the money and do as they please.
+
+@local
+on-arrival: {!
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.04;
+    Q['district_' + d + '_loyalty'] -= 2;
+}
+!}
+
+The districts recruit in their own way and in their own image.

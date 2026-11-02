@@ -1,0 +1,38 @@
+title: The Trade Unions
+new-page: true
+view-if: unions_timer <= 0
+on-arrival: unions_timer = 3; month_actions += 1
+frequency: 300
+is-card: true
+tags: movement
+
+= The Trade Unions
+
+Millions of workers belong to the Free Trade Unions, whose leaders back Ebert. The ultra-left says the unions are dead and must be replaced by revolutionary workers' unions; others say the party must go where the workers are.
+
+- @inside: Work inside the existing unions.
+- @outside: Build revolutionary unions outside them.
+- @easy_discard
+
+@inside
+subtitle: [? if lock_union_work = 1 : Against the party line: costs 10 Unity. ?] Wins workers and the USPD's respect; angers the ultra-left.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_name +] line forbids work inside the old unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 6;
+Q.uspd_relation += 3;
+Q.unionist_satisfaction += 10;
+Q.ultraleft_satisfaction -= 10;
+!}
+
+Communists stand in union elections and speak at every branch meeting. It is slow, unglamorous work.
+
+@outside
+subtitle: Pleases the ultra-left; splits the workforce.
+on-arrival: ultraleft_satisfaction += 10; unionist_satisfaction -= 10; worker_support += 2; militancy += 4
+
+The new unions are small, militant and proud of it.
