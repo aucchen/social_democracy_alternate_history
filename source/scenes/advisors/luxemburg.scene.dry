@@ -1,0 +1,37 @@
+title: Rosa Luxemburg
+is-pinned-card: true
+tags: advisor
+view-if: luxemburg_advisor = 1 and luxemburg_alive = 1
+new-page: true
+
+= Rosa Luxemburg
+
+The party's leading theorist. She believes the revolution must be the work of the majority of the working class, not of a putsch, and she distrusts the Bolsheviks' methods.
+
+- @persuade
+- @against_putsch
+- @root: Return to main
+
+@persuade
+title: Win the Argument
+subtitle: Raises every district's loyalty to the Zentrale.
+unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
+choose-if: advisor_action_timer <= 0
+on-arrival: {!
+Q.advisor_action_timer = 4;
+Q.last_advisor_action = 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 8;
+}
+!}
+
+Luxemburg speaks and writes tirelessly. Even her opponents in the districts read her.
+
+@against_putsch
+title: Against Putschism
+subtitle: Lowers militancy; the ultra-left is offended.
+unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; militancy -= 10; repression -= 5; ultraleft_satisfaction -= 8; luxemburgist_satisfaction += 5
+
+A revolution cannot be ordered from above, Luxemburg argues. It must grow.

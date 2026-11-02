@@ -1,8 +1,7 @@
+# faction strength, share of members in percent
 
-# faction strength
-
-(0..10) weak
-(10..25) moderate
-(25..40) strong
-(40..60) very strong
-(60..) dominant
+(..4.999) negligible
+(4.999..19.999) small
+(19.999..39.999) significant
+(39.999..59.999) large
+(59.999..) dominant

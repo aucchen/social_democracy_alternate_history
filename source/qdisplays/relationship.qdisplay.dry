@@ -1,0 +1,7 @@
+# relations with another party, 0-100
+
+(..14.999) hostile
+(14.999..34.999) cold
+(34.999..59.999) neutral
+(59.999..79.999) warm
+(79.999..) close

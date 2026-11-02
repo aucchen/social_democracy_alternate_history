@@ -1,0 +1,47 @@
+title: The Independents
+new-page: true
+view-if: uspd_timer <= 0
+on-arrival: uspd_timer = 3; month_actions += 1
+frequency: 300
+is-card: true
+tags: germany
+
+= The Independents
+
+The Independent Social Democrats (USPD) stand between Ebert's party and ours. Their left wing is close to us; their leaders are not.
+
+- @joint: Propose joint action to the USPD.
+- @left_wing: Court the USPD's left wing.
+- @denounce: Denounce the USPD leaders as traitors.
+- @easy_discard
+
+@joint
+subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Improves relations with both social democratic parties.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_name +] line forbids any united front.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.uspd_relation += 10;
+Q.spd_relation += 3;
+Q.luxemburgist_satisfaction += 5;
+Q.unionist_satisfaction += 5;
+Q.ultraleft_satisfaction -= 10;
+Q.offensive_satisfaction -= 10;
+!}
+
+Our proposal for joint demonstrations is received with interest by the Independents.
+
+@left_wing
+subtitle: Small gains, especially in Halle.
+on-arrival: uspd_relation += 4; district_halle_members += 0.5; worker_support += 1
+
+Some of the Independents' most radical members cross over to us.
+
+@denounce
+subtitle: Pleases the radicals.
+on-arrival: uspd_relation -= 10; ultraleft_satisfaction += 5; offensive_satisfaction += 5
+
+We denounce the Independents as half-hearted traitors. They return the favour.

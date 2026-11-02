@@ -1,0 +1,63 @@
+title: The District Question
+new-page: true
+view-if: organisers_timer <= 0
+on-arrival: {!
+Q.organisers_timer = 3;
+Q.month_actions += 1;
+// target the least loyal district
+var target = Q.districts[0];
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_loyalty'] < Q['district_' + target + '_loyalty']) {
+        target = d;
+    }
+}
+Q.target_district = target;
+Q.target_district_name = Q.district_names[target];
+Q.target_faction = Q['district_' + target + '_faction'];
+Q.target_faction_name = Q.faction_names[Q.target_faction];
+Q.target_is_rival = Q.target_faction != Q.leading_faction ? 1 : 0;
+!}
+frequency: 300
+is-card: true
+tags: party_affairs
+
+= The District Question
+
+The district of **[+ target_district_name +]** ([+ target_faction_name +]) is the least loyal to the Zentrale. Holding the Zentrale means little if the districts ignore it.
+
+- @send: Send organisers from the Zentrale.
+- @replace: Remove the district leadership.
+- @easy_discard
+
+@send
+subtitle: Costs 1 fund. Raises the district's loyalty; a devoted district may change sides.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+var d = Q.target_district;
+Q['district_' + d + '_loyalty'] += 20;
+Q.target_flipped = 0;
+if (Q['district_' + d + '_loyalty'] >= 80 && Q['district_' + d + '_faction'] != Q.leading_faction) {
+    Q['district_' + d + '_faction'] = Q.leading_faction;
+    Q['district_' + d + '_loyalty'] = 60;
+    Q.target_flipped = 1;
+}
+!}
+
+Organisers from the Zentrale speak at every meeting in [+ target_district_name +]. [? if target_flipped : The district has come over to the [+ leading_faction_name +]. ?]
+
+@replace
+subtitle: The district joins our faction, but loses members, and its faction is outraged.
+choose-if: target_is_rival = 1
+unavailable-subtitle: The district already follows our faction.
+on-arrival: {!
+var d = Q.target_district;
+Q['district_' + d + '_faction'] = Q.leading_faction;
+Q['district_' + d + '_loyalty'] = 60;
+Q['district_' + d + '_members'] *= 0.6;
+Q[Q.target_faction + '_satisfaction'] -= 20;
+Q.unity -= 10;
+!}
+
+The district leadership is removed and replaced with people loyal to the Zentrale. Many members follow their old leaders out of the party.

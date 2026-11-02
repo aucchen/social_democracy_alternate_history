@@ -1,0 +1,5 @@
+# how the party line treats an action: 0 open, 1 soft lock, 2 hard lock
+
+(..0.5) open
+(0.5..1.5) against the line (costs Unity)
+(1.5..) forbidden by the line

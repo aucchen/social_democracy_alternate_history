@@ -1,0 +1,7 @@
+# a faction's satisfaction with the party line, 0-100
+
+(..9.999) ready to split
+(9.999..29.999) angry
+(29.999..54.999) uneasy
+(54.999..79.999) content
+(79.999..) enthusiastic

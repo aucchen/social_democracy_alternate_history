@@ -1,0 +1,27 @@
+title: Party Finances
+new-page: true
+view-if: dues_timer <= 0
+on-arrival: dues_timer = 4; month_actions += 1
+frequency: 300
+is-card: true
+tags: party_affairs
+
+= Party Finances
+
+A revolutionary party still has to pay for paper, printing presses, offices and train tickets.
+
+- @maintain: Collect the usual dues.
+- @raise: Ask the members for more.
+- @easy_discard
+
+@maintain
+subtitle: [+ dues +] funds gained.
+on-arrival: resources += dues
+
+The district treasurers send in what they have.
+
+@raise
+subtitle: [+ dues + 1 +] funds gained. Members are poor, and some will drift away.
+on-arrival: dues += 1; resources += dues; worker_support -= 2; unity -= 2
+
+The money comes in, with complaints. In a winter of hunger, every pfennig counts.
