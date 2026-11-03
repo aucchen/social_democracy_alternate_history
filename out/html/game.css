@@ -597,57 +597,6 @@ table {
     text-decoration-style: dotted;
 }
 
-/* ------------------------------------------------------------------ */
-/* Red Germany sidebar: faction colours, party-line tags, tabs */
-
-body {
-  --f-luxemburgist: #c0392b;
-  --f-offensive: #7b1e4f;
-  --f-unionist: #2c6fae;
-  --f-ultraleft: #222222;
-  --lock-open: #2e7d32;
-  --lock-soft: #b7791f;
-  --lock-hard: #b3261e;
-}
-body.dark-mode {
-  --f-luxemburgist: #ef6b5e;
-  --f-offensive: #d26aa0;
-  --f-unionist: #6fa8dc;
-  --f-ultraleft: #c8c8c8;
-  --lock-open: #66bb6a;
-  --lock-soft: #e0a54a;
-  --lock-hard: #ef6b5e;
-}
-
-.f-luxemburgist { color: var(--f-luxemburgist); }
-.f-offensive { color: var(--f-offensive); }
-.f-unionist { color: var(--f-unionist); }
-.f-ultraleft { color: var(--f-ultraleft); }
-.faction-text { font-weight: bold; }
-
-.line-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.3em 0;
-}
-.lock {
-  font-size: 0.8em;
-  padding: 0 0.6em;
-  border-radius: 1em;
-  border: 1px solid currentColor;
-  white-space: nowrap;
-}
-.lock-0 { color: var(--lock-open); }
-.lock-1 { color: var(--lock-soft); }
-.lock-2 { color: var(--lock-hard); }
-
+/* second row of sidebar tabs */
 .tab_container.second_row { margin-top: 0; }
-#stats_sidebar .tab_container { display: flex; }
-#stats_sidebar .tab_button {
-  flex: 1 1 auto;
-  padding: 8px 4px;
-  white-space: nowrap;
-  font-size: 13px;
-  text-align: center;
-}
+#stats_sidebar .tab_button { padding: 10px 8px; }

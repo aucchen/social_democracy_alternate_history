@@ -14,46 +14,52 @@ Unity: [+ unity : level +]
 
 = The Party Line
 
-Zentrale: {!<span class="faction-name" data-q="leading_faction"></span>!}[? if junior_faction : , with the {!<span class="faction-name" data-q="junior_faction"></span>!} ?]
+Zentrale: [+ leading_faction_name +][? if junior_faction : , with the [+ junior_faction_name +] ?]
 
-{!<div class="line-row"><span>Elections</span><span class="lock" data-q="lock_elections"></span></div>!}
-{!<div class="line-row"><span>United front</span><span class="lock" data-q="lock_united_front"></span></div>!}
-{!<div class="line-row"><span>Union work</span><span class="lock" data-q="lock_union_work"></span></div>!}
-{!<div class="line-row"><span>Councils and occupations</span><span class="lock" data-q="lock_councils"></span></div>!}
-{!<div class="line-row"><span>Armed uprising</span><span class="lock" data-q="lock_uprising"></span></div>!}
-{!<div class="line-row"><span>Moscow's orders</span><span class="lock" data-q="lock_moscow_orders"></span></div>!}
+Elections: [+ lock_elections : lock +]
+
+United front: [+ lock_united_front : lock +]
+
+Union work: [+ lock_union_work : lock +]
+
+Councils and occupations: [+ lock_councils : lock +]
+
+Armed uprising: [+ lock_uprising : lock +]
+
+Moscow's orders: [+ lock_moscow_orders : lock +]
+
 
 @factions
 
 = Factions
 
-{!<span class="tooltip-text faction-text f-luxemburgist" title="Luxemburg, Jogiches, Levi, Zetkin. A mass party, democracy inside the party, independence from Moscow.">Spartacists</span>!}: [+ luxemburgist_strength : strength +], [+ luxemburgist_satisfaction : satisfaction +]
+{!<span class="tooltip-text" title="Luxemburg, Jogiches, Levi, Zetkin. A mass party, democracy inside the party, independence from Moscow.">Spartacists</span>!}: [+ luxemburgist_strength : strength +], [+ luxemburgist_satisfaction : satisfaction +]
 
-{!<span class="tooltip-text faction-text f-offensive" title="Later led by Ruth Fischer and Arkadi Maslow. Armed action soon: the theory of the offensive.">Left</span>!}: [+ offensive_strength : strength +], [+ offensive_satisfaction : satisfaction +]
+{!<span class="tooltip-text" title="Later led by Ruth Fischer and Arkadi Maslow. Armed action soon: the theory of the offensive.">Left</span>!}: [+ offensive_strength : strength +], [+ offensive_satisfaction : satisfaction +]
 
-{!<span class="tooltip-text faction-text f-unionist" title="Later led by Heinrich Brandler and August Thalheimer. Union work and the united front with the SPD and USPD.">Right</span>!}: [+ unionist_strength : strength +], [+ unionist_satisfaction : satisfaction +]
+{!<span class="tooltip-text" title="Later led by Heinrich Brandler and August Thalheimer. Union work and the united front with the SPD and USPD.">Right</span>!}: [+ unionist_strength : strength +], [+ unionist_satisfaction : satisfaction +]
 
-{!<span class="tooltip-text faction-text f-ultraleft" title="The Bremen and Hamburg radicals, later the KAPD. Boycott parliament and the unions: councils only.">Left Radicals</span>!}: [+ ultraleft_strength : strength +], [+ ultraleft_satisfaction : satisfaction +]
+{!<span class="tooltip-text" title="The Bremen and Hamburg radicals, later the KAPD. Boycott parliament and the unions: councils only.">Left Radicals</span>!}: [+ ultraleft_strength : strength +], [+ ultraleft_satisfaction : satisfaction +]
 
 @districts
 
 = Districts
 
-Berlin-Brandenburg: {!<span class="faction-name" data-q="district_berlin_faction"></span>!}, [+ district_berlin_members_display +]k, [+ district_berlin_loyalty : loyalty +]
+Berlin-Brandenburg: [+ district_berlin_faction_name +], [+ district_berlin_members_display +]k, [+ district_berlin_loyalty : loyalty +]
 
-Hamburg: {!<span class="faction-name" data-q="district_hamburg_faction"></span>!}, [+ district_hamburg_members_display +]k, [+ district_hamburg_loyalty : loyalty +]
+Hamburg: [+ district_hamburg_faction_name +], [+ district_hamburg_members_display +]k, [+ district_hamburg_loyalty : loyalty +]
 
-Bremen: {!<span class="faction-name" data-q="district_bremen_faction"></span>!}, [+ district_bremen_members_display +]k, [+ district_bremen_loyalty : loyalty +]
+Bremen: [+ district_bremen_faction_name +], [+ district_bremen_members_display +]k, [+ district_bremen_loyalty : loyalty +]
 
-Rhineland-Westphalia: {!<span class="faction-name" data-q="district_ruhr_faction"></span>!}, [+ district_ruhr_members_display +]k, [+ district_ruhr_loyalty : loyalty +]
+Rhineland-Westphalia: [+ district_ruhr_faction_name +], [+ district_ruhr_members_display +]k, [+ district_ruhr_loyalty : loyalty +]
 
-Saxony: {!<span class="faction-name" data-q="district_saxony_faction"></span>!}, [+ district_saxony_members_display +]k, [+ district_saxony_loyalty : loyalty +]
+Saxony: [+ district_saxony_faction_name +], [+ district_saxony_members_display +]k, [+ district_saxony_loyalty : loyalty +]
 
-Thuringia: {!<span class="faction-name" data-q="district_thuringia_faction"></span>!}, [+ district_thuringia_members_display +]k, [+ district_thuringia_loyalty : loyalty +]
+Thuringia: [+ district_thuringia_faction_name +], [+ district_thuringia_members_display +]k, [+ district_thuringia_loyalty : loyalty +]
 
-Bavaria: {!<span class="faction-name" data-q="district_bavaria_faction"></span>!}, [+ district_bavaria_members_display +]k, [+ district_bavaria_loyalty : loyalty +]
+Bavaria: [+ district_bavaria_faction_name +], [+ district_bavaria_members_display +]k, [+ district_bavaria_loyalty : loyalty +]
 
-Halle-Merseburg: {!<span class="faction-name" data-q="district_halle_faction"></span>!}, [+ district_halle_members_display +]k, [+ district_halle_loyalty : loyalty +]
+Halle-Merseburg: [+ district_halle_faction_name +], [+ district_halle_members_display +]k, [+ district_halle_loyalty : loyalty +]
 
 @germany
 

@@ -374,31 +374,6 @@
       dendryUI.dendryEngine._runActions(scene.onArrival);
       var displayContent = dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
       $('#qualities').append(dendryUI.contentToHTML.convert(displayContent));
-      window.renderSidebarWidgets();
-  };
-
-  // Sidebar widgets: the status scene writes empty placeholders for
-  // party-line tags and faction names, filled in here from the qualities.
-  var LOCK_LABELS = ['open', 'against the line', 'forbidden'];
-
-  window.renderSidebarWidgets = function() {
-      var Q = dendryUI.dendryEngine.state.qualities;
-      var root = document.getElementById('qualities');
-      if (!root || !Q.factions) {
-          return;
-      }
-      root.querySelectorAll('.lock').forEach(function(el) {
-          var lock = Q[el.dataset.q] || 0;
-          el.className = 'lock lock-' + lock;
-          el.textContent = LOCK_LABELS[lock];
-      });
-      root.querySelectorAll('.faction-name').forEach(function(el) {
-          var f = Q[el.dataset.q];
-          if (f) {
-              el.className = 'faction-name faction-text f-' + f;
-              el.textContent = (Q.faction_names && Q.faction_names[f]) || f;
-          }
-      });
   };
 
   window.changeTab = function(newTab, tabId) {
