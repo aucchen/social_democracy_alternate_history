@@ -597,6 +597,16 @@ table {
     text-decoration-style: dotted;
 }
 
-/* second row of sidebar tabs */
-.tab_container.second_row { margin-top: 0; }
-#stats_sidebar .tab_button { padding: 10px 8px; }
+/* sidebar tabs: four equal columns, so the Moscow tab lines up under Party */
+#stats_sidebar .tab_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+#stats_sidebar .tab_container.second_row { margin-top: 0; }
+#stats_sidebar .tab_button {
+    padding: 10px 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
