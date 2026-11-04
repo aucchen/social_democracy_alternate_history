@@ -1,0 +1,91 @@
+title: Twelve Million on Strike
+subtitle: The greatest strike in German history.
+new-page: true
+tags: event
+view-if: crisis_kapp = 1 and crisis_time = 1
+max-visits: 1
+priority: 5
+
+= Twelve Million on Strike
+
+Nothing moves in Germany. No trains, no trams, no post, no gas, no newspapers. Kapp's decrees are printed on handbills because the printers will not set them. The civil servants of the ministries refuse to take his orders, and the Reichsbank refuses to pay his officers.
+
+[? if kapp_statement = 1 : Our statement of the first day is being quoted against us in every strike meeting. The Zentrale has quietly reversed it, but the damage is done. ?][? if kapp_statement = 2 : Our members sit on the strike committees in Berlin, Halle and Chemnitz, and the workers listen to them. ?][? if kapp_armed = 1 : Our call to arms was heard. ?]
+
+In the Ruhr, armed workers have beaten the Lichtschlag Freikorps at Wetter and are driving the army out of Dortmund. In Saxony and Thuringia, workers' militias are fighting the Reichswehr and the student volunteers. In Berlin, the strike committees ask what the strike is for, once Kapp falls.
+
+- @all_in: Throw everything into the strike, and keep it united.
+- @demands: Raise our own demands inside the strike.
+- @armed: Turn the strike into an armed struggle.
+- @apart: Stand apart from a strike for Ebert's republic.
+
+@all_in
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. Unity of the working class first.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += 10;
+Q.worker_support += 4;
+Q.spd_relation += 5;
+Q.uspd_relation += 6;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 4;
+Q.lean_unionist += 2;
+!}
+
+Our members keep the pickets disciplined and the soup kitchens running. The union officials, who expected trouble from us, find none.
+
+@demands
+subtitle: The Spartacist line: disarm the counter-revolution, arm the workers, purge the army.
+on-arrival: {!
+Q.crisis_momentum += 6;
+Q.militancy += 4;
+Q.worker_support += 2;
+Q.uspd_relation += 3;
+Q.uspd_score += 1;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 2;
+!}
+
+Our resolutions pass in strike meetings across Berlin: no return to work until the Freikorps are disarmed, the putschists punished, and a workers' militia formed. The USPD left votes with us.
+
+@armed
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. The Ruhr shows what is possible.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.kapp_armed = 1;
+Q.crisis_momentum += 7;
+Q.militancy += 10;
+Q.repression += 8;
+Q.red_guards_strength += 6;
+Q.red_guards_arms += 8;
+Q.offensive_satisfaction += 10;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 2;
+!}
+
+The Zentrale's couriers carry a single order to the districts: arm, and hold what you take. Rifles are handed out from the Einwohnerwehr depots in a dozen towns.
+
+@apart
+subtitle: The ultra-left answer. The strike will go on without us, and the workers will not forget.
+on-arrival: {!
+Q.crisis_momentum -= 15;
+Q.worker_support -= 5;
+Q.uspd_relation -= 8;
+Q.ultraleft_satisfaction += 8;
+Q.offensive_satisfaction += 3;
+Q.luxemburgist_satisfaction -= 10;
+Q.unionist_satisfaction -= 10;
+Q.lean_ultraleft += 2;
+!}
+
+We tell our members that a strike to bring back Noske is no business of communists. Many of them stay on the picket lines regardless, and tear up their party cards.

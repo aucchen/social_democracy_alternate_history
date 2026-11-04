@@ -1,0 +1,41 @@
+title: 1920 setup
+view-if: e20_init_done = 0
+tags: event
+priority: 100
+max-visits: 1
+on-arrival: {!
+Q.e20_init_done = 1;
+// only set what is not set yet, so test presets are not overwritten
+var start = {
+    // shared flags set in 1920 (see the writing guide)
+    kapp_outcome: 0, ruhr_red_army: 0, warsaw_outcome: 0,
+    twenty_one_conditions: 0, uspd_split: 0, vkpd_formed: 0,
+    // the Kapp Putsch and the Ruhr, as a weekly crisis
+    kapp_started: 0, crisis_kapp: 0, crisis_ruhr: 0, kapp_decided: 0,
+    kapp_statement: 0, kapp_armed: 0, kapp_junta_fell: 0,
+    bielefeld: 0, ruhr_peaceful: 0, ruhr_soviet: 0,
+    wg_stance: 0, kpd_in_government: 0,
+    // the Bavarian council republic, if it survived 1919
+    bavaria_1920_fate: 0, bav_strength: 0, bav_settled: 0, bav_surrendered: 0,
+    // the Left Radicals and the KAPD
+    kapd_members: 0, kapd_sympathiser: 0, ultraleft_crisis_1920: 0,
+    // the year's other decisions
+    massacre_response: 0, works_councils_line: 0,
+    election_bonus: 0, e20_campaign: 0, e20_election_done: 0,
+    warsaw_bonus: 0, border_rising: 0,
+    uspd_score: 0, congress_done: 0, halle_done: 0,
+    e20_lead_ul: 0, e20_lux_in: 1,
+    // scratch values used inside single events
+    e20_wg_roll: 0, e20_junta_bonus: 0, e20_wesel: 0, e20_negotiated: 0,
+    e20_split_lost: 0, e20_ul_won: 0, e20_wg_survives: 0, e20_kpd_seats_display: 0,
+    e20_rising_strength: 0, e20_rising_held: 0, e20_attacked: 0, e20_halle_bonus: 0,
+    e20_uspd_ministers_left: 0, e20_newcomers: 0, e20_lead_choice: 0,
+    e20_left_government: 0, e20_members_display: 0, e20_bread: 0
+};
+for (var k in start) {
+    if (Q[k] === undefined) {
+        Q[k] = start[k];
+    }
+}
+!}
+go-to: post_event

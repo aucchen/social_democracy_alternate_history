@@ -1,0 +1,69 @@
+title: Moscow and the KAPD
+subtitle: The International admits our rivals as a sympathising party.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 11 and crisis = 0 and kapd_exists = 1 and ending_id = 0
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.kapd_sympathiser = 1;
+!}
+
+= Moscow and the KAPD
+
+The KAPD has had a hard year. In the summer it expelled Laufenberg and Wolffheim for their national bolshevism, and Otto Rühle has broken with it to preach that all parties are bourgeois. But it still has tens of thousands of members in Berlin, Hamburg and the Ruhr, and the Bolsheviks do not want to lose them.
+
+In November, the Executive of the International admits the KAPD as a **sympathising party**, with a consultative voice at its congresses. Moscow tells us to work with it. [? if levi_chair = 1 : Levi is furious: Moscow has rewarded a split from its own German section. ?]
+
+- @protest: Protest to the Executive.
+- @talks: Accept the decision, and open talks on unity.
+- @compete: Compete for their members in the factories.
+
+@protest
+subtitle: The Spartacist answer. Moscow will note who complained.
+on-arrival: {!
+Q.independence += 5;
+Q.kapd_relation -= 8;
+Q.luxemburgist_satisfaction += 5;
+Q.offensive_satisfaction -= 3;
+Q.lean_luxemburgist += 1;
+!}
+
+Our letter to Zinoviev is sharp: the International cannot have two sections in Germany. Zinoviev replies that the International can have whatever it likes.
+
+@talks
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] The Left's answer. Some of the KAPD's workers might come back to a united party.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.kapd_relation += 15;
+Q.independence -= 4;
+Q.kapd_members -= 3;
+Q.district_berlin_members += 1;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 4;
+Q.lean_offensive += 2;
+!}
+
+Our delegates and theirs meet under Radek's eye. Nothing is agreed, but a few KAPD branches in Berlin vote to return.
+
+@compete
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] The Right's answer: the unions are where the workers are, not the KAPD's factory leagues.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the reformist unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.kapd_relation -= 5;
+Q.worker_support += 2;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 1;
+!}
+
+Our union fractions win wage disputes in the Hamburg yards. The KAPD's factory organisations, which refuse to negotiate with anyone, lose members to us.

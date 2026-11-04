@@ -1,0 +1,52 @@
+title: A Meeting in a Beer Hall
+subtitle: A small völkisch party takes a new name.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 2
+max-visits: 1
+on-arrival: {!
+Q.nsdap_name = 'NSDAP';
+Q.nsdap_relation = 0;
+!}
+
+= A Meeting in a Beer Hall
+
+[? if bavaria_soviet = 2 : On 24 February, in a Nuremberg beer hall full of officers and students who fled red Munich, ?][? if bavaria_soviet != 2 : On 24 February, in the great hall of the Hofbräuhaus in Munich, ?] the little German Workers' Party holds its biggest meeting yet. Two thousand people come. A former corporal named Adolf Hitler reads out a programme of twenty-five points: against Versailles, against "interest slavery", against the Jews.
+
+A few communists and Independents in the hall heckle and are thrown out. A week later the party renames itself the National Socialist German Workers' Party.
+
+Our Munich comrades send a short report. Most of the Zentrale reads it and puts it aside.
+
+- @ignore: A beer-hall sect. We have bigger enemies.
+- @disrupt: Break up their meetings.
+- @expose: Expose them in our press as the counter-revolution's new face.
+
+@ignore
+subtitle: Costs nothing now.
+on-arrival: {!
+Q.luxemburgist_satisfaction += 1;
+!}
+
+There are a dozen such leagues in Bavaria alone. This one will fade like the rest, the Zentrale decides.
+
+@disrupt
+subtitle: The Left's answer. Brawls in the beer halls; the police take notes.
+on-arrival: {!
+Q.militancy += 3;
+Q.repression += 2;
+Q.district_bavaria_loyalty += 4;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+Our young comrades start turning up at their meetings in groups. The Nazis answer by forming a "hall protection" squad of ex-soldiers.
+
+@expose
+subtitle: The Spartacist answer. Few readers care yet.
+on-arrival: {!
+Q.worker_support += 1;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+Our Munich paper prints the twenty-five points with a commentary: who pays for this "workers' party", and why its speakers never mention a single strike.

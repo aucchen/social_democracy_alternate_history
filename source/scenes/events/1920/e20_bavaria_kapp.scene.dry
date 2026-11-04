@@ -1,0 +1,103 @@
+title: The March on Munich
+subtitle: The Bavarian counter-revolution uses the putsch.
+new-page: true
+tags: event
+view-if: crisis_kapp = 1 and crisis_time = 1 and bavaria_soviet = 2 and bavaria_1920_fate = 0
+max-visits: 1
+priority: 4
+
+= The March on Munich
+
+While Berlin strikes, Bavaria's generals move. General von Möhl and the civil guards of Georg Escherich declare that they will no longer wait for orders from a government that has fled. The Epp Freikorps and twenty thousand civil guards are marching on Munich from Ingolstadt and Augsburg.
+
+[? if bav_settled = 1 : The talks with Berlin had begun to disarm the council republic. Now the men who were to guarantee the settlement are in Stuttgart, and the Red Army has half the rifles it had in January. ?][? if bav_settled = 0 : The workers' Red Army mans the Lech and the Isar bridges. ?] The Executive Council asks the Zentrale for everything it has.
+
+- @defend: Defend Munich street by street.
+- @relief: Send armed columns from Thuringia and Saxony.
+- @appeal: Call out the railwaymen and the Bavarian strikers behind the enemy's lines.
+- @surrender: Negotiate a surrender, and save the cadres.
+
+@defend
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Munich will be a battlefield either way.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.bav_strength += 2;
+Q.militancy += 6;
+Q.offensive_satisfaction += 8;
+Q.lean_offensive += 2;
+!}
+
+- @fate: Continue...
+
+@relief
+subtitle: Weakens our militias elsewhere.
+choose-if: red_guards_strength >= 4
+unavailable-subtitle: We have no armed columns to send.
+on-arrival: {!
+Q.bav_strength += 2;
+Q.red_guards_strength -= 3;
+Q.crisis_momentum -= 3;
+Q.offensive_satisfaction += 4;
+Q.luxemburgist_satisfaction += 2;
+Q.lean_offensive += 1;
+!}
+
+- @fate: Continue...
+
+@appeal
+subtitle: The Spartacist answer: the trains that carry the Freikorps must stop.
+on-arrival: {!
+Q.bav_strength += 1;
+Q.worker_support += 2;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+!}
+
+- @fate: Continue...
+
+@surrender
+subtitle: The Right's answer. Munich falls, but fewer of ours die.
+on-arrival: {!
+Q.bav_strength = -10;
+Q.bav_surrendered = 1;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 12;
+Q.lean_unionist += 2;
+!}
+
+- @fate: Continue...
+
+@fate
+title: Munich
+new-page: true
+on-arrival: {!
+var score = Q.bav_strength + Math.floor(Math.random() * 4) + (Q.crisis_momentum >= 55 ? 1 : 0);
+if (score >= 5) {
+    Q.bavaria_1920_fate = 2;
+    Q.district_bavaria_loyalty += 10;
+    Q.world_revolution += 4;
+    Q.civil_guards_strength -= 60;
+    Q.freikorps_strength -= 10;
+} else {
+    Q.bavaria_1920_fate = 1;
+    Q.bavaria_soviet = 1;
+    Q.district_bavaria_members *= Q.bav_surrendered ? 0.6 : 0.35;
+    Q.district_bavaria_loyalty -= 10;
+    Q.red_guards_strength -= Q.bav_surrendered ? 1 : 3;
+    Q.repression += 8;
+    Q.crisis_momentum -= 4;
+}
+!}
+
+= Munich
+
+[? if bavaria_1920_fate = 2 : For three days the fighting rages at Dachau and on the Theresienwiese. Then the trains behind Epp's lines stop moving, and his civil guards begin to melt away to their farms. The council republic has survived again. In Munich they ring the bells. ?]
+
+[? if bavaria_1920_fate = 1 : Munich falls on 19 March. Gustav von Kahr becomes the master of Bavaria, and the civil guards hunt the members of the councils through the working-class districts. The Bavarian Council Republic is over. ?]
+
+[? if bavaria_1920_fate = 1 and bav_surrendered = 1 : Most of our leaders got away over the Austrian border before the end. ?]

@@ -1,0 +1,225 @@
+title: The Fate of the Ruhr
+subtitle: The army marches, or it does not.
+new-page: true
+tags: event
+view-if: crisis_ruhr = 1 and crisis_time = 4
+max-visits: 1
+priority: 5
+on-arrival: {!
+var m = Q.crisis_momentum;
+var holds = false;
+Q.ruhr_peaceful = 0;
+if (Q.kapp_outcome == 3) {
+    if (Q.bielefeld == 1 || Q.bielefeld == 3) {
+        Q.ruhr_peaceful = m >= 35 ? 1 : 0;
+    } else {
+        holds = m >= 65;
+    }
+} else if (Q.kapp_outcome == 2) {
+    holds = m >= 65;
+} else {
+    holds = Q.bielefeld != 1 && m >= 70;
+}
+Q.ruhr_red_army = holds ? 2 : 1;
+Q.crisis = 0;
+Q.crisis_kapp = 0;
+Q.crisis_ruhr = 0;
+Q.crisis_name = 0;
+Q.crisis_goal = 0;
+if (holds) {
+    Q.world_revolution += 8;
+    Q.stability -= 10;
+    Q.militancy += 5;
+    Q.district_ruhr_members += 3;
+    Q.district_ruhr_loyalty += 15;
+    Q.red_guards_strength = Math.max(Q.red_guards_strength, 30);
+    Q.freikorps_strength -= 20;
+    if (Q.kapp_outcome == 2) {
+        Q.kapp_junta_fell = 1;
+        Q.government_name = 'Müller cabinet (SPD, Centre, DDP)';
+        Q.chancellor = 'Hermann Müller';
+        for (var p of Q.parties) {
+            Q[p + '_in_government'] = 0;
+        }
+        Q.spd_in_government = 1;
+        Q.zentrum_in_government = 1;
+        Q.ddp_in_government = 1;
+        Q.repression -= 20;
+        Q.stability += 10;
+    }
+} else if (Q.ruhr_peaceful) {
+    Q.red_guards_strength = Math.max(4, Q.red_guards_strength * 0.25);
+    Q.district_ruhr_members += 2;
+    Q.stability += 5;
+} else {
+    Q.red_guards_strength = Math.max(3, Q.red_guards_strength * 0.12);
+    Q.red_guards_arms -= 12;
+    Q.district_ruhr_members *= 0.8;
+    Q.district_ruhr_loyalty -= 10;
+    Q.repression += 12;
+    Q.worker_support += 2;
+    Q.spd_relation -= 10;
+    Q.world_revolution -= 3;
+    if (Q.kapp_outcome == 2) {
+        Q.ending_id = 3;
+    }
+}
+!}
+
+= The Fate of the Ruhr
+
+[? if ruhr_red_army = 1 and ruhr_peaceful = 0 : On 2 April the Reichswehr and the Freikorps cross the Lippe. The Red Army breaks in three days. What follows is not a battle but a hunt. Prisoners are shot "while trying to escape", nurses of the Red Army are shot in the streets of Pelkum, and the courts-martial sit day and night. More than a thousand workers are dead. When the army crosses into the demilitarised zone, the French occupy Frankfurt and Darmstadt in protest. ?]
+
+[? if ruhr_red_army = 1 and ruhr_peaceful = 1 : The workers' government keeps its word, and so does the Ruhr. The Red Army hands in its heavy weapons at the collection points, the workers' defence units take over the towns, and General von Watter is ordered back to Münster. He goes, with bad grace. There is no white terror in the Ruhr this spring. ?]
+
+[? if ruhr_red_army = 2 and kapp_outcome != 2 : On 2 April the Freikorps try the Lippe crossings at Haltern and Dorsten, and are thrown back. The French warn that any army in the demilitarised zone means French troops in Frankfurt. Berlin hesitates, then stops. The Red Army still holds the Ruhr, and its councils run the pits, the food supply and the towns. A workers' Ruhr exists inside the Republic, and nobody knows for how long. ?]
+
+[? if ruhr_red_army = 2 and kapp_outcome = 2 : The Freikorps break on the Lippe. Then the dictatorship breaks in Berlin. The strike has spread back across the south and the centre, the officers quarrel, and on 6 April Kapp flies to Sweden after all. Ebert's ministers return to Berlin under Hermann Müller, owing their offices to the armed miners of the Ruhr. The Red Army still holds the coalfield. ?]
+
+[? if ending_id = 3 : The Red Army breaks on the Lippe. The generals are masters of Germany, and the hunt for communists begins in every town of the Reich. ?]
+
+- @protest: Call a protest strike against the white terror.
+- @save_cadres: Get the cadres out, and keep the organisation alive.
+- @inquiry: Demand an amnesty and an inquiry, with the unions.
+- @defence_units: Build up the workers' defence units promised at Bielefeld.
+- @control: Keep the councils alive as organs of workers' control.
+- @republic: Proclaim the Ruhr Soviet Republic.
+- @autonomy: Keep a workers' Ruhr inside the Republic, on the Bielefeld terms.
+- @congress: Call a congress of the Ruhr's councils to decide.
+- @end: See how it ends.
+
+@protest
+subtitle: The Left's answer. Few will strike so soon after a defeat.
+view-if: ruhr_red_army = 1 and ruhr_peaceful = 0 and ending_id = 0
+on-arrival: {!
+Q.militancy += 5;
+Q.repression += 5;
+Q.worker_support -= 1;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+A few pits stop work for a day. The rest of the Ruhr buries its dead in silence.
+
+@save_cadres
+subtitle: Costs 1 fund. The Spartacist answer: a defeat must not become a rout.
+view-if: ruhr_red_army = 1 and ruhr_peaceful = 0 and ending_id = 0
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.district_ruhr_members += 1;
+Q.district_ruhr_loyalty += 8;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+!}
+
+False papers, safe houses in Holland, train tickets to Saxony. Most of our Ruhr leaders survive the courts-martial.
+
+@inquiry
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. The unions are ashamed of what the army did.
+view-if: ruhr_red_army = 1 and ruhr_peaceful = 0 and ending_id = 0
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a common campaign with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.repression -= 4;
+Q.uspd_relation += 5;
+Q.spd_relation += 3;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+The unions and the USPD join our demand. An amnesty law is passed for the rank and file. The officers who shot prisoners are never tried.
+
+@defence_units
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: armed, legal and lasting.
+view-if: ruhr_peaceful = 1
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.red_guards_strength += 4;
+Q.red_guards_loyalty -= 5;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+The workers' defence units of the Ruhr are registered with the Prussian interior ministry. Half their men are our members.
+
+@control
+subtitle: The Spartacist answer. The councils remain a second power in the pits.
+view-if: ruhr_peaceful = 1
+on-arrival: {!
+Q.worker_support += 3;
+Q.district_ruhr_loyalty += 6;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+!}
+
+In the big pits, the councils of March refuse to dissolve. They inspect the coal accounts and argue about wages and hours with the mine managers.
+
+@republic
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. A red republic in the heart of German industry, and a declaration of war.
+view-if: ruhr_red_army = 2
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.ruhr_soviet = 1;
+Q.world_revolution += 6;
+Q.repression += 8;
+Q.stability -= 6;
+Q.offensive_satisfaction += 12;
+Q.ultraleft_satisfaction += 6;
+Q.unionist_satisfaction -= 10;
+Q.lean_offensive += 3;
+!}
+
+In the Essen town hall, the central council proclaims the Soviet Republic of the Ruhr. Moscow sends its greetings. Berlin declares the proclamation null and void, and has no army that can enforce it.
+
+@autonomy
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. Keeps the peace, and the guns.
+view-if: ruhr_red_army = 2
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.stability += 4;
+Q.spd_relation += 5;
+Q.uspd_relation += 6;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 6;
+Q.lean_unionist += 2;
+!}
+
+The councils keep the pits and the defence units; the towns keep their mayors. It is an armed truce with the Republic, written down on paper.
+
+@congress
+subtitle: The Spartacist answer: the Ruhr's workers must decide for themselves.
+view-if: ruhr_red_army = 2
+on-arrival: {!
+Q.worker_support += 4;
+Q.uspd_relation += 4;
+Q.uspd_score += 1;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 2;
+!}
+
+Eight hundred delegates from the pits and works meet in Bochum. They vote to keep the councils and the Red Army, and to send delegates to every factory in Germany to explain why.
+
+@end
+view-if: ending_id = 3
+go-to: game_over

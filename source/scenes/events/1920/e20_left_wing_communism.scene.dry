@@ -1,0 +1,83 @@
+title: An Infantile Disorder
+subtitle: Lenin writes about the German left.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 6 and crisis = 0 and e20_election_done = 1 and ending_id = 0
+max-visits: 1
+on-arrival: {!
+Q.e20_lead_ul = (Q.leading_faction == 'ultraleft') ? 1 : 0;
+!}
+
+= An Infantile Disorder
+
+A pamphlet arrives from Moscow: *"Left-Wing" Communism: An Infantile Disorder*, by Lenin. It is aimed at the ultra-lefts of every country, and above all at the Germans who refuse to work in the unions and the parliaments. "Not to work in the reactionary trade unions," Lenin writes, "means leaving the insufficiently developed or backward masses of workers under the influence of the reactionary leaders."
+
+[? if wg_stance = 1 : In an appendix, Lenin turns to our statement of March on a "loyal opposition" to a workers' government. He finds fault with some of its phrases, but calls it quite correct in its basic premise and its practical conclusions. ?][? if wg_stance != 1 : In an appendix, Lenin turns to the Kapp days. A communist party, he writes, should have offered a loyal opposition to a workers' government of the social democrats, and won the masses by showing them what such a government could not do. ?]
+
+[? if e20_lead_ul = 1 : Every page reads like an indictment of our own Zentrale. ?][? if kapd_exists = 1 : The KAPD's leaders call it a betrayal of the revolution. ?]
+
+- @print: Print it in a hundred thousand copies.
+- @unions: Use it to send the whole party into the unions.
+- @discipline: Take from it what fits: discipline, centralism and an iron party.
+- @wrong: Lenin is wrong about Germany.
+
+@print
+subtitle: The Spartacist answer. Lenin is on our side of the argument.
+on-arrival: {!
+Q.worker_support += 1;
+Q.independence -= 2;
+Q.ultraleft_satisfaction -= 6;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 1;
+if (Q.kapd_exists) {
+    Q.kapd_relation -= 6;
+    Q.kapd_members -= 3;
+    Q.district_berlin_members += 1;
+    Q.district_hamburg_members += 0.5;
+}
+!}
+
+The pamphlet sells at every party meeting. [? if kapd_exists = 1 : In Berlin, a few hundred KAPD members read it and come back to us. ?]
+
+@unions
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] The Right's answer. A communist in every union branch.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the reformist unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 3;
+Q.district_saxony_members += 0.5;
+Q.unionist_satisfaction += 8;
+Q.ultraleft_satisfaction -= 10;
+Q.lean_unionist += 2;
+!}
+
+The Zentrale orders every member who has left a union to rejoin it, and every cell to form a fraction inside its branch. Brandler is delighted.
+
+@discipline
+subtitle: The Left's reading. Moscow likes it.
+on-arrival: {!
+Q.independence -= 4;
+Q.unity += 3;
+Q.offensive_satisfaction += 6;
+Q.luxemburgist_satisfaction -= 3;
+Q.lean_offensive += 1;
+!}
+
+Our young cadres underline the passages on iron discipline and the leading role of the party, and skip the ones about compromise.
+
+@wrong
+subtitle: The Left Radical answer. Independence from Moscow, at a price.
+view-if: ultraleft_gone = 0 or e20_lead_ul = 1
+on-arrival: {!
+Q.independence += 8;
+Q.ultraleft_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 6;
+Q.offensive_satisfaction -= 4;
+Q.lean_ultraleft += 2;
+!}
+
+We publish a reply: Russian tactics for Russian conditions. Germany has a proletariat of millions, and does not need to learn from Moscow how to deal with Legien. Zinoviev answers in *Pravda*.

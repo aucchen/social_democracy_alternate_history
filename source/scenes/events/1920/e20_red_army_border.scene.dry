@@ -1,0 +1,99 @@
+title: The Red Army on the Border
+subtitle: Soviet cavalry waters its horses within sight of East Prussia.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 9 and crisis = 0 and warsaw_outcome = 2 and ending_id = 0
+max-visits: 1
+priority: 3
+
+= The Red Army on the Border
+
+Soviet Poland is three weeks old. Its Red Army is exhausted and hungry, and its supply lines run back four hundred miles to Smolensk. But it stands on the borders of East Prussia and Silesia, and the whole of Europe is watching Germany.
+
+General von Seeckt has moved Reichswehr divisions to the east and says Germany will defend its frontiers. He also says, in private, that a Poland gone is no great loss. The Entente demands that Germany let French troops cross to the Vistula. The Fehrenbach cabinet does not know what to do. Radek writes from Moscow: this is the hour.
+
+- @rise: Rise now, and open the road to the east.
+- @alliance: Demand an alliance with Soviet Russia against Versailles.
+- @no_soldier: Mass campaign: not one soldier, not one train against Soviet Russia.
+- @councils: Call for the election of workers' councils everywhere, to be ready.
+
+@rise
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's hour. The Reichswehr is still the Reichswehr.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.border_rising = 2;
+Q.e20_rising_strength = Q.red_guards_strength + Q.militancy / 2 + Q.worker_support / 2 + (Q.ruhr_red_army == 2 ? 20 : 0);
+Q.e20_rising_held = Q.e20_rising_strength >= 80 ? 1 : 0;
+Q.militancy += 10;
+Q.repression += Q.e20_rising_held ? 10 : 25;
+Q.district_halle_members *= Q.e20_rising_held ? 0.95 : 0.8;
+Q.district_berlin_members *= 0.9;
+Q.red_guards_strength *= Q.e20_rising_held ? 0.8 : 0.4;
+Q.world_revolution += Q.e20_rising_held ? 8 : 2;
+Q.stability -= Q.e20_rising_held ? 12 : 5;
+Q.offensive_satisfaction += 12;
+Q.luxemburgist_satisfaction -= 12;
+Q.unionist_satisfaction -= 10;
+Q.lean_offensive += 3;
+!}
+
+The signal goes out on 5 September. In Halle-Merseburg and the Mansfeld copper country, armed miners occupy the pits and the railway junctions. In Berlin, the police are waiting for us.
+
+[? if e20_rising_held = 1 : For a week, no Reichswehr train can pass through Central Germany. Seeckt's divisions in the east are cut off from their depots. Then the strike crumbles and the miners go home with their rifles. The government, shaken, agrees to let no Entente soldier cross Germany. ?][? if e20_rising_held = 0 : Within four days it is over. The Sipo storms the occupied works with armoured cars, and the courts-martial begin again. The Red Army does not move. ?]
+
+@alliance
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Radek's line. The nationalists will listen; the workers will be puzzled.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 6;
+Q.dnvp_relation += 4;
+Q.stability -= 3;
+Q.offensive_satisfaction += 5;
+Q.luxemburgist_satisfaction -= 6;
+Q.lean_offensive += 1;
+!}
+
+Our deputies propose a treaty of friendship with Soviet Russia and a common front against the Versailles system. A few nationalist officers write to *Die Rote Fahne* to agree. The Zentrale prefers not to print the letters.
+
+@no_soldier
+subtitle: The Spartacist answer. Defend the revolution by keeping Germany out of the war.
+on-arrival: {!
+Q.worker_support += 4;
+Q.uspd_relation += 5;
+Q.uspd_score += 1;
+Q.stability -= 2;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 2;
+!}
+
+Rallies in every city, under the banners of all three workers' parties. The railwaymen's union declares that no Entente troop train will cross Germany. The government, relieved, says the same.
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The councils of 1918, reborn. The Left Radicals and the USPD left will join in.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.militancy += 6;
+Q.worker_support += 2;
+Q.uspd_score += 1;
+Q.ultraleft_satisfaction += 6;
+Q.offensive_satisfaction += 3;
+Q.lean_ultraleft += 1;
+Q.lean_offensive += 1;
+!}
+
+In the big works, the workers elect action councils again. They do not yet know what they will act on.

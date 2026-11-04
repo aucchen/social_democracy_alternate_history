@@ -1,0 +1,84 @@
+title: Munich in Winter
+subtitle: The Bavarian Council Republic has survived its first year.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 1 and bavaria_soviet = 2
+max-visits: 1
+priority: 2
+
+= Munich in Winter
+
+The red flag still flies over the Wittelsbach Palace. Munich and the towns of Upper Bavaria are governed by their councils, and the workers' Red Army holds a front along the Danube and the Lech.
+
+But the council republic is starving. The Hoffmann government in Bamberg blockades it, the peasants hide their grain, and coal comes in by the wagonload when it comes at all. In the countryside, the Bavarian civil guards drill openly with the army's rifles. Everyone knows that Berlin has only postponed the reckoning.
+
+The Executive Council in Munich asks the Zentrale what the party will do for it.
+
+- @reinforce: Send cadres, money and weapons to Munich.
+- @broaden: Broaden the council republic: bring in the USPD and the peasants' councils.
+- @settle: Negotiate a settlement with Berlin.
+- @no_compromise: No parliament, no compromise: all power to the councils.
+
+@reinforce
+subtitle: Costs 1 fund. The Left's answer: Munich must become a fortress.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.bav_strength += 2;
+Q.red_guards_strength += 2;
+Q.red_guards_arms += 3;
+Q.district_bavaria_loyalty += 10;
+Q.repression += 3;
+Q.offensive_satisfaction += 8;
+Q.lean_offensive += 2;
+!}
+
+Our best organisers slip across the lines at night, with banknotes sewn into their coats. In Munich they drill the Red Army's battalions and tighten the Executive Council's grip.
+
+@broaden
+subtitle: The Spartacist answer: a council republic must win the majority of the working people, not just hold a city.
+on-arrival: {!
+Q.bav_strength += 1;
+Q.uspd_relation += 6;
+Q.worker_support += 2;
+Q.district_bavaria_members += 0.5;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 2;
+!}
+
+The Executive Council opens its doors to the Independents and calls a congress of the peasants' councils. Grain begins to come in from a few villages. The Bavarian bourgeoisie is not reassured.
+
+@settle
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: autonomy, an amnesty and elections, in exchange for laying down the guns.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids bargaining with Ebert's government.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.bav_settled = 1;
+Q.bav_strength -= 1;
+Q.stability += 3;
+Q.spd_relation += 6;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 8;
+Q.lean_unionist += 2;
+!}
+
+Through the USPD, the Zentrale opens talks with Berlin. The government agrees to lift the blockade while the talks last. In Munich, the Red Army's commanders call it the beginning of the end.
+
+@no_compromise
+subtitle: The Left Radical answer. The councils will love it; Bamberg will call it a declaration of war.
+view-if: ultraleft_gone = 0
+on-arrival: {!
+Q.bav_strength += 1;
+Q.militancy += 6;
+Q.repression += 4;
+Q.ultraleft_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 5;
+Q.lean_ultraleft += 2;
+!}
+
+The Executive Council dissolves the last municipal councils left over from the old order. Munich will live or die as a republic of councils, and nothing else.
