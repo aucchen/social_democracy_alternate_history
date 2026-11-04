@@ -82,7 +82,7 @@ const IGNORE = /d3 is not defined|toFixed|font_size/;
       if (hand.length) { await hand[Math.floor(Math.random() * hand.length)].click(); await page.waitForTimeout(40); continue; }
       const decks = await page.$$('#content ul.decks a.card');
       if (decks.length) { await decks[Math.floor(Math.random() * decks.length)].click(); await page.waitForTimeout(40); continue; }
-      const pinned = await page.$$('#content ul.pinned a.card');
+      const pinned = await page.$$('#content ul.pinned-cards a.card');
       if (pinned.length) { await pinned[0].click(); await page.waitForTimeout(40); continue; }
       stuck = true;
       break;

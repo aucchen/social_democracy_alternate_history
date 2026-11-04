@@ -81,7 +81,7 @@ Rules learned the hard way:
 - `priority: N` makes an event go first when several are eligible (higher first). Default 1.
 - To chain one event straight into another, end with a choice to a section that does `go-to: other_scene_id`, or set a flag that the next event's `view-if` reads (it then fires after the next turn).
 - Raw HTML inside `{! !}` in text is printed literally, and `[+ +]` inside it is **not** expanded. Close the HTML before inserting a quality: `{!<span class="tooltip-text" title="...">!}[+ name +]{!</span>!}`.
-- An event or card that ends the turn must add to `month_actions` (cards: `on-arrival: month_actions += 1` at the top level). Events do **not** add to `month_actions`; only cards and advisor actions do.
+- A card ends the turn by adding to `month_actions` (`on-arrival: month_actions += 1` at the top level). Events and advisor actions do **not** add to `month_actions`.
 
 ## The state you can use
 

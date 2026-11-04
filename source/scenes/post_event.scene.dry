@@ -7,6 +7,15 @@ on-arrival: {!
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 
+// Run every writer's setup scene (file id ending in _init) once, silently,
+// so the setup never shows up as an event the player has to click.
+for (var sid in this.game.scenes) {
+    if (/_init$/.test(sid) && !Q[sid + '_ran'] && this.game.scenes[sid].onArrival) {
+        Q[sid + '_ran'] = 1;
+        this._runActions(this.game.scenes[sid].onArrival);
+    }
+}
+
 var clamp = function(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
 
 // ---------------------------------------------------------------- time
