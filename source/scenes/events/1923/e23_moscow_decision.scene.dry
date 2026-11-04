@@ -1,0 +1,96 @@
+title: The German October
+subtitle: In Moscow, the Politburo decides that the German revolution is near.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 9 and e23_october_path = 0 and crisis = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction];
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+!}
+
+= The German October
+
+On 23 August, after the Cuno strike, the Politburo in Moscow decided that Germany is ripe. Trotsky, Zinoviev, Radek and Stalin argued over the details and agreed on the essentials: the German party must prepare an armed rising, Moscow will pay for it, and Russian officers will help to plan it. Since September, [+ party_leader +] and the German leaders have been in Moscow for weeks of meetings.
+
+Trotsky wants a date, fixed in advance, as in Petrograd: he proposes 9 November, the anniversary of the German revolution. Brandler says the German party, not the Russian, must decide the moment, and asks for Trotsky himself to come to Germany to lead it. Zinoviev wants a rising and is not sure he wants Trotsky to have the credit. [? if lead_code = 2 : Ruth Fischer, for the Left, says the party is ready now. ?]
+
+[? if warsaw_outcome = 2 : Since 1920, the Red Army has stood on the Vistula. If Germany rises, Trotsky says, it will not be alone. ?]
+
+The plan is simple to describe. The party will enter the governments of Saxony and Thuringia, arm the hundreds from the state arsenals, and when the Reichswehr marches on Saxony, a general strike will turn into a rising across the Reich.
+
+- @date: Accept the plan, and Trotsky's date.
+- @own_moment: Accept the plan, but the German party chooses the moment.
+- @now: The moment is now: rise in October, before the enemy is ready.
+- @refuse: Refuse: the German working class is not ready for power.
+
+@date
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow's plan in full. Money, arms and advisers; little room for our own judgement.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_october_path = 1;
+Q.e23_date_set = 1;
+Q.independence -= 10;
+Q.resources += 3;
+Q.red_guards_arms += 6;
+Q.moscow_subsidy += 1;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+The date is set and written in no document. Pyatakov and Radek leave for Berlin with false papers. Red Army officers follow, and money, a great deal of it.
+
+@own_moment
+subtitle: The Right's answer. Moscow's help, on German terms. Trotsky is annoyed.
+on-arrival: {!
+Q.e23_october_path = 1;
+Q.e23_date_set = 0;
+Q.independence -= 4;
+Q.resources += 2;
+Q.red_guards_arms += 4;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+Moscow agrees that the Germans will give the signal. Trotsky is not sent. Radek and Pyatakov are, and a group of Red Army officers to plan the military side.
+
+@now
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Less preparation, more surprise.
+view-if: offensive_gone = 0
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_october_path = 1;
+Q.e23_hasty = 1;
+Q.independence -= 4;
+Q.resources += 2;
+Q.militancy += 6;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 4;
+Q.lean_offensive += 3;
+!}
+
+The Left's resolution wins in Moscow over Brandler's objections. The rising will come in October, with whatever arms there are.
+
+@refuse
+subtitle: The Spartacist verdict. Independence rises sharply; Moscow's money and patience run out.
+on-arrival: {!
+Q.e23_october_path = 0;
+Q.independence += 15;
+Q.moscow_subsidy = 0;
+Q.offensive_satisfaction -= 12;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 3;
+Q.world_revolution -= 5;
+!}
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg writes the German reply. A revolution, she writes, cannot be ordered for a date like a delivery of coal. ?][? if luxemburg_alive = 0 : The German delegation says no, politely and then less politely. ?] Zinoviev calls it the gravest error since Levi. Radek, privately, is relieved.

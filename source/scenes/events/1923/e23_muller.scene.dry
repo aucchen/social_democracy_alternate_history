@@ -1,0 +1,90 @@
+title: General Müller's Orders
+subtitle: The Reichswehr bans the hundreds in Saxony.
+new-page: true
+tags: event
+view-if: crisis_october = 1 and crisis_time = 1 and e23_rising_phase = 0 and e23_muller_done = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.e23_muller_done = 1;
+Q.repression += 5;
+!}
+
+= General Müller's Orders
+
+On 13 October General Alfred Müller, commander of the Reichswehr in Saxony, bans the proletarian hundreds and places the Saxon state police under his own command. Reichswehr battalions from Bavaria, Württemberg and Prussia begin arriving by train at Leipzig and Dresden. [? if saxony_government = 1 : Our ministers are ordered to stop "inciting" the population. ?]
+
+Zeigner answers with a speech in the Landtag about the Black Reichswehr and the army's illegal arms stores. Müller answers by demanding that he retract it. In Berlin, the Stresemann cabinet is preparing a Reichsexekution: the Reich's power to depose a state government.
+
+The rising was meant to begin when the Reichswehr marched on Saxony. The Reichswehr is marching.
+
+- @defy: The hundreds march openly, in defiance of the ban.
+- @hide: Obey for now, and hide the arms.
+- @appeal: Appeal to the Social Democratic workers to defend their government.
+- @now: Strike first: begin the rising this week.
+
+@defy
+subtitle: Shows our strength and commits our people. The army will take note of every name.
+on-arrival: {!
+Q.crisis_momentum += 6;
+Q.repression += 6;
+Q.red_guards_loyalty += 5;
+Q.militancy += 5;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+Twenty thousand hundreds march through Chemnitz on Sunday. The Reichswehr watches from the pavements, fingers on the triggers.
+
+@hide
+subtitle: The careful course. The arms survive; the workers wonder.
+on-arrival: {!
+Q.crisis_momentum -= 2;
+Q.red_guards_arms += 3;
+Q.unity += 3;
+Q.unionist_satisfaction += 3;
+Q.offensive_satisfaction -= 4;
+!}
+
+The hundreds become football clubs again. Their rifles go into cellars, under coal.
+
+@appeal
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The SPD's workers are angry too. Their leaders are afraid.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any appeal to the SPD.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += 4;
+Q.spd_relation += 6;
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+In Leipzig and Dresden, SPD branches pass resolutions for a general strike if the Reichswehr touches the Saxon government. Their executive in Berlin passes nothing.
+
+@now
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Surprise, without the plan's preparations.
+view-if: offensive_gone = 0
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_rising_phase = 1;
+Q.e23_chemnitz_done = 1;
+Q.crisis_name = 'The German Revolution';
+Q.crisis_goal = 'Win the rising before the Reichswehr can concentrate.';
+Q.crisis_momentum -= 4;
+Q.militancy += 10;
+Q.repression += 8;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 3;
+!}
+
+The signal goes out a week early. In Saxony, Thuringia and Berlin the hundreds take the town halls and the railway stations, and the Zentrale's couriers race to tell the districts that were not ready.

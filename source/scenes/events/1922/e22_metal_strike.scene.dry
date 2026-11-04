@@ -1,0 +1,72 @@
+title: The Eight-Hour Day
+subtitle: The southern metalworkers are fighting for the forty-six-hour week.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 5
+max-visits: 1
+
+= The Eight-Hour Day
+
+The metal employers of southern Germany want their men to work longer for the same wage, and the men have refused. Since March, tens of thousands have been on strike or locked out. The strike funds are empty, the union is negotiating, and the employers' association says it will starve them back.
+
+[? if bavaria_soviet = 2 : In Red Bavaria the councils decreed the eight-hour day long ago. The fight is in Württemberg and Baden, and the employers there point to Munich as a warning. ?]
+
+The eight-hour day was the one great gain of the November revolution that every worker can feel in his legs. If it falls in the south, it will fall everywhere. May Day is coming.
+
+- @may_day: Make May Day a national day of action for the strikers.
+- @collect: Collect for the strike funds in every works.
+- @occupy: Tell the locked-out men to occupy the works.
+
+@may_day
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Joint May Day marches with the unions, for the eight-hour day.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids marching with the reformist unions.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_metal = 1;
+Q.worker_support += 4;
+Q.spd_relation += 3;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+On May Day the slogans are the same in every procession: hands off the eight-hour day. In late May the southern strike ends in a compromise that saves the principle, for now.
+
+@collect
+subtitle: Costs 1 fund. Wins goodwill in the south.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds to give.
+on-arrival: {!
+Q.e22_metal = 2;
+Q.resources -= 1;
+Q.worker_support += 3;
+Q.district_bavaria_members += 0.8;
+Q.district_bavaria_loyalty += 5;
+Q.unity += 2;
+!}
+
+Collection lists go round the Berlin and Saxon works. The money is small; the gesture is not forgotten in Munich and Stuttgart.
+
+@occupy
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Left's answer. Bold, and the police will come.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids occupations.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_metal = 3;
+Q.militancy += 7;
+Q.repression += 6;
+Q.worker_support += 1;
+Q.offensive_satisfaction += 5;
+Q.ultraleft_satisfaction += 4;
+Q.lean_offensive += 2;
+Q.district_bavaria_members -= 0.5;
+!}
+
+Two works near Stuttgart are occupied for three days before the Württemberg police clear them. The strike ends soon after, and our members in the south are the first to be blacklisted.

@@ -1,0 +1,91 @@
+title: Cuno Falls
+subtitle: The government resigns. The strike must end, or go further.
+new-page: true
+tags: event
+view-if: crisis_cuno = 1 and crisis_time >= 2
+max-visits: 1
+priority: 3
+on-arrival: {!
+var m = Q.crisis_momentum;
+Q.e23_cuno_result = m >= 72 ? 1 : (m >= 40 ? 2 : 3);
+Q.chancellor = 'Gustav Stresemann';
+Q.government_name = 'Stresemann cabinet (DVP, Centre, DDP, SPD)';
+Q.spd_in_government = 1; Q.zentrum_in_government = 1; Q.ddp_in_government = 1; Q.dvp_in_government = 1; Q.bvp_in_government = 0;
+Q.stability += 4;
+!}
+
+= Cuno Falls
+
+On 12 August Wilhelm Cuno resigns. The next day Gustav Stresemann, leader of the People's Party, the party of heavy industry, forms a great coalition that runs from his own party to the SPD. The Social Democrats get four ministries, including finance, and promise a stable currency.
+
+[? if e23_cuno_result = 1 : The strike is not over. In Berlin, Hamburg and Saxony the factory councils are still meeting, the hundreds stand guard at the power stations, and the police are waiting for orders that do not come. For a few days, the strikers believe anything is possible. Some of our leaders believe it too. ?]
+
+[? if e23_cuno_result = 2 : The strike has done what it set out to do. It is ebbing now, works by works, as the strikers collect their pay and look at the prices. The party has led three million workers and brought down a government. ?]
+
+[? if e23_cuno_result = 3 : The strike was crumbling before Cuno fell. The SPD's call to return to work was obeyed, the police arrested our council delegates, and the government's fall looks like the SPD's achievement, not ours. ?]
+
+- @rising: Turn the strike into a rising, now.
+- @victory: End the strike in good order, and claim the victory.
+- @retreat: Call off the strike before it is broken.
+
+@rising
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The German revolution, in August. Moscow has not been asked.
+view-if: e23_cuno_result = 1
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_cuno_done = 1;
+Q.crisis_cuno = 0;
+Q.crisis_october = 1;
+Q.e23_october_path = 2;
+Q.e23_rising_phase = 1;
+Q.crisis_time = 2;
+Q.crisis_name = 'The German Revolution';
+Q.crisis_goal = 'Turn the general strike into a rising, and win it before the Reichswehr can concentrate.';
+// no plan, no arms, no Moscow: the rising starts far behind the strike
+Q.crisis_momentum = Math.max(35, Q.crisis_momentum - 20);
+Q.militancy += 10;
+Q.repression += 10;
+Q.lean_offensive += 3;
+Q.offensive_satisfaction += 10;
+Q.unionist_satisfaction -= 6;
+Q.independence += 5;
+!}
+
+The council of the Berlin works calls for the arming of the workers. The hundreds take the power station at Klingenberg and the railway junctions at Lichtenberg. In Dresden and Hamburg the district leaders open the arms stores. The Reichswehr ministry declares a state of siege.
+
+@victory
+subtitle: The party's prestige rises, and many strikers join.
+view-if: e23_cuno_result <= 2
+on-arrival: {!
+Q.e23_cuno_done = 1;
+Q.crisis = 0; Q.crisis_cuno = 0; Q.crisis_name = 0; Q.crisis_goal = 0;
+Q.worker_support += 6;
+Q.militancy += 3;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.06;
+}
+Q.unionist_satisfaction += 5;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 1;
+!}
+
+The factory councils vote to return to work on 14 August. Tens of thousands join the party in the weeks that follow. In Moscow, Zinoviev reads the reports and starts to talk about a German October.
+
+@retreat
+subtitle: The strike ends with its organisation intact, and little else.
+on-arrival: {!
+Q.e23_cuno_done = 1;
+Q.crisis = 0; Q.crisis_cuno = 0; Q.crisis_name = 0; Q.crisis_goal = 0;
+Q.worker_support -= 2;
+Q.militancy -= 4;
+Q.repression += 3;
+Q.offensive_satisfaction -= 6;
+Q.unity -= 2;
+!}
+
+The Zentrale calls the strikers back to work. The police release most of the arrested council delegates within a week. The Left says the party ran away from its own strike.

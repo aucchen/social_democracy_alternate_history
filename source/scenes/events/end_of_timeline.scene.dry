@@ -1,12 +1,23 @@
 title: The End of 1923
+subtitle: The year of crisis is over.
 new-page: true
 tags: event
-view-if: year >= 1924
+view-if: year >= 1924 and crisis = 0 and ending_id = 0
 max-visits: 1
 priority: 5
+on-arrival: {!
+Q.ending_id = 6;
+!}
 
 = The End of 1923
 
-The year of crisis is over.
+The year that began with French soldiers in Essen ends with a new currency, a general with emergency powers, and a Republic that is still standing, to the surprise of many of its citizens.
 
-- @game_over: See how the party stands.
+Five years ago, a hundred-odd delegates founded the Communist Party of Germany in the Prussian Landtag. Since then it has been through civil war, risings, splits, congresses beyond counting and the whole of the inflation. [? if kpd_banned = 1 : It enters 1924 banned. ?][? if kpd_banned = 0 : It enters 1924 legal, which in itself is something. ?]
+
+It is time to take stock.
+
+- @finish: See how the party stands.
+
+@finish
+go-to: game_over

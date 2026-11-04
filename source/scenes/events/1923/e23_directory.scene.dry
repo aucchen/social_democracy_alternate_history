@@ -1,0 +1,47 @@
+title: The Directory
+subtitle: Seeckt takes the power he was given.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 12 and german_october = 2 and e23_oct_result >= 3 and e23_seeckt_ambition = 1 and e23_directory = 0 and stability < 8 and army_loyalty >= 50 and crisis = 0
+max-visits: 1
+priority: 4
+on-arrival: {!
+Q.e23_directory = 1;
+Q.kpd_banned = 1;
+Q.chancellor = 'Hans von Seeckt';
+Q.government_name = 'Directory (Seeckt, with Kahr and the industrialists)';
+for (var p of Q.parties) { Q[p + '_in_government'] = 0; }
+!}
+
+= The Directory
+
+The beaten rising, the putsch in Munich and the ruined currency have done what the Kapp putsch could not. In December the Reichstag is adjourned without a date. General von Seeckt announces a Directory of national men: himself, the industrialist Otto Wiedfeldt, Kahr from Bavaria, a banker, a judge. The President signs, because the army has told him he will.
+
+The Directory dissolves the state governments of Saxony and Thuringia for good, places the unions under supervision, and makes membership of the Communist Party a crime punishable by prison. The SPD protests and is banned in Saxony a week later. The Republic of Weimar ends without a shot.
+
+- @underground: Go underground and prepare for a long night.
+- @exile: Send the leadership abroad, and keep the party alive from Prague and Moscow.
+
+@underground
+subtitle: The party survives as a conspiracy.
+on-arrival: {!
+Q.ending_id = 3;
+!}
+
+The Zentrale disappears into safe flats and allotment huts. It will be years before it holds a meeting in daylight again.
+
+- @end: See how it ends.
+
+@exile
+subtitle: The leaders live; the party at home is on its own.
+on-arrival: {!
+Q.ending_id = 3;
+Q.independence -= 10;
+!}
+
+The leaders cross into Czechoslovakia by night through the forests of the Erzgebirge. In Germany, the cells carry on without them.
+
+- @end: See how it ends.
+
+@end
+go-to: game_over

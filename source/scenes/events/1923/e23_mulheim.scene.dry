@@ -1,0 +1,68 @@
+title: The Town Hall at Mülheim
+subtitle: Unemployed workers seize a town in the occupied Ruhr.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 4
+max-visits: 1
+
+= The Town Hall at Mülheim
+
+In Mülheim an der Ruhr, a march of the unemployed against the price of bread ends at the town hall, and does not leave. The German police, half of them expelled by the French, are nowhere to be seen. A committee of action, led by local communists and syndicalists, declares that it will run food supply until the prices fall. For a few days the red flag flies over a town of a hundred and thirty thousand people.
+
+The French commander watches, amused. The nationalist press in Berlin calls it treason behind the lines. The Ruhr district asks the Zentrale for orders and, more urgently, for money.
+
+- @spread: Spread it: every Ruhr town its own committee of action.
+- @hold: Hold the town hall, and send a delegation to negotiate.
+- @withdraw: Get our members out before it ends in blood.
+
+@spread
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. A test of strength in the Ruhr, months too early.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed seizures.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_mulheim = 1;
+Q.militancy += 10;
+Q.repression += 8;
+Q.district_ruhr_loyalty += 6;
+Q.district_ruhr_members *= 0.96;
+Q.red_guards_strength += 2;
+Q.offensive_satisfaction += 7;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 2;
+Q.spd_relation -= 4;
+!}
+
+Committees of action appear in Gelsenkirchen and Bochum. After a week, the Ruhr employers and the Social Democratic mayors raise volunteer police, and the committees are cleared out one town at a time. Our dead are buried with red flags.
+
+@hold
+subtitle: Costs 1 fund. Wins concessions on prices; some arrests.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds to send.
+on-arrival: {!
+Q.e23_mulheim = 2;
+Q.resources -= 1;
+Q.worker_support += 4;
+Q.district_ruhr_loyalty += 3;
+Q.unionist_satisfaction += 3;
+Q.offensive_satisfaction += 2;
+Q.lean_unionist += 1;
+!}
+
+The Zentrale's delegation, the town council and the union secretaries agree on fixed prices for bread and potatoes. The committee leaves the town hall in procession, with its banners.
+
+@withdraw
+subtitle: The careful answer. Fewer martyrs; the Ruhr Left is furious.
+on-arrival: {!
+Q.e23_mulheim = 3;
+Q.militancy -= 4;
+Q.district_ruhr_loyalty -= 8;
+Q.offensive_satisfaction -= 7;
+Q.luxemburgist_satisfaction += 3;
+Q.unity -= 2;
+!}
+
+The Zentrale orders the comrades out. Most obey. The syndicalists stay, and are arrested on the third night.

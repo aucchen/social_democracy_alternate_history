@@ -1,0 +1,73 @@
+title: The Beer Hall Putsch
+subtitle: Hitler proclaims a national revolution in Munich.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 11 and beer_hall_putsch = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.beer_hall_putsch = 1;
+if (Q.spd_in_government && Q.dvp_in_government && Q.e22_workers_gov == 0) {
+    Q.spd_in_government = 0;
+    Q.government_name = Q.government_name.replace(', SPD', '');
+}
+if (Q.crisis_october == 1) {
+    Q.crisis_momentum += 3;
+}
+Q.e23_beer_in_crisis = Q.crisis_october ? 1 : 0;
+!}
+
+= The Beer Hall Putsch
+
+[? if bavaria_soviet != 2 : On the evening of 8 November, Adolf Hitler bursts into the Bürgerbräukeller in Munich, where Kahr is addressing three thousand notables, fires a shot into the ceiling and proclaims the national revolution. General Ludendorff lends his name. Kahr, Lossow and Seisser are made to agree at pistol point, and change their minds as soon as they are released. ?][? if bavaria_soviet = 2 : On the night of 8 November, Adolf Hitler and General Ludendorff lead the nationalist leagues across the Franconian border into Red Bavaria, proclaiming a national revolution that will begin in Munich and end in Berlin. ?]
+
+[? if bavaria_soviet != 2 : The next morning, two thousand men march through Munich towards the War Ministry. At the Odeonsplatz the Bavarian state police open fire. Fourteen putschists and four policemen are killed. Hitler flees with a dislocated shoulder and is arrested two days later. ?][? if bavaria_soviet = 2 : At the Danube crossings the Bavarian workers' guard is waiting. The columns are broken in a day of fighting. Ludendorff is taken prisoner by a squad of railwaymen, and Hitler escapes back across the border. ?]
+
+[? if e23_beer_in_crisis = 1 : The Reichswehr, already fighting our hundreds, now has a putsch at its back. Seeckt must divide his forces. ?]
+
+The putsch has failed, but the danger has not. Half the officer corps sympathised with it.
+
+- @strike: Call a general strike against the fascist danger.
+- @front: Propose to the SPD and the unions a common defence against the right.
+- @analyse: Let the counter-revolutionaries fight each other.
+
+@strike
+subtitle: The Left's answer. Militant; the authorities will treat us like the putschists.
+on-arrival: {!
+Q.militancy += 6;
+Q.repression += 5;
+Q.worker_support += 2;
+Q.crisis_momentum += 3;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+Our call goes out by every means we still have. In the industrial towns, whole works stop for a day. The emergency commanders ban more of our papers.
+
+@front
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] A united front against fascism. The SPD's members are interested.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 5;
+Q.worker_support += 3;
+Q.crisis_momentum += 2;
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+The SPD's executive refuses to sit with us. Many of its local branches do not.
+
+@analyse
+subtitle: Cold, and correct, perhaps.
+on-arrival: {!
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+Q.militancy -= 2;
+!}
+
+*Die Rote Fahne* explains that Kahr and Hitler are two wings of the same reaction, and that the workers should not mistake the quarrel of their enemies for a victory of their own.

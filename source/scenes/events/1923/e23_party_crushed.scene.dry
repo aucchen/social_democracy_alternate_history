@@ -1,0 +1,21 @@
+title: The Party Is Broken
+subtitle: There is almost nothing left.
+new-page: true
+tags: event
+view-if: members < 1 and time > 1 and game_over = 0 and ending_id = 0
+max-visits: 1
+priority: 50
+on-arrival: {!
+Q.ending_id = 4;
+!}
+
+= The Party Is Broken
+
+The district offices are closed and their secretaries in prison, in exile or dead. The membership lists have been seized or burned. Fewer than a thousand people in all of Germany still pay dues to the party, and most of them no longer know whom to pay them to.
+
+Parties have come back from worse, in other countries and other centuries. This one will not, not in this generation.
+
+- @end: See how it ends.
+
+@end
+go-to: game_over

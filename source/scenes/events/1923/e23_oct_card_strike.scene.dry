@@ -1,0 +1,46 @@
+title: The General Strike
+subtitle: The rising lives or dies with the strike.
+view-if: crisis_october = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The General Strike
+
+Every plan of the rising begins with a general strike. Without it the hundreds are a few thousand armed men; with it the Reichswehr cannot move its trains, light its barracks or feed its soldiers. But the workers are hungry, the unions are bankrupt, and a strike costs a week's wages that do not exist.
+
+- @railways: Stop the railways first.
+- @kitchens: Open strike kitchens in every district.
+- @power: Shut down the power stations.
+
+@railways
+subtitle: If the trains stop, the army cannot concentrate. The railwaymen must agree.
+on-arrival: {!
+var ok = Q.worker_support >= 35 || Q.e23_rail_joined == 1;
+Q.e23_rail_ok = ok ? 1 : 0;
+Q.crisis_momentum += ok ? 8 : 2;
+Q.repression += 3;
+!}
+
+[? if e23_rail_ok = 1 : The depots of Leipzig, Halle and Berlin-Lichtenberg come out. Troop trains stand in sidings with their engines cold. ?][? if e23_rail_ok = 0 : The railwaymen hesitate. Some trains are stopped by our pickets on the tracks; most run late, but run. ?]
+
+@kitchens
+subtitle: Costs 1 fund. The strikers can hold out.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; worker_support += 4; crisis_momentum += 5; unity += 2
+
+The control committees requisition potatoes and flour, and the strike kitchens feed the families in every workers' district.
+
+@power
+subtitle: The cities go dark. The strikers' families too.
+on-arrival: {!
+Q.crisis_momentum += 6;
+Q.worker_support -= 2;
+Q.militancy += 4;
+Q.lean_offensive += 1;
+!}
+
+The Klingenberg station goes silent, and with it half of Berlin. The army's searchlights run on its own generators.

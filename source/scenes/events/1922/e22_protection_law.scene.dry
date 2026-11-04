@@ -1,0 +1,63 @@
+title: The Law for the Protection of the Republic
+subtitle: The Reichstag votes on a law against the Republic's enemies.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 7
+max-visits: 1
+priority: 2
+
+= The Law for the Protection of the Republic
+
+Out of the anger of June comes a law. It bans organisations that plot against the Republic, makes it a crime to insult its ministers or its flag, and sets up a State Court at Leipzig to try the conspirators. The SPD calls it the answer to the murderers. Our lawyers read it twice and point out that it does not say which enemies it means.
+
+[? if bavaria_soviet = 2 : In Red Bavaria the councils laugh at it: Berlin's law will never be enforced in Munich, by anyone. ?][? if bavaria_soviet != 2 : Bavaria's government refuses to apply it at all and issues a decree of its own. Munich, it says, will decide who threatens the Republic in Bavaria. ?]
+
+Our deputies must vote on 18 July.
+
+- @for: Vote for it: the murderers must be stopped.
+- @against: Vote against it: it will be used against the workers.
+- @abstain: Abstain, and demand that it names the right.
+
+@for
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's choice. The SPD notices; so will the judges.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids voting with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_protection_law = 1;
+Q.spd_relation += 6;
+Q.stability += 3;
+Q.unionist_satisfaction += 5;
+Q.offensive_satisfaction -= 6;
+Q.lean_unionist += 2;
+!}
+
+The law passes with our votes. Within a year, the State Court will try more communists under it than monarchists.
+
+@against
+subtitle: The Left's and the Spartacists' choice. Principled; the SPD calls us the murderers' allies.
+on-arrival: {!
+Q.e22_protection_law = 2;
+Q.spd_relation -= 6;
+Q.offensive_satisfaction += 5;
+Q.luxemburgist_satisfaction += 3;
+Q.unionist_satisfaction -= 3;
+Q.lean_offensive += 1;
+Q.lean_luxemburgist += 1;
+Q.independence += 2;
+!}
+
+We vote against, beside the nationalists for opposite reasons. The law passes anyway. *Vorwärts* prints the division list on its front page.
+
+@abstain
+subtitle: A careful middle course. Nobody is impressed.
+on-arrival: {!
+Q.e22_protection_law = 3;
+Q.unity += 1;
+Q.spd_relation -= 1;
+!}
+
+Our amendment to name the monarchist leagues in the text is voted down, and our deputies sit on their hands for the final vote.

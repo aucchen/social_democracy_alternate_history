@@ -1,0 +1,77 @@
+title: The Proletarian Hundreds
+subtitle: Workers' squads and price committees spread across Germany.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 2
+max-visits: 1
+
+= The Proletarian Hundreds
+
+The French have drawn a customs line around the Ruhr. Nothing goes in or out without their stamp, and in the rest of Germany coal is rationed and the mark falls by the day. In the occupied towns, the nationalist saboteurs of the Freikorps blow up railway bridges, and the French shoot hostages in reply.
+
+Across the country, workers are organising on their own. Control committees go through the markets and the warehouses, looking for hoarded butter and potatoes. In Saxony, Thuringia and Berlin young workers form **proletarian hundreds**, drilling in the evenings with sticks and, here and there, with rifles from 1920. Social Democrats join them as often as communists.
+
+The Zentrale must decide what to make of this.
+
+- @open: Build the hundreds openly, with the SPD workers, in every district.
+- @committees: Put everything into the control committees.
+- @apparatus: Build a secret military apparatus, with Moscow's help.
+
+@open
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] More armed workers, under our influence. The Prussian police will not tolerate it for long.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed formations.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_hundreds = 1;
+Q.red_guards_strength += 8;
+Q.red_guards_arms += 4;
+Q.red_guards_loyalty += 4;
+Q.repression += 5;
+Q.spd_relation += 2;
+Q.offensive_satisfaction += 5;
+Q.unionist_satisfaction += 3;
+Q.lean_offensive += 1;
+Q.lean_unionist += 1;
+!}
+
+By March there are hundreds in three hundred towns. In Saxony they march past the Landtag in grey windcheaters, and the SPD ministers wave from the windows.
+
+@committees
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Right's priority. Popular, unarmed, and it brings SPD workers to us.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_hundreds = 2;
+Q.worker_support += 6;
+Q.spd_relation += 4;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.03;
+}
+!}
+
+The control committees become the most popular thing the party has ever done. Housewives who have never been to a meeting come to ours to report a grocer.
+
+@apparatus
+subtitle: Costs independence. Better arms and secret officers; Moscow pays.
+on-arrival: {!
+Q.e23_hundreds = 3;
+Q.red_guards_arms += 10;
+Q.red_guards_loyalty += 6;
+Q.independence -= 6;
+Q.resources += 1;
+Q.repression += 3;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+Russian officers arrive with false passports and a great deal of money. A military apparatus is built in secret, with its own couriers, weapons stores and lists. Few in the Zentrale know how it works.

@@ -1,0 +1,50 @@
+title: The Arms Question
+subtitle: The hundreds have more men than rifles.
+view-if: crisis_october = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Arms Question
+
+The military apparatus counted the party's weapons for the plan. The result was not encouraging: a few thousand rifles, some machine guns from 1920, pistols, hand grenades of uncertain age. The Reichswehr, the police and the Black Reichswehr have stores all over Germany. Some of them are badly guarded.
+
+- @raid: Raid the police and Reichswehr depots.
+- @buy: Buy arms through Moscow's agents.
+- @share: Share out what we have, fairly, to every district.
+
+@raid
+subtitle: [? if e23_rising_phase = 1 : The fighting needs rifles now. ?] More arms, and blood.
+on-arrival: {!
+Q.red_guards_arms += 8;
+Q.repression += 5;
+Q.crisis_momentum += (Q.e23_rising_phase == 1) ? 7 : 4;
+Q.lean_offensive += 1;
+!}
+
+At night the hundreds take a police barracks in Zwickau and a Black Reichswehr store outside Halle. Two of ours are killed. Six hundred rifles change hands.
+
+@buy
+subtitle: Costs 1 fund. Better arms, if they arrive in time.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.red_guards_arms += 10;
+Q.independence -= 2;
+Q.crisis_momentum += (Q.e23_rising_phase == 1) ? 4 : 6;
+!}
+
+Russian money, Dutch smugglers, a barge on the Elbe. Most of the crates arrive. One holds Mexican saddles.
+
+@share
+subtitle: Every district gets something. Nobody gets enough.
+on-arrival: {!
+Q.red_guards_loyalty += 5;
+Q.unity += 3;
+Q.crisis_momentum += 3;
+!}
+
+The apparatus sends a few dozen rifles to every district. In Hamburg they are glad. In Berlin they ask where the rest went.

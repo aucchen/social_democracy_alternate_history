@@ -1,0 +1,112 @@
+title: The Reckoning
+subtitle: The Central Committee meets to decide who failed, and who leads.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 12 and e23_reckoning = 0 and crisis = 0
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+Q.e23_right_blamed = (Q.lead_code == 3 && (Q.german_october == 1 || Q.german_october == 2)) ? 1 : 0;
+Q.e23_right_can = (Q.unionist_gone == 0 && (!Q.e23_right_blamed || Q.unionist_strength >= 40)) ? 1 : 0;
+!}
+
+= The Reckoning
+
+The Central Committee meets [? if kpd_banned = 1 : in secret, in a flat in Berlin with lookouts on the stairs ?][? if kpd_banned = 0 : in the Zentrale's offices, under police observation ?]. The agenda has one item: the lessons of 1923.
+
+[? if german_october = 1 : The rising was called off at Chemnitz, and Hamburg fought alone. The Left says the Zentrale lost its nerve and left Thälmann's men to die. The Right says the Zentrale saved the party from a massacre, and that the masses would not have followed. Moscow, which planned the October, says both. ?]
+[? if german_october = 2 : The rising was fought and lost. The Left says it was betrayed by hesitation, the Right that it should never have been fought. In Moscow Zinoviev and Trotsky blame each other and agree on blaming the German leaders. ?]
+[? if german_october = 0 and e23_october_done = 1 : The party never rose. Some say it missed the chance of a generation. Others say it is still alive because it did not try. ?]
+[? if german_october = 0 and e23_october_done = 0 : Moscow's October never came to Germany. The party spent the year in strikes and committees, and the Left says that is all it will ever do. ?]
+
+[? if e23_right_blamed = 1 : Brandler and Thalheimer led the Zentrale through the October. Fewer and fewer districts stand by them. ?]
+
+Whoever leads the party into 1924 will decide what it becomes.
+
+- @right: Brandler keeps the Zentrale.
+- @left: The Left takes the Zentrale: Fischer, Maslow and Thälmann.
+- @middle: A middle group of old Spartacists, with the Left as junior partner.
+- @purge: The Left takes over and expels Brandler's Right.
+- @stay: Leave the Zentrale as it is.
+
+@right
+subtitle: The Right's line continues. The Left is enraged.
+view-if: unionist_gone = 0
+choose-if: e23_right_can = 1
+unavailable-subtitle: The districts will not have Brandler back.
+on-arrival: {!
+Q.e23_reckoning = 1;
+Q.leading_faction = 'unionist';
+Q.junior_faction = 0;
+Q.unionist_satisfaction += 10;
+Q.offensive_satisfaction -= 15;
+Q.lean_unionist += 3;
+Q.independence += 3;
+!}
+
+Brandler survives the vote by a handful. He promises the united front, patient work in the unions, and no more risings planned in Moscow. Zinoviev's letter of reply is not read out.
+
+@left
+subtitle: The Left's victory, with Moscow's blessing. Brandler is sent to Moscow.
+view-if: offensive_gone = 0
+on-arrival: {!
+Q.e23_reckoning = 2;
+Q.leading_faction = 'offensive';
+Q.junior_faction = 0;
+Q.offensive_satisfaction += 15;
+Q.unionist_satisfaction -= 15;
+Q.lean_offensive += 3;
+Q.independence -= 6;
+!}
+
+The Left wins the districts one by one. Ruth Fischer and Arkadi Maslow take the Zentrale, with Thälmann beside them. Brandler and Thalheimer are summoned to Moscow and told to stay there.
+
+@middle
+subtitle: The Spartacist centre leads; the Left shares power.
+view-if: luxemburgist_gone = 0 and offensive_gone = 0
+on-arrival: {!
+Q.e23_reckoning = 3;
+Q.leading_faction = 'luxemburgist';
+Q.junior_faction = 'offensive';
+Q.luxemburgist_satisfaction += 10;
+Q.offensive_satisfaction += 4;
+Q.unionist_satisfaction -= 6;
+Q.lean_luxemburgist += 3;
+Q.unity += 4;
+!}
+
+Wilhelm Pieck, Hermann Remmele and Hugo Eberlein form a middle group, and the Central Committee follows them, for now. The Left takes its seats and waits for the next congress.
+
+@purge
+subtitle: The Left rules alone. The Right and its districts leave.
+view-if: offensive_gone = 0 and unionist_gone = 0
+on-arrival: {!
+Q.e23_reckoning = 4;
+Q.leading_faction = 'offensive';
+Q.junior_faction = 0;
+Q.unionist_gone = 1;
+Q.unionist_satisfaction = 0;
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_faction'] == 'unionist') {
+        Q['district_' + d + '_members'] *= 0.5;
+        Q['district_' + d + '_faction'] = 'offensive';
+        Q['district_' + d + '_loyalty'] = 50;
+    }
+}
+Q.offensive_satisfaction += 15;
+Q.unity += 5;
+Q.worker_support -= 4;
+Q.lean_offensive += 3;
+!}
+
+Brandler, Thalheimer and Walcher are expelled. Half of Saxony goes with them, and the old union men of Chemnitz found an opposition of their own.
+
+@stay
+subtitle: No change at the top, and no peace below.
+on-arrival: {!
+Q.e23_reckoning = 5;
+Q.unity -= 4;
+!}
+
+The Central Committee passes a resolution on the lessons of 1923 that everyone can vote for and nobody believes.

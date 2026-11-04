@@ -1,0 +1,77 @@
+title: Anti-Fascist Day
+subtitle: The party calls a day of action. Prussia bans it.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 7
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+Q.sa_strength += 3;
+!}
+
+= Anti-Fascist Day
+
+The nationalist leagues are arming openly. [? if bavaria_soviet != 2 : In Bavaria, Hitler's storm troopers parade with the Reichswehr's rifles. ?][? if bavaria_soviet = 2 : On the borders of Red Bavaria, the nationalist leagues drill for a march on Munich. ?] In the north the Black Reichswehr, the army's illegal reserve, has thousands of men in barracks around Berlin. The Zentrale has called an Anti-Fascist Day for Sunday, 29 July: mass demonstrations in every city.
+
+The Prussian government bans all open-air demonstrations for that day. Other states follow. Then a telegram arrives from Moscow, signed by Radek: the Executive advises against risking a defeat in the streets. Zinoviev and Bukharin, it is said, wanted the opposite.
+
+[? if lead_code = 2 : The Left's Zentrale wants to march. The telegram makes it want to march more. ?]
+
+- @march: March, ban or no ban.
+- @indoor: Hold the demonstrations indoors in Prussia, and outdoors where they are allowed.
+- @spd: Ask the SPD to march with us and demand that the ban is lifted.
+
+@march
+subtitle: [? if lock_moscow_orders = 0 : Defies Moscow's advice. ?] The Left's answer. A test of strength with the police.
+on-arrival: {!
+Q.e23_antifascist_day = 1;
+Q.militancy += 8;
+Q.repression += 8;
+Q.worker_support += 3;
+Q.red_guards_loyalty += 4;
+Q.independence += 3;
+Q.offensive_satisfaction += 7;
+Q.unionist_satisfaction -= 5;
+Q.lean_offensive += 2;
+!}
+
+In Berlin forty thousand march despite the ban. The Schupo charge on the Alexanderplatz. There are dead in Frankfurt and Breslau. The party has shown it can fill the streets, and the police have shown what they will do about it.
+
+@indoor
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow's advice. The Right's caution; the Left calls it a retreat.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_antifascist_day = 2;
+Q.independence -= 3;
+Q.militancy -= 3;
+Q.worker_support += 1;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 7;
+Q.lean_unionist += 1;
+!}
+
+In Berlin the halls are full and the streets are quiet. In Saxony and Thuringia two hundred thousand march with the hundreds in front. Fischer calls it the day the Zentrale lost its nerve.
+
+@spd
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The united front against fascism. The SPD's left wing is tempted.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any appeal to the SPD.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_antifascist_day = 3;
+Q.spd_relation += 6;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 4;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_unionist += 1;
+Q.lean_luxemburgist += 1;
+!}
+
+The SPD executive refuses. But SPD branches in Saxony, Thuringia and parts of Berlin join the meetings, and the ban is quietly not enforced against them.

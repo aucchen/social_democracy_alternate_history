@@ -1,0 +1,46 @@
+title: The Council of the Works
+subtitle: The factory councils are leading the strike. Who leads the councils?
+view-if: crisis_cuno = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Council of the Works
+
+The general assembly of Berlin's factory councils sits in permanent session in a union hall in the Engelufer. Our members are the largest group, but not a majority. SPD and non-party delegates want the strike to stay a strike. Some of ours want it to become something more.
+
+- @joint: Elect a joint strike committee with the SPD delegates.
+- @guard: Put the hundreds at the council's disposal.
+- @national: Call a national congress of factory councils.
+
+@joint
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Broadens the strike; the SPD delegates stay.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a joint committee with the SPD.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += 6;
+Q.spd_relation += 4;
+Q.lean_unionist += 1;
+!}
+
+A strike committee of fifteen is elected, seven of them Social Democrats. The SPD executive disowns them. They stay.
+
+@guard
+subtitle: Protects the strike; frightens the moderates.
+on-arrival: crisis_momentum += 4; red_guards_loyalty += 4; militancy += 3; spd_relation -= 2; lean_offensive += 1
+
+Grey windcheaters appear at the doors of the power stations and the council's hall. The police keep their distance.
+
+@national
+subtitle: Costs 1 fund. A national body for the councils, which may outlast the strike.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds to bring the delegates.
+on-arrival: resources -= 1; crisis_momentum += 5; worker_support += 3; lean_ultraleft += 1
+
+Delegates from three hundred works arrive in Berlin by lorry and bicycle. The congress elects a national committee of the factory councils. The ADGB declares it illegitimate.

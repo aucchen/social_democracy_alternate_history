@@ -1,0 +1,70 @@
+title: The March on Rome
+subtitle: Mussolini's Blackshirts take power in Italy.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 10
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.sa_strength += 3;
+Q.nsdap_relation = 0;
+!}
+
+= The March on Rome
+
+At the end of October, columns of Blackshirts converge on Rome. The army could stop them in an afternoon. The King refuses to sign the state of siege, and on 30 October Benito Mussolini, a former socialist editor, becomes Prime Minister of Italy. Two years ago the Italian workers occupied the factories of Turin and Milan. Now the fascist squads burn their union halls and nobody punishes them.
+
+[? if bavaria_soviet != 2 : In Munich, a beer-hall agitator named Adolf Hitler tells his audiences that Germany needs its own Mussolini. His storm troopers are a few thousand strong, and the Bavarian government finds them useful. ?][? if bavaria_soviet = 2 : The German nationalists driven out of Red Bavaria gather in Coburg and Württemberg, and their speakers now promise a march on Munich, and then on Berlin. ?]
+
+The Zentrale must decide what Rome means for Germany.
+
+- @defence: Build proletarian defence formations against the fascists.
+- @front: Propose an anti-fascist front to the SPD and the unions.
+- @dismiss: Fascism is an Italian sickness; the German danger is the generals.
+
+@defence
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] More armed workers. The Left's instinct; the police will notice.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed formations.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_rome = 1;
+Q.red_guards_strength += 3;
+Q.red_guards_arms += 3;
+Q.repression += 4;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+Each district is told to form proletarian hundreds: young workers, trained, disciplined, ready to break up fascist meetings and defend our own.
+
+@front
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. The social democrats are interested, and afraid.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a front with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_rome = 2;
+Q.spd_relation += 5;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 2;
+!}
+
+Our appeal is answered in Saxony and Thuringia, where SPD and KPD workers already share the streets. In Berlin the SPD executive says the Republic has its own police.
+
+@dismiss
+subtitle: The old analysis. Nothing is spent.
+on-arrival: {!
+Q.e22_rome = 3;
+Q.militancy -= 2;
+Q.luxemburgist_satisfaction += 2;
+!}
+
+Our theoreticians explain that Italy is a backward country of landlords and peasants. Germany, with its great industrial working class, is different.
