@@ -1,21 +1,23 @@
 title: Paul Levi
 is-pinned-card: true
 tags: advisor
-view-if: levi_advisor = 1
+view-if: adv_show_levi = 1
 new-page: true
 
 = Paul Levi
 
-A lawyer and Luxemburg's close ally. Cool-headed and organised, he wants a disciplined party that can win the majority of workers.
+A Frankfurt lawyer, Luxemburg's defender in court and her closest ally. Cool, organised and impatient with fools, he wants a disciplined mass party that wins the majority of the workers before it reaches for power.
+
+[? if levi_chair = 1 : He chairs the Zentrale now, and carries Luxemburg's legacy like a weight. ?]
 
 - @organise
-- @funds
+- @open_letter
 - @root: Return to main
 
 @organise
 title: Organise the Apparatus
-subtitle: Raises the loyalty of the three least loyal districts.
-unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
+subtitle: The three least loyal districts move closer to the Zentrale.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
 choose-if: advisor_action_timer <= 0
 on-arrival: {!
 Q.advisor_action_timer = 4;
@@ -26,15 +28,30 @@ var sorted = Q.districts.slice().sort(function(a, b) {
 for (var i = 0; i < 3; i++) {
     Q['district_' + sorted[i] + '_loyalty'] += 12;
 }
+Q.lean_luxemburgist += 1;
 !}
 
-Levi builds a network of district secretaries who answer to the Zentrale.
+Levi builds a network of district secretaries who answer to the Zentrale, and reads every report they send.
 
-@funds
-title: Put the Finances in Order
-subtitle: 2 funds.
-unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
-choose-if: advisor_action_timer <= 0
-on-arrival: advisor_action_timer = 4; last_advisor_action = 1; resources += 2
+@open_letter
+title: Appeal to the Other Workers' Parties
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Proposes common demands to the social democrats and the unions. The Left calls it opportunism.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?][? if lock_united_front = 2 : The [+ leading_faction_adj +] line forbids any deal with the social democrats. ?]
+choose-if: advisor_action_timer <= 0 and lock_united_front < 2
+on-arrival: {!
+Q.advisor_action_timer = 4;
+Q.last_advisor_action = 1;
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 5;
+Q.uspd_relation += 5;
+Q.worker_support += 3;
+Q.offensive_satisfaction -= 5;
+Q.ultraleft_satisfaction -= 5;
+Q.lean_luxemburgist += 1;
+Q.lean_unionist += 1;
+!}
 
-Dues are collected, debts are chased, and the accounts are balanced.
+Levi drafts a letter to every workers' party and union: bread, wages, the disarming of the counter-revolution. Let them refuse it in front of their own members.

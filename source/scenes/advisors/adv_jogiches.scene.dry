@@ -1,0 +1,33 @@
+title: Leo Jogiches
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_jogiches = 1
+new-page: true
+
+= Leo Jogiches
+
+The organiser. He ran the Spartacus League's illegal network through the war, and he has spent his life in the underground of three empires. He rarely speaks in public, and he forgets nothing.
+
+[? if luxemburg_alive = 0 : Since Rosa's murder he works as if he had no time left. ?]
+
+- @network
+- @investigate
+- @root: Return to main
+
+@network
+title: Rebuild the Underground Network
+subtitle: Safe houses, couriers and false papers. The party is harder to strike.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; repression -= 6; red_guards_loyalty += 5; unity += 3; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+Jogiches knows which printers keep their mouths shut and which landladies ask no questions. Within weeks the Zentrale can work even if Berlin is under martial law.
+
+@investigate
+title: Hunt the Murderers
+subtitle: Name the officers who killed our comrades. The workers are outraged; the government is shamed.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 5; last_advisor_action = 1; worker_support += 4; spd_relation -= 6; uspd_relation += 3; stability -= 2; repression += 3; lean_luxemburgist += 1
+
+Jogiches gathers witnesses, hotel staff and photographs of the officers of the Guards Cavalry Rifle Division drinking to their work. Die Rote Fahne prints everything. Noske's courts will not want to hear it.

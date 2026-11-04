@@ -1,0 +1,73 @@
+title: The Italian Comrades
+new-page: true
+view-if: crisis = 0 and c_italy_timer <= 0 and time >= 6
+on-arrival: c_italy_timer = 6; month_actions += 1
+frequency: 150
+is-card: true
+tags: international
+
+= The Italian Comrades
+
+[? if year <= 1920 : Italy is in its two red years. The Socialist Party of Serrati has joined the Communist International, the peasants are occupying the land, and in Turin Antonio Gramsci's Ordine Nuovo group builds factory councils on the Russian model. ?][? if year = 1920 and month >= 9 : This September half a million metalworkers occupied their factories, and then gave them back. ?][? if year = 1921 or (year = 1922 and month < 10) : In January 1921, at Livorno, the Comintern demanded that the Italian Socialists expel their reformists. Serrati refused, and the communists walked out to found their own small party. Since then, Mussolini's blackshirts have been burning down the workers' houses one province at a time. ?][? if (year = 1922 and month >= 10) or year >= 1923 : Mussolini has marched on Rome, and the King has made him prime minister. The Italian left, split three ways, could not stop him. ?]
+
+The Italians want to know where the German party stands.
+
+- @councils: Hold up Turin's councils as the model for Germany.
+- @unity: Defend the unity of the Italian left.
+- @clean_break: Back Moscow's demand for a clean break with the reformists.
+- @antifascist: Raise money for the Italians fighting the blackshirts.
+- @easy_discard
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Militancy rises; the council idea spreads. The Left approves.
+view-if: year <= 1920
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council work.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.militancy += 3;
+Q.world_revolution += 3;
+Q.offensive_satisfaction += 3;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 3;
+}
+Q.lean_offensive += 1;
+!}
+
+Die Rote Fahne prints Gramsci's articles on the factory councils. Shop stewards in Berlin and Halle read them closely.
+
+@unity
+subtitle: A split now hands Italy to the reaction, we say. The Spartacists agree; Moscow does not.
+on-arrival: independence += 4; world_revolution -= 1; luxemburgist_satisfaction += 5; offensive_satisfaction -= 4; lean_luxemburgist += 2
+
+[? if levi_split = 0 and year >= 1921 : Paul Levi, who saw Livorno for himself, argues that a small sect cut off from the masses is no gain. ?][? if levi_split = 1 or year <= 1920 : The Zentrale argues that a small sect cut off from the masses is no gain. ?] The Executive is not amused.
+
+@clean_break
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Purity first. Moscow is pleased; the Left too.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 4;
+Q.world_revolution += 2;
+Q.offensive_satisfaction += 5;
+Q.luxemburgist_satisfaction -= 3;
+Q.lean_offensive += 1;
+!}
+
+The German party declares that there is no room in the International for reformists, in Italy or anywhere else.
+
+@antifascist
+subtitle: Costs 1 fund. Solidarity with the beaten and the exiled.
+view-if: year >= 1921
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; world_revolution += 2; worker_support += 1; unity += 1
+
+The money goes over the Alps to the families of the dead and to the comrades hiding in Milan and Turin. Some of the exiles come north, with stories that make our young workers very quiet.

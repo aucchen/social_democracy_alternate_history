@@ -1,0 +1,62 @@
+title: The Youth League
+new-page: true
+view-if: crisis = 0 and c_youth_timer <= 0
+on-arrival: c_youth_timer = 5; month_actions += 1
+frequency: 200
+is-card: true
+tags: party_affairs
+
+= The Youth League
+
+[? if year <= 1920 : The Free Socialist Youth ?][? if year >= 1921 : The Communist Youth League ?] has thousands of members: apprentices, young workers, boys who missed the trenches by a year or two and girls who ran the machines while their fathers were at the front. They are the most radical people in the movement, and they know it.
+
+Their leaders want to run their own affairs, as Willi Münzenberg's Youth International always has. The Zentrale is not so sure.
+
+- @autonomy: Let the youth run their own affairs.
+- @discipline: Put the league under the Zentrale.
+- @apprentices: Send them into the workshops and the unions.
+- @easy_discard
+
+@autonomy
+subtitle: The youth are fiery and grateful. The Left is pleased.
+on-arrival: {!
+Q.militancy += 3;
+Q.offensive_satisfaction += 6;
+Q.red_guards_strength += 0.3;
+Q.unity -= 2;
+Q.lean_offensive += 1;
+!}
+
+The league holds its own congress, elects its own leaders and publishes its own paper, which is rude about everybody, including us.
+
+@discipline
+subtitle: The league follows the party line. Some of the young ones walk away.
+on-arrival: {!
+Q.unity += 3;
+Q[Q.leading_faction + '_satisfaction'] += 4;
+Q.offensive_satisfaction -= 4;
+Q.militancy -= 2;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.99;
+}
+Q['lean_' + Q.leading_faction] += 1;
+!}
+
+A member of the Zentrale now sits on the league's executive, and every leaflet goes through the party office first.
+
+@apprentices
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] Slow work for apprentices' pay and rights. The Right approves.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the old unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 3;
+Q.unionist_satisfaction += 5;
+Q.offensive_satisfaction -= 2;
+Q.lean_unionist += 1;
+!}
+
+Young communists join the metalworkers' youth sections and fight for the eight-hour day for apprentices. It is less exciting than the barricades, and it lasts longer.

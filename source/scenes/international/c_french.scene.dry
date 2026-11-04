@@ -1,0 +1,62 @@
+title: Across the Rhine
+new-page: true
+view-if: crisis = 0 and c_french_timer <= 0 and time >= 5
+on-arrival: c_french_timer = 5; month_actions += 1
+frequency: 150
+is-card: true
+tags: international
+
+= Across the Rhine
+
+[? if year = 1919 : French sailors of the Black Sea fleet mutinied rather than fight Soviet Russia, and the French socialists are torn over the peace of Versailles. In Hamburg, the Left Radicals Laufenberg and Wolffheim preach a people's war against the Entente, alongside the Red Army. ?][? if year = 1920 : The French Socialist Party is debating whether to join the Communist International. In Hamburg, Laufenberg and Wolffheim still preach a people's war against the Entente. ?][? if year >= 1921 and ruhr_occupied = 0 : At Tours, the majority of the French socialists founded a Communist Party. French troops stand on the Rhine, and Paris demands the reparations in coal and gold. ?][? if ruhr_occupied = 1 : French and Belgian troops occupy the Ruhr. The German nationalists cry for resistance, and the French communists who protested are in prison. ?]
+
+What should the German party say about the French?
+
+- @joint: Campaign with the French comrades against Versailles.
+- @national_bolsheviks: Hear out Hamburg's national bolsheviks.
+- @nation: Speak to the nationalist middle classes.
+- @help: Help the French build their party.
+- @easy_discard
+
+@joint
+subtitle: The workers of both countries against both their governments. The Spartacists approve.
+on-arrival: world_revolution += 3; worker_support += 1; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+[? if ruhr_occupied = 1 : Delegates of the French and German parties meet in Essen and issue a common appeal: against Poincaré and against Cuno. ?][? if ruhr_occupied = 0 : Our papers print the French comrades' statements against the peace treaty, and theirs print ours. ?]
+
+@national_bolsheviks
+subtitle: The Left Radicals' Hamburg wing approves. Everyone else is horrified.
+view-if: year <= 1920 and ultraleft_gone = 0
+on-arrival: ultraleft_satisfaction += 6; luxemburgist_satisfaction -= 6; spd_relation -= 3; world_revolution -= 2; lean_ultraleft += 1
+
+A war of the German proletariat with Soviet Russia against the Entente, with the officers if they will come: Laufenberg's pamphlet is printed in the party's name. Radek calls it madness.
+
+@nation
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow's new line: win the ruined middle classes from the nationalists. Controversial everywhere.
+view-if: ruhr_occupied = 1
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 3;
+Q.militancy += 2;
+Q.world_revolution -= 2;
+Q.spd_relation -= 3;
+Q.independence -= 3;
+Q.luxemburgist_satisfaction -= 4;
+Q.offensive_satisfaction += 2;
+!}
+
+Our speakers tell the ruined shopkeepers and students that their enemy is not France but the German capitalists who sold them out. Some listen. Some come to our meetings in nationalist uniforms.
+
+@help
+subtitle: Costs 1 fund. A stronger French party. Moscow approves.
+view-if: year >= 1921
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; world_revolution += 3; independence -= 1
+
+German comrades in Alsace and Lorraine carry our pamphlets over the border, and we help the French print their Rhineland paper for the occupying soldiers.

@@ -1,0 +1,54 @@
+title: Home from Russia
+new-page: true
+view-if: crisis = 0 and c_returnees_timer <= 0 and year <= 1920
+on-arrival: c_returnees_timer = 4; month_actions += 1
+frequency: 200
+is-card: true
+tags: international
+
+= Home from Russia
+
+Hundreds of thousands of German prisoners of war are coming home from Russia, through the transit camps on the eastern border. Most just want to see their families. Some have fought in the Red Army, joined the German section of the Bolshevik party, or sat in the soviets of Siberian towns. A few, like Ernst Reuter, come home as convinced communists with Lenin's handshake to prove it.
+
+At the same time, more than a million Russian prisoners are still held in German camps, hungry and forgotten.
+
+- @recruit: Recruit at the transit camps.
+- @russians: Help the Russian prisoners in the German camps.
+- @cadres: Give the returned Bolsheviks posts in the party.
+- @easy_discard
+
+@recruit
+subtitle: New members who know how to fight. The Left approves.
+on-arrival: {!
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.03;
+}
+Q.militancy += 2;
+Q.red_guards_strength += 0.5;
+Q.offensive_satisfaction += 2;
+Q.lean_offensive += 1;
+!}
+
+Our comrades meet the trains at Frankfurt an der Oder with soup and leaflets. Some of the men read them on the platform.
+
+@russians
+subtitle: Solidarity with the Russian workers. The authorities dislike it.
+on-arrival: world_revolution += 2; independence -= 1; repression += 1; luxemburgist_satisfaction += 2
+
+Our women's groups bring bread and newspapers to the camp fences. The guards look the other way more often than not.
+
+@cadres
+subtitle: Experienced Bolsheviks in the districts. Discipline improves; old Spartacists grumble.
+on-arrival: {!
+Q.district_berlin_loyalty += 4;
+Q.red_guards_loyalty += 4;
+Q.offensive_satisfaction += 4;
+Q.luxemburgist_satisfaction -= 2;
+Q.unity -= 1;
+if (Q.comintern_member) {
+    Q.independence -= 3;
+}
+Q.lean_offensive += 1;
+!}
+
+The returned men know how a party of professional revolutionaries works, and say so at every meeting. They are right more often than the old comrades like.

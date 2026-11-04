@@ -1,0 +1,31 @@
+title: Arkadi Maslow
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_maslow = 1
+new-page: true
+
+= Arkadi Maslow
+
+Born Isaak Tschemerinski in Yelisavetgrad, raised in Germany, once a concert pianist and a student of Einstein's. Ruth Fischer's partner and the Left's sharpest mind. He knows the Russian party from the inside and believes the German revolution is a matter of will.
+
+- @theory
+- @zinoviev
+- @root: Return to main
+
+@theory
+title: Theorise the Offensive
+subtitle: The revolution needs a party that attacks. Militancy rises; the Left's ideas spread.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; militancy += 4; offensive_satisfaction += 5; unionist_satisfaction -= 3; lean_offensive += 2
+
+Maslow's articles argue that a revolutionary party which waits for the majority will wait for ever. The young comrades copy them out by hand.
+
+@zinoviev
+title: Court Zinoviev
+subtitle: Maslow works his friends in the Executive. Moscow leans towards the Left.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?][? if comintern_member = 0 : We are not in the International. ?]
+choose-if: advisor_action_timer <= 0 and comintern_member = 1
+on-arrival: advisor_action_timer = 5; last_advisor_action = 1; independence -= 5; offensive_satisfaction += 6; world_revolution += 2; lean_offensive += 1
+
+Maslow's letters to Moscow are long and well informed. The Executive learns that the German Zentrale is timid, and that the German Left is not.

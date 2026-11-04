@@ -1,0 +1,68 @@
+title: The Party School
+new-page: true
+view-if: crisis = 0 and c_school_timer <= 0
+on-arrival: c_school_timer = 5; month_actions += 1
+frequency: 150
+is-card: true
+tags: party_affairs
+
+= The Party School
+
+The party is growing faster than it can train its own officials. District secretaries who joined last year are expected to explain imperialism, chair a strike committee and keep the accounts. [? if year <= 1920 : Hermann Duncker ?][? if year >= 1921 : Hermann Duncker and August Thalheimer ?] want a proper party school, with courses for the best young workers from every district.
+
+What should it teach?
+
+- @classics: Marx, Engels and Luxemburg.
+- @russia: The lessons of the Russian revolution.
+- @practice: The practice of union and council work.
+- @evenings: No school. Evening classes in the districts will do.
+- @easy_discard
+
+@classics
+subtitle: Costs 1 fund. The party argues better and holds together. The Spartacists are pleased.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.unity += 4;
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 3;
+}
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 1;
+!}
+
+Young metalworkers read Capital at a long table in a rented villa. Some of them will run districts in a year.
+
+@russia
+subtitle: Costs 1 fund. Discipline, insurrection, the party of a new type. The Left is pleased; Moscow too.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.militancy += 2;
+Q.offensive_satisfaction += 5;
+Q.independence -= 2;
+Q.lean_offensive += 1;
+!}
+
+The students study the October insurrection hour by hour. Each of them leaves sure that Germany will be next.
+
+@practice
+subtitle: Costs 1 fund. Practical cadres for the unions and works councils. The Right is pleased.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 1;
+!}
+
+How to read a wage agreement. How to run a works council meeting. How to win a union branch vote at eleven at night when the reformists have gone home.
+
+@evenings
+subtitle: Nothing spent, little gained.
+on-arrival: unity += 1
+
+The districts carry on as before, with a borrowed hall and a reading list.

@@ -1,0 +1,43 @@
+title: The Countryside
+new-page: true
+view-if: crisis = 0 and c_peasants_timer <= 0
+on-arrival: c_peasants_timer = 5; month_actions += 1
+frequency: 150
+is-card: true
+tags: germany
+
+= The Countryside
+
+A third of Germans live on the land, and the party barely reaches them. East of the Elbe, farm labourers work the Junkers' estates for a pittance and a cottage they can be thrown out of. In the south and west, smallholders fear the city workers who want cheap bread, and the priests tell them that communists will take their cows. [? if inflation >= 40 : Inflation has paid off the farmers' debts, and they will not sell their grain for paper. ?]
+
+[? if year <= 1920 : Without the countryside, the cities can be starved out, as the Bavarian soviet learned. ?]
+
+- @labourers: Organise the farm labourers on the estates.
+- @land: Promise the land to those who work it.
+- @smallholders: Defend the smallholders against debt and requisition.
+- @easy_discard
+
+@labourers
+subtitle: Strikes at harvest time. The landowners call out the civil guards.
+on-arrival: worker_support += 3; militancy += 2; repression += 3; unionist_satisfaction += 3; lean_unionist += 1
+
+Our agitators reach the estates of Pomerania and Saxony at harvest time. The labourers strike for wages in money, not potatoes, and the landowners' guards come out with rifles.
+
+@land
+subtitle: The Russian way. Peasants listen; the Left approves; Spartacist critics recall Luxemburg's warnings.
+on-arrival: worker_support += 2; militancy += 2; district_bavaria_loyalty += 3; offensive_satisfaction += 3; luxemburgist_satisfaction -= 2; lean_offensive += 1
+
+Break up the estates and give the land to the labourers. Rosa Luxemburg warned that it would make a new class of small owners hostile to socialism. The labourers are interested anyway.
+
+@smallholders
+subtitle: Patient work in the villages. Small gains in Bavaria and Thuringia.
+on-arrival: {!
+Q.district_bavaria_members *= 1.04;
+Q.district_thuringia_members *= 1.04;
+Q.worker_support += 2;
+Q.luxemburgist_satisfaction += 2;
+Q.unionist_satisfaction += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+No forced requisitions, cheap credit, and the burden of the war on the rich: our programme for the villages is short, and some of the villagers read it.

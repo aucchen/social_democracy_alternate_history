@@ -8,15 +8,18 @@ tags: party_affairs
 
 = Die Rote Fahne
 
-The party paper reaches tens of thousands of readers. The Zentrale must decide what it will say this month.
+The party paper reaches tens of thousands of readers[? if repression >= 60 : , when the police let it appear at all. Half its editors have been arrested at one time or another ?]. The Zentrale must decide what it will say this month.
+
+[? if year >= 1921 : Beside Die Rote Fahne, the party now has dailies in most big cities, and every one of them has opinions. ?]
 
 - @line: Argue for the Zentrale's line.
 - @debate: Open the paper to debate.
 - @attack: Attack the SPD leaders who sent the Freikorps.
+- @regional: Fund new local editions.
 - @easy_discard
 
 @line
-subtitle: Districts move towards the Zentrale; other factions resent it.
+subtitle: Districts move towards the Zentrale; other currents resent it.
 on-arrival: {!
 for (var d of Q.districts) {
     Q['district_' + d + '_loyalty'] += 5;
@@ -26,22 +29,47 @@ for (var f of Q.factions) {
         Q[f + '_satisfaction'] -= 3;
     }
 }
+Q['lean_' + Q.leading_faction] += 1;
 !}
 
 The paper explains the Zentrale's line, patiently and at length. Some districts are persuaded.
 
 @debate
-subtitle: Every faction feels heard.
+subtitle: Every current feels heard.
 on-arrival: {!
 for (var f of Q.factions) {
     Q[f + '_satisfaction'] += 4;
 }
+Q.lean_luxemburgist += 1;
 !}
 
 Letters and articles from every wing of the party fill the pages. Rosa Luxemburg would approve: freedom is always the freedom of those who think differently.
 
 @attack
 subtitle: Pleases the radicals; burns bridges with the SPD.
-on-arrival: spd_relation -= 10; militancy += 5; ultraleft_satisfaction += 5; offensive_satisfaction += 5; worker_support += 2
+on-arrival: {!
+Q.spd_relation -= 10;
+Q.militancy += 5;
+Q.worker_support += 2;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 1;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 5;
+}
+!}
 
 Noske the bloodhound, Ebert the traitor. The words sell papers.
+
+@regional
+subtitle: Costs 1 fund. More workers read us; the districts feel closer to the party.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.worker_support += 3;
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 2;
+}
+!}
+
+New local editions appear in the Ruhr and in Saxony, with the factory news on the front page and Berlin's articles inside.

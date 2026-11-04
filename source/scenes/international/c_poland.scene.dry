@@ -1,0 +1,63 @@
+title: The War with Poland
+new-page: true
+view-if: crisis = 0 and c_poland_timer <= 0 and year = 1920 and month >= 5 and month <= 9 and warsaw_outcome = 0
+on-arrival: c_poland_timer = 3; month_actions += 1
+frequency: 300
+is-card: true
+tags: international
+
+= The War with Poland
+
+Piłsudski's armies marched on Kiev in the spring, and the Red Army has thrown them back. [? if month >= 7 : Now Tukhachevsky's cavalry is riding west towards Warsaw, and the Red Army's newspapers speak of carrying the revolution to the Rhine on the points of their bayonets. ?] Munitions for Poland pass through Germany, by rail from France and by sea through Danzig.
+
+[? if month >= 7 : The dockers of Danzig have already refused to unload them. ?] The German government has declared neutrality, and the right wonders aloud whether to march with the Poles or the Russians.
+
+- @block: Stop the munitions trains.
+- @neutrality: Campaign for real neutrality with the USPD and the unions.
+- @prepare: Prepare to rise when the Red Army reaches the border.
+- @easy_discard
+
+@block
+subtitle: Railwaymen and dockers stop the trains. The Left approves.
+on-arrival: militancy += 5; world_revolution += 4; repression += 4; worker_support += 2; offensive_satisfaction += 4; lean_offensive += 1
+
+At junction after junction, railwaymen uncouple the wagons bound for Poland. Not one is our member; all of them have read our leaflet.
+
+@neutrality
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Workers' control of transit, with the other workers' parties. The Right's line.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.uspd_relation += 5;
+Q.spd_relation += 2;
+Q.world_revolution += 2;
+Q.worker_support += 2;
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+The railwaymen's and transport workers' unions agree to inspect every train crossing Germany. It is the first time the union leaders have done anything for Soviet Russia.
+
+@prepare
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's line: be ready to strike when the Red Army comes. The police are watching.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an uprising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.militancy += 6;
+Q.red_guards_strength += 1;
+Q.repression += 6;
+Q.stability -= 2;
+Q.offensive_satisfaction += 6;
+Q.luxemburgist_satisfaction -= 5;
+Q.lean_offensive += 2;
+!}
+
+In East Prussia and Upper Silesia, our districts draw up lists of rail junctions and police stations. Everyone waits for news from Warsaw.

@@ -1,0 +1,75 @@
+title: The Workers' Militias
+new-page: true
+view-if: crisis = 0 and c_militias_timer <= 0 and year <= 1921
+on-arrival: c_militias_timer = 4; month_actions += 1
+frequency: 200
+is-card: true
+tags: movement
+
+= The Workers' Militias
+
+[? if year = 1919 : Rifles from the army depots of November are still hidden in allotment sheds and cellars. In some towns the old Red Soldiers' League still drills on Sundays. ?][? if year = 1920 and kapp_outcome = 0 : Rifles from the army depots of November are still hidden in allotment sheds and cellars. The Freikorps and the civil guards are better armed every month. ?][? if year = 1920 and kapp_outcome != 0 : The Kapp days showed what armed workers can do, and how quickly the Reichswehr disarms them afterwards. ?][? if year = 1921 : Since the disarmament laws, the police search workers' districts for weapons, while the civil guards of the propertied keep theirs. ?]
+
+Our armed men are few, and they listen to their own commanders as much as to the Zentrale.
+
+- @arm: Buy rifles for them.
+- @control: Bring them under the Zentrale's command.
+- @joint: Form joint defence units with social democratic workers.
+- @disarm: Stand them down before they give the Freikorps an excuse.
+- @easy_discard
+
+@arm
+subtitle: Costs 1 fund. Better armed militias; more police attention. The Left approves.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; red_guards_arms += 8; red_guards_strength += 0.5; repression += 4; militancy += 2; offensive_satisfaction += 4; lean_offensive += 2
+
+The rifles come from a demobilised quartermaster and cost twice what they should. The ammunition costs more.
+
+@control
+subtitle: The militias answer to the Zentrale. Their local commanders resent it.
+on-arrival: {!
+Q.red_guards_loyalty += 10;
+Q.militancy -= 2;
+Q[Q.leading_faction + '_satisfaction'] += 3;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction -= 4;
+}
+Q['lean_' + Q.leading_faction] += 1;
+!}
+
+Every unit now has a political commissar named by the district, and every district answers to Berlin.
+
+@joint
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Larger units, shared with other workers. Our grip on them loosens. The Right's line.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.red_guards_strength += 1.5;
+Q.red_guards_loyalty -= 5;
+Q.spd_relation += 3;
+Q.uspd_relation += 5;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 2;
+!}
+
+In the workers' quarters, socialists of every party stand guard together against the Freikorps. They argue about everything except who the enemy is.
+
+@disarm
+subtitle: Fewer armed men and less repression. The Spartacists approve; the Left is furious.
+on-arrival: {!
+Q.militancy -= 5;
+Q.repression -= 5;
+Q.red_guards_strength *= 0.7;
+Q.red_guards_arms -= 5;
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction -= 6;
+Q.lean_luxemburgist += 1;
+!}
+
+A rifle in the cellar is an invitation to the Freikorps, the Zentrale argues. The workers' strength is in the factories. Not every unit obeys.

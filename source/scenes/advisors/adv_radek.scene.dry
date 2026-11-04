@@ -1,0 +1,42 @@
+title: Karl Radek
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_radek = 1
+new-page: true
+
+= Karl Radek
+
+The Comintern's man for Germany: born in Lemberg, a brilliant journalist, a wit, and a conspirator who has been expelled from more parties than most men have joined. He speaks for Moscow, though not always for the same Moscow twice.
+
+- @money
+- @advice
+- @root: Return to main
+
+@money
+title: Ask Radek for Money
+subtitle: 3 funds. Moscow will expect to be heard.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 5; last_advisor_action = 1; resources += 3; independence -= 6; luxemburgist_satisfaction -= 3
+
+Radek produces the money with a joke about capitalist banks. He is also taking notes.
+
+@advice
+title: Take Radek's Advice
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow's authority quiets the quarrels, at a price.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?][? if lock_moscow_orders = 2 : The [+ leading_faction_adj +] line forbids taking orders from Moscow. ?]
+choose-if: advisor_action_timer <= 0 and lock_moscow_orders < 2
+on-arrival: {!
+Q.advisor_action_timer = 4;
+Q.last_advisor_action = 1;
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 4;
+Q.unity += 5;
+Q.world_revolution += 2;
+Q.offensive_satisfaction += 3;
+!}
+
+Radek listens to every current, flatters each of them, and then tells the Zentrale what the Executive expects. The quarrelling stops, for a while.

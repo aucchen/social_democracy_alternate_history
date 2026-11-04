@@ -1,0 +1,47 @@
+title: Advisor roster
+tags: event
+view-if: {!
+// This event never fires. Each time post_event looks for events, this check
+// runs and picks the advisors at the table this month: those plausible at
+// this date, ranked by their weight in the party, at most four. Each advisor's
+// view-if reads adv_show_<id>.
+var n = function(k) { return (typeof Q[k] === 'number') ? Q[k] : 0; };
+var t = n('time') || 1;
+var lead = Q.leading_faction;
+// numeric form of the leading faction, for Dendry conditions in card text:
+// 1 Spartacists, 2 Left, 3 Right, 4 Left Radicals
+Q.c_lead = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[lead] || 0;
+var off = n('offensive_strength');
+var rep = (typeof Q.comintern_rep === 'string') ? Q.comintern_rep : '';
+var cand = [];
+var add = function(id, ok, prio) { if (ok) { cand.push([id, prio]); } };
+// historically Brandler was jailed after the March Action and spent 1922 in Moscow
+var brandler_away = n('march_action') == 1 && t >= 30 && t <= 43;
+add('luxemburg', n('luxemburg_alive') == 1 && n('luxemburg_advisor') == 1, 100);
+add('liebknecht', n('liebknecht_alive') == 1 && n('liebknecht_advisor') == 1, 95);
+add('jogiches', n('jogiches_alive') == 1 && t <= 30, 90);
+add('levi', n('levi_advisor') == 1 && n('levi_split') == 0 && n('luxemburgist_gone') == 0, lead == 'luxemburgist' ? 92 : 85);
+add('zetkin', t >= 3, lead == 'luxemburgist' ? 80 : 62);
+add('pieck', t >= 2, 40);
+add('thalheimer', t >= 13 && n('unionist_gone') == 0, lead == 'unionist' ? 60 : (t <= 24 ? 52 : 45));
+add('brandler', t >= 13 && n('unionist_gone') == 0 && !brandler_away, lead == 'unionist' ? 88 : (t >= 25 ? 58 : 50));
+add('meyer', t >= 28 && t <= 50 && n('unionist_gone') == 0, (lead == 'unionist' || lead == 'luxemburgist') ? 84 : 48);
+add('fischer', t >= 25 && n('offensive_gone') == 0, lead == 'offensive' ? 86 : 44 + off / 2);
+add('maslow', t >= 25 && n('offensive_gone') == 0, lead == 'offensive' ? 76 : 30 + off / 4);
+add('thalmann', t >= 25 && n('offensive_gone') == 0, lead == 'offensive' ? 74 : 34 + off / 4 + (t >= 49 ? 15 : 0));
+add('radek', n('comintern_member') == 1 && rep.indexOf('Radek') >= 0, 78);
+cand.sort(function(a, b) { return b[1] - a[1]; });
+var ids = ['luxemburg', 'liebknecht', 'jogiches', 'levi', 'zetkin', 'pieck', 'thalheimer', 'brandler',
+    'meyer', 'fischer', 'maslow', 'thalmann', 'radek'];
+for (var id of ids) {
+    Q['adv_show_' + id] = 0;
+}
+for (var i = 0; i < cand.length && i < 4; i++) {
+    Q['adv_show_' + cand[i][0]] = 1;
+}
+return false;
+!}
+
+= Advisor roster
+
+This scene is never shown.

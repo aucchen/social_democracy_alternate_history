@@ -1,0 +1,65 @@
+title: The World Congress
+new-page: true
+view-if: crisis = 0 and c_congress_timer <= 0 and comintern_member = 1 and ((year = 1920 and month >= 5 and month <= 7) or (year = 1921 and month >= 4 and month <= 6) or (year = 1922 and month >= 9 and month <= 11))
+on-arrival: c_congress_timer = 6; month_actions += 1
+frequency: 400
+is-card: true
+tags: international
+
+= The World Congress
+
+[? if year = 1920 : The Second World Congress of the Communist International meets this summer in Petrograd and Moscow, while the Red Army marches on Warsaw. It will decide the conditions for joining the International. ?][? if year = 1921 : The Third World Congress meets in Moscow in June. [? if march_action = 1 : After the defeat of the March Action, ?][? if march_action != 1 : After the failure of the Italian factory occupations, ?] Lenin and Trotsky want to talk about winning the majority of the working class. Zinoviev and Bukharin want to talk about the offensive. ?][? if year = 1922 : The Fourth World Congress meets in Moscow and Petrograd this autumn, the last Lenin is well enough to address. It will speak of the united front and of workers' governments. ?]
+
+The party must choose its delegation. Whoever goes will speak for the German party before the whole International.
+
+- @loyal: Send a delegation loyal to the Zentrale.
+- @every: Send every current.
+- @executive: Let the Executive invite whom it wants.
+- @easy_discard
+
+@loyal
+subtitle: One voice for the party. Our own current is strengthened; the others are left at home.
+on-arrival: {!
+Q[Q.leading_faction + '_satisfaction'] += 5;
+for (var f of Q.factions) {
+    if (f != Q.leading_faction) {
+        Q[f + '_satisfaction'] -= 2;
+    }
+}
+Q.unity += 2;
+Q.independence += 2;
+Q['lean_' + Q.leading_faction] += 1;
+!}
+
+Our delegates speak with one voice in Moscow, and the Executive takes the measure of the German leadership.
+
+@every
+subtitle: All currents go. The party feels heard, and Moscow becomes the arbiter.
+on-arrival: {!
+for (var f of Q.factions) {
+    Q[f + '_satisfaction'] += 3;
+}
+Q.unity += 3;
+Q.independence -= 3;
+Q.lean_luxemburgist += 1;
+!}
+
+The German delegation argues with itself in the corridors of the Kremlin. The Russians listen to everyone and decide for themselves.
+
+@executive
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow chooses. Funds and favour, at the price of our independence. The Left approves.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 8;
+Q.world_revolution += 3;
+Q.resources += 1;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+The Executive invites the comrades it finds most promising. Several of them are not on speaking terms with the Zentrale.

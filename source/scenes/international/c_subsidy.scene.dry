@@ -1,0 +1,48 @@
+title: Moscow's Money
+new-page: true
+view-if: crisis = 0 and c_subsidy_timer <= 0 and comintern_member = 1
+on-arrival: c_subsidy_timer = 6; month_actions += 1
+frequency: 200
+is-card: true
+tags: international
+
+= Moscow's Money
+
+The Executive's treasurer has come to Berlin with the accounts. [? if moscow_subsidy > 0 : Moscow already pays the party [+ moscow_subsidy +] funds a month, for the papers, the full-time organisers and things the accounts do not name. ?][? if moscow_subsidy = 0 : Moscow is offering a regular subsidy, for the papers, the full-time organisers and things the accounts would not name. ?] [? if year >= 1921 and year <= 1922 : The money comes from a country where people are starving. ?]
+
+Money from Moscow keeps the party alive. It also means Moscow's voice weighs more at every Central Committee meeting.
+
+- @more: Accept a larger regular subsidy.
+- @accounts: Take a one-off payment, and keep our own accounts.
+- @refuse: Live on our own dues.
+- @easy_discard
+
+@more
+subtitle: More funds every month. Our independence suffers.
+choose-if: moscow_subsidy < 2
+unavailable-subtitle: Moscow will not pay more than it does.
+on-arrival: moscow_subsidy += 1; independence -= 10; offensive_satisfaction += 3; luxemburgist_satisfaction -= 4; lean_offensive += 1
+
+The money will arrive every month through a bank in Stockholm. So will the letters from the Executive.
+
+@accounts
+subtitle: 1 fund. The treasurer is not pleased with our bookkeeping.
+on-arrival: resources += 1; independence += 2; lean_luxemburgist += 1
+
+We take the money and send back a receipt. We do not send the minutes.
+
+@refuse
+subtitle: [? if moscow_subsidy > 0 : Less money each month. ?] Our independence grows; the Spartacists are proud, the Left uneasy.
+on-arrival: {!
+if (Q.moscow_subsidy > 0) {
+    Q.moscow_subsidy -= 1;
+    Q.independence += 8;
+} else {
+    Q.independence += 4;
+}
+Q.luxemburgist_satisfaction += 5;
+Q.offensive_satisfaction -= 3;
+Q.lean_luxemburgist += 1;
+!}
+
+A party that cannot pay for its own paper, the Zentrale writes, will not be able to make its own revolution.
