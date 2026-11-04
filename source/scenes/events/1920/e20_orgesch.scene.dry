@@ -1,0 +1,65 @@
+title: The Orgesch
+subtitle: The civil guards organise across the Reich.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 5 and crisis = 0 and ending_id = 0
+max-visits: 1
+
+= The Orgesch
+
+On 9 May, in Regensburg, the Bavarian forester Georg Escherich founds the Organisation Escherich, the "Orgesch". It is meant to unite the civil guards of the whole Reich into one armed league of property owners, against Bolshevism and against the Allied demand that they be disarmed. [? if bavaria_1920_fate = 2 : In Bavaria, its men stand only a day's march from red Munich. ?]
+
+The guards have hundreds of thousands of rifles, machine guns and even field guns, hidden on estates and in parish halls. The Allies demand that Germany disarm them. The government says it is trying.
+
+- @expose: Publish the locations of their arms depots.
+- @defence: Build workers' defence units to face them.
+- @campaign: Campaign with the unions for a law to disarm them.
+
+@expose
+subtitle: The Spartacist answer. The nationalists will call us traitors who inform for the Entente.
+on-arrival: {!
+Q.civil_guards_strength -= 60;
+Q.repression += 3;
+Q.worker_support += 2;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+!}
+
+*Die Rote Fahne* prints a list of farms, monasteries and sawmills, with the number of machine guns at each. Some of the depots are raided. Our paper is banned for a week, and the nationalist press calls us agents of Paris.
+
+@defence
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Armed workers against armed burghers.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.red_guards_strength += 3;
+Q.red_guards_arms += 4;
+Q.militancy += 5;
+Q.repression += 5;
+Q.offensive_satisfaction += 8;
+Q.lean_offensive += 2;
+!}
+
+In Halle, Chemnitz and the Vogtland, our members drill on Sunday mornings in the woods, with rifles left over from March.
+
+@campaign
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. Slower, and it brings the unions closer.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a common campaign with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.civil_guards_strength -= 30;
+Q.spd_relation += 4;
+Q.uspd_relation += 4;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+Our resolution for the disarming of the civil guards passes in union branches across the Reich. In August, the Reichstag passes a disarmament law. Bavaria ignores it.

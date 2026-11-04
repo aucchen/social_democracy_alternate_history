@@ -1,0 +1,49 @@
+title: Comrade Thomas
+subtitle: The International's man in Berlin has money to offer.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 4 and crisis = 0 and ending_id = 0
+max-visits: 1
+
+= Comrade Thomas
+
+The Communist International keeps a secret West European Secretariat in Berlin. Its head calls himself Comrade Thomas. He runs a publishing house, a network of couriers and a great deal of money, some of it in banknotes and some in jewels sold off from the treasures of the Tsars.
+
+After Kapp, Thomas comes to the Zentrale with an offer. The party is short of everything: paper, printing presses, organisers' wages, money for the Reichstag election. Moscow would be glad to help, regularly, every month.
+
+- @subsidy: Accept a regular subsidy.
+- @once: Take money for the election, and nothing more.
+- @refuse: Refuse. A German party must live on German workers' dues.
+
+@subsidy
+subtitle: One more fund every month. Moscow's money comes with Moscow's opinions.
+on-arrival: {!
+Q.moscow_subsidy += 1;
+Q.resources += 1;
+Q.independence -= 10;
+Q.comintern_rep = 'Comrade Thomas';
+Q.offensive_satisfaction += 3;
+Q.luxemburgist_satisfaction -= 3;
+!}
+
+The money arrives on the first of every month, through a bank in Amsterdam. The party hires full-time secretaries in every district. They are paid by Moscow, and they know it.
+
+@once
+subtitle: 3 funds now. A smaller debt.
+on-arrival: {!
+Q.resources += 3;
+Q.independence -= 3;
+!}
+
+Thomas hands over a sealed envelope and a receipt to sign. The election posters are printed the next week.
+
+@refuse
+subtitle: The Spartacist tradition. The party stays poor, and its own.
+on-arrival: {!
+Q.independence += 8;
+Q.luxemburgist_satisfaction += 5;
+Q.offensive_satisfaction -= 4;
+Q.lean_luxemburgist += 1;
+!}
+
+Thomas takes his envelope away again. He will report to Zinoviev that the German Zentrale has delusions of independence.

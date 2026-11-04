@@ -1,0 +1,79 @@
+title: The Campaign
+subtitle: Germany elects its first Reichstag on 6 June.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 5 and crisis = 0 and ending_id = 0
+max-visits: 1
+priority: 2
+
+= The Campaign
+
+The National Assembly has done its work, and the first Reichstag of the Republic will be elected on 6 June. [? if kapp_outcome = 3 : The workers' government hopes to win a majority of its own. The bourgeois parties campaign against "the dictatorship of Legien". ?][? if kapp_outcome != 2 and kapp_outcome != 3 : The coalition of the SPD, the Centre and the Democrats is tired and unloved. The nationalists campaign on the shame of Versailles, the Independents on the betrayal of the revolution. ?][? if kapp_outcome = 2 : The Republic that the Ruhr saved is holding its election under the shadow of the generals who nearly destroyed it. ?]
+
+It is the first national election our party contests. We have few candidates anyone has heard of, little money and no daily paper in most of the Reich. [? if election_boycott = 1 : But the party has decided to boycott the vote. ?]
+
+- @lessons: Campaign on the lessons of the Kapp days.
+- @tribune: Campaign to use the Reichstag as a tribune for the revolution.
+- @bloc: Call for a bloc of the workers' parties against the bourgeoisie.
+- @boycott: Boycott the election.
+
+@lessons
+subtitle: The Spartacist campaign. Who saved the Republic, and who nearly lost it.
+choose-if: lock_elections < 2 and election_boycott = 0
+unavailable-subtitle: The party will not stand in this election.
+on-arrival: {!
+Q.e20_campaign = 1;
+Q.election_bonus += 2;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+!}
+
+Our posters show the Ehrhardt Brigade's helmets and the strikers who stopped them. Our speakers ask why the officers of March are still in their barracks.
+
+@tribune
+subtitle: The Left's campaign. The Reichstag is a stage, not a workplace.
+choose-if: lock_elections < 2 and election_boycott = 0
+unavailable-subtitle: The party will not stand in this election.
+on-arrival: {!
+Q.e20_campaign = 2;
+Q.election_bonus += 1;
+Q.militancy += 3;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+We tell the voters plainly: our deputies will go to the Reichstag to denounce it, and to call the workers to the councils. Some workers like the honesty.
+
+@bloc
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's campaign. The USPD will like it; it may cost us votes to them.
+choose-if: lock_elections < 2 and election_boycott = 0 and lock_united_front < 2
+unavailable-subtitle: The party line does not allow it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e20_campaign = 3;
+Q.election_bonus += 1;
+Q.uspd_relation += 8;
+Q.spd_relation += 3;
+Q.uspd_score += 1;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+Our speakers call for a workers' majority in the Reichstag, and for the SPD and USPD to break with the bourgeois parties for good. The USPD's speakers say kind things about us for the first time.
+
+@boycott
+subtitle: The Left Radical answer. No votes for parliament, not even our own.
+view-if: ultraleft_gone = 0 or election_boycott = 1 or lock_elections = 2
+on-arrival: {!
+Q.e20_campaign = 4;
+Q.election_boycott = 1;
+Q.ultraleft_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 8;
+Q.unionist_satisfaction -= 8;
+Q.lean_ultraleft += 2;
+!}
+
+Our posters say: do not vote, organise in the factories. Most workers vote anyway, for the USPD.

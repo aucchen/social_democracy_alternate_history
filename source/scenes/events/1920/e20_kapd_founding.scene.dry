@@ -1,0 +1,75 @@
+title: The KAPD
+subtitle: The expelled opposition founds a party of its own.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 4 and crisis = 0 and ultraleft_gone = 1 and kapd_exists = 0 and ending_id = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.kapd_exists = 1;
+Q.kapd_split = 1;
+Q.kapd_members = 38;
+Q.kapd_relation = 20;
+Q.kapd_seats = 0;
+Q.district_berlin_members -= 1.5;
+Q.district_hamburg_members -= 0.5;
+!}
+
+= The KAPD
+
+On 4 and 5 April, in a Berlin restaurant, the opposition we expelled at Heidelberg founds the **Communist Workers' Party of Germany**. Its delegates claim to speak for thirty-eight thousand members, more than half of what we had a year ago. Berlin, Hamburg and Bremen are its strongholds. It rejects parliament, the unions and every compromise, and it says the Kapp days prove it right: [? if kapp_statement = 1 : even our own Zentrale did not want to defend the Republic. ?][? if kapp_statement != 1 : our Zentrale ran after the social democrats. ?]
+
+The new party wants to join the Communist International. Two of its members, Jan Appel and Franz Jung, are already on their way to Moscow, on a fishing steamer they seized off Cuxhaven at gunpoint.
+
+- @members: Appeal to their members, over the heads of their leaders.
+- @joint: Offer joint action in the factories.
+- @denounce: Denounce them as anarchists who will wreck the movement.
+- @moscow: Ask Moscow to keep them out of the International.
+
+@members
+subtitle: The Spartacist answer. Patient, and it works slowly.
+on-arrival: {!
+Q.kapd_members -= 4;
+Q.district_berlin_members += 1.5;
+Q.district_hamburg_members += 0.5;
+Q.kapd_relation -= 5;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 1;
+!}
+
+Our leaflets go to the KAPD's members in the works: you left over the elections, but the strike against Kapp was won by unity. A few hundred come back each week.
+
+@joint
+subtitle: The Left's answer. They are revolutionaries, after all.
+on-arrival: {!
+Q.kapd_relation += 15;
+Q.militancy += 3;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 5;
+Q.lean_offensive += 2;
+!}
+
+In Berlin and on the Hamburg docks, our cells and theirs agree to stand together in strikes. The Zentrale's moderates grumble that we are rewarding a split.
+
+@denounce
+subtitle: The Right's answer. Unites the party; closes the door.
+on-arrival: {!
+Q.kapd_relation -= 15;
+Q.unity += 4;
+Q.unionist_satisfaction += 5;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 1;
+!}
+
+*Die Rote Fahne* calls the KAPD a party of syndicalists, adventurers and "national bolsheviks". The KAPD's paper calls us the lackeys of the union bosses.
+
+@moscow
+subtitle: Moscow listens to us. It will remember the favour.
+on-arrival: {!
+Q.kapd_relation -= 10;
+Q.independence -= 4;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+We write to the Executive of the International: a party that refuses parliament and the unions does not belong in it. Zinoviev replies that Moscow will hear both sides.

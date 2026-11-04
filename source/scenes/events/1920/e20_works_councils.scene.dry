@@ -1,0 +1,94 @@
+title: The Works Councils Law
+subtitle: The law the dead protested against is in force.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 2
+max-visits: 1
+priority: 2
+
+= The Works Councils Law
+
+On 4 February the Works Councils Law comes into force. In every firm with twenty workers or more, the staff will elect a council. It may inspect the balance sheet and speak on dismissals. It may not strike, and it must keep the peace in the works.
+
+The unions mean to fill the councils with their own men. In Berlin, Richard Müller and Ernst Däumig of the USPD left want to link the councils into a central office of their own, beyond what the law allows. [? if massacre_response = 4 : We told the workers in January to boycott the councils. Many are asking whether that still holds. ?]
+
+The elections begin this spring, factory by factory.
+
+- @stand: Stand communist lists in every council election.
+- @fractions: Stand in the elections, and build communist cells in the unions.
+- @network: Link the councils into a revolutionary network, whatever the law says.
+- @aau: Leave the old unions for revolutionary factory organisations.
+
+@stand
+subtitle: The Spartacist line: wherever workers vote, communists must stand.
+on-arrival: {!
+Q.works_councils_line = 1;
+Q.worker_support += 3;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+if (Q.massacre_response == 4) {
+    Q.ultraleft_satisfaction -= 6;
+    Q.unity -= 3;
+}
+!}
+
+Our lists win a few hundred council seats in the first month, in the machine shops of Berlin, the mines of Halle-Merseburg and the shipyards of the coast.
+
+@fractions
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] The Right's line: the councils and the unions together are where the masses are.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the reformist unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.works_councils_line = 2;
+Q.worker_support += 4;
+Q.district_saxony_members += 0.5;
+Q.district_thuringia_members += 0.3;
+Q.unionist_satisfaction += 8;
+Q.ultraleft_satisfaction -= 6;
+Q.lean_unionist += 2;
+!}
+
+In Saxony and Thuringia, Brandler's people stand for the councils and for every union post that falls vacant. The union bosses complain of communist infiltration. The members re-elect our men anyway.
+
+@network
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Draws the USPD left closer. The employers and the police will call it sedition.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.works_councils_line = 3;
+Q.militancy += 4;
+Q.repression += 3;
+Q.uspd_relation += 6;
+Q.uspd_score += 1;
+Q.offensive_satisfaction += 5;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_offensive += 1;
+Q.lean_luxemburgist += 1;
+!}
+
+With Müller and Däumig, our council members set up a Berlin centre of works councils. It meets in a hall in Neukölln, and its resolutions go far beyond the law.
+
+@aau
+subtitle: The Left Radical line. Splits the factory floor; delights Hamburg and Bremen.
+view-if: ultraleft_gone = 0
+on-arrival: {!
+Q.works_councils_line = 4;
+Q.militancy += 5;
+Q.worker_support -= 3;
+Q.ultraleft_satisfaction += 12;
+Q.unionist_satisfaction -= 12;
+Q.luxemburgist_satisfaction -= 5;
+Q.district_hamburg_loyalty += 5;
+Q.district_bremen_loyalty += 5;
+Q.lean_ultraleft += 3;
+!}
+
+Our militants tear up their union cards and found factory organisations that will answer to no union and no parliament. In the shipyards they are a power. Elsewhere, they are a sect.

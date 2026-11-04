@@ -1,0 +1,94 @@
+title: The Workers' Government
+subtitle: Legien's cabinet asks what the communists will do.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 4 and crisis = 0 and kapp_outcome = 3 and ending_id = 0
+max-visits: 1
+priority: 2
+
+= The Workers' Government
+
+For the first time, Germany is governed by the parties of the working class alone. Carl Legien sits in the Chancellery, with SPD and USPD ministers and the union leaders behind him. Noske is gone. The cabinet promises to purge the army, to disarm the Freikorps and to put the coal mines under public control. The Centre and the Democrats call it a dictatorship of the unions.
+
+The cabinet has no majority in the National Assembly. It governs because twelve million workers stopped work in March, and it needs elections soon. Legien sends word through the USPD: he would like to know whether the communists are with him or against him.
+
+- @loyal: Keep our word: a loyal opposition.
+- @enter: Enter the government.
+- @councils: Demand that the government answer to a congress of councils.
+- @oppose: Oppose it as a cover for the counter-revolution.
+
+@loyal
+subtitle: The Spartacist answer. Support every step forward, criticise every step back.
+on-arrival: {!
+Q.wg_stance = 1;
+Q.stability += 4;
+Q.worker_support += 3;
+Q.uspd_relation += 5;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 2;
+!}
+
+We vote for the purge of the army and against every concession to the employers. The cabinet does not love us, but it knows where we stand.
+
+@enter
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: put communists in the ministries. The Left will be furious.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids sitting in a government with social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.wg_stance = 2;
+Q.kpd_in_government = 1;
+Q.government_name = 'Workers\' government (SPD, USPD, KPD, unions)';
+Q.stability += 6;
+Q.worker_support += 4;
+Q.spd_relation += 8;
+Q.uspd_relation += 10;
+Q.independence += 3;
+Q.unionist_satisfaction += 12;
+Q.offensive_satisfaction -= 15;
+Q.ultraleft_satisfaction -= 15;
+Q.lean_unionist += 3;
+!}
+
+A communist becomes undersecretary for the mines, another sits on the commission for the purge of the army. Zinoviev's telegram from Moscow is not friendly.
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] A second power beside the cabinet. The USPD left likes it; the SPD does not.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.wg_stance = 1;
+Q.militancy += 4;
+Q.uspd_relation += 6;
+Q.uspd_score += 1;
+Q.spd_relation -= 4;
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction += 4;
+Q.ultraleft_satisfaction += 4;
+Q.lean_luxemburgist += 1;
+Q.lean_offensive += 1;
+!}
+
+We call for a national congress of workers' councils to watch over the government. Däumig takes up the call in the USPD. Legien says he did not end one dictatorship to start another.
+
+@oppose
+subtitle: The Left's answer. No illusions in social democrats.
+on-arrival: {!
+Q.wg_stance = 3;
+Q.militancy += 4;
+Q.worker_support -= 3;
+Q.uspd_relation -= 8;
+Q.spd_relation -= 6;
+Q.offensive_satisfaction += 10;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 2;
+!}
+
+We declare that a government of Legien is the last line of defence of German capital. Many workers who struck in March think we have forgotten who Kapp was.

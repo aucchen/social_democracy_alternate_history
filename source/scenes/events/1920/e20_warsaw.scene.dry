@@ -1,0 +1,89 @@
+title: Before Warsaw
+subtitle: The Red Army stands at the gates of the Polish capital.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 8 and crisis = 0 and ending_id = 0
+max-visits: 1
+priority: 3
+
+= Before Warsaw
+
+In the second week of August, the Red Army reaches the Vistula. Its cavalry is across the river north of Warsaw, and its patrols are riding along the East Prussian border. In Białystok, a Polish Revolutionary Committee under Julian Marchlewski waits to take power. In Berlin the generals and the communists both study the maps, for opposite reasons. [? if border_rising = 1 : Our districts in the east are ready. ?]
+
+Everything depends on the next days. What can the German party still do?
+
+- @danzig: Send our best people to the Danzig docks.
+- @strike: Call a general strike in solidarity with Soviet Russia.
+- @peace: Campaign for peace and the recognition of Soviet Russia.
+
+@danzig
+subtitle: Costs 1 fund. Every ship that is not unloaded is a battery that never fires.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.warsaw_bonus += 1;
+Q.luxemburgist_satisfaction += 3;
+Q.unionist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+- @battle: Continue...
+
+@strike
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Few will come out, and the police will be ready.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.warsaw_bonus += 1;
+Q.militancy += 6;
+Q.repression += 6;
+Q.worker_support -= 2;
+Q.offensive_satisfaction += 8;
+Q.lean_offensive += 2;
+!}
+
+- @battle: Continue...
+
+@peace
+subtitle: The Right's answer. Wins friends; changes little at the front.
+on-arrival: {!
+Q.worker_support += 2;
+Q.uspd_relation += 3;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+- @battle: Continue...
+
+@battle
+title: The Battle of Warsaw
+new-page: true
+on-arrival: {!
+var p = 0.04 + 0.04 * Q.warsaw_bonus + Math.max(0, Q.world_revolution - 60) / 400;
+Q.warsaw_outcome = Math.random() < p ? 2 : 1;
+if (Q.warsaw_outcome == 2) {
+    Q.world_revolution += 20;
+    Q.soviet_russia_status = 'The Red Army has taken Warsaw';
+    Q.stability -= 8;
+    Q.militancy += 8;
+    Q.repression += 5;
+    Q.offensive_satisfaction += 10;
+    Q.worker_support += 3;
+} else {
+    Q.world_revolution -= 10;
+    Q.soviet_russia_status = 'The civil war is won; the Red Army was stopped at Warsaw';
+    Q.offensive_satisfaction -= 5;
+    Q.stability += 3;
+}
+!}
+
+= The Battle of Warsaw
+
+[? if warsaw_outcome = 1 : On 16 August, Piłsudski strikes from the south into the Red Army's open flank. In ten days Tukhachevsky's armies are routed. Tens of thousands of Red Army men are taken prisoner, and whole divisions flee into East Prussia, where the German authorities intern them. The Polish bourgeoisie calls it the miracle on the Vistula. The revolution will not come to Germany from the east. ?]
+
+[? if warsaw_outcome = 2 : Piłsudski's counter-attack from the Wieprz comes too late and too weak. On 19 August the Red Army enters Warsaw, and Marchlewski's committee proclaims a Polish Soviet Republic from the Royal Castle. For the first time since 1917, the revolution has a common border with Germany. In the factories, workers talk of nothing else. ?]

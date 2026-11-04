@@ -1,0 +1,85 @@
+title: Blood on the Königsplatz
+subtitle: The security police fire on a crowd outside the Reichstag.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 1
+max-visits: 1
+priority: 3
+
+= Blood on the Königsplatz
+
+On 13 January the National Assembly debates the Works Councils Law. The councils of 1918 had demanded control of the factories. The law gives them a right to be consulted, and little else.
+
+The USPD and our party called the Berlin factories out in protest. A hundred thousand workers filled the square before the Reichstag. Then the Security Police opened fire with rifles and machine guns from the steps. Forty-two people are dead and more than a hundred wounded.
+
+That evening the government declares a state of emergency across northern Germany. *Die Rote Fahne* and the USPD's *Freiheit* are banned, and the police are rounding up our functionaries. The bill will pass in a few days.
+
+- @general_strike: Call for a general strike against the murderers.
+- @joint: Bury the dead together with the USPD and the unions.
+- @use_law: Mourn the dead, then fight inside the new councils.
+- @boycott_law: Boycott the councils of the law, and build councils of our own.
+
+@general_strike
+subtitle: The Left's answer. The factories may not follow, and the police are ready.
+on-arrival: {!
+Q.massacre_response = 1;
+Q.militancy += 8;
+Q.repression += 8;
+Q.worker_support -= 1;
+Q.offensive_satisfaction += 8;
+Q.luxemburgist_satisfaction -= 3;
+Q.lean_offensive += 2;
+Q.district_berlin_loyalty -= 3;
+!}
+
+Our call goes out from a cellar print shop. Some Berlin factories stop for a day, most do not, and a dozen more of our people are arrested at the gates.
+
+@joint
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: a common front of mourning with the USPD and the unions.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any common front with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.massacre_response = 2;
+Q.uspd_relation += 8;
+Q.spd_relation += 2;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 4;
+Q.lean_unionist += 2;
+!}
+
+Behind the coffins walk delegations from the USPD, from the metalworkers and from our party. The police keep their distance. Many workers notice who walked together.
+
+@use_law
+subtitle: The Spartacist answer: take the councils the law allows and fill them with communists.
+on-arrival: {!
+Q.massacre_response = 3;
+Q.worker_support += 2;
+Q.repression -= 2;
+Q.luxemburgist_satisfaction += 8;
+Q.unionist_satisfaction += 3;
+Q.offensive_satisfaction -= 3;
+Q.lean_luxemburgist += 2;
+!}
+
+The Zentrale's circular is sober: the law is a fraud, but every council elected under it is a platform. We will stand in the factory elections and make the councils ours.
+
+@boycott_law
+subtitle: The Left Radical answer. The most bitter workers will like it; the masses will vote in the elections anyway.
+on-arrival: {!
+Q.massacre_response = 4;
+Q.militancy += 5;
+Q.worker_support -= 2;
+Q.ultraleft_satisfaction += 10;
+Q.kapd_relation += 6;
+Q.luxemburgist_satisfaction -= 6;
+Q.unionist_satisfaction -= 8;
+Q.lean_ultraleft += 2;
+Q.lean_offensive += 1;
+!}
+
+We tell the workers to have nothing to do with councils made by the men who shot them. The most bitter workers agree. The rest will vote in the elections without us.

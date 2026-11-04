@@ -1,0 +1,55 @@
+title: The Barracks
+subtitle: The army waits to see who will win.
+view-if: crisis_kapp = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Barracks
+
+The Reichswehr has not fought for Kapp, and it has not fought against him. Its officers sit in their barracks, and their men read the newspapers like everyone else. The Security Police in Berlin are wavering too.
+
+- @soldiers: Send our people to talk to the soldiers.
+- @police: Work on the Security Police.
+- @threaten: Warn the officers what will happen if they move.
+
+@soldiers
+subtitle: Costs 1 fund. Some regiments may refuse to march.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.crisis_momentum += 7;
+Q.army_loyalty += 4;
+Q.luxemburgist_satisfaction += 2;
+Q.offensive_satisfaction += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+Leaflets, cigarettes and old comrades from the war. In two barracks at Spandau, the men elect soldiers' councils again and refuse to leave their quarters.
+
+@police
+subtitle: Slower and quieter. The police may stand aside.
+on-arrival: {!
+Q.crisis_momentum += 4;
+Q.police_loyalty += 6;
+Q.repression -= 2;
+Q.unionist_satisfaction += 2;
+Q.lean_unionist += 1;
+!}
+
+Many policemen are union men too. A few precincts in the east of Berlin quietly stop patrolling.
+
+@threaten
+subtitle: The Left's style. Frightens some officers and hardens the rest.
+on-arrival: {!
+Q.crisis_momentum += 3;
+Q.militancy += 5;
+Q.repression += 4;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 1;
+!}
+
+Our posters name the officers who went over to Kapp, with their addresses. Some of them go into hiding. Others swear to settle the account later.

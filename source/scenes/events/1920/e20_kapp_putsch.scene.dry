@@ -1,0 +1,111 @@
+title: The Kapp Putsch
+subtitle: The Ehrhardt Brigade marches on Berlin.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 3 and kapp_started = 0
+max-visits: 1
+priority: 6
+on-arrival: {!
+Q.kapp_started = 1;
+Q.crisis = 1;
+Q.crisis_kapp = 1;
+Q.crisis_time = 0;
+Q.week = 1;
+Q.crisis_name = 'The Kapp Putsch';
+Q.crisis_goal = 'Defeat the putsch, and decide what comes after it.';
+Q.crisis_momentum = 50;
+Q.stability -= 15;
+Q.army_loyalty -= 15;
+Q.freikorps_loyalty -= 20;
+Q.e20_lead_ul = (Q.leading_faction == 'ultraleft') ? 1 : 0;
+!}
+
+= The Kapp Putsch
+
+Before dawn on 13 March, the Ehrhardt Marine Brigade marches into Berlin from its camp at Döberitz, with swastikas painted on its helmets. The government was ordered to disband it under the peace treaty. General von Lüttwitz has chosen to disband the government instead.
+
+The ministers flee to Dresden. The army does not defend them. "Troops do not fire on troops," General von Seeckt is said to have told Noske. By breakfast, a provincial civil servant named Wolfgang Kapp has proclaimed himself Chancellor of the Reich.
+
+Then something unheard of happens. The unions of Carl Legien, the SPD and the USPD call a general strike to defend the Republic. [? if levi_chair = 1 : Paul Levi is cut off in a prison cell. ?] The members of the Zentrale who are still free meet in a back room and must say, today, where the party stands.
+
+- @not_a_finger: "The working class will not lift a finger for the democratic republic."
+- @join_strike: Join the general strike at once, under our own slogans.
+- @to_arms: Call the workers to arms.
+- @councils: Form action committees from below, and take power in the factories.
+
+@not_a_finger
+subtitle: The Left's instinct: this is a quarrel between two gangs of the bourgeoisie. The workers may not see it that way.
+on-arrival: {!
+Q.kapp_statement = 1;
+Q.crisis_momentum -= 12;
+Q.worker_support -= 4;
+Q.uspd_relation -= 6;
+Q.offensive_satisfaction += 6;
+Q.ultraleft_satisfaction += 4;
+Q.luxemburgist_satisfaction -= 8;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 2;
+!}
+
+The statement goes out under the Zentrale's name: we will not defend the republic of Noske, the murderer of Rosa Luxemburg. By the afternoon, it is clear that every factory in Berlin is stopping anyway, without us. Our own members are on the picket lines and ask what the Zentrale is playing at.
+
+@join_strike
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Spartacist answer: defeat Kapp first, and fight for more inside the strike.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids striking alongside the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.kapp_statement = 2;
+Q.crisis_momentum += 8;
+Q.worker_support += 4;
+Q.uspd_relation += 5;
+Q.spd_relation += 3;
+Q.luxemburgist_satisfaction += 8;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction -= 3;
+Q.lean_luxemburgist += 2;
+Q.lean_unionist += 1;
+!}
+
+Our call goes out the same day: down tools, against Kapp and against the generals, for the arming of the workers and the disarming of the counter-revolution. Our people are on the strike committees from the first hour.
+
+@to_arms
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The generals are divided and the state is paralysed. Risky; the officers will remember.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.kapp_statement = 3;
+Q.kapp_armed = 1;
+Q.crisis_momentum += 5;
+Q.militancy += 12;
+Q.repression += 8;
+Q.red_guards_strength += 4;
+Q.red_guards_arms += 6;
+Q.offensive_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 4;
+Q.lean_offensive += 2;
+!}
+
+We call on the workers to arm themselves, from the police stations and the civil guards' depots if need be. In the Ruhr and in Central Germany, they are already doing it.
+
+@councils
+subtitle: The Left Radical answer: neither Kapp nor Ebert, but the councils.
+view-if: ultraleft_gone = 0
+on-arrival: {!
+Q.kapp_statement = 4;
+Q.crisis_momentum -= 4;
+Q.militancy += 8;
+Q.ultraleft_satisfaction += 10;
+Q.kapd_relation += 5;
+Q.unionist_satisfaction -= 6;
+Q.lean_ultraleft += 2;
+!}
+
+Our call goes out for action committees elected in every factory, to take the works and the towns into the workers' hands. In Hamburg and Bremen, the committees spring up within hours. Elsewhere, workers strike under the unions' banner and ask what councils have to do with Kapp.

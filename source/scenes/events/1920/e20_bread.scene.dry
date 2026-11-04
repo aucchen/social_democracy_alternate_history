@@ -1,0 +1,67 @@
+title: The Price of Bread
+subtitle: The mark is falling, and the winter is coming.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 10 and crisis = 0 and ending_id = 0
+max-visits: 1
+on-arrival: {!
+Q.inflation += 1;
+!}
+
+= The Price of Bread
+
+At Spa, in July, the Allies made Germany promise two million tonnes of coal a month. Now the coal is going west, and the cellars of Berlin and Chemnitz are empty. A loaf of bread costs many times what it did before the war, and a dollar buys more than fifteen times as many marks.
+
+Wages are always one step behind the prices. In the working-class districts, women queue outside the bakeries from five in the morning, and the black marketeers drive past them in motor cars.
+
+- @control: Form price control committees in the working-class districts.
+- @wages: Fight in the unions for wages that follow the prices.
+- @march: Lead hunger marches on the town halls.
+
+@control
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Spartacist answer. The housewives of the districts will run them.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e20_bread = 1;
+Q.worker_support += 3;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+!}
+
+In Neukölln and Wedding, committees of housewives and works council members check the prices in the shops and post the profiteers' names on the walls. Some bakers lower their prices. Others close their shutters.
+
+@wages
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] The Right's answer. Slow work, and it wins members in the unions.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the reformist unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e20_bread = 2;
+Q.worker_support += 2;
+Q.district_saxony_members += 0.5;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+Our fractions put the same motion to every union branch: a wage that rises each month with the cost of living. The union leaders say the employers will never accept it. The members vote for it anyway.
+
+@march
+subtitle: The Left's answer. The police will meet the marchers.
+on-arrival: {!
+Q.e20_bread = 3;
+Q.militancy += 6;
+Q.repression += 4;
+Q.worker_support += 1;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+Thousands march on the town halls of Halle, Leipzig and Chemnitz. In Leipzig the police fire over their heads. The mayors promise extra rations, and some of them deliver.

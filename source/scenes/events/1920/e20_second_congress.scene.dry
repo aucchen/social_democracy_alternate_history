@@ -1,0 +1,84 @@
+title: The Twenty-One Conditions
+subtitle: The Second Congress of the International meets in Moscow.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 7 and crisis = 0 and congress_done = 0 and ending_id = 0
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.congress_done = 1;
+!}
+
+= The Twenty-One Conditions
+
+The Second Congress of the Communist International opens in Petrograd on 19 July and moves to Moscow. In the Kremlin hall, a great map of Poland hangs on the wall, and every morning the delegates watch the little red flags move closer to Warsaw. [? if levi_chair = 1 : Paul Levi leads our delegation, and sits on the congress presidium. ?]
+
+The USPD has sent four delegates, two from its right, Crispien and Dittmann, and two from its left, Däumig and Stoecker. The International wants the USPD's hundreds of thousands of workers, and not its leaders. Zinoviev has drafted the conditions for joining: a centralised party under the Executive in Moscow, illegal work beside legal work, communist cells in every union, and the expulsion of "reformists and centrists". Lenin adds a last one: whoever votes against the conditions at their own congress must be expelled.
+
+Every section must accept them. Ours too.
+
+- @accept: Vote for the conditions as they stand.
+- @amend: Accept them, and fight for amendments that keep the door open to the USPD's masses.
+- @stricter: Demand that the conditions be stricter still.
+- @reject: Refuse conditions that let Moscow choose our allies and our leaders.
+
+@accept
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] The International knows best. Moscow will be generous.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.twenty_one_conditions = 1;
+Q.independence -= 8;
+Q.resources += 1;
+Q.world_revolution += 2;
+Q.offensive_satisfaction += 8;
+Q.lean_offensive += 2;
+!}
+
+Our delegates raise their cards with the rest. The conditions are adopted with only a handful of votes against. Zinoviev embraces our delegation.
+
+@amend
+subtitle: Levi's instinct. Whether Moscow listens depends on how strong and how independent we are.
+on-arrival: {!
+var strong = Q.independence >= 45 && Q.members >= 40;
+Q.twenty_one_conditions = strong ? 2 : 1;
+Q.independence += 3;
+Q.uspd_score += strong ? 1 : 0;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 2;
+!}
+
+[? if twenty_one_conditions = 2 : Our amendments pass in commission: the conditions will be applied "with regard to national circumstances", and no named leader of the USPD's left must be expelled. Däumig thanks us privately. ?][? if twenty_one_conditions = 1 : Zinoviev listens politely and changes nothing. The conditions are adopted as drafted, with our votes. ?]
+
+@stricter
+subtitle: The Left's answer. Keep the USPD's leaders out, at the cost of fewer USPD members coming in.
+on-arrival: {!
+Q.twenty_one_conditions = 1;
+Q.uspd_score -= 1;
+Q.independence -= 4;
+Q.uspd_relation -= 8;
+Q.offensive_satisfaction += 10;
+Q.unionist_satisfaction -= 5;
+Q.lean_offensive += 2;
+!}
+
+Our delegates propose that the conditions name the men who must go: Kautsky, Hilferding, Crispien, Dittmann. The congress agrees. Crispien and Dittmann go home to fight the conditions with all they have.
+
+@reject
+subtitle: Rosa Luxemburg's warning against a party run from above. Moscow will cut off the money and look for a new leadership.
+on-arrival: {!
+Q.twenty_one_conditions = Q.independence >= 65 ? 2 : 3;
+Q.independence += 10;
+Q.moscow_subsidy = 0;
+Q.uspd_score -= 1;
+Q.luxemburgist_satisfaction += 6;
+Q.offensive_satisfaction -= 10;
+Q.ultraleft_satisfaction += 4;
+Q.lean_luxemburgist += 2;
+!}
+
+[? if twenty_one_conditions = 2 : Our refusal shakes the congress. Lenin himself intervenes, and the conditions are softened for Germany: no names, no deadlines. Zinoviev will not forget who humiliated him. ?][? if twenty_one_conditions = 3 : The conditions are adopted over our votes. Moscow's subsidies stop, and Radek begins to talk to the Left about the German party's leadership. ?]

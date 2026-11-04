@@ -1,0 +1,58 @@
+title: Upper Silesia
+subtitle: German and Polish nationalists prepare for the plebiscite.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 11 and crisis = 0 and ending_id = 0
+max-visits: 1
+
+= Upper Silesia
+
+The peace treaty says that the people of Upper Silesia will vote on whether their mines and steelworks belong to Germany or to Poland. The plebiscite is set for March. In August, Polish insurgents rose under Wojciech Korfanty and took half the industrial district before the Allied commission stopped them. Now German "self-defence" units, Freikorps by another name, are drilling in the woods around Gleiwitz and Beuthen.
+
+The miners of Upper Silesia speak German and Polish, often both. The nationalists of both sides want them to fight each other. [? if warsaw_outcome = 2 : Many of the Polish miners look east, to Soviet Warsaw, and the German nationalists call every Pole a Bolshevik. ?]
+
+- @common_front: Call for a common front of Polish and German workers.
+- @boycott: Tell the workers to boycott the plebiscite.
+- @unions: Work with the unions to keep the Freikorps out.
+
+@common_front
+subtitle: The Spartacist answer. Internationalism where it is hardest.
+on-arrival: {!
+Q.worker_support += 1;
+Q.world_revolution += 2;
+Q.repression += 2;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+!}
+
+Our leaflets appear in two languages at the pit heads: the coal belongs to those who dig it, not to Berlin or to Warsaw. Both nationalist presses call us traitors.
+
+@boycott
+subtitle: The Left's answer. A plebiscite between two bourgeoisies is not our affair.
+on-arrival: {!
+Q.militancy += 2;
+Q.worker_support -= 1;
+Q.offensive_satisfaction += 5;
+Q.ultraleft_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+We call on the miners to stay home on the day of the vote. In the mining towns, few are listening to anyone but the nationalists.
+
+@unions
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. The Freikorps are the danger, whichever flag they fly.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a common front with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.freikorps_strength -= 5;
+Q.spd_relation += 3;
+Q.uspd_relation += 3;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+The miners' unions, German and Polish, issue a joint appeal against armed bands of every kind. It is signed by our union men too. The Allied commission bans a few of the self-defence units, on paper.
