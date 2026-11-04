@@ -1,6 +1,6 @@
 title: The Factory Councils
 new-page: true
-view-if: factory_councils_timer <= 0
+view-if: crisis = 0 and factory_councils_timer <= 0
 on-arrival: factory_councils_timer = 3; month_actions += 1
 frequency: 300
 is-card: true

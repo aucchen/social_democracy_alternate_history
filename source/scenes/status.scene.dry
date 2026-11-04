@@ -65,6 +65,14 @@ Halle-Merseburg: [+ district_halle_faction_name +], [+ district_halle_members_di
 
 = Germany
 
+Government: [+ government_name +]
+
+Chancellor: [+ chancellor +]
+
+[? if parliament_name : [+ parliament_name +]: the government holds [+ government_seats +] of [+ parliament_size +] seats ?]
+
+= The Country
+
 Militancy: [+ militancy : level +]
 
 Worker support: [+ worker_support : level +]
@@ -73,13 +81,61 @@ Repression: [+ repression : level +]
 
 Republic stability: [+ stability : level +]
 
-= Relations
+Inflation: [+ inflation : inflation +]
 
-SPD: [+ spd_relation : relationship +]
+@parties
 
-USPD: [+ uspd_relation : relationship +]
+= Party Relations
 
-The workers' militias, the Freikorps and the Reichswehr will be added here in a later build.
+[? if spd_exists : {!<span class="tooltip-text" title="Majority Social Democratic Party. The party of Ebert, Scheidemann and Noske.">SPD</span>!}: [+ spd_relation : relationship +][? if parliament_name : , [+ spd_seats +] seats ?] ?]
+
+[? if uspd_exists : {!<span class="tooltip-text" title="Independent Social Democratic Party. Split from the SPD over the war; torn between the councils and parliament.">USPD</span>!}: [+ uspd_relation : relationship +][? if parliament_name : , [+ uspd_seats +] seats ?] ?]
+
+[? if kapd_exists : {!<span class="tooltip-text" title="Communist Workers' Party. The ultra-left that left or was driven out of the KPD.">KAPD</span>!}: [+ kapd_relation : relationship +] ?]
+
+[? if ddp_exists : {!<span class="tooltip-text" title="German Democratic Party. Liberal, middle-class, a pillar of the Weimar coalition.">DDP</span>!}: [+ ddp_relation : relationship +][? if parliament_name : , [+ ddp_seats +] seats ?] ?]
+
+[? if zentrum_exists : {!<span class="tooltip-text" title="The Catholic Centre Party.">Centre</span>!}: [+ zentrum_relation : relationship +][? if parliament_name : , [+ zentrum_seats +] seats ?] ?]
+
+[? if bvp_exists : {!<span class="tooltip-text" title="Bavarian People's Party. Catholic, conservative and Bavarian first.">BVP</span>!}: [+ bvp_relation : relationship +][? if bvp_seats > 0 : , [+ bvp_seats +] seats ?] ?]
+
+[? if dvp_exists : {!<span class="tooltip-text" title="German People's Party. National liberals and heavy industry; Stresemann's party.">DVP</span>!}: [+ dvp_relation : relationship +][? if parliament_name : , [+ dvp_seats +] seats ?] ?]
+
+[? if dnvp_exists : {!<span class="tooltip-text" title="German National People's Party. Monarchists, landowners and nationalists.">DNVP</span>!}: [+ dnvp_relation : relationship +][? if parliament_name : , [+ dnvp_seats +] seats ?] ?]
+
+[? if nsdap_exists : {!<span class="tooltip-text" title="A small völkisch party in Munich.">!}[+ nsdap_name +]{!</span>!}: [+ nsdap_relation : relationship +][? if nsdap_seats > 0 : , [+ nsdap_seats +] seats ?] ?]
+
+[? if parliament_name : KPD: [+ kpd_seats +] seats ?]
+
+@forces
+
+= Armed Forces
+
+{!<span class="tooltip-text" title="The regular army of the Republic, rebuilt as the Reichswehr from March 1919.">!}[+ army_name +]{!</span>!}: [+ army_strength_display +] thousand. Loyalty to the Republic: [+ army_loyalty : loyalty +]
+
+{!<span class="tooltip-text" title="Volunteer units of officers and soldiers, raised by Noske to crush the left.">Freikorps</span>!}: [+ freikorps_strength_display +] thousand. Loyalty to the Republic: [+ freikorps_loyalty : loyalty +]
+
+{!<span class="tooltip-text" title="The state police, and from 1919 the Security Police (Sipo).">Police</span>!}: [+ police_strength_display +] thousand. Loyalty to the Republic: [+ police_loyalty : loyalty +]
+
+[? if civil_guards_strength > 0 : {!<span class="tooltip-text" title="Armed civil guards (Einwohnerwehren) of the propertied classes, strongest in Bavaria.">Civil guards</span>!}: [+ civil_guards_strength_display +] thousand ?]
+
+[? if sa_strength > 0 : {!<span class="tooltip-text" title="The storm troopers of the Nazi party.">SA</span>!}: [+ sa_strength_display +] thousand ?]
+
+= Our Forces
+
+{!<span class="tooltip-text" title="Armed workers who follow the party: red guards, militias and later the proletarian hundreds.">Red guards</span>!}: [+ red_guards_strength_display +] thousand. Loyalty to the Zentrale: [+ red_guards_loyalty : loyalty +]
+
+Arms: [+ red_guards_arms : level +]
+
+@crisis
+
+= [+ crisis_name +]
+
+[? if crisis : Week [+ crisis_time +] of the crisis. ?]
+
+[? if crisis_goal : [+ crisis_goal +] ?]
+
+Our position: [+ crisis_momentum : momentum +]
 
 @moscow
 
@@ -89,4 +145,10 @@ The workers' militias, the Freikorps and the Reichswehr will be added here in a 
 
 World revolution: [+ world_revolution : level +]
 
-The Comintern's factions will be added here in a later build.
+Soviet Russia: [+ soviet_russia_status +]
+
+[? if comintern_member : The KPD is a section of the Communist International. ?][? if comintern_member = 0 : The KPD is not a member of any International. ?]
+
+[? if comintern_rep : Comintern envoy: [+ comintern_rep +] ?]
+
+[? if moscow_subsidy > 0 : Moscow's subsidy: [+ moscow_subsidy +] funds a month ?]

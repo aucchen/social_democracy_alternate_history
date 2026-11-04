@@ -1,6 +1,7 @@
 title: Next month
 is-hand: true
 on-arrival: {!
+Q.turn_label = Q.crisis ? 'week' : 'month';
 if (Q.advisor_action_timer <= 0) {
     Q.pinnedCardsDescription = 'Advisors - an action is available.';
 } else if (Q.advisor_action_timer == 1) {
@@ -13,34 +14,50 @@ max-cards: 3
 
 #Here, the main deck will be displayed. Clicking on the deck draws a card into your hand. Clicking on a card activates that card.
 
+[? if crisis : **[+ crisis_name +].** Each action now takes a week. [+ crisis_goal +] ?]
+
+[? if faction_shift_note : [+ faction_shift_note +] ?]
+
 Party line: **[+ leading_faction_name +]**[? if junior_faction : , with the [+ junior_faction_name +] as junior partner ?]. Members in loyal districts: [+ loyal_share_display +]%.
 
+- @crisis_deck
 - @party
 - @movement
 - @germany
 - @international
 - #advisor
 
+@crisis_deck
+title: The Crisis
+is-deck: true
+view-if: crisis = 1
+
+- #crisis
+
 @party
 title: Party Affairs
 is-deck: true
+view-if: crisis = 0
 
 - #party_affairs
 
 @movement
 title: The Movement
 is-deck: true
+view-if: crisis = 0
 
 - #movement
 
 @germany
 title: Germany
 is-deck: true
+view-if: crisis = 0
 
 - #germany
 
 @international
 title: The International
 is-deck: true
+view-if: crisis = 0
 
 - #international

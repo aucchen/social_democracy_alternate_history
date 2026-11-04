@@ -4,6 +4,13 @@ new-page: true
 tags: event
 view-if: year = 1919 and month = 1 and spartacist_uprising_done = 1
 max-visits: 1
+on-arrival: {!
+// historical results, 19 January 1919 (423 seats; the Centre and the BVP stood together)
+Q.parliament_name = 'National Assembly';
+Q.parliament_size = 423;
+Q.spd_seats = 163; Q.zentrum_seats = 91; Q.ddp_seats = 75; Q.dnvp_seats = 44;
+Q.uspd_seats = 22; Q.dvp_seats = 19; Q.bvp_seats = 0; Q.nsdap_seats = 0;
+!}
 
 = Elections to the National Assembly
 

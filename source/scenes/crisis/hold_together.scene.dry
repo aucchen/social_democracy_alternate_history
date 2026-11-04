@@ -1,0 +1,35 @@
+title: Hold the Party Together
+subtitle: Whatever happens this week, the party must survive it.
+view-if: crisis = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Hold the Party Together
+
+Couriers run between the Zentrale and the districts day and night. Nobody sleeps. Some things have to be done whatever happens on the streets.
+
+- @funds: Collect what money we can.
+- @steady: Steady the districts.
+- @agitate: Flood the factories with leaflets.
+
+@funds
+subtitle: +1 fund.
+view-if: resources < 3
+on-arrival: resources += 1
+
+The collection tins come back fuller than expected.
+
+@steady
+subtitle: Raises Unity; the loudest voices calm down a little.
+on-arrival: unity += 4; militancy -= 2
+
+The Zentrale's couriers reach every district with the same message: no adventures, no desertions.
+
+@agitate
+subtitle: Worker support and our position in the crisis improve slightly.
+on-arrival: worker_support += 1; crisis_momentum += 3
+
+By morning, every factory gate in the city has our leaflet.

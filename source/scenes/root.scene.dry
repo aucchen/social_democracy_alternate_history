@@ -94,13 +94,80 @@ Q.unity = 50;
 Q.militancy = 40;
 Q.worker_support = 15;
 Q.repression = 20;
-Q.spd_relation = 10;
-Q.uspd_relation = 45;
 Q.independence = 65;
 Q.world_revolution = 50;
 // background values
 Q.inflation = 5;
 Q.stability = 30;
+
+// ------------------------------------------------------------ dynamic factions
+// Options that follow a faction's line add to lean_<faction> (see the
+// writer's guide). post_event adds the month's lean to history_<faction>,
+// which the historical splits read, and resets the lean.
+for (var f of Q.factions) {
+    Q['lean_' + f] = 0;
+    Q['history_' + f] = 0;
+    Q[f + '_gone'] = 0;
+}
+Q.faction_shift_note = 0;
+
+// ------------------------------------------------------------ parties
+// relation 0-100 with the KPD; seats in the current parliament
+Q.parties = ['spd', 'uspd', 'kapd', 'ddp', 'zentrum', 'bvp', 'dvp', 'dnvp', 'nsdap'];
+Q.party_names = {
+    spd: 'SPD', uspd: 'USPD', kapd: 'KAPD', ddp: 'DDP', zentrum: 'Centre',
+    bvp: 'BVP', dvp: 'DVP', dnvp: 'DNVP', nsdap: 'NSDAP'
+};
+Q.spd_relation = 10;      Q.spd_exists = 1;      Q.spd_seats = 0;
+Q.uspd_relation = 45;     Q.uspd_exists = 1;     Q.uspd_seats = 0;
+Q.kapd_relation = 0;      Q.kapd_exists = 0;     Q.kapd_seats = 0;
+Q.ddp_relation = 5;       Q.ddp_exists = 1;      Q.ddp_seats = 0;
+Q.zentrum_relation = 5;   Q.zentrum_exists = 1;  Q.zentrum_seats = 0;
+Q.bvp_relation = 3;       Q.bvp_exists = 1;      Q.bvp_seats = 0;
+Q.dvp_relation = 2;       Q.dvp_exists = 1;      Q.dvp_seats = 0;
+Q.dnvp_relation = 0;      Q.dnvp_exists = 1;     Q.dnvp_seats = 0;
+Q.nsdap_relation = 0;     Q.nsdap_exists = 1;    Q.nsdap_seats = 0;
+Q.kpd_seats = 0;
+Q.nsdap_name = 'DAP';     // German Workers' Party; NSDAP from February 1920
+Q.parliament_name = 0;    // 'National Assembly', then 'Reichstag'
+Q.parliament_size = 0;
+for (var p of Q.parties) {
+    Q[p + '_in_government'] = 0;
+}
+Q.spd_in_government = 1;
+Q.government_name = 'Council of People\'s Deputies';
+Q.chancellor = 'Friedrich Ebert';
+
+// ------------------------------------------------------------ forces
+// strength in thousands; loyalty is to the Republic for the state's forces
+// and to the Zentrale for our own red guards. Placeholder figures.
+Q.forces = ['army', 'freikorps', 'police', 'civil_guards', 'red_guards', 'sa'];
+Q.army_strength = 400;        Q.army_loyalty = 40;
+Q.freikorps_strength = 40;    Q.freikorps_loyalty = 55;
+Q.police_strength = 60;       Q.police_loyalty = 60;
+Q.civil_guards_strength = 0;  Q.civil_guards_loyalty = 50;
+Q.red_guards_strength = 3;    Q.red_guards_loyalty = 50;
+Q.sa_strength = 0;            Q.sa_loyalty = 0;
+Q.red_guards_arms = 10;       // 0-100, how well armed our militias are
+Q.army_name = 'Army';         // 'Reichswehr' from March 1919
+
+// ------------------------------------------------------------ Moscow
+Q.comintern_member = 0;       // the Comintern is founded in March 1919
+Q.comintern_rep = 0;          // name of Moscow's envoy, if any
+Q.moscow_subsidy = 0;         // funds added each month
+Q.soviet_russia_status = 'Civil war';
+
+// ------------------------------------------------------------ crises
+// A crisis turns each action into a week instead of a month.
+Q.crisis = 0;
+Q.week = 0;
+Q.crisis_time = 0;
+Q.crisis_name = 0;
+Q.crisis_goal = 0;
+Q.crisis_momentum = 50;
+
+// ------------------------------------------------------------ endings
+Q.ending_id = 0;
 
 // ------------------------------------------------------------ story flags
 Q.election_boycott = 1;       // decided by the founding congress
@@ -128,8 +195,6 @@ new-page: true
  - Rosa Luxemburg, *Order Prevails in Berlin*, January 1919
 
 This is a game of alternate history. It follows the history of the Communist Party of Germany closely at first, but your choices will take Germany, the party and the international movement somewhere else.
-
-This is an early build: only the first months of 1919 are playable so far.
 
 - @1919_main: Begin
 

@@ -1,6 +1,6 @@
 title: Word from Moscow
 new-page: true
-view-if: moscow_timer <= 0
+view-if: crisis = 0 and moscow_timer <= 0
 on-arrival: moscow_timer = 4; month_actions += 1
 frequency: 300
 is-card: true

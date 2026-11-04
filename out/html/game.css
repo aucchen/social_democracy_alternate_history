@@ -610,3 +610,19 @@ table {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* during a crisis, each turn is a week: a slightly darker, sterner page */
+body.crisis-mode {
+    --bg-color: #ddd6c4;
+}
+body.dark-mode.crisis-mode {
+    --bg-color: #1a0d0b;
+}
+body.crisis-mode #content h1,
+body.crisis-mode #qualities h1 {
+    color: #8b1a1a;
+}
+body.dark-mode.crisis-mode #content h1,
+body.dark-mode.crisis-mode #qualities h1 {
+    color: #e07a6a;
+}

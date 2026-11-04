@@ -1,6 +1,6 @@
 title: The District Question
 new-page: true
-view-if: organisers_timer <= 0
+view-if: crisis = 0 and organisers_timer <= 0
 on-arrival: {!
 Q.organisers_timer = 3;
 Q.month_actions += 1;

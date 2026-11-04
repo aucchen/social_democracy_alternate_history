@@ -1,6 +1,6 @@
 title: Recruitment Drive
 new-page: true
-view-if: recruitment_timer <= 0
+view-if: crisis = 0 and recruitment_timer <= 0
 on-arrival: recruitment_timer = 3; month_actions += 1
 frequency: 300
 is-card: true

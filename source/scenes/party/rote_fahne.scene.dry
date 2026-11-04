@@ -1,6 +1,6 @@
 title: Die Rote Fahne
 new-page: true
-view-if: rote_fahne_timer <= 0
+view-if: crisis = 0 and rote_fahne_timer <= 0
 on-arrival: rote_fahne_timer = 3; month_actions += 1
 frequency: 300
 is-card: true

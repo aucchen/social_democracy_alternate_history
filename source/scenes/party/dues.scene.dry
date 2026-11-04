@@ -1,6 +1,6 @@
 title: Party Finances
 new-page: true
-view-if: dues_timer <= 0
+view-if: crisis = 0 and dues_timer <= 0
 on-arrival: dues_timer = 4; month_actions += 1
 frequency: 300
 is-card: true

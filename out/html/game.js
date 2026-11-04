@@ -36,6 +36,9 @@
           'districts_tab': "Bezirke",
           'germany_tab': "Deutschland",
           'moscow_tab': "Moskau",
+          'parties_tab': "Parteien",
+          'forces_tab': "Kräfte",
+          'crisis_tab': "Krise",
           'stats-link': "Bibliothek",
           'save-link': "Speichern/Laden",
           'options-link': "Einstellungen",
@@ -87,6 +90,9 @@
           'districts_tab': "Districts",
           'germany_tab': "Germany",
           'moscow_tab': "Moscow",
+          'parties_tab': "Parties",
+          'forces_tab': "Forces",
+          'crisis_tab': "Crisis",
           'stats-link': "Library",
           'save-link': "Save/Load",
           'options-link': "Options",
@@ -374,6 +380,15 @@
       dendryUI.dendryEngine._runActions(scene.onArrival);
       var displayContent = dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
       $('#qualities').append(dendryUI.contentToHTML.convert(displayContent));
+      // the Crisis tab only shows while a crisis is running
+      var crisisTab = document.getElementById('crisis_tab');
+      if (crisisTab) {
+          var inCrisis = !!dendryUI.dendryEngine.state.qualities.crisis;
+          crisisTab.style.display = inCrisis ? '' : 'none';
+          if (!inCrisis && window.statusTab == 'status.crisis') {
+              window.changeTab('status', 'main_tab');
+          }
+      }
   };
 
   window.changeTab = function(newTab, tabId) {

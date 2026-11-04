@@ -1,0 +1,7 @@
+# inflation, rises slowly to 1922 and then runs away
+
+(..9.999) moderate
+(9.999..24.999) high
+(24.999..49.999) severe
+(49.999..79.999) galloping
+(79.999..) hyperinflation

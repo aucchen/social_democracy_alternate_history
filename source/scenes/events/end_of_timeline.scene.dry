@@ -1,0 +1,12 @@
+title: The End of 1923
+new-page: true
+tags: event
+view-if: year >= 1924
+max-visits: 1
+priority: 5
+
+= The End of 1923
+
+The year of crisis is over.
+
+- @game_over: See how the party stands.
