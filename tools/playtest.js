@@ -77,11 +77,17 @@ const IGNORE = /d3 is not defined|toFixed|font_size/;
         if (tabs.length) { await tabs[Math.floor(Math.random() * tabs.length)].click(); }
       }
       const choices = await page.$$('#content ul.choices li a');
-      if (choices.length) { await choices[Math.floor(Math.random() * choices.length)].click(); await page.waitForTimeout(40); continue; }
+      if (choices.length) { await choices[Math.floor(Math.random() * choices.length)].click({ force: true, timeout: 5000 }).catch(() => {}); await page.waitForTimeout(40); continue; }
+      // pick among the hand and the decks, so a hand of unplayable cards cannot loop forever
       const hand = await page.$$('#content ul.hand a.card');
-      if (hand.length) { await hand[Math.floor(Math.random() * hand.length)].click(); await page.waitForTimeout(40); continue; }
       const decks = await page.$$('#content ul.decks a.card');
-      if (decks.length) { await decks[Math.floor(Math.random() * decks.length)].click(); await page.waitForTimeout(40); continue; }
+      const handFull = hand.length >= 3;
+      const pool = handFull || !decks.length ? hand : (hand.length && Math.random() < 0.6 ? hand : decks);
+      if (pool.length) {
+        await pool[Math.floor(Math.random() * pool.length)].click({ force: true, timeout: 5000 }).catch(() => {});
+        await page.waitForTimeout(60);
+        continue;
+      }
       const pinned = await page.$$('#content ul.pinned-cards a.card');
       if (pinned.length) { await pinned[0].click(); await page.waitForTimeout(40); continue; }
       stuck = true;
