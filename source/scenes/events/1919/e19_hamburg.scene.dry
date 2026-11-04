@@ -1,0 +1,44 @@
+title: The Hamburg Line
+subtitle: Laufenberg and Wolffheim preach a national revolution.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 8 and crisis = 0
+max-visits: 1
+priority: 0.5
+
+= The Hamburg Line
+
+In Hamburg, Heinrich Laufenberg, once chairman of the city's workers' and soldiers' council, and Fritz Wolffheim have gone further than anyone in the party. The German bourgeoisie, they say, has sold the nation to the Entente. The working class must lead a revolutionary people's war against Versailles, side by side with Soviet Russia, and whoever is willing to fight, officer or worker, is welcome.
+
+They also want no party Zentrale, no union work and no elections. The Hamburg district, one of our largest, follows them. [? if versailles_line = 2 : In May the Zentrale let their line on Versailles stand. They take that as a licence. ?] [+ party_chair +] is drafting theses for the autumn congress, and every word from Hamburg is ammunition.
+
+- @condemn: Condemn the Hamburg line publicly.
+- @tolerate: Tolerate it for the sake of unity.
+- @workers: Fight for Hamburg's workers, not with its leaders.
+- @discipline: Demand that the Hamburg district submit to the Zentrale.
+
+@condemn
+subtitle: The Spartacist answer: national bolshevism is counter-revolution in a red shirt.
+on-arrival: heid_natbol = 1; natbol_line = 1; ultraleft_satisfaction -= 8; district_hamburg_loyalty -= 8; luxemburgist_satisfaction += 5; lean_luxemburgist += 2; lean_ultraleft -= 1
+
+The Zentrale's circular calls the Hamburg line a betrayal of internationalism. Bremen, which dislikes Laufenberg's nationalism, keeps quiet. Hamburg calls it a declaration of war.
+
+@tolerate
+subtitle: A party this young cannot afford heresy trials. The Left Radicals are pleased.
+on-arrival: natbol_line = 2; ultraleft_satisfaction += 6; unity += 3; luxemburgist_satisfaction -= 5; lean_ultraleft += 1; stability -= 1
+
+The Zentrale says nothing. In Hamburg the nationalist officers' clubs send observers to our meetings.
+
+@workers
+subtitle: Costs 1 fund. The Left's way: win the Hamburg rank and file away from its leaders.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: heid_natbol = 1; natbol_line = 3; district_hamburg_loyalty += 4; offensive_satisfaction += 6; ultraleft_satisfaction -= 4; lean_offensive += 2; resources -= 1
+
+Young organisers go to the shipyards of Blohm and Voss and the docks with a simple message: we are against Versailles and against the generals, both. A Hamburg opposition to Laufenberg begins to form.
+
+@discipline
+subtitle: The Right's answer: a party is not a federation of districts. Hamburg will resist.
+on-arrival: heid_natbol = 1; natbol_line = 4; ultraleft_satisfaction -= 10; district_hamburg_loyalty -= 12; unionist_satisfaction += 5; luxemburgist_satisfaction += 2; lean_unionist += 2; unity -= 3
+
+The Zentrale demands that Hamburg hand over its membership lists and its press. Hamburg refuses. Everyone now knows what the congress will be about.

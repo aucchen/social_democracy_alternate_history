@@ -1,0 +1,51 @@
+title: The Theses
+subtitle: The Zentrale prepares for the congress.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 9 and crisis = 0
+max-visits: 1
+priority: 2
+on-arrival: {!
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+var total = 0;
+for (var d of Q.districts) {
+    total += Q['district_' + d + '_members'];
+}
+Q.members_display = total.toFixed(1);
+!}
+
+= The Theses
+
+The party now has [+ members_display +] thousand members, most of them new, most of them young, many of them unemployed. The second party congress is called for October, in secret, somewhere in Baden. [+ party_chair +] has drafted theses on communist principles and tactics: the party must use elections and parliament as a platform; it must work inside the trade unions, where the workers are; it must be a centralised party, not a federation of districts. Anyone who rejects these principles, the last thesis says, stands outside the party.
+
+The Left Radicals know that the last thesis is about them. They hold Hamburg, Bremen and much of Berlin, and they say that a congress of delegates elected by the members would vote the theses down. The Zentrale must decide how the delegates are chosen.
+
+- @zentrale: The Zentrale sets the rules for the mandates.
+- @districts: One delegate per district, whatever its size.
+- @free: Free elections, one delegate per thousand members.
+
+@zentrale
+subtitle: Levi's way: a congress the Zentrale can rely on. The Left Radicals will call it rigged.
+on-arrival: heid_mandates = 1; unity -= 5; ultraleft_satisfaction -= 10; luxemburgist_satisfaction += 5; lean_luxemburgist += 2; lean_ultraleft -= 1
+
+Mandates go to district committees that the Zentrale has checked, and the members of the Zentrale vote too. In Hamburg and Berlin, the Left Radicals talk of a packed congress before it has even met.
+
+@districts
+subtitle: The Right's compromise: the small loyal districts count as much as the big rebellious ones.
+on-arrival: heid_mandates = 2; unity -= 2; ultraleft_satisfaction -= 5; unionist_satisfaction += 4; lean_unionist += 1; lean_luxemburgist += 1
+
+Thuringia and Halle get as many delegates as Hamburg. The rule can be defended in public. Everyone knows why it was chosen.
+
+@free
+subtitle: Party democracy, as Luxemburg wanted it. The Left Radicals may well win.
+on-arrival: heid_mandates = 0; unity += 4; ultraleft_satisfaction += 6; luxemburgist_satisfaction -= 2; lean_ultraleft += 1
+
+The districts elect their delegates in crowded, angry meetings. Whatever the congress decides, nobody will be able to say it was not the party's own decision.

@@ -1,0 +1,174 @@
+title: The Heidelberg Congress
+subtitle: 20 October. The party congress meets in secret.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 10 and crisis = 0 and heidelberg_outcome = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+var clamp = function(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+// share of delegates for the Zentrale's theses, 0-100
+var s = 100 - Q.ultraleft_strength;
+if (Q.heid_mandates == 1) { s += 15; } else if (Q.heid_mandates == 2) { s += 8; }
+var h = Q.history_luxemburgist + Q.history_unionist + 0.5 * Q.history_offensive - 1.5 * Q.history_ultraleft;
+s += clamp(h / 3, -12, 12);
+if (Q.heid_radek == 1) { s += 4; } else if (Q.heid_radek == 2) { s -= 3; }
+if (Q.heid_natbol == 1) { s += 3; }
+if (Q.natbol_line == 2) { s -= 3; }
+if (Q.heid_left == 1) { s += 4; } else if (Q.heid_left == 2) { s -= 4; }
+if (Q.luxemburg_alive) { s += 8; }
+if (Q.independence < 50) { s += 3; }
+s += (Q.unity - 50) / 5;
+Q.heid_already = (Q.ultraleft_gone || Q.ultraleft_strength < 3) ? 1 : 0;
+if (Q.heid_already) { s = 90; }
+s = clamp(Math.round(s), 15, 90);
+Q.heid_support = s;
+Q.heid_for = Math.round(49 * s / 100);
+Q.heid_against = 49 - Q.heid_for;
+Q.heid_fight = 0;
+!}
+
+= The Heidelberg Congress
+
+The second congress of the party meets illegally near Heidelberg from 20 October, moving between rooms so that the police cannot find it. The Zentrale's theses are the only real business. [+ party_chair +] opens the debate: the party must stand in elections, work in the unions, and be one party with one discipline. Whoever will not accept this must go.
+
+[? if heid_already = 0 : The Left Radicals answer through Laufenberg and Wolffheim of Hamburg, Otto Rühle of Dresden and the Bremen delegates: the unions are the bosses' police, parliament is a swamp, and a party with a Zentrale is a party of generals. The delegates count themselves. About **[+ heid_for +]** of forty-nine look ready to vote for the theses, **[+ heid_against +]** against. ?][? if heid_already = 1 : The Left Radicals are not in the hall. Their districts broke with the Zentrale months ago, and most of their members went with them. The congress has only to say what that break means. ?]
+
+[? if heid_mandates = 1 and heid_already = 0 : The Left Radicals protest that the mandates were drawn up by the Zentrale. They are right. ?][? if heid_mandates = 2 and heid_already = 0 : The small districts carry as much weight as the large ones, and the Left Radicals say so loudly. ?][? if heid_mandates = 0 and heid_already = 0 : The delegates were freely elected, and nobody can deny that the congress speaks for the party. ?] [? if heid_radek = 1 : Radek's letter from Moabit backs the theses, if not the expulsions. ?][? if heid_radek = 2 : Radek's letter from Moabit pleads for unity at any price. ?] [? if heid_natbol = 1 : The Zentrale has already made Hamburg's national bolshevism a scandal. ?] [? if heid_left = 1 : Ruth Fischer's Berlin supporters are with the Zentrale, for now. ?][? if heid_left = 2 : Ruth Fischer, kept out in the cold, is waiting to see who wins. ?][? if heid_left = 3 : Ruth Fischer is working the corridors for a compromise. ?] [? if luxemburg_alive = 1 and heid_already = 0 : Many delegates who doubt the theses will not vote against Luxemburg herself. ?]
+
+- @expel: Put the theses to the vote, the last thesis included.
+- @soft: Put the theses, without the expulsion clause.
+- @action: Postpone the theses, and unite the party around action.
+- @withdraw: Withdraw the theses: let each district choose its tactics.
+- @confirm: Adopt the theses, and declare the break final.
+
+@expel
+view-if: heid_already = 0
+subtitle: The Spartacist line, Levi's line. A clean party, at a heavy price. A defining decision.
+on-arrival: {!
+Q.lean_luxemburgist += 3;
+Q.lean_ultraleft -= 2;
+Q.heid_pass = Q.heid_support >= 50 ? 1 : 0;
+if (!Q.heid_pass) {
+    Q.heidelberg_outcome = 3;
+}
+!}
+go-to: walkout if heid_pass = 1; result if heid_pass = 0
+
+@soft
+view-if: heid_already = 0
+subtitle: The Right's answer, and Radek's advice: the principles, but no expulsions.
+on-arrival: {!
+Q.lean_unionist += 2;
+Q.lean_luxemburgist += 1;
+Q.heidelberg_outcome = Q.heid_support >= 40 ? 2 : 3;
+Q.election_boycott = (Q.heidelberg_outcome == 2) ? 0 : 1;
+!}
+go-to: result
+
+@action
+view-if: heid_already = 0
+subtitle: The Left's answer: the party should argue less and fight more.
+on-arrival: {!
+Q.lean_offensive += 2;
+Q.heidelberg_outcome = Q.heid_support >= 45 ? 2 : 3;
+!}
+go-to: result
+
+@withdraw
+subtitle: The Left Radicals' demand. The party stays together, on their terms.
+view-if: ultraleft_gone = 0 and heid_already = 0
+on-arrival: {!
+Q.lean_ultraleft += 3;
+Q.lean_luxemburgist -= 2;
+Q.heidelberg_outcome = Q.heid_support < 55 ? 3 : 2;
+Q.election_boycott = 1;
+!}
+go-to: result
+
+@confirm
+view-if: heid_already = 1
+subtitle: The Spartacist line. The break has happened; the congress only names it.
+on-arrival: heidelberg_outcome = 1; election_boycott = 0; lean_luxemburgist += 2
+go-to: result
+
+@walkout
+title: The Walkout
+new-page: true
+
+= The Walkout
+
+The theses are carried by [+ heid_for +] votes to [+ heid_against +]. Laufenberg rises and declares that the minority will not accept them. The Left Radical delegates stand up and walk out of the hall, and the doors bang behind them. In Hamburg, Bremen and Berlin, their districts are waiting for them.
+
+Some delegates are already saying that half the party has just left. Others say that the party has only now become one.
+
+- @let_go: Let them go. The expulsions stand.
+- @fight: Let them go, and fight for every member in their districts.
+- @probation: Call them back: a last chance to submit by the next congress.
+
+@let_go
+subtitle: The Spartacist line to the end.
+on-arrival: heidelberg_outcome = 1; election_boycott = 0; lean_luxemburgist += 1
+go-to: result
+
+@fight
+subtitle: The Left's answer: no mercy for the splitters, and no members left to them.
+on-arrival: heidelberg_outcome = 1; election_boycott = 0; heid_fight = 1; lean_offensive += 2; offensive_satisfaction += 6
+go-to: result
+
+@probation
+subtitle: The Right's hope, and Radek's. It works only if someone the Left Radicals trust will vouch for it.
+on-arrival: {!
+Q.lean_unionist += 2;
+Q.election_boycott = 0;
+Q.heidelberg_outcome = (Q.heid_radek >= 1 || Q.heid_left == 3 || Q.heid_mandates != 1) ? 2 : 1;
+!}
+go-to: result
+
+@result
+title: After Heidelberg
+new-page: true
+on-arrival: {!
+if (Q.heidelberg_outcome == 1) {
+    Q.luxemburgist_satisfaction += 10;
+    Q.unionist_satisfaction += 4;
+    // kept above the generic split threshold: the split itself comes in November
+    Q.ultraleft_satisfaction = 12;
+    Q.unity -= 5;
+    Q.levi_chair = (Q.luxemburg_alive || Q.jogiches_alive) ? 0 : 1;
+} else if (Q.heidelberg_outcome == 2) {
+    if (Q.leading_faction == 'luxemburgist') {
+        Q.junior_faction = 'ultraleft';
+    }
+    Q.ultraleft_satisfaction += 10;
+    Q.luxemburgist_satisfaction -= 5;
+    Q.unity += 5;
+    Q.levi_chair = (Q.luxemburg_alive || Q.jogiches_alive) ? 0 : 1;
+} else {
+    Q.leading_faction = 'ultraleft';
+    Q.junior_faction = 0;
+    Q.levi_chair = 0;
+    Q.election_boycott = 1;
+    Q.party_chair = (Q.natbol_line == 2) ? 'Heinrich Laufenberg' : 'Otto Rühle';
+    Q.ultraleft_satisfaction += 20;
+    Q.luxemburgist_satisfaction = Math.min(Q.luxemburgist_satisfaction, 25);
+    Q.unionist_satisfaction -= 10;
+    Q.unity -= 8;
+    for (var d of Q.districts) {
+        if (Q['district_' + d + '_faction'] == 'ultraleft') {
+            Q['district_' + d + '_loyalty'] += 15;
+        } else {
+            Q['district_' + d + '_loyalty'] -= 15;
+        }
+    }
+}
+Q.kapd_split = 0;
+!}
+
+= After Heidelberg
+
+[? if heidelberg_outcome = 1 and heid_already = 1 : The congress adopts the theses without a dissenting vote and declares that the Left Radicals who left in the summer stand outside the party for good. ?][? if heidelberg_outcome = 1 and heid_already = 0 : The congress expels the opposition. The Left Radicals' districts are declared to stand outside the party, and the Zentrale sends its own people to rebuild them. The young party has chosen to be smaller, and to be one. Within weeks it will learn how much smaller. ?]
+
+[? if heidelberg_outcome = 2 and election_boycott = 0 : The congress ends without a split. The theses on elections and the unions are adopted, but nobody is expelled for rejecting them. ?][? if heidelberg_outcome = 2 and election_boycott = 1 : The congress ends without a split. The boycott stands, the theses are shelved, and nobody is expelled. ?][? if heidelberg_outcome = 2 : The Left Radicals stay, with seats in the leadership and their own papers. Every meeting of the Zentrale will now be a negotiation. ?]
+
+[? if heidelberg_outcome = 3 : The congress votes the Zentrale down. The Spartacist members of the Zentrale resign, and a new one is elected from the Left Radical districts, with **[+ party_chair +]** at its head. The boycott of parliament and the unions is now the party's line, and the councils are its whole programme. ?][? if heidelberg_outcome = 3 and luxemburg_alive = 1 : Rosa Luxemburg and Paul Levi remain in the party, for now, at the head of a bitter minority. ?][? if heidelberg_outcome = 3 and luxemburg_alive = 0 : Paul Levi and his friends remain in the party, for now, as a bitter minority. ?]

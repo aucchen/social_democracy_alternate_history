@@ -1,0 +1,53 @@
+title: The Peace Terms
+subtitle: 7 May. The Allies hand Germany their conditions.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 5 and crisis = 0
+max-visits: 1
+on-arrival: {!
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+Q.stability -= 4;
+!}
+
+= The Peace Terms
+
+At Versailles, on 7 May, Clemenceau handed the German delegation the Allies' terms. Germany is to lose Alsace-Lorraine, Posen and West Prussia, its colonies and its fleet, to keep an army of a hundred thousand men, and to accept the guilt for the war and pay for it. Scheidemann tells the Assembly: "What hand would not wither that put itself and us in these chains?"
+
+The whole country is in uproar, from the generals to the trade unions. In Hamburg, Heinrich Laufenberg and Fritz Wolffheim say that only a revolutionary Germany, allied to Soviet Russia, could tear up the treaty, and they say it to nationalist officers as well as to workers. The party must answer.
+
+- @class: Against the victors' peace, and against the German bourgeoisie.
+- @war: A revolutionary war with Soviet Russia against the Entente.
+- @accept: The workers cannot fight another war. Sign, and fight at home.
+- @strike: Use the crisis: strikes against the government.
+
+@class
+subtitle: The Spartacist line: Versailles is the fruit of the war that German capital lost.
+on-arrival: versailles_line = 1; worker_support += 2; luxemburgist_satisfaction += 5; lean_luxemburgist += 2
+
+Our illegal leaflets say that the treaty is a robbery, and that the robbers in Paris and the robbers in Berlin understand each other perfectly. It is not what the crowds want to hear, but it holds.
+
+@war
+subtitle: The Hamburg Left Radicals' line. Popular this month; the rest of the party is alarmed.
+on-arrival: versailles_line = 2; militancy += 5; worker_support += 3; ultraleft_satisfaction += 6; luxemburgist_satisfaction -= 6; unionist_satisfaction -= 4; lean_ultraleft += 2; independence -= 2; stability -= 2
+
+The Zentrale lets the Hamburg line stand. Some nationalist students come to our meetings. Some of our workers stop coming.
+
+@accept
+subtitle: The Right's line, close to the Independents'. Sober, and unpopular.
+on-arrival: versailles_line = 3; uspd_relation += 5; worker_support -= 2; unionist_satisfaction += 5; ultraleft_satisfaction -= 4; lean_unionist += 2
+
+Our paper says what the Independents say: there is no army left to refuse with, and the workers will not die for the Saar. The nationalists call us traitors. They called us that already.
+
+@strike
+subtitle: The Left's answer: the government is weak, so hit it now.
+on-arrival: versailles_line = 4; militancy += 6; repression += 5; offensive_satisfaction += 6; lean_offensive += 2
+
+Our people call strikes in Berlin and Leipzig "against the government of hunger and defeat". They are smaller than we hoped, and the police are waiting.

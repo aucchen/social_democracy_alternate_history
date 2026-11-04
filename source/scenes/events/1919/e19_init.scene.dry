@@ -1,0 +1,84 @@
+title: 1919 setup
+view-if: e19_init_done = 0
+tags: event
+priority: 100
+max-visits: 1
+on-arrival: {!
+Q.e19_init_done = 1;
+// only set what is not set yet, so test presets are not overwritten
+var start = {
+    // shared flags (see the writing guide)
+    jogiches_alive: 1,
+    bavaria_soviet: 0,
+    heidelberg_outcome: 0,
+    kapd_split: 0,
+    levi_chair: 0,
+    versailles_signed: 0,
+    constitution_adopted: 0,
+    // who chairs the Zentrale, for text
+    party_chair: 'Rosa Luxemburg',
+    // the January uprising
+    crisis_january: 0,
+    jan_line: 0,
+    jan_talks: 0,
+    january_outcome: 0,
+    jan_arms_done: 0,
+    jan_garrison_done: 0,
+    jan_strike_done: 0,
+    jan_hide_done: 0,
+    lux_risk: 0,
+    lieb_risk: 0,
+    // spring 1919
+    radek_prison: 0,
+    rote_fahne_banned: 0,
+    bremen_line: 0,
+    ruhr_line: 0,
+    halle_line: 0,
+    march_line: 0,
+    // Bavaria
+    bav_started: 0,
+    crisis_bavaria: 0,
+    bav_prep: 0,
+    levine_sent: 0,
+    bav_power: 0,
+    bav_peasants: 0,
+    bav_solidarity: 0,
+    bav_negotiated: 0,
+    bav_red_army_done: 0,
+    bav_bread_done: 0,
+    bav_solidarity_done: 0,
+    bav_talks_done: 0,
+    bav_talks: 0,
+    bav_hostages: 1,
+    bav_result: 0,
+    levine_escape: 0,
+    levine_alive: 1,
+    liebknecht_march_death: 0,
+    // summer
+    underground_line: 0,
+    versailles_line: 0,
+    natbol_line: 0,
+    // Heidelberg
+    heid_mandates: 0,
+    heid_radek: 0,
+    heid_natbol: 0,
+    heid_left: 0,
+    heid_support: 0,
+    heid_for: 0,
+    heid_against: 0,
+    heid_pass: 0,
+    heid_members_lost: 0,
+    heid_fight: 0,
+    heid_already: 0,
+    heid_lost_names: 0,
+    heid_split_share: 0.7,
+    e19_split_done: 0,
+    leipzig_line: 0
+};
+for (var k in start) {
+    if (Q[k] === undefined) {
+        Q[k] = start[k];
+    }
+}
+!}
+go-to: post_event

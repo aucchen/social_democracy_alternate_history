@@ -1,0 +1,53 @@
+title: The Talks Fail
+subtitle: The Independents try to mediate.
+new-page: true
+tags: event
+view-if: crisis_january = 1 and crisis_time = 1
+max-visits: 1
+
+= The Talks Fail
+
+For two days, Kautsky, Breitscheid and Oskar Cohn of the Independents have gone back and forth between the Chancellery and the Revolutionary Committee. The government wants the newspaper buildings cleared before it will talk about anything. The Committee wants Eichhorn back and Ebert gone.
+
+On 8 January the government issues a proclamation: "The hour of reckoning is near." Noske's volunteers are drilling in Dahlem, and the middle-class districts are forming citizens' guards. [? if crisis_momentum >= 55 : The streets are still ours, and the government knows it. ?][? if crisis_momentum < 55 : The crowds are thinner every morning. ?]
+
+[? if jan_line = 3 : Our delegates are at the table. The fighters in the buildings do not trust them. ?][? if jan_line = 1 : Our delegates are not at the table. We have said that there is nothing to negotiate. ?]
+
+- @demand: No deal while Ebert governs.
+- @eichhorn: Talk, but hold the buildings until Eichhorn is restored.
+- @evacuate: Accept the mediation and leave the buildings.
+
+@demand
+subtitle: The Left and the Left Radicals: the talks are a trap.
+on-arrival: crisis_momentum += 4; militancy += 4; ultraleft_satisfaction += 5; offensive_satisfaction += 5; lean_offensive += 1; lean_ultraleft += 1; uspd_relation -= 5; jan_talks = 0; lux_risk += 5; lieb_risk += 5
+
+The Committee breaks off the talks. Both sides now wait for the guns.
+
+@eichhorn
+subtitle: The Spartacist position: a limited demand the workers understand.
+on-arrival: crisis_momentum += 2; luxemburgist_satisfaction += 4; lean_luxemburgist += 1; uspd_relation += 3
+
+The demand is reasonable, and the government rejects it. At least the workers can see who refused.
+
+@evacuate
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's choice. Fewer will die. Berlin will remember who gave in.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.jan_talks = 1;
+Q.crisis_momentum -= 8;
+Q.militancy -= 5;
+Q.uspd_relation += 8;
+Q.unionist_satisfaction += 8;
+Q.ultraleft_satisfaction -= 10;
+Q.lean_unionist += 2;
+Q.district_berlin_loyalty -= 8;
+Q.lux_risk -= 8;
+Q.lieb_risk -= 8;
+!}
+
+The Zentrale accepts the terms and tells the occupiers to go home. Some do. The *Vorwärts* garrison stays.
