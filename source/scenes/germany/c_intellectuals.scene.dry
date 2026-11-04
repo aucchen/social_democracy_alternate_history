@@ -1,0 +1,38 @@
+title: Artists and Intellectuals
+new-page: true
+view-if: crisis = 0 and c_intellectuals_timer <= 0
+on-arrival: c_intellectuals_timer = 5; month_actions += 1
+frequency: 150
+is-card: true
+tags: germany
+
+= Artists and Intellectuals
+
+Revolution is fashionable in the cafés of Berlin. George Grosz draws generals and profiteers with pigs' faces; John Heartfield and his brother Wieland Herzfelde print them at the Malik-Verlag. [? if time >= 2 : Käthe Kollwitz has drawn Liebknecht on his bier. ?] [? if year >= 1920 : Erwin Piscator has opened a Proletarian Theatre in the workers' halls. ?] Professors and students, some of them veterans, come to our meetings and write to our papers.
+
+Some comrades think the artists will be useful. Others think they are tourists.
+
+- @welcome: Open the party to them.
+- @workers_culture: Build a culture of the workers themselves.
+- @posters: Put them to work for the press.
+- @easy_discard
+
+@welcome
+subtitle: New members, new ideas and donations from the comfortable. Some workers are suspicious.
+on-arrival: resources += 1; worker_support += 1; unity -= 2; luxemburgist_satisfaction += 4; lean_luxemburgist += 1
+
+The party's meetings fill with people in good coats. Their donations pay for the printing; their arguments go on until midnight.
+
+@workers_culture
+subtitle: Choirs, theatre and sport clubs, made by workers for workers. The Left approves.
+on-arrival: worker_support += 2; militancy += 1; unity += 2; offensive_satisfaction += 3; lean_offensive += 1
+
+Workers' choirs sing the Internationale in four voices, and amateur theatres play the Paris Commune in back rooms. It belongs to the workers, and they know it.
+
+@posters
+subtitle: Costs 1 fund. Brilliant posters and caricatures. Worker support rises.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; worker_support += 4; militancy += 2
+
+Heartfield's montages and Grosz's drawings appear on every hoarding in Berlin. The police tear them down in the morning; by evening there are new ones.

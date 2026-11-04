@@ -1,0 +1,55 @@
+title: Clara Zetkin
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_zetkin = 1
+new-page: true
+
+= Clara Zetkin
+
+The grand old woman of the socialist women's movement, friend of Luxemburg and of Lenin alike. She founded International Women's Day, edits the party's women's paper, and is one of the few comrades every current still listens to.
+
+[? if kpd_seats > 0 : She sits in the Reichstag for the party. ?]
+
+- @women
+- @mediate
+- @root: Return to main
+
+@women
+title: Rally Working Women
+subtitle: Women in the factories and the queues come to the party. The Spartacists are pleased.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: {!
+Q.advisor_action_timer = 4;
+Q.last_advisor_action = 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.03;
+}
+Q.worker_support += 4;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+Zetkin tours the textile towns of Saxony and the munitions plants now laid off. Women who were told politics was not for them fill the meeting halls.
+
+@mediate
+title: Mediate Between the Currents
+subtitle: The most aggrieved current is heard out. The party draws together.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: {!
+Q.advisor_action_timer = 5;
+Q.last_advisor_action = 1;
+var low = null;
+for (var f of Q.factions) {
+    if (!Q[f + '_gone'] && (low === null || Q[f + '_satisfaction'] < Q[low + '_satisfaction'])) {
+        low = f;
+    }
+}
+if (low) {
+    Q[low + '_satisfaction'] += 10;
+}
+Q.unity += 5;
+!}
+
+Zetkin spends long evenings with the angriest comrades. She scolds them like a mother and defends them like one, and they leave calmer than they came.

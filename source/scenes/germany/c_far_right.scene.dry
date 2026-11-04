@@ -1,0 +1,49 @@
+title: The Nationalist Right
+new-page: true
+view-if: crisis = 0 and c_far_right_timer <= 0 and time >= 3
+on-arrival: c_far_right_timer = 4; month_actions += 1
+frequency: 200
+is-card: true
+tags: germany
+
+= The Nationalist Right
+
+[? if year <= 1920 : The Freikorps officers who murdered Luxemburg and Liebknecht are heroes in the officers' clubs. Anti-Bolshevik leagues, financed by industrialists, paper the cities with posters of Bolsheviks with knives in their teeth. ?][? if year >= 1921 and year <= 1922 : The Freikorps have gone underground into rifle clubs and labour companies, and the murderers of Organisation Consul pick off the Republic's ministers one by one. ?][? if year >= 1923 : In Munich, a former corporal named Adolf Hitler draws thousands to the beer halls, and his storm troopers break up workers' meetings across Bavaria. ?][? if nsdap_exists = 1 and year < 1923 : In Munich, the [+ nsdap_name +] is one small sect among many. ?]
+
+This month they marched through a workers' district, and a comrade was beaten half to death.
+
+- @break_up: Break up their meetings.
+- @joint: Form joint defence committees with the social democrats.
+- @expose: Expose their paymasters in industry and the Reichswehr.
+- @easy_discard
+
+@break_up
+subtitle: Fists and chair legs. The right is driven off the streets, for now. The Left's line.
+on-arrival: militancy += 5; repression += 4; red_guards_strength += 0.5; red_guards_loyalty += 3; offensive_satisfaction += 5; lean_offensive += 2
+
+Our young workers fill the front rows of the next nationalist meeting. It ends after ten minutes, in the street, with the police arresting mostly our side.
+
+@joint
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Workers of every party defend each other's meetings. The Right's line.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 5;
+Q.worker_support += 2;
+Q.red_guards_strength += 0.5;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 2;
+Q.lean_unionist += 2;
+!}
+
+In the district, the SPD's hall stewards had no use for us yesterday. Today they stand at the same door when the nationalists come.
+
+@expose
+subtitle: Names, cheques and arms depots in the party press. The Republic is shaken a little.
+on-arrival: worker_support += 2; stability -= 1; spd_relation += 1; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+Die Rote Fahne prints the list of firms that pay the leagues, and the addresses of the Reichswehr depots that arm them. The government promises an investigation.

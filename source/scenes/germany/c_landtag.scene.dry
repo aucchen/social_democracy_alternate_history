@@ -1,0 +1,99 @@
+title: State Elections
+new-page: true
+view-if: crisis = 0 and c_landtag_timer <= 0 and time >= 5
+on-arrival: {!
+Q.c_landtag_timer = 6;
+Q.month_actions += 1;
+var states = [
+    ['prussia', 'Prussia'], ['saxony', 'Saxony'], ['thuringia', 'Thuringia'], ['hamburg', 'Hamburg'],
+    ['bavaria', 'Bavaria'], ['brunswick', 'Brunswick'], ['wurttemberg', 'Württemberg'], ['mecklenburg', 'Mecklenburg']
+];
+var s = states[Math.floor(Math.random() * states.length)];
+Q.c_landtag_state = s[0];
+Q.c_landtag_state_name = s[1];
+// the district whose members carry the campaign
+var dist = {prussia: 'berlin', saxony: 'saxony', thuringia: 'thuringia', hamburg: 'hamburg',
+    bavaria: 'bavaria', brunswick: 'halle', wurttemberg: 'saxony', mecklenburg: 'berlin'};
+Q.c_landtag_district = dist[s[0]];
+Q.c_landtag_left_state = (s[0] == 'saxony' || s[0] == 'thuringia' || s[0] == 'brunswick') ? 1 : 0;
+!}
+frequency: 200
+is-card: true
+tags: germany
+
+= State Elections
+
+**[+ c_landtag_state_name +]** votes for a new state parliament. The states run the police, the schools and the courts, and a state government can make the party's life easy or impossible. [? if c_landtag_left_state = 1 : Here the socialist parties together may have a majority, if they can agree. ?]
+
+[? if c_landtag_seats > 0 : The party already holds [+ c_landtag_seats +] seats in the state parliaments. ?]
+
+- @stand: Stand our own lists.
+- @boycott: Boycott the election and campaign for councils.
+- @tolerate: Promise to support a socialist government, on conditions.
+- @easy_discard
+
+@stand
+subtitle: [? if lock_elections = 1 : Against the party line: costs Unity. ?] Our own candidates, our own platform. A few seats, and a voice in the state.
+choose-if: lock_elections < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking part in bourgeois elections.
+on-arrival: {!
+if (Q.lock_elections == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+var won = Math.max(1, Math.round(Q.worker_support / 8 + Math.random() * 3));
+Q.c_landtag_won = won;
+Q.c_landtag_seats += won;
+Q.worker_support += 3;
+Q['district_' + Q.c_landtag_district + '_loyalty'] += 4;
+Q.luxemburgist_satisfaction += 2;
+Q.unionist_satisfaction += 2;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction -= 6;
+}
+Q.lean_luxemburgist += 1;
+Q.lean_unionist += 1;
+!}
+
+The party wins [+ c_landtag_won +] seats in [+ c_landtag_state_name +]. It is not the revolution, but every one of those deputies has a free railway pass and parliamentary immunity.
+
+@boycott
+subtitle: [? if ultraleft_gone = 0 : The Left Radicals' line. ?] No seats; a clear conscience. The workers mostly vote anyway.
+on-arrival: {!
+Q.worker_support -= 1;
+Q.militancy += 2;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 6;
+    Q.lean_ultraleft += 2;
+} else {
+    Q.offensive_satisfaction += 3;
+    Q.lean_offensive += 1;
+}
+Q.unionist_satisfaction -= 3;
+!}
+
+Our posters call on workers to elect councils, not deputies. The turnout in the workers' districts is barely lower than last time.
+
+@tolerate
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Our votes for a socialist government, in exchange for workers' demands. The Right's line.
+view-if: c_landtag_left_state = 1 and time >= 13
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 6;
+if (Q.uspd_exists) {
+    Q.uspd_relation += 4;
+}
+Q.worker_support += 2;
+Q.repression -= 2;
+Q['district_' + Q.c_landtag_district + '_loyalty'] += 4;
+Q.unionist_satisfaction += 5;
+Q.offensive_satisfaction -= 5;
+Q.lean_unionist += 2;
+!}
+
+We will vote for a socialist government, the party declares, if it purges the police, disarms the civil guards and feeds the unemployed. The social democrats accept some of it and our votes keep them in office.

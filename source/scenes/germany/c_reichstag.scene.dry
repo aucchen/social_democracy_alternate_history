@@ -1,0 +1,49 @@
+title: The Reichstag Fraction
+new-page: true
+view-if: crisis = 0 and c_reichstag_timer <= 0 and kpd_seats > 0
+on-arrival: c_reichstag_timer = 4; month_actions += 1
+frequency: 200
+is-card: true
+tags: germany
+
+= The Reichstag Fraction
+
+The party has [+ kpd_seats +] deputies in the Reichstag. [? if kpd_seats <= 4 : They are few, and the house laughs at them when they speak. ?][? if kpd_seats > 4 : They are a real fraction now, with an office, a whip and quarrels of their own. ?] Liebknecht used the Reichstag as a tribune to speak to the masses outside it. Others think a communist deputy should be a socialist legislator like any other, only better.
+
+- @tribune: Use the tribune for agitation.
+- @bills: Table bills with the social democrats.
+- @obstruct: Obstruct the house until they throw us out.
+- @easy_discard
+
+@tribune
+subtitle: Speeches for the workers outside, printed in every party paper.
+on-arrival: militancy += 3; worker_support += 3; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+Our deputies speak about the hunger in Berlin, the murders in Bavaria and the profits of the Ruhr barons. The house empties; the speeches are read in the factories.
+
+@bills
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] A tax on great fortunes, the eight-hour day in law. The Right's line.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 3;
+Q.spd_relation += 4;
+if (Q.uspd_exists) {
+    Q.uspd_relation += 4;
+}
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 2;
+!}
+
+Our bill to seize the war profits fails, but the social democrats had to vote on it, and some voted with us.
+
+@obstruct
+subtitle: Whistles, shouting and a scuffle with the ushers. The Left loves it.
+on-arrival: militancy += 5; repression += 2; offensive_satisfaction += 5; unionist_satisfaction -= 3; lean_offensive += 1
+
+Our deputies drown out the chancellor and are excluded for twenty sittings. Die Rote Fahne calls it the only honest day the house has had.

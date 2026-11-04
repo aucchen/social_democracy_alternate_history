@@ -1,0 +1,68 @@
+title: The Police Raid
+new-page: true
+view-if: crisis = 0 and c_police_timer <= 0 and time >= 2
+on-arrival: {!
+Q.c_police_timer = 4;
+Q.month_actions += 1;
+// the raid falls where the party is strongest
+var best = Q.districts[0];
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_members'] * (0.5 + Math.random()) > Q['district_' + best + '_members']) {
+        best = d;
+    }
+}
+Q.c_police_district = best;
+Q.c_police_district_name = Q.district_names[best];
+!}
+frequency: 150
+is-card: true
+tags: germany
+
+= The Police Raid
+
+At dawn, [? if time < 15 : Noske's troops and the police ?][? if time >= 15 : the Security Police of Carl Severing's Prussian interior ministry, or their colleagues in the other states, ?] raid the party offices in **[+ c_police_district_name +]**. They take the membership files, the typewriters and the district secretary. The papers say they found plans for an uprising. Our comrades say they found the minutes of a dues committee.
+
+- @protest: Protest in the streets.
+- @illegal: Build an illegal apparatus beside the legal party.
+- @legal: Fight it in the courts and the parliaments.
+- @easy_discard
+
+@protest
+subtitle: Thousands march. The district is proud; the police are ready.
+on-arrival: {!
+var d = Q.c_police_district;
+Q['district_' + d + '_loyalty'] += 5;
+Q.militancy += 4;
+Q.repression += 3;
+Q.offensive_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+The district calls out the factories. The march passes the police headquarters in silence, and then not in silence.
+
+@illegal
+subtitle: Costs 1 fund. Duplicate files, hidden presses, cover addresses. The party is harder to strike.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+var d = Q.c_police_district;
+Q['district_' + d + '_loyalty'] += 3;
+Q.repression -= 4;
+Q.red_guards_loyalty += 3;
+Q.unity += 2;
+!}
+
+The next raid will find empty cupboards. The membership lists are copied by hand and kept in three places nobody writes down.
+
+@legal
+subtitle: Complaints, questions in parliament, a lawsuit. Slow, but it keeps the party legal.
+on-arrival: {!
+Q.repression -= (Q.kpd_seats > 0) ? 4 : 3;
+Q.militancy -= 2;
+Q.luxemburgist_satisfaction += 2;
+Q.unionist_satisfaction += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+Our lawyers file complaints and [? if kpd_seats > 0 : our deputies ?][? if kpd_seats = 0 : friendly Independent deputies ?] ask questions in parliament. Months later, the typewriters come back.

@@ -1,0 +1,76 @@
+title: An Opposition Platform
+new-page: true
+view-if: crisis = 0 and c_opposition_timer <= 0 and time >= 3
+on-arrival: {!
+Q.c_opposition_timer = 6;
+Q.month_actions += 1;
+// the strongest current that does not hold the Zentrale
+var opp = null;
+for (var f of Q.factions) {
+    if (f != Q.leading_faction && !Q[f + '_gone'] && (opp === null || Q[f + '_strength'] > Q[opp + '_strength'])) {
+        opp = f;
+    }
+}
+if (opp === null) {
+    opp = Q.leading_faction;
+}
+Q.c_opp_faction = opp;
+Q.c_opp_faction_name = Q.faction_names[opp];
+Q.c_opp_is_rival = (opp != Q.leading_faction) ? 1 : 0;
+!}
+frequency: 200
+is-card: true
+tags: party_affairs
+
+= An Opposition Platform
+
+Forty functionaries of the **[+ c_opp_faction_name +]** have signed a platform against the Zentrale's line and sent it to every district. It accuses the Zentrale of betraying the decisions of the last congress, of hiding the accounts and of listening to the wrong people.
+
+Half of it is unfair. The other half is being read aloud at district meetings.
+
+- @debate: Open a party discussion.
+- @concede: Bring two of their leaders into the Zentrale.
+- @expel: Expel the ringleaders.
+- @easy_discard
+
+@debate
+subtitle: The opposition has its say in the press and at meetings. The Zentrale looks less sure of itself.
+on-arrival: {!
+Q[Q.c_opp_faction + '_satisfaction'] += 8;
+Q[Q.leading_faction + '_satisfaction'] -= 3;
+Q.unity += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+For a month the party argues with itself in public. It is noisy and bitter, and when it is over most of the signatories are still in the party.
+
+@concede
+subtitle: The opposition is pleased and the party draws together. Our own current feels betrayed.
+choose-if: c_opp_is_rival = 1
+unavailable-subtitle: There is no rival current left to bring in.
+on-arrival: {!
+Q[Q.c_opp_faction + '_satisfaction'] += 12;
+Q[Q.leading_faction + '_satisfaction'] -= 6;
+Q.unity += 5;
+Q['lean_' + Q.c_opp_faction] += 1;
+!}
+
+Two of the signatories get seats in the Zentrale, and a desk each. They will be harder to silence now, but also harder to blame us for.
+
+@expel
+subtitle: The line is clear and the Zentrale is obeyed. Their districts bleed members, and their current will not forget.
+on-arrival: {!
+var f = Q.c_opp_faction;
+Q[f + '_satisfaction'] -= 15;
+Q[Q.leading_faction + '_satisfaction'] += 6;
+Q.unity -= 5;
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_faction'] == f) {
+        Q['district_' + d + '_members'] *= 0.92;
+        Q['district_' + d + '_loyalty'] += 6;
+    }
+}
+Q['lean_' + Q.leading_faction] += 1;
+!}
+
+The Central Committee expels the ringleaders for breach of discipline. Their friends hold a protest meeting, and then, mostly, they go home.

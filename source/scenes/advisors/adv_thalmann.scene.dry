@@ -1,0 +1,31 @@
+title: Ernst Thälmann
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_thalmann = 1
+new-page: true
+
+= Ernst Thälmann
+
+A Hamburg transport worker and docker, broad-shouldered, a soldier of the Western Front who came over from the USPD with its left wing. He is no theorist and does not pretend to be. The Hamburg workers trust him because he is one of them.
+
+- @docks
+- @drill
+- @root: Return to main
+
+@docks
+title: Organise the Hamburg Docks
+subtitle: Hamburg grows and follows its own. Worker support rises.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; district_hamburg_members *= 1.06; district_hamburg_loyalty += 6; worker_support += 2; offensive_satisfaction += 3; lean_offensive += 1
+
+Thälmann is on the quays at the shift change, in the harbour bars at night. The dockers sign up in groups.
+
+@drill
+title: Drill the Fighters
+subtitle: Our militias grow, and answer to the party. The police notice.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 5; last_advisor_action = 1; red_guards_strength += 1; red_guards_loyalty += 6; militancy += 3; repression += 2; lean_offensive += 1
+
+On Sunday mornings in the heath outside the city, men who learned their trade in the trenches teach it to younger ones.

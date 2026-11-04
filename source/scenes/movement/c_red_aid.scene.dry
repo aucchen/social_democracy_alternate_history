@@ -1,0 +1,45 @@
+title: Prisoners and Their Families
+new-page: true
+view-if: crisis = 0 and c_red_aid_timer <= 0 and time >= 2
+on-arrival: c_red_aid_timer = 4; month_actions += 1
+frequency: 200
+is-card: true
+tags: movement
+
+= Prisoners and Their Families
+
+[? if repression >= 50 : Thousands of our comrades are in prison or on the run. ?][? if repression < 50 : Hundreds of our comrades are in prison, many of them for the street fighting that followed the revolution. ?] Their wives take in washing; their children are thrown out of school for their fathers' politics. [? if year >= 1921 : The Red Aid committees collect for them in every district, and the collection tins come back half empty. ?][? if year <= 1920 : Prisoners' aid committees collect for them where they can. ?]
+
+- @lawyers: Pay for lawyers.
+- @families: Support the families.
+- @abroad: Smuggle the wanted comrades abroad.
+- @easy_discard
+
+@lawyers
+subtitle: Costs 1 fund. Some comrades go free; the courts are a little more careful.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; repression -= 4; unity += 3; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+The party's lawyers fight every case. Some of them win.
+
+@families
+subtitle: Costs 1 fund. Prisoners' families are fed. The comrades see the party stands by its own.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; worker_support += 3; red_guards_loyalty += 5; unity += 2
+
+Every prisoner's family gets a parcel at the end of the month, and a visit from a comrade who knows their name.
+
+@abroad
+subtitle: The wanted men are safe. Their districts lose them.
+on-arrival: {!
+Q.repression -= 2;
+Q.red_guards_strength -= 0.2;
+Q.offensive_satisfaction += 2;
+if (Q.comintern_member) {
+    Q.independence -= 2;
+}
+!}
+
+[? if comintern_member = 1 : A route via Stettin and the Baltic takes them to Soviet Russia. ?][? if comintern_member = 0 : A route through the mountains takes them to Austria and Czechoslovakia. ?] Some will come back with new names.

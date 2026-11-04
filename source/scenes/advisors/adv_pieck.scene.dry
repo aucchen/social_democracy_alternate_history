@@ -1,0 +1,38 @@
+title: Wilhelm Pieck
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_pieck = 1
+new-page: true
+
+= Wilhelm Pieck
+
+A carpenter from Guben, a founder of the party, and a survivor: he was arrested with Luxemburg and Liebknecht on 15 January and walked out alive. He is no theorist. He keeps the offices open and the money counted.
+
+- @finances
+- @veterans
+- @root: Return to main
+
+@finances
+title: Put the Finances in Order
+subtitle: 2 funds.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; resources += 2
+
+Dues are collected, debts are chased and the accounts are balanced. Pieck signs every receipt himself.
+
+@veterans
+title: Bring Back the Old Spartacists
+subtitle: Veterans who drifted away return to work. The districts steady.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: {!
+Q.advisor_action_timer = 4;
+Q.last_advisor_action = 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 3;
+}
+Q.unity += 4;
+!}
+
+Pieck writes to every comrade from the wartime circles whose address he still has. Many of them answer.

@@ -1,0 +1,53 @@
+title: The Hungarian Comrades
+new-page: true
+view-if: crisis = 0 and c_hungary_timer <= 0 and time >= 2 and year <= 1921
+on-arrival: c_hungary_timer = 5; month_actions += 1
+frequency: 150
+is-card: true
+tags: international
+
+= The Hungarian Comrades
+
+[? if time <= 3 : In Budapest, Béla Kun's young Communist Party, founded by prisoners of war back from Russia, grows by the day. Count Károlyi's republic is too weak to govern and too proud to give way. ?][? if time >= 4 and time <= 7 : Hungary is a Soviet Republic. In March the social democrats merged with Béla Kun's communists and took power without a shot. Now Romanian and Czech armies are closing in, and the Entente blockades the country. ?][? if time >= 8 : The Hungarian Soviet Republic has fallen. Admiral Horthy's officers are hanging communists and Jews across the country, and the survivors have fled to Vienna and Berlin. ?]
+
+[? if year = 1921 : Béla Kun himself now works for the Comintern, and is said to be on his way to Germany. ?]
+
+- @solidarity: Call for solidarity with the Hungarian communists.
+- @lessons: Draw the lesson: no fusion with the social democrats.
+- @warn: Warn against the Hungarians' mistakes.
+- @refugees: Shelter the refugees.
+- @easy_discard
+
+@solidarity
+subtitle: Strikes and demonstrations for Budapest. The Left approves.
+view-if: time <= 7
+on-arrival: militancy += 5; world_revolution += 4; repression += 3; offensive_satisfaction += 4; lean_offensive += 1
+
+[? if time >= 4 : Hands off Soviet Hungary: the slogan is chalked on every wall in Berlin's working-class districts. ?][? if time <= 3 : Our meetings demand the release of Béla Kun and his comrades from the Budapest prisons. ?]
+
+@lessons
+subtitle: The Hungarians fell because they trusted the social democrats. The Left nods; the Independents bristle.
+view-if: time >= 8
+on-arrival: {!
+Q.offensive_satisfaction += 4;
+Q.uspd_relation -= 3;
+Q.unionist_satisfaction -= 2;
+Q.lean_offensive += 1;
+!}
+
+The Zentrale's resolution says that Budapest was betrayed by the very socialists Kun took into his government. The Independents take it personally.
+
+@warn
+subtitle: Power without the majority does not last. The Spartacists agree; Moscow is irritated.
+on-arrival: independence += 3; luxemburgist_satisfaction += 4; offensive_satisfaction -= 3; lean_luxemburgist += 1
+
+A revolution made from above, without councils rooted in the factories and villages, falls as fast as it rose. Rosa Luxemburg wrote as much of Russia. The Hungarians are not grateful for the reminder.
+
+@refugees
+subtitle: Costs 1 fund. Lodgings, papers and work for the exiles.
+view-if: time >= 8
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; world_revolution += 2; unity += 1; repression += 1
+
+Hungarian comrades find beds in Berlin flats and jobs in the party's offices. Some of them are brilliant, and some of them think they know how to make a revolution better than we do.
