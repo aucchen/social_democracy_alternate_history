@@ -1,0 +1,57 @@
+title: Spread the Strike
+subtitle: Central Germany cannot win alone.
+view-if: crisis_march = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Spread the Strike
+
+Couriers come in from Mansfeld every few hours with the same message: we are holding, but we cannot hold alone. The other districts are waiting for a sign from the Zentrale.
+
+- @ruhr: Bring out the Ruhr miners.
+- @berlin: Call out the Berlin factories.
+- @gates: Speak to the social democratic workers at the gates.
+
+@ruhr
+subtitle: The Left's line. Strong if the Ruhr district is loyal to us; costly either way.
+on-arrival: {!
+var gain = (Q.district_ruhr_loyalty >= 50 || Q.ruhr_red_army == 2) ? 8 : 3;
+Q.crisis_momentum += gain;
+Q.district_ruhr_members *= 0.96;
+Q.repression += 2;
+Q.lean_offensive += 1;
+!}
+
+Strike committees form at a dozen pits around Bochum and Gelsenkirchen. The police arrest their leaders the same night.
+
+@berlin
+subtitle: The Left's line. Berlin decides whether this is a national action or a provincial one.
+on-arrival: {!
+var gain = (Q.district_berlin_loyalty >= 50) ? 7 : 3;
+Q.crisis_momentum += gain;
+Q.district_berlin_members *= 0.97;
+Q.offensive_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+The Berlin district calls the factories out. The electrical works answer; the big engineering plants, mostly, do not.
+
+@gates
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's way: persuade, do not command.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids appeals to the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += (Q.e21_march_mode == 1) ? 7 : 4;
+Q.spd_relation += 2;
+Q.worker_support += 1;
+Q.lean_unionist += 1;
+!}
+
+At the factory gates our speakers do not shout. They ask the social democratic workers what they would do if the police came to their town. Some of them answer by joining the strike.

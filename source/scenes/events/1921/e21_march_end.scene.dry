@@ -1,0 +1,76 @@
+title: The End of the March Action
+subtitle: The fighting in Central Germany is over.
+new-page: true
+tags: event
+view-if: crisis_march = 1 and (crisis_time >= 4 or e21_ma_calloff = 1)
+max-visits: 1
+priority: 20
+on-arrival: {!
+Q.crisis = 0;
+Q.crisis_march = 0;
+Q.crisis_name = 0;
+Q.crisis_goal = 0;
+Q.week = 0;
+Q.comintern_rep = 'Karl Radek';
+Q.e21_final_momentum = Q.crisis_momentum;
+var won = Q.crisis_momentum >= 80;
+Q.march_action = won ? 2 : 1;
+var mode = Q.e21_march_mode;
+if (won) {
+    Q.worker_support += (mode == 1) ? 10 : 8;
+    Q.militancy += (mode == 2) ? 10 : 5;
+    Q.stability -= (mode == 2) ? 15 : 6;
+    Q.repression += (mode == 2) ? 4 : 0;
+    Q.red_guards_strength += (mode == 2) ? 6 : 3;
+    Q.red_guards_loyalty += 10;
+    Q.police_loyalty -= 5;
+    Q.district_halle_members *= 1.15;
+    Q.district_halle_loyalty += 20;
+    Q.unity += 8;
+    Q.offensive_satisfaction += (mode == 2) ? 20 : 8;
+    Q.unionist_satisfaction += (mode == 1) ? 12 : 4;
+    Q.luxemburgist_satisfaction += (mode == 1) ? 8 : 0;
+    if (mode == 1) { Q.spd_relation += 5; Q.uspd_relation += 6; }
+    Q.world_revolution += 8;
+    Q.e21_soviet_viable = (mode == 2 && Q.crisis_momentum >= 85 &&
+        (Q.red_guards_strength >= 12 || Q.ruhr_red_army == 2 || Q.kapp_outcome == 3)) ? 1 : 0;
+} else {
+    // losses: deaths, prisoners, and members who simply leave
+    var f = (mode == 2) ? 0.76 : 0.90;
+    var fh = (mode == 2) ? 0.60 : 0.80;
+    if (Q.e21_ma_calloff) { f += 0.04; fh += 0.06; }
+    if (Q.e21_arms_saved) { f += 0.02; }
+    if (Q.crisis_momentum >= 60) { f += 0.03; fh += 0.05; }
+    f = Math.min(f, 0.97);
+    for (var d of Q.districts) {
+        Q['district_' + d + '_members'] *= f;
+    }
+    Q.district_halle_members *= fh;
+    Q.district_halle_loyalty -= 10;
+    Q.repression += (mode == 2) ? 20 : 10;
+    Q.worker_support -= (mode == 2) ? 6 : 2;
+    Q.red_guards_strength *= (mode == 2) ? 0.5 : 0.8;
+    Q.red_guards_arms -= Q.e21_arms_saved ? 4 : ((mode == 2) ? 15 : 6);
+    Q.spd_relation -= (mode == 2) ? 10 : 2;
+    Q.uspd_relation -= (mode == 2) ? 8 : 0;
+    Q.unity -= (mode == 2) ? 10 : 4;
+    Q.luxemburgist_satisfaction -= (mode == 2) ? 15 : 5;
+    Q.unionist_satisfaction -= (mode == 2) ? 6 : 2;
+    Q.offensive_satisfaction -= (mode == 2) ? 4 : 6;
+    Q.world_revolution -= 5;
+    Q.stability += 4;
+}
+Q.e21_members_now = Math.round(Q['district_berlin_members'] + Q['district_hamburg_members'] + Q['district_bremen_members'] + Q['district_ruhr_members'] + Q['district_saxony_members'] + Q['district_thuringia_members'] + Q['district_bavaria_members'] + Q['district_halle_members']);
+!}
+
+= [? if march_action = 2 : Victory in Central Germany ?][? if march_action = 1 : Defeat ?]
+
+[? if march_action = 2 and e21_march_mode = 2 : The Reichswehr does not march. Seeckt will not risk his army in a civil war for Hörsing's sake, and the Prussian government, frightened by the strikes in Berlin and the Ruhr, orders the Security Police out of the copper district. Armed workers hold Mansfeld, Merseburg and the Leuna works. For the first time since 1919, the party has won a fight. ?]
+
+[? if march_action = 2 and e21_march_mode = 1 : The Prussian government gives way. Hörsing's police are withdrawn from the Mansfeld district, the strikers are promised that nobody will be punished, and the factory councils at Leuna are recognised. Social democratic workers who struck beside us say so openly. It is a victory of the whole class, and everybody knows who called it. ?]
+
+[? if march_action = 1 and e21_march_mode = 2 : On 1 April the Zentrale calls off the action. About a hundred and fifty workers are dead, thousands are in prison, and the courts will hand out years of penal servitude. The party that began the year with [+ e21_members_jan +] thousand members has [+ e21_members_now +] thousand left, and the number is still falling. In the factories, social democratic workers remember that communists tried to drive them out with clubs. ?]
+
+[? if march_action = 1 and e21_march_mode = 1 : The strike ends without victory. The police stay in Mansfeld, the leaders of the strike committees are arrested, and the Leuna works are cleared. But the party fought for something every worker understood, and most of its members are still with it: [+ e21_members_now +] thousand. ?]
+
+[? if march_action = 2 and e21_soviet_viable = 1 : In Halle the council of the district is meeting day and night. Some delegates are asking a question nobody dared ask a month ago: why give anything back? ?]

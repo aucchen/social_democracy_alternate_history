@@ -1,0 +1,68 @@
+title: The Communist Working Group
+subtitle: Levi's friends found an organisation of their own.
+new-page: true
+tags: event
+view-if: year = 1921 and month >= 9 and crisis = 0 and levi_split = 1 and levi_in_party = 0 and e21_kag_done = 0
+max-visits: 1
+priority: 8
+on-arrival: e21_kag_done = 1; kag_exists = 1
+
+= The Communist Working Group
+
+Levi's supporters have left the party, or been pushed out of it. Ernst Däumig, Adolph Hoffmann, Otto Brass, Curt Geyer, Paul Malzahn and a group of Reichstag deputies form the **Kommunistische Arbeitsgemeinschaft**, the Communist Working Group, around Levi. They say they are still communists, against Moscow's emissaries and against putschism. They have a newspaper, a Reichstag group and friends in the metalworkers' union.
+
+[? if e21_levi_fate = 4 : They are few: Levi left almost alone, after a victory, and most of his friends stayed. ?][? if e21_levi_fate != 4 : In the districts, members who agreed with Levi are deciding whether to follow. ?]
+
+- @rank_and_file: Win back the rank and file, not the leaders.
+- @renegades: Denounce them as renegades.
+- @talks: Offer the KAG joint work.
+
+@rank_and_file
+subtitle: The Right's way. Patient, and it keeps most of the waverers.
+on-arrival: {!
+var f = (Q.e21_levi_fate == 4) ? 0.99 : 0.93;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= f;
+}
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+Party organisers visit every member who has stopped paying dues. Most are not interested in Levi; they are tired, or out of work. Many come back.
+
+@renegades
+view-if: offensive_gone = 0
+subtitle: The Left's way. Clear lines, and more members lost.
+on-arrival: {!
+var f = (Q.e21_levi_fate == 4) ? 0.97 : 0.89;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= f;
+}
+Q.offensive_satisfaction += 6;
+Q.luxemburgist_satisfaction -= 6;
+Q.unity += 3;
+Q.lean_offensive += 2;
+!}
+
+The Rote Fahne calls the KAG a bridge back to the SPD for deserters. Every member who has doubts is invited to cross it. Thousands do.
+
+@talks
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Spartacist way: treat them as comrades in a different room.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with Levi's group.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+var f = (Q.e21_levi_fate == 4) ? 0.99 : 0.94;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= f;
+}
+Q.luxemburgist_satisfaction += 8;
+Q.offensive_satisfaction -= 8;
+Q.independence += 3;
+Q.lean_luxemburgist += 2;
+!}
+
+The Zentrale proposes joint work in the unions and the Reichstag. Levi accepts, coolly. Moscow asks why we are negotiating with a man the International has expelled.

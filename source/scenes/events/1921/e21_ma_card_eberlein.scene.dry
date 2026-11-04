@@ -1,0 +1,37 @@
+title: The Eberlein Plan
+subtitle: A comrade proposes to manufacture outrage.
+view-if: crisis_march = 1 and e21_march_mode = 2
+max-visits: 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Eberlein Plan
+
+Hugo Eberlein, sent by the Zentrale to Central Germany, has a plan to make the workers angry enough to come out. Bombs at railway lines and munitions trains. Perhaps a staged attack on our own offices, or the faked kidnapping of a party leader, to be blamed on the right.
+
+He says the masses need a shock. Some members of the Zentrale do not want to know the details.
+
+- @approve: Approve it.
+- @forbid: Forbid it outright.
+- @remove: Forbid it, and recall Eberlein.
+
+@approve
+subtitle: The Left's logic, carried to its end. If it comes out, it will poison everything.
+on-arrival: e21_ma_eberlein = 1; crisis_momentum += 4; repression += 6; luxemburgist_satisfaction -= 12; unionist_satisfaction -= 6; offensive_satisfaction += 2; lean_offensive += 1
+
+A few bombs go off in the week that follows. A railway bridge is damaged. Nobody believes the right did it.
+
+@forbid
+subtitle: The Spartacist line: we do not deceive the workers.
+on-arrival: luxemburgist_satisfaction += 5; lean_luxemburgist += 1
+
+The Zentrale forbids it. Eberlein shrugs and goes back to organising the fighting groups.
+
+@remove
+subtitle: The Spartacists and the Right together. The Left calls it weakness.
+on-arrival: luxemburgist_satisfaction += 6; unionist_satisfaction += 4; offensive_satisfaction -= 5; unity -= 2; lean_luxemburgist += 1; lean_unionist += 1
+
+Eberlein is recalled to Berlin and his plan goes into the Zentrale's safe. It will not stay secret forever.

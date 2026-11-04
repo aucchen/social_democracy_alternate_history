@@ -1,0 +1,157 @@
+title: Hörsing Moves
+subtitle: The police are coming to the Mansfeld copper district.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 3 and e21_kun_done = 1 and e21_march_started = 0
+max-visits: 1
+priority: 9
+on-arrival: {!
+Q.e21_march_started = 1;
+Q.e21_lux_leads = (Q.leading_faction == 'luxemburgist') ? 1 : 0;
+var lux_line = (Q.history_luxemburgist || 0) >= (Q.history_offensive || 0);
+Q.e21_can_avoid = 0;
+if (Q.e21_lux_leads == 1 && (lux_line || Q.e21_offensive_plan == 1)) { Q.e21_can_avoid = 1; }
+if (Q.luxemburg_alive == 1 && Q.e21_offensive_plan != 3) { Q.e21_can_avoid = 1; }
+if (Q.kapp_outcome == 3 && Q.e21_offensive_plan != 3) { Q.e21_can_avoid = 1; }
+!}
+
+= Hörsing Moves
+
+On 16 March Otto Hörsing, the Social Democratic Oberpräsident of the Prussian province of Saxony, announces that the Security Police will occupy the Mansfeld copper district and the chemical works around Merseburg. He speaks of thefts, wildcat strikes and armed bands. Everyone knows the real reason: Halle-Merseburg is the reddest district in Germany, and it is ours.
+
+[? if e21_offensive_plan = 3 : This is the pretext Kun was waiting for. In the Zentrale, nobody asks whether we are ready; the question is only how fast we can strike. ?][? if e21_offensive_plan = 2 : The strike committees we prepared are ready. The question is what to use them for. ?][? if e21_offensive_plan = 1 : We refused Kun's offensive. Now the enemy has attacked first, and Kun, from his hotel, says that history has made the decision for us. ?][? if e21_offensive_plan = 0 : The Zentrale has made no plans. It has to decide in a night. ?]
+
+[? if kapp_outcome = 3 : Hörsing acts for the Prussian government, not for the workers' government in Berlin. Its ministers are asking us, privately, not to give him the fight he wants. ?]
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg writes one sentence in the margin of the Zentrale's draft call to arms: "A party that rises because it is impatient will be beaten because it is alone." ?]
+
+The police will enter the district on 19 March. The miners are already talking about striking.
+
+- @rising: Call the workers to arms.
+- @strike: Call a defensive general strike in Central Germany.
+- @refuse: Protest, but refuse the provocation.
+- @everywhere: Rise everywhere at once.
+
+@rising
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's line, and Kun's: answer the police with rifles, and set Germany alight.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_march_mode = 2;
+var m = 30;
+if (Q.e21_offensive_plan == 3) { m += 5; }
+if (Q.e21_offensive_plan == 2) { m += 8; }
+if (Q.ruhr_red_army == 2) { m += 12; }
+if (Q.kapp_outcome == 3) { m -= 10; }
+if (Q.vkpd_formed != 1) { m -= 10; }
+m += Math.min(8, Q.worker_support / 5);
+m += Math.min(8, Q.red_guards_strength / 3);
+Q.crisis = 1;
+Q.crisis_march = 1;
+Q.crisis_time = 0;
+Q.week = 1;
+Q.crisis_name = 'The March Action';
+Q.crisis_goal = 'Hold Central Germany, bring out the rest of the country, and keep the party alive.';
+Q.crisis_momentum = Math.round(m);
+Q.militancy += 10;
+Q.repression += 8;
+Q.offensive_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 10;
+Q.lean_offensive += 3;
+Q.lean_luxemburgist -= 1;
+!}
+
+On 17 March the Zentrale decides to answer force with force. The Rote Fahne of the next day calls on the workers to take up arms: whoever is not with us is against us. In the Mansfeld pits, the miners down tools on 21 March, and the first shots are fired.
+
+@strike
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Right's answer: defend the district with the strike, not the rifle, and keep the other workers with us.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids occupations and council action.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_march_mode = 1;
+var m = 34;
+if (Q.e21_offensive_plan == 2) { m += 10; }
+if (Q.e21_offensive_plan == 3) { m -= 4; }
+if (Q.ruhr_red_army == 2) { m += 8; }
+if (Q.kapp_outcome == 3) { m += 12; }
+if (Q.vkpd_formed != 1) { m -= 10; }
+if (Q.open_letter == 1) { m += 4; }
+m += Math.min(10, Q.worker_support / 4);
+Q.crisis = 1;
+Q.crisis_march = 1;
+Q.crisis_time = 0;
+Q.week = 1;
+Q.crisis_name = 'The March Strike';
+Q.crisis_goal = 'Drive the police out of Central Germany with the strike, without being isolated.';
+Q.crisis_momentum = Math.round(m);
+Q.militancy += 5;
+Q.repression += 4;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 4;
+Q.lean_unionist += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+The Zentrale calls a strike in defence of the Mansfeld district and the Leuna works, against the police occupation and for nothing else. The call is printed beside an appeal to the social democratic and independent workers to join it.
+
+@refuse
+subtitle: The Spartacist line. The Left and Kun will never forgive it, and the district will fight anyway.
+choose-if: e21_can_avoid = 1
+unavailable-subtitle: The Zentrale has committed itself to the offensive. It cannot back down now.
+on-arrival: {!
+Q.e21_march_mode = 0;
+Q.march_action = 0;
+Q.repression += 3;
+Q.worker_support += 2;
+Q.independence += 6;
+Q.district_halle_loyalty -= 10;
+Q.district_halle_members *= 0.95;
+Q.offensive_satisfaction -= 15;
+Q.luxemburgist_satisfaction += 10;
+Q.unionist_satisfaction += 4;
+Q.militancy -= 4;
+Q.lean_luxemburgist += 3;
+Q.lean_offensive -= 2;
+!}
+
+The Zentrale protests in the Landtag and in the press, calls for mass meetings and tells the district not to take up arms. The police occupy Mansfeld on 19 March.
+
+[? if kapd_exists = 1 : Max Hoelz, who answers to nobody, comes anyway with his bands. He robs banks and blows up a courthouse, and is hunted down within two weeks. ?][? if kapd_exists = 0 : A few hotheads fight beside Max Hoelz's bands for a week, and are hunted down. ?] The district is bitter, but the party is still standing. In Moscow, Kun writes that the German party has failed its first test.
+
+@everywhere
+view-if: ultraleft_gone = 0
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left Radicals' answer: the councils must rise in every city, now.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_march_mode = 2;
+var m = 26 + Math.min(8, Q.red_guards_strength / 3);
+if (Q.ruhr_red_army == 2) { m += 12; }
+Q.crisis = 1;
+Q.crisis_march = 1;
+Q.crisis_time = 0;
+Q.week = 1;
+Q.crisis_name = 'The March Action';
+Q.crisis_goal = 'Hold Central Germany, bring out the rest of the country, and keep the party alive.';
+Q.crisis_momentum = Math.round(m);
+Q.militancy += 14;
+Q.repression += 10;
+Q.ultraleft_satisfaction += 12;
+Q.unionist_satisfaction -= 10;
+Q.luxemburgist_satisfaction -= 12;
+Q.lean_ultraleft += 3;
+!}
+
+The call goes out to every district at once: occupy the factories, arm the councils, overthrow the government. Hamburg and Bremen answer first. Most of Germany does not answer at all.

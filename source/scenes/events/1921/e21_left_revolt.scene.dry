@@ -1,0 +1,53 @@
+title: The Left Revolts
+subtitle: The Berlin Left accuses the Zentrale of cowardice.
+new-page: true
+tags: event
+view-if: year = 1921 and month >= 4 and crisis = 0 and e21_march_started = 1 and e21_march_mode = 0 and e21_after_done = 0
+max-visits: 1
+priority: 12
+on-arrival: e21_after_done = 1; comintern_rep = 'Karl Radek'
+
+= The Left Revolts
+
+Béla Kun has gone back to Moscow, and his report has gone ahead of him: the German Zentrale refused to fight when the enemy attacked. In Berlin, Ruth Fischer and Arkadi Maslow have carried a resolution through the district conference condemning the "passivity" of the leadership. Hamburg has followed. Halle-Merseburg, which was left alone against Hörsing's police, is bitter.
+
+But the party has kept its members, its presses and its contacts in the unions. In the factories, the social democratic workers say, grudgingly, that the communists did not walk into the trap.
+
+- @stand: Stand by the decision.
+- @seats: Give the Left seats in the Zentrale.
+- @arbitrate: Ask Moscow to arbitrate.
+
+@stand
+subtitle: The Spartacist line. The Left will carry its grievance to Moscow.
+on-arrival: independence += 5; offensive_satisfaction -= 10; luxemburgist_satisfaction += 6; worker_support += 2; lean_luxemburgist += 2
+
+The Zentrale publishes a long statement: a party that lets its enemies choose the day of battle will lose every battle. It is reprinted by the USPD.
+
+@seats
+subtitle: The Left becomes the junior partner in the Zentrale. Peace, at a price.
+on-arrival: {!
+Q.junior_faction = 'offensive';
+Q.offensive_satisfaction += 15;
+Q.luxemburgist_satisfaction -= 5;
+Q.unity += 5;
+Q.lean_offensive += 1;
+!}
+
+Ruth Fischer and two of her allies join the Zentrale. The party line now has to be agreed with Berlin. Nobody expects it to be easy.
+
+@arbitrate
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] The Comintern congress will decide who was right.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids handing our affairs to Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 6;
+Q.unity += 3;
+Q.offensive_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+Both sides agree to put the case before the Third Congress of the International in June. Until then, a truce.

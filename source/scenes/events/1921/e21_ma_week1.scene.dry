@@ -1,0 +1,56 @@
+title: The General Strike Call
+subtitle: Central Germany is fighting. Will the rest of the country follow?
+new-page: true
+tags: event
+view-if: crisis_march = 1 and crisis_time = 1
+max-visits: 1
+priority: 10
+
+= The General Strike Call
+
+The Mansfeld pits are idle and the Security Police are in Eisleben and Hettstedt. [? if e21_march_mode = 2 : Max Hoelz has arrived from the Vogtland with his armed bands. They hold villages for a day, rob banks to pay the fighters, and blow up rail lines and a courthouse. The press calls them bandits, and some of them are. ?][? if e21_march_mode = 1 : The strike is solid in the copper district and spreading to the chemical works. Max Hoelz has arrived from the Vogtland with his armed bands, against our wishes, and the press is full of his robberies. ?]
+
+In Hamburg on 23 March the unemployed have occupied the Vulcan and Blohm und Voss shipyards, and the police have cleared them with rifle fire. Elsewhere, the factories are working. The Zentrale must decide how far to widen the fight.
+
+- @national: Call a general strike across Germany.
+- @regional: Keep the strike to Central Germany.
+- @appeal: Ask the SPD and USPD workers to strike with us.
+
+@national
+subtitle: The Left's line, and what the Zentrale did on 24 March. Everything depends on whether the workers come out.
+on-arrival: {!
+var gain = (Q.worker_support >= 30) ? 10 : ((Q.worker_support >= 20) ? 5 : 1);
+Q.crisis_momentum += gain;
+Q.e21_strike_gain = gain;
+Q.militancy += 6;
+Q.repression += 5;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+The call goes out on 24 March: a general strike throughout the Reich. [? if e21_strike_gain >= 10 : Hundreds of thousands answer it. For two days it looks as though the country might follow. ?][? if e21_strike_gain < 10 : In the Ruhr and in Berlin a minority comes out. Most workers read the call in the papers and go to work. ?]
+
+@regional
+subtitle: The Right's caution: fight where we are strong, and nowhere else.
+on-arrival: crisis_momentum += 3; unionist_satisfaction += 4; offensive_satisfaction -= 4; lean_unionist += 1
+
+The Zentrale keeps the strike to the province of Saxony and its neighbours. The Left says we are leaving Mansfeld to die alone. But no district is ordered into a fight it cannot win.
+
+@appeal
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Open Letter's method, in the middle of the fight.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any appeal to the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+var gain = (Q.spd_relation >= 20 || Q.open_letter == 1) ? 8 : 3;
+Q.crisis_momentum += gain;
+Q.spd_relation += 3;
+Q.uspd_relation += 4;
+Q.lean_unionist += 1;
+Q.lean_luxemburgist += 1;
+!}
+
+Our appeal goes to every SPD and USPD branch in Central Germany: defend the district together against Hörsing's police. Here and there, local branches join the strike committees against their own leaders' orders.

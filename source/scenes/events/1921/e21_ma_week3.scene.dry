@@ -1,0 +1,40 @@
+title: The Reckoning
+subtitle: The Zentrale must decide whether to go on.
+new-page: true
+tags: event
+view-if: crisis_march = 1 and crisis_time = 3 and e21_ma_calloff = 0
+max-visits: 1
+priority: 10
+
+= The Reckoning
+
+[? if crisis_momentum >= 65 : Against every expectation, the line is holding. The police have left half the copper district, the strike committees run Merseburg, and in Berlin and the Ruhr the strike is growing instead of shrinking. Hörsing is asking for the Reichswehr; General von Seeckt is asking for written orders. ?][? if crisis_momentum >= 35 and crisis_momentum < 65 : Nothing is decided. The strike holds in Central Germany and nowhere else. Every day it lasts, the police gain ground and the party loses members to arrest. ?][? if crisis_momentum < 35 : The action is collapsing. Outside Central Germany the strike call has been ignored. In some cities our people have tried to drive other workers out of the factories by force, and been beaten back by them. Thousands are in prison. ?]
+
+[? if e21_ma_eberlein = 1 : The bombs set off on Hugo Eberlein's orders have killed no one important and convinced no one. The police are already following the trail back to the Zentrale. ?]
+
+- @calloff: Call off the action.
+- @fight: Fight on.
+- @retreat: Retreat in order, and keep the arms.
+
+@calloff
+subtitle: The Spartacists and the Right ask for it. Saves what can still be saved.
+on-arrival: e21_ma_calloff = 1; luxemburgist_satisfaction += 4; unionist_satisfaction += 4; offensive_satisfaction -= 6; lean_luxemburgist += 1; lean_unionist += 1
+
+The Zentrale decides to end the action. The order goes out to the districts by courier: return to work, together, and hide the arms.
+
+@fight
+subtitle: The Left's line. One more week, and perhaps the country will move.
+on-arrival: {!
+Q.crisis_momentum += (Q.militancy >= 60) ? 6 : 2;
+Q.repression += 5;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+The Zentrale orders the districts to hold on. The Rote Fahne, printed in secret, promises that the decisive days are coming.
+
+@retreat
+subtitle: The Right's caution. A little ground lost now; much less lost later.
+on-arrival: e21_arms_saved = 1; crisis_momentum -= 2; red_guards_arms += 4; unionist_satisfaction += 4; lean_unionist += 1
+
+The fighting groups are told to pull back to the villages, bury their rifles and wait. The strike committees stay in being.

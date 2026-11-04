@@ -1,0 +1,67 @@
+title: The Civil Guards Disbanded
+subtitle: The Allies demand that Bavaria give up its private army.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 6 and crisis = 0
+max-visits: 1
+priority: 8
+on-arrival: {!
+Q.civil_guards_dissolved = 1;
+Q.civil_guards_strength = Math.min(Q.civil_guards_strength, 60);
+!}
+
+= The Civil Guards Disbanded
+
+The London Ultimatum also demanded disarmament. Under that pressure the Reich has ordered the dissolution of the civil guards, the armed citizens' militias formed in 1919 against the left. The largest of them, the Bavarian Einwohnerwehr of Georg Escherich, had hundreds of thousands of men and its own artillery. Gustav von Kahr's Bavarian government resisted for months, and gives way in June.
+
+Nobody believes the rifles have really been handed in. They are being moved to monasteries, estates and the cellars of the Orgesch, Escherich's national organisation, and to the Freikorps that are now called sports clubs.
+
+On 9 June Karl Gareis, leader of the Independents in the Bavarian Landtag, who had exposed the secret arms dumps, was shot dead outside his house in Munich. His murderers have not been found.
+
+[? if bavaria_soviet = 2 : For the council republic in Bavaria, the dissolution of the Einwohnerwehr is the best news in two years. Kahr's men will still be waiting across the line. ?]
+
+- @all_arms: Demand that every rifle be handed in.
+- @committees: Form workers' committees to find the hidden arms.
+- @republic: Back the Reich government against Kahr.
+
+@all_arms
+subtitle: The Spartacist line: hold the Republic to its own law.
+on-arrival: civil_guards_strength -= 10; luxemburgist_satisfaction += 4; worker_support += 1; lean_luxemburgist += 1
+
+Our deputies table question after question in the Reichstag and the Landtag, with names and places. A few arms dumps are actually emptied.
+
+@committees
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Left's way: find the arms ourselves, and keep some.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids this kind of council action.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.red_guards_arms += 6;
+Q.civil_guards_strength -= 15;
+Q.repression += 5;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+Railwaymen, farmhands and carters report where the crates are going. Some of the crates never arrive. The police arrest a dozen of our men for theft of state property.
+
+@republic
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's line: side with Berlin, and with the SPD, against Munich.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any common cause with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 4;
+Q.uspd_relation += 3;
+Q.stability += 2;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 2;
+!}
+
+The party supports the Reich's disarmament law against the Bavarian government, and says so beside the SPD in the Reichstag. Kahr calls it proof that Berlin is in the hands of the Marxists.

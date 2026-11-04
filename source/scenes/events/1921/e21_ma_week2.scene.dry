@@ -1,0 +1,75 @@
+title: Leuna
+subtitle: The great chemical works are in the workers' hands, and the guns are coming.
+new-page: true
+tags: event
+view-if: crisis_march = 1 and crisis_time = 2
+max-visits: 1
+priority: 10
+
+= Leuna
+
+The Leuna works near Merseburg, the biggest chemical plant in Europe, have been occupied since the first days of the strike. Thousands of workers live inside the walls. They have rifles, a few machine guns and an armoured train they built themselves in the works' shops.
+
+[? if crisis_momentum >= 65 : Around Leuna the police are hesitant. Their officers have asked Berlin for the Reichswehr, and Berlin has not yet said yes. ?][? if crisis_momentum < 65 : The Security Police have brought up artillery. Their commander has given the occupiers until dawn. ?]
+
+- @hold: Hold the works to the last.
+- @withdraw: Negotiate a withdrawal with honour.
+- @relieve: Send fighters from Halle to break the ring.
+
+@hold
+subtitle: The Left's line. If Leuna holds, the action holds. If it falls, it falls hard.
+on-arrival: {!
+var arms = Q.red_guards_arms + (Q.e21_ma_hoelz ? 10 : 0);
+if (arms >= 30 || Q.crisis_momentum >= 65) {
+    Q.crisis_momentum += 8;
+    Q.e21_leuna = 1;
+} else {
+    Q.crisis_momentum -= 8;
+    Q.e21_leuna = 2;
+    Q.district_halle_members *= 0.92;
+    Q.red_guards_strength -= 2;
+}
+Q.repression += 5;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+[? if e21_leuna = 1 : The guns open up at dawn and the works do not fall. By evening the police have pulled back to the Merseburg road. Leuna becomes a word that is spoken in every factory in Germany. ?][? if e21_leuna = 2 : On 29 March the police shell the works and storm them. Those who surrender are beaten in the yard; some are shot. More than a thousand men are marched away as prisoners. ?]
+
+@withdraw
+subtitle: The Right's line, and the Spartacists'. We lose the works, not the men.
+on-arrival: {!
+Q.e21_leuna = 3;
+Q.crisis_momentum -= 4;
+Q.unionist_satisfaction += 4;
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction -= 6;
+Q.lean_unionist += 1;
+Q.lean_luxemburgist += 1;
+!}
+
+Through a works council member with a brother in the police, the occupiers agree to march out with their heads high and their rifles hidden. The police take an empty factory. The Left calls it capitulation.
+
+@relieve
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] Strike at the police from behind. Needs arms and men we may not have.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed action.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+if (Q.red_guards_strength >= 12 || Q.ruhr_red_army == 2) {
+    Q.crisis_momentum += 10;
+    Q.e21_leuna = 1;
+} else {
+    Q.crisis_momentum -= 5;
+    Q.e21_leuna = 2;
+    Q.red_guards_strength -= 3;
+}
+Q.repression += 6;
+Q.militancy += 4;
+Q.lean_offensive += 2;
+!}
+
+[? if e21_leuna = 1 : Columns of armed workers from Halle and Ammendorf fall on the police lines from the rear. The ring breaks. ?][? if e21_leuna = 2 : The relief column is caught on the open road by machine guns. The survivors scatter, and the works fall on 29 March. ?]

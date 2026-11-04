@@ -1,0 +1,96 @@
+title: The Emissaries
+subtitle: Béla Kun arrives from Moscow with a theory.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 3 and e21_kun_done = 0
+max-visits: 1
+priority: 10
+on-arrival: {!
+Q.e21_kun_done = 1;
+Q.e21_lux_leads = (Q.leading_faction == 'luxemburgist') ? 1 : 0;
+Q.comintern_rep = 'Béla Kun';
+!}
+
+= The Emissaries
+
+In the first days of March three men arrive from Moscow: Béla Kun, who led the Hungarian soviet republic to its fall in 1919, József Pogány and August Guralsky. They come from Zinoviev, and their message is simple. Soviet Russia is isolated, Kronstadt is in revolt, and the German party is sitting on its hands. It must go over to the offensive: act, and if necessary provoke, until the masses move.
+
+In the Rote Fahne, Thalheimer and Frölich are already writing that a revolutionary party cannot wait to be attacked. [? if e21_levi_resigned = 1 : Kun goes to see Levi and Zetkin out of courtesy. Zetkin tells him that his plan is madness. Levi writes to Lenin. ?][? if e21_levi_resigned = 0 and levi_in_party = 1 : Kun goes first to Levi, who still holds the chair. Levi listens for an hour and shows him to the door. ?]
+
+[? if kapp_outcome = 3 : Kun does not hide that the offensive would be aimed at the workers' government too. In his view it is a Kerensky government, and Kerenskys are there to be overthrown. ?]
+
+- @embrace: Adopt the theory of the offensive.
+- @prepare: Prepare the party to defend itself, not to attack.
+- @refuse: Send Kun back to Moscow.
+- @arm: Arm the councils at once.
+
+@embrace
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] The Left's line. The party will strike at the first occasion.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_offensive_plan = 3;
+Q.militancy += 8;
+Q.red_guards_arms += 4;
+Q.independence -= 5;
+Q.offensive_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 10;
+Q.lean_offensive += 3;
+Q.lean_luxemburgist -= 1;
+!}
+
+The Zentrale accepts Kun's line. The districts are told to be ready for action at any moment, and to look for a pretext. Nobody says out loud what kind of pretext.
+
+@prepare
+subtitle: The Right's answer. Costs 1 fund: arms, couriers and strike funds, ready for when the enemy strikes first.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds to prepare anything.
+on-arrival: {!
+Q.resources -= 1;
+Q.e21_offensive_plan = 2;
+Q.red_guards_arms += 8;
+Q.militancy += 3;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+Kun is thanked for his advice and given an office. Meanwhile the Zentrale quietly prepares strike committees, courier lines and arms caches in Central Germany, for a defensive fight that everyone expects to come.
+
+@refuse
+subtitle: The Spartacist answer. Moscow will be angry, and its money will be short.
+choose-if: e21_lux_leads = 1
+unavailable-subtitle: Without Levi at its head, nobody in the Zentrale will defy Moscow's envoys.
+on-arrival: {!
+Q.e21_offensive_plan = 1;
+Q.independence += 10;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+Q.luxemburgist_satisfaction += 10;
+Q.offensive_satisfaction -= 10;
+Q.militancy -= 3;
+Q.lean_luxemburgist += 3;
+Q.lean_offensive -= 1;
+!}
+
+The Zentrale tells Kun that the German party will decide for itself when and how to fight. Kun stays in Berlin anyway, and spends his evenings with Ruth Fischer and the Berlin Left.
+
+@arm
+view-if: ultraleft_gone = 0
+subtitle: The Left Radicals go further than Kun: no more parties, the councils must take power.
+on-arrival: {!
+Q.e21_offensive_plan = 3;
+Q.militancy += 10;
+Q.red_guards_strength += 2;
+Q.repression += 4;
+Q.ultraleft_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 10;
+Q.unionist_satisfaction -= 8;
+Q.lean_ultraleft += 3;
+!}
+
+Hamburg and Bremen send their own men to the Mansfeld pits with rifles. Kun is delighted. The Zentrale is no longer sure who is leading whom.

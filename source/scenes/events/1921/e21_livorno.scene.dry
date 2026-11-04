@@ -1,0 +1,63 @@
+title: Livorno
+subtitle: The Italian Socialist Party splits, and the quarrel comes home.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 1 and e21_open_letter_done = 1 and e21_livorno = 0
+max-visits: 1
+priority: 9
+
+= Livorno
+
+From 15 to 21 January the Italian Socialist Party holds its congress in the Teatro Goldoni at Livorno. The Comintern has sent two envoys, the Hungarian Mátyás Rákosi and the Bulgarian Christo Kabakchiev. Their task is to make the party expel Turati's reformists. Serrati, who leads the majority, accepts the Twenty-One Conditions but refuses to break with Turati on Moscow's timetable.
+
+The envoys break instead. Bordiga's minority walks out singing the Internationale and founds the Communist Party of Italy with a third of the delegates. The great mass of the Italian socialist workers stays with Serrati, outside the International.
+
+[? if levi_in_party = 1 : Paul Levi was in the hall. He comes back convinced that Rákosi has thrown away a mass party to keep a pure sect, and he says so. Rákosi, for his part, has been heard to say that the German party might need a split of its own. ?][? if levi_in_party = 0 : Our delegates come back divided. Some say Rákosi has thrown away a mass party to keep a pure sect. ?]
+
+- @defend: Defend Serrati's majority in the Rote Fahne.
+- @inside: Keep the dispute inside the Zentrale.
+- @endorse: Endorse the Comintern's split.
+
+@defend
+subtitle: The Spartacist line: a party of the masses, and our own judgement. Moscow will hear of it.
+on-arrival: {!
+Q.e21_livorno = 1;
+Q.independence += 8;
+Q.luxemburgist_satisfaction += 8;
+Q.unionist_satisfaction += 2;
+Q.offensive_satisfaction -= 6;
+Q.lean_luxemburgist += 2;
+Q.lean_offensive -= 1;
+!}
+
+Levi's articles say what many think: that you cannot build a communist party by expelling the workers. In the Hotel Lux, the articles are translated and underlined.
+
+@inside
+subtitle: No public quarrel with Moscow. The question will come back at the Central Committee.
+on-arrival: {!
+Q.e21_livorno = 2;
+Q.unity += 3;
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+The Zentrale debates Livorno behind closed doors, and the Rote Fahne prints only the facts. Rákosi takes the silence for weakness.
+
+@endorse
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] The Left's line: the International decides, and it was right to purge.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_livorno = 3;
+Q.independence -= 6;
+Q.offensive_satisfaction += 8;
+Q.luxemburgist_satisfaction -= 8;
+Q.lean_offensive += 2;
+Q.lean_luxemburgist -= 1;
+!}
+
+The Rote Fahne salutes the new Communist Party of Italy and condemns Serrati. [? if levi_in_party = 1 : Levi does not sign the article. Everybody notices. ?]
