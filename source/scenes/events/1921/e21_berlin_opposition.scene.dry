@@ -1,0 +1,46 @@
+title: The Berlin Opposition
+subtitle: Ruth Fischer and Arkadi Maslow turn Berlin against the Zentrale.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 10 and crisis = 0 and offensive_gone = 0 and left_split = 0 and e21_left_leads = 0
+max-visits: 1
+priority: 7
+
+= The Berlin Opposition
+
+The Berlin-Brandenburg district is the biggest in the party, and since the summer it has been run by the Left. Ruth Fischer is twenty-five, Viennese, a brilliant speaker with a gift for contempt. Arkadi Maslow, born in Russia and educated in Germany, writes her theses. Together they have made Berlin into an opposition to the Zentrale.
+
+Their complaint is the united front: it is a road back to the SPD, they say, and the leadership has lost its nerve. In the Berlin factory cells, where unemployment is rising, the argument goes down well.
+
+- @co_opt: Bring Fischer into the Zentrale's work.
+- @isolate: Isolate the Berlin leadership.
+- @summon: Ask Moscow to call Maslow to Moscow.
+
+@co_opt
+subtitle: The Left's influence grows. Berlin calms down.
+on-arrival: offensive_satisfaction += 10; district_berlin_loyalty += 10; unionist_satisfaction -= 4; lean_offensive += 1
+
+Fischer is given responsibility for the party's work among the unemployed. She uses it to build her following across the country.
+
+@isolate
+subtitle: The Right's and the Spartacists' way. Berlin will resent it.
+on-arrival: offensive_satisfaction -= 10; district_berlin_loyalty -= 10; unity -= 2; unionist_satisfaction += 4; luxemburgist_satisfaction += 4; lean_unionist += 1; lean_luxemburgist += 1
+
+The Zentrale sends its own organisers to Berlin and builds a minority of the district around them. Every district meeting becomes a battle.
+
+@summon
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow solves German problems by inviting them to Moscow.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids asking Moscow to intervene.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_maslow_moscow = 1;
+Q.independence -= 5;
+Q.offensive_satisfaction -= 5;
+Q.unity += 2;
+!}
+
+The Executive invites Maslow to Moscow to explain his past, and some questions about his conduct in 1919. He goes, and is kept there. Fischer carries on alone, more bitter than before.

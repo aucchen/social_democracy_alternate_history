@@ -1,0 +1,31 @@
+title: A Mass Party
+subtitle: The new year begins.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 1 and e21_started = 0
+max-visits: 1
+priority: 50
+on-arrival: {!
+Q.e21_started = 1;
+Q.e21_party = (Q.vkpd_formed == 1) ? 'VKPD' : 'KPD';
+Q.e21_lux_leads = (Q.leading_faction == 'luxemburgist') ? 1 : 0;
+Q.e21_levi_leads = (Q.levi_in_party == 1 && (Q.levi_chair == 1 || Q.e21_lux_leads == 1) && Q.e21_lux_leads == 1) ? 1 : 0;
+Q.e21_members_now = Math.round(Q.members);
+Q.e21_members_jan = Q.e21_members_now;
+!}
+
+= January 1921
+
+[? if vkpd_formed = 1 : In December the left wing of the Independents came over to us at the unification congress in Berlin. The party now calls itself the United Communist Party, the **VKPD**, and it is no longer a sect: it claims [+ e21_members_now +] thousand members, dozens of daily papers and the strongest positions in Halle-Merseburg, Thuringia and the Berlin factories. ?]
+
+[? if vkpd_formed = 1 and levi_in_party = 1 : Paul Levi and Ernst Däumig share the chair. ?]
+
+[? if vkpd_formed != 1 : The Independents did not split towards us. The party remains the **KPD**, a party of [+ e21_members_now +] thousand members, while the left wing of the USPD still sits with Crispien and Hilferding, undecided. ?]
+
+[? if kapp_outcome = 3 : Since the defeat of Kapp, Germany has had a government of the workers' parties and the unions. Nobody knows how long it can last, or what the party should be to it: ally, critic or gravedigger. ?]
+
+[? if kapp_outcome = 2 : The generals still rule from Berlin. The party works half in the open and half underground. ?]
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg still writes the leading articles of the Rote Fahne, and nothing important is decided without her. ?]
+
+The great question of the year is not yet asked, but everyone can feel it. The revolution in the West has stalled. In Moscow, Zinoviev and Bukharin want the German party to act. In Berlin, [? if e21_levi_leads = 1 : Levi wants ?][? if e21_levi_leads = 0 : the cautious want ?] to win the majority of the working class first. Between them stand [+ e21_members_now +] thousand impatient members.

@@ -1,0 +1,43 @@
+title: The Plebiscite in Upper Silesia
+subtitle: German or Polish? The miners are asked to choose a nation.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 3 and e21_march_started = 1
+max-visits: 1
+priority: 5
+
+= The Plebiscite in Upper Silesia
+
+On 20 March Upper Silesia, the second coal basin of Germany, votes on whether to stay German or to join Poland, as the Treaty of Versailles decreed. Trains bring tens of thousands of emigrants back from the Ruhr to vote. German and Polish nationalist bands patrol the villages. The Allied commission, French, British and Italian, watches and takes sides.
+
+The result: about six in ten for Germany, four in ten for Poland. The towns voted German, many of the mining villages Polish. Nobody yet knows where the line will be drawn, and both sides are arming.
+
+- @together: Call on Polish and German workers to stand together.
+- @boycott: Denounce the whole plebiscite.
+- @german: Defend the German workers of Upper Silesia.
+- @national: Call for a national front against the Entente.
+
+@together
+subtitle: The Spartacist line: the enemy is the mine owner, whatever language he speaks.
+on-arrival: luxemburgist_satisfaction += 4; worker_support -= 1; independence += 2; lean_luxemburgist += 2
+
+Our Upper Silesian district, with the Polish communists, issues a leaflet in both languages. It is torn down by both nationalist camps.
+
+@boycott
+subtitle: The Left's line: a vote between two bourgeois states is no choice at all.
+on-arrival: offensive_satisfaction += 4; militancy += 2; lean_offensive += 1
+
+The party calls the plebiscite a fraud and refuses to take part. Few workers follow; fewer remember.
+
+@german
+subtitle: Popular in the Reich, and a small betrayal of our principles.
+on-arrival: worker_support += 2; unionist_satisfaction += 2; luxemburgist_satisfaction -= 5; lean_unionist += 1
+
+The Rote Fahne writes that the miners of Upper Silesia should not be handed over to Polish landlords. Our Polish comrades read it with disgust.
+
+@national
+view-if: ultraleft_gone = 0
+subtitle: The National Bolshevism of Laufenberg and Wolffheim: a people's war against Versailles, with Soviet Russia.
+on-arrival: ultraleft_satisfaction += 8; luxemburgist_satisfaction -= 10; unionist_satisfaction -= 4; lean_ultraleft += 2
+
+Hamburg's radicals call for a revolutionary war of the German nation against the Entente. Moscow is embarrassed. The nationalists are interested.

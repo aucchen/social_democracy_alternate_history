@@ -1,0 +1,49 @@
+title: The Trial of Max Hoelz
+subtitle: The red general before a special court.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 6 and crisis = 0 and march_action != 2
+max-visits: 1
+priority: 6
+on-arrival: hoelz_imprisoned = 1
+
+= The Trial of Max Hoelz
+
+Max Hoelz was arrested in Berlin in April, living under a false name. He is tried before a special court in Moabit. He does not defend himself; he accuses. He tells the court about prisoners beaten and shot in March, about the Kapp officers who were never punished, about the hunger in the Vogtland.
+
+On 22 June he is sentenced to penal servitude for life, for a murder he almost certainly did not commit. The courtroom sings the Internationale as he is taken out.
+
+[? if march_action = 0 : He fought in March without us, against our advice. The workers of Central Germany do not care about that. ?][? if march_action = 1 : Hundreds of our own comrades are going through the same courts this summer, with less publicity and similar sentences. ?]
+
+- @campaign: Make him a symbol: a national campaign for Hoelz.
+- @relief: Build a relief organisation for all the prisoners.
+- @distance: Keep our distance from a bank robber.
+
+@campaign
+subtitle: The Left's line. Hoelz is popular, and so is defiance.
+on-arrival: worker_support += 2; militancy += 3; offensive_satisfaction += 5; luxemburgist_satisfaction -= 2; lean_offensive += 1
+
+"Free Max Hoelz" is painted on walls from Plauen to Hamburg. The campaign will last for years.
+
+@relief
+subtitle: The Right's and the Spartacists' way. Costs 1 fund. Slow work that keeps members in the party.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.unity += 4;
+Q.worker_support += 2;
+Q.district_halle_loyalty += 6;
+Q.unionist_satisfaction += 3;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_unionist += 1;
+Q.lean_luxemburgist += 1;
+!}
+
+Committees of Red Aid are formed in every district: lawyers for the accused, parcels for the prisoners, money for their families. Many of the families are not communists. Some become communists.
+
+@distance
+subtitle: Respectable. Central Germany will not like it.
+on-arrival: spd_relation += 2; district_halle_loyalty -= 6; offensive_satisfaction -= 5; luxemburgist_satisfaction += 2
+
+The Rote Fahne reports the sentence in a short notice on page three.

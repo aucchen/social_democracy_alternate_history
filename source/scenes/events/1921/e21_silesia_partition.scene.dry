@@ -1,0 +1,41 @@
+title: The Partition of Upper Silesia
+subtitle: The League of Nations draws the line, and Germany howls.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 10 and crisis = 0
+max-visits: 1
+priority: 8
+on-arrival: {!
+Q.upper_silesia_outcome = 1;
+Q.stability -= 3;
+Q.inflation += 2;
+Q.dnvp_relation -= 2;
+!}
+
+= The Partition of Upper Silesia
+
+On 20 October the Allies accept the League of Nations' line through Upper Silesia. Germany keeps most of the land and most of the voters. Poland gets most of the mines: Kattowitz, Königshütte and the richest coal seams in Europe go east.
+
+The nation is in uproar. [? if spd_in_government = 1 : Wirth resigns in protest, and four days later forms a new cabinet, because nobody else will. ?] The nationalist papers print black borders. The mark falls again on the news.
+
+- @workers: Speak for the miners, not for the nation.
+- @versailles: Denounce Versailles and the League's robbery.
+- @poland: Remind Germany that Polish workers live there too.
+
+@workers
+subtitle: The Right's line: the question is who owns the pits, not which flag flies over them.
+on-arrival: unionist_satisfaction += 4; worker_support += 1; lean_unionist += 1
+
+The Rote Fahne writes that the miners of Kattowitz will be exploited in Polish by the same companies that exploited them in German, and demands their nationalisation on both sides of the line.
+
+@versailles
+subtitle: Popular, and close to the nationalists' tune.
+on-arrival: worker_support += 2; luxemburgist_satisfaction -= 5; offensive_satisfaction += 2; independence += 2; lean_offensive += 1
+
+The party joins the protest against the robbery of Upper Silesia. Its speakers try to make clear that they mean the robbery of the Entente's capitalists, and the crowd hears what it wants to hear.
+
+@poland
+subtitle: The Spartacist line. Principled and unpopular.
+on-arrival: luxemburgist_satisfaction += 6; worker_support -= 2; lean_luxemburgist += 2
+
+The party says what no other German party will say: that the border should be decided by the people who live there, and that they decided by votes and by rifles to be divided. The nationalists call us Poles. Some of us are.

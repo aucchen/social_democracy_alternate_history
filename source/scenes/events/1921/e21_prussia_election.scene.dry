@@ -1,0 +1,51 @@
+title: Prussia Votes
+subtitle: The first election for the united party.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 2 and e21_prussia_done = 0
+max-visits: 1
+priority: 8
+on-arrival: e21_prussia_done = 1
+
+= Prussia Votes
+
+On 20 February Prussia, two thirds of Germany, elects its Landtag. It is the first real test of the [+ e21_party +]. The campaign is short and cold. Our speakers are shouted down in the Catholic Rhineland and cheered in the Mansfeld copper towns.
+
+[? if kapp_outcome = 3 : The workers' government in Berlin has not touched Prussia, where Otto Braun's ministers and the old officials still rule. ?]
+
+What should the campaign be about?
+
+- @bread: Bread, wages and the price of coal.
+- @soviets: Soviet Russia and the councils.
+- @tribune: Parliament as a tribune: say what no one else will.
+
+@bread
+subtitle: The Right's campaign. Wins votes among the unorganised.
+on-arrival: worker_support += 3; unionist_satisfaction += 4; lean_unionist += 1
+go-to: result
+
+@soviets
+subtitle: The Left's campaign. Fires up the party, frightens the voters.
+on-arrival: militancy += 3; worker_support += 1; offensive_satisfaction += 4; lean_offensive += 1
+go-to: result
+
+@tribune
+subtitle: The Spartacist campaign: use the Landtag to expose, not to govern.
+on-arrival: worker_support += 2; luxemburgist_satisfaction += 4; lean_luxemburgist += 1
+go-to: result
+
+@result
+title: The Result
+new-page: true
+on-arrival: {!
+Q.e21_prussia_seats = (Q.vkpd_formed == 1) ? 31 : 9;
+if (Q.vkpd_formed == 1 && Q.worker_support >= 25) {
+    Q.e21_prussia_seats = 34;
+}
+!}
+
+= The Result
+
+[? if vkpd_formed = 1 : The [+ e21_party +] wins 7.4 per cent of the vote and [+ e21_prussia_seats +] seats in the Landtag, more than the rump USPD. In the Merseburg constituency we are the largest party. The SPD remains the strongest party in Prussia, and the coalition will be formed without us, as always. ?][? if vkpd_formed != 1 : The KPD wins [+ e21_prussia_seats +] seats. The Independents, who kept their left wing, do better than we do in every industrial district. ?]
+
+Ernst Reuter, who signs his articles as Friesland, writes that the result proves the party can become the party of the majority. Ruth Fischer writes that it proves nothing at all.
