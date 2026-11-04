@@ -1,0 +1,96 @@
+title: The Cuno Strike
+subtitle: Berlin's factory councils call a general strike against the government.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 8 and e22_workers_gov = 0 and e23_cuno_done = 0 and crisis = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction];
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+Q.inflation = Math.min(100, Q.inflation + 5);
+Q.stability -= 5;
+!}
+
+= The Cuno Strike
+
+The dollar costs four million marks. On 10 August the printers of the Reichsdruckerei, who print the money, walk out, and the presses stop. That evening the general assembly of Berlin's factory councils, where our members are the largest group, calls a general strike to bring down the Cuno government. The ADGB refuses to back it. The SPD hesitates.
+
+By the next morning the strike has spread to the Berlin power stations, the trams and the great works of Siemensstadt, then to Hamburg, the Lausitz, Saxony and the Prussian provinces. Three million workers are out. Most of them have never struck for a political cause before. They are striking because a week's wage buys a loaf of bread.
+
+The party leads a strike that it did not plan. What should it be for?
+
+- @fall: A strike to bring down Cuno: nothing more, nothing less.
+- @workers_gov: A strike for a workers' government.
+- @power: A strike for power: the hundreds to the front.
+
+@fall
+subtitle: The Right's aim. Limited, and it unites the strikers.
+on-arrival: {!
+Q.e23_cuno_aim = 1;
+Q.lean_unionist += 2;
+Q.unionist_satisfaction += 4;
+Q.spd_relation += 3;
+Q.e23_cuno_bonus = 4;
+!}
+go-to: begin
+
+@workers_gov
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Demands a government of the workers' parties. The SPD's left wing is tempted.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids offering the SPD a government.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_cuno_aim = 2;
+Q.lean_unionist += 1;
+Q.lean_luxemburgist += 1;
+Q.spd_relation += 2;
+Q.e23_cuno_bonus = 6;
+!}
+go-to: begin
+
+@power
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's aim. The police and the army will answer it.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_cuno_aim = 3;
+Q.lean_offensive += 3;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 4;
+Q.militancy += 6;
+Q.repression += 5;
+Q.spd_relation -= 4;
+Q.e23_cuno_bonus = 2;
+!}
+go-to: begin
+
+@begin
+title: Three Million on Strike
+new-page: true
+on-arrival: {!
+Q.crisis = 1;
+Q.crisis_cuno = 1;
+Q.crisis_time = 0;
+Q.week = 1;
+Q.crisis_name = 'The Cuno Strike';
+Q.crisis_goal = 'Bring down the Cuno government, and decide how far the strike should go.';
+var m = 36 + Q.worker_support * 0.2 + (Q.unity - 50) * 0.1 + Q.e23_cuno_bonus;
+if (Q.e23_inflation_line == 2) { m += 5; }
+if (Q.red_guards_strength >= 20) { m += 3; }
+Q.crisis_momentum = Math.max(20, Math.min(62, m));
+!}
+
+= Three Million on Strike
+
+The trams stand in their depots. The newspapers do not appear, except ours, printed in a cellar. In the Lustgarten the police wait beside their lorries. [? if e23_cuno_aim = 1 : Our slogan is short. Away with Cuno. ?][? if e23_cuno_aim = 2 : Our slogan is a question to every Social Democrat. Away with Cuno, and who governs then. ?][? if e23_cuno_aim = 3 : Our slogan is the oldest one. All power to the councils. ?]
+
+Every day of the strike will count.

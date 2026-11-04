@@ -1,0 +1,34 @@
+title: The Money Presses
+subtitle: Without the Reichsdruckerei, there is no money to pay anyone.
+view-if: crisis_cuno = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Money Presses
+
+The printers of the Reichsdruckerei are still out, and so are the private firms that print notes on contract. The government cannot pay its officials, its police or the Ruhr strikers. The banks are rationing cash. Every day the presses stand still is a day Cuno cannot govern.
+
+- @picket: Picket the presses day and night.
+- @strike_pay: Let one press run, to print the strikers' pay.
+- @seize: Seize a lorry of fresh notes for the strike fund.
+
+@picket
+subtitle: The strongest pressure on the government. The police will try to break it.
+on-arrival: crisis_momentum += 7; repression += 3; red_guards_loyalty += 2
+
+The printers and the hundreds stand outside the Reichsdruckerei in shifts. A police charge on the second night is beaten back with cobblestones.
+
+@strike_pay
+subtitle: The strikers can hold out longer, and the presses work for us for a day.
+on-arrival: crisis_momentum += 4; worker_support += 2
+
+For one night, a single press prints notes under the eyes of the strike committee. The money goes to the strike kitchens.
+
+@seize
+subtitle: +1 fund. The newspapers call it robbery, and they are not wrong.
+on-arrival: resources += 1; crisis_momentum += 2; spd_relation -= 4; repression += 3
+
+A lorry from the Reichsdruckerei is stopped in Kreuzberg. The notes are worth a fortune at breakfast and much less by supper.

@@ -1,0 +1,77 @@
+title: Hamburg Rises Alone
+subtitle: The courier from Chemnitz arrived too late.
+new-page: true
+tags: event
+view-if: crisis_october = 1 and crisis_time >= 3 and e23_rising_phase = 2 and e23_hamburg_done = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.e23_hamburg_done = 1;
+Q.repression += 8;
+!}
+
+= Hamburg Rises Alone
+
+Before dawn on 23 October, a few hundred armed communists storm the police stations of Barmbek, Schiffbek and Eimsbüttel in Hamburg. They take the rifles and build barricades of paving stones and overturned trams. They believe the whole Reich is rising with them. Nobody has told them that it is not.
+
+The police recover within hours. Marines arrive from Kiel. In Barmbek the fighters hold out for two days, supported by women who carry food and ammunition through the courtyards, while the rest of the city goes to work. [? if offensive_gone = 0 : Ernst Thälmann, who leads the Hamburg district, sends to the Zentrale for orders. ?][? if offensive_gone = 1 : The Hamburg leaders send to the Zentrale for orders. ?]
+
+- @retreat: Get the fighters out, in good order.
+- @disown: Disown the rising as an adventure.
+- @signal: Make Hamburg the signal after all: the Reich rises.
+
+@retreat
+subtitle: Saves lives and the Hamburg organisation. The legend begins.
+on-arrival: {!
+Q.german_october = 1;
+Q.e23_october_done = 1;
+Q.e23_oct_result = 0;
+Q.crisis = 0; Q.crisis_october = 0; Q.crisis_name = 0; Q.crisis_goal = 0;
+Q.district_hamburg_members *= 0.85;
+Q.district_hamburg_loyalty += 6;
+Q.red_guards_strength *= 0.85;
+Q.repression += 6;
+Q.offensive_satisfaction -= 4;
+Q.unionist_satisfaction += 2;
+!}
+
+On the night of 25 October the last fighters slip away through the allotments with their rifles. Twenty-four of them are dead, and seventeen policemen. The party will spend years telling the story of the three hundred of Barmbek, and arguing about whose fault it was.
+
+@disown
+subtitle: The Zentrale keeps its hands clean, and Hamburg never forgives it.
+on-arrival: {!
+Q.german_october = 1;
+Q.e23_october_done = 1;
+Q.e23_oct_result = 0;
+Q.crisis = 0; Q.crisis_october = 0; Q.crisis_name = 0; Q.crisis_goal = 0;
+Q.district_hamburg_members *= 0.8;
+Q.district_hamburg_loyalty -= 15;
+Q.red_guards_strength *= 0.8;
+Q.offensive_satisfaction -= 12;
+Q.unionist_satisfaction += 3;
+Q.unity -= 5;
+Q.lean_unionist += 1;
+!}
+
+*Die Rote Fahne* calls the rising a local action taken without the Zentrale's knowledge. In Hamburg the police read the paper with interest and arrest everyone named in it.
+
+@signal
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] Two days late, and the enemy is warned. The Left demands it.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_rising_phase = 1;
+Q.crisis_name = 'The German Revolution';
+Q.crisis_goal = 'Win the rising that Hamburg began.';
+Q.crisis_momentum -= 6;
+Q.militancy += 10;
+Q.offensive_satisfaction += 10;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 3;
+!}
+
+The Zentrale reverses itself in a night session. The couriers go out again, this time with the signal. In Saxony, Thuringia and Berlin the hundreds dig up their rifles. Hamburg holds out for a third day, and a fourth.

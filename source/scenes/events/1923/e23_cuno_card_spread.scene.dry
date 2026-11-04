@@ -1,0 +1,45 @@
+title: Spread the Strike
+subtitle: Berlin is out. The rest of Germany is wavering.
+view-if: crisis_cuno = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Spread the Strike
+
+The strike is strongest in Berlin and weakest where the unions are strongest. Hamburg's docks are out; its shipyards are not. The Ruhr miners are already on strike against the French. The railwaymen have not moved since their own defeat last year.
+
+- @railways: Send our best speakers to the railway depots.
+- @provinces: Send couriers to every district with the strike call.
+- @ruhr: Bring the Ruhr pit committees into the strike.
+
+@railways
+subtitle: If the trains stop, the strike becomes national. A long shot.
+on-arrival: {!
+if (Q.worker_support >= 30) {
+    Q.crisis_momentum += 9;
+    Q.e23_rail_joined = 1;
+} else {
+    Q.crisis_momentum += 3;
+    Q.e23_rail_joined = 0;
+}
+Q.repression += 2;
+!}
+
+[? if e23_rail_joined = 1 : The Berlin and Leipzig depots vote to come out. By evening the trains stop on the main lines. ?][? if e23_rail_joined = 0 : The railwaymen listen politely and go back to their engines. A few depots stop work for a day. ?]
+
+@provinces
+subtitle: Costs 1 fund. The strike spreads more evenly.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds for couriers.
+on-arrival: resources -= 1; crisis_momentum += 6; worker_support += 2
+
+Couriers on motorcycles carry the strike call to Stettin, Breslau and Königsberg. The provincial towns come out a day late, but they come out.
+
+@ruhr
+subtitle: The Ruhr Left is eager. The French may take advantage.
+on-arrival: crisis_momentum += 5; district_ruhr_loyalty += 4; militancy += 3
+
+The Ruhr pit committees turn their strike against the French into a strike against Cuno. The occupation authorities watch the Germans fight each other with interest.

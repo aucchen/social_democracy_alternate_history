@@ -1,0 +1,71 @@
+title: The Fourth Congress
+subtitle: In Moscow, the International argues about the workers' government.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 12
+max-visits: 1
+priority: 2
+
+= The Fourth Congress
+
+The Fourth Congress of the Communist International closes in Moscow on 5 December, after a month of speeches. Lenin, grey and partly paralysed since his first stroke, spoke for an hour on 13 November, and said the International had passed a resolution too Russian for foreigners to understand. Few of the delegates expect to hear him again.
+
+The great question for the German delegation was the **workers' government**. Radek and Ernst Meyer argued that a government of the workers' parties, even one formed in a parliament, could be a step towards power: if the SPD would break with the bourgeoisie, communists could sit beside its ministers. Ruth Fischer answered that a workers' government could only be another name for the dictatorship of the proletariat, and that anything else was coalition politics in a red shirt. Zinoviev's resolution allowed for both, and five kinds of workers' government in between.
+
+[? if e22_workers_gov = 2 : Our own ministers in Berlin make the debate less theoretical than the delegates would like. ?][? if saxony_government = 1 : Our ministers in Dresden make the debate less theoretical than the delegates would like. ?]
+
+The delegation must say what the German party will take home.
+
+- @broad: Take home Radek's formula: a workers' government can begin in parliament.
+- @narrow: Take home the Left's formula: no coalition, only the dictatorship of the proletariat.
+- @own: Declare that the German party will apply it to German conditions.
+- @zinoviev: Accept the resolution as written, every word of it.
+
+@broad
+subtitle: The Right's line. The road to Saxony and to coalition offers is open.
+on-arrival: {!
+Q.e22_fourth_congress = 1;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 8;
+Q.lean_unionist += 3;
+Q.spd_relation += 3;
+!}
+
+The Zentrale's report to the Central Committee puts it plainly: the party will offer the SPD a workers' government wherever the two parties have a majority, and fight for it where they do not.
+
+@narrow
+subtitle: The Left's line. The radicals are encouraged; the SPD shrugs.
+view-if: offensive_gone = 0
+on-arrival: {!
+Q.e22_fourth_congress = 2;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 3;
+Q.spd_relation -= 3;
+Q.militancy += 3;
+!}
+
+Fischer returns to Berlin in triumph. The workers' government, she tells the district, is a slogan for the street, not for the Landtag.
+
+@own
+subtitle: The Spartacist answer. More independence, and less money from Moscow.
+on-arrival: {!
+Q.e22_fourth_congress = 3;
+Q.independence += 8;
+Q.luxemburgist_satisfaction += 7;
+Q.lean_luxemburgist += 2;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+!}
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg, who did not go to Moscow, writes the German resolution herself. ?][? if luxemburg_alive = 0 : Clara Zetkin's report insists that the German party will choose its own allies. ?] Zinoviev calls it a lapse into federalism, and lets it pass.
+
+@zinoviev
+subtitle: Obeys Moscow word for word. Unity rises; independence falls.
+on-arrival: {!
+Q.e22_fourth_congress = 4;
+Q.independence -= 7;
+Q.unity += 4;
+Q.moscow_subsidy += 1;
+!}
+
+The delegation votes for the resolution in full. At home every current reads in it exactly what it hoped to find.

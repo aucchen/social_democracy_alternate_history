@@ -1,0 +1,86 @@
+title: The Railway Strike
+subtitle: The trains stop, and the President bans the strike.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 2
+max-visits: 1
+
+= The Railway Strike
+
+On 1 February the Reich railway officials walk out. Their salaries are worth half of what they were a year ago. Within a day almost nothing moves between Hamburg and Munich, and President Ebert signs an emergency decree forbidding civil servants to strike. Strikers are threatened with dismissal and prison.
+
+In Berlin the municipal workers come out in sympathy: gas, water and the electric trams stop. The union federation, the ADGB, keeps its distance. The railway union is not one of its own, and its leaders fear a general strike they cannot control.
+
+The strikers are not communists. Most of them voted for the Centre or the SPD. But they are fighting the Republic's first emergency decree against strikers.
+
+- @solidarity: Call solidarity strikes in the big works.
+- @unions: Press the ADGB to back the strikers, inside the unions.
+- @general: Call for a general strike against the decree.
+- @quiet: Keep our members out of it.
+
+@solidarity
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Our factory cells walk out. Strong for a week, then lonely.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_railway = 1;
+Q.militancy += 6;
+Q.worker_support += 3;
+Q.repression += 4;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+Q.district_berlin_loyalty += 4;
+!}
+
+In Berlin, Halle and the Ruhr our cells bring out a few thousand workers. On 7 February the railway officials' leaders settle. Our strikers go back to work with nothing, but they are remembered.
+
+@unions
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] The Right's way. Slow, and it builds our standing in the unions.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the reformist unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_railway = 2;
+Q.worker_support += 4;
+Q.spd_relation += 3;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+Our members move resolutions in a hundred union branches: the federation must defend the right to strike. The ADGB does not move, but its members have seen who stood up for the railwaymen.
+
+@general
+subtitle: The Left's call. Brave, and few will follow it.
+view-if: offensive_gone = 0 or ultraleft_gone = 0
+on-arrival: {!
+Q.e22_railway = 3;
+Q.militancy += 10;
+Q.repression += 8;
+Q.worker_support -= 1;
+Q.offensive_satisfaction += 6;
+Q.ultraleft_satisfaction += 4;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 2;
+Q.spd_relation -= 4;
+!}
+
+*Die Rote Fahne* calls for a general strike to tear up the decree. It does not come. The police raid our offices in three cities, and the strike collapses on 7 February.
+
+@quiet
+subtitle: The party avoids trouble, and the strikers notice.
+on-arrival: {!
+Q.e22_railway = 0;
+Q.worker_support -= 3;
+Q.militancy -= 4;
+Q.offensive_satisfaction -= 5;
+Q.luxemburgist_satisfaction += 2;
+!}
+
+The Zentrale publishes a statement of sympathy and nothing more. The strike ends after a week, with a few concessions and many dismissals.

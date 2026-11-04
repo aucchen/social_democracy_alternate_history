@@ -1,0 +1,100 @@
+title: The Murder of Rathenau
+subtitle: The foreign minister is shot in the Grunewald.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 6
+max-visits: 1
+on-arrival: {!
+Q.rathenau_murdered = 1;
+Q.stability -= 6;
+Q.inflation = Math.min(100, Q.inflation + 4);
+!}
+
+= The Murder of Rathenau
+
+On the morning of 24 June, Walther Rathenau is driven in an open car from his villa in the Grunewald to the Foreign Office. On the Koenigsallee a second car draws alongside. A machine pistol and a hand grenade, and the man who signed Rapallo is dead. The killers belong to the Organisation Consul, the secret army of the Freikorps veterans who murdered Erzberger last summer.
+
+The working-class districts empty into the streets. On 27 June, hundreds of thousands march in Berlin alone. In the Reichstag Chancellor Wirth points at the nationalist benches and says what everyone feels: "The enemy stands on the right."
+
+For once, the SPD, the USPD and the union federation sit down with us. They propose a joint programme: a law against the monarchist leagues, a purge of the officers and judges, an amnesty for the left. The question is what our party wants from these days.
+
+- @front: Sign the joint programme with the SPD, the USPD and the unions.
+- @strike: Call our own general strike: arm the workers, purge the Reichswehr.
+- @hundreds: Form workers' defence squads in every district, now.
+- @aloof: Refuse to defend the bourgeois Republic.
+
+@front
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's united front. Huge marches, and the social democrats set the terms.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any agreement with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_rathenau_front = 1;
+Q.spd_relation += 10;
+Q.uspd_relation += 8;
+Q.worker_support += 6;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 6;
+Q.lean_unionist += 3;
+Q.stability += 3;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.03;
+}
+!}
+
+The four organisations march together on 4 July. A week later the SPD leaders, under pressure from the Centre, drop us from the agreement. But in a hundred towns our members have stood on the same platform as the union secretary, and the workers saw it.
+
+@strike
+subtitle: The Left's call. Militant, and the SPD will not follow.
+view-if: offensive_gone = 0
+on-arrival: {!
+Q.e22_rathenau_front = 2;
+Q.militancy += 10;
+Q.repression += 6;
+Q.worker_support += 2;
+Q.spd_relation -= 5;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 3;
+!}
+
+In Berlin, Halle and Chemnitz our general strike call brings out the big works for a day. Elsewhere the unions' own protests are bigger, and quieter.
+
+@hundreds
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] Raises our own armed squads. The police will call it an army.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids building armed formations.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_rathenau_front = 3;
+Q.red_guards_strength += 4;
+Q.red_guards_arms += 5;
+Q.red_guards_loyalty += 5;
+Q.repression += 8;
+Q.militancy += 5;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+In the weeks after the murder, squads of young workers start drilling in the courtyards of Wedding and the woods outside Chemnitz. They call themselves defence formations. The police have other names for them.
+
+@aloof
+subtitle: The Left Radicals' answer. Our members march anyway, without us.
+view-if: ultraleft_gone = 0
+on-arrival: {!
+Q.e22_rathenau_front = 4;
+Q.worker_support -= 5;
+Q.ultraleft_satisfaction += 6;
+Q.unionist_satisfaction -= 8;
+Q.luxemburgist_satisfaction -= 5;
+Q.unity -= 4;
+Q.lean_ultraleft += 2;
+!}
+
+The Zentrale's statement says the workers have no Republic to defend. Half the party marches regardless, under the unions' banners.

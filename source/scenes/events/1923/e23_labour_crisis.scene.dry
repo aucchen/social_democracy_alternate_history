@@ -1,0 +1,99 @@
+title: The Strike of Capital
+subtitle: Industry and the generals move against the workers' government.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 8 and e22_workers_gov > 0 and e23_labour_crisis_done = 0 and crisis = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.e23_labour_crisis_done = 1;
+Q.inflation = Math.min(100, Q.inflation + 5);
+Q.stability -= 6;
+!}
+
+= The Strike of Capital
+
+The dollar costs four million marks, and the workers' government can no longer pay for the Ruhr. In the second week of August the Reich Association of Industry announces that its members will make no more deliveries to the state on credit. Hugo Stinnes says in the Reichstag lobby that the currency will be saved the day the government is gone. The Bavarian government refuses to forward its taxes to Berlin.
+
+On 12 August General von Seeckt calls on President Ebert. The army, he says, can no longer guarantee order unless the President dismisses the cabinet and gives him emergency powers. Ebert has not yet answered. [? if e22_workers_gov = 2 : Our ministers sit in the cabinet room and wait for his answer like everyone else. ?][? if e22_workers_gov = 1 : The Chancellor asks whether our deputies, and our hundreds, will stand by him. ?]
+
+- @defend: Call out the workers and the hundreds to defend the government.
+- @councils: Demand emergency powers for the factory councils, not for Seeckt.
+- @let_go: Let the government fall rather than fight the army.
+
+@defend
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] A general strike and armed workers against the generals. The decisive battle, now.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking up arms.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis = 1;
+Q.crisis_october = 1;
+Q.e23_october_path = 3;
+Q.e23_rising_phase = 1;
+Q.crisis_time = 2;
+Q.week = 1;
+Q.crisis_name = 'The Defence of the Workers\' Government';
+Q.crisis_goal = 'Defeat Seeckt and the industrialists, and keep the workers\' government in power.';
+var m = 45 + Q.worker_support * 0.3 + Q.red_guards_arms * 0.1 + (Q.e22_workers_gov == 2 ? 6 : 0);
+Q.crisis_momentum = Math.max(35, Math.min(72, m));
+Q.spd_relation += 6;
+Q.militancy += 8;
+Q.lean_offensive += 2;
+Q.lean_unionist += 1;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction += 6;
+!}
+
+The unions, the SPD and our party call a general strike in defence of the government. The hundreds take over the guard of the ministries. Seeckt orders the Reichswehr to stand by.
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Left Radicals' and the Left's answer. A rising from below, in the government's name.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis = 1;
+Q.crisis_october = 1;
+Q.e23_october_path = 3;
+Q.e23_rising_phase = 1;
+Q.crisis_time = 2;
+Q.week = 1;
+Q.crisis_name = 'The Defence of the Workers\' Government';
+Q.crisis_goal = 'Defeat Seeckt and the industrialists, and give the councils the power.';
+var m = 40 + Q.worker_support * 0.3 + Q.militancy * 0.1;
+Q.crisis_momentum = Math.max(30, Math.min(68, m));
+Q.spd_relation -= 4;
+Q.militancy += 12;
+Q.lean_ultraleft += 2;
+Q.lean_offensive += 2;
+Q.ultraleft_satisfaction += 6;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 4;
+!}
+
+The factory councils of Berlin declare themselves the guardians of the workers' government and take over the food supply. The SPD ministers are horrified. Seeckt is delighted: now he has his reason.
+
+@let_go
+subtitle: The government falls. Stresemann comes, and the workers ask what we were for.
+on-arrival: {!
+Q.e22_workers_gov = 0;
+Q.e23_cuno_done = 1;
+Q.chancellor = 'Gustav Stresemann';
+Q.government_name = 'Stresemann cabinet (DVP, Centre, DDP, SPD)';
+Q.spd_in_government = 1; Q.zentrum_in_government = 1; Q.ddp_in_government = 1; Q.dvp_in_government = 1;
+Q.worker_support -= 6;
+Q.spd_relation -= 4;
+Q.stability += 6;
+Q.offensive_satisfaction -= 8;
+Q.unionist_satisfaction -= 3;
+Q.unity -= 4;
+!}
+
+Ebert dismisses the cabinet on 13 August and asks Gustav Stresemann to form a great coalition. The SPD stays in, with fewer ministries. Seeckt does not get his emergency powers, yet.

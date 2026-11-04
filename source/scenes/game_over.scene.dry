@@ -1,15 +1,103 @@
 title: Game Over.
 new-page: true
 on-arrival: game_over = 1
+go-to: verdict
+
+@verdict
+new-page: true
+on-arrival: {!
+if (!Q.ending_id) { Q.ending_id = 6; }
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction] || 'the Zentrale';
+Q.go_lead = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction] || 3;
+var m = Q.members || 0;
+Q.go_size = m < 30 ? 1 : (m < 120 ? 2 : (m < 250 ? 3 : 4));
+Q.go_support = Q.worker_support < 20 ? 1 : (Q.worker_support < 40 ? 2 : (Q.worker_support < 60 ? 3 : 4));
+Q.go_indep = Q.independence < 30 ? 1 : (Q.independence < 60 ? 2 : 3);
+Q.go_unity = Q.unity < 35 ? 1 : (Q.unity < 65 ? 2 : 3);
+Q.go_region = Q.e23_red_region > 0 ? Q.e23_red_region : (Q.ruhr_red_army == 2 ? 2 : (Q.bavaria_soviet == 2 ? 4 : (Q.march_action == 2 ? 5 : 0)));
+Q.go_dict = Q.kapp_outcome == 2 ? 1 : (Q.e23_directory == 1 ? 2 : 3);
+Q.go_germany = Q.e22_workers_gov > 0 ? 1 : (Q.stability >= 35 ? 2 : 3);
+Q.go_spd = Q.spd_relation >= 40 ? 1 : 0;
+Q.go_right = Q.sa_strength >= 10 ? 1 : 0;
+Q.go_guards = Q.red_guards_strength >= 25 ? 1 : 0;
+Q.go_red_bavaria = (Q.bavaria_soviet == 2 && Q.ending_id == 6) ? 1 : 0;
+Q.go_red_ruhr = (Q.ruhr_red_army == 2 && Q.ending_id == 6) ? 1 : 0;
+Q.go_people = (Q.ending_id == 6) ? 1 : 0;
+Q.go_exile = (Q.ending_id == 3 || Q.ending_id == 4) ? 1 : 0;
+Q.go_thaelmann_rise = (Q.go_lead == 2 || Q.e23_reckoning == 2 || Q.e23_reckoning == 4) ? 1 : 0;
+!}
 
 = Game Over
 
-Members: [+ members_display +] thousand. Unity: [+ unity : level +]. Worker support: [+ worker_support : level +].
+[? if ending_id = 1 : **The German Soviet Republic** ?][? if ending_id = 2 : **A Red Island** ?][? if ending_id = 3 : **The Generals** ?][? if ending_id = 4 : **Order Prevails** ?][? if ending_id = 5 : **One Party of the Workers** ?][? if ending_id = 6 : **The Party at the End of 1923** ?]
 
-[? if luxemburg_alive = 1 : Rosa Luxemburg is alive. ?]
-[? if liebknecht_alive = 1 : Karl Liebknecht is alive. ?]
+Members: [+ members_display +] thousand. Unity: [+ unity : level +]. Worker support: [+ worker_support : level +]. Independence from Moscow: [+ independence : level +].
 
-The party is led by the [+ leading_faction_name +].
+[? if ending_id = 1 : In [+ month : month +] [+ year +], a congress of workers' and soldiers' councils meets in the Reichstag building, in the chamber where the war credits were voted in 1914, and proclaims the German Socialist Soviet Republic. The Zentrale of the Communist Party, led by [+ party_leader +], sits on its executive beside left Social Democrats, factory council delegates and soldiers who were wearing the Reichswehr's uniform a month ago. ?]
+
+[? if ending_id = 1 : The new republic nationalises the mines, the great banks and the heavy industry of the Ruhr, gives the land of the Junkers to those who work it, and repudiates Versailles. Officers loyal to Seeckt hold out in East Prussia and Bavaria for the winter. France threatens to march on Frankfurt and does not, because its own workers have filled the streets of Paris. In London, the dockers refuse to load munitions. ?]
+
+[? if ending_id = 1 : Moscow is overjoyed and uneasy. The centre of the world revolution has moved west, to a country with three times Russia's industry and a working class that reads. Lenin, dying in Gorki, is told the news and is said to have wept. Whether Germany's councils will stay free, or harden like Russia's, is the question the next years will answer. ?]
+
+[? if ending_id = 1 and luxemburg_alive = 1 : Rosa Luxemburg addresses the first congress of the Soviet Republic. Her speech is about freedom of the press, and it is not popular with everyone on the platform. ?][? if ending_id = 1 and liebknecht_alive = 1 : Karl Liebknecht reads the proclamation from the balcony of the Palace, as he did on 9 November 1918, and this time it is true. ?]
+
+[? if ending_id = 2 and go_region = 1 : The Republic did not fall, but Central Germany is red. From Chemnitz to Gera and Halle the councils govern, the hundreds hold the passes of the Erzgebirge and the Thuringian Forest, and the Reichswehr besieges a state within the state that it cannot take and dares not starve. ?]
+[? if ending_id = 2 and go_region = 2 : The Republic did not fall, but the Ruhr is red. Between the French army and the Reichswehr, the councils run the pits, the steelworks and the towns from Duisburg to Dortmund, and sell coal to whoever pays in gold. ?]
+[? if ending_id = 2 and go_region = 3 : The Republic did not fall, but the coast is red. Hamburg and Bremen are governed by councils, the harbour is closed to the army, and Soviet ships unload grain at the Kaiser's old quays. ?]
+[? if ending_id = 2 and go_region = 4 : The Republic did not fall, but Bavaria is still red. The council republic of Munich survives, poor and besieged, the only soviet state west of the Vistula. ?]
+[? if ending_id = 2 and go_region = 5 : The Republic did not fall, but Central Germany is red. The councils that won the March fighting hold the Leuna works and the mining towns of Mansfeld, and Berlin has learned to negotiate with them. ?]
+[? if ending_id = 2 and go_region = 0 : The Republic did not fall, but somewhere inside it the councils still rule. ?]
+
+[? if ending_id = 2 : It is a red island in a sea that is not. Moscow sends grain and advisers. Berlin sends spies and a blockade. The rest of the German working class looks at the island and asks itself whether it is a model or a warning. The party, led by [+ party_leader +], governs the region and argues about whether to wait for the next wave or to make it. ?]
+
+[? if ending_id = 3 and go_dict = 1 : The putsch of March 1920 succeeded. Wolfgang Kapp and General von Lüttwitz did not last long, but the generals who stood behind them did. Germany is governed by the army, with a civilian chancellor for appearances. The constitution of Weimar was suspended and never restored. ?]
+[? if ending_id = 3 and go_dict = 2 : In December 1923 General von Seeckt took the power the emergency laws had given him and kept it. The Directory governs Germany by decree, in alliance with heavy industry and the Bavarian monarchists. The Reichstag is a museum. ?]
+[? if ending_id = 3 and go_dict = 3 : The generals took power, and the Republic fell without a fight. ?]
+[? if ending_id = 3 : The party is illegal. Its leaders are in prison, in Moscow or in Prague. Its members meet in cells of five, print leaflets on hand presses and wait. The Social Democrats, who trusted the generals, are banned a few months after us. In the cells, the old quarrels about who was to blame continue. ?]
+
+[? if ending_id = 4 : The party is gone. A few hundred members are left, scattered and hunted, and the name of the Communist Party of Germany survives in police files and in Moscow's archives. The workers who followed it in 1919 and in 1923 go back to the SPD, to the unions, or to nothing. ?]
+[? if ending_id = 4 : Germany is quieter without it. The employers have their long working day back, the army its officers, the courts their judges. In the Reich, men in brown shirts begin to say that they will finish what the Reichswehr started. The revolution that Luxemburg promised would rise again, clashing its weapons, will have to wait for another generation. ?]
+
+[? if ending_id = 5 : The Communist Party of Germany is no more. Its members joined a single party of the German workers with the Social Democrats, and its delegates took a third of the seats on the new executive. Moscow expelled them all from the International by telegram. ?]
+[? if ending_id = 5 : The united party is the largest in the Reich, and it argues with itself without end, about Saxony and the Reichswehr, about coalition and revolution. But the employers face one workers' party instead of two, and the nationalists face a working class that is not at war with itself. Whether the old Spartacists change it, or it changes them, is the history of the next decade. ?]
+[? if ending_id = 5 and luxemburg_alive = 1 : Rosa Luxemburg, who left the SPD in 1917, rejoined it at the age of fifty-one, on her own terms. She leads its left wing and edits its theoretical journal, and she has never been more dangerous to its executive. ?][? if ending_id = 5 and levi_in_party = 1 : Paul Levi, who argued for unity longer than anyone, becomes the united party's spokesman in the Reichstag. ?]
+
+[? if ending_id = 6 and go_size = 1 : **The party.** It enters 1924 as a sect: fewer than thirty thousand members, scattered and exhausted. ?][? if ending_id = 6 and go_size = 2 : **The party.** It enters 1924 smaller than it hoped, but alive: a hundred thousand members, give or take, and a hard core that has been through everything. ?][? if ending_id = 6 and go_size = 3 : **The party.** It enters 1924 as a mass party: well over a hundred thousand members, the strongest communist party outside Russia. ?][? if ending_id = 6 and go_size = 4 : **The party.** It enters 1924 as a great mass party, a quarter of a million members and more, the strongest communist party in the world outside Russia. ?]
+
+[? if ending_id = 6 and go_support >= 3 : Millions of German workers trust it. In the big works of Berlin, Saxony and the Ruhr, its candidates win the factory council elections. ?][? if ending_id = 6 and go_support = 2 : A large minority of the working class follows it, in the worst-paid trades and among the unemployed. ?][? if ending_id = 6 and go_support = 1 : Most workers do not listen to it. They remember the year of hunger, and they blame it for something. ?]
+
+[? if ending_id = 6 and go_unity = 3 : It is united, for once. ?][? if ending_id = 6 and go_unity = 2 : Its currents quarrel, as they always have, and stay together. ?][? if ending_id = 6 and go_unity = 1 : It is at war with itself, and the next split is already being prepared. ?] [? if ending_id = 6 and go_lead = 1 : The Spartacists hold the Zentrale under [+ party_leader +], and the party still thinks of itself as Luxemburg's. ?][? if ending_id = 6 and go_lead = 2 : The Left holds the Zentrale: Ruth Fischer, Arkadi Maslow and Ernst Thälmann, the generation of the street, who promise that the next October will not be called off. ?][? if ending_id = 6 and go_lead = 3 : The Right holds the Zentrale under Heinrich Brandler, and the party bets on the united front, the unions and patience. ?][? if ending_id = 6 and go_lead = 4 : The council communists hold the Zentrale. The party has left the unions and the parliaments to others, and lives in the factory councils. ?]
+
+[? if ending_id = 6 and go_indep = 1 : It is, above all, a section of the International. Its money, its line and more and more of its leaders come from Moscow, and the next leadership will be chosen there too. ?][? if ending_id = 6 and go_indep = 2 : It belongs to the International and argues with it, and Moscow is never quite sure of it. ?][? if ending_id = 6 and go_indep = 3 : It is its own party. It takes Moscow's advice when it agrees with it, and Zinoviev calls it the most troublesome section of the International. ?]
+
+[? if ending_id = 6 and kpd_banned = 1 : It is banned. Its press is silenced and its offices are sealed, but its deputies sit in the Reichstag, and the ban will not last long. ?][? if ending_id = 6 and kpd_banned = 0 : It is legal, which after 1923 is not a small thing. ?][? if ending_id = 6 and saxony_government = 1 : For a few weeks, its ministers governed in Dresden and Weimar, and the party will argue for years about whether that was the road to power or a trap. ?]
+
+[? if ending_id = 6 and german_october = 0 and e23_october_done = 1 : The German October was called off before a shot was fired. ?][? if ending_id = 6 and german_october = 1 : The German October was called off at Chemnitz, and Hamburg fought alone. Barmbek became a legend, and a reproach. ?][? if ending_id = 6 and german_october = 2 : The German October was fought and lost, and the dead are the party's heaviest inheritance. ?]
+
+[? if ending_id = 6 and go_germany = 1 : **Germany.** Against everyone's expectations, the workers' government born in the Kapp days has survived the inflation. It is poor, harassed by the generals and the trusts, and still there. ?][? if ending_id = 6 and go_germany = 2 : **Germany.** The Republic has survived. The Rentenmark holds, the Americans are preparing a plan for the reparations, and the bourgeois parties govern with the SPD's toleration. The good years may be coming, for those who survived the bad ones. ?][? if ending_id = 6 and go_germany = 3 : **Germany.** The Republic has survived, barely. It is governed by emergency decree, the army holds the real power, and nobody in Berlin believes the new currency will last. ?]
+
+[? if ending_id = 6 and go_spd = 1 : The SPD and the party are on speaking terms, which in the history of the German working class is almost a revolution in itself. ?][? if ending_id = 6 and go_spd = 0 : Between the SPD and the party lies a ditch filled with the dead of 1919, 1921 and 1923. ?] [? if ending_id = 6 and go_right = 1 : The far right has been banned and not destroyed. Hitler is in prison in Landsberg, writing a book. ?][? if ending_id = 6 and go_guards = 1 : The party still has armed men in its hundreds, and the police know it. ?]
+
+[? if go_red_bavaria = 1 : In Munich, the Bavarian council republic has survived its fifth winter, a red island the Republic has learned to live with. ?][? if go_red_ruhr = 1 : In the Ruhr, the councils of 1920 still hold the pits, and neither Paris nor Berlin has found a way to break them. ?]
+
+[? if go_people = 1 : **What became of them.** ?][? if go_exile = 1 : **What became of them.** ?]
+
+[? if go_exile = 1 and luxemburg_alive = 1 : Rosa Luxemburg is smuggled across the border to Switzerland, where she writes the history of the German revolution and refuses every invitation to Moscow. ?][? if go_exile = 1 and liebknecht_alive = 1 : Karl Liebknecht is arrested in Berlin and sentenced to fifteen years in a fortress. ?][? if go_exile = 1 and levi_split = 1 : Paul Levi, from the SPD, defends communists in the courts until his own party is silenced too. ?][? if go_exile = 1 and levi_in_party = 1 : Paul Levi defends the party's prisoners in court, until the court decides he is one of them. ?]
+
+[? if go_exile = 1 : Heinrich Brandler and Ruth Fischer, who fought each other for the Zentrale, meet again in exile in Moscow and blame each other in front of Zinoviev. Ernst Thälmann stays in Hamburg, underground, and is arrested in the spring. ?]
+
+[? if go_people = 1 and luxemburg_alive = 1 and go_lead = 1 : Rosa Luxemburg leads the party into 1924, fifty-two years old and often ill. She writes every week against Zinoviev and against the Reichswehr, and both of them read her. ?][? if go_people = 1 and luxemburg_alive = 1 and go_lead != 1 : Rosa Luxemburg, outvoted in the Zentrale, writes from her flat in Südende. Her articles are read in Moscow with irritation and in the factories with affection. ?]
+
+[? if go_people = 1 and liebknecht_alive = 1 and kpd_banned = 1 : Karl Liebknecht, the party's best-loved orator, is in hiding again, as he was in January 1919. ?][? if go_people = 1 and liebknecht_alive = 1 and kpd_banned = 0 : Karl Liebknecht still speaks in the Reichstag, where the nationalists shout him down and the galleries cheer. ?]
+
+[? if go_people = 1 and levi_in_party = 1 : Paul Levi stayed in the party he spent five years trying to save from itself. In Moscow they still call him a renegade. In Germany they call him the only communist the bourgeoisie is afraid to debate. ?][? if go_people = 1 and levi_split = 1 : Paul Levi went back to the SPD with the last Independents and became the conscience of its left wing in the Reichstag, the scourge of the generals and the judges. He died in 1930, falling from the window of his Berlin flat in a fever. ?]
+
+[? if go_people = 1 and unionist_gone = 1 : Heinrich Brandler, expelled, built a communist opposition of his own among the union men of Saxony. It was small, honest and right more often than it was heard. ?][? if go_people = 1 and unionist_gone = 0 and go_lead = 3 : Heinrich Brandler, the stonemason who never wanted to be a German Lenin, leads the party into 1924. His enemies in Moscow are already preparing his replacement. ?][? if go_people = 1 and unionist_gone = 0 and go_lead != 3 : Heinrich Brandler was blamed for the October, summoned to Moscow and kept there. Expelled at last in 1929, he founded a communist opposition and outlived nearly everyone in this story. He died in Hanover in 1967. ?]
+
+[? if go_people = 1 and offensive_gone = 1 : Ruth Fischer leads a small party of the Left in Berlin, and waits for the Zentrale to fail. ?][? if go_people = 1 and offensive_gone = 0 and go_lead = 2 : Ruth Fischer leads the party, twenty-eight years old and certain. Moscow made her, and Moscow will unmake her: within three years she will be expelled, and she will spend the rest of her life as an enemy of Stalin. ?][? if go_people = 1 and offensive_gone = 0 and go_lead != 2 : Ruth Fischer leads the Berlin opposition and counts the delegates for the next congress. ?]
+
+[? if go_people = 1 and offensive_gone = 0 and go_thaelmann_rise = 1 : Ernst Thälmann, the Hamburg docker, is the rising man of the Left. Within two years he will be chairman of the party. He will be arrested by the National Socialists in 1933 and shot in Buchenwald in 1944. ?][? if go_people = 1 and offensive_gone = 0 and go_thaelmann_rise = 0 : Ernst Thälmann goes back to the Hamburg docks and his district, and waits for the Left's turn. ?]
 
 - @end_game: End game.
 

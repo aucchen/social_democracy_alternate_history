@@ -1,0 +1,65 @@
+title: Easter Saturday at Krupp
+subtitle: French soldiers fire on the workers in Essen.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 3
+max-visits: 1
+
+= Easter Saturday at Krupp
+
+On 31 March a French detachment comes to requisition lorries at the Krupp works in Essen. The sirens sound, and thousands of workers pour into the yard. A lieutenant panics and his men open fire. Thirteen workers are killed and dozens wounded. The French court then arrests Gustav Krupp von Bohlen, as if the works' owner had ordered his own men to die.
+
+[? if e23_ruhr_line = 3 : In the pits our committees have taken over, the miners are waiting for the party to say what comes next. ?]
+
+The funeral will be the largest the Ruhr has ever seen. The nationalists want it for themselves. So does the party.
+
+- @funeral: Make the funeral a workers' march, against Poincaré and against Krupp.
+- @strike: Call a general strike of the Ruhr and occupy the works.
+- @soldiers: Appeal to the French soldiers in their own language.
+
+@funeral
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] With the unions. Our banners among the nation's; a hearing for our slogan.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a common march with the reformist unions.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_krupp = 1;
+Q.worker_support += 4;
+Q.district_ruhr_members *= 1.04;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+On 10 April three hundred thousand follow the coffins. Our banners say "Murdered by French and German capital". The union banners say only "Murdered".
+
+@strike
+subtitle: The Left's call. The Ruhr Left is ready; both armies are watching.
+view-if: offensive_gone = 0 or ultraleft_gone = 0
+on-arrival: {!
+Q.e23_krupp = 2;
+Q.militancy += 10;
+Q.repression += 7;
+Q.district_ruhr_members *= 1.06;
+Q.district_ruhr_loyalty += 5;
+Q.red_guards_strength += 2;
+Q.offensive_satisfaction += 7;
+Q.unionist_satisfaction -= 5;
+Q.lean_offensive += 2;
+!}
+
+For three days the strike holds from Duisburg to Dortmund. Our pit committees take over the offices of two collieries. Then the strike pay runs out, and the French bring up armoured cars.
+
+@soldiers
+subtitle: The internationalist answer. Some French soldiers listen; the French courts do not.
+on-arrival: {!
+Q.e23_krupp = 3;
+Q.world_revolution += 3;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 1;
+Q.repression += 3;
+!}
+
+Leaflets in French appear in the barracks of Essen and Gelsenkirchen. Two French conscripts are court-martialled before the month is out. A third crosses over to the hundreds.

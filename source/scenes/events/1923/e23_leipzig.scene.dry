@@ -1,0 +1,131 @@
+title: The Leipzig Congress
+subtitle: The party congress decides who leads in the year of crisis.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 1 and ruhr_occupied = 1
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.e23_can_left = (Q.offensive_gone == 0 && (Q.offensive_strength + Q.offensive_satisfaction / 2 >= 35 || Q.history_offensive >= 12)) ? 1 : 0;
+Q.e23_can_sparta = (Q.luxemburgist_gone == 0 && (Q.luxemburgist_strength >= 20 || Q.levi_in_party == 1 || Q.luxemburg_alive == 1 || Q.history_luxemburgist >= 12)) ? 1 : 0;
+Q.e23_can_council = (Q.ultraleft_gone == 0 && Q.ultraleft_strength >= 20) ? 1 : 0;
+if (Q.unionist_gone == 1 && !Q.e23_can_left && !Q.e23_can_sparta && !Q.e23_can_council) {
+    if (Q.luxemburgist_gone == 0) { Q.e23_can_sparta = 1; } else { Q.e23_can_left = 1; }
+}
+!}
+
+= The Leipzig Congress
+
+From 28 January to 1 February, with French soldiers in Essen, the party's Eighth Congress meets in Leipzig. It is the bitterest congress since Heidelberg.
+
+[? if unionist_gone = 0 : Heinrich Brandler, a stonemason from Bohemia who came up through the Chemnitz building workers, speaks for the Zentrale. His theses are those of the Fourth Congress: the united front, control committees in every works, and a workers' government with the SPD wherever there is a majority for one, beginning with Saxony. August Thalheimer writes the theory, Clara Zetkin lends her name. ?]
+
+[? if offensive_gone = 0 : Against him stands the Left. Ruth Fischer and Arkadi Maslow speak for Berlin, Ernst Thälmann for Hamburg, and the Ruhr delegates for the pits. They say the party is talking itself into Social Democracy: the Ruhr is burning and the Zentrale is writing letters to Dresden. They have perhaps two-fifths of the delegates. ?]
+
+[? if offensive_gone = 1 : The Left that broke away in 1921 heckles from outside the hall. Inside, the argument is between the Right and the old Spartacists. ?]
+
+[? if levi_in_party = 1 : Paul Levi sits in the front row, says little, and is applauded every time he does. ?][? if luxemburg_alive = 1 : Rosa Luxemburg speaks on the second day, for the party's right to decide for itself. ?]
+
+Radek has come from Moscow to watch. The vote on the theses will decide who holds the Zentrale through 1923.
+
+- @right: Carry Brandler's theses, and keep the Left out.
+- @compromise: Carry Brandler's theses, and bring the Left into the Zentrale.
+- @left: Let the Left win the congress.
+- @spartacist: Elect a Spartacist Zentrale between the two camps.
+- @council: Hand the party to the council communists.
+
+@right
+subtitle: The Right's victory. Brandler leads; the Left is bitter.
+view-if: unionist_gone = 0
+on-arrival: {!
+Q.e23_leipzig = 1;
+Q.leading_faction = 'unionist';
+Q.junior_faction = 0;
+Q.unionist_satisfaction += 12;
+Q.offensive_satisfaction -= 15;
+Q.lean_unionist += 3;
+Q.unity -= 4;
+Q.party_leader = 'Heinrich Brandler';
+Q.lead_code = 3;
+!}
+
+The theses pass by a clear majority. The Left's candidates are voted off the Zentrale, and Fischer tells the press the congress has buried the revolution under a pile of resolutions.
+
+@compromise
+subtitle: The Right leads, with the Left as junior partner. Moscow's preferred outcome.
+view-if: unionist_gone = 0 and offensive_gone = 0
+on-arrival: {!
+Q.e23_leipzig = 2;
+Q.leading_faction = 'unionist';
+Q.junior_faction = 'offensive';
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction += 4;
+Q.lean_unionist += 2;
+Q.lean_offensive += 1;
+Q.independence -= 3;
+Q.unity += 4;
+Q.party_leader = 'Heinrich Brandler';
+Q.lead_code = 3;
+!}
+
+Brandler's theses pass. Then Radek takes both sides into a back room, and the Left gets seats in the Zentrale. Thälmann among them. Nobody believes the peace will last the year.
+
+@left
+subtitle: The Left takes the Zentrale. Brandler's supporters will not forgive it.
+view-if: offensive_gone = 0
+choose-if: e23_can_left = 1
+unavailable-subtitle: The Left does not have the delegates.
+on-arrival: {!
+Q.e23_leipzig = 3;
+Q.leading_faction = 'offensive';
+Q.junior_faction = 0;
+Q.offensive_satisfaction += 15;
+Q.unionist_satisfaction -= 15;
+Q.lean_offensive += 3;
+Q.unity -= 6;
+Q.militancy += 5;
+Q.party_leader = 'Ruth Fischer';
+Q.lead_code = 2;
+!}
+
+The Left's resolution wins. Ruth Fischer and Arkadi Maslow take the Zentrale, with Thälmann beside them. In Chemnitz, Brandler's Saxons walk out of the hall singing.
+
+@spartacist
+subtitle: The Spartacists lead, between the Right and the Left.
+view-if: luxemburgist_gone = 0
+choose-if: e23_can_sparta = 1
+unavailable-subtitle: The Spartacists are too few to hold the balance.
+on-arrival: {!
+Q.e23_leipzig = 4;
+Q.leading_faction = 'luxemburgist';
+Q.junior_faction = Q.unionist_gone ? 0 : 'unionist';
+Q.luxemburgist_satisfaction += 12;
+Q.unionist_satisfaction -= 4;
+Q.offensive_satisfaction -= 6;
+Q.lean_luxemburgist += 3;
+Q.independence += 4;
+Q.party_leader = (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer'));
+Q.lead_code = 1;
+!}
+
+Neither the Right nor the Left can win alone, and the old Spartacists hold the balance. [+ party_leader +] heads the new Zentrale, with Brandler's people as junior partners. Radek reports to Moscow that the Germans have elected a debating society.
+
+@council
+subtitle: The Left Radicals take the Zentrale. Parliament and the unions are abandoned.
+view-if: ultraleft_gone = 0
+choose-if: e23_can_council = 1
+unavailable-subtitle: The council communists are far too few.
+on-arrival: {!
+Q.e23_leipzig = 5;
+Q.leading_faction = 'ultraleft';
+Q.junior_faction = 0;
+Q.ultraleft_satisfaction += 15;
+Q.unionist_satisfaction -= 15;
+Q.luxemburgist_satisfaction -= 8;
+Q.lean_ultraleft += 3;
+Q.unity -= 8;
+Q.party_leader = 'Karl Schröder';
+Q.lead_code = 4;
+!}
+
+The congress votes to leave the reformist unions and to put all its strength into the factory councils. Moscow's envoy leaves before the final session.

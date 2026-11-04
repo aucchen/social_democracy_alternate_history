@@ -1,0 +1,47 @@
+title: The Generals' Republic
+subtitle: The putsch has succeeded, and the generals are here to stay.
+new-page: true
+tags: event
+view-if: kapp_outcome = 2 and crisis = 0 and e23_generals_done = 0 and ending_id = 0
+max-visits: 1
+priority: 40
+on-arrival: {!
+Q.e23_generals_done = 1;
+Q.e23_red_refuge = (Q.ruhr_red_army == 2 || Q.bavaria_soviet == 2) ? 1 : 0;
+Q.kpd_banned = 1;
+!}
+
+= The Generals' Republic
+
+The general strike did not bring the putschists down. Kapp's men hold the ministries, and the army has decided that it prefers them to the Republic. Lüttwitz's decrees dissolve the councils, put the unions under military supervision and outlaw the Communist Party. The Social Democratic ministers are in exile in Stuttgart, then in Switzerland. The courts sentence our people by the hundred.
+
+There will be no elections, and no workers' government. What remains is to decide how the party will live through the dictatorship.
+
+[? if e23_red_refuge = 1 : One place in Germany is still in the workers' hands. ?]
+
+- @underground: Go underground, everywhere.
+- @refuge: Withdraw to the red region that still holds out.
+
+@underground
+subtitle: The party becomes a conspiracy, for years.
+on-arrival: {!
+Q.ending_id = 3;
+!}
+
+The Zentrale disappears into cellars and safe flats. The next meeting of the Central Committee is held in Prague.
+
+- @end: See how it ends.
+
+@refuge
+subtitle: The red region becomes the last base of the German revolution.
+view-if: e23_red_refuge = 1
+on-arrival: {!
+Q.ending_id = 2;
+!}
+
+The Zentrale, its archives and its best cadres cross the lines by night. Behind the red front, the councils still sit.
+
+- @end: See how it ends.
+
+@end
+go-to: game_over

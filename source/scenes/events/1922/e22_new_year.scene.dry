@@ -1,0 +1,105 @@
+title: The Party in 1922
+subtitle: The Zentrale takes stock at the start of a new year.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 1
+max-visits: 1
+priority: 3
+on-arrival: {!
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction];
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+!}
+
+= The Party in 1922
+
+The year opens cold and hungry. The mark has lost most of its value since the war, the reparations bill hangs over every budget debate, and Chancellor [+ chancellor +] promises to "fulfil" what the Allies demand while the right calls him a traitor for it.
+
+[? if march_action = 1 : The party has not recovered from the March Action. Hundreds of thousands left after the defeat in Central Germany, and the leaders who called the rising have been sent to prison or to Moscow. Lenin's verdict at the Third Congress was blunt: first win the majority of the working class. ?]
+
+[? if march_action = 0 and levi_in_party = 1 : There was no March Action. Levi still sits in the Zentrale, the party kept its members, and it is now the second workers' party in many cities. Moscow trusts it less than ever. ?]
+
+[? if march_action = 0 and levi_in_party = 0 : The party avoided a rising in 1921 and kept most of its members, though not every leader it had in 1920. ?]
+
+[? if march_action = 2 : The March Action did not end in defeat, and the party has been living off the memory of it ever since. The authorities have not forgotten either. ?]
+
+[? if levi_split = 1 : Paul Levi and his friends are outside the party now. Their Communist Working Group sits in the Reichstag and tells anyone who will listen that the Zentrale takes its orders from Moscow. ?]
+
+[? if left_split = 1 : The Left walked out in 1921. Ruth Fischer and Arkadi Maslow now lead a rival group in Berlin that accuses the Zentrale of cowardice. ?]
+
+[? if kapp_outcome = 3 : Since the general strike against Kapp, Germany has been governed by a cabinet the unions helped to make. Its ministers call it a workers' government. The employers call it a temporary misfortune. ?]
+
+[? if bavaria_soviet = 2 : In Munich the red flag still flies over the Wittelsbach Palace. The Bavarian councils have survived, poor, isolated and watched from every side. ?]
+
+[? if ruhr_red_army = 2 : In the Ruhr the councils that defeated Kapp never gave up their arms. The pits and the towns between Duisburg and Dortmund answer to the workers more than to Berlin. ?]
+
+[? if warsaw_outcome = 2 : Since the Red Army took Warsaw, Soviet Poland lies on Germany's eastern border. The generals in Berlin speak of nothing else. ?]
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg is tired and often ill, but her articles still set the tone of the party press. ?]
+
+The party has [+ members_display +] thousand members. The [+ leading_faction_name +] hold the Zentrale. What should this year be for?
+
+- @united: Win the majority of the workers: the united front.
+- @rebuild: Rebuild the party first: discipline, schools, a better press.
+- @prepare: Prepare for the next round of battle.
+- @councils: Build the councils in the factories, from below.
+
+@united
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer, and Moscow's line since the Third Congress.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_year_line = 1;
+Q.lean_unionist += 2;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction -= 4;
+Q.spd_relation += 4;
+Q.worker_support += 2;
+!}
+
+The Zentrale's New Year circular is short: go to the factories, go into the unions, and propose joint action to every worker who will listen, social democrat or not.
+
+@rebuild
+subtitle: The Spartacist answer. Steadies the party; nobody outside notices.
+on-arrival: {!
+Q.e22_year_line = 2;
+Q.lean_luxemburgist += 2;
+Q.luxemburgist_satisfaction += 6;
+Q.unity += 5;
+Q.militancy -= 3;
+!}
+
+The party schools reopen, the district secretaries are told to send their accounts on time, and *Die Rote Fahne* is ordered to write for workers rather than for other communists.
+
+@prepare
+subtitle: The Left's answer. The radicals are pleased; the police take note.
+view-if: offensive_gone = 0
+on-arrival: {!
+Q.e22_year_line = 3;
+Q.lean_offensive += 2;
+Q.offensive_satisfaction += 7;
+Q.unionist_satisfaction -= 4;
+Q.militancy += 5;
+Q.repression += 3;
+Q.red_guards_arms += 3;
+!}
+
+Quietly, the old fighters of 1920 and 1921 are asked to keep their weapons oiled and their names on a list.
+
+@councils
+subtitle: The Left Radicals' answer: the councils, not the unions.
+view-if: ultraleft_gone = 0
+on-arrival: {!
+Q.e22_year_line = 4;
+Q.lean_ultraleft += 2;
+Q.ultraleft_satisfaction += 7;
+Q.unionist_satisfaction -= 4;
+Q.militancy += 3;
+Q.worker_support += 1;
+!}
+
+The circular calls on every member to make the factory council, not the union branch, the centre of their work.

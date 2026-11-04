@@ -1,0 +1,74 @@
+title: Severing's Ban
+subtitle: Prussia bans the proletarian hundreds; the Ruhr strikes.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 5
+max-visits: 1
+on-arrival: {!
+Q.repression += 4;
+Q.inflation = Math.min(100, Q.inflation + 3);
+!}
+
+= Severing's Ban
+
+In May, Carl Severing, the Social Democratic interior minister of Prussia, bans the proletarian hundreds throughout Prussia: in Berlin, the Ruhr, Halle and Hamburg's Prussian suburbs. The police are told to break up their drills and confiscate their arms. In Saxony and Thuringia, where the governments are friendlier, the hundreds are left alone.
+
+At the same time the Ruhr explodes. The strike wages paid from Berlin are worthless by the time they are paid, and in the last week of May the miners and metalworkers of Gelsenkirchen, Dortmund and Bochum strike for wages that keep up with prices. Our members lead many of the strike committees.
+
+- @defy: Defy the ban: the hundreds march in Prussia.
+- @saxony: Obey in Prussia, and build the hundreds in Saxony and Thuringia.
+- @strikes: Put the party behind the Ruhr strikes for wages.
+
+@defy
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Arrests, and pride.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed formations.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_may = 1;
+Q.militancy += 6;
+Q.repression += 8;
+Q.red_guards_strength -= 2;
+Q.red_guards_loyalty += 5;
+Q.spd_relation -= 6;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+The Berlin hundreds march through Wedding on a Sunday morning. The Schupo arrest four hundred of them, and the rest learn to drill in the woods at night.
+
+@saxony
+subtitle: The Right's answer. The hundreds grow where they are legal; Saxony becomes their base.
+on-arrival: {!
+Q.e23_may = 2;
+Q.red_guards_strength += 4;
+Q.district_saxony_loyalty += 4;
+Q.district_thuringia_loyalty += 4;
+Q.unionist_satisfaction += 5;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 2;
+!}
+
+In Prussia the hundreds become sports clubs and hiking societies. In Saxony and Thuringia they become an army in grey windcheaters.
+
+@strikes
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] Wins the Ruhr workers' trust, and some of their wages.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids working through the unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_may = 3;
+Q.worker_support += 5;
+Q.district_ruhr_members *= 1.06;
+Q.district_ruhr_loyalty += 4;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+The strike committees win a wage index in a dozen pits. For the first time since 1920 our party is the strongest force in the Ruhr strike committees.

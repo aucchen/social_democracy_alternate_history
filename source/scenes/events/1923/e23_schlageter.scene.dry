@@ -1,0 +1,64 @@
+title: The Wanderer into the Void
+subtitle: Radek praises a nationalist martyr.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 6
+max-visits: 1
+
+= The Wanderer into the Void
+
+On 26 May the French shot Albert Leo Schlageter on the Golzheimer Heath outside Düsseldorf. He was a Freikorps veteran of the Baltic and of the Ruhr in 1920, and he had been blowing up railway lines used by the French. The nationalists have made him a saint.
+
+On 20 June, before the enlarged Executive of the International in Moscow, Karl Radek gives a speech about him. Schlageter, he says, was a courageous soldier of the counter-revolution who deserves to be honoured by the soldiers of the revolution, a wanderer into the void who died for a nationalism that betrays the nation to the capitalists. If the nationalist youth want to fight for Germany, Radek says, they should fight beside the workers.
+
+The speech is printed in *Die Rote Fahne*. Count Reventlow answers in the nationalist press. Communists and völkisch students begin to debate each other in beer halls. Moscow wants the campaign pursued.
+
+- @follow: Pursue the campaign: win the nationalist youth for the workers.
+- @refuse: Refuse it: the nationalists are our enemies, not our recruits.
+- @debate: Debate them, but on the class question only.
+
+@follow
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow's line. A few recruits from the right; our own internationalists are disgusted.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_schlageter = 1;
+Q.independence -= 6;
+Q.worker_support += 1;
+Q.spd_relation -= 6;
+Q.luxemburgist_satisfaction -= 8;
+Q.ultraleft_satisfaction -= 6;
+Q.moscow_subsidy += 1;
+!}
+
+Our speakers share platforms with Reventlow's men in Berlin and Jena. A few hundred young nationalists join the party. The SPD prints the speeches side by side with Hitler's.
+
+@refuse
+subtitle: The Spartacist answer. More independence; Radek is offended and Moscow's money is short.
+on-arrival: {!
+Q.e23_schlageter = 2;
+Q.independence += 8;
+Q.spd_relation += 3;
+Q.luxemburgist_satisfaction += 7;
+Q.lean_luxemburgist += 2;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+!}
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg's reply to Radek runs to three columns and begins "There is no such thing as a revolutionary nationalism." ?][? if luxemburg_alive = 0 : The Zentrale declares that it will not compete with the nationalists for the memory of a saboteur. ?] Radek complains to Zinoviev that the Germans have no sense of tactics.
+
+@debate
+subtitle: The Left's way into the campaign. Popular with the young, and some of it will be remembered with shame.
+view-if: offensive_gone = 0
+on-arrival: {!
+Q.e23_schlageter = 3;
+Q.independence -= 2;
+Q.worker_support += 2;
+Q.militancy += 3;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 1;
+Q.luxemburgist_satisfaction -= 4;
+!}
+
+Ruth Fischer speaks to völkisch students in Berlin and goes further than Radek ever did, using words about capital that the nationalists recognise as their own. The Left later prefers not to discuss it.

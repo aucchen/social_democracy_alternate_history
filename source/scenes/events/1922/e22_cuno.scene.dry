@@ -1,0 +1,130 @@
+title: The Fall of the Government
+subtitle: The coalition breaks over reparations and the eight-hour day.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 11
+max-visits: 1
+on-arrival: {!
+Q.e22_labour_branch = (Q.kapp_outcome == 3) ? 1 : 0;
+Q.e22_old_chancellor = Q.chancellor;
+!}
+
+= The Fall of the Government
+
+[? if e22_labour_branch = 0 : On 14 November Chancellor [+ e22_old_chancellor +] resigns. The People's Party would only join a broad coalition if the SPD gave up the eight-hour day, and the SPD would not. A week later President Ebert appoints Wilhelm Cuno, director of the Hamburg-America Line, at the head of a "cabinet of business": shipowners, bankers and civil servants, with the support of the bourgeois parties. The SPD goes into opposition. ?]
+
+[? if e22_labour_branch = 0 : Cuno's friends call it a government above parties. Our press calls it the government of Stinnes. ?]
+
+[? if e22_labour_branch = 1 : The workers' government born in the general strike against Kapp is in danger. The Centre and the Democrats, who tolerated it for two years, now demand that it give up the eight-hour day and hand the reparations question to "men of business". Without them it has no majority, unless our deputies vote for it. Chancellor [+ e22_old_chancellor +] asks to see our Zentrale. Behind him, the shipowner Wilhelm Cuno is already being named as the man of the bankers. ?]
+
+- @stinnes: Campaign against the government of the trusts.
+- @opposition: Propose that the SPD fight Cuno together with us.
+- @tolerate: Keep the workers' government in office with our votes.
+- @enter: Enter the workers' government with our own ministers.
+- @let_fall: Let it fall: it was never a workers' government.
+
+@stinnes
+subtitle: Our own campaign. The workers listen; the trusts do not care.
+view-if: e22_labour_branch = 0
+on-arrival: {!
+Q.government_name = 'Cuno cabinet (non-party, with Centre, DDP, DVP, BVP)';
+Q.chancellor = 'Wilhelm Cuno';
+Q.spd_in_government = 0; Q.zentrum_in_government = 1; Q.ddp_in_government = 1; Q.dvp_in_government = 1; Q.bvp_in_government = 1;
+Q.e22_workers_gov = 0;
+Q.worker_support += 3;
+Q.militancy += 3;
+Q.offensive_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+Our posters show Cuno and Stinnes counting money over the bodies of workers. They are pasted over by the next morning, and pasted up again by the next evening.
+
+@opposition
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's line. The SPD is in opposition too; perhaps it will listen now.
+view-if: e22_labour_branch = 0
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any proposal to the SPD.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.government_name = 'Cuno cabinet (non-party, with Centre, DDP, DVP, BVP)';
+Q.chancellor = 'Wilhelm Cuno';
+Q.spd_in_government = 0; Q.zentrum_in_government = 1; Q.ddp_in_government = 1; Q.dvp_in_government = 1; Q.bvp_in_government = 1;
+Q.e22_workers_gov = 0;
+Q.spd_relation += 6;
+Q.worker_support += 2;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 2;
+!}
+
+The SPD executive declines a joint campaign. But its Reichstag group votes with ours against Cuno's first decrees, and in the factories the two parties' members find they have the same enemy.
+
+@tolerate
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The workers' government survives, and we share the blame for what it does.
+view-if: e22_labour_branch = 1
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids keeping social democrats in office.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_workers_gov = 1;
+Q.government_name = 'Workers\' government (SPD, with communist support)';
+Q.spd_in_government = 1; Q.zentrum_in_government = 0; Q.ddp_in_government = 0; Q.dvp_in_government = 0; Q.bvp_in_government = 0;
+Q.spd_relation += 8;
+Q.worker_support += 4;
+Q.stability -= 4;
+Q.unionist_satisfaction += 6;
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction -= 6;
+Q.lean_unionist += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+Our deputies vote for the government. It survives by eleven votes. The bourgeois press calls the Chancellor a prisoner of Moscow, and the Reichswehr ministry stops answering his letters promptly.
+
+@enter
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The boldest step: communist ministers in Berlin. Moscow is split; the Left is appalled.
+view-if: e22_labour_branch = 1
+choose-if: lock_united_front < 2 and spd_relation >= 30
+unavailable-subtitle: The SPD will not take communist ministers, or the line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_workers_gov = 2;
+Q.government_name = 'Workers\' government (SPD and KPD)';
+Q.spd_in_government = 1; Q.zentrum_in_government = 0; Q.ddp_in_government = 0; Q.dvp_in_government = 0; Q.bvp_in_government = 0;
+Q.spd_relation += 6;
+Q.worker_support += 6;
+Q.stability -= 8;
+Q.army_loyalty -= 8;
+Q.repression -= 5;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 12;
+Q.unity -= 4;
+Q.lean_unionist += 3;
+!}
+
+Three communists take ministries: labour, food supply and justice. The first decree requisitions hoarded grain. The second dissolves the Organisation Consul. General von Seeckt calls on the President and says the army cannot be answerable for its mood.
+
+@let_fall
+subtitle: The Left's answer. Cuno comes, and the SPD will never forgive us.
+view-if: e22_labour_branch = 1
+on-arrival: {!
+Q.e22_workers_gov = 0;
+Q.government_name = 'Cuno cabinet (non-party, with Centre, DDP, DVP, BVP)';
+Q.chancellor = 'Wilhelm Cuno';
+Q.spd_in_government = 0; Q.zentrum_in_government = 1; Q.ddp_in_government = 1; Q.dvp_in_government = 1; Q.bvp_in_government = 1;
+Q.spd_relation -= 15;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 2;
+Q.militancy += 4;
+!}
+
+Our deputies vote with the nationalists, and the workers' government falls. On 22 November Wilhelm Cuno forms a cabinet of business. In the SPD's districts, our members are spat at in the street.

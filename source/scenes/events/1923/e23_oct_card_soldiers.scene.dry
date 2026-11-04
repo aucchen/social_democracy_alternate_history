@@ -1,0 +1,57 @@
+title: The Soldiers
+subtitle: Will the Reichswehr shoot?
+view-if: crisis_october = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Soldiers
+
+Seeckt's army is small, professional and chosen for its politics. Its officers are monarchists to a man. Its soldiers are not: many are workers' sons from the same towns as the hundreds, paid in the same worthless marks. The Saxon and Prussian police are another matter again: Social Democrats run them, and many policemen vote SPD.
+
+- @leaflets: Flood the barracks with leaflets.
+- @police: Work on the police through their Social Democratic union.
+- @officers: Approach the officers who hate Seeckt.
+
+@leaflets
+subtitle: Cheap, and some soldiers read them.
+on-arrival: {!
+Q.army_loyalty -= 5;
+Q.crisis_momentum += 4;
+Q.repression += 2;
+!}
+
+The leaflet is short: "Soldier, your mother is starving too." Sentries are doubled in Dresden after one is found in every locker of a battalion.
+
+@police
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Slow and uncertain. If it works, the police stand aside.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.police_loyalty -= 6;
+Q.crisis_momentum += (Q.spd_relation >= 35) ? 7 : 3;
+Q.lean_unionist += 1;
+!}
+
+Police delegates meet our people in a Leipzig back room. They will not join a rising. Some of them say they will not fire on strikers.
+
+@officers
+subtitle: Costs 1 fund. A gamble on the national bolsheviks in uniform.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+var ok = Math.random() < 0.4;
+Q.e23_officers_ok = ok ? 1 : 0;
+Q.army_loyalty -= ok ? 8 : 0;
+Q.crisis_momentum += ok ? 8 : -2;
+Q.independence -= 2;
+!}
+
+[? if e23_officers_ok = 1 : A captain in Döberitz and a major in Leipzig promise that their battalions will stay in barracks. ?][? if e23_officers_ok = 0 : The officers take our money and give our names to Seeckt's counter-intelligence. ?]

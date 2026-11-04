@@ -1,0 +1,61 @@
+title: Bread for the Volga
+subtitle: Russia is starving, and Münzenberg wants the party's help.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 3
+max-visits: 1
+
+= Bread for the Volga
+
+The famine on the Volga has killed hundreds of thousands since the summer. Willi Münzenberg's Workers' International Relief collects money, flour and tools in every German city: posters of starving children hang in union halls that would never hang a communist poster.
+
+Münzenberg wants the party's apparatus behind the campaign. The district treasurers point out that the party cannot pay its own printers.
+
+- @all_in: Put the whole party behind the relief.
+- @share: Help, but keep the party's money for the party.
+- @joint: Make it a joint campaign with the unions and the SPD.
+
+@all_in
+subtitle: Costs 1 fund. Wins sympathy far beyond the party, and Moscow is grateful.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds to give.
+on-arrival: {!
+Q.e22_famine = 1;
+Q.resources -= 1;
+Q.worker_support += 4;
+Q.independence -= 2;
+Q.world_revolution += 2;
+Q.unity += 2;
+Q.lean_unionist += 1;
+!}
+
+Ship after ship leaves Hamburg with flour and machine parts. Workers who have never read a communist paper put coins in our tins.
+
+@share
+subtitle: The party keeps its money; the campaign is smaller.
+on-arrival: {!
+Q.e22_famine = 2;
+Q.worker_support += 1;
+Q.independence += 1;
+!}
+
+The cells collect where they can. Münzenberg complains to Moscow that the Germans are mean.
+
+@joint
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Bigger and less ours. The social democrats can share the credit.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any campaign with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_famine = 3;
+Q.worker_support += 3;
+Q.spd_relation += 5;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+Q.offensive_satisfaction -= 3;
+!}
+
+Some SPD branches join, and the ADGB lets its locals decide. The posters carry three names instead of one.

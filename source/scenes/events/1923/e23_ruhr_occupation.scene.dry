@@ -1,0 +1,99 @@
+title: The Occupation of the Ruhr
+subtitle: French and Belgian troops march into the Ruhr.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 1
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.ruhr_occupied = 1;
+Q.inflation = Math.min(100, Q.inflation + 10);
+Q.stability -= 6;
+Q.e23_red_ruhr = (Q.ruhr_red_army == 2) ? 1 : 0;
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction];
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+!}
+
+= The Occupation of the Ruhr
+
+On 11 January, French and Belgian troops cross into the Ruhr with tanks and machine guns. Essen, Gelsenkirchen, Bochum: by the end of the week sixty thousand soldiers guard the pits, the coking plants and the railway yards of Germany's industrial heart. The engineers of the Allied mission have come to take the coal that Germany did not deliver.
+
+[? if e22_workers_gov = 0 : Chancellor Cuno proclaims passive resistance. No official is to obey the French, no train is to move for them, and the Reich will pay the wages of every worker who stops. The money will be printed. For the first weeks the whole country stands behind him, from the nationalist leagues to the SPD. ?]
+[? if e22_workers_gov > 0 : The workers' government calls for passive resistance, and the unions organise it. The pits are idle, the railwaymen refuse to work for the French, and the government pays the strike wages with money from the presses. The employers join the resistance in public and send their coal to France in private. ?]
+
+[? if e23_red_ruhr = 1 : In the red Ruhr, the occupation means something else. The councils that have run the towns since 1920 face foreign bayonets for the first time. The French generals have orders to disarm them, and the industrialists in Berlin are glad to let them. ?]
+
+The nation is at war again, without guns. The party must decide which side it is on, and how.
+
+- @both: Defeat Poincaré on the Ruhr and the German capitalists at home.
+- @international: Organise a joint strike with the French communists, against both governments.
+- @seize: Seize the pits: workers' control of the Ruhr, against the French and the owners alike.
+- @national: Join the national resistance.
+
+@both
+subtitle: The Right's line. Holds the party between the camps and wins a hearing.
+on-arrival: {!
+Q.e23_ruhr_line = 1;
+Q.worker_support += 4;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+Q.district_ruhr_members *= 1.05;
+!}
+
+Our leaflets in the Ruhr say the French soldiers are workers in uniform and the German owners are profiteers in mourning. In the pits, a war on two fronts sounds like common sense.
+
+@international
+subtitle: The Spartacist answer. Internationalist, and it brings arrests on both sides of the border.
+on-arrival: {!
+Q.e23_ruhr_line = 2;
+Q.world_revolution += 4;
+Q.repression += 5;
+Q.worker_support += 1;
+Q.luxemburgist_satisfaction += 6;
+Q.ultraleft_satisfaction += 3;
+Q.lean_luxemburgist += 2;
+!}
+
+German and French communists distribute the same leaflet in two languages at the pit gates. Some French soldiers take it; some of them are court-martialled for it.
+
+@seize
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Left's plan. Bold, popular in the pits, and both armies will answer.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids occupations.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_ruhr_line = 3;
+Q.militancy += 10;
+Q.repression += 8;
+Q.district_ruhr_members *= 1.08;
+Q.district_ruhr_loyalty += 6;
+Q.red_guards_strength += 3;
+Q.offensive_satisfaction += 7;
+Q.ultraleft_satisfaction += 5;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 2;
+Q.lean_ultraleft += 1;
+!}
+
+[? if e23_red_ruhr = 1 : The councils of the red Ruhr take over the pits the owners have abandoned. ?][? if e23_red_ruhr = 0 : In Gelsenkirchen, Bochum and Mülheim, pit committees led by our members take over the abandoned mines. ?] They dig coal for the workers' families and for no one else. The French commander calls it anarchy. The German owners agree with him.
+
+@national
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Radek's national line. Some nationalists listen; many of our own are disgusted.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_ruhr_line = 4;
+Q.independence -= 6;
+Q.worker_support += 2;
+Q.luxemburgist_satisfaction -= 8;
+Q.ultraleft_satisfaction -= 8;
+Q.unity -= 3;
+!}
+
+Our deputies vote for the government's emergency credits. In the Ruhr, our members stand beside the miners' union and the Catholic priests at the funerals of the first shot strikers.

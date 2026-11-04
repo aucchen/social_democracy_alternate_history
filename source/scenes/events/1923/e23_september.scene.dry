@@ -1,0 +1,66 @@
+title: 26 September
+subtitle: Passive resistance ends, and Germany comes under emergency rule.
+new-page: true
+tags: event
+view-if: year = 1923 and month >= 9 and e23_sept_done = 0 and crisis = 0
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.e23_sept_done = 1;
+Q.repression += 6;
+Q.army_loyalty += 4;
+Q.inflation = Math.min(100, Q.inflation + 6);
+!}
+
+= 26 September
+
+On 26 September, [+ chancellor +] announces the end of passive resistance in the Ruhr. The Reich can no longer pay for it: the dollar costs a hundred and sixty million marks. The nationalists call it a second Versailles.
+
+[? if bavaria_soviet != 2 : The same day, the Bavarian government declares a state of emergency and makes Gustav von Kahr General State Commissioner, with dictatorial powers. Kahr, the monarchist who ran Bavaria after the Kapp days, refuses to take orders from Berlin. The Reichswehr division in Munich, under General von Lossow, takes his side. Hitler's storm troopers and the patriotic leagues talk of a march on Berlin. ?][? if bavaria_soviet = 2 : The nationalist leagues, who have waited since 1919 to reconquer Red Bavaria, demand that the Reich march on Munich at last. ?]
+
+That night President Ebert declares a state of emergency for the whole Reich. Executive power passes to the Reichswehr minister, which means to General von Seeckt and his district commanders. In Saxony and Thuringia, General Müller and General Reinhardt are now the real governments.
+
+- @protest: Call a protest strike against the emergency.
+- @spd: Demand that the SPD leave the coalition.
+- @prepare: Say little, and move the arms to Saxony.
+
+@protest
+subtitle: The Left's answer. A show of strength, and a list of names for the police.
+view-if: offensive_gone = 0 or ultraleft_gone = 0
+on-arrival: {!
+Q.militancy += 6;
+Q.repression += 6;
+Q.worker_support += 1;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 1;
+!}
+
+The protest strike is solid in Saxony and patchy in Berlin. The military commanders ban our papers in four districts the next day.
+
+@spd
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Pressure on the Social Democratic ministers. Their left wing listens.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any appeal to the SPD.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 4;
+Q.worker_support += 2;
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+Our open letter to the SPD's members asks how long their ministers will sit beside Seeckt. The ministers stay. Many members ask the same question.
+
+@prepare
+subtitle: The careful answer. Better arms where they may be needed.
+on-arrival: {!
+Q.red_guards_arms += 6;
+Q.district_saxony_loyalty += 3;
+Q.repression -= 2;
+Q.unionist_satisfaction += 2;
+!}
+
+Lorries with crates marked "machine parts" travel by night from Berlin and Halle to Chemnitz and Zwickau.

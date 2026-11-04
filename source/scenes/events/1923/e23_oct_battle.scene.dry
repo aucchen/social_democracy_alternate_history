@@ -1,0 +1,85 @@
+title: The Reichswehr Marches
+subtitle: The rising has begun. Where will it be decided?
+new-page: true
+tags: event
+view-if: crisis_october = 1 and crisis_time >= 3 and e23_rising_phase = 1 and e23_battle_done = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.e23_battle_done = 1;
+Q.e23_red_ruhr = (Q.ruhr_red_army == 2) ? 1 : 0;
+Q.stability -= 8;
+// Seeckt concentrates his forces against the rising
+Q.crisis_momentum -= 8;
+Q.army_loyalty += 5;
+!}
+
+= The Reichswehr Marches
+
+[? if e23_october_path = 1 : The general strike holds in Saxony and Thuringia and in the big works of Berlin. The hundreds hold the stations of Chemnitz and Leipzig, and the Reichswehr has stopped outside Dresden to wait for reinforcements. ?][? if e23_october_path = 2 : The strike that brought down Cuno has become a rising. The hundreds hold the power stations of Berlin and the railway yards of Leipzig. The Reichswehr is concentrating around the capital. ?][? if e23_october_path = 3 : The workers' government's defenders hold the ministries and the stations of Berlin. Seeckt has declared the government deposed and is bringing in troops from Pomerania and Silesia. ?][? if e23_october_path = 4 : The strike in defence of Saxony has become a fight. The hundreds hold Chemnitz and Zwickau, and the Reichswehr is pouring into the Vogtland. ?]
+
+General von Seeckt has a hundred thousand professional soldiers, the police, the Black Reichswehr and the nationalist leagues. We have the hundreds, a few thousand rifles, and the strike. [+ crisis_name +] will be decided by where we fight, and whether the soldiers and the Social Democratic workers are with us or against us.
+
+[? if e23_red_ruhr = 1 : The councils of the red Ruhr are ready to march, if the French let them. ?][? if bavaria_soviet = 2 : Red Bavaria has mobilised its workers' guard on the Franconian border. ?][? if warsaw_outcome = 2 : On the Polish border, Red Army divisions are moving west. ?]
+
+- @saxony: Make Saxony and Thuringia our fortress.
+- @berlin: Everything on Berlin: take the capital.
+- @ruhr: Raise the Ruhr and the ports.
+- @spd_gov: Offer the SPD a workers' government for the whole Reich, now.
+
+@saxony
+subtitle: A red base the Reichswehr must besiege. Safer, and slower.
+on-arrival: {!
+Q.e23_focus = 1;
+Q.crisis_momentum += (Q.saxony_government == 1) ? 6 : 3;
+Q.district_saxony_loyalty += 6;
+Q.district_thuringia_loyalty += 6;
+Q.lean_unionist += 1;
+!}
+
+The hundreds dig in along the hills of the Erzgebirge and the Vogtland. Workers' councils take over the food supply of Chemnitz and Gera. The Reichswehr must come to us.
+
+@berlin
+subtitle: The boldest throw. If the capital falls, the Reich falls.
+on-arrival: {!
+Q.e23_focus = 2;
+var roll = Math.floor(Math.random() * 21) - 6;
+Q.crisis_momentum += roll;
+Q.e23_berlin_roll = roll >= 4 ? 1 : 0;
+Q.militancy += 6;
+Q.lean_offensive += 2;
+!}
+
+[? if e23_berlin_roll = 1 : The hundreds of Wedding and Neukölln cross the Spree at dawn. The Reich Chancellery is under siege by noon. ?][? if e23_berlin_roll = 0 : The attack on the centre of Berlin runs into machine guns on the Friedrichstrasse. The workers' districts hold, but the government quarter does not fall. ?]
+
+@ruhr
+subtitle: The pits and the docks. Strong where the party is strong.
+on-arrival: {!
+Q.e23_focus = 3;
+var bonus = 3;
+if (Q.e23_red_ruhr == 1 || Q.district_ruhr_loyalty >= 60) { bonus += 4; }
+if (Q.district_hamburg_loyalty >= 60) { bonus += 2; }
+Q.crisis_momentum += bonus;
+Q.district_ruhr_loyalty += 5;
+Q.lean_offensive += 1;
+Q.lean_ultraleft += 1;
+!}
+
+The miners of Bochum and Gelsenkirchen and the dockers of Hamburg and Bremen come out. The French watch from their barracks and do nothing, for now.
+
+@spd_gov
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] If the SPD's workers come over, the soldiers may not shoot.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an offer to the SPD.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_focus = 1;
+Q.crisis_momentum += (Q.spd_relation >= 35) ? 8 : 3;
+Q.spd_relation += 5;
+Q.lean_unionist += 2;
+!}
+
+Our offer is printed on every wall: a workers' government of the SPD and the KPD, the disarming of the Reichswehr's officers, bread for everyone. In a dozen cities the SPD's branches join the strike. Its executive denounces us, and loses its members by the hour.

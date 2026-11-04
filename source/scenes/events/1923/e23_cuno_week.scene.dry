@@ -1,0 +1,62 @@
+title: The SPD Decides
+subtitle: The Reichstag meets, and the Social Democrats must choose.
+new-page: true
+tags: event
+view-if: crisis_cuno = 1 and crisis_time = 1
+max-visits: 1
+priority: 3
+
+= The SPD Decides
+
+The Reichstag sits on the second day of the strike. Cuno reads a statement nobody listens to. In the lobbies the SPD deputies argue for hours. Their own members are on strike under communist slogans. If they keep Cuno in office, they will lose the factories. If they bring him down, they will have to govern in his place.
+
+Our deputies have tabled a motion of no confidence. The SPD's Reichstag group asks, through an intermediary, what we would do if it voted with us.
+
+- @promise: Promise to end the strike if Cuno falls.
+- @demand: Demand a workers' government as the price of ending it.
+- @nothing: Promise nothing: the strike goes on whatever the SPD does.
+
+@promise
+subtitle: The SPD will vote against Cuno. The strike will end on its terms.
+on-arrival: {!
+Q.e23_cuno_spd = 1;
+Q.spd_relation += 6;
+Q.crisis_momentum -= 4;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 5;
+Q.lean_unionist += 1;
+!}
+
+The intermediary goes back with our answer. That evening the SPD's group votes to withdraw its toleration of the Cuno government.
+
+@demand
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] A real price for the SPD. Some of its left wing will pay it.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids offering the SPD a government.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_cuno_spd = 2;
+Q.spd_relation += 2;
+Q.crisis_momentum += 5;
+Q.unionist_satisfaction += 3;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+The SPD executive says no. Thirty of its deputies say they would have said yes. The strikers hear about both.
+
+@nothing
+subtitle: The Left's answer. The strike keeps its edge, and loses its friends.
+on-arrival: {!
+Q.e23_cuno_spd = 3;
+Q.spd_relation -= 5;
+Q.crisis_momentum += 6;
+Q.militancy += 4;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+Our deputies tell the intermediary to read *Die Rote Fahne*. The SPD withdraws from Cuno anyway, to save itself, and calls on its members to go back to work.
