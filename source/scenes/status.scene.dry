@@ -4,7 +4,9 @@ is-special: true
 
 = The Party
 
-[+ month : month +] [+ year +]
+[+ month : month +] [+ year +][? if crisis : , week [+ week +] ?]
+
+Name: [+ party_name +]
 
 Funds: [+ resources +]
 
@@ -130,8 +132,6 @@ Arms: [+ red_guards_arms : level +]
 @crisis
 
 = [+ crisis_name +]
-
-[? if crisis : Week [+ crisis_time +] of the crisis. ?]
 
 [? if crisis_goal : [+ crisis_goal +] ?]
 

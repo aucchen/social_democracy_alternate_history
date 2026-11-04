@@ -22,6 +22,9 @@ var clamp = function(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
 // Normal play advances one month per action. During a crisis (crisis = 1)
 // each action is one week; after the 4th week the month turns as usual.
 var month_turns = false;
+if (!Q.crisis) {
+    Q.week = 0;
+}
 if (Q.month_actions >= 1) {
     Q.month_actions = 0;
     if (Q.crisis) {
@@ -204,6 +207,9 @@ if (Q.resources < 0) {
     Q.resources = 0;
 }
 Q.unity_display = Math.round(Q.unity);
+// the party's name: VKPD from the December 1920 unification until the
+// 1921 writer's Jena congress switches back to KPD
+Q.party_name = (Q.vkpd_formed && Q.e21_party != 'KPD' && Q.year <= 1921) ? 'VKPD' : 'KPD';
 
 if (typeof document !== 'undefined') {
     document.body.classList.toggle('crisis-mode', !!Q.crisis);

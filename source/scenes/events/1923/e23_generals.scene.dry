@@ -2,7 +2,7 @@ title: The Generals' Republic
 subtitle: The putsch has succeeded, and the generals are here to stay.
 new-page: true
 tags: event
-view-if: kapp_outcome = 2 and crisis = 0 and e23_generals_done = 0 and ending_id = 0
+view-if: kapp_outcome = 2 and kapp_junta_fell = 0 and crisis = 0 and e23_generals_done = 0 and ending_id = 0
 max-visits: 1
 priority: 40
 on-arrival: {!

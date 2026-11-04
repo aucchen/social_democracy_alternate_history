@@ -13,7 +13,8 @@ if (Q.warsaw_outcome == 2) { m += 8; }
 if (Q.army_loyalty >= 70) { m -= 6; }
 if (Q.army_loyalty < 35) { m += 3; }
 var region_ok = (Q.e23_focus == 1 && (Q.saxony_government == 1 || Q.district_saxony_loyalty >= 65)) || (Q.e23_focus == 3 && (Q.ruhr_red_army == 2 || Q.district_ruhr_loyalty >= 55 || Q.district_hamburg_loyalty >= 55));
-if (m >= 90) {
+// a national victory also needs the masses and a wavering army behind the momentum
+if (m >= 92 && Q.worker_support >= 35 && Q.army_loyalty < 60) {
     Q.e23_oct_result = 1;
     Q.german_october = 3;
 } else if (m >= 66 && region_ok) {

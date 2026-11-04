@@ -18,7 +18,7 @@ max-cards: 3
 
 [? if faction_shift_note : [+ faction_shift_note +] ?]
 
-Party line: **[+ leading_faction_name +]**[? if junior_faction : , with the [+ junior_faction_name +] as junior partner ?]. Members in loyal districts: [+ loyal_share_display +]%.
+Party line: **[+ leading_faction_name +]**[? if junior_faction : , with the [+ junior_faction_name +] as junior partner?]. Members in loyal districts: [+ loyal_share_display +]%.
 
 - @crisis_deck
 - @party
