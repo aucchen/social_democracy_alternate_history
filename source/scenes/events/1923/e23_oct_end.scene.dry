@@ -1,0 +1,136 @@
+title: The Decision
+subtitle: The German revolution is won or lost.
+new-page: true
+tags: event
+view-if: crisis_october = 1 and crisis_time >= 5 and e23_rising_phase = 1 and e23_october_done = 0
+max-visits: 1
+priority: 4
+on-arrival: {!
+var m = Q.crisis_momentum;
+if (Q.red_guards_strength >= 40) { m += 3; }
+if (Q.red_guards_arms >= 50) { m += 3; }
+if (Q.warsaw_outcome == 2) { m += 8; }
+if (Q.army_loyalty >= 70) { m -= 6; }
+if (Q.army_loyalty < 35) { m += 3; }
+var region_ok = (Q.e23_focus == 1 && (Q.saxony_government == 1 || Q.district_saxony_loyalty >= 65)) || (Q.e23_focus == 3 && (Q.ruhr_red_army == 2 || Q.district_ruhr_loyalty >= 55 || Q.district_hamburg_loyalty >= 55));
+// a national victory also needs the masses and a wavering army behind the momentum
+if (m >= 92 && Q.worker_support >= 35 && Q.army_loyalty < 60) {
+    Q.e23_oct_result = 1;
+    Q.german_october = 3;
+} else if (m >= 66 && region_ok) {
+    Q.e23_oct_result = 2;
+    Q.german_october = 2;
+    Q.e23_red_region = (Q.e23_focus == 3) ? ((Q.ruhr_red_army == 2 || Q.district_ruhr_loyalty >= Q.district_hamburg_loyalty) ? 2 : 3) : 1;
+} else if (m < 15) {
+    Q.e23_oct_result = 4;
+    Q.german_october = 2;
+} else {
+    Q.e23_oct_result = 3;
+    Q.german_october = 2;
+    // whether Seeckt is tempted to keep the power the emergency gives him
+    Q.e23_seeckt_ambition = (Math.random() < 0.3) ? 1 : 0;
+}
+Q.e23_october_done = 1;
+Q.crisis = 0; Q.crisis_october = 0; Q.crisis_name = 0; Q.crisis_goal = 0;
+!}
+
+= The Decision
+
+[? if e23_oct_result = 1 : The soldiers would not shoot. It began in a barracks in Spandau and spread down the railway lines: battalions that elected councils, officers locked in their quarters, machine guns handed over to the hundreds. On the sixth day General von Seeckt left Berlin for Pomerania with the officers who would follow him. In Leipzig and Hamburg, in the Ruhr and in the capital, the councils hold power. The German revolution has won. ?]
+
+[? if e23_oct_result = 2 and e23_red_region = 1 : Berlin did not fall, and neither did Saxony. The hundreds hold the line of the Erzgebirge and the Thuringian Forest, the workers' councils govern from Chemnitz to Gera, and the Reichswehr, short of men and of reliable soldiers, has stopped attacking. A red Central Germany stands inside a hostile Reich. ?]
+
+[? if e23_oct_result = 2 and e23_red_region = 2 : Berlin did not fall, but the Ruhr is ours. Between the French bayonets and the Reichswehr's, the councils govern the pits and the towns from Duisburg to Dortmund. Neither army wants to be the first to attack. ?]
+
+[? if e23_oct_result = 2 and e23_red_region = 3 : Berlin did not fall, but the coast did not either. Hamburg and Bremen are governed by workers' councils, the harbour is closed to the Reichswehr's transports, and the marines in Kiel have elected their own committee. ?]
+
+[? if e23_oct_result = 3 : The rising is beaten. The strike broke first, in the towns where the SPD called its members back to work, and then the hundreds were driven from the stations and the town halls one by one. The Reichswehr fought its way into Chemnitz and Leipzig. Thousands are under arrest. The leaders are in hiding, or across the border. ?]
+
+[? if e23_oct_result = 4 : It is a massacre. The strike never became general, the soldiers shot, and the hundreds were cut down in the streets. The Reichswehr and the Black Reichswehr hunt the party from district to district, with lists that were stolen from our own couriers. There is nothing left to retreat with. ?]
+
+- @proclaim: Proclaim the German Socialist Soviet Republic.
+- @hold_region: Hold the red region, and build a council republic inside it.
+- @negotiate: Negotiate: give up the region in return for an amnesty.
+- @underground: Retreat underground, and save what can be saved.
+- @last_stand: Fight on in the workers' districts to the end.
+- @crushed: See how it ends.
+
+@proclaim
+view-if: e23_oct_result = 1
+on-arrival: {!
+Q.ending_id = 1;
+!}
+go-to: game_over
+
+@hold_region
+subtitle: The council republic lives, besieged.
+view-if: e23_oct_result = 2
+on-arrival: {!
+Q.ending_id = 2;
+!}
+go-to: game_over
+
+@negotiate
+subtitle: The rising ends without a massacre. The Republic survives, and so does the party.
+view-if: e23_oct_result = 2
+on-arrival: {!
+Q.e23_red_region = 0;
+Q.repression += 10;
+Q.worker_support += 2;
+Q.red_guards_strength *= 0.5;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.9;
+}
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 8;
+!}
+
+The councils hand back the town halls in return for an amnesty, signed by Stresemann and witnessed by the Social Democratic ministers. Seeckt calls it treason. The hundreds go home with their heads up, and without their rifles.
+
+@underground
+subtitle: The party goes into illegality. Many members are lost; the organisation survives.
+view-if: e23_oct_result = 3
+on-arrival: {!
+Q.repression += 25;
+Q.stability -= 4;
+Q.red_guards_strength *= 0.3;
+Q.red_guards_arms *= 0.5;
+Q.worker_support -= 6;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.65;
+}
+Q.unity -= 6;
+!}
+
+The order goes out: bury the rifles, burn the lists, scatter. By Christmas the party has lost a third of its members, and most of its weapons.
+
+@last_stand
+subtitle: A legend, and very few survivors.
+view-if: e23_oct_result = 3
+on-arrival: {!
+Q.repression += 35;
+Q.stability -= 6;
+Q.red_guards_strength *= 0.1;
+Q.red_guards_arms *= 0.2;
+Q.militancy += 10;
+Q.worker_support -= 3;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.5;
+}
+Q.offensive_satisfaction += 6;
+!}
+
+In Wedding and Barmbek and the Chemnitz suburbs the barricades hold for a week. When they fall, the Reichswehr shoots the prisoners it does not need. The workers who survive will name their sons after the dead.
+
+@crushed
+view-if: e23_oct_result = 4
+on-arrival: {!
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] = 0.1;
+}
+Q.members = 0.8;
+Q.members_display = '0.8';
+Q.kpd_banned = 1;
+Q.ending_id = 4;
+!}
+go-to: game_over

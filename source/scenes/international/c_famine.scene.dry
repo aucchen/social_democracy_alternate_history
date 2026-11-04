@@ -1,0 +1,56 @@
+title: Famine on the Volga
+new-page: true
+view-if: crisis = 0 and c_famine_timer <= 0 and ((year = 1921 and month >= 8) or (year = 1922 and month <= 9))
+on-arrival: c_famine_timer = 5; month_actions += 1
+frequency: 300
+is-card: true
+tags: international
+
+= Famine on the Volga
+
+Drought, war and requisitions have brought famine to the Volga. Millions are starving; there are reports of cannibalism in Samara. Lenin has appealed to the workers of the world, and Willi Münzenberg has founded the Workers' International Relief in Berlin to answer him. [? if c_famine_relief = 1 : Our collections have already sent several shiploads of food. ?]
+
+Even the SPD's workers want to help. The question is how.
+
+- @collect: Collect in every factory, with any worker who will give.
+- @party_funds: Send the party's own money.
+- @skilled: Send skilled workers and machines.
+- @easy_discard
+
+@collect
+subtitle: A broad campaign alongside the social democratic workers. Worker support and goodwill rise.
+on-arrival: {!
+Q.c_famine_relief = 1;
+Q.worker_support += 3;
+Q.spd_relation += 3;
+if (Q.uspd_exists) {
+    Q.uspd_relation += 3;
+}
+Q.world_revolution += 2;
+Q.unionist_satisfaction += 2;
+Q.lean_unionist += 1;
+!}
+
+Collection tins pass through every works canteen in Germany. Workers who would never vote for us give a day's wages for the Russian children.
+
+@party_funds
+subtitle: Costs 1 fund. Moscow is grateful; the party is poorer.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; c_famine_relief = 1; world_revolution += 3; independence += 2; offensive_satisfaction += 2
+
+The party's own money buys grain in Hamburg. For once, the money is going east.
+
+@skilled
+subtitle: Some of our best workers emigrate. Soviet industry gains; our districts lose them.
+on-arrival: {!
+Q.c_famine_relief = 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.99;
+}
+Q.world_revolution += 4;
+Q.independence -= 2;
+Q.offensive_satisfaction += 2;
+!}
+
+Engineers from the Ruhr and toolmakers from Berlin pack their tools for the Urals. Some will build a new world. Some will write home to say it is harder than they thought.

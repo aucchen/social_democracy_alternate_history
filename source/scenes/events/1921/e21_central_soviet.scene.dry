@@ -1,0 +1,93 @@
+title: Red Central Germany
+subtitle: The workers hold the copper district and the chemical works. What now?
+new-page: true
+tags: event
+view-if: march_action = 2 and e21_central_done = 0 and crisis = 0
+max-visits: 1
+priority: 15
+on-arrival: e21_central_done = 1
+
+= Red Central Germany
+
+The police are gone from Mansfeld and Merseburg. [? if e21_march_mode = 2 : Armed workers guard the pitheads, the Leuna gates and the Halle railway station. The district council of Halle-Merseburg meets in the Volkspark and issues orders that the Landrat obeys, because he has no choice. ?][? if e21_march_mode = 1 : The strike committees have become councils, and the councils are not in a hurry to dissolve. The managers of the Leuna works negotiate with them as with a government. ?]
+
+In Berlin the cabinet is in session every day. In Munich and East Prussia the Freikorps are recruiting. [? if e21_soviet_viable = 1 : Seeckt has told the government that the Reichswehr is not ready to fight a civil war in Central Germany this spring, and the Ruhr and Berlin would rise if it tried. ?][? if e21_soviet_viable = 0 : Seeckt has told the government that he can retake the district in a week, if he is given the order. ?]
+
+- @proclaim: Proclaim the Central German Soviet Republic.
+- @councils: Keep the councils and the arms, and negotiate.
+- @return: Return the works and claim the victory.
+
+@proclaim
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's dream. If the Reichswehr marches, we stand alone.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.lean_offensive += 3;
+if (Q.e21_soviet_viable == 1) {
+    Q.central_germany_soviet = 2;
+    Q.ending_id = 2;
+    Q.world_revolution += 15;
+} else {
+    Q.central_germany_soviet = 0;
+    for (var d of Q.districts) {
+        Q['district_' + d + '_members'] *= 0.85;
+    }
+    Q.district_halle_members *= 0.45;
+    Q.repression += 25;
+    Q.red_guards_strength *= 0.3;
+    Q.red_guards_arms -= 20;
+    Q.unity -= 10;
+    Q.luxemburgist_satisfaction -= 15;
+    Q.worker_support -= 6;
+    Q.stability += 5;
+}
+!}
+
+[? if central_germany_soviet = 2 : On a spring morning the council proclaims the Soviet Republic of Central Germany from the steps of the Halle town hall. The Reichswehr gathers on the borders of the province and does not cross them. In Berlin, the government decides that a negotiated frontier is better than a civil war. Germany now has a red heart, and the Republic has a hole in it. ?][? if central_germany_soviet = 0 : The proclamation is read on the Halle market square. Five days later the Reichswehr comes, with artillery, from three sides. The soviet republic lasts eleven days. The courts work for a year afterwards. ?]
+
+- @end: See how it ends.
+- @go_on: Continue...
+
+@end
+view-if: ending_id = 2
+go-to: game_over
+
+@go_on
+view-if: ending_id != 2
+
+The party goes on, smaller, and hunted.
+
+@councils
+subtitle: The Right's line: hold what we have won and make the state recognise it.
+on-arrival: {!
+Q.central_germany_soviet = 1;
+Q.stability -= 8;
+Q.district_halle_loyalty += 15;
+Q.district_halle_members *= 1.1;
+Q.worker_support += 5;
+Q.red_guards_arms += 5;
+Q.unionist_satisfaction += 10;
+Q.offensive_satisfaction += 2;
+Q.lean_unionist += 2;
+!}
+
+The councils stay, the arms stay hidden, and the Prussian government signs an agreement with the district council that it hopes nobody will read too closely. Central Germany becomes a place where the party is the law in the factories and the police come only when invited.
+
+@return
+subtitle: The Spartacist line: a victory for the whole class, not a fortress for the party.
+on-arrival: {!
+Q.central_germany_soviet = 0;
+Q.worker_support += 6;
+Q.spd_relation += 8;
+Q.uspd_relation += 6;
+Q.militancy -= 5;
+Q.luxemburgist_satisfaction += 10;
+Q.offensive_satisfaction -= 10;
+Q.lean_luxemburgist += 2;
+!}
+
+The occupied works are handed back, in return for an amnesty and the recognition of the factory councils. The party's membership books, in every district, cannot be printed fast enough.

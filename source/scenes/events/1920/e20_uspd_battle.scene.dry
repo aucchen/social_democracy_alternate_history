@@ -1,0 +1,79 @@
+title: The Battle for the USPD
+subtitle: The Independents tear themselves apart over Moscow's conditions.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 9 and crisis = 0 and ending_id = 0
+max-visits: 1
+priority: 2
+
+= The Battle for the USPD
+
+The USPD delegates came home from Moscow divided. Däumig and Stoecker want to accept the conditions and join the International. Crispien and Dittmann call them a dictatorship of Moscow, and Hilferding writes in *Freiheit* that the conditions would hand the German workers' movement over to the Russian state. Every USPD branch in Germany is voting on it, one by one, before the party congress at Halle in October. [? if uspd_in_government = 1 : The USPD's ministers in Legien's cabinet know that the conditions would force them out of it. ?]
+
+In Italy, four hundred thousand metalworkers have occupied their factories. Many USPD members ask why their own party is still arguing.
+
+How do we fight for the USPD's workers?
+
+- @quiet: Work quietly with Däumig, Stoecker and Koenen.
+- @attack: Attack Crispien, Dittmann and Hilferding by name.
+- @factories: Win the USPD's workers in common struggles in the factories.
+- @emissaries: Leave it to Moscow's emissaries and Moscow's money.
+
+@quiet
+subtitle: The Spartacist method. Let the USPD left lead its own members to us.
+on-arrival: {!
+Q.uspd_score += 1;
+Q.uspd_relation += 4;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+!}
+
+Our people meet the USPD left in back rooms and say little in public. In Halle-Merseburg and Berlin, the left wins branch after branch.
+
+@attack
+subtitle: The Left's method. Rallies the most radical Independents, and frightens the rest.
+on-arrival: {!
+Q.e20_attacked = 1;
+Q.uspd_relation -= 10;
+Q.militancy += 3;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 4;
+Q.lean_offensive += 2;
+!}
+
+*Die Rote Fahne* calls the USPD right the agents of the bourgeoisie inside the working class. The USPD left wins votes in the cities. In the small towns, the members rally to the old leaders.
+
+@factories
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's method. Workers who strike together will join together.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids common struggles with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.uspd_score += 1;
+Q.uspd_relation += 8;
+Q.worker_support += 2;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+In the Leuna works and the Berlin machine shops, our cells and the USPD's run common strike committees on wages and on the price of bread. The USPD members begin to think of us as comrades.
+
+@emissaries
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Effective, and it makes the USPD left Moscow's men rather than ours.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.uspd_score += 1;
+Q.independence -= 6;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+The International's couriers bring money for the USPD left's newspapers and travel funds for its speakers. The USPD right calls them "Moscow's roubles", and it is not wrong.

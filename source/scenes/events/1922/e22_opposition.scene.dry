@@ -1,0 +1,65 @@
+title: The Opposition
+subtitle: A great district turns against the Zentrale.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 10 and offensive_gone = 0 and unionist_gone = 0
+max-visits: 1
+on-arrival: {!
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+Q.e22_opp = (Q.lead_code == 2) ? 'unionist' : 'offensive';
+!}
+
+= The Opposition
+
+[? if lead_code != 2 : The Berlin-Brandenburg district has become a party within the party. Its leaders, Ruth Fischer and Arkadi Maslow, sharp, young and impatient, say the Zentrale's united front has become a polite conversation with the SPD executive. Their resolutions call the workers' government a "Social Democratic swindle" and demand a return to revolutionary struggle. The Hamburg district, under Ernst Thälmann, a docker with a big voice and no patience for theory, increasingly agrees with them. ?]
+
+[? if lead_code = 2 : With the Left in the Zentrale, the opposition comes from the other side. Heinrich Brandler, August Thalheimer and the Saxon district say the Fischer line is driving away every union member the party ever won, and that the next adventure will finish the party for good. They write to Moscow more often than to Berlin. ?]
+
+The opposition has its own platform, its own meetings and its own friends in the Executive in Moscow. The Zentrale must decide how to live with it.
+
+- @discipline: Forbid factional platforms, and remove its leaders from their posts.
+- @concede: Bring its leaders into the Zentrale.
+- @moscow: Ask the Executive in Moscow to arbitrate.
+
+@discipline
+subtitle: The Zentrale's authority grows. The opposition will not forget it.
+on-arrival: {!
+var o = Q.e22_opp;
+Q.e22_berlin_opposition = 1;
+Q[o + '_satisfaction'] -= 12;
+Q.unity -= 3;
+Q[Q.leading_faction + '_satisfaction'] += 5;
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_faction'] == o) {
+        Q['district_' + d + '_loyalty'] -= 8;
+    }
+}
+!}
+
+The Central Committee bans factional circulars. The opposition's leaders lose their posts and keep their following, which now meets in back rooms instead of the district office.
+
+@concede
+subtitle: The opposition becomes the Zentrale's junior partner, and its line weighs on ours.
+on-arrival: {!
+var o = Q.e22_opp;
+Q.e22_berlin_opposition = 2;
+Q.junior_faction = o;
+Q[o + '_satisfaction'] += 12;
+Q.unity += 4;
+Q[Q.leading_faction + '_satisfaction'] -= 5;
+Q['lean_' + o] += 2;
+!}
+
+Two of the opposition's leaders take seats in the Zentrale. Its meetings become longer and louder, and the party breathes more easily.
+
+@moscow
+subtitle: The Executive decides. Independence falls; the quarrel goes quiet for a while.
+on-arrival: {!
+var o = Q.e22_opp;
+Q.e22_berlin_opposition = 3;
+Q.independence -= 6;
+Q.unity += 3;
+Q[o + '_satisfaction'] += 4;
+!}
+
+Zinoviev and Radek summon both sides, praise both, and recommend unity. The opposition goes home with a promise that the next congress will hear its theses.

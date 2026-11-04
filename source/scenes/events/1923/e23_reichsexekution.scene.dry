@@ -1,0 +1,79 @@
+title: The Reichsexekution
+subtitle: The Reichswehr marches into Saxony to depose its government.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 10 and e23_reich_done = 0 and crisis = 0 and e23_october_path != 1 and (e23_saxony_decided = 1 or e23_october_done = 1)
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.e23_reich_done = 1;
+Q.repression += 6;
+Q.spd_in_government = 0;
+Q.government_name = 'Stresemann cabinet (DVP, Centre, DDP)';
+!}
+
+= The Reichsexekution
+
+In late October the Reichswehr marches into Saxony. General Müller's troops occupy Dresden, Leipzig and Chemnitz, and on 29 October an officer with a squad of soldiers removes Erich Zeigner from his office. A Reich commissioner governs Saxony in his place. [? if saxony_government = 1 : Our ministers are driven out with him. ?] Thuringia's government is threatened with the same.
+
+[? if bavaria_soviet != 2 : Against the Saxon Social Democrats, the Reich sends the army. Against Kahr's Bavaria, which openly defies Berlin, it sends letters. ?][? if bavaria_soviet = 2 : The Reich sends the army against the Saxon Social Democrats because it dares not send it against Red Bavaria. ?] The SPD leaves the Stresemann coalition in protest on 2 November, and does nothing else.
+
+[? if german_october = 2 : The party, beaten in the streets weeks ago, can only watch. ?][? if german_october != 2 and e23_october_done = 0 : The Saxon workers are looking to the party. Some of them have rifles. ?]
+
+- @defend: Call a general strike in defence of Saxony, and fight.
+- @protest: Call a protest strike in Saxony, and no more.
+- @yield: Yield: the party will not be provoked.
+
+@defend
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] An improvised rising. The Reichswehr is already inside the fortress.
+view-if: e23_october_done = 0
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis = 1;
+Q.crisis_october = 1;
+Q.e23_october_path = 4;
+Q.e23_rising_phase = 1;
+Q.crisis_time = 2;
+Q.week = 1;
+Q.crisis_name = 'The Defence of Saxony';
+Q.crisis_goal = 'Drive the Reichswehr out of Saxony, and spread the rising to the Reich.';
+var m = 26 + Q.worker_support * 0.2 + Q.red_guards_arms * 0.15 + (Q.saxony_government == 1 ? 4 : 0);
+Q.crisis_momentum = Math.max(20, Math.min(60, m));
+Q.militancy += 10;
+Q.repression += 8;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 4;
+Q.lean_offensive += 3;
+!}
+
+The sirens of Chemnitz sound at noon. The hundreds take the station and the post office while the Reichswehr is still at lunch.
+
+@protest
+subtitle: Shows that Saxony's workers object. The army takes their names.
+on-arrival: {!
+if (!Q.e23_october_done) { Q.german_october = 0; Q.e23_october_done = 1; }
+Q.militancy += 3;
+Q.repression += 4;
+Q.worker_support += 2;
+Q.spd_relation += 3;
+Q.lean_unionist += 1;
+!}
+
+For a day the Saxon works stand still. In Freiberg soldiers fire into a crowd of strikers and kill twenty-three. Then the strike ends.
+
+@yield
+subtitle: The careful course. No martyrs. The Left calls it capitulation.
+on-arrival: {!
+if (!Q.e23_october_done) { Q.german_october = 0; Q.e23_october_done = 1; }
+Q.militancy -= 5;
+Q.worker_support -= 3;
+Q.offensive_satisfaction -= 8;
+Q.unity -= 2;
+!}
+
+The party publishes a protest and holds meetings in halls the army has not yet closed.

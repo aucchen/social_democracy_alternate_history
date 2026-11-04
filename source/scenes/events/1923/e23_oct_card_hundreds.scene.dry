@@ -1,0 +1,49 @@
+title: Mobilise the Hundreds
+subtitle: The proletarian hundreds wait for orders.
+view-if: crisis_october = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Mobilise the Hundreds
+
+The hundreds are workers, not soldiers. They drill on Sunday mornings and go to work on Monday. To fight, they must leave the factories, which means losing their wages, which means their families will not eat. Every mobilisation costs the strike something and gives the army something to aim at.
+
+- @all: Call them all out, now.
+- @picked: Mobilise only the best-armed, as shock troops.
+- @guard: Keep them guarding the works and the strike.
+
+@all
+subtitle: Many fighters, and many targets.
+on-arrival: {!
+Q.red_guards_strength += 6;
+Q.crisis_momentum += (Q.e23_rising_phase == 1) ? 7 : 3;
+Q.repression += 5;
+Q.militancy += 4;
+Q.lean_offensive += 1;
+!}
+
+Tens of thousands of young workers report to their assembly points with whatever they have: rifles, pistols, iron bars.
+
+@picked
+subtitle: Fewer men, better used. The military apparatus approves.
+on-arrival: {!
+Q.red_guards_loyalty += 6;
+Q.crisis_momentum += (Q.e23_rising_phase == 1) ? 6 : 4;
+Q.repression += 2;
+!}
+
+The apparatus forms shock companies of veterans from 1920, with machine guns and Russian advisers.
+
+@guard
+subtitle: The strike holds; the army is not provoked.
+on-arrival: {!
+Q.worker_support += 3;
+Q.crisis_momentum += 3;
+Q.spd_relation += 2;
+Q.lean_unionist += 1;
+!}
+
+The hundreds stand at the factory gates and the power stations. Social Democratic strikers stand with them.

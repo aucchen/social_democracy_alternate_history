@@ -1,0 +1,74 @@
+title: The Mark Falls
+subtitle: A thousand marks to the dollar.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 8
+max-visits: 1
+on-arrival: {!
+Q.inflation = Math.min(100, Q.inflation + 6);
+Q.stability -= 4;
+!}
+
+= The Mark Falls
+
+In January a dollar cost under two hundred marks. In August it costs more than a thousand. Since Rathenau's murder no one abroad believes the Republic will last, and the Reichsbank prints whatever the government needs. Prices are now marked up on Monday and again on Thursday.
+
+The men who own things are doing well. Stinnes buys mines, hotels and newspapers with loans he will repay in worthless paper. The workers' wages are fixed for weeks at a time and are worth a third less by payday. In the markets of Berlin and Leipzig, housewives turn on traders they think are hoarding.
+
+The party must say what the workers should do.
+
+- @committees: Build control committees to police prices and hoarding.
+- @marches: Lead hunger marches on the town halls.
+- @scales: Fight in the unions for wages that rise with prices.
+
+@committees
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Committees of workers and housewives check the shops. Popular, and it builds organisation.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_inflation_line = 1;
+Q.worker_support += 5;
+Q.militancy += 3;
+Q.unionist_satisfaction += 4;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_unionist += 1;
+Q.lean_luxemburgist += 1;
+!}
+
+The first control committees appear in Saxony and Thuringia, then in Berlin. They go from shop to shop with lists of fair prices. Some shopkeepers lower them; some call the police.
+
+@marches
+subtitle: The Left's answer. The hungry follow us; so do the police.
+view-if: offensive_gone = 0 or ultraleft_gone = 0
+on-arrival: {!
+Q.e22_inflation_line = 2;
+Q.militancy += 8;
+Q.repression += 6;
+Q.worker_support += 3;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+Thousands of unemployed march on the town halls of Chemnitz, Halle and Gelsenkirchen. Some markets are plundered. The police make arrests, and the arrested are mostly ours.
+
+@scales
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] The Right's answer. Slow, and it wins respect in the unions.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the reformist unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_inflation_line = 3;
+Q.worker_support += 4;
+Q.spd_relation += 3;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+Our members in the metalworkers' union move resolution after resolution for a sliding scale of wages. By the autumn some big works pay weekly bonuses tied to the price of bread.

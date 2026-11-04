@@ -1,0 +1,61 @@
+title: The Price of Bread
+new-page: true
+view-if: crisis = 0 and c_prices_timer <= 0 and (year >= 1922 or inflation >= 30)
+on-arrival: c_prices_timer = 4; month_actions += 1
+frequency: 250
+is-card: true
+tags: movement
+
+= The Price of Bread
+
+[? if inflation < 60 : The mark is sliding. Wages are renegotiated every month, and every month they buy less. ?][? if inflation >= 60 : The mark is collapsing. Workers are paid twice a day and run to the shops before the prices change again. Farmers will not sell grain for paper. ?] In the markets, traders hold back butter and potatoes until the price rises, and the women in the queues know it.
+
+In some towns, works councils and housewives have formed control committees to watch the prices.
+
+- @committees: Elect control committees in every market.
+- @seize: Seize the hoarded food and sell it at fair prices.
+- @wages: Demand wages that rise with prices, with the unions.
+- @easy_discard
+
+@committees
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Elected committees inspect the shops and the stores. Worker support grows.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council work.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 5;
+Q.militancy += 3;
+Q.luxemburgist_satisfaction += 2;
+Q.unionist_satisfaction += 2;
+Q.lean_luxemburgist += 1;
+Q.lean_unionist += 1;
+!}
+
+Committees of workers and housewives walk the markets with notebooks. Traders caught hoarding find their names in the local party paper.
+
+@seize
+subtitle: Bread for today; police for tomorrow. The Left's line.
+on-arrival: militancy += 8; repression += 6; worker_support += 4; stability -= 2; offensive_satisfaction += 6; unionist_satisfaction -= 3; lean_offensive += 2
+
+A crowd opens a potato warehouse and sells its contents at last month's prices, paying the owner in cash. The owner calls the police anyway.
+
+@wages
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] A joint demand with the unions and the social democrats. The Right's line.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 4;
+Q.spd_relation += 3;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 2;
+Q.lean_unionist += 2;
+!}
+
+Wages tied to the cost of living: the demand is so obvious that the union leaders cannot refuse to sign it, though they would like to.

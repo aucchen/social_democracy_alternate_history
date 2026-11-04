@@ -1,0 +1,158 @@
+title: Bloody March in Berlin
+subtitle: The Berlin councils call a general strike.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 3 and crisis = 0
+max-visits: 1
+
+= Bloody March in Berlin
+
+On 3 March the general assembly of the Berlin workers' councils called a general strike for the recognition of the councils and the release of political prisoners. The Social Democrats voted for it, then left the strike committee because our delegates refused to sit with them. The city stopped. In the east, around the Alexanderplatz, crowds plundered shops, and soldiers of the People's Naval Division began handing out rifles.
+
+Noske's troops are already moving in. [? if luxemburg_alive = 1 : Luxemburg, still in hiding, writes that the strike must not become a second January. ?][? if luxemburg_alive = 0 : Jogiches, who now holds the Zentrale together, writes that the strike must not become a second January. ?] The young men in Lichtenberg and Friedrichshain are not listening.
+
+- @unarmed: Back the strike, but no armed fighting.
+- @rising: Arm the strike and fight.
+- @with_spd: Let the Social Democrats back into the strike committee.
+
+@unarmed
+subtitle: The Spartacist line. Some will fight anyway.
+on-arrival: march_line = 1; worker_support += 3; repression += 6; luxemburgist_satisfaction += 5; offensive_satisfaction -= 3; lean_luxemburgist += 2; district_berlin_members -= 0.3
+
+On 5 March *Die Rote Fahne* tells the workers to stay out of the fighting. The paper is banned the next day.
+
+- @terror: Continue...
+
+@rising
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's and the Left Radicals' answer. Noske has artillery, aircraft and orders to shoot.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.march_line = 2;
+Q.militancy += 10;
+Q.repression += 10;
+Q.red_guards_strength -= 1;
+Q.district_berlin_members -= 0.8;
+Q.district_berlin_loyalty += 6;
+Q.offensive_satisfaction += 8;
+Q.ultraleft_satisfaction += 6;
+Q.lean_offensive += 2;
+Q.lean_ultraleft += 1;
+!}
+
+Our people join the sailors at the barricades in Lichtenberg. For four days, the east of Berlin is a battlefield.
+
+- @terror: Continue...
+
+@with_spd
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: a stronger strike, and a narrower one.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids sitting with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.march_line = 3;
+Q.worker_support += 5;
+Q.spd_relation += 6;
+Q.repression += 3;
+Q.unionist_satisfaction += 8;
+Q.ultraleft_satisfaction -= 8;
+Q.lean_unionist += 2;
+Q.lean_ultraleft -= 1;
+!}
+
+The committee is united again, for a few days. The power stations keep the strike going, and the government, for once, has to negotiate. Then the fighting in the east begins without anyone's permission.
+
+- @terror: Continue...
+
+@terror
+title: Noske's Order
+new-page: true
+on-arrival: {!
+Q.rote_fahne_banned = 1;
+Q.repression += 3;
+Q.freikorps_strength += 20;
+// Liebknecht at the barricades
+if (Q.liebknecht_alive == 1 && Q.march_line == 2 && Math.random() < 0.4) {
+    Q.liebknecht_alive = 0;
+    Q.liebknecht_advisor = 0;
+    Q.liebknecht_march_death = 1;
+    Q.militancy += 5;
+}
+!}
+
+= Noske's Order
+
+On 9 March, after newspaper reports, all of them false, that the rebels had massacred the police in Lichtenberg, Noske ordered that anyone found carrying arms against the government be shot on the spot. The troops used field guns, mortars and aircraft against the tenements of the east. Twenty-nine sailors of the People's Naval Division who came to collect their pay were taken into a courtyard in the Französische Strasse and shot. About twelve hundred people are dead.
+
+[? if liebknecht_march_death = 1 : Karl Liebknecht was among the fighters in Lichtenberg. He was recognised at a checkpoint and shot. ?] The strike has collapsed. The party is banned in all but name, and *Die Rote Fahne* is printed in secret.
+
+Leo Jogiches has spent two months finding the men who killed Luxemburg and Liebknecht. The police know where he sleeps.
+
+- @leave: Order Jogiches to leave Berlin.
+- @hide: Hide him in a flat only the Zentrale knows.
+- @work: Let him finish his investigation.
+
+@leave
+subtitle: He will refuse unless the order is firm. The investigation stops.
+on-arrival: {!
+var risk = 15 + Math.random() * 30;
+Q.jogiches_alive = risk < 40 ? 1 : 0;
+Q.unity -= 2;
+!}
+go-to: jogiches
+
+@hide
+subtitle: Costs 1 fund.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+var risk = 30 + Math.random() * 30;
+Q.jogiches_alive = risk < 45 ? 1 : 0;
+!}
+go-to: jogiches
+
+@work
+subtitle: The murderers must be named. So must the officers who protect them.
+on-arrival: {!
+var risk = 45 + Math.random() * 30;
+Q.jogiches_alive = risk < 50 ? 1 : 0;
+Q.worker_support += 2;
+Q.luxemburgist_satisfaction += 3;
+!}
+go-to: jogiches
+
+@jogiches
+title: The Zentrale
+new-page: true
+on-arrival: {!
+if (!Q.jogiches_alive) {
+    Q.luxemburgist_satisfaction -= 5;
+    Q.spd_relation -= 5;
+}
+if (Q.luxemburg_alive) {
+    Q.party_chair = 'Rosa Luxemburg';
+    Q.levi_chair = 0;
+} else if (Q.jogiches_alive) {
+    Q.party_chair = 'Leo Jogiches';
+    Q.levi_chair = 0;
+} else {
+    Q.party_chair = 'Paul Levi';
+    Q.levi_chair = 1;
+}
+!}
+
+= The Zentrale
+
+[? if jogiches_alive = 0 : On 10 March Leo Jogiches is arrested in his flat in Neukölln and taken to the remand prison in Moabit. That evening a police sergeant, Ernst Tamschick, shoots him in the back in a corridor, "while trying to escape". The man who built the Spartacus League in secret through four years of war is dead. ?][? if jogiches_alive = 1 : The police come to Jogiches' flat in Neukölln on 10 March and find it empty. He has learned the trade of hiding in the Tsar's empire, and he has not forgotten it. ?]
+
+[? if levi_chair = 1 : The leadership passes to **Paul Levi**, a thirty-five-year-old Frankfurt lawyer, Luxemburg's defender in court and her closest political friend. He is cool, cultivated and impatient with fools, and the Left Radicals detest him. He means to turn a sect of rebels into a party that can win the working class. ?][? if levi_chair = 0 and luxemburg_alive = 1 : **Rosa Luxemburg** still leads the Zentrale from hiding, with Paul Levi as her right hand. ?][? if levi_chair = 0 and luxemburg_alive = 0 : **Leo Jogiches** still holds the Zentrale together, with Paul Levi as his right hand. ?]
+
+The party goes underground. It is smaller in Berlin than in January, and growing everywhere else.

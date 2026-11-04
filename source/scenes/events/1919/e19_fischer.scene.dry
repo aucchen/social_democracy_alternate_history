@@ -1,0 +1,35 @@
+title: Ruth Fischer Comes to Berlin
+subtitle: A young Viennese communist wants a place in the party.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 9 and crisis = 0
+max-visits: 1
+priority: 0.5
+
+= Ruth Fischer Comes to Berlin
+
+Ruth Fischer is twenty-three, a founder of the Austrian Communist Party, a brilliant speaker and a ruthless one. She has come to Berlin with her friend Arkadi Maslow, a Russian-born student who has read everything and fears nothing. They want a party that fights, and they think the Zentrale talks too much.
+
+But they also think the Left Radicals are a dead end: a party that boycotts the unions will never lead the workers anywhere. In the Berlin district, where the Left Radicals still hold the committee, Fischer could be useful to the Zentrale. She could also become its next problem.
+
+- @berlin: Give her a post in the Berlin district.
+- @distance: Keep her at arm's length.
+- @mediate: Ask her to mediate with the Left Radicals.
+
+@berlin
+subtitle: The Left gets a voice in Berlin. Before the congress, it will be on our side.
+on-arrival: heid_left = 1; offensive_satisfaction += 8; lean_offensive += 2; district_berlin_loyalty += 5; ultraleft_satisfaction -= 4
+
+Within weeks Fischer is the best-known speaker in the Berlin district. The Left Radicals on the committee find their meetings full of her supporters.
+
+@distance
+subtitle: The Spartacist caution: the Zentrale does not need another faction. The Left resents it.
+on-arrival: heid_left = 2; offensive_satisfaction -= 6; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+Fischer is given a desk and a typewriter in the women's section. She uses both to write about the Zentrale's timidity.
+
+@mediate
+subtitle: The Right's hope: a bridge between the Zentrale and the Left Radicals.
+on-arrival: heid_left = 3; ultraleft_satisfaction += 4; offensive_satisfaction += 3; unionist_satisfaction += 3; lean_unionist += 1; lean_offensive += 1
+
+Fischer goes to the Left Radicals' meetings in Berlin and argues for the party staying together. They listen, more than they would to the Zentrale.

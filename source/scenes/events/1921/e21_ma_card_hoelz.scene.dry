@@ -1,0 +1,47 @@
+title: Max Hoelz
+subtitle: A Robin Hood with dynamite, and nobody's soldier.
+view-if: crisis_march = 1 and e21_ma_hoelz = 0
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Max Hoelz
+
+Max Hoelz, the Vogtland rebel of the Kapp days, has come to Mansfeld with a few hundred armed men. [? if kapd_exists = 1 : We expelled him last year; he is closer to the KAPD now than to us. ?] He blows up railway lines, robs banks and post offices to pay his fighters, and burns the villas of the mine directors. The workers love him. The press calls him the red general, and the bandit.
+
+- @arms: Send him arms and a liaison officer.
+- @discipline: Bring his men under the strike committees.
+- @disown: Disown his robberies and bombs.
+
+@arms
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's line: every rifle counts. The Spartacists are appalled.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed action.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_ma_hoelz = 1;
+Q.crisis_momentum += 8;
+Q.repression += 6;
+Q.luxemburgist_satisfaction -= 8;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+A Zentrale courier reaches Hoelz near Hettstedt with money and a cart of rifles. For a few days his bands and the miners' fighting groups act together, and they hold the roads.
+
+@discipline
+subtitle: The Right's way. Slower, but the fighters will answer to someone.
+on-arrival: e21_ma_hoelz = 2; crisis_momentum += 3; red_guards_loyalty += 5; unionist_satisfaction += 3; lean_unionist += 1
+
+Hoelz agrees to coordinate with the strike committees, more or less. He keeps his dynamite.
+
+@disown
+subtitle: The Spartacist line. The strike stays clean; it may also stay weaker.
+on-arrival: e21_ma_hoelz = 3; crisis_momentum -= 3; spd_relation += 3; luxemburgist_satisfaction += 5; offensive_satisfaction -= 4; lean_luxemburgist += 1
+
+The Rote Fahne declares that bank robbery is not a communist tactic. Hoelz reads it, laughs, and carries on.

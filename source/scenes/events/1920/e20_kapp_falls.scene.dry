@@ -1,0 +1,146 @@
+title: Kapp Flees
+subtitle: The putsch collapses. What comes after it?
+new-page: true
+tags: event
+view-if: crisis_kapp = 1 and crisis_time = 2 and kapp_decided = 0 and crisis_momentum >= 25
+max-visits: 1
+priority: 5
+on-arrival: {!
+Q.kapp_decided = 1;
+Q.e20_wg_roll = Math.floor(Math.random() * 11);
+!}
+
+= Kapp Flees
+
+On 17 March, Wolfgang Kapp resigns and takes a plane to Sweden. Lüttwitz follows him into hiding. The next day the Ehrhardt Brigade marches out of Berlin, and at the Brandenburg Gate it fires into the crowd that jeers it. Twelve people die.
+
+The workers have beaten the generals with their bare hands, and they do not want to go back to the way things were. The strike goes on. Carl Legien, the most cautious union leader in Germany, demands the resignation of Noske, the punishment of the putschists and the socialisation of the mines. Then he goes further: let the SPD, the USPD and the unions form a **workers' government**, without the bourgeois parties.
+
+The USPD leaders are suspicious. They ask what the communists will do. The Zentrale must answer.
+
+- @loyal: Promise a "loyal opposition" to a workers' government.
+- @support: Urge the USPD to accept, and offer to support the government ourselves.
+- @fraud: Denounce the offer as a trick to end the strike.
+- @committees: No government of parties: all power to the action committees.
+
+@loyal
+subtitle: The Spartacist answer, and Levi's: we will not overthrow a socialist government by force, so long as it lets the workers organise.
+on-arrival: {!
+Q.wg_stance = 1;
+var score = Q.crisis_momentum + (Q.uspd_relation - 45) / 2 + Q.e20_wg_roll;
+Q.kapp_outcome = score >= 90 ? 3 : 1;
+Q.luxemburgist_satisfaction += 6;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 6;
+Q.uspd_relation += 4;
+Q.lean_luxemburgist += 2;
+!}
+
+We publish the statement on 23 March. A workers' government would be a step forward; we would not try to bring it down by force while it respects the freedom of the workers' organisations; we would remain its critics. The Left calls it a declaration of loyalty to Legien.
+
+[? if kapp_outcome = 3 : It is enough. The USPD's congress delegates vote to accept, and Crispien and Däumig go to the Chancellery with Legien. ?][? if kapp_outcome = 1 : It is not enough. The USPD leaders refuse to sit with the party of Noske. Legien gives up, and the old coalition returns under Hermann Müller. ?]
+
+- @ruhr: Continue...
+
+@support
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. The best chance of a workers' government; the Left will never forgive it.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids supporting a government of social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.wg_stance = 2;
+var score = Q.crisis_momentum + (Q.uspd_relation - 45) / 2 + 9 + Q.e20_wg_roll;
+Q.kapp_outcome = score >= 90 ? 3 : 1;
+Q.unionist_satisfaction += 10;
+Q.offensive_satisfaction -= 12;
+Q.uspd_relation += 8;
+Q.spd_relation += 4;
+Q.uspd_score += 1;
+Q.lean_unionist += 3;
+!}
+
+Our delegates tell the USPD leaders to their faces: take power with Legien, and the communists will defend that government against any general.
+
+[? if kapp_outcome = 3 : The Independents cannot refuse what even the communists demand. Legien becomes Chancellor of a government of the SPD, the USPD and the unions. ?][? if kapp_outcome = 1 : The USPD leaders refuse all the same. Legien gives up, and the old coalition returns under Hermann Müller. ?]
+
+- @ruhr: Continue...
+
+@fraud
+subtitle: The Left's answer: no illusions, and no end to the strike.
+on-arrival: {!
+Q.wg_stance = 3;
+Q.kapp_outcome = 1;
+Q.militancy += 5;
+Q.worker_support -= 2;
+Q.uspd_relation -= 4;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 2;
+!}
+
+We tell the strikers that Legien's government would be Noske's government with a new coat of paint. The USPD leaders are glad of the excuse to refuse. The old coalition returns under Hermann Müller, and the unions call off the strike.
+
+- @ruhr: Continue...
+
+@committees
+subtitle: The Left Radical answer. The strike committees are the only power we recognise.
+view-if: ultraleft_gone = 0
+on-arrival: {!
+Q.wg_stance = 4;
+Q.kapp_outcome = 1;
+Q.militancy += 6;
+Q.ultraleft_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 5;
+Q.lean_ultraleft += 2;
+!}
+
+We call on the action committees to take over the towns and ignore Berlin altogether. A few do, on the coast and in the Ruhr. The old coalition returns under Hermann Müller.
+
+- @ruhr: Continue...
+
+@ruhr
+title: The Red Army of the Ruhr
+new-page: true
+on-arrival: {!
+Q.crisis_kapp = 0;
+Q.crisis_ruhr = 1;
+Q.crisis_name = 'The Ruhr Red Army';
+Q.crisis_goal = 'Hold what the workers have won in the Ruhr, or save what can be saved.';
+Q.red_guards_strength += 45;
+Q.red_guards_arms += 15;
+Q.red_guards_loyalty -= 10;
+Q.freikorps_strength -= 60;
+Q.stability -= 5;
+Q.district_ruhr_members += 2;
+if (Q.kapp_outcome == 3) {
+    Q.government_name = 'Workers\' government (SPD, USPD, unions)';
+    Q.chancellor = 'Carl Legien';
+    Q.spd_in_government = 1;
+    Q.uspd_in_government = 1;
+    Q.zentrum_in_government = 0;
+    Q.ddp_in_government = 0;
+    Q.dvp_in_government = 0;
+    Q.worker_support += 6;
+    Q.army_loyalty += 5;
+    Q.repression -= 10;
+} else {
+    Q.government_name = 'Müller cabinet (SPD, Centre, DDP)';
+    Q.chancellor = 'Hermann Müller';
+    Q.spd_in_government = 1;
+    Q.zentrum_in_government = 1;
+    Q.ddp_in_government = 1;
+    Q.army_loyalty += 10;
+}
+Q.crisis_momentum = 35 + Math.round(Q.red_guards_arms / 5) + (Q.kapp_armed ? 5 : 0) + (Q.kapp_outcome == 3 ? 8 : 0);
+!}
+
+= The Red Army of the Ruhr
+
+The strike is over in Berlin. In the Ruhr it has become a war. Since the first days of the putsch, armed miners and steelworkers have driven the Reichswehr and the Freikorps out of Dortmund, Essen, Bochum and Duisburg. By 20 March the whole coalfield is theirs, from the Rhine to Hamm.
+
+They call themselves the Red Army. There may be fifty thousand of them, with machine guns and artillery taken from the army. Its front runs along the Lippe, and it is besieging the fortress of Wesel. Two central councils claim to lead it: one in Hagen, run by the USPD, and one in Essen, where our comrades and the syndicalists are strong.
+
+[? if kapp_outcome = 3 : The workers' government in Berlin has ordered General von Watter not to cross the Lippe. Watter has not yet said whether he will obey. ?][? if kapp_outcome = 1 : In Münster, General von Watter is gathering the same Freikorps that marched with Kapp, and Berlin is letting him. ?]

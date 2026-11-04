@@ -1,0 +1,94 @@
+title: Seeckt's Decree
+subtitle: The general with emergency powers turns on the extremes.
+new-page: true
+tags: event
+view-if: year = 1923 and month >= 11 and crisis = 0 and e23_ban_done = 0 and beer_hall_putsch = 1
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.e23_ban_done = 1;
+var ban = (Q.german_october >= 1 || Q.e23_october_path > 0 || Q.militancy >= 50) ? 1 : 0;
+Q.kpd_banned = ban;
+if (ban) {
+    Q.repression += 15;
+    for (var d of Q.districts) {
+        Q['district_' + d + '_members'] *= 0.9;
+    }
+} else {
+    Q.repression += 4;
+}
+Q.nsdap_exists = 1;
+Q.sa_strength *= 0.6;
+!}
+
+= Seeckt's Decree
+
+After the putsch in Munich, President Ebert transfers executive power in the whole Reich to General Hans von Seeckt himself. Seeckt has no wish to be a dictator, he says, only to restore order. On 23 November he bans Hitler's National Socialists and the German Völkisch Freedom Party.
+
+[? if kpd_banned = 1 : He bans the Communist Party of Germany in the same decree. Its offices are closed, its presses sealed, *Die Rote Fahne* forbidden. Its deputies keep their immunity, and nothing else. Thousands of functionaries are arrested in the first week. ?]
+
+[? if kpd_banned = 0 : He does not ban us. The party took no part in any rising, the SPD has let it be known that it would leave the government over a ban, and Stresemann has no wish to make martyrs. The police keep their lists up to date all the same. ?]
+
+- @underground: Build the illegal apparatus: cells, couriers, hidden presses.
+- @legal: Fight it in the courts and the Reichstag, with whoever will help.
+- @defy: Defy it openly: our papers appear anyway.
+- @use: Use our legality: recruit the workers the others have lost.
+
+@underground
+subtitle: The party survives as a conspiracy, disciplined and small.
+view-if: kpd_banned = 1
+on-arrival: {!
+Q.unity += 5;
+Q.red_guards_loyalty += 5;
+Q.worker_support -= 3;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+The party splits into cells of five. Leaflets are printed in cellars and handed out at dawn. The membership falls, and those who stay can be trusted.
+
+@legal
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The SPD's left wing and the civil-liberties lawyers help. Slow.
+view-if: kpd_banned = 1
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids asking the social democrats for help.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 5;
+Q.repression -= 5;
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+[? if levi_split = 1 : Paul Levi, from the SPD benches, is the first to denounce the ban in the Reichstag. ?] Our deputies and their lawyers fight the ban case by case. Some presses are unsealed by the courts within weeks.
+
+@defy
+subtitle: Brave, and the arrests double.
+view-if: kpd_banned = 1
+on-arrival: {!
+Q.repression += 8;
+Q.militancy += 5;
+Q.worker_support += 2;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.95;
+}
+!}
+
+*Die Rote Fahne* appears under a new name every week, and every week the police seize it.
+
+@use
+subtitle: Recruits the disappointed, from the left and the right.
+view-if: kpd_banned = 0
+on-arrival: {!
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.05;
+}
+Q.worker_support += 3;
+Q.unionist_satisfaction += 3;
+Q.luxemburgist_satisfaction += 3;
+!}
+
+With the National Socialists banned and the SPD in disgrace with its own members, our meetings are full all through December.

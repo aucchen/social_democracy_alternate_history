@@ -1,6 +1,6 @@
 title: Recruitment Drive
 new-page: true
-view-if: recruitment_timer <= 0
+view-if: crisis = 0 and recruitment_timer <= 0
 on-arrival: recruitment_timer = 3; month_actions += 1
 frequency: 300
 is-card: true
@@ -8,11 +8,12 @@ tags: party_affairs
 
 = Recruitment Drive
 
-Thousands of workers are disappointed in Ebert's republic. A recruitment drive could bring them into the party, but only the districts loyal to the Zentrale will put real effort into it.
+[? if year = 1919 or (year = 1920 and month < 4) : Thousands of workers are disappointed in Ebert's republic. ?][? if year = 1920 and month >= 4 : After the Kapp days, many workers want a party that will fight. ?][? if year >= 1921 : The party has become a mass party, and it must keep growing or it will shrink. ?] A recruitment drive could bring new members in, but only the districts loyal to the Zentrale will put real effort into it.
 
 Members in loyal districts: [+ loyal_share_display +]%.
 
 - @drive: Fund a recruitment drive.
+- @tested: Admit only tested militants.
 - @local: Leave recruitment to the districts.
 - @easy_discard
 
@@ -27,9 +28,24 @@ for (var d of Q.districts) {
     Q['district_' + d + '_members'] *= 1 + grow;
 }
 Q.worker_support += 2;
+Q.lean_luxemburgist += 1;
 !}
 
 Organisers fan out to factories and labour exchanges. The loyal districts report a stream of new members; the others take the money and do as they please.
+
+@tested
+subtitle: Slow growth, but the new members are fighters who answer to the party.
+on-arrival: {!
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.02;
+}
+Q.unity += 3;
+Q.red_guards_loyalty += 3;
+Q.offensive_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+A party of action, not of dues-payers. Each new member must be vouched for by two comrades who have seen them in a strike or on the streets.
 
 @local
 on-arrival: {!

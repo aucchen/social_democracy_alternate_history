@@ -1,0 +1,34 @@
+title: The Garrison Wavers
+subtitle: Berlin's soldiers have not chosen a side.
+view-if: crisis_january = 1 and jan_garrison_done = 0
+on-arrival: month_actions += 1; jan_garrison_done = 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Garrison Wavers
+
+The People's Naval Division, which fought the government at Christmas, has declared itself neutral. The Republican Soldiers' Guard is split. Whoever wins the barracks wins Berlin, and the Revolutionary Committee has not even sent anyone to ask.
+
+- @liebknecht: Send Liebknecht to the barracks.
+- @leaflets: Flood the barracks with leaflets.
+- @neutral: Ask the sailors only to stay out of it.
+
+@liebknecht
+subtitle: The Left's gamble on Liebknecht's name. It puts him in plain sight.
+on-arrival: crisis_momentum += 8; army_loyalty -= 3; offensive_satisfaction += 5; lean_offensive += 1; lieb_risk += 10
+
+Liebknecht speaks in the courtyard of the Marstall to men who cheer him and then go back to their cards. A few companies send delegates. Most wait.
+
+@leaflets
+subtitle: The Spartacist way: explain, patiently. Slow, but it costs us nothing.
+on-arrival: crisis_momentum += 5; army_loyalty -= 2; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+"Soldiers, will you shoot at your brothers?" The leaflets are read, and some are kept.
+
+@neutral
+subtitle: The Right's caution: a neutral garrison means fewer dead.
+on-arrival: crisis_momentum += 2; repression -= 3; unionist_satisfaction += 4; lean_unionist += 1; lux_risk -= 3; lieb_risk -= 3
+
+The sailors agree to stay in their barracks whatever happens. It is not much, but it is something.

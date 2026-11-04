@@ -1,21 +1,31 @@
 title: Karl Liebknecht
 is-pinned-card: true
 tags: advisor
-view-if: liebknecht_advisor = 1 and liebknecht_alive = 1
+view-if: adv_show_liebknecht = 1
 new-page: true
 
 = Karl Liebknecht
 
-The man who voted against war credits and proclaimed the socialist republic on 9 November. The streets love him; he is less patient than Luxemburg.
+The man who voted alone against the war credits in 1914 and proclaimed the socialist republic from the balcony of the palace on 9 November. The streets love him. He is braver than he is patient.
 
 - @rally
+- @soldiers
 - @root: Return to main
 
 @rally
 title: Rally the Streets
-subtitle: Raises militancy and worker support; pleases the radicals.
-unavailable-subtitle: [+ advisor_action_timer +] months before the next advisor action.
+subtitle: The workers come out in their thousands; the radicals cheer, the police take note.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
 choose-if: advisor_action_timer <= 0
-on-arrival: advisor_action_timer = 4; last_advisor_action = 1; militancy += 8; worker_support += 4; repression += 4; ultraleft_satisfaction += 8; offensive_satisfaction += 5
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; militancy += 8; worker_support += 4; repression += 4; ultraleft_satisfaction += 8; offensive_satisfaction += 5; lean_offensive += 1
 
-Tens of thousands come to hear Liebknecht speak.
+Tens of thousands crowd the Siegesallee to hear Liebknecht speak. He promises them that the revolution is not over.
+
+@soldiers
+title: Speak to the Soldiers
+subtitle: Some soldiers waver, and a few bring their rifles. Noske will want his head even more.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; army_loyalty -= 4; red_guards_strength += 0.5; red_guards_arms += 2; repression += 3; offensive_satisfaction += 4; lean_offensive += 1
+
+Liebknecht goes from barracks to barracks. He was a soldier himself, sent to the front for his politics, and the men listen.

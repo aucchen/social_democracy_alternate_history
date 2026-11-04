@@ -1,0 +1,63 @@
+title: The Unemployed
+new-page: true
+view-if: crisis = 0 and c_unemployed_timer <= 0
+on-arrival: c_unemployed_timer = 4; month_actions += 1
+frequency: 200
+is-card: true
+tags: movement
+
+= The Unemployed
+
+[? if year = 1919 : Millions of demobilised soldiers have come home to closed munitions works and no jobs. ?][? if year >= 1920 and inflation < 60 : The war industries are gone, and every slump throws thousands more onto the street. ?][? if inflation >= 60 : As the mark collapses, factories close for lack of credit, and the unemployed relief is worth nothing by the time it is paid. ?] Outside the labour exchanges, men queue in their old army coats.
+
+In several towns, our members have formed committees of the unemployed. They want to know what the party will do for them.
+
+- @march: March on the town hall.
+- @councils: Build councils of the unemployed.
+- @relief: Demand relief together with the unions and the SPD.
+- @easy_discard
+
+@march
+subtitle: Loud and angry. The police meet it with batons.
+on-arrival: militancy += 5; worker_support += 3; repression += 4; offensive_satisfaction += 3; lean_offensive += 1
+
+Thousands of unemployed march behind red flags. The council promises to raise the relief, and the police arrest the speakers.
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Elected councils of the unemployed, tied to the factory councils. Members join.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council work.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.03;
+}
+Q.worker_support += 3;
+Q.militancy += 2;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+The unemployed elect their own councils at the labour exchanges, and send delegates to the works councils of the factories that laid them off.
+
+@relief
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] A joint demand for relief and public works. The Right's line.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 4;
+Q.spd_relation += 3;
+Q.uspd_relation += 3;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 2;
+!}
+
+The local union cartel and the SPD agree, after long hesitation, to sign a joint appeal with us. The council raises the relief by a third.

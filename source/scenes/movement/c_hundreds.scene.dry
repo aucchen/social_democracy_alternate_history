@@ -1,0 +1,63 @@
+title: The Proletarian Hundreds
+new-page: true
+view-if: crisis = 0 and c_hundreds_timer <= 0 and year >= 1922
+on-arrival: c_hundreds_timer = 4; month_actions += 1
+frequency: 250
+is-card: true
+tags: movement
+
+= The Proletarian Hundreds
+
+[? if rathenau_murdered = 1 : Since the murder of Rathenau, ?][? if rathenau_murdered = 0 : As the nationalist leagues grow bolder, ?] works councils in many towns have formed proletarian hundreds: units of a hundred workers from one factory, communists and social democrats together, to defend meetings and workers' districts against the right. [? if year >= 1923 : Prussia has banned them. In Saxony and Thuringia they drill openly. ?]
+
+[? if c_hundreds_built >= 2 : There are many of them now, and the Reichswehr has begun to count them. ?] The question is what they are for.
+
+- @build: Build hundreds in every factory.
+- @arm: Arm them from the caches.
+- @centre: Concentrate them in Saxony and Thuringia.
+- @easy_discard
+
+@build
+subtitle: Many more hundreds, drawn from all workers. Our command over them is loose.
+on-arrival: {!
+Q.c_hundreds_built += 1;
+Q.red_guards_strength += 3;
+Q.red_guards_loyalty -= 3;
+Q.worker_support += 2;
+Q.repression += 3;
+Q.unionist_satisfaction += 3;
+Q.offensive_satisfaction += 2;
+Q.lean_unionist += 1;
+Q.lean_offensive += 1;
+!}
+
+Every big works elects its hundred at a factory meeting. Most of the men have no weapons, and many of them have never held one, but they turn out on Sundays in their caps and armbands.
+
+@arm
+subtitle: Costs 2 funds. Rifles and pistols for the most reliable hundreds. The Left's line.
+choose-if: resources >= 2
+unavailable-subtitle: We need 2 funds.
+on-arrival: {!
+Q.resources -= 2;
+Q.red_guards_arms += 10;
+Q.red_guards_loyalty += 3;
+Q.repression += 5;
+Q.militancy += 3;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+Crates from the M-Apparat's caches are opened at night. The hundreds that receive them are the ones whose leaders carry party cards.
+
+@centre
+subtitle: Strength where the hundreds are legal and the governments are friendly. The Right's line.
+on-arrival: {!
+Q.c_hundreds_built += 1;
+Q.district_saxony_loyalty += 5;
+Q.district_thuringia_loyalty += 5;
+Q.red_guards_strength += 2;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 2;
+!}
+
+The Zentrale sends its best organisers to Saxony and Thuringia, where workers' governments rest on our votes and the police leave the hundreds alone.

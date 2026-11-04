@@ -1,0 +1,67 @@
+title: The Social Democrats
+new-page: true
+view-if: crisis = 0 and c_spd_timer <= 0 and time >= 2
+on-arrival: c_spd_timer = 4; month_actions += 1
+frequency: 250
+is-card: true
+tags: germany
+
+= The Social Democrats
+
+[? if year = 1919 : The SPD governs. Its leaders, Ebert, Scheidemann and Noske, sent the Freikorps against the workers of Berlin, and our comrades are dead. But millions of workers still vote for it, and many of them are ashamed. ?][? if year >= 1920 and year <= 1921 : The SPD is still the largest workers' party in Germany, and its unions hold the factories. Its members are tired of governing with the bourgeois parties and getting nothing for it. ?][? if year >= 1922 : The SPD is the party of the Republic, and of eight million trade unionists. Its leaders fear us more than they fear the right, and its members are not sure they agree. ?]
+
+How should the party speak to the social democratic workers?
+
+- @offer: Offer the SPD joint action on wages and against the right.
+- @below: Appeal to the SPD's members over the heads of their leaders.
+- @expose: Expose the crimes of the SPD leaders.
+- @easy_discard
+
+@offer
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] An open offer, made in public. The Right's line; the Left calls it capitulation.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 8;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 5;
+Q.offensive_satisfaction -= 4;
+Q.lean_unionist += 2;
+!}
+
+[? if year = 1921 and month <= 3 : It is the policy of the Open Letter of January, pressed further. ?] The SPD executive refuses, as expected. Several of its local branches accept.
+
+@below
+subtitle: A united front from below. Some SPD workers come over; their leaders are furious.
+on-arrival: {!
+Q.spd_relation -= 3;
+Q.worker_support += 3;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.02;
+}
+Q.offensive_satisfaction += 2;
+Q.lean_offensive += 1;
+!}
+
+Our leaflets at the SPD's own meetings ask its members why their ministers sit with the industrialists. A few hundred tear up their cards.
+
+@expose
+subtitle: Burns the bridges. The radicals cheer.
+on-arrival: {!
+Q.spd_relation -= 8;
+Q.militancy += 4;
+Q.offensive_satisfaction += 5;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 5;
+    Q.lean_ultraleft += 1;
+} else {
+    Q.lean_offensive += 1;
+}
+Q.unionist_satisfaction -= 3;
+!}
+
+Die Rote Fahne prints the names of the workers shot by the Freikorps, and beside them the name of the minister who signed the order to fire.

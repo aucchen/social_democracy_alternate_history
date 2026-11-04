@@ -7,12 +7,41 @@ on-arrival: {!
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 
+// Run every writer's setup scene (file id ending in _init) once, silently,
+// so the setup never shows up as an event the player has to click.
+for (var sid in this.game.scenes) {
+    if (/_init$/.test(sid) && !Q[sid + '_ran'] && this.game.scenes[sid].onArrival) {
+        Q[sid + '_ran'] = 1;
+        this._runActions(this.game.scenes[sid].onArrival);
+    }
+}
+
 var clamp = function(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
 
-// ---------------------------------------------------------------- month
+// ---------------------------------------------------------------- time
+// Normal play advances one month per action. During a crisis (crisis = 1)
+// each action is one week; after the 4th week the month turns as usual.
+var month_turns = false;
+if (!Q.crisis) {
+    Q.week = 0;
+}
 if (Q.month_actions >= 1) {
-    Q.time += 1;
     Q.month_actions = 0;
+    if (Q.crisis) {
+        Q.crisis_time += 1;
+        Q.week += 1;
+        if (Q.week > 4) {
+            Q.week = 1;
+            month_turns = true;
+        }
+    } else {
+        Q.week = 0;
+        month_turns = true;
+    }
+}
+if (month_turns) {
+    Q.faction_shift_note = 0;
+    Q.time += 1;
     Q.month += 1;
     if (Q.month >= 13) {
         Q.month = 1;
@@ -26,6 +55,7 @@ if (Q.month_actions >= 1) {
     if (Q.advisor_action_timer > 0) {
         Q.advisor_action_timer -= 1;
     }
+    Q.resources += Q.moscow_subsidy;
     // Monthly drift. Placeholder balance values: tune these in playtesting.
     // Militancy draws repression; repression slowly fades.
     Q.repression += Q.militancy / 20 - 2;
@@ -35,11 +65,34 @@ if (Q.month_actions >= 1) {
             Q['district_' + d + '_members'] *= 0.98;
         }
     }
-    // Inflation keeps rising through the period.
-    Q.inflation += 0.5;
+    // Inflation: slow until 1922, then runaway.
+    Q.inflation += (Q.year >= 1922) ? 3 : 0.5;
     // Unity drifts towards the strength-weighted satisfaction of the factions.
     Q.unity += (Q.unity_target - Q.unity) * 0.25;
-    // Hostile districts may act on their own.
+    // Lean: every option that follows a faction's line adds to lean_<faction>.
+    // It is added to history_<faction> for good (the historical splits read
+    // these), and a strong lean wins over a wavering district.
+    var top = null;
+    for (var f of Q.factions) {
+        Q['history_' + f] += Q['lean_' + f];
+        if (!Q[f + '_gone'] && Q['lean_' + f] >= 4 && (!top || Q['lean_' + f] > Q['lean_' + top])) {
+            top = f;
+        }
+    }
+    if (top && Math.random() < 0.35) {
+        var cands = Q.districts.filter(function(d) {
+            return Q['district_' + d + '_faction'] != top && Q['district_' + d + '_loyalty'] < 60;
+        });
+        if (cands.length) {
+            var pick = cands[Math.floor(Math.random() * cands.length)];
+            Q['district_' + pick + '_faction'] = top;
+            Q.faction_shift_note = Q.district_names[pick] + ' now follows the ' + Q.faction_names[top] + '.';
+        }
+    }
+    for (var f of Q.factions) {
+        Q['lean_' + f] = 0;
+    }
+    // Hostile districts may act on their own (not during a crisis week).
     Q.defiance_flag = 0;
     for (var d of Q.districts) {
         var f = Q['district_' + d + '_faction'];
@@ -93,7 +146,7 @@ Q.unity_target = weighted / 100;
 // A faction pushed below 10 satisfaction while holding members splits off.
 Q.split_flag = 0;
 for (var f of Q.factions) {
-    if (f != Q.leading_faction && Q[f + '_satisfaction'] < 10 && Q[f + '_strength'] >= 5) {
+    if (f != Q.leading_faction && !Q[f + '_gone'] && Q[f + '_satisfaction'] < 10 && Q[f + '_strength'] >= 5) {
         Q.split_faction = f;
         Q.split_flag = 1;
         Q.split_faction_name = Q.faction_names[f];
@@ -128,8 +181,25 @@ Q.unity = clamp(Q.unity, 0, 100);
 Q.militancy = clamp(Q.militancy, 0, 100);
 Q.worker_support = clamp(Q.worker_support, 0, 100);
 Q.repression = clamp(Q.repression, 0, 100);
-Q.spd_relation = clamp(Q.spd_relation, 0, 100);
-Q.uspd_relation = clamp(Q.uspd_relation, 0, 100);
+for (var p of Q.parties) {
+    Q[p + '_relation'] = clamp(Q[p + '_relation'], 0, 100);
+}
+Q.crisis_momentum = clamp(Q.crisis_momentum, 0, 100);
+Q.inflation = Math.max(0, Q.inflation);
+Q.government_seats = 0;
+for (var p of Q.parties) {
+    if (Q[p + '_in_government']) {
+        Q.government_seats += Q[p + '_seats'];
+    }
+}
+// forces, shown in the Forces tab
+for (var fo of Q.forces) {
+    if (Q[fo + '_strength'] < 0) {
+        Q[fo + '_strength'] = 0;
+    }
+    Q[fo + '_strength_display'] = Math.round(Q[fo + '_strength']);
+    Q[fo + '_loyalty'] = clamp(Q[fo + '_loyalty'], 0, 100);
+}
 Q.independence = clamp(Q.independence, 0, 100);
 Q.world_revolution = clamp(Q.world_revolution, 0, 100);
 Q.stability = clamp(Q.stability, 0, 100);
@@ -137,6 +207,13 @@ if (Q.resources < 0) {
     Q.resources = 0;
 }
 Q.unity_display = Math.round(Q.unity);
+// the party's name: VKPD from the December 1920 unification until the
+// 1921 writer's Jena congress switches back to KPD
+Q.party_name = (Q.vkpd_formed && Q.e21_party != 'KPD' && Q.year <= 1921) ? 'VKPD' : 'KPD';
+
+if (typeof document !== 'undefined') {
+    document.body.classList.toggle('crisis-mode', !!Q.crisis);
+}
 
 // ---------------------------------------------------------------- routing
 Q.has_event = 0;
@@ -148,7 +225,7 @@ if (choices && choices[0].title != "Continue...") {
 !}
 go-to: events_choice if has_event = 1; main if has_event = 0
 
-= [+ month : month +] [+ year +]
+= [+ month : month +] [+ year +][? if crisis : , week [+ week +] ?]
 
 @events_choice
 

@@ -1,0 +1,67 @@
+title: The Weimar Constitution
+subtitle: 11 August. Ebert signs the new constitution.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 8 and crisis = 0
+max-visits: 1
+priority: 2
+on-arrival: {!
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+Q.constitution_adopted = 1;
+Q.stability += 5;
+!}
+
+= The Weimar Constitution
+
+On 31 July the National Assembly adopted the constitution of the German Reich by 262 votes to 75, and on 11 August Ebert signed it at Schwarzburg. It is, its authors say, the most democratic constitution in the world: universal suffrage for men and women, proportional representation, a president elected by the people, basic rights for all.
+
+It has two articles that matter to us. Article 165 promises workers' councils in the factories, which is all that is left of the councils of November. Article 48 lets the president suspend basic rights and send in the army whenever "public security and order" are threatened. Ebert has already used his powers under the state of siege more often than the Kaiser did.
+
+- @rights: Use its freedoms: demand the end of the state of siege.
+- @works_councils: Stand in the works council elections.
+- @article48: Warn that Article 48 is a dictatorship in waiting.
+- @reject: Reject it: there is no constitution but the councils.
+
+@rights
+subtitle: The Spartacist line: use every legal right, and expose every broken promise.
+on-arrival: repression -= 4; worker_support += 2; luxemburgist_satisfaction += 4; lean_luxemburgist += 2
+
+Our lawyers take the constitution into court, article by article. Some district offices are reopened. The state of siege in Berlin stays.
+
+@works_councils
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] The Right's answer: be where the workers vote, even in the Republic's councils.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work in the Republic's institutions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 5;
+Q.unionist_satisfaction += 6;
+Q.ultraleft_satisfaction -= 6;
+Q.lean_unionist += 2;
+Q.lean_ultraleft -= 1;
+!}
+
+When the law on works councils comes, our candidates will be ready. The Left Radicals say we are helping to bury the councils under paperwork.
+
+@article48
+subtitle: The Left's answer: prepare for the day it is used against us.
+on-arrival: militancy += 4; red_guards_strength += 1; offensive_satisfaction += 5; lean_offensive += 2; repression += 2
+
+The paper prints Article 48 in full under the heading "Noske's constitution". Our defence squads take it as a warning.
+
+@reject
+subtitle: The Left Radicals' line. Pure, and lonely.
+on-arrival: ultraleft_satisfaction += 6; worker_support -= 2; lean_ultraleft += 2
+
+The Bremen and Hamburg papers call the constitution a scrap of paper. The workers, who have just won the eight-hour day and the vote for their wives, are not convinced.

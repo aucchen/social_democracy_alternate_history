@@ -1,0 +1,66 @@
+title: The Strike Committees
+subtitle: In every town, a committee of the striking parties runs the strike.
+view-if: crisis_kapp = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Strike Committees
+
+In Berlin, Halle and Chemnitz, the strike is run by committees of the SPD, the USPD and the unions. In some towns they have asked for a communist delegate. In others they have locked our people out.
+
+- @join: Sit on the committees, side by side with the SPD.
+- @councils: Turn the committees into elected workers' councils.
+- @own: Keep our own banner and our own committees.
+
+@join
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Strengthens the strike and our standing with the unions.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids sitting with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += 8;
+Q.spd_relation += 3;
+Q.uspd_relation += 4;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+Our delegates take their seats. They run the strike pickets better than anyone, and the union men grudgingly say so.
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] More power to the workers, more fear among the officials.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += 6;
+Q.militancy += 4;
+Q.uspd_relation += 2;
+Q.luxemburgist_satisfaction += 3;
+Q.offensive_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+Q.lean_offensive += 1;
+!}
+
+In the big works, the strikers elect delegates to a council of the whole town. In Chemnitz, Brandler's council takes over the town hall and the food supply.
+
+@own
+subtitle: Pleases the radicals, weakens the strike a little.
+on-arrival: {!
+Q.crisis_momentum -= 2;
+Q.militancy += 3;
+Q.offensive_satisfaction += 4;
+Q.ultraleft_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+We run our own committees in the districts where we are strong. The workers do not much care whose committee it is, as long as the strike holds.

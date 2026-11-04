@@ -1,0 +1,58 @@
+title: Levi Was Wrong
+subtitle: The action he feared has won. What becomes of its critic?
+new-page: true
+tags: event
+view-if: year = 1921 and month >= 4 and crisis = 0 and levi_in_party = 1 and march_action = 2 and e21_central_done = 1 and e21_after_done = 0
+max-visits: 1
+priority: 12
+on-arrival: e21_after_done = 1
+
+= Levi Was Wrong
+
+Paul Levi had a pamphlet half written: a reckoning with the March Action, which he was certain would end in a massacre. It did not. The pamphlet stays in his drawer.
+
+The Left is triumphant. Ruth Fischer says in the Berlin district that the party has learned to fight, and that those who would not fight should step aside. [? if e21_march_mode = 1 : Levi's friends answer that the strike won because it was a defensive strike of the whole class, exactly what Levi always asked for. ?][? if e21_march_mode = 2 : Levi's friends answer that one lucky victory proves nothing, and that next time the Reichswehr will march. ?]
+
+- @admit: Levi admits he was wrong, and stays.
+- @warn: Levi keeps warning against adventures.
+- @leave: Levi leaves the party.
+
+@admit
+subtitle: Unity, for now. The Spartacists lose their voice.
+on-arrival: {!
+Q.e21_levi_fate = 5;
+Q.unity += 6;
+Q.luxemburgist_satisfaction -= 5;
+Q.offensive_satisfaction += 5;
+Q.lean_unionist += 1;
+Q.lean_offensive += 1;
+!}
+
+Levi writes a short article saying that he underestimated the workers of Central Germany. It is the most painful thing he has ever written. The Left reads it aloud at meetings.
+
+@warn
+subtitle: The Spartacist line. Levi stays, and the quarrel goes on.
+on-arrival: e21_levi_fate = 2; luxemburgist_satisfaction += 6; offensive_satisfaction -= 8; independence += 3; lean_luxemburgist += 2
+
+Levi publishes an article: a victory won by luck is not a method. The Left demands his expulsion. The Zentrale refers the question to the Comintern's congress.
+
+@leave
+subtitle: Levi goes, almost alone. A few friends go with him.
+on-arrival: {!
+Q.e21_levi_fate = 4;
+Q.levi_in_party = 0;
+Q.levi_split = 1;
+Q.levi_advisor = 0;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.97;
+}
+if (Q.leading_faction == 'luxemburgist') {
+    Q.leading_faction = 'unionist';
+    Q.junior_faction = 'offensive';
+}
+Q.luxemburgist_satisfaction -= 10;
+Q.offensive_satisfaction += 6;
+Q.unity += 3;
+!}
+
+Levi returns his membership book with a letter to the Zentrale: the party has chosen a road he cannot follow. A few deputies and journalists go with him. The members, flushed with victory, hardly notice.

@@ -1,0 +1,68 @@
+title: Working Women
+new-page: true
+view-if: crisis = 0 and c_women_timer <= 0
+on-arrival: c_women_timer = 5; month_actions += 1
+frequency: 200
+is-card: true
+tags: party_affairs
+
+= Working Women
+
+Women won the vote in November, and in the war they kept the factories running. Now the men are back, and the women are being sent home: from the munitions works, the trams and the offices. Those who stay are paid a third less for the same work. In the queues outside the bakeries, every woman knows the price of bread.
+
+[? if time >= 3 : Clara Zetkin wants a women's secretariat with its own paper, Die Kommunistin, and its own organisers. ?][? if time < 3 : The party has no women's organisation of its own yet. ?] Many comrades think the women's question can wait until after the revolution.
+
+- @paper: Fund the women's paper and secretariat.
+- @prices: Organise the women in the queues against high prices.
+- @equal_pay: Fight for equal pay in the factories.
+- @general: Fold women's work into the general work of the party.
+- @easy_discard
+
+@paper
+subtitle: Costs 1 fund. Women join the party; the Spartacists are pleased.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.03;
+}
+Q.worker_support += 3;
+Q.luxemburgist_satisfaction += 4;
+Q.lean_luxemburgist += 1;
+!}
+
+Women organisers travel from district to district. In the textile towns of Saxony, whole sewing rooms join at once.
+
+@prices
+subtitle: Angry demonstrations at the markets. The police are called.
+on-arrival: militancy += 4; worker_support += 3; repression += 2; offensive_satisfaction += 2; lean_offensive += 1
+
+Hundreds of women march on the town hall with empty baskets. The mayor promises an inquiry. The women promise to come back.
+
+@equal_pay
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] Communist women stand in union elections. The Right approves.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the old unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 4;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+Equal pay for equal work: it is in every socialist programme, and in almost no wage agreement. Our women make the union officials explain why.
+
+@general
+subtitle: The men in the districts are relieved. Zetkin is not, and fewer women stay.
+on-arrival: {!
+Q.unity += 2;
+Q[Q.leading_faction + '_satisfaction'] += 2;
+Q.luxemburgist_satisfaction -= 4;
+Q.worker_support -= 2;
+!}
+
+The Zentrale decides that there is no special women's question, only the class question. The women comrades notice who decided it.

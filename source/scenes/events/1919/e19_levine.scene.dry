@@ -1,0 +1,49 @@
+title: The Trial of Eugen Leviné
+subtitle: Munich's court-martial wants a head.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 6 and crisis = 0 and bavaria_soviet = 1 and bav_power != 2
+max-visits: 1
+
+= The Trial of Eugen Leviné
+
+[? if levine_escape = 1 : The false passport was not enough. ?] Leviné was found in a flat in Munich in mid-May and brought before a court-martial for high treason. The prosecutor asks for death. Toller, Mühsam and the others will get prison; the court wants one man to die, and it has chosen the Russian Jew who led the Executive Council.
+
+Leviné does not plead for his life. "We Communists are all dead men on leave," he tells the judges. [? if bav_negotiated = 1 : The truce of 1 May promised courts, not firing squads. The government in Bamberg would rather not break its word in public. ?]
+
+- @campaign: A campaign across Germany to save him.
+- @lawyers: Fight it in the courts.
+- @martyr: Let him speak, and make the trial a tribune.
+
+@campaign
+subtitle: The Left and the Right agree on this: strikes and protests for Leviné.
+on-arrival: {!
+var chance = 0.25 + (Q.bav_negotiated ? 0.35 : 0) + Q.worker_support / 200;
+Q.levine_alive = Math.random() < chance ? 1 : 0;
+Q.militancy += 4;
+Q.repression += 3;
+Q.worker_support += 2;
+Q.offensive_satisfaction += 3;
+Q.unionist_satisfaction += 3;
+Q.lean_offensive += 1;
+Q.lean_unionist += 1;
+!}
+
+[? if levine_alive = 1 : Protest strikes in Munich, Berlin and the Ruhr, and an outcry abroad, make the Bavarian government think again. Leviné's sentence is commuted to fifteen years' fortress. ?][? if levine_alive = 0 : The strikes are large, and too late. On 5 June Leviné is shot in the yard of Stadelheim prison, crying "Long live the world revolution!" ?]
+
+@lawyers
+subtitle: The Spartacist way: [? if levi_chair = 1 : Levi, a lawyer himself, ?][? if levi_chair = 0 : Levi ?] knows how these courts work.
+on-arrival: {!
+var chance = 0.15 + (Q.bav_negotiated ? 0.4 : 0);
+Q.levine_alive = Math.random() < chance ? 1 : 0;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+[? if levine_alive = 1 : The defence proves that the court-martial had no jurisdiction under the terms of the truce. A higher court sends the case back, and the death sentence is never carried out. ?][? if levine_alive = 0 : The court hears the appeals and rejects them in an afternoon. On 5 June Leviné is shot in the yard of Stadelheim prison, crying "Long live the world revolution!" ?]
+
+@martyr
+subtitle: Leviné's own choice. The speech will be read for decades.
+on-arrival: levine_alive = 0; worker_support += 3; militancy += 3; offensive_satisfaction += 4; ultraleft_satisfaction += 3; lean_offensive += 1
+
+Leviné's speech to the court is printed illegally in a hundred thousand copies. On 5 June he is shot in the yard of Stadelheim prison, crying "Long live the world revolution!"

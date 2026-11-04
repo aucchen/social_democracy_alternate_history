@@ -1,0 +1,55 @@
+title: The Strike Bulletin
+subtitle: The papers are silent. Ours need not be.
+view-if: crisis_kapp = 1 or crisis_ruhr = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Strike Bulletin
+
+The printers are on strike, and *Die Rote Fahne* is banned anyway. But our comrades have a hand press in a cellar in Wedding, and the strikers are hungry for news.
+
+- @bulletin: Print a daily strike bulletin.
+- @expose: Expose the SPD's deals with the generals.
+- @letter: Print the Zentrale's own debate, warts and all.
+
+@bulletin
+subtitle: Costs 1 fund. Keeps the strikers informed and our name in front of them.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.crisis_momentum += 5;
+Q.worker_support += 3;
+Q.luxemburgist_satisfaction += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+Every morning, a single sheet: where the strike holds, where the troops are, what the committees demand. It is passed from hand to hand until it falls apart.
+
+@expose
+subtitle: The Left's line. True enough, but it divides the strikers.
+on-arrival: {!
+Q.crisis_momentum -= 3;
+Q.militancy += 3;
+Q.spd_relation -= 6;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 1;
+!}
+
+We print what the SPD ministers said to the generals in Dresden and Stuttgart. The workers read it, and some of them stop trusting the strike committees.
+
+@letter
+subtitle: The party will argue in public. Unity suffers; honesty is respected.
+on-arrival: {!
+Q.unity -= 4;
+Q.worker_support += 2;
+Q.uspd_relation += 2;
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction -= 3;
+Q.lean_luxemburgist += 1;
+!}
+
+We print the criticisms from inside the party alongside the Zentrale's line. Readers outside the party are surprised: the communists can admit a mistake.

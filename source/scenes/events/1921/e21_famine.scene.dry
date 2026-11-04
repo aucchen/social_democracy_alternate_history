@@ -1,0 +1,50 @@
+title: Famine on the Volga
+subtitle: Soviet Russia is starving, and asks the workers of the world for bread.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 9 and crisis = 0
+max-visits: 1
+priority: 5
+on-arrival: soviet_russia_status = 'Famine on the Volga; the New Economic Policy'
+
+= Famine on the Volga
+
+After drought and seven years of war, famine has struck the Volga basin. Millions are starving; there are reports of cannibalism. Maxim Gorky has appealed to the world for help, and Lenin has accepted aid even from Herbert Hoover's American Relief Administration.
+
+In Berlin, Willi Münzenberg has founded the Workers' International Relief, to collect money, food and tools from workers abroad for Soviet Russia. He wants the party behind it, but not in front of it: the relief should be for everyone who wants to help.
+
+- @all_in: Throw the whole party into the campaign.
+- @broad: Make it a campaign of the whole labour movement.
+- @party: Keep the collection in the party's hands.
+
+@all_in
+subtitle: Costs 1 fund. Workers respond to a cause they can see.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; worker_support += 3; world_revolution += 2; independence -= 2; offensive_satisfaction += 2; luxemburgist_satisfaction += 2
+
+Every party cell collects. Lorries leave Berlin for Petrograd with flour, medicine and tractors. The Russian comrades write to thank us.
+
+@broad
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's way: invite the unions and the SPD to collect with us.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids joint campaigns with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 3;
+Q.spd_relation += 3;
+Q.uspd_relation += 3;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+Collection committees form in factories where communists and social democrats have not spoken for two years. The Vorwärts reports on the famine without a sneer.
+
+@party
+subtitle: Brings in 1 fund. Our relief, our credit, as Moscow would prefer.
+on-arrival: independence -= 3; resources += 1; offensive_satisfaction += 3; lean_offensive += 1
+
+The party runs the collection through its own offices and keeps some of the funds for the organisation's costs. Münzenberg protests, and is overruled.

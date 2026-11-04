@@ -1,0 +1,86 @@
+title: A Strike Breaks Out
+new-page: true
+view-if: crisis = 0 and c_strike_timer <= 0
+on-arrival: {!
+Q.c_strike_timer = 3;
+Q.month_actions += 1;
+var trades = {
+    berlin: 'the metalworkers at the Siemens and AEG works',
+    hamburg: 'the dockers and shipyard workers of the port',
+    bremen: 'the shipyard workers at the Weser yard',
+    ruhr: 'the miners of the Ruhr pits',
+    saxony: 'the textile workers of Chemnitz and Plauen',
+    thuringia: 'the porcelain and toy workers of the Thuringian forest',
+    bavaria: 'the railway workshops of Munich',
+    halle: 'the chemical workers at Leuna and the miners of the Mansfeld copper pits'
+};
+var d = Q.districts[Math.floor(Math.random() * Q.districts.length)];
+Q.c_strike_district = d;
+Q.c_strike_district_name = Q.district_names[d];
+Q.c_strike_trade = trades[d];
+!}
+frequency: 250
+is-card: true
+tags: movement
+
+= A Strike Breaks Out
+
+In [+ c_strike_district_name +], [+ c_strike_trade +] have walked out. [? if inflation >= 40 : Their wages are worth less every week. ?][? if inflation < 40 : They want the eight-hour day kept, the food allowance raised and the foremen who informed on them in the war sacked. ?] The union officials want it settled quickly. Our members are on the strike committee.
+
+- @fund: Fund the strike committee.
+- @political: Turn it into a political strike.
+- @union: Let the union negotiate, and keep our people on the committee.
+- @easy_discard
+
+@fund
+subtitle: Costs 1 fund. The strikers hold out longer, and the district remembers who fed them.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+var d = Q.c_strike_district;
+Q['district_' + d + '_loyalty'] += 8;
+Q['district_' + d + '_members'] *= 1.05;
+Q.worker_support += 4;
+Q.militancy += 2;
+Q.lean_unionist += 1;
+!}
+
+The party's money buys soup and coal for the strikers' families. After three weeks the employers give way on most of the demands.
+
+@political
+subtitle: Strikers' demands against the government itself. Militancy rises; so does repression. The Left's line.
+on-arrival: {!
+var d = Q.c_strike_district;
+Q['district_' + d + '_loyalty'] += 4;
+Q.militancy += 8;
+Q.repression += 5;
+Q.worker_support += 2;
+Q.stability -= 2;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 4;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 4;
+}
+Q.lean_offensive += 2;
+!}
+
+Our speakers add the demands of the whole class: release the prisoners, disarm the Freikorps, the councils to power. The strike spreads to two more works before the police break it up.
+
+@union
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] A modest settlement. The workers keep their gains and their trust in us. The Right approves.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the old unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 3;
+Q.spd_relation += 2;
+Q.unionist_satisfaction += 4;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 1;
+!}
+
+The union signs a compromise. Our comrades on the committee make sure the strikers know which parts of it they fought for.

@@ -1,0 +1,36 @@
+title: The Annaberg
+subtitle: Polish insurgents and German Freikorps fight for Upper Silesia.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 5 and crisis = 0
+max-visits: 1
+priority: 6
+on-arrival: freikorps_strength += 15; freikorps_loyalty -= 5
+
+= The Annaberg
+
+On the night of 2 May Wojciech Korfanty's insurgents rise across Upper Silesia and take most of the industrial district up to the line Poland claims. The Allied troops stand aside. Berlin officially forbids any German counter-attack, and unofficially lets the Freikorps go.
+
+The Bavarian Freikorps Oberland and the Silesian self-defence units storm the Annaberg, a hill with a monastery on it, on 21 May. In the Reich the nationalist papers are full of heroes, and recruitment offices for the Freikorps open in every city.
+
+- @fraternise: Call on the miners of both nations to put down their guns.
+- @expose: Expose the Freikorps and who pays them.
+- @quiet: Say as little as possible.
+
+@fraternise
+subtitle: The Spartacists and the Right together. Principled, and unpopular for now.
+on-arrival: luxemburgist_satisfaction += 4; unionist_satisfaction += 2; worker_support -= 1; lean_luxemburgist += 1; lean_unionist += 1
+
+Our leaflet goes out in German and Polish: the coal belongs to those who dig it. In a few pits, miners of both languages hold a joint meeting. Then the fighting reaches them.
+
+@expose
+subtitle: The Left's way: strike at the counter-revolution where it gathers.
+on-arrival: freikorps_strength -= 5; repression += 3; offensive_satisfaction += 4; militancy += 2; lean_offensive += 1
+
+The Rote Fahne prints the names of the industrialists funding the Freikorps, and the addresses of their recruiting offices. Some of those offices are wrecked in the night.
+
+@quiet
+subtitle: Avoids trouble. The party looks small.
+on-arrival: unity += 2; worker_support += 1; luxemburgist_satisfaction -= 3
+
+The party says little and waits for the fighting to end. It ends in July, with a ceasefire and an Allied promise to decide the border.

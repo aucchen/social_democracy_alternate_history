@@ -1,0 +1,34 @@
+title: A Message from Bamberg
+subtitle: Hoffmann's government sends feelers.
+view-if: crisis_bavaria = 1 and bav_talks_done = 0
+on-arrival: month_actions += 1; bav_talks_done = 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= A Message from Bamberg
+
+A Social Democratic railwayman has crossed the lines with a letter from Bamberg. Some of Hoffmann's ministers do not want Prussian troops to conquer a Bavarian city. They hint at terms: the councils dissolved, an amnesty for the rank and file, the leaders before a court. The Executive must answer.
+
+- @talk: Open talks through Toller.
+- @refuse: Refuse to talk to the government of the Freikorps.
+- @towns: Use the letter to win over the Majority Socialists of the towns.
+
+@talk
+subtitle: The Right's answer. It may save lives, and it tells the Whites we are weakening.
+on-arrival: bav_talks += 1; crisis_momentum -= 3; unionist_satisfaction += 5; offensive_satisfaction -= 4; lean_unionist += 2
+
+Toller meets Hoffmann's envoys in a village inn. Nothing is signed. Both sides now know that there is something to sign.
+
+@refuse
+subtitle: The Left's answer: no deals with Noske's allies.
+on-arrival: crisis_momentum += 4; militancy += 3; offensive_satisfaction += 4; ultraleft_satisfaction += 3; lean_offensive += 1; lean_ultraleft += 1
+
+The letter is printed in the council paper with a reply: the workers of Munich do not bargain over their own surrender.
+
+@towns
+subtitle: The Spartacist way: split the other side, rather than talk to its masters.
+on-arrival: crisis_momentum += 5; bav_peasants += 1; luxemburgist_satisfaction += 4; lean_luxemburgist += 1
+
+The letter goes to the Social Democratic workers of Rosenheim, Kolbermoor and Augsburg: your own ministers are ready to bargain, so why should you fight for the Prussians? In Rosenheim the workers' council declares for Munich.

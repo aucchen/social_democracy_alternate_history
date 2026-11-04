@@ -1,6 +1,6 @@
 title: The Factory Councils
 new-page: true
-view-if: factory_councils_timer <= 0
+view-if: crisis = 0 and factory_councils_timer <= 0
 on-arrival: factory_councils_timer = 3; month_actions += 1
 frequency: 300
 is-card: true
@@ -8,24 +8,71 @@ tags: movement
 
 = The Factory Councils
 
-The workers' and soldiers' councils of November are losing ground to the new republic, but the factory councils are still alive in the big plants.
+[? if time < 14 : The workers' and soldiers' councils of November are losing ground to the new republic, but the factory councils are still alive in the big plants. The government has promised to write them into law, and to tame them in the process. ?][? if time >= 14 : Since the Works Councils Act of February 1920, every large firm must have an elected works council. The law gives them the right to see the balance sheet and little else. Whether they become organs of struggle or of conciliation depends on who sits on them. ?]
 
 - @build: Build up the councils patiently.
 - @occupy: Push the councils to occupy the factories.
+- @congress: Call a national congress of the works councils.
 - @easy_discard
 
 @build
-subtitle: Slow gains in worker support, scaled by the districts that follow us.
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Slow gains in worker support, larger where the districts follow us.
 choose-if: lock_councils < 2
 unavailable-subtitle: The [+ leading_faction_adj +] line forbids council work.
-on-arrival: worker_support += 2 + 4*loyal_share; militancy += 3; unionist_satisfaction += 3
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 2 + 4 * Q.loyal_share;
+Q.militancy += 3;
+Q.unionist_satisfaction += 3;
+Q.luxemburgist_satisfaction += 2;
+Q.lean_luxemburgist += 1;
+!}
 
 Communist shop stewards win seats on council after council.
 
 @occupy
-subtitle: Inspires the radicals, and brings the police.
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Inspires the radicals, and brings the police.
 choose-if: lock_councils < 2
 unavailable-subtitle: The [+ leading_faction_adj +] line forbids council work.
-on-arrival: militancy += 12; repression += 8; worker_support += 3; ultraleft_satisfaction += 10; offensive_satisfaction += 5; unionist_satisfaction -= 5; stability -= 3
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.militancy += 12;
+Q.repression += 8;
+Q.worker_support += 3;
+Q.stability -= 3;
+Q.offensive_satisfaction += 5;
+Q.unionist_satisfaction -= 5;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 10;
+    Q.lean_ultraleft += 1;
+}
+Q.lean_offensive += 1;
+!}
 
 Red flags fly over the factory gates, for now.
+
+@congress
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] Costs 1 fund. Delegates from every party's workers meet under our banner. The Right approves.
+view-if: time >= 14
+choose-if: lock_councils < 2 and resources >= 1
+unavailable-subtitle: [? if lock_councils = 2 : The [+ leading_faction_adj +] line forbids council work. ?][? if resources < 1 : We have no funds. ?]
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.resources -= 1;
+Q.worker_support += 4;
+Q.uspd_relation += 4;
+Q.spd_relation -= 2;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+Hundreds of works councillors meet in Berlin, many of them social democrats, and elect a national committee with a communist majority. The union leaders call it a splitting manoeuvre and tell their members to stay away. Many did not.

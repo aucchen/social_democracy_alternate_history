@@ -1,0 +1,96 @@
+title: The Open Letter
+subtitle: An offer of joint action to the whole labour movement.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 1 and e21_started = 1 and e21_open_letter_done = 0
+max-visits: 1
+priority: 10
+on-arrival: e21_open_letter_done = 1
+
+= The Open Letter
+
+In December the Stuttgart metalworkers, led by communists, won the local SPD and USPD branches and the unions to a common list of demands. [? if levi_in_party = 1 : Paul Levi and Karl Radek ?][? if levi_in_party = 0 : Karl Radek and the union men of the Right ?] want to make the same offer to the whole country.
+
+The draft is ready for the Rote Fahne of 8 January. It is addressed to the SPD, the USPD, [? if kapd_exists = 1 : the KAPD ?][? if kapd_exists = 0 : the anarchist unions ?] and every trade union federation. It proposes joint action for higher wages and pensions, workers' control of food supplies, the disarming of the bourgeois civil guards, the release of political prisoners and trade with Soviet Russia. It does not ask anyone to accept the dictatorship of the proletariat first.
+
+[? if kapp_outcome = 3 : Since the strike against Kapp, the SPD and the USPD sit in a workers' government. A letter like this would read as a programme for that government, and as a test of it. ?]
+
+The Left is against it. Ruth Fischer and Arkadi Maslow, who are building their following in Berlin, call it an invitation to the traitors of 1919 to take our workers back. In Moscow, Zinoviev is suspicious. Lenin has not yet said a word.
+
+- @sincere: Publish the letter, and mean it.
+- @manoeuvre: Publish it to show the workers who refuses.
+- @shelve: Shelve the letter.
+- @denounce: Denounce the very idea.
+
+@sincere
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Spartacists' and the Right's line: the first united front. The Left will be furious.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any offer to the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.open_letter = 1;
+Q.spd_relation += 6;
+Q.uspd_relation += 8;
+Q.worker_support += 3;
+Q.luxemburgist_satisfaction += 6;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 8;
+Q.lean_luxemburgist += 2;
+Q.lean_unionist += 2;
+Q.lean_offensive -= 1;
+!}
+
+The letter appears on 8 January. The SPD's *Vorwärts* calls it a manoeuvre and the union leaders refuse within the week. But it is read aloud at factory meetings across Germany, and in many of them the social democratic workers vote for it.
+
+@manoeuvre
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] An offer made to be refused. Both wings can live with it, and neither is satisfied.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any offer to the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.open_letter = 2;
+Q.spd_relation -= 2;
+Q.uspd_relation += 2;
+Q.worker_support += 1;
+Q.unity += 2;
+Q.lean_offensive += 1;
+Q.lean_unionist += 1;
+!}
+
+The letter is published with a commentary predicting its rejection. The prediction comes true. The *Vorwärts* quotes our commentary back at us, and the social democratic workers conclude that we never meant it.
+
+@shelve
+subtitle: The Left's line: no deals with Noske's party. The Right and the Spartacists will not forget it.
+on-arrival: {!
+Q.open_letter = 0;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 8;
+Q.luxemburgist_satisfaction -= 6;
+Q.militancy += 2;
+Q.lean_offensive += 2;
+Q.lean_unionist -= 1;
+!}
+
+The draft goes back in the drawer. In Stuttgart, the comrades who started it all are told to dissolve their joint committee. Some of them do.
+
+@denounce
+view-if: ultraleft_gone = 0
+subtitle: The Left Radicals' line: there is nothing to talk about with the parties of the old movement.
+on-arrival: {!
+Q.open_letter = 0;
+Q.ultraleft_satisfaction += 10;
+Q.offensive_satisfaction += 3;
+Q.unionist_satisfaction -= 12;
+Q.luxemburgist_satisfaction -= 8;
+Q.spd_relation -= 5;
+Q.uspd_relation -= 5;
+Q.lean_ultraleft += 2;
+!}
+
+The Rote Fahne prints not the letter but an attack on everyone it was addressed to. Hamburg and Bremen applaud. Stuttgart is stunned.

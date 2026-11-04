@@ -1,0 +1,52 @@
+title: The Friesland Affair
+subtitle: The party's general secretary turns against Moscow's methods.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 12 and crisis = 0
+max-visits: 1
+priority: 8
+
+= The Friesland Affair
+
+Ernst Reuter, who writes as Friesland, was a prisoner of war in Russia, a commissar of the Volga Germans, and since Jena the general secretary of the party. He was on the Left in March. He is not any more. [? if march_action != 0 : After the Vorwärts documents, he has demanded that the party stop taking its decisions from envoys who answer to the Executive in Moscow and not to the German members. ?][? if march_action = 0 : After a year of quarrels with Kun, Zinoviev and the Berlin Left, he has demanded that the party stop taking its decisions from envoys who answer to the Executive in Moscow. ?]
+
+[? if levi_in_party = 0 : Levi has announced that he will publish Rosa Luxemburg's manuscript on the Russian revolution, which she wrote in prison in 1918 and never published. Friesland is said to be in contact with him. ?][? if levi_in_party = 1 : Levi is in the party still, and Friesland has made no secret of how often they talk. ?]
+
+Moscow's representatives want him removed. Many in the party agree with every word he says.
+
+- @remove: Remove him as general secretary.
+- @back: Back his demand for independence.
+- @compromise: Keep him, and censure him.
+
+@remove
+subtitle: What history did. Moscow is satisfied. Friesland will not stay long after this.
+on-arrival: {!
+Q.friesland_outcome = 1;
+Q.independence -= 6;
+Q.moscow_subsidy += 1;
+Q.unity -= 2;
+Q.luxemburgist_satisfaction -= 6;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+The Central Committee removes Friesland as general secretary. In the new year he will be expelled, and will go to the KAG, and from there, it is said, to the SPD.
+
+@back
+subtitle: The Spartacist line: a German party, a member of the International, not its colony.
+on-arrival: {!
+Q.friesland_outcome = 2;
+Q.independence += 10;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+Q.luxemburgist_satisfaction += 8;
+Q.offensive_satisfaction -= 8;
+Q.lean_luxemburgist += 2;
+!}
+
+The Zentrale backs its general secretary and writes to the Executive that its emissaries will in future be guests of the German party, not its masters. Zinoviev's reply is long, and cold.
+
+@compromise
+subtitle: The Right's way. Friesland stays in his post, under watch.
+on-arrival: friesland_outcome = 3; unity += 3; unionist_satisfaction += 4; independence += 2; lean_unionist += 1
+
+The Central Committee censures Friesland for indiscipline and keeps him in his post. Everyone involved knows it is a reprieve.

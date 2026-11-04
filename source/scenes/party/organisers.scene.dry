@@ -1,6 +1,6 @@
 title: The District Question
 new-page: true
-view-if: organisers_timer <= 0
+view-if: crisis = 0 and organisers_timer <= 0
 on-arrival: {!
 Q.organisers_timer = 3;
 Q.month_actions += 1;
@@ -23,14 +23,17 @@ tags: party_affairs
 
 = The District Question
 
-The district of **[+ target_district_name +]** ([+ target_faction_name +]) is the least loyal to the Zentrale. Holding the Zentrale means little if the districts ignore it.
+The district of **[+ target_district_name +]**, which follows the [+ target_faction_name +], is the least loyal to the Zentrale. Its secretary answers letters late or not at all, and its paper prints what it likes.
+
+Holding the Zentrale means little if the districts ignore it.
 
 - @send: Send organisers from the Zentrale.
+- @autonomy: Promise the district its autonomy.
 - @replace: Remove the district leadership.
 - @easy_discard
 
 @send
-subtitle: Costs 1 fund. Raises the district's loyalty; a devoted district may change sides.
+subtitle: Costs 1 fund. The district moves closer to the Zentrale; a devoted district may change sides.
 choose-if: resources >= 1
 unavailable-subtitle: We have no funds.
 on-arrival: {!
@@ -43,14 +46,28 @@ if (Q['district_' + d + '_loyalty'] >= 80 && Q['district_' + d + '_faction'] != 
     Q['district_' + d + '_loyalty'] = 60;
     Q.target_flipped = 1;
 }
+Q['lean_' + Q.leading_faction] += 1;
 !}
 
 Organisers from the Zentrale speak at every meeting in [+ target_district_name +]. [? if target_flipped : The district has come over to the [+ leading_faction_name +]. ?]
 
+@autonomy
+subtitle: The district's current is pleased, and the party is calmer. The Zentrale's authority suffers.
+on-arrival: {!
+var d = Q.target_district;
+Q[Q.target_faction + '_satisfaction'] += 8;
+Q[Q.leading_faction + '_satisfaction'] -= 3;
+Q['district_' + d + '_loyalty'] += 4;
+Q.unity += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+The Zentrale writes that the district knows its own conditions best. In [+ target_district_name +] they read it as an apology, and accept it.
+
 @replace
-subtitle: The district joins our faction, but loses members, and its faction is outraged.
+subtitle: The district joins our current, but loses members, and its current is outraged.
 choose-if: target_is_rival = 1
-unavailable-subtitle: The district already follows our faction.
+unavailable-subtitle: The district already follows our current.
 on-arrival: {!
 var d = Q.target_district;
 Q['district_' + d + '_faction'] = Q.leading_faction;
@@ -58,6 +75,7 @@ Q['district_' + d + '_loyalty'] = 60;
 Q['district_' + d + '_members'] *= 0.6;
 Q[Q.target_faction + '_satisfaction'] -= 20;
 Q.unity -= 10;
+Q['lean_' + Q.leading_faction] += 2;
 !}
 
 The district leadership is removed and replaced with people loyal to the Zentrale. Many members follow their old leaders out of the party.

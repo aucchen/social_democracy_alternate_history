@@ -1,0 +1,54 @@
+title: The First of May in Munich
+subtitle: Von Oven's troops attack.
+new-page: true
+tags: event
+view-if: crisis_bavaria = 1 and crisis_time >= 4
+max-visits: 1
+priority: 2
+on-arrival: {!
+var survive = Q.crisis_momentum >= 80 && Q.bav_peasants >= 1 && Q.bav_solidarity >= 1
+    && (Q.bav_power == 1 || Q.bav_power == 3) && Q.bav_negotiated == 0;
+if (survive) {
+    Q.bav_result = 3;
+    Q.bavaria_soviet = 2;
+    Q.district_bavaria_members += 3;
+    Q.district_bavaria_loyalty += 20;
+    Q.world_revolution += 8;
+    Q.stability -= 8;
+    Q.repression += 4;
+    Q.militancy += 8;
+    Q.red_guards_strength += 5;
+    Q.offensive_satisfaction += 10;
+    Q.levine_alive = 1;
+} else if (Q.bav_negotiated == 1) {
+    Q.bav_result = 2;
+    Q.bavaria_soviet = 1;
+    Q.district_bavaria_members *= 0.8;
+    Q.repression += 4;
+    Q.red_guards_strength -= 2;
+} else {
+    Q.bav_result = 1;
+    Q.bavaria_soviet = 1;
+    Q.district_bavaria_members *= (Q.bav_power == 2) ? 0.7 : 0.5;
+    Q.district_bavaria_loyalty -= 10;
+    Q.repression += Q.bav_hostages ? 10 : 6;
+    Q.red_guards_strength -= 3;
+    Q.militancy -= 5;
+    Q.freikorps_strength += 20;
+    Q.civil_guards_strength += 40;
+}
+Q.crisis = 0;
+Q.crisis_bavaria = 0;
+Q.crisis_name = 0;
+Q.crisis_goal = 0;
+!}
+
+= The First of May in Munich
+
+[? if bav_result = 1 and bav_hostages = 1 : On 30 April, in the yard of the Luitpold Gymnasium, Red Army men shot ten of their hostages. The Whites now have the atrocity they wanted. ?][? if bav_result = 1 and bav_hostages = 0 : The hostages, at least, were freed in time, and the Whites have no atrocity to point to. ?][? if bav_result = 1 : On 1 May von Oven's troops broke into Munich. For three days they hunted the Reds through the streets of Giesing and Schwabing. Gustav Landauer was beaten to death in the yard of Stadelheim prison. Egelhofer was shot in the Residenz. Fifty-three Russian prisoners of war were shot at Gräfelfing, and a party of Catholic journeymen, taken for Spartacists, at the Karolinenplatz. Over six hundred people are dead. ?][? if bav_result = 1 and bav_power = 2 : Our party never sat in the Executive, and it is said in Munich that the Communists had warned against it. It changes little in Stadelheim. ?]
+
+[? if bav_result = 2 : On 1 May, after two days of talks, von Oven's troops march into Munich behind a white flag of their own. The Red Army hands in its rifles at the barracks. There are arrests, and there are beatings in the cellars, but there is no massacre. The leaders who did not escape will face a court rather than a firing squad in a yard. ?]
+
+[? if bav_result = 3 : On 1 May the Whites attack and are thrown back at the Isar bridges and at Dachau. The general strike in Saxony and the Ruhr holds, the Allied peace terms are due at Versailles any day, and the peasants of Upper Bavaria are selling their milk to Munich. Noske hesitates, and Berlin will not pay for a siege of Bavaria's capital. On 4 May, at Freising, the generals sign a truce. **A Bavarian Soviet Republic survives** in Munich and the south, ringed by enemies, short of everything, and alive. ?]
+
+[? if bav_result != 3 : The Bavarian Council Republic is over. Bavaria will be the most reactionary state in Germany for years to come, and its new masters will remember who frightened them. ?]

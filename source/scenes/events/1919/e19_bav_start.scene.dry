@@ -1,0 +1,87 @@
+title: A Council Republic in Munich
+subtitle: 7 April. The coffee-house revolutionaries proclaim a Soviet Bavaria.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 4 and bav_started = 0
+max-visits: 1
+on-arrival: {!
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+Q.bav_started = 1;
+Q.crisis = 1;
+Q.crisis_bavaria = 1;
+Q.crisis_time = 0;
+Q.week = 1;
+Q.crisis_name = 'The Bavarian Council Republic';
+Q.crisis_goal = 'Decide whether we take power in Munich, and whether a red Bavaria can survive.';
+Q.crisis_momentum = 35 + 5 * Q.bav_prep + (Q.levine_sent ? 5 : 0);
+!}
+
+= A Council Republic in Munich
+
+On the night of 6 to 7 April, in the former queen's bedroom of the Wittelsbach palace, the Central Council of the Bavarian councils proclaimed a Council Republic. The playwright Ernst Toller, the anarchists Erich Mühsam and Gustav Landauer, some Independents and even a few Majority Socialists sit in its government. Hoffmann's cabinet has fled to Bamberg. The new People's Commissar for Foreign Affairs has already wired Lenin and the Pope.
+
+[? if levine_sent = 1 : Eugen Leviné, whom we sent to Munich in March, has refused to join. ?][? if levine_sent = 0 : Our Munich comrades, led by Eugen Leviné and Max Levien, have refused to join. ?] A council republic, he says, is not proclaimed by poets in a palace. It is built by the factory councils, with arms, against the bourgeoisie, and that has not happened yet. The Zentrale must decide what our party does in Munich.
+
+- @refuse: Stand by Leviné: no part in a sham council republic.
+- @join: Join the council government and push it to the left.
+- @factories: Arm the factory councils for the real fight.
+- @bamberg: Seek a compromise between Munich and Bamberg.
+
+@refuse
+subtitle: The Spartacist line. We keep our hands clean, and our powder dry.
+on-arrival: crisis_momentum -= 3; luxemburgist_satisfaction += 5; lean_luxemburgist += 2; district_bavaria_loyalty += 5
+
+The Munich Communists denounce the "sham council republic" and wait. In the factories, workers ask why the Communists are sulking.
+
+@join
+subtitle: The Left's answer: the revolution has started, so lead it.
+on-arrival: crisis_momentum += 8; militancy += 6; offensive_satisfaction += 8; luxemburgist_satisfaction -= 4; lean_offensive += 2; repression += 3
+
+Levien takes a seat beside Toller and Mühsam. The council government nationalises the press and abolishes the university entrance examination. The banks remain open.
+
+@factories
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Left Radicals' instinct, and Leviné's own: power belongs to the factory councils, armed.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council action.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += 5;
+Q.red_guards_strength += 2;
+Q.red_guards_arms += 4;
+Q.ultraleft_satisfaction += 6;
+Q.offensive_satisfaction += 3;
+Q.lean_ultraleft += 2;
+!}
+
+Our shop stewards at the Maffei locomotive works and the railway shops start drilling armed workers' squads. They are the only armed force in Munich that answers to anyone.
+
+@bamberg
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: a socialist settlement, before the Freikorps arrive.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids dealing with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum -= 5;
+Q.bav_talks = 1;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 6;
+Q.uspd_relation += 5;
+Q.spd_relation += 3;
+Q.lean_unionist += 2;
+!}
+
+Our envoys carry proposals to Bamberg: new council elections, no troops. Hoffmann listens politely. His ministers are already talking to Noske.

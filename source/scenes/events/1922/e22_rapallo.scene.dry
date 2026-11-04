@@ -1,0 +1,53 @@
+title: Rapallo
+subtitle: Germany and Soviet Russia sign a treaty.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 4
+max-visits: 1
+
+= Rapallo
+
+On Easter Sunday, 16 April, at the edge of the Genoa conference, Walther Rathenau and Georgy Chicherin sign a treaty in a hotel in Rapallo. Germany and Soviet Russia renounce all claims on each other and restore full relations. The Allies are outraged. In Berlin, the nationalists are torn between hating the Bolsheviks and enjoying the Allies' fury.
+
+Everyone in the Zentrale knows what the treaty does not say. General von Seeckt's officers have been visiting Russia for a year, and there is talk of Junkers building aircraft near Moscow, out of sight of the Versailles inspectors.
+
+- @hail: Hail the treaty as a victory for the workers' state.
+- @warn: Welcome it, and warn against the generals' secret deals.
+- @trade: Campaign for trade with Russia: work for German workers.
+
+@hail
+subtitle: Moscow is pleased. Independence falls.
+on-arrival: {!
+Q.e22_rapallo = 1;
+Q.independence -= 5;
+Q.world_revolution += 3;
+Q.offensive_satisfaction += 2;
+Q.unionist_satisfaction += 2;
+Q.lean_unionist += 1;
+!}
+
+*Die Rote Fahne* prints the treaty under the headline "The Blockade Is Broken". The paper says nothing about Seeckt.
+
+@warn
+subtitle: The Spartacist line. More independence; Radek is furious.
+on-arrival: {!
+Q.e22_rapallo = 2;
+Q.independence += 7;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+Q.army_loyalty -= 2;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+!}
+
+Our Reichstag deputies ask what German officers are doing in Russia. The Reichswehr ministry denies everything. Radek's next letter to the Zentrale is unprintable.
+
+@trade
+subtitle: The Right's line. Practical, and wins a hearing in the factories.
+on-arrival: {!
+Q.e22_rapallo = 3;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+!}
+
+Our factory cells collect signatures for orders from Russia: locomotives, turbines, ploughs. Even some engineering employers sign.

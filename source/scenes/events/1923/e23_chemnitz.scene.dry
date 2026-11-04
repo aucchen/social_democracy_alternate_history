@@ -1,0 +1,104 @@
+title: The Chemnitz Conference
+subtitle: The factory councils of Saxony meet to decide on the general strike.
+new-page: true
+tags: event
+view-if: crisis_october = 1 and crisis_time >= 2 and e23_rising_phase = 0 and e23_chemnitz_done = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.e23_chemnitz_done = 1;
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction];
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+Q.e23_spd_ready = (Q.spd_relation >= 40 || (Q.saxony_government == 1 && Q.spd_relation >= 30)) ? 1 : 0;
+!}
+
+= The Chemnitz Conference
+
+On 21 October, as Reichswehr columns enter Saxony, a conference of factory councils, unions, control committees and workers' parties meets in Chemnitz. It was meant to give the signal. [+ party_leader +] rises and proposes an immediate general strike in defence of the Saxon government. Everyone in the hall who knows the plan knows what the strike is for.
+
+There is no applause. Georg Graupe, the Social Democratic labour minister, says that if the proposal is put to the vote, his party will walk out. The union delegates look at the floor. The proposal could be handed to a commission, where it would quietly die. [? if e23_spd_ready = 1 : But some SPD delegates from Leipzig and Dresden whisper that they would stay, if we asked them properly. ?]
+
+In Hamburg, the district leaders are waiting for a courier from this hall. In Berlin, Radek is on a train. The party has a few hours.
+
+- @call_off: Hand the proposal to a commission, and call the rising off.
+- @stop_courier: Call it off, and stop every courier before the word goes out.
+- @with_spd: Win the SPD delegates for the strike, then rise.
+- @alone: Rise without the SPD.
+
+@call_off
+subtitle: What history did. The party survives, and the word may already have gone to Hamburg.
+on-arrival: {!
+Q.e23_rising_phase = 2;
+Q.crisis_momentum -= 10;
+Q.unionist_satisfaction += 3;
+Q.offensive_satisfaction -= 12;
+Q.lean_unionist += 2;
+Q.independence += 2;
+!}
+
+The proposal goes to a commission. That night the Zentrale meets in Chemnitz and calls the rising off. A courier is sent to Hamburg with the new decision. Another courier, sent earlier, is already there.
+
+@stop_courier
+subtitle: The rising is called off everywhere. No martyrs, no victory, and a furious Left.
+on-arrival: {!
+Q.e23_rising_phase = 3;
+Q.german_october = 0;
+Q.e23_october_done = 1;
+Q.e23_oct_result = 0;
+Q.crisis = 0; Q.crisis_october = 0; Q.crisis_name = 0; Q.crisis_goal = 0;
+Q.offensive_satisfaction -= 15;
+Q.unionist_satisfaction += 4;
+Q.militancy -= 8;
+Q.worker_support -= 3;
+Q.lean_unionist += 2;
+!}
+
+Telephone lines, couriers, a car through the night to Hamburg: the order to stand down reaches every district in time. Nothing happens anywhere. On 23 October Germany's newspapers write about the Reichswehr in Saxony and the coming new currency, and nothing about us.
+
+@with_spd
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The strike as a united front. If the SPD's delegates stay, half of Saxony comes out.
+choose-if: lock_uprising < 2 and e23_spd_ready = 1
+unavailable-subtitle: The SPD delegates will not stay, or the line forbids a rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_rising_phase = 1;
+Q.crisis_name = 'The German Revolution';
+Q.crisis_goal = 'Win the rising before the Reichswehr can concentrate.';
+Q.crisis_momentum += 8;
+Q.spd_relation += 4;
+Q.militancy += 8;
+Q.repression += 8;
+Q.lean_unionist += 2;
+Q.lean_offensive += 2;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction += 2;
+!}
+
+Graupe walks out with a handful of followers. The rest of the SPD delegates stay. The conference votes for a general strike in defence of the Saxon government, and that night the hundreds take the railway stations of Chemnitz, Leipzig and Plauen.
+
+@alone
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. The rising begins, and the SPD workers must choose.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_rising_phase = 1;
+Q.crisis_name = 'The German Revolution';
+Q.crisis_goal = 'Win the rising before the Reichswehr can concentrate.';
+Q.crisis_momentum += (Q.worker_support >= 40) ? 0 : -8;
+Q.spd_relation -= 10;
+Q.militancy += 10;
+Q.repression += 10;
+Q.offensive_satisfaction += 8;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 3;
+!}
+
+The Social Democrats leave the hall. Our delegates stay and vote the general strike alone. By midnight the signal has gone to every district: the German revolution has begun.

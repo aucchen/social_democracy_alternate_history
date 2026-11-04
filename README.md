@@ -6,18 +6,23 @@ This is a modification of [Social Democracy: An Alternate History](https://githu
 
 ## Status
 
-Early build: January to April 1919 is playable (the January Uprising, the National Assembly election, four card decks and three advisors).
+The full campaign from January 1919 to December 1923 is playable: about 180 events across five years, weekly crises for the great confrontations (the January Uprising, the Bavarian Council Republic, the Kapp Putsch and the Ruhr, the March Action, the Cuno strike and the German October), four card decks, generic crisis cards, thirteen advisors and six endings. Writers should read `docs/writing-guide.md`.
 
 ## How the game works
 
 - **Factions set the party line.** The faction leading the Zentrale decides which actions are open, against the line (allowed, but costs Unity), or forbidden. A Left Radical Zentrale cannot propose a united front at all.
 - **Districts can defy the Zentrale.** Each district has its own faction, members and loyalty. Loyal districts carry out your cards; defiant ones may act alone.
 - **Factions can split.** A faction whose satisfaction falls too low walks out with its districts' members.
+- **Weekly crises.** In the great confrontations each turn is a week, and only crisis cards can be played.
 - **Meters:** Unity, Militancy, Worker support, Repression, SPD and USPD relations, Independence from Moscow, World revolution, plus Republic stability.
 
 The party logic (party line, district totals, faction strength, monthly drift) lives in `source/scenes/post_event.scene.dry`; the starting state is in `source/scenes/root.scene.dry`.
 
 Starting numbers and monthly drift are placeholders, to be tuned in playtesting. Historical details should be checked before more content is written.
+
+## Testing
+
+With the game built and served, `node tools/playtest.js [runs] [steps] [port] [start] [until]` plays random games and reports errors and dead ends. `start` (for example 1921-1) jumps to a year with the historical state from `tools/presets/`.
 
 ## Building the game
 

@@ -1,0 +1,70 @@
+title: A Million Marks
+subtitle: Wages are paid twice a day and spent within the hour.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 7
+max-visits: 1
+on-arrival: {!
+Q.inflation = Math.min(100, Q.inflation + 8);
+Q.stability -= 5;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.05;
+}
+!}
+
+= A Million Marks
+
+At the end of July the dollar passes a million marks. Wages are paid every day now, in some works twice a day, and the wives wait at the factory gates with shopping bags to spend them before the next price list goes up. A tram ticket costs more than a week's wage did in January. The middle classes are selling their pianos and their wedding rings.
+
+The unions are bankrupt: their dues are worthless before they reach the treasurer. Hundreds of thousands are leaving them, and many are joining us. [? if e22_workers_gov > 0 : The workers' government prints money to pay the Ruhr strikers and cannot stop. ?][? if e22_workers_gov = 0 : The Cuno government prints money to pay the Ruhr strikers and cannot stop. ?]
+
+- @hunger: Lead the hungry on the shops and the farms.
+- @gold: Demand wages in gold value, through the factory councils.
+- @recruit: Turn the party into a mass party: open the doors to everyone.
+
+@hunger
+subtitle: The Left's answer. Food for some, prison for others.
+view-if: offensive_gone = 0 or ultraleft_gone = 0
+on-arrival: {!
+Q.e23_inflation_line = 1;
+Q.militancy += 8;
+Q.repression += 6;
+Q.worker_support += 3;
+Q.offensive_satisfaction += 5;
+Q.ultraleft_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+Columns of unemployed go out from Berlin and Leipzig into the countryside to "buy" potatoes at the prices the control committees have fixed. The farmers call the gendarmes. The gendarmes come late.
+
+@gold
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The factory councils' demand. It wins support across the workers' parties.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_inflation_line = 2;
+Q.worker_support += 6;
+Q.spd_relation += 3;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 2;
+!}
+
+Factory council after factory council votes for wages fixed in gold marks and paid in paper at the day's rate. In Berlin a council of the big works begins to meet every week. It will matter in August.
+
+@recruit
+subtitle: Many new members, untrained and hungry. Unity suffers.
+on-arrival: {!
+Q.e23_inflation_line = 3;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 1.08;
+}
+Q.unity -= 4;
+Q.worker_support += 2;
+Q.luxemburgist_satisfaction += 3;
+!}
+
+The party's offices cannot print membership cards fast enough. Many of the new members have never been to a meeting. They are angry, and they are waiting for someone to tell them what to do.

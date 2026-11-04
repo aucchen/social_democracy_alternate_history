@@ -1,0 +1,62 @@
+title: The Lippe Front
+subtitle: The Red Army holds a line from the Rhine to Hamm.
+view-if: crisis_ruhr = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Lippe Front
+
+The Red Army's units are elected in the pits and the steelworks. They are brave and badly led. Some men go home every night to sleep. Others loot, and the Essen central council has had two of them shot. Before Wesel, the army's fortress guns are killing our men by the dozen.
+
+- @cadres: Send our best cadres to command.
+- @wesel: Storm Wesel.
+- @discipline: Pull back to a defensible line and dig in.
+
+@cadres
+subtitle: Costs 1 fund. A better led army.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.crisis_momentum += 7;
+Q.red_guards_loyalty += 10;
+Q.district_ruhr_loyalty += 5;
+Q.luxemburgist_satisfaction += 2;
+Q.offensive_satisfaction += 2;
+Q.lean_offensive += 1;
+!}
+
+Old soldiers from the party take over the battalions at Dinslaken and Hamm. The front stops leaking men.
+
+@wesel
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] A great gamble. If it works, the Red Army has the Rhine crossing.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e20_wesel = Math.random() < 0.4 ? 1 : 0;
+Q.crisis_momentum += Q.e20_wesel ? 14 : -6;
+Q.red_guards_strength -= Q.e20_wesel ? 2 : 6;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+[? if e20_wesel = 1 : The fortress falls after a night assault across the canal. The Red Army has the guns of Wesel and the bridge over the Rhine. ?][? if e20_wesel = 0 : The assault breaks down under machine-gun fire before the walls. Hundreds of miners lie in the fields outside Wesel. ?]
+
+@discipline
+subtitle: The Spartacist and Right answer. Holds longer, wins nothing.
+on-arrival: {!
+Q.crisis_momentum += 3;
+Q.red_guards_strength += 2;
+Q.unionist_satisfaction += 3;
+Q.luxemburgist_satisfaction += 2;
+Q.lean_unionist += 1;
+!}
+
+The Red Army lifts the siege of Wesel and digs in along the Lippe. The men grumble. Fewer of them die.

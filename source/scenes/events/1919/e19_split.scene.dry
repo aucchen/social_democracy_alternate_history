@@ -1,0 +1,86 @@
+title: The Expelled
+subtitle: The Left Radical districts leave the party.
+new-page: true
+tags: event
+view-if: year = 1919 and month >= 11 and crisis = 0 and heidelberg_outcome = 1 and e19_split_done = 0
+max-visits: 1
+priority: 2
+
+= The Expelled
+
+[? if heid_already = 0 : The Zentrale's emissaries have gone to Hamburg, Bremen and Berlin with the congress's decision. In Hamburg, the district meeting votes almost to a man to stay with Laufenberg and Wolffheim. In Berlin, the old district committee takes most of the members and the offices with it. In Bremen the Left Radicals hold the party paper. In Dresden Rühle declares that the time of parties is over. ?][? if heid_already = 1 : The Left Radicals who broke away in the summer have been holding conferences of their own. Now that Heidelberg has closed the door, the last of their sympathisers in our districts are choosing sides, and Laufenberg, Wolffheim and Rühle are talking about a new party. ?]
+
+The expelled are not yet a party of their own. They call themselves the opposition, and they say that the real Communist Party is the one the Zentrale threw out. Moscow, which did not want this split, is asking questions.
+
+- @rebuild: Rebuild the lost districts from the Zentrale.
+- @door: Keep the door open for the workers who left.
+- @fight: Fight them for every factory.
+
+@rebuild
+subtitle: The Spartacist way: new committees, loyal secretaries.
+on-arrival: heid_split_share = 0.72; lean_luxemburgist += 1
+go-to: exodus
+
+@door
+subtitle: The Right's way: no insults, and a way back for the rank and file.
+on-arrival: heid_split_share = 0.66; kapd_relation += 20; lean_unionist += 1
+go-to: exodus
+
+@fight
+subtitle: The Left's way: hard, loud and in every workplace. Some will stay.
+on-arrival: heid_split_share = 0.64; kapd_relation -= 10; offensive_satisfaction += 4; lean_offensive += 2
+go-to: exodus
+
+@exodus
+title: After the Split
+new-page: true
+on-arrival: {!
+var share = Q.heid_split_share;
+if (Q.heid_fight) {
+    share -= 0.06;
+}
+var lost = 0;
+var names = [];
+var heirs = {
+    berlin: (Q.heid_left == 1) ? 'offensive' : 'luxemburgist',
+    hamburg: 'offensive',
+    bremen: 'luxemburgist',
+    ruhr: 'offensive'
+};
+for (var d of Q.districts) {
+    var key = 'district_' + d;
+    if (Q[key + '_faction'] == 'ultraleft') {
+        var l = Q[key + '_members'] * share;
+        lost += l;
+        names.push(Q.district_names[d]);
+        Q[key + '_members'] -= l;
+        Q[key + '_faction'] = heirs[d] || Q.leading_faction;
+        Q[key + '_loyalty'] = 50;
+    } else {
+        var l2 = Q[key + '_members'] * 0.08;
+        lost += l2;
+        Q[key + '_members'] -= l2;
+    }
+}
+Q.heid_members_lost = lost.toFixed(1);
+Q.heid_lost_names = names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1] : (names[0] || "the opposition districts");
+Q.ultraleft_gone = 1;
+Q.ultraleft_satisfaction = 0;
+Q.lean_ultraleft = 0;
+if (Q.junior_faction == 'ultraleft') {
+    Q.junior_faction = 0;
+}
+Q.kapd_split = 1;
+Q.e19_split_done = 1;
+Q.worker_support -= 3;
+Q.unity += 15;
+Q.militancy -= 4;
+!}
+
+= After the Split
+
+By the end of the year the party has lost about **[+ heid_members_lost +] thousand** members. [? if heid_already = 0 : Most of the members in [+ heid_lost_names +] have gone over to the opposition. ?][? if heid_already = 1 : The districts were lost months ago; now the last doubters go. ?] Those who stay accept the theses.
+
+The opposition will hold its own congress in the spring and call itself the Communist Workers' Party. For now it is a rival for the same workers, in the same factories, with the same red flags.
+
+The party that remains is smaller, poorer and of one mind. [+ party_chair +] calls it the beginning of a real Communist party. In Moscow, Lenin is less sure.

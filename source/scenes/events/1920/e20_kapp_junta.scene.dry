@@ -1,0 +1,112 @@
+title: The Generals Hold Berlin
+subtitle: The strike has broken, and the putsch has not.
+new-page: true
+tags: event
+view-if: crisis_kapp = 1 and crisis_time = 2 and kapp_decided = 0 and crisis_momentum < 25
+max-visits: 1
+priority: 5
+on-arrival: {!
+Q.kapp_decided = 1;
+Q.kapp_outcome = 2;
+Q.government_name = 'Military dictatorship (Kapp, Lüttwitz)';
+Q.chancellor = 'Wolfgang Kapp';
+for (var p of Q.parties) {
+    Q[p + '_in_government'] = 0;
+}
+Q.dnvp_in_government = 1;
+Q.stability -= 20;
+Q.repression += 25;
+Q.army_loyalty -= 20;
+Q.freikorps_strength += 40;
+Q.worker_support -= 4;
+Q.spd_relation += 10;
+Q.uspd_relation += 5;
+!}
+
+= The Generals Hold Berlin
+
+The strike did not hold. The workers' front was divided from the first day, and the generals saw it. On the fifth day the railwaymen of Brandenburg drifted back to work under the guns of the Ehrhardt Brigade. Then the Reichswehr, which had waited to see who would win, decided.
+
+Kapp remains in the Chancellery. General von Lüttwitz rules Prussia under martial law. The Ebert government sits in Stuttgart and talks of a "compromise of national concentration". In Berlin, the courts-martial have begun. The party is banned, and the lists of our functionaries are in the hands of the military police.
+
+Only the Ruhr still fights. Its armed workers hold the coalfield, and they have not been told that the war is lost.
+
+- @underground: Take the party underground, and wait.
+- @fortress: Make the Ruhr a fortress and fight on.
+- @restrike: Rebuild the general strike with the unions, from the provinces.
+
+@underground
+subtitle: The party survives, as a conspiracy.
+on-arrival: {!
+Q.ending_id = 3;
+Q.crisis = 0;
+Q.crisis_kapp = 0;
+Q.crisis_ruhr = 0;
+Q.crisis_name = 0;
+Q.crisis_goal = 0;
+Q.ruhr_red_army = 1;
+!}
+
+The Zentrale disperses. Couriers carry the last instructions to the districts: bury the presses, burn the membership lists, trust no one. Without Berlin and without the party, the Ruhr Red Army is crushed within a fortnight.
+
+- @end: See how it ends.
+
+@fortress
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Everything depends on the Ruhr now.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.offensive_satisfaction += 10;
+Q.lean_offensive += 3;
+Q.e20_junta_bonus = 8;
+!}
+
+The Zentrale moves to Essen. Whatever we have, men, rifles and money, goes to the Lippe front.
+
+- @ruhr: Continue...
+
+@restrike
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's and the Spartacists' answer: only the whole working class can bring the generals down.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a common front with the unions' leaders.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.unionist_satisfaction += 8;
+Q.luxemburgist_satisfaction += 6;
+Q.spd_relation += 8;
+Q.uspd_relation += 8;
+Q.lean_unionist += 2;
+Q.lean_luxemburgist += 1;
+Q.e20_junta_bonus = 5;
+!}
+
+From Halle, Chemnitz and Stuttgart, we and the union leaders call the workers out again. In the south the strike holds. The Ruhr is its sword.
+
+- @ruhr: Continue...
+
+@ruhr
+title: The Last Front
+new-page: true
+on-arrival: {!
+Q.crisis_kapp = 0;
+Q.crisis_ruhr = 1;
+Q.crisis_name = 'The Ruhr Red Army';
+Q.crisis_goal = 'Hold the Ruhr against the generals. If it falls, everything falls.';
+Q.red_guards_strength += 45;
+Q.red_guards_arms += 15;
+Q.crisis_momentum = 25 + Math.round(Q.red_guards_arms / 5) + (Q.kapp_armed ? 5 : 0) + Q.e20_junta_bonus;
+!}
+
+= The Last Front
+
+Fifty thousand armed workers hold the Ruhr, from the Rhine to Hamm. They have artillery taken from the army and a front along the Lippe. If they hold, the dictatorship in Berlin may yet crack. If they fall, the generals will have all of Germany.
+
+@end
+go-to: game_over

@@ -1,0 +1,63 @@
+title: Poincaré's Ultimatum
+subtitle: France prepares to seize the Ruhr.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 12
+max-visits: 1
+on-arrival: {!
+Q.inflation = Math.min(100, Q.inflation + 4);
+Q.e22_red_ruhr = (Q.ruhr_red_army == 2) ? 1 : 0;
+!}
+
+= Poincaré's Ultimatum
+
+The dollar costs seven thousand marks. Germany has asked for a moratorium on reparations, and France's Prime Minister, Raymond Poincaré, has refused. On 26 December the Reparations Commission declares Germany in default on its deliveries of timber. Everyone knows what comes next: French engineers and soldiers will go into the Ruhr to take the coal themselves.
+
+[? if e22_red_ruhr = 1 : For the councils of the Ruhr, a French occupation would be a war on the workers' own territory. In Paris, the papers say openly that it would also finish the "Bolshevik Ruhr". ?]
+
+In January the communist parties of Western Europe will meet in Essen. The German party must decide what it will say there, and to the German workers.
+
+- @both: Fight on both fronts: against Poincaré and against our own bourgeoisie.
+- @french: Plan a joint struggle with the French communists.
+- @national: Call for national resistance to the French.
+
+@both
+subtitle: The Right's slogan. Keeps the party between the two camps.
+on-arrival: {!
+Q.e22_ruhr_line = 1;
+Q.unionist_satisfaction += 4;
+Q.lean_unionist += 1;
+Q.worker_support += 2;
+!}
+
+[? if e22_workers_gov = 0 : The Zentrale's slogan is ready before the first French soldier crosses the bridge at Düsseldorf. Defeat Poincaré on the Ruhr and Cuno on the Spree. ?][? if e22_workers_gov > 0 : The Zentrale's slogan is ready before the first French soldier crosses the bridge at Düsseldorf. Defeat Poincaré on the Ruhr and Stinnes at home. ?]
+
+@french
+subtitle: The internationalist answer. The Spartacists and the Left Radicals approve; the nationalists howl.
+on-arrival: {!
+Q.e22_ruhr_line = 2;
+Q.world_revolution += 3;
+Q.luxemburgist_satisfaction += 4;
+Q.ultraleft_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+Q.repression += 3;
+!}
+
+Marcel Cachin and the French party promise agitation among the French conscripts. Cachin is arrested in Paris for it.
+
+@national
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Radek's private advice. Popular in some quarters, and dangerous.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_ruhr_line = 3;
+Q.independence -= 4;
+Q.worker_support += 1;
+Q.luxemburgist_satisfaction -= 6;
+Q.ultraleft_satisfaction -= 6;
+Q.offensive_satisfaction += 2;
+!}
+
+Our manifesto speaks of the German nation enslaved by Versailles. The nationalists quote it with pleasure. So do the Social Democrats, with less pleasure.

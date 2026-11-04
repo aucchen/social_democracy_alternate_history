@@ -1,0 +1,61 @@
+title: Levi's Letter
+subtitle: The strike was lost. Levi writes, but not for the bookshops.
+new-page: true
+tags: event
+view-if: year = 1921 and month >= 4 and crisis = 0 and levi_in_party = 1 and march_action = 1 and e21_march_mode = 1 and e21_after_done = 0
+max-visits: 1
+priority: 12
+on-arrival: e21_after_done = 1
+
+= Levi's Letter
+
+The strike in Central Germany was lost, but it was not a putsch, and Levi knows it. He writes a long letter to Lenin, not a pamphlet. The strike was right, he says, and badly prepared: the party asked the workers to fight before it had won them. He asks for one thing, that the International stop sending emissaries who decide German questions in hotel rooms.
+
+[? if e21_levi_resigned = 1 : Levi has been out of the Zentrale since February. His friends say it is time he came back. ?][? if e21_levi_resigned = 0 : Levi still holds the chair. The Left says the defeat is his, since he would not let the party fight properly. ?]
+
+- @return: Bring Levi back to the head of the party.
+- @counsel: Keep the present leadership, and listen to him.
+- @sideline: Sideline him: the defeat proves the Left right.
+
+@return
+subtitle: The Spartacist line. The Left will not take it quietly.
+on-arrival: {!
+Q.e21_levi_fate = 5;
+Q.leading_faction = 'luxemburgist';
+Q.junior_faction = 'unionist';
+Q.e21_levi_resigned = 0;
+Q.luxemburgist_satisfaction += 12;
+Q.offensive_satisfaction -= 12;
+Q.independence += 5;
+Q.lean_luxemburgist += 3;
+!}
+
+The Central Committee asks Levi and Zetkin to return. Levi takes the chair again, on condition that the emissaries are recalled. Kun leaves Berlin in a temper.
+
+@counsel
+subtitle: The Right's way: Brandler leads, Levi advises. Nobody is quite satisfied.
+on-arrival: {!
+Q.e21_levi_fate = 5;
+if (Q.leading_faction == 'offensive') {
+    Q.leading_faction = 'unionist';
+    Q.junior_faction = 'offensive';
+}
+Q.unionist_satisfaction += 8;
+Q.luxemburgist_satisfaction += 3;
+Q.offensive_satisfaction -= 4;
+Q.lean_unionist += 2;
+!}
+
+The Zentrale keeps its leaders but changes its tone. The theory of the offensive is quietly dropped from the Rote Fahne, and Levi's letter is circulated to the Central Committee.
+
+@sideline
+subtitle: The Left's line. Levi is pushed to the edge of the party.
+on-arrival: {!
+Q.e21_levi_fate = 2;
+Q.offensive_satisfaction += 10;
+Q.luxemburgist_satisfaction -= 12;
+Q.lean_offensive += 2;
+Q.lean_luxemburgist -= 1;
+!}
+
+The Zentrale resolves that the strike failed because it was not bold enough. Levi is removed from every committee he still sits on. His case, his friends say, will go to Moscow.

@@ -1,0 +1,51 @@
+title: The KAPD Breaks in Two
+subtitle: The Communist Workers' Party splits.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 3 and kapd_exists = 1
+max-visits: 1
+
+= The KAPD Breaks in Two
+
+The Communist Workers' Party has broken in two. The Essen tendency, around Karl Schröder, wants a new International of its own and no compromise with anyone. The Berlin tendency wants to keep the party's workers in the factories and its General Workers' Union alive. Both sides accuse the other of betraying the councils.
+
+Thousands of KAPD workers in Berlin, Hamburg and the Ruhr are suddenly without a home. Many of them were in our party in 1919.
+
+- @welcome: Invite their workers back into the party.
+- @joint: Propose joint action to the Berlin tendency.
+- @ignore: Let the sect destroy itself.
+
+@welcome
+subtitle: A few thousand old radicals return. The Right is uneasy.
+on-arrival: {!
+Q.district_berlin_members += 1.5;
+Q.district_hamburg_members += 1;
+Q.district_ruhr_members += 1;
+Q.kapd_relation -= 5;
+Q.ultraleft_satisfaction += 6;
+Q.offensive_satisfaction += 2;
+Q.unionist_satisfaction -= 3;
+Q.lean_ultraleft += 1;
+Q.militancy += 2;
+!}
+
+Whole factory groups in Neukölln and Hamburg-Barmbek come back to the party they left at Heidelberg, bringing their old arguments with them.
+
+@joint
+subtitle: Better relations with the KAPD's saner half.
+on-arrival: {!
+Q.kapd_relation += 12;
+Q.worker_support += 1;
+Q.ultraleft_satisfaction += 3;
+!}
+
+A joint committee meets twice in Berlin and agrees on May Day. That is more than anyone expected.
+
+@ignore
+subtitle: Nothing gained, nothing spent.
+on-arrival: {!
+Q.kapd_relation -= 3;
+Q.unity += 1;
+!}
+
+By the end of the year the KAPD has a few thousand members and two newspapers that attack each other more than they attack the bourgeoisie.

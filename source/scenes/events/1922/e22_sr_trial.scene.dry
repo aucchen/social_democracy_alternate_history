@@ -1,0 +1,51 @@
+title: The Trial in Moscow
+subtitle: The Socialist Revolutionaries face the death penalty.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 7
+max-visits: 1
+
+= The Trial in Moscow
+
+In the Hall of Columns in Moscow, the leaders of the Socialist Revolutionary Party are on trial for terror against the Soviet state. Emile Vandervelde came from Brussels to defend them and left in protest. The Berlin conference in April was promised there would be no death sentences. Now the prosecutors ask for them anyway.
+
+The SPD press runs the trial on its front page every day. In the factories, our members are asked a simple question: is this the socialism you want for Germany?
+
+- @defend: Defend the trial: the SRs took up arms against the revolution.
+- @protest: Protest to Moscow: the promise made in Berlin must be kept.
+- @silence: Say as little as possible.
+
+@defend
+subtitle: Loyal to Moscow. The social democrats have a weapon against us.
+on-arrival: {!
+Q.e22_sr_trial = 1;
+Q.independence -= 5;
+Q.spd_relation -= 6;
+Q.worker_support -= 2;
+Q.offensive_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+*Die Rote Fahne* explains the case against the defendants at length. In August twelve are sentenced to death, and the sentences are suspended as long as their party lays down its arms.
+
+@protest
+subtitle: The Spartacist answer. More independence; Moscow takes offence.
+on-arrival: {!
+Q.e22_sr_trial = 2;
+Q.independence += 8;
+Q.spd_relation += 4;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+!}
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg's open letter repeats what she wrote in prison in 1918, "Freedom only for the supporters of the government is no freedom at all", and it is reprinted across Europe. ?][? if luxemburg_alive = 0 : Clara Zetkin writes to Lenin in private, and the Zentrale asks in public for the promise to be kept. ?] The death sentences, when they come, are suspended. Moscow says this was always the plan.
+
+@silence
+subtitle: Nothing gained, nothing lost, except a little respect.
+on-arrival: {!
+Q.e22_sr_trial = 3;
+Q.worker_support -= 1;
+!}
+
+Our press reports the trial in a few lines on the inside pages.

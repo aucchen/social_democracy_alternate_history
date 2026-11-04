@@ -1,0 +1,100 @@
+title: The Halle Congress
+subtitle: The USPD decides whether to join the International.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 10 and crisis = 0 and halle_done = 0 and ending_id = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.halle_done = 1;
+!}
+
+= The Halle Congress
+
+On 12 October, the USPD congress opens in Halle. Four hundred delegates sit on two sides of the hall and do not look at each other. Grigory Zinoviev has come from Moscow, with a German police permit for ten days. On the other side sits Julius Martov, the Menshevik, ill and hoarse, to warn the Germans what the Bolsheviks have done to the Russian socialists.
+
+On the 14th, Zinoviev speaks in German for four hours. Hilferding answers him for two. The vote will come tomorrow. [? if twenty_one_conditions = 2 : The softened conditions have made it easier for the waverers. ?][? if twenty_one_conditions = 3 : Our own quarrel with Moscow has not gone unnoticed. The USPD right asks why it should accept conditions the communists themselves rejected. ?]
+
+What does the KPD do on the eve of the vote?
+
+- @zinoviev: Leave it to Zinoviev.
+- @comrades: Let our own people speak to the delegates as comrades.
+- @promise: Promise the USPD's members an equal place in a united party.
+
+@zinoviev
+subtitle: Moscow's star speaker needs no help from us.
+on-arrival: {!
+Q.e20_halle_bonus = 1;
+Q.independence -= 3;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+- @vote: Continue...
+
+@comrades
+subtitle: The Spartacist way. The German workers' movement can unite itself.
+on-arrival: {!
+Q.e20_halle_bonus = (Q.twenty_one_conditions == 2) ? 2 : 1;
+Q.independence += 3;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+!}
+
+- @vote: Continue...
+
+@promise
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's way. No purge below the leaders, no second-class members.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e20_halle_bonus = 2;
+Q.uspd_relation += 5;
+Q.offensive_satisfaction -= 5;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+- @vote: Continue...
+
+@vote
+title: The Vote
+new-page: true
+on-arrival: {!
+var score = Q.uspd_score + Q.e20_halle_bonus
+    + (Q.twenty_one_conditions == 2 ? 2 : (Q.twenty_one_conditions == 3 ? -2 : 0))
+    + (Q.uspd_relation >= 55 ? 1 : 0)
+    + (Q.kapp_outcome == 3 ? -1 : 0)
+    + Math.floor(Math.random() * 3);
+if (score >= 9 && !Q.e20_attacked) {
+    Q.uspd_split = 2;
+    Q.uspd_relation += 15;
+    Q.world_revolution += 4;
+} else if (score >= 1) {
+    Q.uspd_split = 1;
+    Q.uspd_relation -= 10;
+} else {
+    Q.uspd_split = 3;
+    Q.uspd_relation -= 15;
+}
+if (Q.kapp_outcome == 3 && Q.uspd_in_government && Q.uspd_split == 2) {
+    Q.e20_uspd_ministers_left = 1;
+    Q.uspd_in_government = 0;
+    Q.government_name = 'Legien cabinet (SPD, unions)';
+    Q.stability -= 5;
+}
+!}
+
+= The Vote
+
+[? if uspd_split = 1 : On 16 October the congress votes, 237 to 156, to accept the conditions and join the Communist International. The minority walks out to hold its own congress in the same town. Crispien, Dittmann and Hilferding keep the name of the USPD, its newspaper and most of its deputies. The majority, led by Däumig and Stoecker, prepares to unite with us. ?]
+
+[? if uspd_split = 2 : The vote is overwhelming. Crispien and Dittmann see the hall and give up the fight. Only Hilferding and a few dozen delegates walk out, most of them back towards the SPD. The Independent Social Democratic Party of Germany, with its hundreds of thousands of members, its newspapers and its Reichstag deputies, will unite with the communists. ?]
+
+[? if uspd_split = 3 : The congress rejects the conditions, 214 to 179. Däumig and Stoecker lead the left minority out of the hall. They are fewer than Moscow hoped, and they know it. Most of the Independents stay with Crispien and Dittmann. ?]
+
+[? if e20_uspd_ministers_left = 1 : The USPD's ministers resign from Legien's cabinet the next day. Communists, the conditions say, do not sit in governments with reformists. Legien carries on with the SPD alone, at the mercy of the Centre. ?]

@@ -1,0 +1,44 @@
+title: Protect the Leadership
+subtitle: The lists of names are already printed in the officers' clubs.
+view-if: crisis = 1
+on-arrival: month_actions += 1
+frequency: 60
+is-card: true
+new-page: true
+tags: crisis
+
+= Protect the Leadership
+
+Nobody has forgotten January 1919. In every crisis, the Freikorps and the political police go looking for the party's leaders first, and they do not always bother with a court.
+
+The Zentrale must decide where its members sleep this week.
+
+- @hide: Hide the leaders in safe houses.
+- @openly: Lead openly, in the streets.
+- @couriers: Set up a courier network to every district.
+
+@hide
+subtitle: The leadership is safe; it is also out of sight.
+on-arrival: unity += 3; repression -= 3; crisis_momentum -= 2; lean_luxemburgist += 1
+
+The leaders move every night, from a doctor's flat in Charlottenburg to a gardener's hut in Treptow. The orders still go out, a day late.
+
+@openly
+subtitle: The workers see their leaders with them. So do the police.
+on-arrival: crisis_momentum += 4; militancy += 3; repression += 4; unity += 2; offensive_satisfaction += 3; lean_offensive += 1
+
+The Zentrale's members speak from lorries at the factory gates. The crowds roar. Plain-clothes men in the crowd write down the times and places.
+
+@couriers
+subtitle: Costs 1 fund. The districts hear from the Zentrale every day, and act together.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 5;
+}
+Q.crisis_momentum += 2;
+!}
+
+Young comrades on bicycles and railwaymen with messages in their boots carry the Zentrale's instructions to every district within a day.

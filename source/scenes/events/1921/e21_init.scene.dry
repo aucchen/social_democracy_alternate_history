@@ -1,0 +1,37 @@
+title: 1921 setup
+view-if: e21_init_done = 0
+tags: event
+priority: 100
+max-visits: 1
+on-arrival: {!
+Q.e21_init_done = 1;
+// only set what is not set yet, so test presets are not overwritten
+var start = {
+    // shared flags (contract)
+    levi_in_party: 1, levi_split: 0, left_split: 0, march_action: 0, kag_exists: 0,
+    // shared flags beyond the contract, for later writers
+    central_germany_soviet: 0, friesland_outcome: 0, erzberger_murdered: 0,
+    london_ultimatum: 0, upper_silesia_outcome: 0, civil_guards_dissolved: 0,
+    hoelz_imprisoned: 0, open_letter: 0,
+    // 1921 internal state
+    e21_started: 0, e21_party: 'VKPD', e21_levi_leads: 0, e21_lux_leads: 0,
+    e21_open_letter_done: 0, e21_livorno: 0, e21_cc_done: 0, e21_levi_resigned: 0,
+    e21_prussia_done: 0, e21_kun_done: 0, e21_offensive_plan: 0,
+    e21_can_avoid: 0, e21_march_started: 0, e21_march_mode: 0, crisis_march: 0,
+    e21_ma_calloff: 0, e21_ma_hoelz: 0, e21_ma_eberlein: 0, e21_arms_saved: 0,
+    e21_final_momentum: 0, e21_soviet_viable: 0, e21_central_done: 0,
+    e21_levi_fate: 0, e21_levi_plea: 0, e21_levi_verdict: 0, e21_after_done: 0,
+    e21_third_done: 0, e21_jena_done: 0, e21_jena_case: 0, e21_left_split_pending: 0,
+    e21_left_leads: 0, e21_levi_readmitted: 0, e21_kag_done: 0, e21_maslow_moscow: 0,
+    e21_cc_win_chance: 0, e21_cc_won: 0, e21_jena_readmit_ok: 0,
+    e21_cc_odds: 'uncertain', e21_members_jan: 0, e21_members_now: 0, e21_strike_gain: 0,
+    e21_leuna: 0, e21_prussia_seats: 0, e21_new_cabinet: 0, e21_levi_score: 0,
+    e21_left_ahead: 0, e21_left_strong: 0, e21_can_readmit: 0, e21_left_lost: 0
+};
+for (var k in start) {
+    if (Q[k] === undefined) {
+        Q[k] = start[k];
+    }
+}
+!}
+go-to: post_event

@@ -1,0 +1,66 @@
+title: 1922–23 setup
+view-if: e22_init_done = 0
+tags: event
+priority: 100
+max-visits: 1
+on-arrival: {!
+Q.e22_init_done = 1;
+// only set what is not set yet, so test presets are not overwritten
+var start = {
+    // shared contract flags for 1922-23
+    rathenau_murdered: 0, ruhr_occupied: 0, saxony_government: 0,
+    german_october: 0, kpd_banned: 0, beer_hall_putsch: 0,
+    // the leader's name and a number for the leading current, for text
+    party_leader: 'Heinrich Brandler', lead_code: 3,
+    // 1922
+    e22_year_line: 0,          // 1 united front, 2 discipline, 3 prepare, 4 councils
+    e22_friesland: 0,          // 1 expelled, 2 kept, 3 left of his own accord
+    e22_railway: 0,            // 1 solidarity strikes, 2 through the unions, 3 general strike call
+    e22_three_int: 0,          // 1 real united front, 2 manoeuvre, 3 stayed away
+    e22_rapallo: 0,            // 1 hailed, 2 warned against the Reichswehr deals
+    e22_famine: 0,
+    e22_metal: 0,
+    e22_rathenau_front: 0,     // 1 joint protests, 2 own general strike, 3 arms, 4 aloof
+    e22_protection_law: 0,     // 1 voted for, 2 voted against, 3 abstained
+    e22_sr_trial: 0,           // 1 defended Moscow, 2 protested
+    e22_inflation_line: 0,     // 1 control committees, 2 hunger marches, 3 wage scales
+    e22_reunification: 0,      // 1 courted the USPD left, 2 united front offer, 3 denounced
+    e22_rome: 0,               // 1 defence formations, 2 anti-fascist front, 3 dismissed
+    e22_berlin_opposition: 0,  // 1 disciplined, 2 conceded, 3 Moscow arbitrated
+    e22_saxon_toleration: 0,   // 1 tolerate Buck on conditions, 2 refuse, 3 unconditional
+    e22_workers_gov: 0,        // 0 Cuno comes; 1 the workers' government survives with our votes; 2 our ministers in it
+    e22_fourth_congress: 0,    // 1 Radek's broad formula, 2 the Left's narrow one, 3 our own
+    e22_ruhr_line: 0,          // 1 on both fronts, 2 with the French workers, 3 national defence
+    // 1923
+    e23_ruhr_line: 0,
+    e23_leipzig: 0,            // 1 Right, 2 compromise, 3 Left, 4 Spartacists, 5 council line
+    e23_hundreds: 0,
+    e23_krupp: 0,
+    e23_zeigner: 0,            // 1 tolerated on conditions, 2 refused
+    e23_mulheim: 0,
+    e23_may: 0,
+    e23_schlageter: 0,         // 1 followed Radek, 2 refused, 3 debated nationalists
+    e23_antifascist_day: 0,    // 1 marched, 2 indoor, 3 joint with the SPD left
+    e23_inflation_line: 0,
+    crisis_cuno: 0, e23_cuno_done: 0, e23_cuno_result: 0,
+    e23_labour_crisis_done: 0,
+    e23_sept_done: 0,
+    e23_october_path: 0,       // 1 Moscow's autumn plan, 2 from the Cuno strike, 3 defence of a workers' government, 4 improvised over Saxony
+    e23_date_set: 0,
+    e23_hasty: 0,
+    crisis_october: 0, e23_rising_phase: 0, e23_october_done: 0, e23_oct_result: 0,
+    e23_saxony_decided: 0, e23_saxon_police: 0, e23_muller_done: 0,
+    e23_chemnitz_done: 0, e23_hamburg_done: 0, e23_battle_done: 0,
+    e23_focus: 0,              // 1 Saxony and Thuringia, 2 Berlin, 3 the Ruhr and the ports
+    e23_red_region: 0,         // 1 Saxony and Thuringia, 2 the Ruhr, 3 Hamburg and the coast
+    e23_reich_done: 0,
+    e23_ban_done: 0, e23_seeckt_ambition: 0, e23_rentenmark_done: 0, e23_reckoning: 0, e23_directory: 0,
+    e23_generals_done: 0
+};
+for (var k in start) {
+    if (Q[k] === undefined) {
+        Q[k] = start[k];
+    }
+}
+!}
+go-to: post_event

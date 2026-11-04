@@ -1,0 +1,141 @@
+title: The Reichstag Election
+subtitle: 6 June 1920. The Weimar coalition loses its majority.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 6 and crisis = 0 and ending_id = 0 and e20_election_done = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.e20_election_done = 1;
+var s = {spd: 102, uspd: 84, ddp: 39, zentrum: 64, bvp: 21, dvp: 65, dnvp: 71, nsdap: 0, kapd: 0};
+var kpd = 0;
+if (!Q.election_boycott) {
+    kpd = Math.round(0.5 + Q.worker_support / 10 + Q.election_bonus * 1.2
+        + (Q.kapp_outcome == 3 ? 3 : 0) + (Q.ruhr_red_army == 2 ? 2 : 0)
+        + (Q.kapp_statement == 1 ? -1 : 0));
+    kpd = Math.max(1, Math.min(30, kpd));
+}
+s.uspd -= (kpd - 4);
+if (Q.kapp_outcome == 3) {
+    // the victory over Kapp carries the workers' parties; how far depends on our standing
+    var shift = Math.max(20, Math.min(50, Math.round(35 + (Q.worker_support - 25) / 2)));
+    var to_spd = Math.round(shift * 0.6);
+    s.spd += to_spd; s.uspd += shift - to_spd;
+    var from_dnvp = Math.round(shift * 0.4), from_dvp = Math.round(shift * 0.35), from_ddp = Math.round(shift * 0.15);
+    s.dnvp -= from_dnvp; s.dvp -= from_dvp; s.ddp -= from_ddp; s.zentrum -= shift - from_dnvp - from_dvp - from_ddp;
+} else if (Q.kapp_outcome == 2) {
+    s.spd += 8; s.uspd += 7; s.dnvp -= 10; s.dvp -= 5;
+}
+if (Q.ruhr_red_army == 2) {
+    s.dnvp += 4; s.dvp += 3; s.spd -= 4; s.ddp -= 3;
+}
+for (var p in s) {
+    Q[p + '_seats'] = s[p];
+}
+Q.kpd_seats = kpd;
+Q.parliament_name = 'Reichstag';
+Q.parliament_size = 459;
+Q.e20_kpd_seats_display = kpd;
+// the government after the election
+Q.e20_wg_survives = 0;
+if (Q.kapp_outcome == 3) {
+    var left = s.spd + s.uspd + ((Q.wg_stance == 1 || Q.wg_stance == 2) ? kpd : 0);
+    if (left >= 230) {
+        Q.e20_wg_survives = 1;
+    }
+}
+for (var p of Q.parties) {
+    Q[p + '_in_government'] = 0;
+}
+if (Q.e20_wg_survives) {
+    Q.spd_in_government = 1;
+    Q.uspd_in_government = 1;
+    Q.chancellor = 'Carl Legien';
+    Q.government_name = Q.kpd_in_government ? 'Workers\' government (SPD, USPD, KPD)' : 'Workers\' government (SPD, USPD)';
+} else {
+    Q.zentrum_in_government = 1;
+    Q.ddp_in_government = 1;
+    Q.dvp_in_government = 1;
+    Q.chancellor = 'Constantin Fehrenbach';
+    Q.government_name = 'Fehrenbach cabinet (Centre, DDP, DVP)';
+    Q.kpd_in_government = 0;
+    Q.stability += 3;
+}
+!}
+
+= The Reichstag Election
+
+The votes are counted. The parties of the Weimar coalition, which held three quarters of the National Assembly, have lost their majority. The SPD wins [+ spd_seats +] seats and the USPD [+ uspd_seats +]. On the right, the DNVP wins [+ dnvp_seats +] and Stresemann's DVP [+ dvp_seats +]. The Centre has [+ zentrum_seats +], the Bavarian People's Party [+ bvp_seats +], the Democrats [+ ddp_seats +].
+
+[? if election_boycott = 0 : Our party wins [+ e20_kpd_seats_display +] seats in the Reichstag. ?][? if election_boycott = 1 : We stood no candidates. The workers who would have voted for us voted for the Independents. ?]
+
+[? if e20_wg_survives = 1 : The workers' parties have a majority, if the communists count. Legien remains Chancellor. ?][? if e20_wg_survives = 0 and kapp_outcome = 3 : The workers' government has no majority in the new Reichstag. Legien resigns, and the Centre's Constantin Fehrenbach forms a cabinet with the Democrats and the DVP. ?][? if e20_wg_survives = 0 and kapp_outcome != 3 : The SPD leaves the government. On 25 June the Centre's Constantin Fehrenbach forms a cabinet of the Centre, the Democrats and the DVP, the party of heavy industry. ?]
+
+- @whole_class: Our deputies will speak for the whole working class.
+- @tribune: Our deputies will use the Reichstag as a tribune for the revolution.
+- @bloc: Propose a workers' bloc in the Reichstag to the SPD and USPD.
+- @abstention: The abstentions prove we were right.
+- @mistake: Admit that the boycott was a mistake.
+
+@whole_class
+subtitle: The Spartacist line. Serious work in parliament, for the masses outside it.
+view-if: election_boycott = 0
+on-arrival: {!
+Q.worker_support += 2;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 1;
+!}
+
+Our deputies take their seats on the far left of the chamber. Their first speech is on the dead of the Ruhr and the officers who killed them. It is printed in full by the USPD's paper.
+
+@tribune
+subtitle: The Left's line.
+view-if: election_boycott = 0
+on-arrival: {!
+Q.militancy += 3;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 1;
+!}
+
+Our deputies interrupt, heckle and are suspended from the chamber. The speeches are reprinted as pamphlets and sold at the factory gates.
+
+@bloc
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's line.
+view-if: election_boycott = 0
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.uspd_relation += 6;
+Q.spd_relation += 4;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 1;
+!}
+
+We propose that the three workers' parties vote together against the Fehrenbach cabinet's every measure against labour. The SPD says it will consider it. It does not.
+
+@abstention
+subtitle: The Left Radical view.
+view-if: election_boycott = 1
+on-arrival: {!
+Q.ultraleft_satisfaction += 5;
+Q.worker_support -= 2;
+Q.lean_ultraleft += 1;
+!}
+
+Our press reports that a fifth of the electorate did not vote. It does not say that most of them were never ours.
+
+@mistake
+subtitle: The Spartacist view. The Left Radicals will be angry.
+view-if: election_boycott = 1
+on-arrival: {!
+Q.election_boycott = 0;
+Q.ultraleft_satisfaction -= 10;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+!}
+
+The Zentrale admits it in a circular: the boycott left the Reichstag to our enemies and our voters to the USPD. It will not happen again.

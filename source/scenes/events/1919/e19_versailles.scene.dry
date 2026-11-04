@@ -1,0 +1,53 @@
+title: The Treaty Is Signed
+subtitle: Scheidemann resigns. Bauer signs at Versailles.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 6 and crisis = 0
+max-visits: 1
+priority: 2
+on-arrival: {!
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+Q.versailles_signed = 1;
+Q.government_name = 'Bauer cabinet (SPD, Centre)';
+Q.chancellor = 'Gustav Bauer';
+Q.ddp_in_government = 0;
+Q.stability -= 3;
+Q.army_loyalty -= 5;
+Q.freikorps_loyalty -= 8;
+!}
+
+= The Treaty Is Signed
+
+Scheidemann would not sign, and on 20 June his cabinet resigned. Gustav Bauer, a trade union man, formed a new government of the Social Democrats and the Centre; the Democrats walked out rather than share the blame. The generals told Ebert that the army could not resist an Allied invasion. On 28 June, in the Hall of Mirrors, two ministers no one had heard of signed the treaty.
+
+The Freikorps officers who crushed Berlin and Munich for the Republic now say that the Republic has betrayed them. Some talk openly of a dictatorship. In the factories, the mood is exhaustion more than anger.
+
+- @warn: Warn the workers against the generals.
+- @nationalists: Win over the angry young officers and soldiers.
+- @hunger: Talk about bread, not about the treaty.
+
+@warn
+subtitle: The Spartacist and the Right's line: the danger comes from the right now.
+on-arrival: worker_support += 3; uspd_relation += 3; luxemburgist_satisfaction += 4; unionist_satisfaction += 3; lean_luxemburgist += 1; lean_unionist += 1
+
+Our paper writes that the officers who murdered Luxemburg are waiting for their chance against the Republic itself. Many workers who hate the Republic hate the officers more.
+
+@nationalists
+subtitle: [? if versailles_line = 2 : The Hamburg line, taken further. ?] Dangerous company. Levi will not forgive it.
+on-arrival: militancy += 3; ultraleft_satisfaction += 5; luxemburgist_satisfaction -= 6; lean_ultraleft += 2; army_loyalty -= 3; independence -= 1
+
+Our agitators speak in the barracks of the Baltic volunteers about the betrayal of Versailles. A few listen. Most of them were shooting at us in March.
+
+@hunger
+subtitle: The Left's instinct: strikes over prices and rations, where the anger is.
+on-arrival: militancy += 4; worker_support += 3; repression += 3; offensive_satisfaction += 5; lean_offensive += 2
+
+The summer brings strikes over bread and wages from Berlin to Stuttgart. Our people are in the front of most of them.

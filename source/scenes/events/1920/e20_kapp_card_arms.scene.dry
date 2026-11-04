@@ -1,0 +1,61 @@
+title: Arms for the Workers
+subtitle: The civil guards' depots are full of rifles.
+view-if: crisis_kapp = 1 or crisis_ruhr = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Arms for the Workers
+
+Every town has its depot: rifles of the civil guards, the police armouries, the army's stores. In the Ruhr and in Thuringia the workers have already helped themselves. Elsewhere they are waiting for a word.
+
+- @seize: Seize the depots.
+- @battalions: Form workers' battalions under party discipline.
+- @hide: Hide what we have for later.
+
+@seize
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] Arms us quickly, and alarms everyone else.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.kapp_armed = 1;
+Q.red_guards_arms += 10;
+Q.red_guards_strength += 4;
+Q.civil_guards_strength -= 20;
+Q.crisis_momentum += 6;
+Q.repression += 5;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+In a dozen towns, armed workers walk into the depots and walk out with the rifles. In some, the civil guards fire first.
+
+@battalions
+subtitle: Fewer guns, more discipline.
+on-arrival: {!
+Q.red_guards_loyalty += 10;
+Q.red_guards_strength += 2;
+Q.crisis_momentum += 4;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+Our battalions elect their officers and take their orders from the district leadership, not from whoever shouts loudest.
+
+@hide
+subtitle: Nothing now, something for the next time.
+on-arrival: {!
+Q.red_guards_arms += 4;
+Q.repression -= 2;
+Q.unionist_satisfaction += 2;
+Q.offensive_satisfaction -= 2;
+Q.lean_unionist += 1;
+!}
+
+Rifles go into allotment sheds and under the floorboards of union halls. The police will not find most of them.

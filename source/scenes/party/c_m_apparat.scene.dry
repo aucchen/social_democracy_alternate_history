@@ -1,0 +1,62 @@
+title: The M-Apparat
+new-page: true
+view-if: crisis = 0 and c_m_apparat_timer <= 0 and year >= 1921
+on-arrival: c_m_apparat_timer = 5; month_actions += 1
+frequency: 150
+is-card: true
+tags: party_affairs
+
+= The M-Apparat
+
+The party has a secret department now: the military-political apparatus, known to the few who know of it as the M-Apparat. It collects intelligence on the Reichswehr and the right, trains instructors for the workers' militias, and keeps lists of weapons. [? if comintern_member = 1 : Officers sent by the Red Army's staff advise it, and Moscow pays for much of it. ?]
+
+[? if march_action = 1 : After March, everyone agrees the party was not ready to fight. They do not agree on what to do about it. ?] [? if c_m_apparat_built >= 2 : The apparatus has grown large enough that the police have started looking for it. ?]
+
+- @build: Expand the apparatus.
+- @inward: Turn it to protecting the party.
+- @small: Keep it small, and under the Zentrale's control.
+- @easy_discard
+
+@build
+subtitle: Costs 1 fund. More arms and trained men; more police attention. The Left approves.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.c_m_apparat_built += 1;
+Q.red_guards_arms += 6;
+Q.red_guards_strength += 1;
+Q.repression += 3 + Q.c_m_apparat_built;
+Q.offensive_satisfaction += 6;
+Q.luxemburgist_satisfaction -= 3;
+if (Q.comintern_member) {
+    Q.independence -= 3;
+}
+Q.lean_offensive += 2;
+!}
+
+Instructors are trained in a forest lodge in Thuringia, and arms are bought from Reichswehr quartermasters who need the money. Every new cell is another secret that can be betrayed.
+
+@inward
+subtitle: Watch the Freikorps, spot the informers. The party is harder to strike.
+on-arrival: {!
+Q.repression -= 4;
+Q.red_guards_loyalty += 5;
+Q.unity += 2;
+Q['lean_' + Q.leading_faction] += 1;
+!}
+
+The apparatus turns its attention to the police spies inside our own districts. Two are found in Berlin, one in Halle. The right-wing leagues' meeting places are watched.
+
+@small
+subtitle: The Spartacists are relieved; the Left calls it cowardice.
+on-arrival: {!
+Q.unity += 3;
+Q.independence += 2;
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction -= 4;
+Q.militancy -= 2;
+Q.lean_luxemburgist += 1;
+!}
+
+The Zentrale decides that a party of workers does not need a general staff. The apparatus is reduced to a few couriers and a filing cabinet.

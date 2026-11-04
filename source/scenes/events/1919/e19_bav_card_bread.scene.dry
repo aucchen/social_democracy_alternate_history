@@ -1,0 +1,34 @@
+title: Bread for Munich
+subtitle: The peasants have stopped sending milk.
+view-if: crisis_bavaria = 1 and bav_bread_done = 0
+on-arrival: month_actions += 1; bav_bread_done = 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Bread for Munich
+
+Bamberg has blockaded the city, and the priests of the Bavarian countryside preach that the Reds will take the peasants' cows and their churches. Milk for children is down to a few days' supply. A city that is hungry will not fight for long.
+
+- @requisition: Send armed squads to requisition from the villages.
+- @peasants: Make a deal with the peasants' councils.
+- @hoarders: Open the hoarders' cellars and the bank vaults.
+
+@requisition
+subtitle: The Left's answer. Food this week, and enemies in every village.
+on-arrival: crisis_momentum += 4; bav_peasants -= 1; repression += 2; offensive_satisfaction += 4; lean_offensive += 1
+
+The squads come back with cheese, flour and stories of farmers waiting with shotguns. The next convoy is ambushed.
+
+@peasants
+subtitle: The Right's answer, and the Spartacists': no war on the peasants. It needs patience.
+on-arrival: crisis_momentum += 5; bav_peasants += 1; unionist_satisfaction += 4; luxemburgist_satisfaction += 3; lean_unionist += 2; lean_luxemburgist += 1
+
+The Executive promises the peasants that their land is theirs and pays for milk in Reich marks, not in its own paper. In the villages of the Dachau moor, carts start rolling to the city again.
+
+@hoarders
+subtitle: The Left Radicals' answer: let the rich go hungry first.
+on-arrival: crisis_momentum += 4; worker_support += 2; ultraleft_satisfaction += 5; lean_ultraleft += 2; stability -= 2
+
+The cellars of the grand hotels give up hams and wine, the bank vaults gold. The working-class districts eat well for a week, and the middle class decides it would rather have the Freikorps.

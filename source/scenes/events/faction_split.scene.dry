@@ -17,7 +17,14 @@ for (var d of Q.districts) {
     }
 }
 Q.split_members_lost = Q.split_members_lost.toFixed(1);
-Q[f + '_satisfaction'] = 40;
+Q[f + '_satisfaction'] = 0;
+Q[f + '_gone'] = 1;
+if (f == 'ultraleft') {
+    Q.kapd_split = 1;
+}
+if (Q.junior_faction == f) {
+    Q.junior_faction = 0;
+}
 Q.worker_support -= 5;
 Q.unity += 10;
 Q.split_flag = 0;

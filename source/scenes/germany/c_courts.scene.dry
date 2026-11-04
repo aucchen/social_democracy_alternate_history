@@ -1,0 +1,52 @@
+title: The Courts
+new-page: true
+view-if: crisis = 0 and c_courts_timer <= 0 and time >= 2
+on-arrival: c_courts_timer = 4; month_actions += 1
+frequency: 200
+is-card: true
+tags: germany
+
+= The Courts
+
+The Republic kept the Kaiser's judges. They hand down years of fortress or prison to communists for a speech, and acquit the officers who shoot prisoners "while trying to escape". [? if year >= 1922 : The statistician Emil Gumbel has counted the political murders since 1919: over three hundred by the right, almost all unpunished; a few dozen by the left, punished with long sentences and ten executions. ?]
+
+This month, a group of our comrades goes on trial.
+
+- @tribune: Turn the trial into a tribune.
+- @lawyers: Hire the best defence money can buy.
+- @amnesty: Demand an amnesty with the other workers' parties.
+- @easy_discard
+
+@tribune
+subtitle: The accused accuse their judges. Heavier sentences; a louder echo.
+on-arrival: militancy += 3; worker_support += 3; repression += 3; luxemburgist_satisfaction += 2; offensive_satisfaction += 2; lean_luxemburgist += 1
+
+Our comrades refuse to defend themselves and speak instead about the murders of January. They are sentenced to three years each. Their speeches are sold as pamphlets.
+
+@lawyers
+subtitle: Costs 1 fund. Shorter sentences. The party looks after its own.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; repression -= 4; unity += 2; red_guards_loyalty += 2
+
+[? if levi_split = 0 : Paul Levi, who defended Rosa Luxemburg before the war, recommends the lawyers. ?] Two of the accused are acquitted on a technicality. The judge does not hide his disgust.
+
+@amnesty
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] A joint campaign for the release of political prisoners. The Right's line.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.repression -= 5;
+Q.spd_relation += 3;
+if (Q.uspd_exists) {
+    Q.uspd_relation += 5;
+}
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+Socialist deputies of every party put their names to the amnesty petition. The justice ministry releases a few hundred prisoners and says it was planning to anyway.

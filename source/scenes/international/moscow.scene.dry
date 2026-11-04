@@ -1,6 +1,6 @@
 title: Word from Moscow
 new-page: true
-view-if: moscow_timer <= 0
+view-if: crisis = 0 and moscow_timer <= 0
 on-arrival: moscow_timer = 4; month_actions += 1
 frequency: 300
 is-card: true
@@ -8,7 +8,7 @@ tags: international
 
 = Word from Moscow
 
-Karl Radek, the Bolsheviks' envoy, has slipped into Berlin. Lenin's party wants a say in how the German revolution is made, and it can offer money in return.
+[? if comintern_rep : [+ comintern_rep +], ?][? if comintern_rep = 0 : An envoy of the Bolsheviks, ?] travelling on false papers, has asked to see the Zentrale. [? if comintern_member = 0 : Lenin's party wants a say in how the German revolution is made, and it can offer money in return. ?][? if comintern_member = 1 : The Executive of the Communist International has views on the German section's work, and it pays a good share of the section's bills. ?]
 
 - @funds: Ask for money.
 - @advice: Follow Moscow's advice.
@@ -16,13 +16,13 @@ Karl Radek, the Bolsheviks' envoy, has slipped into Berlin. Lenin's party wants 
 - @easy_discard
 
 @funds
-subtitle: 3 funds. Moscow's money comes with expectations.
-on-arrival: resources += 3; independence -= 10
+subtitle: 2 funds. Moscow's money comes with expectations.
+on-arrival: resources += 2; independence -= 6; luxemburgist_satisfaction -= 2
 
-Radek is generous. He is also taking notes.
+The envoy is generous. He is also taking notes.
 
 @advice
-subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs 10 Unity. ?] Draws us closer to the Bolsheviks.
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Draws us closer to the Bolsheviks. The Left approves.
 choose-if: lock_moscow_orders < 2
 unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
 on-arrival: {!
@@ -32,14 +32,15 @@ if (Q.lock_moscow_orders == 1) {
 }
 Q.independence -= 5;
 Q.world_revolution += 3;
-Q.offensive_satisfaction += 10;
+Q.offensive_satisfaction += 8;
 Q.luxemburgist_satisfaction -= 5;
+Q.lean_offensive += 1;
 !}
 
-We follow Radek's advice. The Bolsheviks have made a revolution; we have not yet.
+We follow Moscow's advice. The Bolsheviks have made a revolution; we have not yet.
 
 @distance
-subtitle: The Spartacists approve.
-on-arrival: independence += 5; luxemburgist_satisfaction += 5; offensive_satisfaction -= 5
+subtitle: The Spartacists approve. Moscow is cooler.
+on-arrival: independence += 5; luxemburgist_satisfaction += 5; offensive_satisfaction -= 5; lean_luxemburgist += 1
 
-The German revolution will be made by German workers. We thank Radek for his interest.
+The German revolution will be made by German workers. We thank our visitor for his interest.

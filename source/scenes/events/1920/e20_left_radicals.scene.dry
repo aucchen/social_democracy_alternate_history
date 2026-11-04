@@ -1,0 +1,175 @@
+title: The Left Radicals after Kapp
+subtitle: Hamburg and Bremen draw their own lessons from March.
+new-page: true
+tags: event
+view-if: year = 1920 and month = 4 and crisis = 0 and ultraleft_gone = 0 and ultraleft_crisis_1920 = 0 and ending_id = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+Q.ultraleft_crisis_1920 = 1;
+Q.e20_lead_ul = (Q.leading_faction == 'ultraleft') ? 1 : 0;
+Q.e20_lux_in = Q.luxemburgist_gone ? 0 : 1;
+!}
+
+= The Left Radicals after Kapp
+
+[? if e20_lead_ul = 0 : The Left Radicals stayed in the party after Heidelberg. After Kapp, they will not stay quietly. Their conference in Hamburg demands that the party leave the "counter-revolutionary" unions, boycott the coming Reichstag election and build factory organisations in their place. Two of their Hamburg leaders, Heinrich Laufenberg and Fritz Wolffheim, go further. They call for a "revolutionary people's war" against the Entente, alongside any officers who will fight Versailles. Their delegates have given the Zentrale until the end of the month. ?]
+
+[? if e20_lead_ul = 1 : The Left Radicals hold the Zentrale. After Kapp, they mean to finish the break with the old movement: out of the unions, no part in the Reichstag election, and a General Workers' Union of factory organisations to replace them. In Hamburg, Laufenberg and Wolffheim preach a "revolutionary people's war" against the Entente. And from Moscow comes a sharp letter: the International expects its German section to work in the unions and in parliament. ?]
+
+- @expel: Expel the Left Radicals now.
+- @expel_nb: Expel Laufenberg and Wolffheim, and keep the rest.
+- @concede: Concede the election boycott to keep the peace.
+- @congress: Let a party congress decide.
+- @aau: Leave the unions: found the General Workers' Union.
+- @people_war: Take up the call for a people's war against Versailles.
+- @moscow_turn: Bow to Moscow and return to the unions and parliament.
+
+@expel
+subtitle: A second Heidelberg. The party will be smaller and of one mind.
+view-if: e20_lead_ul = 0
+on-arrival: {!
+Q.e20_split_lost = 0;
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_faction'] == 'ultraleft') {
+        var lost = Q['district_' + d + '_members'] * 0.6;
+        Q.e20_split_lost += lost;
+        Q['district_' + d + '_members'] -= lost;
+        Q['district_' + d + '_faction'] = Q.leading_faction;
+        Q['district_' + d + '_loyalty'] = 50;
+    }
+}
+Q.ultraleft_gone = 1;
+Q.ultraleft_satisfaction = 0;
+Q.kapd_split = 1;
+Q.kapd_exists = 1;
+Q.kapd_members = Math.round(Q.e20_split_lost + 8);
+Q.kapd_relation = 10;
+if (Q.junior_faction == 'ultraleft') {
+    Q.junior_faction = 0;
+}
+Q.unity += 12;
+Q.worker_support -= 2;
+Q.e20_split_lost = Q.e20_split_lost.toFixed(1);
+Q.lean_luxemburgist += 2;
+Q.lean_unionist += 1;
+!}
+
+The Zentrale expels the Hamburg and Bremen leaders, and their districts walk out with them, about [+ e20_split_lost +] thousand members. Within days, they found the Communist Workers' Party of Germany, the KAPD.
+
+@expel_nb
+subtitle: Cuts out the national bolsheviks, and leaves the quarrel unsettled.
+view-if: e20_lead_ul = 0
+on-arrival: {!
+Q.ultraleft_satisfaction -= 10;
+Q.unity += 3;
+Q.district_hamburg_members -= 0.5;
+Q.luxemburgist_satisfaction += 4;
+Q.lean_luxemburgist += 1;
+!}
+
+Laufenberg and Wolffheim are expelled for "national bolshevism". The rest of the Left Radicals call it a manoeuvre, and stay.
+
+@concede
+subtitle: Pleases the Left Radicals greatly. The Spartacists and the Right are appalled.
+view-if: e20_lead_ul = 0
+on-arrival: {!
+Q.election_boycott = 1;
+Q.ultraleft_satisfaction += 20;
+Q.luxemburgist_satisfaction -= 15;
+Q.unionist_satisfaction -= 15;
+Q.lean_ultraleft += 3;
+!}
+
+The party will not stand in the Reichstag election. The Left Radicals celebrate. In Saxony, Brandler's members ask why they should vote for the USPD instead.
+
+@congress
+subtitle: Whoever has the districts wins. It is a gamble.
+view-if: e20_lead_ul = 0
+on-arrival: {!
+var power = Q.ultraleft_strength + Q.history_ultraleft * 2 - Q.history_luxemburgist - Q.history_unionist;
+Q.e20_ul_won = power >= 35 ? 1 : 0;
+if (Q.e20_ul_won) {
+    Q.junior_faction = Q.leading_faction;
+    Q.leading_faction = 'ultraleft';
+    Q.ultraleft_satisfaction += 25;
+    Q.election_boycott = 1;
+    Q.unity -= 8;
+} else {
+    Q.e20_split_lost = 0;
+    for (var d of Q.districts) {
+        if (Q['district_' + d + '_faction'] == 'ultraleft') {
+            var lost = Q['district_' + d + '_members'] * 0.5;
+            Q.e20_split_lost += lost;
+            Q['district_' + d + '_members'] -= lost;
+            Q['district_' + d + '_faction'] = Q.leading_faction;
+            Q['district_' + d + '_loyalty'] = 55;
+        }
+    }
+    Q.ultraleft_gone = 1;
+    Q.ultraleft_satisfaction = 0;
+    Q.kapd_split = 1;
+    Q.kapd_exists = 1;
+    Q.kapd_members = Math.round(Q.e20_split_lost + 6);
+    Q.kapd_relation = 15;
+    if (Q.junior_faction == 'ultraleft') {
+        Q.junior_faction = 0;
+    }
+    Q.unity += 10;
+}
+Q.lean_luxemburgist += 1;
+!}
+
+[? if e20_ul_won = 1 : The congress meets in Berlin in the middle of April. The districts that fought in March vote with the Left Radicals. They take the Zentrale, and the party will boycott the election. ?][? if e20_ul_won = 0 : The congress votes for the Zentrale's line. The Left Radical delegates walk out singing the *Internationale* and found the Communist Workers' Party, the KAPD. Their districts go with them, but fewer members than they hoped. ?]
+
+@aau
+subtitle: The Left Radical line, in full. The masses stay in the unions.
+view-if: e20_lead_ul = 1
+on-arrival: {!
+Q.militancy += 5;
+Q.worker_support -= 4;
+Q.district_hamburg_loyalty += 6;
+Q.district_bremen_loyalty += 6;
+Q.ultraleft_satisfaction += 10;
+Q.unionist_satisfaction -= 15;
+Q.independence += 5;
+Q.lean_ultraleft += 3;
+!}
+
+The General Workers' Union takes in tens of thousands of members, mostly in the shipyards and the pits. Eight million workers stay in the old unions.
+
+@people_war
+subtitle: Laufenberg and Wolffheim's line. Moscow will call it treason to internationalism.
+view-if: e20_lead_ul = 1
+on-arrival: {!
+Q.independence += 8;
+Q.militancy += 4;
+Q.world_revolution -= 3;
+Q.ultraleft_satisfaction += 4;
+Q.luxemburgist_satisfaction -= 12;
+Q.offensive_satisfaction -= 4;
+Q.lean_ultraleft += 2;
+!}
+
+Our Hamburg paper calls for a red army of workers and patriotic officers against the Entente. A few officers reply. Radek writes from Moscow that the German communists have lost their minds.
+
+@moscow_turn
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Hands the Zentrale back to the [? if e20_lux_in = 1 : Spartacists ?][? if e20_lux_in = 0 : Left ?]. The Left Radicals will not forgive it.
+view-if: e20_lead_ul = 1
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.leading_faction = Q.e20_lux_in ? 'luxemburgist' : 'offensive';
+Q.junior_faction = 'ultraleft';
+Q.election_boycott = 0;
+Q.independence -= 10;
+Q.ultraleft_satisfaction -= 20;
+Q[Q.leading_faction + '_satisfaction'] += 15;
+Q.lean_luxemburgist += 2;
+!}
+
+The Central Committee accepts Moscow's letter by a narrow vote, and the Left Radical leaders resign from the Zentrale. The party will stand in the election after all.

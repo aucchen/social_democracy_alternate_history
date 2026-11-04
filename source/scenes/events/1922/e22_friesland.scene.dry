@@ -1,0 +1,58 @@
+title: The Friesland Affair
+subtitle: The general secretary turns on Moscow.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 1
+max-visits: 1
+
+= The Friesland Affair
+
+Ernst Reuter, who signs himself Friesland, was the party's general secretary and one of the loudest voices for the March offensive. Now he has changed his mind about everything. In a pamphlet and in the Central Committee he says that the party is run by envoys from Moscow, that the Zentrale hides its debts and its subsidies, and that German workers will never follow a party that cannot decide for itself.
+
+[? if levi_split = 1 : He says, in other words, what Paul Levi said a year ago, and Moscow is demanding the same answer: expulsion. ?]
+[? if levi_in_party = 1 : Levi, who is still in the party, quietly agrees with most of it, which makes Moscow's envoy furious. ?]
+
+Half the Central Committee wants him gone by the end of the month. The other half has read the pamphlet and does not entirely disagree.
+
+- @expel: Expel him for breaking party discipline.
+- @debate: Keep him, and open a debate on the party's independence.
+- @demote: Take his post, but leave him his membership.
+
+@expel
+subtitle: Moscow and the Left are satisfied. Some members follow him out.
+on-arrival: {!
+Q.e22_friesland = 1;
+Q.independence -= 6;
+Q.unity += 3;
+Q.offensive_satisfaction += 5;
+Q.luxemburgist_satisfaction -= 5;
+Q.lean_offensive += 1;
+Q.district_berlin_members *= 0.97;
+!}
+
+The Central Committee votes him out. Reuter takes a few hundred Berlin members with him[? if kag_exists = 1 : , first to Levi's Working Group ?], and the right-wing press prints his pamphlet in full.
+
+@debate
+subtitle: The Spartacist answer. The party grows more independent, and Moscow notices.
+on-arrival: {!
+Q.e22_friesland = 2;
+Q.independence += 8;
+Q.lean_luxemburgist += 2;
+Q.luxemburgist_satisfaction += 6;
+Q.offensive_satisfaction -= 5;
+Q.unity -= 3;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+!}
+
+For two months *Die Rote Fahne* prints letters for and against. Reuter stays. Radek writes home that the German party is "infected with Levi-ism", and the next subsidy arrives late and short.
+
+@demote
+subtitle: A compromise. Nobody is happy, and the quarrel goes quiet.
+on-arrival: {!
+Q.e22_friesland = 3;
+Q.unity += 1;
+Q.unionist_satisfaction += 3;
+Q.lean_unionist += 1;
+!}
+
+Reuter loses his post and keeps his card. Within the year he leaves on his own, and few people notice when he does.

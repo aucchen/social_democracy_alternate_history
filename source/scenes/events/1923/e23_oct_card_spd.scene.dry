@@ -1,0 +1,59 @@
+title: The Social Democratic Workers
+subtitle: Millions of SPD workers are watching.
+view-if: crisis_october = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Social Democratic Workers
+
+[? if e23_october_path = 3 : The SPD's ministers have been deposed by Seeckt, and its executive still hesitates to call on its members to fight. ?][? if e23_october_path != 3 : The SPD sits in the government that is sending the army against the workers. ?] Its members are in the factories beside ours, as hungry as ours and nearly as angry. If they come with us, the revolution has a majority. If they stay at their machines, it does not.
+
+- @appeal: Appeal to them as comrades.
+- @left_leaders: Win over the SPD's left-wing leaders in Saxony and Thuringia.
+- @denounce: Denounce their leaders as Seeckt's accomplices.
+
+@appeal
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Patient and honest. Some will come.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 5;
+Q.crisis_momentum += 5;
+Q.lean_unionist += 1;
+!}
+
+"Your government sends tanks to Dresden. Ours sends bread." The leaflet is read in every works.
+
+@left_leaders
+subtitle: Costs 1 fund. If Zeigner's people come over, Saxony comes over.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+var ok = Q.spd_relation >= 30;
+Q.e23_spd_left_ok = ok ? 1 : 0;
+Q.spd_relation += ok ? 6 : 1;
+Q.crisis_momentum += ok ? 8 : 2;
+Q.lean_unionist += 1;
+!}
+
+[? if e23_spd_left_ok = 1 : In Leipzig and Gera, district leaders of the SPD call their members out. Their executive expels them by telegram. They do not care. ?][? if e23_spd_left_ok = 0 : The SPD's left-wing leaders are sympathetic, and unwilling. They will protest; they will not fight. ?]
+
+@denounce
+subtitle: The Left's instinct. Our own people cheer; the SPD's close ranks.
+on-arrival: {!
+Q.spd_relation -= 8;
+Q.militancy += 4;
+Q.crisis_momentum += 1;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+*Die Rote Fahne* prints the names of the SPD ministers under a drawing of a gallows.

@@ -1,0 +1,88 @@
+title: The Bielefeld Agreement
+subtitle: The government offers the Ruhr terms.
+new-page: true
+tags: event
+view-if: crisis_ruhr = 1 and crisis_time = 3
+max-visits: 1
+priority: 5
+
+= The Bielefeld Agreement
+
+[? if kapp_outcome != 2 : On 24 March, at Bielefeld, the government's commissioner Carl Severing meets delegates of the Ruhr's parties, unions and councils. He offers an agreement: the Reichswehr stays out of the Ruhr, the putschists will be punished, the workers' local defence units may remain, and the Red Army hands in its weapons. ?][? if kapp_outcome = 2 : General von Watter sends an officer under a white flag to Hagen. His terms are simple: an amnesty for the rank and file, and the surrender of every rifle within a week. ?]
+
+The USPD's Hagen council is ready to sign. The Essen council, where our comrades are strong, says the generals have broken every promise they ever made. At the front, the men want to know whether they are going home.
+
+[? if kapp_outcome = 3 : The workers' government in Berlin has promised to stand by the agreement, whatever General von Watter thinks. ?]
+
+- @accept: Sign, and hand in the guns in good order.
+- @keep_arms: Sign, but hide the arms and keep the councils alive.
+- @reject: Reject the terms. The Red Army fights on.
+- @soviet: Proclaim a Ruhr republic of councils.
+
+@accept
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. Saves lives, if the other side keeps its word.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any agreement with the government.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.bielefeld = 1;
+Q.crisis_momentum -= 10;
+Q.red_guards_strength -= 15;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 10;
+Q.spd_relation += 4;
+Q.lean_unionist += 2;
+!}
+
+Our delegates sign with the Hagen council. Columns of armed miners march to the collection points and stack their rifles. Others, in Essen and on the Lippe, refuse.
+
+@keep_arms
+subtitle: The Spartacist answer: take the agreement, and trust only our own strength.
+on-arrival: {!
+Q.bielefeld = 3;
+Q.crisis_momentum += 3;
+Q.red_guards_arms += 5;
+Q.red_guards_strength -= 8;
+Q.luxemburgist_satisfaction += 8;
+Q.lean_luxemburgist += 2;
+!}
+
+We sign. Then the machine guns go down the mine shafts and into the cellars of the co-operatives, and the councils keep meeting under new names.
+
+@reject
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Everything on the Red Army.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.bielefeld = 2;
+Q.crisis_momentum += 10;
+Q.militancy += 6;
+Q.repression += 6;
+Q.offensive_satisfaction += 10;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 2;
+!}
+
+The Essen council tears up the agreement. The Red Army stays on the Lippe, and its commanders tell the men that the generals are afraid.
+
+@soviet
+subtitle: The Left Radical answer. Inspires the Ruhr's most radical workers, and gives the generals their pretext.
+view-if: ultraleft_gone = 0
+on-arrival: {!
+Q.bielefeld = 4;
+Q.crisis_momentum += 12;
+Q.militancy += 10;
+Q.repression += 12;
+Q.ultraleft_satisfaction += 12;
+Q.unionist_satisfaction -= 10;
+Q.lean_ultraleft += 3;
+!}
+
+In Mülheim and Duisburg, the councils declare the old authorities deposed and the Ruhr a republic of workers' councils. The Hagen council disowns them.

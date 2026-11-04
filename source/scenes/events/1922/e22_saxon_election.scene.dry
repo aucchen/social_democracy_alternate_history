@@ -1,0 +1,77 @@
+title: A Workers' Majority in Saxony
+subtitle: The Saxon Landtag elections give the two workers' parties a majority.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 11
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.district_saxony_members *= 1.04;
+!}
+
+= A Workers' Majority in Saxony
+
+On 5 November Saxony elects a new Landtag. The SPD wins forty seats, the party wins ten, and together the two workers' parties hold fifty of the ninety-six. In Saxony, at least, the bourgeois parties can be outvoted.
+
+The Saxon SPD is the most left-wing in Germany. Its members sing the *Internationale* at their meetings and many of them would rather govern with us than with the Democrats. Its leaders want our votes for a Social Democratic government. They ask what our price is.
+
+[? if luxemburg_alive = 1 : Rosa Luxemburg writes that a workers' majority in one Land is a school, not a revolution, and that the party must not be afraid to sit its exams. ?]
+
+- @tolerate: Support an SPD government, on conditions: control committees, a workers' militia, a purge of the monarchist officials.
+- @ministers: Demand seats in the government: a real workers' government.
+- @refuse: No support for Social Democratic ministers.
+
+@tolerate
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's road. Saxony becomes our showcase, and our responsibility.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids supporting a Social Democratic government.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_saxon_toleration = 1;
+Q.spd_relation += 6;
+Q.worker_support += 3;
+Q.district_saxony_loyalty += 6;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction -= 5;
+Q.lean_unionist += 2;
+!}
+
+The SPD accepts most of our conditions on paper. A Social Democratic minority government takes office in Dresden with our votes, and the control committees get a legal footing.
+
+@ministers
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Only possible if the Saxon SPD trusts us. Bold, and Berlin will be alarmed.
+choose-if: lock_united_front < 2 and spd_relation >= 35
+unavailable-subtitle: The SPD will not take communist ministers, or the line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_saxon_toleration = 3;
+Q.saxony_government = 1;
+Q.spd_relation += 4;
+Q.worker_support += 4;
+Q.repression += 4;
+Q.district_saxony_loyalty += 8;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction -= 8;
+Q.lean_unionist += 3;
+!}
+
+After a month of talks, two communists take seats in the Saxon cabinet. It is the first time our party has held ministries anywhere in Germany. The Reichswehr commander in Dresden asks Berlin for instructions.
+
+@refuse
+subtitle: The Left's answer. The SPD governs with the Democrats, and blames us.
+on-arrival: {!
+Q.e22_saxon_toleration = 2;
+Q.spd_relation -= 6;
+Q.district_saxony_loyalty -= 5;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 2;
+!}
+
+Our deputies vote against every candidate for Minister-President. The Saxon SPD forms a minority government with the Democrats' tolerance, and its members ask our members what they are for.

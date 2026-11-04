@@ -1,0 +1,36 @@
+title: Kronstadt and the NEP
+subtitle: News from Russia that the party must explain.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 4 and crisis = 0
+max-visits: 1
+priority: 5
+on-arrival: soviet_russia_status = 'Kronstadt crushed; the New Economic Policy begins'
+
+= Kronstadt and the NEP
+
+While Central Germany was fighting, the sailors of Kronstadt, the heroes of 1917, rose against the Bolsheviks under the slogan of soviets without communists. The Red Army crossed the ice and crushed them on 18 March. In the same days the Tenth Congress of the Russian party abandoned the requisitioning of grain, allowed the peasants to trade, and banned factions inside the party.
+
+The SPD press writes that Lenin has restored capitalism and shot the revolution's own sailors. Our members want to know what to say at work.
+
+- @defend: Defend the suppression of Kronstadt without reservation.
+- @explain: Explain the NEP honestly: a retreat, not a defeat.
+- @criticise: Say openly what troubles us.
+
+@defend
+subtitle: The Left's line, and Moscow's. Loyalty first.
+on-arrival: independence -= 4; offensive_satisfaction += 4; luxemburgist_satisfaction -= 3; lean_offensive += 1
+
+The Rote Fahne calls the Kronstadt rebels tools of the White émigrés and the French general staff. Some of our readers believe it.
+
+@explain
+subtitle: The Right's way. Workers respect an honest account.
+on-arrival: worker_support += 2; unionist_satisfaction += 4; lean_unionist += 1
+
+Thalheimer writes that the Russian workers have made a tactical retreat in a ruined country, as an army retreats to save itself. It is the most widely read article the paper prints that spring.
+
+@criticise
+subtitle: The Spartacist line, in Rosa Luxemburg's spirit. Moscow will not like it.
+on-arrival: independence += 6; luxemburgist_satisfaction += 6; offensive_satisfaction -= 6; lean_luxemburgist += 2
+
+The Rote Fahne defends the Russian revolution, and says that freedom only for the members of one party is no freedom at all. The quotation is Luxemburg's. Radek asks who authorised it.

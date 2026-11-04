@@ -1,0 +1,68 @@
+title: The Ruhr Is Not Alone
+subtitle: The rest of Germany has gone back to work.
+view-if: crisis_ruhr = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Ruhr Is Not Alone
+
+Everywhere else the strike is over. If the Ruhr fights alone, it will be beaten alone. The Freikorps are coming by train from Berlin and Bavaria.
+
+- @rail: Ask the railwaymen to stop the troop trains.
+- @strike: Call Central Germany out again.
+- @negotiate: Press the Ruhr leaders to negotiate while they are strong.
+
+@rail
+subtitle: Some trains will stop. The railwaymen will pay for it.
+on-arrival: {!
+Q.crisis_momentum += 6;
+Q.worker_support += 2;
+Q.repression += 3;
+Q.luxemburgist_satisfaction += 3;
+Q.lean_luxemburgist += 1;
+!}
+
+At Hamm and Soest, the signalmen walk out. The troop trains wait for a day in the sidings, and some of the volunteers go home.
+
+@strike
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] A second front in Halle and Saxony, if the workers follow.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids it.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum += 5;
+Q.militancy += 6;
+Q.repression += 5;
+Q.district_halle_loyalty += 5;
+Q.worker_support -= 1;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+The Leuna works and the Mansfeld pits stop again. Elsewhere in Saxony the workers are tired and stay at work.
+
+@negotiate
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: bargain now, before the guns decide.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids bargaining with the government.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum -= 3;
+Q.e20_negotiated = 1;
+Q.spd_relation += 4;
+Q.uspd_relation += 4;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction -= 6;
+Q.lean_unionist += 2;
+!}
+
+Our delegates in Hagen argue for a settlement: the Red Army can win terms now, and will win none once Watter attacks. The Essen council calls them defeatists.

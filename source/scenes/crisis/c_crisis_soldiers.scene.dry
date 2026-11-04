@@ -1,0 +1,34 @@
+title: Win Over the Soldiers
+subtitle: The men with the rifles decide most things in the end.
+view-if: crisis = 1
+on-arrival: month_actions += 1
+frequency: 60
+is-card: true
+new-page: true
+tags: crisis
+
+= Win Over the Soldiers
+
+The soldiers and the police are workers' sons too, most of them. Their officers keep them in barracks and feed them stories about Bolshevik murderers. If even a few companies refuse to march, the whole balance of the week changes.
+
+- @leaflets: Smuggle leaflets into the barracks.
+- @fraternise: Send the women and the young to the checkpoints.
+- @deserters: Offer shelter to deserters who bring their weapons.
+
+@leaflets
+subtitle: Some soldiers waver. Those caught with our leaflets are court-martialled.
+on-arrival: army_loyalty -= 3; police_loyalty -= 2; crisis_momentum += 4; repression += 3
+
+The leaflets are tucked into bread deliveries and laundry bundles. In one barracks, the men refuse to clean their rifles.
+
+@fraternise
+subtitle: Hard to shoot at people who brought you coffee. A little goodwill on both sides.
+on-arrival: army_loyalty -= 2; crisis_momentum += 3; worker_support += 1
+
+Women from the workers' districts bring coffee and cigarettes to the boys at the roadblocks, and talk to them about their mothers.
+
+@deserters
+subtitle: A few more rifles, and a few more trained men. The officers will want revenge.
+on-arrival: red_guards_arms += 3; red_guards_strength += 0.3; army_loyalty -= 1; crisis_momentum += 2; repression += 2; lean_offensive += 1
+
+A handful of soldiers walk out of the barracks at night with their rifles and their ammunition belts. Our people hide them in allotment huts.

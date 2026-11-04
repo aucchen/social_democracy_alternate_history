@@ -1,0 +1,51 @@
+title: Rifles and Ammunition
+subtitle: The fighting groups are short of everything.
+view-if: crisis_march = 1
+on-arrival: month_actions += 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Rifles and Ammunition
+
+The fighting groups in the Mansfeld villages have shotguns, a few army rifles from 1918 and almost no ammunition. The miners have dynamite. The police have machine guns and armoured cars.
+
+- @depots: Raid the police and Reichswehr depots.
+- @miners: Arm the Mansfeld miners with what we have.
+- @bury: Bury the rifles for another day.
+
+@depots
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's line. Arms for the fight, and a reason for the state to hit back harder.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed action.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.red_guards_arms += 10;
+Q.crisis_momentum += 5;
+Q.repression += 6;
+Q.offensive_satisfaction += 3;
+Q.lean_offensive += 2;
+!}
+
+A night raid on a police barracks near Eisleben brings in two hundred rifles and a machine gun. Two of our men are killed.
+
+@miners
+subtitle: More men under arms. Better if we already have arms to give them.
+on-arrival: {!
+Q.crisis_momentum += (Q.red_guards_arms >= 20) ? 6 : 2;
+Q.red_guards_strength += 3;
+Q.repression += 3;
+Q.lean_offensive += 1;
+!}
+
+The miners' fighting groups double in size in a day. Half of the new men have nothing but a pick handle.
+
+@bury
+subtitle: The Right's caution: keep the arms for a fight we can win.
+on-arrival: e21_arms_saved = 1; crisis_momentum -= 3; red_guards_arms += 3; unionist_satisfaction += 3; luxemburgist_satisfaction += 2; lean_unionist += 1
+
+The rifles are greased, wrapped in oilcloth and buried in the allotments. The men who bury them are told to forget where.

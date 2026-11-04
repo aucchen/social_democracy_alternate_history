@@ -1,0 +1,60 @@
+title: The Generals' Secret
+new-page: true
+view-if: crisis = 0 and c_reichswehr_timer <= 0 and comintern_member = 1 and c_reichswehr_exposed = 0 and (year >= 1922 or (year = 1921 and month >= 9))
+on-arrival: c_reichswehr_timer = 6; month_actions += 1
+frequency: 150
+is-card: true
+tags: international
+
+= The Generals' Secret
+
+A comrade who works as a clerk at the Junkers works has brought us copies of letters. General von Seeckt's officers are negotiating to build aircraft at Fili, outside Moscow, and a poison gas plant on the Volga, and they are paying for it through front companies from a secret fund. [? if time >= 40 : Since Rapallo, the two governments are friends in public too. ?] [? if time < 40 : Moscow and Berlin are talking quietly about a treaty. ?]
+
+The same Reichswehr that shoots German workers is arming itself with the help of the workers' state. Moscow has asked us to say nothing.
+
+- @expose: Expose the secret cooperation.
+- @silence: Keep silent, as Moscow asks.
+- @rapallo: Welcome the friendship as a breach in the blockade.
+- @easy_discard
+
+@expose
+subtitle: A scandal at home and fury in Moscow. Our independence grows; Moscow's money may not.
+on-arrival: {!
+Q.c_reichswehr_exposed = 1;
+Q.independence += 8;
+Q.worker_support += 2;
+Q.army_loyalty -= 2;
+Q.stability -= 2;
+if (Q.moscow_subsidy > 0) {
+    Q.moscow_subsidy -= 1;
+}
+Q.offensive_satisfaction -= 5;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+!}
+
+Die Rote Fahne prints the letters. The Reichstag erupts, the war minister denies everything, and the Comintern's envoy arrives at the Zentrale white with anger.
+
+@silence
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow is grateful. Some comrades cannot sleep.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 5;
+Q.resources += 1;
+Q.luxemburgist_satisfaction -= 3;
+Q.offensive_satisfaction += 2;
+!}
+
+The letters go into a safe at the Zentrale. The workers' state needs every weapon it can get, Moscow says, and the Reichswehr's guns will not always point where its generals want.
+
+@rapallo
+subtitle: Peace and trade with Soviet Russia. Popular with workers; the Right approves.
+view-if: time >= 40
+on-arrival: world_revolution += 2; worker_support += 2; spd_relation += 1; unionist_satisfaction += 3; lean_unionist += 1
+
+We say nothing of the generals and much of the treaty: a defeated Germany and a blockaded Russia, refusing to be isolated.

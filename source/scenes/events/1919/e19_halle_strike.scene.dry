@@ -1,0 +1,98 @@
+title: The General Strike in Central Germany
+subtitle: Halle, Merseburg and the Leuna works stop.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 3 and crisis = 0
+max-visits: 1
+on-arrival: {!
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+// the provisional Reichswehr law of 6 March 1919
+Q.army_name = 'Reichswehr';
+Q.army_strength = 380;
+Q.freikorps_strength += 50;
+!}
+
+= The General Strike in Central Germany
+
+Since 24 February the miners and chemical workers of Halle and Merseburg have been on strike, and with them the railways, the trams and the power stations. Their demand is the one the Assembly ignored: councils written into the constitution, and the mines socialised. The strike committee is led by the Independents of Halle, Wilhelm Koenen above all. Weimar, and the Assembly, are forty miles away.
+
+On 1 March General Maercker's volunteers marched into Halle. The crowds disarmed some of them, beat an officer to death and threw his body into the Saale. Maercker has declared a state of siege. In Weimar, the Assembly has passed a law turning what is left of the old army into a provisional **Reichswehr**, under Noske.
+
+- @arms: Turn the strike into a rising.
+- @committee: Join the Independents in the strike committee.
+- @councils: Push the councils to take over the plants.
+- @recruit: Hold out, and win the strikers for the party.
+
+@arms
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer. Maercker has machine guns on the Market Square.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.halle_line = 1;
+Q.militancy += 10;
+Q.repression += 10;
+Q.red_guards_arms += 4;
+Q.district_halle_members += 0.8;
+Q.district_halle_loyalty += 4;
+Q.offensive_satisfaction += 8;
+Q.lean_offensive += 2;
+!}
+
+There is shooting in the streets of Halle for three days. The rising is put down, and the strike ends with it, but the Leuna workers do not forget who stood with them.
+
+@committee
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: the united front of the strikers. The Independents will lead it.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids sharing a committee with social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.halle_line = 2;
+Q.worker_support += 5;
+Q.uspd_relation += 10;
+Q.district_halle_members += 1.0;
+Q.unionist_satisfaction += 8;
+Q.ultraleft_satisfaction -= 5;
+Q.lean_unionist += 2;
+!}
+
+Our delegates sit with Koenen's men. On 8 March the strike ends with a promise from Weimar of works councils "anchored in the constitution". It is less than the strikers wanted. They know we did not desert them.
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Left Radicals' answer: the councils are the revolution.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council action.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.halle_line = 3;
+Q.militancy += 6;
+Q.repression += 5;
+Q.district_halle_members += 0.6;
+Q.ultraleft_satisfaction += 8;
+Q.lean_ultraleft += 2;
+!}
+
+Councils take the offices in the Mansfeld mines and at Leuna. Maercker's men take them back. The idea outlives the occupations.
+
+@recruit
+subtitle: The Spartacist way. Patient work in a district that already trusts us.
+on-arrival: halle_line = 4; worker_support += 3; district_halle_members += 1.4; district_halle_loyalty += 8; luxemburgist_satisfaction += 5; lean_luxemburgist += 2
+
+Our speakers stay with the strikers to the end and explain why it was lost. Halle-Merseburg will be one of the strongest districts the party has.

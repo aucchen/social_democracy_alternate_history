@@ -1,0 +1,94 @@
+title: Nuremberg
+subtitle: The Independents go home to the SPD.
+new-page: true
+tags: event
+view-if: year = 1922 and month = 9
+max-visits: 1
+on-arrival: {!
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction];
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+Q.e22_had_uspd = Q.uspd_exists ? 1 : 0;
+if (Q.uspd_exists) {
+    Q.spd_seats = Math.min(Q.spd_seats + Q.uspd_seats, Q.uspd_split ? 171 : 999);
+    Q.uspd_seats = 0;
+    Q.uspd_exists = 0;
+    Q.uspd_in_government = 0;
+}
+Q.e22_unity_offer_possible = (Q.lead_code == 1 && Q.spd_relation >= 30) || Q.levi_in_party == 1 ? 1 : 0;
+!}
+
+= Nuremberg
+
+[? if e22_had_uspd = 1 : On 24 September, in Nuremberg, what is left of the Independent Social Democratic Party votes to reunite with the SPD. Six years after the split over the war credits, the old party is whole again. Georg Ledebour and a handful of others refuse and keep the old name alive. ?][? if e22_had_uspd = 1 and uspd_split = 1 :  Missing are the hundreds of thousands who came over to us after Halle. ?]
+[? if e22_had_uspd = 0 : In Nuremberg the SPD holds a congress of unity with the last social democrats who stood apart from it. The old party is whole again, apart from us. ?]
+
+The reunited SPD is the biggest party in the Reichstag again. Its left wing, the old Independents of Crispien and Dittmann, talks of a "proletarian front" and dislikes the coalition with the Centre. Some of its members are looking for something else.
+
+[? if e22_unity_offer_possible = 1 : A few voices on both sides go further. Why should there be two workers' parties at all, if the communists are prepared to work inside a democratic republic? Some in our own Zentrale are asking the same question. ?]
+
+- @court: Appeal to the Independents' left wing to join us instead.
+- @offer: Offer the reunited SPD a united front against the employers.
+- @denounce: Denounce the reunion as the final betrayal.
+- @unity: Propose one united workers' party.
+
+@court
+subtitle: Recruits a few thousand, mostly in Saxony and Thuringia.
+on-arrival: {!
+Q.e22_reunification = 1;
+Q.district_saxony_members += 2;
+Q.district_thuringia_members += 1.5;
+Q.district_berlin_members += 1;
+Q.spd_relation -= 3;
+Q.worker_support += 1;
+!}
+
+Ledebour's group will not come, but in Leipzig, Gera and Suhl whole branches of the old USPD cross over to us rather than go back to the party of Noske.
+
+@offer
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's line. Relations improve; the SPD leaders do not answer.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any offer to the SPD.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e22_reunification = 2;
+Q.spd_relation += 7;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 5;
+Q.lean_unionist += 2;
+!}
+
+Our open letter to the Nuremberg congress proposes a common fight for wages, for the eight-hour day and against the monarchist leagues. The executive files it. Many local branches do not.
+
+@denounce
+subtitle: The Left's answer. The radicals cheer; the SPD's left wing is offended.
+on-arrival: {!
+Q.e22_reunification = 3;
+Q.spd_relation -= 8;
+Q.offensive_satisfaction += 5;
+Q.unionist_satisfaction -= 4;
+Q.lean_offensive += 1;
+Q.militancy += 2;
+!}
+
+*Die Rote Fahne* greets the reunion with a cartoon of Noske welcoming Crispien home with a rope.
+
+@unity
+subtitle: Ends the communist party as a separate party. Only possible if the SPD's left wing is willing.
+view-if: e22_unity_offer_possible = 1
+choose-if: spd_relation >= 40 and lock_united_front = 0
+unavailable-subtitle: The social democrats will not have us, or the party would never accept it.
+on-arrival: {!
+Q.e22_reunification = 4;
+Q.ending_id = 5;
+!}
+
+The Zentrale proposes what nobody has dared to say since 1917. After weeks of talks, and against Moscow's fury, a congress of unity meets in Berlin. The party of Luxemburg and Liebknecht votes, by a narrow majority, to become the left wing of one German workers' party.
+
+- @end: See how it ends.
+
+@end
+go-to: game_over

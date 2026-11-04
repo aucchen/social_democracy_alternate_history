@@ -1,0 +1,48 @@
+title: Open the Arms Caches
+subtitle: Every district asks the same question: do we dig up the rifles?
+view-if: crisis = 1 and red_guards_arms >= 5
+on-arrival: month_actions += 1
+frequency: 60
+is-card: true
+new-page: true
+tags: crisis
+
+= Open the Arms Caches
+
+The weapons are buried under allotments and walled up in cellars. Once they are in workers' hands they will not easily go back, and the other side will say the communists started it.
+
+- @distribute: Distribute the arms to the workers.
+- @guard: Arm only the guards of the party's buildings.
+- @keep: Keep the caches closed.
+
+@distribute
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] Armed workers in the streets. Our position improves; so does the case for repression. The Left's line.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids an armed rising.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.red_guards_strength += 1;
+Q.red_guards_loyalty -= 3;
+Q.crisis_momentum += 6;
+Q.militancy += 4;
+Q.repression += 5;
+Q.offensive_satisfaction += 5;
+Q.lean_offensive += 2;
+!}
+
+Rifles are handed out from the backs of brewery carts. By evening, the workers' districts are patrolled by men in caps with red armbands.
+
+@guard
+subtitle: A few armed men at the party's doors. The Zentrale keeps control.
+on-arrival: red_guards_loyalty += 4; crisis_momentum += 2; repression += 1
+
+The party's offices and printing works are guarded day and night by comrades the Zentrale trusts.
+
+@keep
+subtitle: No pretext for the other side. The Left is disgusted. The Spartacists' line.
+on-arrival: militancy -= 3; repression -= 2; crisis_momentum -= 2; luxemburgist_satisfaction += 3; offensive_satisfaction -= 4; lean_luxemburgist += 1
+
+The Zentrale orders every district to leave the caches where they are. Some districts obey.

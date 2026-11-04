@@ -1,0 +1,59 @@
+title: The Arms Caches
+new-page: true
+view-if: crisis = 0 and c_arms_timer <= 0 and time >= 3
+on-arrival: c_arms_timer = 5; month_actions += 1
+frequency: 150
+is-card: true
+tags: movement
+
+= The Arms Caches
+
+Since November, the country has been full of weapons: rifles brought home from the front, machine guns sold off by demobilised units, crates that fell off army lorries. The party's districts keep their own caches, and the police are looking for them. [? if time >= 20 : Under the disarmament law, the state now pays a bounty for every rifle handed in. ?]
+
+- @buy: Buy weapons on the black market.
+- @quartermaster: Buy from a Reichswehr quartermaster.
+- @hand_in: Hand in the old caches.
+- @easy_discard
+
+@buy
+subtitle: Costs 2 funds. Our militias are better armed. The Left approves.
+choose-if: resources >= 2
+unavailable-subtitle: We need 2 funds.
+on-arrival: resources -= 2; red_guards_arms += 10; repression += 2; offensive_satisfaction += 3; lean_offensive += 1
+
+The dealers are former officers. They sell to anyone who pays, and they remember the faces.
+
+@quartermaster
+subtitle: Costs 1 fund. Cheaper, if he can be trusted.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.c_arms_ok = Math.random() < 0.6 ? 1 : 0;
+if (Q.c_arms_ok) {
+    Q.red_guards_arms += 8;
+} else {
+    Q.repression += 8;
+    Q.red_guards_strength -= 0.3;
+}
+Q.lean_offensive += 1;
+!}
+
+[? if c_arms_ok = 1 : The quartermaster is a sergeant with debts and a brother in the USPD. The crates arrive on time. ?][? if c_arms_ok = 0 : The quartermaster was working for the police. Three comrades are arrested at the handover, and the money is gone. ?]
+
+@hand_in
+subtitle: [? if time >= 20 : 1 fund from the bounty. ?] Fewer weapons and less police attention. The Left is outraged.
+choose-if: red_guards_arms >= 5
+unavailable-subtitle: We have almost nothing to hand in.
+on-arrival: {!
+if (Q.time >= 20) {
+    Q.resources += 1;
+}
+Q.red_guards_arms -= 10;
+Q.repression -= 5;
+Q.militancy -= 3;
+Q.offensive_satisfaction -= 6;
+Q.luxemburgist_satisfaction += 2;
+!}
+
+The rusty rifles go to the police station in a handcart. The good ones, the districts swear, were never there.

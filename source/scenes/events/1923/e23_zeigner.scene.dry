@@ -1,0 +1,76 @@
+title: Zeigner
+subtitle: A left Social Democrat becomes Minister-President of Saxony.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 3
+max-visits: 1
+priority: 2
+on-arrival: {!
+Q.e23_had_sax = Q.saxony_government ? 1 : 0;
+!}
+
+= Zeigner
+
+On 21 March the Saxon Landtag elects Erich Zeigner Minister-President. He is a lawyer of thirty-six, a former judge and Saxon minister of justice, and the most left-wing head of government in Germany. He speaks openly of the Reichswehr's secret arms stores and of the industrialists who finance the nationalist leagues. Berlin's ministers think him reckless. His own party in Saxony adores him.
+
+[? if saxony_government = 1 : Our ministers keep their seats in his cabinet. Zeigner wants them to stay, and asks only that the party stop calling his colleagues traitors in public. ?][? if saxony_government = 0 : Zeigner needs our ten votes. In return he offers an amnesty, legal status for the control committees, and a blind eye to the proletarian hundreds. ?]
+
+- @tolerate: Keep Zeigner in office, on our conditions.
+- @ministers: Join his government with our own ministers.
+- @refuse: Refuse him our votes.
+
+@tolerate
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's road. Saxony becomes the party's fortress, and its hostage.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids keeping Social Democrats in office.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_zeigner = 1;
+Q.spd_relation += 5;
+Q.district_saxony_members *= 1.05;
+Q.district_saxony_loyalty += 6;
+Q.red_guards_strength += 3;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+The agreement is signed in Dresden. The control committees become legal bodies, and the hundreds march openly in Leipzig, Chemnitz and Plauen.
+
+@ministers
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] A workers' government in Saxony, months early. Only if the Saxon SPD will have us.
+view-if: saxony_government = 0
+choose-if: lock_united_front < 2 and spd_relation >= 40
+unavailable-subtitle: Zeigner's party will not take communist ministers yet, or the line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_zeigner = 3;
+Q.saxony_government = 1;
+Q.spd_relation += 3;
+Q.district_saxony_loyalty += 8;
+Q.repression += 4;
+Q.unionist_satisfaction += 8;
+Q.offensive_satisfaction -= 8;
+Q.lean_unionist += 3;
+!}
+
+Two communists join Zeigner's cabinet in the spring. In Berlin, the Reichswehr ministry opens a file on the Saxon government.
+
+@refuse
+subtitle: The Left's answer. Zeigner turns to the Democrats; Saxony's workers blame us.
+on-arrival: {!
+Q.e23_zeigner = 2;
+Q.saxony_government = 0;
+Q.spd_relation -= 7;
+Q.district_saxony_loyalty -= 6;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 8;
+Q.lean_offensive += 2;
+!}
+
+[? if e23_had_sax = 1 : Our ministers resign. ?] Zeigner governs with the Democrats' tolerance, and the Saxon SPD stops inviting our speakers to its meetings.

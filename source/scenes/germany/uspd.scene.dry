@@ -1,6 +1,6 @@
 title: The Independents
 new-page: true
-view-if: uspd_timer <= 0
+view-if: crisis = 0 and uspd_timer <= 0 and uspd_exists = 1
 on-arrival: uspd_timer = 3; month_actions += 1
 frequency: 300
 is-card: true
@@ -8,7 +8,7 @@ tags: germany
 
 = The Independents
 
-The Independent Social Democrats (USPD) stand between Ebert's party and ours. Their left wing is close to us; their leaders are not.
+[? if uspd_split = 0 : The Independent Social Democrats stand between Ebert's party and ours. Their left wing is close to us, and has hundreds of thousands of members in Halle, Leipzig and Berlin; their leaders are not. ?][? if uspd_split = 1 : Since Halle, the Independents who refused Moscow's conditions carry on as a smaller party under Crispien, Dittmann and Hilferding, drifting back towards the SPD. Some of their workers still look to us. ?]
 
 - @joint: Propose joint action to the USPD.
 - @left_wing: Court the USPD's left wing.
@@ -16,7 +16,7 @@ The Independent Social Democrats (USPD) stand between Ebert's party and ours. Th
 - @easy_discard
 
 @joint
-subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Improves relations with both social democratic parties.
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] Improves relations with both social democratic parties. The radicals object.
 choose-if: lock_united_front < 2
 unavailable-subtitle: The [+ leading_faction_adj +] line forbids any united front.
 on-arrival: {!
@@ -29,19 +29,33 @@ Q.spd_relation += 3;
 Q.luxemburgist_satisfaction += 5;
 Q.unionist_satisfaction += 5;
 Q.ultraleft_satisfaction -= 10;
-Q.offensive_satisfaction -= 10;
+Q.offensive_satisfaction -= 8;
+Q.lean_unionist += 1;
+Q.lean_luxemburgist += 1;
 !}
 
 Our proposal for joint demonstrations is received with interest by the Independents.
 
 @left_wing
 subtitle: Small gains, especially in Halle.
-on-arrival: uspd_relation += 4; district_halle_members += 0.5; worker_support += 1
+on-arrival: {!
+Q.uspd_relation += 4;
+Q.district_halle_members += (Q.uspd_split ? 0.3 : 0.5) * Math.max(1, Q.district_halle_members / 10);
+Q.worker_support += 1;
+Q.lean_luxemburgist += 1;
+!}
 
 Some of the Independents' most radical members cross over to us.
 
 @denounce
 subtitle: Pleases the radicals.
-on-arrival: uspd_relation -= 10; ultraleft_satisfaction += 5; offensive_satisfaction += 5
+on-arrival: {!
+Q.uspd_relation -= 10;
+Q.offensive_satisfaction += 5;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 5;
+}
+Q.lean_offensive += 1;
+!}
 
 We denounce the Independents as half-hearted traitors. They return the favour.

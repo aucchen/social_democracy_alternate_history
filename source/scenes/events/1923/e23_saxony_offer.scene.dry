@@ -1,0 +1,102 @@
+title: Ministers in Dresden
+subtitle: Zeigner offers the party seats in the Saxon government.
+new-page: true
+tags: event
+view-if: year = 1923 and month = 10 and e23_october_done = 0 and e23_saxony_decided = 0 and crisis = 0
+max-visits: 1
+priority: 3
+on-arrival: {!
+var L = {unionist: 'Heinrich Brandler', offensive: 'Ruth Fischer', luxemburgist: (Q.luxemburg_alive == 1 ? 'Rosa Luxemburg' : (Q.levi_in_party == 1 ? 'Paul Levi' : 'Ernst Meyer')), ultraleft: 'Karl Schröder'};
+Q.party_leader = L[Q.leading_faction];
+Q.lead_code = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[Q.leading_faction];
+Q.e23_had_sax = Q.saxony_government ? 1 : 0;
+if (Q.e23_october_path == 1) {
+    Q.crisis = 1;
+    Q.crisis_october = 1;
+    Q.crisis_time = 0;
+    Q.week = 1;
+    Q.crisis_name = 'The German October';
+    Q.crisis_goal = 'Arm the workers in Saxony and Thuringia, and decide whether the rising begins.';
+    var m = 28 + Q.worker_support * 0.2 + Q.red_guards_arms * 0.15 + (Q.unity - 50) * 0.15 + Q.militancy * 0.05;
+    if (Q.warsaw_outcome == 2) { m += 8; }
+    if (Q.e23_hundreds == 1 || Q.e23_hundreds == 3) { m += 3; }
+    if (Q.e23_cuno_result == 2) { m += 3; }
+    if (Q.e23_hasty) { m -= 3; }
+    Q.crisis_momentum = Math.max(25, Math.min(55, m));
+}
+!}
+
+= Ministers in Dresden
+
+[? if e23_october_path = 1 : [+ party_leader +] is back from Moscow with the plan, the money and the Russian advisers. The proletarian hundreds are being told to stand ready. The first step is Saxony. ?]
+[? if e23_october_path != 1 : The Reich is under emergency rule and Saxony is surrounded. Its government wants allies. ?]
+
+Erich Zeigner asks the party to join his government. In Saxony, and a few days later in Thuringia, the workers' government of the Fourth Congress can become real. [? if e23_had_sax = 1 : Our ministers are already in his cabinet. Now he offers the party the posts that matter. ?][? if e23_had_sax = 0 : He offers the state chancellery, finance and the economy. Brandler, Paul Böttcher and Fritz Heckert are the names discussed. In Weimar, Karl Korsch and Albin Tenner would take seats in the Thuringian cabinet. ?]
+
+What Zeigner does not offer is the interior ministry and the police. General Müller, who holds executive power in Saxony under the emergency, has already let it be known that he will not tolerate communist ministers.
+
+- @enter: Enter the Saxon and Thuringian governments.
+- @police: Demand the interior ministry and the police as our price.
+- @outside: Stay outside the governments, and arm the hundreds.
+
+@enter
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's plan, and Moscow's. A legal base for the revolution, and a target for the Reichswehr.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids sitting in a government with Social Democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_saxony_decided = 1;
+Q.saxony_government = 1;
+Q.crisis_momentum += 4;
+Q.spd_relation += 4;
+Q.district_saxony_loyalty += 6;
+Q.district_thuringia_loyalty += 6;
+Q.repression += 4;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+!}
+
+On 10 October three communists join the Saxon cabinet; on 16 October two more join the Thuringian. Brandler, as head of the state chancellery, has his own office in Dresden and no control over a single policeman. He goes to look for the arms of the Saxon police, and finds that the arsenal holds eleven rifles.
+
+@police
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The police would arm the hundreds. Only if the Saxon SPD trusts us.
+choose-if: lock_united_front < 2 and spd_relation >= 40
+unavailable-subtitle: Zeigner will never hand us the police, or the line forbids it.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e23_saxony_decided = 1;
+Q.saxony_government = 1;
+Q.e23_saxon_police = 1;
+Q.crisis_momentum += 10;
+Q.red_guards_arms += 8;
+Q.red_guards_strength += 5;
+Q.army_loyalty += 4;
+Q.repression += 6;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction += 3;
+Q.lean_unionist += 2;
+!}
+
+After three nights of argument, Zeigner gives way. A communist becomes Saxony's interior minister, and the state police's armouries open to the hundreds. In Berlin, Seeckt orders General Müller to prepare to march.
+
+@outside
+subtitle: The Left's answer. No ministers for the SPD to hide behind; the hundreds get what arms we can find.
+on-arrival: {!
+Q.e23_saxony_decided = 1;
+Q.saxony_government = 0;
+Q.crisis_momentum += 2;
+Q.red_guards_strength += 3;
+Q.red_guards_arms += 3;
+Q.spd_relation -= 4;
+Q.offensive_satisfaction += 6;
+Q.unionist_satisfaction -= 6;
+Q.lean_offensive += 2;
+!}
+
+[? if e23_had_sax = 1 : Our ministers resign from Zeigner's cabinet. ?] The party stays in opposition in Dresden and Weimar, and its hundreds drill in the forests of the Erzgebirge.

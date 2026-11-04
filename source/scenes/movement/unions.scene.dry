@@ -1,6 +1,6 @@
 title: The Trade Unions
 new-page: true
-view-if: unions_timer <= 0
+view-if: crisis = 0 and unions_timer <= 0
 on-arrival: unions_timer = 3; month_actions += 1
 frequency: 300
 is-card: true
@@ -8,14 +8,15 @@ tags: movement
 
 = The Trade Unions
 
-Millions of workers belong to the Free Trade Unions, whose leaders back Ebert. The Left Radicals say the unions are dead and must be replaced by revolutionary workers' unions; others say the party must go where the workers are.
+[? if year <= 1920 : Millions of workers have poured into the Free Trade Unions since the war, and their leaders back Ebert. ?][? if year >= 1921 : The ADGB has eight million members, and its leaders expel communists who organise against them. ?] [? if ultraleft_gone = 0 : The Left Radicals say the old unions are dead and must be replaced by revolutionary workers' unions; others say the party must go where the workers are. ?][? if ultraleft_gone = 1 and kapd_exists = 1 : The KAPD and its General Workers' Union say the old unions must be smashed. Some of our own members agree. ?][? if ultraleft_gone = 1 and kapd_exists = 0 : The expelled Left Radicals say the old unions must be smashed. Some of those who stayed agree. ?]
 
 - @inside: Work inside the existing unions.
+- @fractions: Organise communist fractions in every union.
 - @outside: Build revolutionary unions outside them.
 - @easy_discard
 
 @inside
-subtitle: [? if lock_union_work = 1 : Against the party line: costs 10 Unity. ?] Wins workers and the USPD's respect; angers the Left Radicals.
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] Wins workers and the USPD's respect; angers the radicals.
 choose-if: lock_union_work < 2
 unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the old unions.
 on-arrival: {!
@@ -26,13 +27,52 @@ if (Q.lock_union_work == 1) {
 Q.worker_support += 6;
 Q.uspd_relation += 3;
 Q.unionist_satisfaction += 10;
-Q.ultraleft_satisfaction -= 10;
+Q.offensive_satisfaction -= 3;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction -= 10;
+}
+Q.lean_unionist += 2;
 !}
 
 Communists stand in union elections and speak at every branch meeting. It is slow, unglamorous work.
 
+@fractions
+subtitle: [? if lock_union_work = 1 : Against the party line: costs Unity. ?] Disciplined communist groups inside the unions. The bureaucrats strike back.
+view-if: year >= 1921
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work inside the old unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.worker_support += 3;
+Q.spd_relation -= 4;
+Q.offensive_satisfaction += 3;
+Q.unionist_satisfaction += 3;
+if (Q.comintern_member) {
+    Q.independence -= 2;
+}
+Q.lean_offensive += 1;
+Q.lean_unionist += 1;
+!}
+
+Every communist in a union belongs to a fraction that meets before the branch meeting and votes as one, as the Red International of Labour Unions demands. Some branches fall to us. Some of our people are expelled.
+
 @outside
-subtitle: Pleases the Left Radicals; splits the workforce.
-on-arrival: ultraleft_satisfaction += 10; unionist_satisfaction -= 10; worker_support += 2; militancy += 4
+subtitle: [? if ultraleft_gone = 0 : The Left Radicals' line. ?][? if ultraleft_gone = 1 : The Left's impatient wing approves. ?] Splits the workforce.
+on-arrival: {!
+Q.worker_support += 2;
+Q.militancy += 4;
+Q.unionist_satisfaction -= 10;
+if (!Q.ultraleft_gone) {
+    Q.ultraleft_satisfaction += 10;
+    Q.lean_ultraleft += 2;
+} else {
+    Q.offensive_satisfaction += 5;
+    Q.kapd_relation += 4;
+    Q.lean_offensive += 1;
+}
+!}
 
 The new unions are small, militant and proud of it.

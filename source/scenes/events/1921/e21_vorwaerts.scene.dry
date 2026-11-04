@@ -1,0 +1,50 @@
+title: The Vorwärts Documents
+subtitle: The SPD's paper publishes our secrets.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 11 and crisis = 0 and march_action != 0
+max-visits: 1
+priority: 8
+
+= The Vorwärts Documents
+
+At the end of November the *Vorwärts* begins to print documents from inside the party: minutes of the Zentrale from March, reports of the emissaries, instructions to the districts. Someone who left with Levi, or someone still inside, has passed them on.
+
+[? if e21_ma_eberlein = 1 : The worst of them is Hugo Eberlein's plan: the bombs, the staged attacks on our own offices, the faked kidnapping. It is all there, in our own words. ?][? if e21_ma_eberlein != 1 : The worst of them show how Kun and his friends planned to provoke the fight, and how little the Zentrale asked about the workers' mood before it called them out. ?] [? if march_action = 2 : Even in victory, it does not read well. ?]
+
+The bourgeois press reprints everything. The Reichstag wants an inquiry.
+
+- @forgeries: Call the documents forgeries.
+- @admit: Admit the mistakes of March.
+- @emissaries: Blame Moscow's emissaries.
+
+@forgeries
+view-if: offensive_gone = 0
+subtitle: The Left's answer. Our members will believe it. Nobody else will.
+on-arrival: {!
+Q.worker_support -= (Q.e21_ma_eberlein == 1) ? 3 : 1;
+Q.offensive_satisfaction += 4;
+Q.luxemburgist_satisfaction -= 4;
+Q.spd_relation -= 4;
+Q.lean_offensive += 1;
+!}
+
+The Rote Fahne declares the documents forged by the police and printed by their friends in the SPD. The Vorwärts prints facsimiles.
+
+@admit
+subtitle: The Right's and the Spartacists' way. Painful, and it is believed.
+on-arrival: unity -= 3; worker_support += 2; spd_relation += 3; uspd_relation += 3; unionist_satisfaction += 3; luxemburgist_satisfaction += 4; offensive_satisfaction -= 6; lean_unionist += 1; lean_luxemburgist += 1
+
+The Zentrale publishes a statement: mistakes were made in March, they were condemned by the world congress, and those responsible no longer decide the party's line. It is the first time a communist party has said so in print.
+
+@emissaries
+subtitle: The Spartacist line. Moscow will take it badly.
+on-arrival: {!
+Q.independence += 8;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction -= 8;
+Q.lean_luxemburgist += 1;
+!}
+
+The Zentrale says the documents are genuine and the plans in them were Kun's, not the German party's. Radek is summoned back to Moscow to explain why the German comrades are washing the International's linen in public.

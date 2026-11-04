@@ -1,0 +1,31 @@
+title: August Thalheimer
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_thalheimer = 1
+new-page: true
+
+= August Thalheimer
+
+The party's theorist since Luxemburg's death, a Württemberg scholar with thick glasses and a sharp pen. Brandler's closest ally, he argues that communists must win the masses with concrete demands they can fight for today.
+
+- @programme
+- @transitional
+- @root: Return to main
+
+@programme
+title: Clarify the Programme
+subtitle: Long articles in the theoretical journal. The Right and the Spartacists find common ground.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; unity += 4; unionist_satisfaction += 5; luxemburgist_satisfaction += 3; lean_unionist += 1
+
+Thalheimer answers every critic in print, at length, with footnotes. Fewer comrades read him than should, but those who do argue better for it.
+
+@transitional
+title: Argue for Transitional Demands
+subtitle: Workers' control of production, seizure of real values. Workers listen; the Left calls it reformism.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; worker_support += 4; spd_relation += 3; offensive_satisfaction -= 5; unionist_satisfaction += 4; lean_unionist += 2
+
+Not the dictatorship of the proletariat tomorrow, Thalheimer writes, but demands that lead towards it: control of the factories, taxes on the propertied, bread for the unemployed.

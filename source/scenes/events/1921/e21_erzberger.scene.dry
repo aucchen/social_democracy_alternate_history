@@ -1,0 +1,52 @@
+title: The Murder of Erzberger
+subtitle: The man who signed the armistice is shot in the Black Forest.
+new-page: true
+tags: event
+view-if: year = 1921 and month = 8 and crisis = 0 and e21_jena_done = 1
+max-visits: 1
+priority: 6
+on-arrival: erzberger_murdered = 1; stability -= 4; militancy += 3
+
+= The Murder of Erzberger
+
+On 26 August Matthias Erzberger of the Centre, who signed the armistice in the forest of Compiègne and was hounded by the nationalist press ever since, is shot dead while out walking at Bad Griesbach in the Black Forest. The two killers, Heinrich Tillessen and Heinrich Schulz, are former naval officers of the Organisation Consul, the secret society that grew out of the Ehrhardt Brigade. They escape to Hungary.
+
+Part of the nationalist press says openly that Erzberger had it coming. The President issues an emergency decree for the protection of the Republic. In Munich, Kahr's government refuses to apply it. On 31 August hundreds of thousands march in the cities of the Reich against the murderers.
+
+- @march: March with the SPD, the USPD and the unions.
+- @defence: Form workers' defence squads.
+- @demand: Demand that the Republic disarm its enemies.
+
+@march
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The united front, in the street. The Right is delighted.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids marching with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.spd_relation += 6;
+Q.uspd_relation += 5;
+Q.worker_support += 4;
+Q.stability += 3;
+Q.unionist_satisfaction += 6;
+Q.luxemburgist_satisfaction += 3;
+Q.offensive_satisfaction -= 4;
+Q.lean_unionist += 2;
+!}
+
+Our banners march in the same columns as the SPD's in Berlin, Leipzig and Chemnitz. The speakers on the platform are of three parties. For one afternoon, the working class looks like one class.
+
+@defence
+view-if: offensive_gone = 0
+subtitle: The Left's line: the workers must defend the Republic themselves, since the Republic will not.
+on-arrival: red_guards_strength += 3; red_guards_arms += 3; repression += 5; militancy += 4; offensive_satisfaction += 6; lean_offensive += 2
+
+In Berlin and the Ruhr, factory defence squads are formed and drill in the evenings. The police watch them more closely than they ever watched the Organisation Consul.
+
+@demand
+subtitle: The Spartacist line: hold the government to its word, and expose it when it fails.
+on-arrival: uspd_relation += 3; worker_support += 2; luxemburgist_satisfaction += 4; lean_luxemburgist += 1
+
+Our deputies demand the dissolution of the Organisation Consul, the purge of the Reichswehr's officers and the trial of the nationalist editors who called for murder. The Reichstag passes some of it. Bavaria applies none of it.

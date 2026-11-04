@@ -1,0 +1,39 @@
+title: Ernst Meyer
+is-pinned-card: true
+tags: advisor
+view-if: adv_show_meyer = 1
+new-page: true
+
+= Ernst Meyer
+
+A Spartacist of the first hour, a journalist from East Prussia with a weak chest and a steady temper. [? if march_action = 1 : After the defeat of March 1921, the party turned to him to put the pieces back together. ?][? if march_action != 1 : He is the man the party sends for when the currents stop speaking to each other. ?]
+
+- @consolidate
+- @centre
+- @root: Return to main
+
+@consolidate
+title: Rebuild the Organisation
+subtitle: Patient work in every district. The party's spine strengthens.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: {!
+Q.advisor_action_timer = 4;
+Q.last_advisor_action = 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 4;
+}
+Q.unity += 5;
+Q.militancy -= 2;
+!}
+
+Meyer visits the districts one by one, reopens the offices that were closed and pays the printers who were not paid. Nobody cheers. The party works again.
+
+@centre
+title: Steer Between Left and Right
+subtitle: Give both wings something. Each suspects the other got more.
+unavailable-subtitle: [? if advisor_action_timer = 1 : Next advisor action in 1 month. ?][? if advisor_action_timer > 1 : Next advisor action in [+ advisor_action_timer +] months. ?]
+choose-if: advisor_action_timer <= 0
+on-arrival: advisor_action_timer = 4; last_advisor_action = 1; offensive_satisfaction += 6; unionist_satisfaction += 6; luxemburgist_satisfaction -= 2; unity += 2
+
+Meyer writes a resolution that both Ruth Fischer and Heinrich Brandler can vote for. It says very little, very carefully.

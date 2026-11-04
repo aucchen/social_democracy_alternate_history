@@ -1,0 +1,102 @@
+title: Against Putschism
+subtitle: Paul Levi publishes his verdict on the March Action.
+new-page: true
+tags: event
+view-if: year = 1921 and month >= 4 and crisis = 0 and levi_in_party = 1 and march_action = 1 and e21_march_mode = 2 and e21_after_done = 0
+max-visits: 1
+priority: 12
+on-arrival: e21_after_done = 1
+
+= Against Putschism
+
+In the second week of April a pamphlet appears in the bookshops: *Unser Weg. Wider den Putschismus*, "Our Path: Against Putschism", by Paul Levi. It calls the March Action the greatest Bakuninist putsch in history. It says that the party attacked the working class instead of leading it, that communists drove workers out of factories with clubs, and that the action was planned by emissaries from Moscow who answered to nobody in Germany.
+
+Every word is read in the Zentrale, in the police headquarters and in the Hotel Lux. Levi has published it without asking anyone, while hundreds of comrades are on trial. Clara Zetkin defends him. So do Däumig, Brass, Adolph Hoffmann and the union men around Paul Malzahn, who say that Levi's crime is to have been right.
+
+[? if e21_ma_eberlein = 1 : Levi does not yet know about Eberlein's bombs. If he did, he would have written about them too. ?]
+
+- @expel: Expel Levi for breaking discipline.
+- @censure: Censure him, but keep him in the party.
+- @debate: Admit he is right, and open the debate.
+- @moscow: Leave his case to the Comintern.
+
+@expel
+subtitle: What the Zentrale did on 15 April. The Left and Moscow approve. Levi's friends will follow him out.
+on-arrival: {!
+Q.e21_levi_fate = 1;
+Q.levi_in_party = 0;
+Q.levi_split = 1;
+Q.levi_advisor = 0;
+var heir = (Q.leading_faction == 'luxemburgist') ? 'unionist' : Q.leading_faction;
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= 0.9;
+    if (Q['district_' + d + '_faction'] == 'luxemburgist') {
+        Q['district_' + d + '_members'] *= 0.7;
+        Q['district_' + d + '_faction'] = heir;
+        Q['district_' + d + '_loyalty'] = 45;
+    }
+}
+if (Q.leading_faction == 'luxemburgist') {
+    Q.leading_faction = 'unionist';
+    Q.junior_faction = 'offensive';
+}
+Q.luxemburgist_satisfaction -= 20;
+Q.offensive_satisfaction += 10;
+Q.independence -= 5;
+Q.unity -= 5;
+Q.lean_offensive += 2;
+Q.lean_luxemburgist -= 2;
+!}
+
+On 15 April the Zentrale expels Paul Levi for gross breach of discipline. The Central Committee confirms it in May. Zetkin votes against. In the districts, those who agreed with Levi stop coming to meetings, and then stop paying their dues.
+
+@censure
+subtitle: The Right's way. The Left will call it cowardice; the case is not closed.
+on-arrival: {!
+Q.e21_levi_fate = 2;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction -= 10;
+Q.luxemburgist_satisfaction += 4;
+Q.unity -= 3;
+Q.lean_unionist += 2;
+!}
+
+The Zentrale publicly condemns the pamphlet and strips Levi of his functions, but does not expel him. Kun and the Berlin Left send a protest to Moscow. Levi waits for the Comintern congress.
+
+@debate
+subtitle: The Spartacist line. The leaders of the action must go. The Left will fight it with everything it has.
+on-arrival: {!
+Q.e21_levi_fate = 3;
+Q.leading_faction = 'unionist';
+Q.junior_faction = 'luxemburgist';
+Q.independence += 8;
+Q.moscow_subsidy = Math.max(0, Q.moscow_subsidy - 1);
+Q.luxemburgist_satisfaction += 15;
+Q.unionist_satisfaction += 2;
+Q.offensive_satisfaction -= 20;
+Q.unity -= 8;
+Q.worker_support += 3;
+Q.spd_relation += 4;
+Q.lean_luxemburgist += 3;
+Q.lean_offensive -= 2;
+!}
+
+The Zentrale does what no communist party has yet done: it says publicly that it was wrong. Brandler and Thalheimer stay, but they turn back towards the united front, and Zetkin returns to the Zentrale. Levi's pamphlet is reprinted as a contribution to the party's discussion. Kun is recalled to Moscow. Ruth Fischer calls it the end of the revolutionary party in Germany.
+
+@moscow
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Let the International judge. It will decide at its congress in June.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids handing our affairs to Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.e21_levi_fate = 2;
+Q.independence -= 5;
+Q.offensive_satisfaction += 2;
+Q.lean_offensive += 1;
+Q.lean_unionist += 1;
+!}
+
+The Zentrale suspends Levi and sends the whole file to Moscow. Both sides start writing their speeches for the congress.

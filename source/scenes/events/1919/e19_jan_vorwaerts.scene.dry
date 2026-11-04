@@ -1,0 +1,74 @@
+title: The Vorwärts Building
+subtitle: 11 January. The Freikorps attack.
+new-page: true
+tags: event
+view-if: crisis_january = 1 and crisis_time = 2
+max-visits: 1
+
+= The Vorwärts Building
+
+At dawn on 11 January, Major von Stephani's Potsdam regiment opens fire on the *Vorwärts* building with field guns and mortars. The defenders send out seven men under a white flag to negotiate. The soldiers beat them and shoot them in the courtyard of the Dragoon barracks. Among them is the poet Wolfgang Fernbach.
+
+That afternoon Noske marches into Berlin at the head of three thousand men. The other buildings are next.
+
+[? if crisis_momentum >= 60 : Whole districts are still on our side. The soldiers move carefully in Moabit and Friedrichshain. ?][? if crisis_momentum < 40 : The working-class districts are quiet. The men in the buildings are alone. ?]
+
+- @hold: Hold the buildings to the last.
+- @retreat: Order a fighting retreat into the workers' districts.
+- @terms: Surrender on terms, through the Independents.
+
+@hold
+subtitle: The Left Radicals' choice. A legend, and a massacre.
+on-arrival: {!
+Q.january_outcome = 1;
+Q.crisis_momentum -= 10;
+Q.militancy += 10;
+Q.repression += 8;
+Q.red_guards_strength -= 1;
+Q.district_berlin_members -= 0.6;
+Q.district_berlin_loyalty += 8;
+Q.ultraleft_satisfaction += 8;
+Q.lean_ultraleft += 2;
+Q.lux_risk += 10;
+Q.lieb_risk += 10;
+!}
+
+The buildings fall one by one under artillery fire. Prisoners are shot in the yards. The legend of the defenders of *Vorwärts* will live in every Berlin factory.
+
+@retreat
+subtitle: The Spartacist choice: save the cadres for the next fight.
+on-arrival: {!
+Q.january_outcome = Q.crisis_momentum >= 50 ? 2 : 1;
+Q.crisis_momentum += 3;
+Q.repression += 6;
+Q.red_guards_strength -= 0.5;
+Q.district_berlin_members -= 0.3;
+Q.luxemburgist_satisfaction += 5;
+Q.lean_luxemburgist += 2;
+!}
+
+[? if january_outcome = 2 : Most of the fighters slip away through the courtyards with their rifles. The soldiers find empty rooms. ?][? if january_outcome = 1 : The retreat comes too late for many. The soldiers take the buildings, and their prisoners. ?]
+
+@terms
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's choice. Lives saved, if the government keeps its word.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.january_outcome = (Q.jan_talks == 1 || Q.crisis_momentum >= 55) ? 2 : 1;
+Q.militancy -= 6;
+Q.repression += (Q.january_outcome == 2) ? 2 : 8;
+Q.uspd_relation += 6;
+Q.unionist_satisfaction += 6;
+Q.ultraleft_satisfaction -= 8;
+Q.offensive_satisfaction -= 6;
+Q.lean_unionist += 2;
+Q.district_berlin_loyalty -= 10;
+Q.lux_risk -= 8;
+Q.lieb_risk -= 8;
+!}
+
+[? if january_outcome = 2 : The Independents obtain a promise: no shootings, the fighters go home, the leaders face the courts. It is mostly kept. ?][? if january_outcome = 1 : The government has no reason to keep its promises. The men who come out with their hands up are beaten, and some are shot. ?]
