@@ -1,0 +1,81 @@
+title: The Manhunt
+subtitle: The Freikorps are searching Berlin for our leaders.
+new-page: true
+tags: event
+view-if: crisis_january = 1 and crisis_time >= 3
+max-visits: 1
+
+= The Manhunt
+
+The last buildings have fallen. [? if january_outcome = 1 : Over a hundred and fifty of the defenders are dead, many of them shot after they surrendered. ?][? if january_outcome = 2 : Most of the defenders got away, but the soldiers are going from house to house. ?] Citizens' guards check papers on the bridges. A reward has been offered for Liebknecht.
+
+[? if leaders_hidden = 1 : Luxemburg and Liebknecht are in the flats we prepared, moving every few nights. ?][? if leaders_hidden = 0 : Luxemburg and Liebknecht have been moving from flat to flat on their own, with friends who are known to the police. ?] Jogiches begs them to leave the city. Luxemburg answers that the leaders cannot run while the workers are being shot.
+
+- @stay: They stay in Berlin, with the workers.
+- @scatter: Hide them apart, in workers' homes in the outer districts.
+- @leave: Smuggle them out of Berlin.
+
+@stay
+subtitle: The radicals will respect it. The risk is great.
+on-arrival: lux_risk += 15; lieb_risk += 15; ultraleft_satisfaction += 5; offensive_satisfaction += 3; lean_offensive += 1
+go-to: fate
+
+@scatter
+subtitle: Costs 1 fund. Safer than a flat the police may know, and they stay close to the party.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; lux_risk -= 12; lieb_risk -= 12; lean_luxemburgist += 1
+go-to: fate
+
+@leave
+subtitle: Much safer. The Berlin workers will say their leaders ran.
+on-arrival: lux_risk -= 30; lieb_risk -= 30; unity -= 5; ultraleft_satisfaction -= 6; district_berlin_loyalty -= 6
+go-to: fate
+
+@fate
+title: 15 January
+new-page: true
+on-arrival: {!
+// a strong position in the streets makes the hunt harder
+var shift = (Q.crisis_momentum - 50) / 5;
+var lux = Q.lux_risk - shift + (Math.random() * 30 - 15);
+var lieb = Q.lieb_risk - shift + (Math.random() * 30 - 15);
+Q.luxemburg_alive = lux < 50 ? 1 : 0;
+Q.liebknecht_alive = lieb < 50 ? 1 : 0;
+Q.luxemburg_advisor = Q.luxemburg_alive;
+Q.liebknecht_advisor = Q.liebknecht_alive;
+if (!Q.luxemburg_alive) {
+    Q.luxemburgist_satisfaction -= 10;
+    Q.unity -= 5;
+}
+if (!Q.liebknecht_alive) {
+    Q.militancy += 5;
+}
+if (!Q.luxemburg_alive && !Q.liebknecht_alive) {
+    Q.spd_relation -= 15;
+    Q.uspd_relation -= 5;
+    Q.worker_support += 3;
+}
+if (Q.january_outcome == 0) {
+    Q.january_outcome = 1;
+}
+Q.party_chair = Q.luxemburg_alive ? 'Rosa Luxemburg' : (Q.jogiches_alive ? 'Leo Jogiches' : 'Paul Levi');
+Q.spartacist_uprising_done = 1;
+// the crisis is over
+Q.crisis = 0;
+Q.crisis_january = 0;
+Q.crisis_name = 0;
+Q.crisis_goal = 0;
+!}
+
+= 15 January 1919
+
+[? if luxemburg_alive = 0 and liebknecht_alive = 0 : On the evening of 15 January, a citizens' guard finds Rosa Luxemburg and Karl Liebknecht in a flat in Wilmersdorf. They are taken to the Eden Hotel, the headquarters of the Guards Cavalry Rifle Division. Captain Pabst gives the orders. Liebknecht is driven into the Tiergarten and shot "while trying to escape". Luxemburg is clubbed with a rifle butt and shot in the car, and her body is thrown into the Landwehr Canal. The government says she was killed by an angry crowd. The party has lost its two best-known leaders, and it will never forgive the social democrats who called in the Freikorps. ?]
+
+[? if luxemburg_alive = 1 and liebknecht_alive = 0 : Karl Liebknecht is caught in Wilmersdorf, taken to the Eden Hotel and shot in the Tiergarten "while trying to escape". The soldiers who came for Rosa Luxemburg find an empty room. She is alive, in hiding, and furious. The history of the party, and perhaps of Germany, has changed. ?]
+
+[? if luxemburg_alive = 0 and liebknecht_alive = 1 : Rosa Luxemburg is caught, taken to the Eden Hotel and murdered by officers of the Guards Cavalry Rifle Division. Her body is thrown into the Landwehr Canal. Karl Liebknecht escapes the manhunt, and his grief makes him harder than ever. ?]
+
+[? if luxemburg_alive = 1 and liebknecht_alive = 1 : The officers who come for Luxemburg and Liebknecht find an empty flat and a cold stove. Both have escaped. Captain Pabst's men will have to look elsewhere for their glory. The history of the party, and perhaps of Germany, has changed. ?]
+
+[? if january_outcome = 2 : The rising is lost, but the party is not broken: most of its fighters are alive, and their rifles are hidden. ?][? if january_outcome = 1 : The rising is crushed. Berlin's working-class districts bury their dead. ?] Order prevails in Berlin.

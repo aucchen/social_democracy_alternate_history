@@ -1,0 +1,86 @@
+title: The Assembly at Weimar
+subtitle: Ebert is elected president of the Republic.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 2 and crisis = 0
+max-visits: 1
+on-arrival: {!
+// the party grows month by month in 1919, faster when workers listen to us
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+Q.government_name = 'Scheidemann cabinet (SPD, Centre, DDP)';
+Q.chancellor = 'Philipp Scheidemann';
+Q.spd_in_government = 1;
+Q.zentrum_in_government = 1;
+Q.ddp_in_government = 1;
+Q.radek_prison = 1;
+Q.freikorps_strength += 40;
+!}
+
+= The Assembly at Weimar
+
+The National Assembly has met in the theatre at Weimar, far from the streets of Berlin, behind a ring of Maercker's volunteers. On 11 February it elected Friedrich Ebert president of the Republic. Philipp Scheidemann heads a coalition of the Social Democrats, the Catholic Centre and the liberal Democrats. The workers' councils that made the revolution have been thanked and sent home.
+
+On 12 February the police arrested Karl Radek in Berlin. He is in Moabit prison, and the government talks of a Bolshevik conspiracy. [? if luxemburg_alive = 0 : The same week, Jogiches printed in *Die Rote Fahne* a photograph of the officers of the Eden Hotel celebrating after the murders. The Republic's courts show no interest. ?]
+
+The party must say what it thinks of the new Republic.
+
+- @expose: Expose the Assembly, and argue for the councils.
+- @march: Call for a march on Weimar.
+- @anchor: Demand, with the Independents, that the councils enter the constitution.
+- @ignore: Ignore Weimar and build councils in the factories.
+
+@expose
+subtitle: The Spartacist line: patient criticism, for the day the workers see it themselves.
+on-arrival: worker_support += 3; luxemburgist_satisfaction += 5; lean_luxemburgist += 2
+
+Every issue of the paper takes the Assembly's debates apart. The workers who voted for Ebert read it too, and some begin to wonder.
+
+@march
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer: take the revolution to Weimar. The volunteers are waiting.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed adventures.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.militancy += 8;
+Q.repression += 5;
+Q.offensive_satisfaction += 8;
+Q.lean_offensive += 2;
+Q.stability -= 2;
+!}
+
+A few thousand marchers set out from Erfurt and Jena. Maercker's men stop them outside the town. The Assembly debates under guard.
+
+@anchor
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. The Independents are pleased; nothing is won yet.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any common front with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.uspd_relation += 8;
+Q.worker_support += 2;
+Q.unionist_satisfaction += 6;
+Q.ultraleft_satisfaction -= 4;
+Q.lean_unionist += 2;
+!}
+
+The demand for the councils to be written into the constitution spreads from Halle to the Ruhr. The Assembly promises to consider it.
+
+@ignore
+subtitle: The Left Radicals: the Republic is not our affair. The councils are.
+on-arrival: ultraleft_satisfaction += 6; lean_ultraleft += 2; worker_support -= 1; militancy += 2
+
+The Bremen and Hamburg comrades say that Weimar will collapse on its own. The councils will be ready.

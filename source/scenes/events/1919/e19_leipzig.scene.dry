@@ -1,0 +1,56 @@
+title: The Independents at Leipzig
+subtitle: The USPD moves to the left.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 12 and crisis = 0
+max-visits: 1
+on-arrival: repression -= 5
+
+= The Independents at Leipzig
+
+From 30 November to 6 December the Independent Social Democrats held their congress in Leipzig. The party has grown to three-quarters of a million members, many times our own, and its left wing won. The congress adopted an action programme for the dictatorship of the proletariat on the basis of the councils, left the Second International and resolved to negotiate with the Communist International.
+
+Their right wing, Hilferding and Kautsky's friends, still sit in the leadership. Their left, Däumig, Stoecker and Koenen of Halle, talk of joining Moscow. [? if kapd_split = 1 : Our own party is half the size it was in October. ?][? if heidelberg_outcome = 3 : Our Left Radical Zentrale despises the Independents as parliamentarians. ?] Karl Radek, about to be released from Moabit and sent home, writes that the future of German communism is in the USPD's left wing.
+
+- @letter: Propose joint action to the whole USPD.
+- @left_wing: Win the USPD's left wing for the International.
+- @denounce: Denounce the Independent leaders as centrists.
+- @alone: No dealings with any parliamentary party.
+
+@letter
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: unity in action, now.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any deal with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.leipzig_line = 1;
+Q.uspd_relation += 12;
+Q.worker_support += 3;
+Q.unionist_satisfaction += 6;
+Q.offensive_satisfaction -= 4;
+Q.lean_unionist += 2;
+!}
+
+The Zentrale's open letter proposes joint campaigns for the councils and against the state of siege. The USPD's leaders reply politely. Its members, in many towns, reply by turning up.
+
+@left_wing
+subtitle: The Spartacist strategy: bring the Independents' best workers to communism, and the party will be a mass party.
+on-arrival: leipzig_line = 2; uspd_relation += 6; world_revolution += 3; independence -= 2; luxemburgist_satisfaction += 6; lean_luxemburgist += 2
+
+Our people seek out Koenen in Halle and Stoecker in Berlin. The talk is of a single Communist party, with the Independents' masses and our principles. It will take a year.
+
+@denounce
+subtitle: The Left's answer: the Independents must be broken, not courted.
+on-arrival: leipzig_line = 3; uspd_relation -= 10; militancy += 3; offensive_satisfaction += 6; lean_offensive += 2
+
+Our paper calls the Leipzig programme a fig leaf for Kautsky and Hilferding. The Independent workers who read it are not grateful.
+
+@alone
+subtitle: The Left Radicals' line: the councils, and nothing else.
+view-if: ultraleft_gone = 0
+on-arrival: leipzig_line = 4; uspd_relation -= 6; ultraleft_satisfaction += 6; lean_ultraleft += 2
+
+The party ignores the Independents' congress as it ignored the National Assembly. The Independents do not ignore us: they are recruiting in our districts.

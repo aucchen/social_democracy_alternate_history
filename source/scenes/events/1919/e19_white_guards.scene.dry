@@ -1,0 +1,78 @@
+title: The Armed Republic
+subtitle: Reichswehr, Freikorps and civil guards.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 7 and crisis = 0
+max-visits: 1
+on-arrival: {!
+// between the great clashes, the state of siege eases a little
+Q.repression -= 6;
+// the Left Radicals expect to win the coming congress, so they do not walk out before it
+if (!Q.ultraleft_gone && Q.heidelberg_outcome == 0) { Q.ultraleft_satisfaction = Math.max(Q.ultraleft_satisfaction, 30); }
+Q.militancy -= 2;
+var g = Math.max(1.05, Math.min(1.35, 1.24 + Q.worker_support / 200 - Q.repression / 400));
+for (var d of Q.districts) {
+    Q['district_' + d + '_members'] *= g;
+}
+Q.freikorps_strength += 40;
+Q.civil_guards_strength += 200;
+Q.police_strength += 20;
+!}
+
+= The Armed Republic
+
+Six months after the revolution, Germany is full of men with rifles, and almost none of them are ours. The provisional Reichswehr is being formed out of the old army and the best of the Freikorps. The other Freikorps refuse to disband: there are wars to fight in the Baltic and Upper Silesia, and strikes to break at home.
+
+Since the spring, the state has armed civil guards in every town: Einwohnerwehren of farmers, shopkeepers, students and officials, with rifles from the army's depots and machine guns in the town hall. [? if bavaria_soviet = 1 : In Bavaria, after the council republic, they are growing fastest of all. ?][? if bavaria_soviet = 2 : North of the truce line, Bavaria's civil guards are an army in all but name, waiting for the order to march on Munich. ?] In some industrial towns, Social Democratic and even Independent workers have joined them to get a rifle.
+
+- @soldiers: Agitate among the soldiers and sailors.
+- @hundreds: Build our own workers' defence squads.
+- @infiltrate: Send our people into the civil guards.
+- @councils: Arm the factory councils instead.
+
+@soldiers
+subtitle: The Spartacist way: the army is made of workers' sons.
+on-arrival: army_loyalty -= 4; freikorps_loyalty -= 2; repression += 2; luxemburgist_satisfaction += 4; lean_luxemburgist += 1
+
+Leaflets appear in the barracks of Döberitz and Zossen: "Soldiers, your officers are preparing a coup against you too." Some of them are handed to the officers. Some are not.
+
+@hundreds
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer: armed proletarian hundreds, trained in secret.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids building armed units.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 5;
+    Q[Q.leading_faction + '_satisfaction'] -= 5;
+}
+Q.red_guards_strength += 3;
+Q.red_guards_arms += 5;
+Q.repression += 5;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+Young comrades drill with broomsticks in the woods outside the cities, and with real rifles in the allotments after dark.
+
+@infiltrate
+subtitle: The Right's cunning: rifles for workers, at the state's expense.
+on-arrival: red_guards_arms += 6; civil_guards_loyalty -= 6; unionist_satisfaction += 5; ultraleft_satisfaction -= 4; offensive_satisfaction -= 2; lean_unionist += 2
+
+In Saxony and Thuringia whole civil guard units in working-class districts quietly fill up with union men and Communists. The rifles are kept at home.
+
+@councils
+subtitle: [? if lock_councils = 1 : Against the party line: costs Unity. ?] The Left Radicals' answer: every factory its own fortress.
+choose-if: lock_councils < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids council action.
+on-arrival: {!
+if (Q.lock_councils == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.red_guards_strength += 2;
+Q.militancy += 4;
+Q.ultraleft_satisfaction += 6;
+Q.lean_ultraleft += 2;
+!}
+
+Factory councils in Hamburg and the Ruhr hide weapons in the works and post guards on the gates. The owners report it to the police.

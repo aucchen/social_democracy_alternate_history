@@ -1,0 +1,35 @@
+title: A New International
+subtitle: In Moscow, Lenin calls the world's communists together.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 3 and crisis = 0
+max-visits: 1
+priority: 2
+
+= A New International
+
+Hugo Eberlein, travelling as "Max Albert", has reached Moscow after weeks on goods trains and sledges. He is the only delegate from a real mass party among the fifty or so who have gathered in the Kremlin. Lenin and Zinoviev want to found a Third, Communist International at once.
+
+Eberlein carries a mandate written by the Zentrale [? if luxemburg_alive = 1 : at Luxemburg's insistence ?][? if luxemburg_alive = 0 : on Luxemburg's last advice ?]: the new International is premature. Without the big parties of the West it would only be a Russian department. The Bolsheviks are pressing him hard. A telegram can still reach him through Stockholm.
+
+- @abstain: Eberlein keeps to his mandate and abstains.
+- @for: Wire Eberlein to vote for the founding.
+- @against: Vote against, until the other parties can join.
+
+@abstain
+subtitle: The Spartacist line. The party joins anyway, but on its own terms.
+on-arrival: comintern_member = 1; independence += 4; world_revolution += 3; luxemburgist_satisfaction += 4; offensive_satisfaction -= 2; lean_luxemburgist += 2
+
+On 4 March the congress founds the Communist International. Eberlein abstains, alone. A few weeks later the Zentrale accepts membership: one does not stand outside the International of the Russian revolution. But Moscow has noted who hesitated.
+
+@for
+subtitle: The Left's line, and the Left Radicals': the world revolution cannot wait for the Independents.
+on-arrival: comintern_member = 1; independence -= 6; world_revolution += 6; moscow_subsidy = 1; offensive_satisfaction += 8; ultraleft_satisfaction += 4; luxemburgist_satisfaction -= 5; lean_offensive += 2; lean_ultraleft += 1; lean_luxemburgist -= 1
+
+Eberlein reads our telegram aloud and votes yes. The hall rises and sings the Internationale. Zinoviev embraces him, and the first money for the German party leaves Moscow sewn into a courier's coat.
+
+@against
+subtitle: Luxemburg's argument taken to its end, and the Right's hope of the Independents. Moscow will not forget.
+on-arrival: comintern_member = 0; independence += 12; world_revolution -= 4; luxemburgist_satisfaction += 5; unionist_satisfaction += 3; offensive_satisfaction -= 8; ultraleft_satisfaction -= 6; lean_luxemburgist += 2; lean_unionist += 1; lean_offensive -= 1; uspd_relation += 4
+
+Eberlein votes no. The congress founds the International all the same, without the German party. Lenin calls it a misunderstanding that time will correct. The Bremen comrades call it a disgrace.

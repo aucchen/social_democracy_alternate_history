@@ -1,0 +1,75 @@
+title: The Party After Heidelberg
+subtitle: The congress did not split the party. Now it must be led.
+new-page: true
+tags: event
+view-if: year = 1919 and month >= 11 and crisis = 0 and heidelberg_outcome >= 2
+max-visits: 1
+priority: 2
+on-arrival: kapd_split = 0
+
+= The Party After Heidelberg
+
+[? if heidelberg_outcome = 2 : The party has kept its members and lost its peace. In Hamburg, Laufenberg's paper attacks the Zentrale every week; in the Zentrale, Levi complains that he cannot make a decision without a Left Radical veto. But the party is still the only Communist party in Germany, and it is still growing. ?]
+
+[? if heidelberg_outcome = 3 : The new Zentrale has moved its office from Berlin to Hamburg. It has stopped paying the union dues of its officials and told its members to tear up their union cards. Levi's friends in Halle, Thuringia and Saxony are holding meetings of their own, and the Independents are courting them openly. [+ party_chair +] says that a party of fighters needs no lawyers. ?]
+
+- @discipline: Hold the Left Radicals to the congress's decisions.
+- @share: Give the Left Radicals a full share of the leadership.
+- @left: Let the Left take them on in Berlin.
+- @offer: Offer the Spartacists their seats back in the Zentrale.
+- @purge: Purge the "parliamentarians" from the districts.
+- @moscow: Ask Moscow to bless the new course.
+
+@discipline
+subtitle: The Spartacist line. Less peace, more party.
+view-if: heidelberg_outcome = 2
+on-arrival: ultraleft_satisfaction -= 8; luxemburgist_satisfaction += 6; unity -= 4; lean_luxemburgist += 2
+
+Districts that boycott the unions lose their subsidies from the Zentrale. The Left Radicals call it blackmail, and stay, for now.
+
+@share
+subtitle: The Right's way: a broad party, and a slow one.
+view-if: heidelberg_outcome = 2
+on-arrival: ultraleft_satisfaction += 8; luxemburgist_satisfaction -= 4; unionist_satisfaction += 3; unity += 6; lean_unionist += 2
+
+Wolffheim joins the Zentrale. Its meetings get longer. Its decisions get vaguer. The party does not split.
+
+@left
+subtitle: The Left's chance: Fischer against the Left Radicals, in the open.
+view-if: heidelberg_outcome = 2
+on-arrival: offensive_satisfaction += 8; ultraleft_satisfaction -= 6; district_berlin_loyalty += 6; lean_offensive += 2
+
+In the Berlin district, Ruth Fischer's people take on the Left Radicals at every members' meeting. They are winning.
+
+@offer
+subtitle: Unity first. The Left Radicals in the districts call it surrender.
+view-if: heidelberg_outcome = 3
+on-arrival: luxemburgist_satisfaction += 15; unionist_satisfaction += 6; ultraleft_satisfaction -= 6; unity += 6; lean_luxemburgist += 1
+
+Levi refuses a seat for himself but lets two of his friends accept. The party stays one, and argues about everything.
+
+@purge
+subtitle: The Left Radicals' line to its end. The Spartacists may leave.
+view-if: heidelberg_outcome = 3
+on-arrival: luxemburgist_satisfaction -= 15; unionist_satisfaction -= 10; ultraleft_satisfaction += 8; unity -= 6; lean_ultraleft += 2
+
+Officials who stood in elections or sat on union committees are removed. In Halle and Chemnitz, the members re-elect them the next week.
+
+@moscow
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Moscow does not like what it hears. Its blessing has a price.
+view-if: heidelberg_outcome = 3
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.independence -= 8;
+Q.comintern_member = 1;
+Q.luxemburgist_satisfaction += 6;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+The Executive in Moscow sends a long letter: the party must not boycott the unions, and it must not drive out the comrades who disagree. The new Zentrale prints the letter, and ignores half of it.

@@ -1,0 +1,34 @@
+title: The Red Army of Bavaria
+subtitle: Egelhofer needs men, rifles and officers.
+view-if: crisis_bavaria = 1 and bav_red_army_done = 0
+on-arrival: month_actions += 1; bav_red_army_done = 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= The Red Army of Bavaria
+
+Munich has a few thousand armed workers, some regiments of the old garrison that have elected their officers, and a great many speeches. Egelhofer wants every worker armed. The former officers who have come over want ranks, drill and obedience. The councils want the bourgeoisie disarmed first.
+
+- @arm_all: Arm every worker who will take a rifle.
+- @discipline: Give the army officers and discipline.
+- @disarm: Disarm the bourgeoisie and take hostages.
+
+@arm_all
+subtitle: The Left's answer, and Egelhofer's. Many rifles, little training.
+on-arrival: crisis_momentum += 8; red_guards_strength += 4; red_guards_arms += 4; militancy += 4; offensive_satisfaction += 5; lean_offensive += 2
+
+Rifles from the barracks are handed out at factory gates against a membership card or a council stamp. By the end of the week the Red Army has twenty thousand names on its lists.
+
+@discipline
+subtitle: The Spartacist and the Right's choice: a smaller army that can actually fight.
+on-arrival: crisis_momentum += 6; red_guards_strength += 2; red_guards_arms += 6; luxemburgist_satisfaction += 3; unionist_satisfaction += 3; ultraleft_satisfaction -= 4; lean_luxemburgist += 1; lean_unionist += 1
+
+Elected officers get the right to give orders in battle. The anarchists protest. The battalions that train behave like soldiers when the shooting starts.
+
+@disarm
+subtitle: The Left Radicals' class war. It strengthens us now, and gives the Whites their atrocity stories.
+on-arrival: crisis_momentum += 6; red_guards_arms += 5; repression += 4; bav_hostages = 1; ultraleft_satisfaction += 5; offensive_satisfaction += 3; lean_ultraleft += 2
+
+Red Guards search the villas of Bogenhausen for weapons and take the owners away for questioning. Some of them are not released.

@@ -1,0 +1,36 @@
+title: Safe Houses
+subtitle: Posters on every wall call for the murder of our leaders.
+view-if: crisis_january = 1 and jan_hide_done = 0
+on-arrival: month_actions += 1; jan_hide_done = 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Safe Houses
+
+"Workers, citizens! Kill their leaders! Kill Liebknecht!" The posters are paid for by the Anti-Bolshevist League, and the soldiers read them. Luxemburg still goes to the *Rote Fahne* office every day to write the paper. Liebknecht still sits with the Revolutionary Committee.
+
+- @flats: Move the leaders to safe flats.
+- @paper: The paper must appear: Luxemburg keeps writing.
+- @recall: Pull Liebknecht off the Revolutionary Committee.
+
+@flats
+subtitle: Costs 1 fund. Keeps the leaders out of sight; the radicals sneer.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: resources -= 1; leaders_hidden = 1; lux_risk -= 15; lieb_risk -= 15; ultraleft_satisfaction -= 3
+
+Comrades in Neukölln and Wilmersdorf lend rooms. The leaders move every two nights, and the couriers learn new addresses by heart.
+
+@paper
+subtitle: Workers need to hear her voice. So do the men hunting her.
+on-arrival: worker_support += 3; crisis_momentum += 4; luxemburgist_satisfaction += 4; lean_luxemburgist += 1; lux_risk += 10
+
+"What does the leadership do?" Luxemburg asks in the paper, and answers that it talks while the masses wait. Every issue is read to pieces.
+
+@recall
+subtitle: Jogiches' demand. The Spartacist line made plain; the Committee and the Left Radicals call it desertion.
+on-arrival: lieb_risk -= 12; crisis_momentum -= 5; ultraleft_satisfaction -= 8; offensive_satisfaction -= 4; luxemburgist_satisfaction += 5; lean_luxemburgist += 2; lean_ultraleft -= 1
+
+Liebknecht resists, then gives way. The Committee carries on without him, and without much else.

@@ -2,7 +2,7 @@ title: Elections to the National Assembly
 subtitle: Germany votes on 19 January.
 new-page: true
 tags: event
-view-if: year = 1919 and month = 1 and spartacist_uprising_done = 1
+view-if: year = 1919 and month = 1 and spartacist_uprising_done = 1 and crisis = 0
 max-visits: 1
 on-arrival: {!
 // historical results, 19 January 1919 (423 seats; the Centre and the BVP stood together)
@@ -14,20 +14,29 @@ Q.uspd_seats = 22; Q.dvp_seats = 19; Q.bvp_seats = 0; Q.nsdap_seats = 0;
 
 = Elections to the National Assembly
 
-Germany votes for a National Assembly that will write the new constitution, the first national election in which women can vote. Our founding congress voted to boycott it, against the Zentrale's advice.
+[? if luxemburg_alive = 0 : Four days after the murders of 15 January, ?][? if luxemburg_alive = 1 and liebknecht_alive = 0 : Four days after the murder of Liebknecht, ?][? if luxemburg_alive = 1 and liebknecht_alive = 1 : Four days after the manhunt of 15 January, ?] Germany votes for a National Assembly that will write the new constitution. It is the first national election in which women can vote. Ebert's party expects to win it outright.
+
+Our founding congress voted by 62 to 23 to boycott it, against the Zentrale. [? if luxemburg_alive = 1 : Luxemburg still thinks the boycott is a mistake: the Assembly is a fortress of the counter-revolution, and we should storm it from inside, as a platform. ?][? if luxemburg_alive = 0 : Luxemburg argued that we must use even the Assembly as a platform. She is dead, and her argument is now a question of loyalty to her memory. ?] The lists close in days.
 
 - @boycott: Respect the congress and boycott the election.
+- @active: Turn the boycott into a day of protest.
 - @candidates: Overrule the congress and stand candidates where we can.
 - @vote_uspd: Tell workers to vote for the USPD.
 
 @boycott
-subtitle: The congress decided; the Zentrale obeys.
-on-arrival: ultraleft_satisfaction += 5; luxemburgist_satisfaction -= 5; worker_support -= 2
+subtitle: The Left Radicals' line, and the congress's decision. The Zentrale obeys.
+on-arrival: ultraleft_satisfaction += 6; luxemburgist_satisfaction -= 4; worker_support -= 2; lean_ultraleft += 2; election_boycott = 1
 
-Our posters call on workers to stay away. Most vote anyway, for the SPD and the USPD.
+Our posters call on workers to stay away. Most vote anyway, for the SPD and the Independents.
+
+@active
+subtitle: The Left's version: demonstrations at the polling stations. Militant, and dangerous.
+on-arrival: ultraleft_satisfaction += 4; offensive_satisfaction += 6; militancy += 6; repression += 6; worker_support -= 3; lean_offensive += 2; lean_ultraleft += 1; election_boycott = 1
+
+Our marchers shout down speakers outside the polling stations in Neukölln and Hamborn. The police make arrests, and the voters step round them.
 
 @candidates
-subtitle: [? if lock_elections = 1 : Against the party line: costs 10 Unity. ?] Overruling a congress costs a further 10 Unity, and it is very late to register lists.
+subtitle: [? if lock_elections = 1 : Against the party line: costs Unity. ?] The Spartacist position. Overruling a congress costs Unity too, and it is very late to register lists.
 choose-if: lock_elections < 2
 unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking part in bourgeois elections.
 on-arrival: {!
@@ -35,16 +44,24 @@ if (Q.lock_elections == 1) {
     Q.unity -= 10;
     Q[Q.leading_faction + '_satisfaction'] -= 10;
 }
-Q.unity -= 10;
-Q.ultraleft_satisfaction -= 20;
+Q.unity -= 8;
+Q.ultraleft_satisfaction -= 10;
+Q.luxemburgist_satisfaction += 6;
+Q.unionist_satisfaction += 4;
 Q.worker_support += 4;
+Q.lean_luxemburgist += 2;
+Q.lean_ultraleft -= 2;
 Q.election_boycott = 0;
+// a few seats, taken mostly from the Independents
+Q.kpd_seats = Q.luxemburg_alive ? 4 : 2;
+Q.uspd_seats -= Q.kpd_seats - 1;
+Q.spd_seats -= 1;
 !}
 
-Our lists appear in a handful of constituencies. We win few votes, but a principle has been set: the Zentrale, not the congress, has the last word. The districts will remember.
+Our lists appear in Berlin, Saxony and a handful of other constituencies. We win [+ kpd_seats +] seats. A principle has been set: the Zentrale, not the congress, has the last word. The districts will remember.
 
 @vote_uspd
-subtitle: [? if lock_united_front = 1 : Against the party line: costs 10 Unity. ?] Helps the Independents; the Left Radicals are appalled.
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. Helps the Independents; the Left Radicals are appalled.
 choose-if: lock_united_front < 2
 unavailable-subtitle: The [+ leading_faction_adj +] line forbids any support for social democrats.
 on-arrival: {!
@@ -53,7 +70,12 @@ if (Q.lock_united_front == 1) {
     Q[Q.leading_faction + '_satisfaction'] -= 10;
 }
 Q.uspd_relation += 12;
+Q.uspd_seats += 2;
+Q.spd_seats -= 2;
 Q.ultraleft_satisfaction -= 10;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+Q.election_boycott = 1;
 !}
 
-The Independents gain votes in the workers' districts, and they know whom to thank.
+The Independents gain votes in the workers' districts, and they know whom to thank. Officially, the party still boycotts.

@@ -1,0 +1,58 @@
+title: Munich Is Not Alone
+subtitle: The rest of Germany must help, or Munich falls.
+view-if: crisis_bavaria = 1 and bav_solidarity_done = 0
+on-arrival: month_actions += 1; bav_solidarity_done = 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Munich Is Not Alone
+
+In the Ruhr the miners are striking for the six-hour shift. In Saxony and Württemberg the workers are restless. If the rest of the Reich moved now, Noske could not spare thirty thousand men for Bavaria. The party, though, is banned in half of Germany, and its paper is printed in cellars.
+
+- @strike: Call a general strike across the Reich for Munich.
+- @volunteers: Send volunteers from Saxony and Thuringia.
+- @moscow: Ask Moscow and Budapest to speak for Munich.
+
+@strike
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left's answer: tie Noske down at home. A great risk for every district.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids a political mass strike of this kind.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.bav_solidarity += 1;
+Q.crisis_momentum += 7;
+Q.militancy += 8;
+Q.repression += 5;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+The call goes out from the illegal Zentrale. In the Ruhr and in Saxony, hundreds of thousands come out. Noske has to keep regiments at home that he meant for Bavaria.
+
+@volunteers
+subtitle: The Spartacist way: a few hundred reliable comrades, and the districts barely weakened.
+on-arrival: bav_solidarity += 1; crisis_momentum += 4; district_saxony_members -= 0.2; district_thuringia_members -= 0.1; luxemburgist_satisfaction += 3; lean_luxemburgist += 1
+
+Small groups cross the Thuringian Forest on foot and by goods train. Some are arrested at Hof. The rest reach Munich with rifles in their luggage.
+
+@moscow
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Lenin has already sent greetings. Words do not stop artillery, but they help.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids turning to Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 5;
+}
+Q.crisis_momentum += 3;
+Q.world_revolution += 4;
+Q.independence -= 3;
+Q.offensive_satisfaction += 3;
+Q.lean_offensive += 1;
+!}
+
+Lenin's radio message asks the Bavarian councils whether they have armed the workers, taken the banks and housed the poor in the rich men's flats. It is read out in every barracks in Munich.

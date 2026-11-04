@@ -1,0 +1,58 @@
+title: Calling Out the Factories
+subtitle: The big plants of Berlin are holding meetings.
+view-if: crisis_january = 1 and jan_strike_done = 0
+on-arrival: month_actions += 1; jan_strike_done = 1
+frequency: 100
+is-card: true
+new-page: true
+tags: crisis
+
+= Calling Out the Factories
+
+At Schwartzkopff, AEG and Siemens the workers are holding meetings. Some want a general strike until Ebert goes. Others pass resolutions against "the fratricide" and demand that all three socialist parties make peace, and that the leaders on every side step down.
+
+- @general: Call a general strike.
+- @demo: Bring the factories to a mass demonstration.
+- @councils: Let each factory council decide for itself.
+- @unity: Take up the call for workers' unity.
+
+@general
+subtitle: The Left's call. Raises the stakes on both sides.
+on-arrival: crisis_momentum += 8; militancy += 8; worker_support += 2; repression += 4; offensive_satisfaction += 6; lean_offensive += 2
+
+The trams stop. The power stations are argued over, shift by shift. Berlin holds its breath.
+
+@demo
+subtitle: The Spartacist and shop stewards' tradition: numbers in the street, not barricades.
+on-arrival: crisis_momentum += 5; worker_support += 2; uspd_relation += 4; luxemburgist_satisfaction += 4; lean_luxemburgist += 1
+
+Two hundred thousand stand in the cold in the Tiergarten. They are many, and they are waiting for someone to tell them what to do.
+
+@councils
+subtitle: The Left Radicals' answer: no orders from above.
+on-arrival: crisis_momentum += 3; ultraleft_satisfaction += 6; lean_ultraleft += 2; unity -= 2
+
+Each factory decides. Some strike, some march, some go back to work. The Zentrale learns the results from the newspapers.
+
+@unity
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer. Workers like it; the fighters in the buildings do not.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any truce with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.crisis_momentum -= 3;
+Q.worker_support += 5;
+Q.spd_relation += 5;
+Q.uspd_relation += 5;
+Q.unionist_satisfaction += 8;
+Q.ultraleft_satisfaction -= 6;
+Q.lean_unionist += 2;
+Q.jan_talks = 1;
+Q.lux_risk -= 5;
+Q.lieb_risk -= 5;
+!}
+
+Our speakers support the unity resolutions. In the plants we gain a hearing; in the newspaper district we lose friends.

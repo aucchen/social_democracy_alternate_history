@@ -1,0 +1,66 @@
+title: The Party Underground
+subtitle: Banned in practice, the party must learn to live in secret.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 5 and crisis = 0
+max-visits: 1
+priority: 0.5
+
+= The Party Underground
+
+The state of siege still holds in Berlin and much of the Reich. Meetings are broken up, district offices searched, organisers held for weeks without charge. *Die Rote Fahne* appears when it can, printed in cellars under false names. Dues hardly come in at all.
+
+[? if levi_chair = 1 : Levi wants an apparatus: couriers, safe addresses, a central treasury and district secretaries who answer to the Zentrale. ?][? if levi_chair = 0 : [+ party_chair +] and Levi want an apparatus: couriers, safe addresses, a central treasury and district secretaries who answer to the Zentrale. ?] The big districts say they managed the revolution without secretaries and can manage illegality without them too.
+
+- @apparatus: Build a central illegal apparatus.
+- @districts: Let each district organise itself in secret.
+- @legal: Work through legal fronts: councils, sports clubs, the unions.
+- @moscow: Ask Moscow for money to pay organisers.
+
+@apparatus
+subtitle: The Spartacist answer. The districts lose their freedom; the Zentrale gains a grip.
+on-arrival: {!
+Q.underground_line = 1;
+for (var d of Q.districts) {
+    Q['district_' + d + '_loyalty'] += 6;
+}
+Q.repression -= 3;
+Q.ultraleft_satisfaction -= 8;
+Q.luxemburgist_satisfaction += 6;
+Q.lean_luxemburgist += 2;
+Q.lean_ultraleft -= 1;
+Q.unity -= 2;
+!}
+
+Every district gets a secretary chosen in Berlin and a courier route to the Zentrale. In Hamburg and Bremen they call it the party of the bureaucrats.
+
+@districts
+subtitle: The Left Radicals' answer: the districts are the party.
+on-arrival: underground_line = 2; ultraleft_satisfaction += 8; lean_ultraleft += 2; repression += 2; district_hamburg_loyalty -= 4; district_bremen_loyalty -= 4; district_berlin_loyalty -= 4
+
+Each district goes its own way. Some are invisible to the police, some are full of informers, and the Zentrale cannot tell which is which.
+
+@legal
+subtitle: The Right's answer: stay where the workers are, legally.
+choose-if: lock_union_work < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids work in the reformist unions.
+on-arrival: {!
+if (Q.lock_union_work == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.underground_line = 3;
+Q.worker_support += 4;
+Q.repression -= 4;
+Q.unionist_satisfaction += 6;
+Q.ultraleft_satisfaction -= 6;
+Q.lean_unionist += 2;
+!}
+
+Communists turn up as treasurers of workers' cycling clubs, as factory councillors and as union delegates. The police find nothing to ban.
+
+@moscow
+subtitle: Costs some independence. The money is real.
+on-arrival: underground_line = 4; resources += 2; independence -= 6; offensive_satisfaction += 3; luxemburgist_satisfaction -= 2; lean_offensive += 1
+
+A courier from Moscow arrives with diamonds sewn into his coat lining. They will be sold in Amsterdam, and the party's organisers will be paid for a few months.

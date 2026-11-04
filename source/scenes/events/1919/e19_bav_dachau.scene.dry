@@ -1,0 +1,46 @@
+title: Victory at Dachau
+subtitle: The Red Army beats Bamberg's troops. Noske sends his own.
+new-page: true
+tags: event
+view-if: crisis_bavaria = 1 and crisis_time = 2
+max-visits: 1
+
+= Victory at Dachau
+
+North of Munich, on 16 April, the Red Army met the troops Hoffmann had scraped together. Ernst Toller, who commands on that front, had not wanted to fight. His men fought anyway and took Dachau. Bamberg's volunteers ran.
+
+It may be the only victory the council republic ever wins. Hoffmann has swallowed his Bavarian pride and asked Berlin for help. Noske is sending General von Oven with Prussian and Württemberg troops and the Freikorps of Epp and Oberland, more than thirty thousand men with artillery and aircraft. The Red Army has perhaps fifteen thousand. [? if bav_power = 1 : In Munich, the Executive Council has its back to the wall and its hand on the factories. ?][? if bav_power = 2 : In Munich, the councils' executive argues while our party fights in the ranks. ?][? if bav_power = 3 : In Munich, the coalition executive holds together, just. ?]
+
+- @advance: Advance north and carry the revolution to Augsburg and Regensburg.
+- @dig_in: Dig in around Munich and train the army.
+- @truce: Let Toller offer Bamberg a truce.
+
+@advance
+subtitle: The Left's answer: a revolution that stands still is lost.
+on-arrival: {!
+if (Q.crisis_momentum >= 55) {
+    Q.crisis_momentum += 10;
+    Q.bav_peasants += 1;
+    Q.district_bavaria_members += 0.4;
+} else {
+    Q.crisis_momentum -= 6;
+    Q.red_guards_strength -= 1;
+}
+Q.militancy += 5;
+Q.offensive_satisfaction += 6;
+Q.lean_offensive += 2;
+!}
+
+[? if crisis_momentum >= 60 : Red columns reach Augsburg, where the workers rise to meet them, and the market towns on the Danube send delegates. Bavaria is no longer only Munich. ?][? if crisis_momentum < 60 : The advance stalls in the rain at Pfaffenhofen. The Red Army loses men it cannot replace. ?]
+
+@dig_in
+subtitle: The Spartacist caution: discipline, trenches, and time.
+on-arrival: crisis_momentum += 5; red_guards_strength += 2; red_guards_arms += 3; luxemburgist_satisfaction += 4; lean_luxemburgist += 1
+
+Trenches are dug along the Würm and the Isar. Egelhofer's men learn to march in step, and some of them learn to shoot.
+
+@truce
+subtitle: The Right's answer, and Toller's. Bamberg may talk, if it fears the cost.
+on-arrival: bav_talks += 1; crisis_momentum -= 2; unionist_satisfaction += 6; offensive_satisfaction -= 6; lean_unionist += 2
+
+Toller sends an offer of a truce to Bamberg on his own authority. [? if bav_power = 1 : The Executive Council is furious, but it does not withdraw the offer. ?] Hoffmann does not answer at once. That itself is news.

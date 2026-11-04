@@ -1,0 +1,53 @@
+title: The Bremen Soviet Republic
+subtitle: Noske's troops are marching on Bremen.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 2 and crisis = 0
+max-visits: 1
+priority: 2
+
+= The Bremen Soviet Republic
+
+On 10 January, while Berlin was fighting, the Communists and the Independents of Bremen proclaimed a Soviet Republic. The city's council of people's commissars disarmed the bourgeois militia and took over the banks. The Bremen Left Radicals are the oldest communists in Germany. They do not much care what the Zentrale thinks.
+
+Now the Senate's bankers have refused the city credit, and Noske has sent the Gerstenberg Division and the Caspari Freikorps. The Hamburg workers' council threatens to march to Bremen's aid. The commissars ask the Zentrale for help.
+
+- @defend: Call on Hamburg and the Ruhr to send fighters.
+- @strike: Call a solidarity strike along the coast.
+- @handover: Advise Bremen to hand over power without a fight.
+
+@defend
+subtitle: [? if lock_uprising = 1 : Against the party line: costs Unity. ?] The Left Radicals and the Left: Bremen must not fall alone. A real battle.
+choose-if: lock_uprising < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids armed action.
+on-arrival: {!
+if (Q.lock_uprising == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.bremen_line = 1;
+Q.militancy += 8;
+Q.repression += 5;
+Q.district_bremen_members -= 0.4;
+Q.district_bremen_loyalty += 15;
+Q.district_hamburg_loyalty += 8;
+Q.red_guards_strength -= 0.5;
+Q.ultraleft_satisfaction += 10;
+Q.offensive_satisfaction += 5;
+Q.lean_ultraleft += 2;
+Q.lean_offensive += 1;
+!}
+
+A few hundred men come from Hamburg; the rest of the Hamburg council talks. On 4 February the Gerstenberg Division storms the city. Dozens die, and the Soviet Republic with them. In Bremen they remember that the Zentrale stood with them.
+
+@strike
+subtitle: The Spartacist way: mass action, not a lost battle.
+on-arrival: bremen_line = 2; militancy += 4; worker_support += 2; repression += 3; district_bremen_loyalty += 5; luxemburgist_satisfaction += 4; lean_luxemburgist += 1; district_bremen_members -= 0.2
+
+The shipyards of Hamburg and Wilhelmshaven stop for a day. It is not enough. On 4 February the troops take Bremen after a day of fighting. The strike has shown that Bremen was not alone, and that it was not enough.
+
+@handover
+subtitle: The Right's realism. Saves lives; the Bremen comrades will never forgive it.
+on-arrival: bremen_line = 3; repression -= 2; district_bremen_loyalty -= 15; ultraleft_satisfaction -= 10; unionist_satisfaction += 6; lean_unionist += 2; lean_ultraleft -= 1
+
+The Zentrale's courier tells the commissars that nobody is coming. Some of them want to negotiate; the rest want to fight. The troops enter Bremen on 4 February all the same. Fewer die than might have, and the Bremen radicals call the Zentrale cowards.

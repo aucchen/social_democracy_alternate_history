@@ -1,0 +1,56 @@
+title: Eisner Is Murdered
+subtitle: 21 February. Munich is in turmoil.
+new-page: true
+tags: event
+view-if: year = 1919 and month = 2 and crisis = 0
+max-visits: 1
+priority: 0.5
+
+= Eisner Is Murdered
+
+On the morning of 21 February, Kurt Eisner, the Independent premier of Bavaria, walked to the Landtag with his resignation in his pocket. His party had been crushed at the polls. A young aristocrat, Count Anton von Arco auf Valley, shot him in the back.
+
+Within hours a butcher's apprentice, a member of a workers' council, shot the Social Democratic leader Erhard Auer in the chamber. The Landtag has fled. A Central Council of the councils rules Munich, and the barracks fly red flags. In the beer halls, the anarchists Erich Mühsam and Gustav Landauer speak of a council republic.
+
+Our Munich group is small and divided. The Zentrale must decide what it wants from Bavaria.
+
+- @levine: Send Eugen Leviné to take the Munich party in hand.
+- @republic: Call for a Bavarian council republic now.
+- @congress: Back the Congress of Councils and the Independents.
+- @anarchists: Work with Mühsam and Landauer.
+
+@levine
+subtitle: The Spartacist answer: a disciplined party first, and no adventures.
+on-arrival: levine_sent = 1; bav_prep += 1; district_bavaria_loyalty += 15; district_bavaria_members += 0.3; luxemburgist_satisfaction += 5; offensive_satisfaction -= 2; lean_luxemburgist += 2
+
+Leviné, a Petersburg-born veteran of 1905 who ran our paper in the Ruhr, takes the night train to Munich. Within weeks the Munich party has membership cards, a printing press and a line.
+
+@republic
+subtitle: The Left's answer. Munich is ready, they say. Is the rest of Bavaria?
+on-arrival: bav_prep += 2; militancy += 6; district_bavaria_members += 0.5; district_bavaria_loyalty += 5; offensive_satisfaction += 8; lean_offensive += 2; repression += 3
+
+Our speakers call for a Bavarian Soviet Republic at every meeting. The barracks applaud. The peasants of the Bavarian countryside hear about it from their priests.
+
+@congress
+subtitle: [? if lock_united_front = 1 : Against the party line: costs Unity. ?] The Right's answer: keep the councils' alliance with the Independents together.
+choose-if: lock_united_front < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids any alliance with the social democrats.
+on-arrival: {!
+if (Q.lock_united_front == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.uspd_relation += 6;
+Q.worker_support += 2;
+Q.unionist_satisfaction += 6;
+Q.lean_unionist += 2;
+Q.bav_prep -= 1;
+!}
+
+We support the Congress of Councils and its uneasy pact with the Majority Socialists. In March the Landtag returns and elects Johannes Hoffmann premier. The councils remain, for now.
+
+@anarchists
+subtitle: The Left Radicals' instinct: councils without a party or a state.
+on-arrival: bav_prep += 1; ultraleft_satisfaction += 6; lean_ultraleft += 2; district_bavaria_members += 0.2; unity -= 2
+
+Our Munich comrades join the anarchists' meetings. There is a lot of poetry, and very little organisation.
