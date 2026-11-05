@@ -1,0 +1,72 @@
+title: Work a Delegation
+subtitle: One district's delegates have not made up their minds.
+view-if: congress = 1 and congress_closing = 0
+on-arrival: {!
+Q.month_actions += 1;
+RG.congress.target();
+Q.sys_outcome = 0;
+!}
+frequency: 100
+is-card: true
+new-page: true
+tags: congress
+
+= The Delegation from [+ congress_target_name +]
+
+The [+ congress_target_name +] delegation sits together near the back of the hall: [+ congress_target_opposed +] delegates who mostly follow the [+ congress_target_faction_name +] and have not yet said how they will vote. Their district secretary is smoking in the corridor, and waiting to be asked.
+
+A delegate votes the way his district told him to, unless someone gives him a better reason before the vote.
+
+- @speakers: Send our best speakers to their caucus.
+- @promise: Promise the district a voice in the new Zentrale.
+- @secretary: Lean on the district secretary.
+- @leave: Leave them to make up their own minds.
+
+@speakers
+subtitle: Costs 1 fund. Wins over part of the delegation, honestly.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds for the hall and the beer.
+on-arrival: {!
+Q.resources -= 1;
+Q.congress_last_moved = RG.congress.convert(Q.congress_target, 0.28 + Math.random() * 0.1);
+RG.congress.tally();
+Q['lean_' + Q.congress_backing] += 1;
+!}
+
+Our speakers argue with the [+ congress_target_name +] delegates until two in the morning. [? if congress_last_moved > 0 : [+ congress_last_moved +] of them come over to us. ?][? if congress_last_moved = 0 : Nobody changes sides, but nobody walks out either. ?]
+
+@promise
+subtitle: Wins over many of them. The rest of the party will notice the price.
+on-arrival: {!
+Q.congress_last_moved = RG.congress.convert(Q.congress_target, 0.4);
+RG.congress.tally();
+RG.district(Q.congress_target, {loyalty: 5});
+RG.congress.bitter(1);
+Q.unity -= 2;
+Q[Q.leading_faction + '_satisfaction'] -= 3;
+!}
+
+The district will have one of its own in the Zentrale, and a say in who edits its paper. [? if congress_last_moved > 0 : [+ congress_last_moved +] delegates come over to us. ?][? if congress_last_moved = 0 : The delegates thank us, and say they will think about it. ?] Other districts start asking what they will get.
+
+@secretary
+subtitle: The district apparatus can deliver its delegates. Bad blood follows.
+choose-if: congress_target_loyal = 1
+unavailable-subtitle: The district's apparatus does not answer to the Zentrale.
+on-arrival: {!
+Q.congress_last_moved = RG.congress.convert(Q.congress_target, 0.35);
+RG.congress.tally();
+RG.district(Q.congress_target, {loyalty: -6});
+RG.congress.bitter(2);
+!}
+
+The secretary has a word with the delegates whose wages the district pays. [? if congress_last_moved > 0 : [+ congress_last_moved +] of them discover that they agree with us after all. ?][? if congress_last_moved = 0 : They are all volunteers, it turns out. ?] The others will remember how it was done.
+
+@leave
+subtitle: Costs nothing. Most of them will vote as they came.
+on-arrival: {!
+Q.congress_last_moved = (Math.random() < 0.5) ? RG.congress.convert(Q.congress_target, 0.1) : 0;
+RG.congress.tally();
+Q.unity += 1;
+!}
+
+We leave the [+ congress_target_name +] delegation alone. [? if congress_last_moved > 0 : Some of them notice, and like it: [+ congress_last_moved +] come over to us on their own. ?][? if congress_last_moved = 0 : They vote as they came. ?]

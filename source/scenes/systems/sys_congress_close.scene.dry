@@ -1,0 +1,92 @@
+title: The Vote
+subtitle: The congress decides.
+new-page: true
+tags: event
+view-if: congress = 1 and congress_closing = 1 and congress_own_close = 0
+priority: 9
+on-arrival: {!
+// the generic close: used when the writer of a congress did not write their own
+Q.sys_cg_walkout_lost = (Q.congress_walkout && !Q.congress_won) ? 1 : 0;
+Q.sys_cg_was_lead = Q.congress_backing_is_lead;
+RG.congress.end();
+!}
+
+= [+ congress_name +]: the Vote
+
+The debate is over. The delegates vote by show of mandate cards, district by district, while the tellers count. At stake: [+ congress_stake +].
+
+The motion of the **[+ congress_result_name +]** is carried. [? if congress_won = 1 : It is ours: [+ congress_votes_for +]% of the delegates voted with us. ?][? if congress_won = 0 : It is not ours: we had [+ congress_votes_for +]% of the delegates. ?] [? if congress_close_call = 1 : It was very close. ?]
+
+[? if congress_leadership_changed = 1 : The new Zentrale is elected on the last evening. The [+ congress_result_name +] hold it now, and the party line is theirs. ?][? if congress_won = 1 and congress_has_deal = 1 : The current that voted with us takes its seats in the Zentrale, as promised. ?][? if sys_cg_walkout_lost = 1 : We threatened to walk out if we lost. The delegates are waiting to see if we meant it. ?]
+
+- @magnanimous: Offer the losers places on the commissions.
+- @press_home: Press home the victory.
+- @accept: Accept the verdict of the congress.
+- @walk_out: Carry out the threat: our delegates leave the hall.
+- @swallow: Swallow it, and stay.
+
+@magnanimous
+subtitle: The losers are reconciled, a little.
+view-if: congress_won = 1
+on-arrival: {!
+Q.unity += 5;
+for (var f of Q.congress_positions) {
+    if (f != Q.congress_result && Q[f + '_satisfaction'] !== undefined) {
+        Q[f + '_satisfaction'] += 6;
+    }
+}
+!}
+
+The beaten minority gets seats on the trade union commission and the editorial board. Nobody is grateful, but nobody leaves.
+
+@press_home
+subtitle: The line is ours, and we use it. The losers suffer.
+view-if: congress_won = 1
+on-arrival: {!
+Q['lean_' + Q.congress_result] += 2;
+for (var f of Q.congress_positions) {
+    if (f != Q.congress_result && Q[f + '_satisfaction'] !== undefined) {
+        Q[f + '_satisfaction'] -= 8;
+    }
+}
+Q.unity -= 4;
+!}
+
+The congress resolution is printed in full on the front page of the Rote Fahne, with the names of those who voted against it underneath.
+
+@accept
+subtitle: The party respects a Zentrale that respects the congress.
+view-if: congress_won = 0 and sys_cg_walkout_lost = 0
+on-arrival: {!
+Q.unity += 3;
+Q[Q.congress_result + '_satisfaction'] += 3;
+!}
+
+We accept the decision and say so from the platform. The congress ends with the Internationale, sung by everybody, more or less in tune.
+
+@walk_out
+subtitle: Our delegates leave with us. The party may not recover from it.
+view-if: sys_cg_walkout_lost = 1
+on-arrival: {!
+Q.unity -= 15;
+Q[Q.congress_result + '_satisfaction'] -= 20;
+Q[Q.congress_backing + '_satisfaction'] += 8;
+if (Q.congress_leadership_changed && Q.congress_old_leader == Q.congress_backing) {
+    // the new majority rules the hall, but our delegates hold the Zentrale's districts
+    Q.leading_faction = Q.congress_old_leader;
+    Q.junior_faction = 0;
+}
+RG.ledger('Our delegates walked out of ' + Q.congress_name + '.', 'walkout_' + Q.time);
+!}
+
+Our delegates stand up together and walk out of the hall. The congress goes on without them, and elects a Zentrale that half the districts do not recognise. In the morning, there are two leaderships, two sets of instructions and one party, for now.
+
+@swallow
+subtitle: We stay. Our own current will not forgive the climbdown.
+view-if: sys_cg_walkout_lost = 1
+on-arrival: {!
+Q[Q.congress_backing + '_satisfaction'] -= 12;
+Q.unity -= 3;
+!}
+
+We stay in our seats. The [+ congress_result_name +] make sure everybody noticed.

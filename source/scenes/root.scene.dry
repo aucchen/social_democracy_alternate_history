@@ -1,5 +1,12 @@
 title: Root Scene
 new-page: true
+on-arrival: {!
+// load the systems library (RG helpers) as soon as the page starts, before
+// any save game is loaded; post_event checks again on every turn
+if (this.game.scenes.sys_lib) {
+    this._runActions(this.game.scenes.sys_lib.onArrival);
+}
+!}
 go-to: post_event if started = 1; start_menu if started = 0
 
 @start_menu
@@ -186,6 +193,16 @@ Q.levi_advisor = 1;
 Q.timers = ['dues', 'recruitment', 'rote_fahne', 'organisers', 'factory_councils', 'unions', 'uspd', 'moscow'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
+}
+
+// ------------------------------------------------------------ systems (W2)
+// districts' militancy, the comrades, Moscow's Executive, the news, the
+// ledger: starting values are set by the systems library (sys_lib)
+if (typeof RG === 'undefined' && this.game.scenes.sys_lib) {
+    this._runActions(this.game.scenes.sys_lib.onArrival);
+}
+if (typeof RG !== 'undefined') {
+    RG.ensureState();
 }
 !}
 new-page: true

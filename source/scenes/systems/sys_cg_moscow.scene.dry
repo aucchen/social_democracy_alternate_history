@@ -1,0 +1,88 @@
+title: Moscow's Letter
+subtitle: The Executive has written to the congress.
+view-if: congress = 1 and congress_closing = 0 and congress_used_moscow = 0 and comintern_member = 1
+on-arrival: {!
+Q.month_actions += 1;
+Q.congress_used_moscow = 1;
+RG.congress.tally();
+Q.sys_outcome = 0;
+!}
+frequency: 100
+is-card: true
+new-page: true
+tags: congress
+
+= Moscow's Letter
+
+A courier from the Executive has brought a letter to the congress, signed by Zinoviev for the Communist International. It is long, it quotes Lenin twice, and it leaves no doubt that Moscow stands with the **[+ moscow_backs_name +]**.
+
+[? if congress_moscow_with_us = 1 : That is our side. ?][? if congress_moscow_with_us = 0 : That is not our side. ?] The delegates know a letter has come. They do not yet know what it says.
+
+- @read: Read the letter to the congress.
+- @read_anyway: Read it, as discipline demands.
+- @suppress: Keep the letter in the drawer.
+- @envoy: Let the envoy speak for the Executive.
+
+@read
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Wins delegates who look to Moscow. Our independence suffers a little.
+view-if: congress_moscow_with_us = 1
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 5;
+    Q[Q.leading_faction + '_satisfaction'] -= 5;
+}
+RG.congress.sway(0.06 + Math.random() * 0.03);
+Q.independence -= 3;
+RG.ecci('zinoviev', 3);
+!}
+
+The chair reads the letter aloud. [? if congress_last_moved > 0 : Delegates who were wavering do not waver any more: [+ congress_last_moved +] of them come over to us. ?] The rest mutter that the German party used to decide its own questions.
+
+@read_anyway
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Some delegates go over to Moscow's side, ours among them. Moscow will be grateful.
+view-if: congress_moscow_with_us = 0
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 5;
+    Q[Q.leading_faction + '_satisfaction'] -= 5;
+}
+RG.congress.swayTo(Q.moscow_backs, 0.07);
+Q.independence -= 4;
+RG.ecci('all', 5);
+!}
+
+We read the letter in full, because a section of the International does not hide the International's letters from its own congress. The [+ moscow_backs_name +] cheer. [+ congress_last_moved +] delegates go over to them.
+
+@suppress
+subtitle: Our independence grows, and Moscow will hear of it. The letter may leak.
+view-if: congress_moscow_with_us = 0
+on-arrival: {!
+Q.independence += 3;
+RG.ecci('all', -6);
+if (Math.random() < 0.4) {
+    Q.sys_outcome = 2;
+    RG.congress.bitter(3);
+    RG.congress.swayTo(Q.moscow_backs, 0.04);
+} else {
+    Q.sys_outcome = 1;
+}
+!}
+
+The letter stays in the Zentrale's drawer. [? if sys_outcome = 1 : Nobody outside the Zentrale learns what it said. ?][? if sys_outcome = 2 : By the second day, the [+ moscow_backs_name +] are quoting it from the floor. The delegates want to know what else we are hiding. ?]
+
+@envoy
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] [+ comintern_rep +] can move the hall like nobody else. Moscow's man in our congress is a precedent.
+view-if: comintern_rep and congress_moscow_with_us = 1
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 5;
+    Q[Q.leading_faction + '_satisfaction'] -= 5;
+}
+RG.congress.sway(0.1);
+Q.independence -= 6;
+RG.ecci('all', 3);
+!}
+
+[+ comintern_rep +] takes the floor and speaks for the whole International. [? if congress_last_moved > 0 : [+ congress_last_moved +] delegates come over to us. ?] Afterwards, some delegates ask who elected him.

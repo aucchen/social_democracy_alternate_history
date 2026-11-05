@@ -1,0 +1,61 @@
+title: A Seat in the Zentrale
+subtitle: Another current might vote with us, for a price.
+view-if: congress = 1 and congress_closing = 0 and congress_used_trade = 0 and congress_has_trade_a = 1
+on-arrival: {!
+Q.month_actions += 1;
+Q.congress_used_trade = 1;
+Q.sys_outcome = 0;
+!}
+frequency: 100
+is-card: true
+new-page: true
+tags: congress
+
+= A Seat in the Zentrale
+
+In a back room of the congress hotel, someone from the [+ congress_trade_a_name +] has let it be known that their delegates are not bound by anything they said in public. [? if congress_has_trade_b = 1 : The [+ congress_trade_b_name +] are listening at the same door. ?]
+
+A seat in the Zentrale is worth more than a speech. It is also a seat we will have to share afterwards, with people who will use it.
+
+- @offer_a: Offer the [+ congress_trade_a_name +] a seat.
+- @offer_b: Offer the [+ congress_trade_b_name +] a seat.
+- @none: Keep the Zentrale whole.
+
+@offer_a
+subtitle: If they accept, their delegates vote with us. If we win, they share the Zentrale, and their red lines with it.
+on-arrival: {!
+if (Math.random() < 0.75) {
+    Q.sys_outcome = 1;
+    RG.congress.deal(Q.congress_trade_a);
+    Q[Q.leading_faction + '_satisfaction'] -= 3;
+} else {
+    Q.sys_outcome = 2;
+    RG.congress.bitter(2);
+}
+!}
+
+[? if sys_outcome = 1 : They accept. When the vote comes, the delegates of the [+ congress_trade_a_name +] will be with us. Our own people grumble about the price. ?][? if sys_outcome = 2 : They take the offer back to their caucus, and the caucus throws it out. By the evening the whole hall knows we tried. ?]
+
+@offer_b
+subtitle: If they accept, their delegates vote with us. If we win, they share the Zentrale, and their red lines with it.
+view-if: congress_has_trade_b = 1
+on-arrival: {!
+if (Math.random() < 0.75) {
+    Q.sys_outcome = 1;
+    RG.congress.deal(Q.congress_trade_b);
+    Q[Q.leading_faction + '_satisfaction'] -= 3;
+} else {
+    Q.sys_outcome = 2;
+    RG.congress.bitter(2);
+}
+!}
+
+[? if sys_outcome = 1 : They accept. When the vote comes, the delegates of the [+ congress_trade_b_name +] will be with us. Our own people grumble about the price. ?][? if sys_outcome = 2 : They take the offer back to their caucus, and the caucus throws it out. By the evening the whole hall knows we tried. ?]
+
+@none
+subtitle: Our own current is proud of it.
+on-arrival: {!
+Q[Q.congress_backing + '_satisfaction'] += 3;
+!}
+
+We will win this on the argument, or not at all.
