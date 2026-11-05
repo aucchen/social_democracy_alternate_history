@@ -3,405 +3,223 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <meta prefix="ifiction: http://babel.ifarchive.org/protocol/iFiction/"
         property="ifiction:ifid" content="7FCDF039-2B77-4179-B795-CBAFA65253AA">
     <title>Red Germany: 1919–1923</title>
+    <link rel="preload" href="fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/source-serif-4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" type="text/css" href="fonts.css">
     <link rel="stylesheet" type="text/css" href="game.css">
+    <script>
+      // pick the colour scheme before the first paint, so the page does not flash
+      (function() {
+        try {
+          var saved = localStorage['rg_dark_mode'];
+          var dark = saved ? saved === 'true' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) { document.documentElement.classList.add('dark-pre'); }
+        } catch (e) {}
+      }());
+    </script>
     <script src="jquery-1.11.1.min.js"></script>
     <script src="d3.v7.min.js"></script>
     <script src="d3-parliament.js"></script>
     <script src="d3-linegraph.js"></script>
     <script src="core.js"></script>
+    <script src="ui-map.js"></script>
     <script src="game.js"></script>
   </head>
   <body>
-    <div class="background" id="bg2">
-    </div>
+    <div class="background" id="bg2"></div>
+    <div class="background" id="bg1"></div>
 
-    <div class="background" id="bg1">
-    </div>
+    <!-- ============================================================ options -->
+    <div id="options" class="overlay options" style="display: none;" role="dialog" aria-labelledby="settings_text">
+      <div class="overlay_top sheet">
+        <div class="sheet-head">
+          <span class="sheet-kicker">Zentrale · Office</span>
+          <h3 id="settings_text">Settings</h3>
+          <button onclick="window.hideOptions();" class="sheet-x" aria-label="Close">&times;</button>
+        </div>
 
-    <div id="options" class="overlay options" style="display: none;">
+        <div class="setting-row">
+          <span class="setting-label" id="color_scheme_text">Colour scheme</span>
+          <span class="segmented">
+            <input type="radio" id="light_mode" name="ld_mode" value="1" onclick="window.enableLightMode();">
+            <label id="light_mode_label" for="light_mode">Day edition</label>
+            <input type="radio" id="dark_mode" name="ld_mode" value="0" onclick="window.enableDarkMode();">
+            <label id="dark_mode_label" for="dark_mode">Night edition</label>
+          </span>
+        </div>
 
-        <div class="overlay_top">
-        <div class="music_player">
+        <div class="setting-row">
+          <span class="setting-label" id="font_size_text">Text size</span>
+          <span class="stepper">
+            <button onclick="window.decreaseFontSize();" id="decrease_font_button" aria-label="Smaller text">A&minus;</button>
+            <span id="font_size_value">100%</span>
+            <button onclick="window.increaseFontSize();" id="increase_font_button" aria-label="Larger text">A+</button>
+          </span>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label" id="animations_text">Animations</span>
+          <span class="segmented">
+            <input type="radio" id="animate_yes" name="animate" value="1" onclick="window.enableAnimate();">
+            <label class="label_on" for="animate_yes">On</label>
+            <input type="radio" id="animate_no" name="animate" value="0" onclick="window.disableAnimate();">
+            <label class="label_off" for="animate_no">Off</label>
+          </span>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label" id="event_images_text">Event images</span>
+          <span class="segmented">
+            <input type="radio" id="images_yes" name="images" value="1" onclick="window.enableImages();">
+            <label class="label_on" for="images_yes">On</label>
+            <input type="radio" id="images_no" name="images" value="0" onclick="window.disableImages();">
+            <label class="label_off" for="images_no">Off</label>
+          </span>
+        </div>
+
+        <!-- kept for the engine and for mods; this game has no music, backgrounds or German build -->
+        <div class="setting-hidden" hidden>
+          <div class="music_player">
             <h3 id="music_header_text">Music</h3>
             <p><span id="currently_playing_text">Currently playing:</span> <span id="currently_playing"></span></p>
-            <p><label for="volume" id="volume_label">Volume:</label><input style="vertical-align:-0.25em;" type="range" min="0" max="100" value="100" id="volume" name="volume" oninput="window.setVolume(this.value);"></p>
-
-            <!-- icon sources: https://icons.getbootstrap.com/ -->
-            <p style="text-align: center;">
-            <button id="pause-button" class="icon-button" onclick="window.togglePausePlay();">
-                <span id="pause-button-image" class="button-image"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 16 16">
-  <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/> </svg></span>
-                <span id="play-button-image" class="button-image" style='display: none;'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-  <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/></svg></span>
-                <span id="pause-button-text">Pause</span></button>
-            <button class="icon-button" onclick="window.shuffle();"><span class="button-image"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-forward-fill" viewBox="0 0 16 16">
-  <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.753l-6.267 3.636c-.54.313-1.233-.066-1.233-.697v-2.94l-6.267 3.636C.693 12.703 0 12.324 0 11.693V4.308c0-.63.693-1.01 1.233-.696L7.5 7.248v-2.94c0-.63.693-1.01 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5"/>
-        </svg></span>
-        <span id="next_song_text">Next song</span></button>
-            </p>
+            <p><label for="volume" id="volume_label">Volume:</label><input type="range" min="0" max="100" value="100" id="volume" name="volume" oninput="window.setVolume(this.value);"></p>
+            <button id="pause-button" class="icon-button" onclick="window.togglePausePlay();"><span id="pause-button-image" class="button-image"></span><span id="play-button-image" class="button-image" style="display: none;"></span><span id="pause-button-text">Pause</span></button>
+            <button class="icon-button" onclick="window.shuffle();"><span id="next_song_text">Next song</span></button>
+          </div>
+          <span id="language_text">Language</span>
+          <label id="english_label" for="english">English</label><input type="radio" id="english" name="language" value="1" onclick="window.loadEnglish();">
+          <label id="german_label" for="german">Deutsch</label><input type="radio" id="german" name="language" value="0" onclick="window.loadGerman();">
+          <span id="backgrounds_text">Backgrounds</span>
+          <label class="label_on" for="backgrounds_yes">On</label><input type="radio" id="backgrounds_yes" name="backgrounds" value="1" onclick="window.enableBg();">
+          <label class="label_off" for="backgrounds_no">Off</label><input type="radio" id="backgrounds_no" name="backgrounds" value="0" onclick="window.disableBg();">
+          <span id="music_text">Music</span>
+          <label class="label_on" for="audio_yes">On</label><input type="radio" id="audio_yes" name="audio" value="1" onclick="window.enableAudio();">
+          <label class="label_off" for="audio_no">Off</label><input type="radio" id="audio_no" name="audio" value="0" onclick="window.disableAudio();">
         </div>
-            <h3 id="settings_text">Settings</h3>
-            <table>
-                <tr>
-                    <td id="language_text">Language (will restart game):</td>
-                    <td>
-                        <label id="english_label" for="english">English</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="english" name="language" value="1" onclick="window.loadEnglish();">
-                    </td>
-                    <td>
-                        <label id="german_label" for="german">Deutsch</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="german" name="language" value="0" onclick="window.loadGerman();">
-                    </td>
-                </tr>
-                <tr>
-                    <td> <hr> </td>
-                </tr>
-                <tr>
-                    <td id="backgrounds_text">
-                        Backgrounds:
-                    </td>
-                    <td>
-                        <label class="label_on" for="backgrounds_yes">On</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="backgrounds_yes" name="backgrounds" value="1" onclick="window.enableBg();">
-                    </td>
-                    <td>
-                        <label class="label_off" for="backgrounds_no">Off</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="backgrounds_no" name="backgrounds" value="0" onclick="window.disableBg();">
-                    </td>
-                </tr>
-                <tr>
-                    <td> <hr> </td>
-                </tr>
-                <tr>
-                    <td id="event_images_text">
-                        Event images:
-                    <td>
-                        <label  class="label_on" for="images_yes">On</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="images_yes" name="images" value="1" onclick="window.enableImages();">
-                    </td>
-                    <td>
-                        <label class="label_off" for="images_no">Off</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="images_no" name="images" value="0" onclick="window.disableImages();">
-                    </td>
-                </tr>
-                <tr>
-                    <td> <hr> </td>
-                </tr>
- 
-                <tr>
-                    <td id="animations_text">
-                        Animations:
-                    </td>
-                    <td>
-                        <label  class="label_on" for="animate_yes">On</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="animate_yes" name="animate" value="1" onclick="window.enableAnimate();">
-                    </td>
-                    <td>
-                        <label class="label_off" for="animate_no">Off</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="animate_no" name="animate" value="0" onclick="window.disableAnimate();">
-                    </td>
-                </tr>
-                <tr>
-                    <td> <hr> </td>
-                </tr>
-                <tr>
-                    <td id="music_text">
-                        Music:
-                    </td>
-                    <td>
-                        <label  class="label_on" for="audio_yes">On</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="audio_yes" name="audio" value="1" onclick="window.enableAudio();">
-                    </td>
-                    <td>
-                        <label class="label_off" for="audio_no">Off</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="audio_no" name="audio" value="0" onclick="window.disableAudio();">
-                    </td>
-                </tr>
-                <tr>
-                    <td> <hr> </td>
-                </tr>
-                <tr>
-                    <td id="color_scheme_text">
-                        Color scheme:
-                    </td>
-                    <td>
-                        <label id="light_mode_label" for="light_mode">Light mode</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="light_mode" name="ld_mode" value="1" onclick="window.enableLightMode();">
-                    </td>
-                    <td>
-                        <label id="dark_mode_label" for="dark_mode">Dark mode</label>
-                    </td>
-                    <td>
-                        <input type="radio" id="dark_mode" name="ld_mode" value="0" onclick="window.enableDarkMode();">
-                    </td>
-                </tr>
-                <tr>
-                    <td> <hr> </td>
-                </tr>
-                <tr>
-                    <td id="font_size_text">
-                        Font size:
-                    </td>
 
-                    <td colspan=2>
-                        <button onclick="window.decreaseFontSize();" id="decrease_font_button"><b>-</b> Decrease font size</button>
-                    </td>
-                    <td colspan=2>
-                        <button onclick="window.increaseFontSize();" id="increase_font_button"><b>+</b> Increase font size</button>
-                    </td>
-                    <td>
-                        <span id="font_size_value"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td> <hr> </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <button onclick="window.hideOptions();" class="close_button">Close</button>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                   <td>
-                        <button onclick="window.showMods();">Mods</button>
-                    </td>
-
-                </tr>
-            </table>
+        <div class="sheet-foot">
+          <button onclick="window.showMods();" class="btn-quiet">Mods</button>
+          <button onclick="window.hideOptions();" class="close_button btn">Close</button>
         </div>
+      </div>
     </div>
 
-    <div id="save" class="overlay saves" style="display: none;">
-        <table id="saves_table" class="overlay_top">
-            <tr>
-                <td>Auto-0</td>
-                <td>
-                    <button class="b save_button" id="save_button_a0">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_a0">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_a0"></td>
-                <td>
-                    <button class="b export_button" id="export_button_a0">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Auto-1</td>
-                <td>
-                    <button class="b save_button" id="save_button_a1">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_a1">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_a1"></td>
-                <td>
-                    <button class="b export_button" id="export_button_a1">Export</button>
-                </td>
-            </tr>
-            
-            <tr>
-                <td>0</td>
-                <td>
-                    <button class="b save_button" id="save_button_0">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_0">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_0"></td>
-                <td>
-                    <button class="b export_button" id="export_button_0">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>
-                    <button class="b save_button" id="save_button_1">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_1">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_1"></td>
-                <td>
-                    <button class="b export_button" id="export_button_1">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>
-                    <button class="b save_button" id="save_button_2">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_2">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_2"></td>
-                <td>
-                    <button class="b export_button" id="export_button_2">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>
-                    <button class="b save_button" id="save_button_3">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_3">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_3"></td>
-                <td>
-                    <button class="b export_button" id="export_button_3">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>
-                    <button class="b save_button" id="save_button_4">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_4">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_4"></td>
-                <td>
-                    <button class="b export_button" id="export_button_4">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>
-                    <button class="b save_button" id="save_button_5">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_5">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_5"></td>
-                <td>
-                    <button class="b export_button" id="export_button_5">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>
-                    <button class="b save_button" id="save_button_6">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_6">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_6"></td>
-                <td>
-                    <button class="b export_button" id="export_button_6">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>
-                    <button class="b save_button" id="save_button_7">Save</button>
-                </td>
-                <td>
-                    <button class="b delete_button" id="delete_button_7">Delete</button>
-                </td>
-                <td class="save_info" id="save_info_7"></td>
-                <td>
-                    <button class="b export_button" id="export_button_7">Export</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5">
-                    <label for="import_save" id="import_save_label">Import save file:</label> <input type="file" id="import_save" onchange="dendryUI.importSave('import_save');"></input>
-                </td>
-            </tr> 
-            <tr>
-                <td>
-                    <button onclick="dendryUI.hideSaveSlots();" class="close_button">Close</button>
-                </td>
-            </tr>
+    <!-- ============================================================ save / load -->
+    <div id="save" class="overlay saves" style="display: none;" role="dialog" aria-label="Save and load">
+      <div class="overlay_top sheet">
+        <div class="sheet-head">
+          <span class="sheet-kicker">The party archive</span>
+          <h3>Save and load</h3>
+          <button onclick="dendryUI.hideSaveSlots();" class="sheet-x" aria-label="Close">&times;</button>
+        </div>
+        <table id="saves_table" class="saves-table">
+          <tr><th>Auto</th><td class="save_info" id="save_info_a0"></td><td class="save-btns"><button class="b save_button" id="save_button_a0">Save</button><button class="b delete_button" id="delete_button_a0">Delete</button><button class="b export_button" id="export_button_a0">Export</button></td></tr>
+          <tr><th>Auto</th><td class="save_info" id="save_info_a1"></td><td class="save-btns"><button class="b save_button" id="save_button_a1">Save</button><button class="b delete_button" id="delete_button_a1">Delete</button><button class="b export_button" id="export_button_a1">Export</button></td></tr>
+          <tr><th>1</th><td class="save_info" id="save_info_0"></td><td class="save-btns"><button class="b save_button" id="save_button_0">Save</button><button class="b delete_button" id="delete_button_0">Delete</button><button class="b export_button" id="export_button_0">Export</button></td></tr>
+          <tr><th>2</th><td class="save_info" id="save_info_1"></td><td class="save-btns"><button class="b save_button" id="save_button_1">Save</button><button class="b delete_button" id="delete_button_1">Delete</button><button class="b export_button" id="export_button_1">Export</button></td></tr>
+          <tr><th>3</th><td class="save_info" id="save_info_2"></td><td class="save-btns"><button class="b save_button" id="save_button_2">Save</button><button class="b delete_button" id="delete_button_2">Delete</button><button class="b export_button" id="export_button_2">Export</button></td></tr>
+          <tr><th>4</th><td class="save_info" id="save_info_3"></td><td class="save-btns"><button class="b save_button" id="save_button_3">Save</button><button class="b delete_button" id="delete_button_3">Delete</button><button class="b export_button" id="export_button_3">Export</button></td></tr>
+          <tr><th>5</th><td class="save_info" id="save_info_4"></td><td class="save-btns"><button class="b save_button" id="save_button_4">Save</button><button class="b delete_button" id="delete_button_4">Delete</button><button class="b export_button" id="export_button_4">Export</button></td></tr>
+          <tr><th>6</th><td class="save_info" id="save_info_5"></td><td class="save-btns"><button class="b save_button" id="save_button_5">Save</button><button class="b delete_button" id="delete_button_5">Delete</button><button class="b export_button" id="export_button_5">Export</button></td></tr>
+          <tr><th>7</th><td class="save_info" id="save_info_6"></td><td class="save-btns"><button class="b save_button" id="save_button_6">Save</button><button class="b delete_button" id="delete_button_6">Delete</button><button class="b export_button" id="export_button_6">Export</button></td></tr>
+          <tr><th>8</th><td class="save_info" id="save_info_7"></td><td class="save-btns"><button class="b save_button" id="save_button_7">Save</button><button class="b delete_button" id="delete_button_7">Delete</button><button class="b export_button" id="export_button_7">Export</button></td></tr>
         </table>
-    </div>
-
-    <!-- Sprite stuff - feel free to comment out/remove if not using -->
-    <div id="contentSpriteContainer">
-        <div class="sprite" id="topLeftSprite"></div>
-        <div class="sprite" id="topRightSprite"></div>
-
-        <div class="sprite" id="bottomLeftSprite"></div>
-        <div class="sprite" id="bottomRightSprite"></div>
-    </div>
-
-    <div id='page'>
-        <div id="mid_panel">
-            <header>
-                <h1 id="game-title">Red Germany: 1919–1923</h1>
-                <h2 id="game-author">Maarten, after a game by Autumn Chen</h2>
-
-                <div id="header-links">
-                    <a id="stats-link" onclick="window.showStats();" href="#">Library</a>
-                    <a id="save-link" onclick="dendryUI.showSaveSlots();" href="#">Save/Load</a>
-                    <a id="options-link"  onclick="window.showOptions();" href="#">Options</a>
-                </div>
-            </header>
-            <div id="tools_wrapper">
-                <div id='stats_sidebar' class='tools left'>
-                    <div class="tab_container">
-                        <button class="tab_button active" id="main_tab" onclick="window.changeTab('status', 'main_tab');">Party</button>
-                        <button class="tab_button" id="factions_tab" onclick="window.changeTab('status.factions', 'factions_tab');">Factions</button>
-                        <button class="tab_button" id="districts_tab" onclick="window.changeTab('status.districts', 'districts_tab');">Districts</button>
-                        <button class="tab_button" id="germany_tab" onclick="window.changeTab('status.germany', 'germany_tab');">Germany</button>
-                    </div>
-                    <div class="tab_container second_row">
-                        <button class="tab_button" id="moscow_tab" onclick="window.changeTab('status.moscow', 'moscow_tab');">Moscow</button>
-                        <button class="tab_button" id="parties_tab" onclick="window.changeTab('status.parties', 'parties_tab');">Parties</button>
-                        <button class="tab_button" id="forces_tab" onclick="window.changeTab('status.forces', 'forces_tab');">Forces</button>
-                        <button class="tab_button" id="crisis_tab" style="display: none;" onclick="window.changeTab('status.crisis', 'crisis_tab');">Crisis</button>
-                    </div>
-                    <div id="qualities">
-                    </div>
-                </div>
-            </div>
-
-            <div id='content'>
-
-            </div>
-
-            <footer>
-      <!--
-      <p>
-        <a onclick="window.showSaveSlots();" href="#">Save/Load</a>
-        <a onclick="window.quickSave();" href="#">Quick Save</a>
-        <a onclick="window.quickLoad();" href="#">Quick Load</a>
-      </p>
-
-      &copy; 2021 Autumn Chen.
-      Made with <a href="https://github.com/aucchen/dendry">Dendry</a>.
-      -->
-            </footer>
+        <div class="sheet-foot">
+          <label for="import_save" id="import_save_label" class="btn-quiet file-label">Import save file&hellip;</label>
+          <input type="file" id="import_save" class="visually-hidden" onchange="dendryUI.importSave('import_save');">
+          <button onclick="dendryUI.hideSaveSlots();" class="close_button btn">Close</button>
         </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ library (filled by game.js) -->
+    <div id="library" class="overlay library" style="display: none;" role="dialog" aria-label="Library">
+      <div class="overlay_top sheet sheet-wide">
+        <div class="sheet-head">
+          <span class="sheet-kicker">Reference</span>
+          <h3>Library</h3>
+          <button onclick="window.hideLibrary();" class="sheet-x" aria-label="Close">&times;</button>
+        </div>
+        <div id="library_body"></div>
+        <div class="sheet-foot">
+          <span></span>
+          <button onclick="window.hideLibrary();" class="close_button btn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="contentSpriteContainer">
+      <div class="sprite" id="topLeftSprite"></div>
+      <div class="sprite" id="topRightSprite"></div>
+      <div class="sprite" id="bottomLeftSprite"></div>
+      <div class="sprite" id="bottomRightSprite"></div>
+    </div>
+
+    <div id="page">
+      <!-- ============================================================ masthead -->
+      <header id="masthead">
+        <div class="mh-top">
+          <span class="mh-slogan">Proletarians of all countries, unite!</span>
+          <nav id="header-links" aria-label="Game">
+            <a id="stats-link" onclick="window.showStats(); return false;" href="#">Library</a>
+            <a id="save-link" onclick="dendryUI.showSaveSlots(); return false;" href="#">Save/Load</a>
+            <a id="options-link" onclick="window.showOptions(); return false;" href="#">Options</a>
+          </nav>
+        </div>
+        <div class="mh-main">
+          <div class="mh-ear mh-ear-left">
+            <span class="ear-k">Edition</span>
+            <span class="ear-v" id="mh-issue">1919–1923</span>
+          </div>
+          <h1 id="game-title"><span class="t-red">Red Germany</span><span class="t-years">1919&thinsp;–&thinsp;1923</span></h1>
+          <div class="mh-ear mh-ear-right">
+            <span class="ear-k">Zentrale</span>
+            <span class="ear-v" id="mh-zentrale">Spartacists</span>
+          </div>
+        </div>
+        <div class="mh-dateline">
+          <span id="mh-party">Central organ of the KPD (Spartacus League)</span>
+          <span id="mh-date">Berlin, January 1919</span>
+          <span id="game-author">Maarten, after Autumn Chen</span>
+        </div>
+        <div id="emergency" aria-hidden="true"><span>State of emergency</span></div>
+      </header>
+
+      <div id="congress-bar" aria-live="polite"></div>
+
+      <div id="layout">
+        <aside id="stats_sidebar" class="tools left" aria-label="Party files">
+          <button id="files-toggle" class="files-toggle" aria-expanded="true" onclick="window.toggleFiles();">
+            <span class="ft-label">Party files</span><span class="ft-summary" id="files-summary"></span><span class="ft-chev" aria-hidden="true"></span>
+          </button>
+          <div class="files-body">
+            <nav class="tab_container" aria-label="Party files">
+              <button class="tab_button tab-alert" id="crisis_tab" style="display: none;" onclick="window.changeTab('status.crisis', 'crisis_tab');">Crisis</button>
+              <button class="tab_button tab-alert tab-congress" id="congress_tab" style="display: none;" onclick="window.changeTab('status.congress', 'congress_tab');">Congress</button>
+              <button class="tab_button active" id="main_tab" onclick="window.changeTab('status', 'main_tab');">Party</button>
+              <button class="tab_button" id="factions_tab" onclick="window.changeTab('status.factions', 'factions_tab');">Factions</button>
+              <button class="tab_button" id="districts_tab" onclick="window.changeTab('status.districts', 'districts_tab');">Districts</button>
+              <button class="tab_button" id="map_tab" onclick="window.changeTab('status.map', 'map_tab');">Map</button>
+              <button class="tab_button" id="germany_tab" onclick="window.changeTab('status.germany', 'germany_tab');">Germany</button>
+              <button class="tab_button" id="parties_tab" onclick="window.changeTab('status.parties', 'parties_tab');">Parties</button>
+              <button class="tab_button" id="forces_tab" onclick="window.changeTab('status.forces', 'forces_tab');">Forces</button>
+              <button class="tab_button" id="moscow_tab" onclick="window.changeTab('status.moscow', 'moscow_tab');">Moscow</button>
+              <button class="tab_button" id="comrades_tab" onclick="window.changeTab('status.comrades', 'comrades_tab');">Comrades</button>
+            </nav>
+            <div id="qualities"></div>
+          </div>
+        </aside>
+
+        <main id="content"></main>
+      </div>
+
+      <footer id="colophon">
+        <span>Red Germany: 1919–1923 · Maarten, after <em>Social Democracy: An Alternate History</em> by Autumn Chen · Made with Dendry</span>
+      </footer>
     </div>
   </body>
 </html>

@@ -28,7 +28,7 @@ d3.parliament = function() {
         "touchmove", "touchstart");
 
     function parliament(data) {
-        console.log(data);
+
         data.each(function(d) {
 
             // if user did not provide, fill the svg:

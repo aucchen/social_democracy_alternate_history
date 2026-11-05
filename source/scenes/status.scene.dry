@@ -2,153 +2,197 @@ title: Status
 new-page: true
 is-special: true
 
+# The sidebar ("the party files"). Each section is one tab.
+# Rows are written as a label span (k) and a value span (v), so the page can
+# lay them out as a ledger. game.js adds the graphics through these hooks:
+#   data-bar="quality"     a 0-100 meter under the row (data-fid: faction colour)
+#   data-lock="quality"    colours a party-line lock (0 open, 1 against, 2 forbidden)
+#   data-fq="quality"      a faction colour dot for the faction id held in that quality
+#   data-fid="faction id"  a faction colour dot for a fixed faction
+#   data-ui="name"         a block drawn by game.js (map, charts, rosters)
+# Qualities from the second design pass (news, congress, ECCI, districts,
+# comrades) are only read by game.js, which copes when they are not set.
+
 = The Party
 
-[+ month : month +] [+ year +][? if crisis : , week [+ week +] ?]
+{!<span class="k">!}Party{!</span><span class="v v-strong">!}[+ party_name +]{!</span>!}
 
-Name: [+ party_name +]
+{!<span class="k">!}Funds{!</span><span class="v" data-pips="resources">!}[+ resources +]{!</span>!}
 
-Funds: [+ resources +]
+{!<span class="k">!}Members{!</span><span class="v">!}[+ members_display +] thousand{!</span>!}
 
-Members: [+ members_display +] thousand
-
-Unity: [+ unity : level +]
+{!<span class="k">!}Unity{!</span><span class="v" data-bar="unity">!}[+ unity : level +]{!</span>!}
 
 = The Party Line
 
-Zentrale: [+ leading_faction_name +][? if junior_faction : , with the [+ junior_faction_name +] ?]
+{!<span class="k">!}Zentrale{!</span><span class="v v-strong" data-fq="leading_faction">!}[+ leading_faction_name +]{!</span>!}
 
-Elections: [+ lock_elections : lock +]
+[? if junior_faction : {!<span class="k">!}Junior partner{!</span><span class="v" data-fq="junior_faction">!}[+ junior_faction_name +]{!</span>!} ?]
 
-United front: [+ lock_united_front : lock +]
+{!<span class="k">!}Elections{!</span><span class="v" data-lock="lock_elections">!}[+ lock_elections : lock +]{!</span>!}
 
-Union work: [+ lock_union_work : lock +]
+{!<span class="k">!}United front{!</span><span class="v" data-lock="lock_united_front">!}[+ lock_united_front : lock +]{!</span>!}
 
-Councils and occupations: [+ lock_councils : lock +]
+{!<span class="k">!}Union work{!</span><span class="v" data-lock="lock_union_work">!}[+ lock_union_work : lock +]{!</span>!}
 
-Armed uprising: [+ lock_uprising : lock +]
+{!<span class="k">!}Councils and occupations{!</span><span class="v" data-lock="lock_councils">!}[+ lock_councils : lock +]{!</span>!}
 
-Moscow's orders: [+ lock_moscow_orders : lock +]
+{!<span class="k">!}Armed uprising{!</span><span class="v" data-lock="lock_uprising">!}[+ lock_uprising : lock +]{!</span>!}
+
+{!<span class="k">!}Moscow's orders{!</span><span class="v" data-lock="lock_moscow_orders">!}[+ lock_moscow_orders : lock +]{!</span>!}
 
 
 @factions
 
 = Factions
 
-{!<span class="tooltip-text" title="Luxemburg, Jogiches, Levi, Zetkin. A mass party, democracy inside the party, independence from Moscow.">Spartacists</span>!}: [+ luxemburgist_strength : strength +], [+ luxemburgist_satisfaction : satisfaction +]
+{!<div class="ui-block" data-ui="faction-stack"></div>!}
 
-{!<span class="tooltip-text" title="Later led by Ruth Fischer and Arkadi Maslow. Armed action soon: the theory of the offensive.">Left</span>!}: [+ offensive_strength : strength +], [+ offensive_satisfaction : satisfaction +]
+[? if luxemburgist_gone = 0 : {!<span class="k" data-fid="luxemburgist"><span class="tooltip-text" title="Luxemburg, Jogiches, Levi, Zetkin. A mass party, democracy inside the party, independence from Moscow.">Spartacists</span></span><span class="v" data-bar="luxemburgist_strength" data-bar-fid="luxemburgist">!}[+ luxemburgist_strength : strength +], [+ luxemburgist_satisfaction : satisfaction +]{!</span>!} ?]
 
-{!<span class="tooltip-text" title="Later led by Heinrich Brandler and August Thalheimer. Union work and the united front with the SPD and USPD.">Right</span>!}: [+ unionist_strength : strength +], [+ unionist_satisfaction : satisfaction +]
+[? if offensive_gone = 0 : {!<span class="k" data-fid="offensive"><span class="tooltip-text" title="Later led by Ruth Fischer and Arkadi Maslow. Armed action soon: the theory of the offensive.">Left</span></span><span class="v" data-bar="offensive_strength" data-bar-fid="offensive">!}[+ offensive_strength : strength +], [+ offensive_satisfaction : satisfaction +]{!</span>!} ?]
 
-{!<span class="tooltip-text" title="The Bremen and Hamburg radicals, later the KAPD. Boycott parliament and the unions: councils only.">Left Radicals</span>!}: [+ ultraleft_strength : strength +], [+ ultraleft_satisfaction : satisfaction +]
+[? if unionist_gone = 0 : {!<span class="k" data-fid="unionist"><span class="tooltip-text" title="Later led by Heinrich Brandler and August Thalheimer. Union work and the united front with the SPD and USPD.">Right</span></span><span class="v" data-bar="unionist_strength" data-bar-fid="unionist">!}[+ unionist_strength : strength +], [+ unionist_satisfaction : satisfaction +]{!</span>!} ?]
+
+[? if ultraleft_gone = 0 : {!<span class="k" data-fid="ultraleft"><span class="tooltip-text" title="The Bremen and Hamburg radicals, later the KAPD. Boycott parliament and the unions: councils only.">Left Radicals</span></span><span class="v" data-bar="ultraleft_strength" data-bar-fid="ultraleft">!}[+ ultraleft_strength : strength +], [+ ultraleft_satisfaction : satisfaction +]{!</span>!} ?]
+
+[? if luxemburgist_gone : {!<span class="k k-gone" data-fid="luxemburgist">Spartacists</span><span class="v v-gone">left the party</span>!} ?]
+
+[? if offensive_gone : {!<span class="k k-gone" data-fid="offensive">Left</span><span class="v v-gone">left the party</span>!} ?]
+
+[? if unionist_gone : {!<span class="k k-gone" data-fid="unionist">Right</span><span class="v v-gone">left the party</span>!} ?]
+
+[? if ultraleft_gone : {!<span class="k k-gone" data-fid="ultraleft">Left Radicals</span><span class="v v-gone">left the party</span>!} ?]
+
 
 @districts
 
 = Districts
 
-Berlin-Brandenburg: [+ district_berlin_faction_name +], [+ district_berlin_members_display +]k, [+ district_berlin_loyalty : loyalty +]
+{!<div class="ui-block" data-ui="districts"></div>!}
 
-Hamburg: [+ district_hamburg_faction_name +], [+ district_hamburg_members_display +]k, [+ district_hamburg_loyalty : loyalty +]
 
-Bremen: [+ district_bremen_faction_name +], [+ district_bremen_members_display +]k, [+ district_bremen_loyalty : loyalty +]
+@map
 
-Rhineland-Westphalia: [+ district_ruhr_faction_name +], [+ district_ruhr_members_display +]k, [+ district_ruhr_loyalty : loyalty +]
+= The Map
 
-Saxony: [+ district_saxony_faction_name +], [+ district_saxony_members_display +]k, [+ district_saxony_loyalty : loyalty +]
+{!<div class="ui-block" data-ui="map"></div>!}
 
-Thuringia: [+ district_thuringia_faction_name +], [+ district_thuringia_members_display +]k, [+ district_thuringia_loyalty : loyalty +]
-
-Bavaria: [+ district_bavaria_faction_name +], [+ district_bavaria_members_display +]k, [+ district_bavaria_loyalty : loyalty +]
-
-Halle-Merseburg: [+ district_halle_faction_name +], [+ district_halle_members_display +]k, [+ district_halle_loyalty : loyalty +]
 
 @germany
 
 = Germany
 
-Government: [+ government_name +]
+{!<span class="k">!}Government{!</span><span class="v">!}[+ government_name +]{!</span>!}
 
-Chancellor: [+ chancellor +]
+{!<span class="k">!}Chancellor{!</span><span class="v">!}[+ chancellor +]{!</span>!}
 
-[? if parliament_name : [+ parliament_name +]: the government holds [+ government_seats +] of [+ parliament_size +] seats ?]
+[? if parliament_name : {!<span class="k">!}[+ parliament_name +]{!</span><span class="v">!}the government holds [+ government_seats +] of [+ parliament_size +] seats{!</span>!} ?]
 
 = The Country
 
-Militancy: [+ militancy : level +]
+{!<span class="k">!}Militancy{!</span><span class="v" data-bar="militancy">!}[+ militancy : level +]{!</span>!}
 
-Worker support: [+ worker_support : level +]
+{!<span class="k">!}Worker support{!</span><span class="v" data-bar="worker_support">!}[+ worker_support : level +]{!</span>!}
 
-Repression: [+ repression : level +]
+{!<span class="k">!}Repression{!</span><span class="v" data-bar="repression" data-bar-tone="ink">!}[+ repression : level +]{!</span>!}
 
-Republic stability: [+ stability : level +]
+{!<span class="k">!}Republic stability{!</span><span class="v" data-bar="stability" data-bar-tone="ink">!}[+ stability : level +]{!</span>!}
 
-Inflation: [+ inflation : inflation +]
+{!<span class="k">!}Inflation{!</span><span class="v" data-bar="inflation" data-bar-tone="ink">!}[+ inflation : inflation +]{!</span>!}
+
 
 @parties
 
-= Party Relations
+= Parties
 
-[? if spd_exists : {!<span class="tooltip-text" title="Majority Social Democratic Party. The party of Ebert, Scheidemann and Noske.">SPD</span>!}: [+ spd_relation : relationship +][? if parliament_name : , [+ spd_seats +] seats ?] ?]
+{!<div class="ui-block" data-ui="hemicycle"></div>!}
 
-[? if uspd_exists : {!<span class="tooltip-text" title="Independent Social Democratic Party. Split from the SPD over the war; torn between the councils and parliament.">USPD</span>!}: [+ uspd_relation : relationship +][? if parliament_name : , [+ uspd_seats +] seats ?] ?]
+= Relations
 
-[? if kapd_exists : {!<span class="tooltip-text" title="Communist Workers' Party. The ultra-left that left or was driven out of the KPD.">KAPD</span>!}: [+ kapd_relation : relationship +] ?]
+[? if spd_exists : {!<span class="k"><i class="pdot p-spd"></i><span class="tooltip-text" title="Majority Social Democratic Party. The party of Ebert, Scheidemann and Noske.">SPD</span></span><span class="v" data-bar="spd_relation" data-bar-party="spd">!}[+ spd_relation : relationship +][? if parliament_name : , [+ spd_seats +] seats ?]{!</span>!} ?]
 
-[? if ddp_exists : {!<span class="tooltip-text" title="German Democratic Party. Liberal, middle-class, a pillar of the Weimar coalition.">DDP</span>!}: [+ ddp_relation : relationship +][? if parliament_name : , [+ ddp_seats +] seats ?] ?]
+[? if uspd_exists : {!<span class="k"><i class="pdot p-uspd"></i><span class="tooltip-text" title="Independent Social Democratic Party. Split from the SPD over the war; torn between the councils and parliament.">USPD</span></span><span class="v" data-bar="uspd_relation" data-bar-party="uspd">!}[+ uspd_relation : relationship +][? if parliament_name : , [+ uspd_seats +] seats ?]{!</span>!} ?]
 
-[? if zentrum_exists : {!<span class="tooltip-text" title="The Catholic Centre Party.">Centre</span>!}: [+ zentrum_relation : relationship +][? if parliament_name : , [+ zentrum_seats +] seats ?] ?]
+[? if kapd_exists : {!<span class="k"><i class="pdot p-kapd"></i><span class="tooltip-text" title="Communist Workers' Party. The ultra-left that left or was driven out of the KPD.">KAPD</span></span><span class="v" data-bar="kapd_relation" data-bar-party="kapd">!}[+ kapd_relation : relationship +]{!</span>!} ?]
 
-[? if bvp_exists : {!<span class="tooltip-text" title="Bavarian People's Party. Catholic, conservative and Bavarian first.">BVP</span>!}: [+ bvp_relation : relationship +][? if bvp_seats > 0 : , [+ bvp_seats +] seats ?] ?]
+[? if ddp_exists : {!<span class="k"><i class="pdot p-ddp"></i><span class="tooltip-text" title="German Democratic Party. Liberal, middle-class, a pillar of the Weimar coalition.">DDP</span></span><span class="v" data-bar="ddp_relation" data-bar-party="ddp">!}[+ ddp_relation : relationship +][? if parliament_name : , [+ ddp_seats +] seats ?]{!</span>!} ?]
 
-[? if dvp_exists : {!<span class="tooltip-text" title="German People's Party. National liberals and heavy industry; Stresemann's party.">DVP</span>!}: [+ dvp_relation : relationship +][? if parliament_name : , [+ dvp_seats +] seats ?] ?]
+[? if zentrum_exists : {!<span class="k"><i class="pdot p-zentrum"></i><span class="tooltip-text" title="The Catholic Centre Party.">Centre</span></span><span class="v" data-bar="zentrum_relation" data-bar-party="zentrum">!}[+ zentrum_relation : relationship +][? if parliament_name : , [+ zentrum_seats +] seats ?]{!</span>!} ?]
 
-[? if dnvp_exists : {!<span class="tooltip-text" title="German National People's Party. Monarchists, landowners and nationalists.">DNVP</span>!}: [+ dnvp_relation : relationship +][? if parliament_name : , [+ dnvp_seats +] seats ?] ?]
+[? if bvp_exists : {!<span class="k"><i class="pdot p-bvp"></i><span class="tooltip-text" title="Bavarian People's Party. Catholic, conservative and Bavarian first.">BVP</span></span><span class="v" data-bar="bvp_relation" data-bar-party="bvp">!}[+ bvp_relation : relationship +][? if bvp_seats > 0 : , [+ bvp_seats +] seats ?]{!</span>!} ?]
 
-[? if nsdap_exists : {!<span class="tooltip-text" title="A small völkisch party in Munich.">!}[+ nsdap_name +]{!</span>!}: [+ nsdap_relation : relationship +][? if nsdap_seats > 0 : , [+ nsdap_seats +] seats ?] ?]
+[? if dvp_exists : {!<span class="k"><i class="pdot p-dvp"></i><span class="tooltip-text" title="German People's Party. National liberals and heavy industry; Stresemann's party.">DVP</span></span><span class="v" data-bar="dvp_relation" data-bar-party="dvp">!}[+ dvp_relation : relationship +][? if parliament_name : , [+ dvp_seats +] seats ?]{!</span>!} ?]
 
-[? if parliament_name : KPD: [+ kpd_seats +] seats ?]
+[? if dnvp_exists : {!<span class="k"><i class="pdot p-dnvp"></i><span class="tooltip-text" title="German National People's Party. Monarchists, landowners and nationalists.">DNVP</span></span><span class="v" data-bar="dnvp_relation" data-bar-party="dnvp">!}[+ dnvp_relation : relationship +][? if parliament_name : , [+ dnvp_seats +] seats ?]{!</span>!} ?]
+
+[? if nsdap_exists : {!<span class="k"><i class="pdot p-nsdap"></i><span class="tooltip-text" title="A small völkisch party in Munich.">!}[+ nsdap_name +]{!</span></span><span class="v" data-bar="nsdap_relation" data-bar-party="nsdap">!}[+ nsdap_relation : relationship +][? if nsdap_seats > 0 : , [+ nsdap_seats +] seats ?]{!</span>!} ?]
+
 
 @forces
 
-= Armed Forces
+= The State's Forces
 
-{!<span class="tooltip-text" title="The regular army of the Republic, rebuilt as the Reichswehr from March 1919.">!}[+ army_name +]{!</span>!}: [+ army_strength_display +] thousand. Loyalty to the Republic: [+ army_loyalty : loyalty +]
+{!<span class="k"><span class="tooltip-text" title="The regular army of the Republic, rebuilt as the Reichswehr from March 1919.">!}[+ army_name +]{!</span></span><span class="v" data-bar="army_loyalty" data-bar-tone="ink">!}[+ army_strength_display +]k, loyalty [+ army_loyalty : loyalty +]{!</span>!}
 
-{!<span class="tooltip-text" title="Volunteer units of officers and soldiers, raised by Noske to crush the left.">Freikorps</span>!}: [+ freikorps_strength_display +] thousand. Loyalty to the Republic: [+ freikorps_loyalty : loyalty +]
+{!<span class="k"><span class="tooltip-text" title="Volunteer units of officers and soldiers, raised by Noske to crush the left.">Freikorps</span></span><span class="v" data-bar="freikorps_loyalty" data-bar-tone="ink">!}[+ freikorps_strength_display +]k, loyalty [+ freikorps_loyalty : loyalty +]{!</span>!}
 
-{!<span class="tooltip-text" title="The state police, and from 1919 the Security Police (Sipo).">Police</span>!}: [+ police_strength_display +] thousand. Loyalty to the Republic: [+ police_loyalty : loyalty +]
+{!<span class="k"><span class="tooltip-text" title="The state police, and from 1919 the Security Police (Sipo).">Police</span></span><span class="v" data-bar="police_loyalty" data-bar-tone="ink">!}[+ police_strength_display +]k, loyalty [+ police_loyalty : loyalty +]{!</span>!}
 
-[? if civil_guards_strength > 0 : {!<span class="tooltip-text" title="Armed civil guards (Einwohnerwehren) of the propertied classes, strongest in Bavaria.">Civil guards</span>!}: [+ civil_guards_strength_display +] thousand ?]
+[? if civil_guards_strength > 0 : {!<span class="k"><span class="tooltip-text" title="Armed civil guards (Einwohnerwehren) of the propertied classes, strongest in Bavaria.">Civil guards</span></span><span class="v">!}[+ civil_guards_strength_display +]k{!</span>!} ?]
 
-[? if sa_strength > 0 : {!<span class="tooltip-text" title="The storm troopers of the Nazi party.">SA</span>!}: [+ sa_strength_display +] thousand ?]
+[? if sa_strength > 0 : {!<span class="k"><span class="tooltip-text" title="The storm troopers of the Nazi party.">SA</span></span><span class="v">!}[+ sa_strength_display +]k{!</span>!} ?]
+
+{!<span class="row-note">Bars show loyalty to the Republic.</span>!}
 
 = Our Forces
 
-{!<span class="tooltip-text" title="Armed workers who follow the party: red guards, militias and later the proletarian hundreds.">Red guards</span>!}: [+ red_guards_strength_display +] thousand. Loyalty to the Zentrale: [+ red_guards_loyalty : loyalty +]
+{!<span class="k"><span class="tooltip-text" title="Armed workers who follow the party: red guards, militias and later the proletarian hundreds.">Red guards</span></span><span class="v" data-bar="red_guards_loyalty">!}[+ red_guards_strength_display +]k, loyalty [+ red_guards_loyalty : loyalty +]{!</span>!}
 
-Arms: [+ red_guards_arms : level +]
+{!<span class="k">!}Arms{!</span><span class="v" data-bar="red_guards_arms">!}[+ red_guards_arms : level +]{!</span>!}
+
 
 @crisis
 
 = [+ crisis_name +]
 
-[? if crisis_goal : [+ crisis_goal +] ?]
+{!<div class="ui-block" data-ui="crisis"></div>!}
 
-Our position: [+ crisis_momentum : momentum +]
+[? if crisis_goal : {!<span class="k k-wide">!}[+ crisis_goal +]{!</span>!} ?]
+
+{!<span class="k">!}Our position{!</span><span class="v" data-bar="crisis_momentum" data-bar-tone="tug">!}[+ crisis_momentum : momentum +]{!</span>!}
+
 
 @moscow
 
 = Moscow
 
-{!<span class="tooltip-text" title="High independence angers Moscow, which cuts funds and backs rival factions. Low independence lets Moscow decide for you.">Independence</span>!}: [+ independence : level +]
+{!<div class="ui-block" data-ui="directive"></div>!}
 
-World revolution: [+ world_revolution : level +]
+{!<div class="ui-block" data-ui="ecci"></div>!}
 
-Soviet Russia: [+ soviet_russia_status +]
+{!<span class="k"><span class="tooltip-text" title="High independence angers Moscow, which cuts funds and backs rival factions. Low independence lets Moscow decide for you.">Independence</span></span><span class="v" data-bar="independence">!}[+ independence : level +]{!</span>!}
 
-[? if comintern_member : The KPD is a section of the Communist International. ?][? if comintern_member = 0 : The KPD is not a member of any International. ?]
+{!<span class="k">!}World revolution{!</span><span class="v" data-bar="world_revolution">!}[+ world_revolution : level +]{!</span>!}
 
-[? if comintern_rep : Comintern envoy: [+ comintern_rep +] ?]
+{!<span class="k">!}Soviet Russia{!</span><span class="v">!}[+ soviet_russia_status +]{!</span>!}
 
-[? if moscow_subsidy > 0 : Moscow's subsidy: [+ moscow_subsidy +] funds a month ?]
+[? if comintern_rep : {!<span class="k">!}Envoy{!</span><span class="v">!}[+ comintern_rep +]{!</span>!} ?]
+
+[? if moscow_subsidy > 0 : {!<span class="k">!}Subsidy{!</span><span class="v">!}[+ moscow_subsidy +] funds a month{!</span>!} ?]
+
+[? if comintern_member : {!<span class="row-note">The party is a section of the Communist International.</span>!} ?][? if comintern_member = 0 : {!<span class="row-note">The party belongs to no International.</span>!} ?]
+
+
+@comrades
+
+= Comrades
+
+{!<div class="ui-block" data-ui="comrades"></div>!}
+
+
+@congress
+
+= Congress
+
+{!<div class="ui-block" data-ui="congress"></div>!}
