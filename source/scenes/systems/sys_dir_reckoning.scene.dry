@@ -1,0 +1,110 @@
+title: Moscow's Verdict
+subtitle: The Executive has judged our work.
+new-page: true
+tags: event
+view-if: directive_reckoning = 1 and crisis = 0 and congress = 0
+priority: 4
+on-arrival: {!
+Q.directive_reckoning = 0;
+Q.sys_outcome = 0;
+!}
+
+= Moscow's Verdict
+
+[? if directive_result = 1 : The Executive has discussed the work of the German section on *[+ directive_last_title +]*, and it is satisfied. [+ directive_from_name +] says so in Pravda, by name. A courier brings a letter of congratulation, and something more useful than a letter. ?][? if directive_result = 2 : The Executive has discussed the work of the German section on *[+ directive_last_title +]*. Its resolution notes "a certain progress" and "serious hesitations". In Moscow, that is a warning. ?][? if directive_result = 3 and directive_defied = 1 : The Executive has read our refusal on *[+ directive_last_title +]*. Its answer is not long in coming. ?][? if directive_result = 3 and directive_defied = 0 : The time the Executive gave us on *[+ directive_last_title +]* has run out, and almost nothing has been done. ?]
+
+[? if directive_result = 3 and directive_punishment_code = 1 : An open letter of the Executive, printed in every communist paper in Europe, condemns the "opportunist passivity" of the German Zentrale. ?][? if directive_result = 3 and directive_punishment_code = 2 : The subsidy is cut. The full-time organisers in three districts will not be paid next month. ?][? if directive_result = 3 and directive_punishment_code = 3 : The Executive sends [+ comintern_rep +] to Berlin, with authority to attend every meeting of the Zentrale. ?][? if directive_result = 3 and directive_punishment_code = 4 : The Executive receives a delegation of the [+ directive_rival_name +] in Moscow and lets it be known that it agrees with them. ?][? if directive_result = 3 and directive_punishment_code = 4 and directive_rival_district_name : In [+ directive_rival_district_name +], the district leadership goes over to them. ?]
+
+- @thank: Thank the Executive for its confidence.
+- @credit: Claim the success for the German party.
+- @promise: Promise to do better.
+- @explain: Explain the German conditions to Moscow.
+- @accept_crit: Accept the criticism.
+- @reply: Answer the Executive in public.
+- @appeal: Appeal to Lenin.
+
+@thank
+subtitle: Moscow is pleased. The Left approves.
+view-if: directive_result = 1
+on-arrival: {!
+RG.ecci('all', 3);
+Q.offensive_satisfaction += 3;
+!}
+
+The Zentrale's reply is warm, and it is printed in Moscow as an example to the other sections.
+
+@credit
+subtitle: The members are proud of their own party. Our independence grows a little.
+view-if: directive_result = 1
+on-arrival: {!
+Q.independence += 3;
+Q.worker_support += 1;
+Q.luxemburgist_satisfaction += 2;
+!}
+
+The Rote Fahne writes about the German workers' achievement, and mentions Moscow in the last paragraph.
+
+@promise
+subtitle: Moscow is a little mollified, at the price of our independence.
+view-if: directive_result = 2
+on-arrival: {!
+RG.ecci(Q.directive_from, 4);
+Q.independence -= 2;
+!}
+
+We promise to correct our hesitations. [+ directive_from_name +] files the promise with the others.
+
+@explain
+subtitle: Our independence grows. Moscow is not convinced.
+view-if: directive_result = 2
+on-arrival: {!
+Q.independence += 2;
+RG.ecci(Q.directive_from, -3);
+!}
+
+We send Moscow a long memorandum on German conditions: the unions, the elections, the police. It is read by Radek, who agrees with half of it, and by nobody else.
+
+@accept_crit
+subtitle: The party closes ranks. Moscow is mollified. Our own current resents it.
+view-if: directive_result = 3
+on-arrival: {!
+Q.unity += 3;
+Q.independence -= 3;
+RG.ecci('all', 4);
+Q[Q.leading_faction + '_satisfaction'] -= 4;
+!}
+
+The Zentrale accepts the Executive's criticism "in the spirit of international discipline". Our own people read it twice and do not like it either time.
+
+@reply
+subtitle: Our independence grows, and the Spartacists cheer. Moscow will remember.
+view-if: directive_result = 3
+on-arrival: {!
+Q.independence += 5;
+RG.ecci('all', -6);
+Q.luxemburgist_satisfaction += 4;
+Q.offensive_satisfaction -= 4;
+Q.lean_luxemburgist += 1;
+!}
+
+We answer in the Rote Fahne: a communist party is not a regiment, and the Executive is not its general staff. Half the party cheers, and the other half counts the cost.
+
+@appeal
+subtitle: Lenin might overrule the Executive. It is a gamble with Zinoviev's temper.
+view-if: directive_result = 3 and ecci_lenin_ill = 0 and ecci_lenin >= 50
+on-arrival: {!
+RG.ecci('zinoviev', -5);
+if (Math.random() < 0.6) {
+    Q.sys_outcome = 1;
+    RG.ecci('lenin', 3);
+    if (Q.directive_punishment_code == 2) { Q.moscow_subsidy += 1; }
+    if (Q.directive_punishment_code == 4 && Q.directive_rival) { Q[Q.directive_rival + '_satisfaction'] -= 8; }
+    if (Q.directive_punishment_code == 1) { Q.unity += 4; }
+    if (Q.directive_punishment_code == 3) { Q.independence += 4; }
+} else {
+    Q.sys_outcome = 2;
+    RG.ecci('lenin', -4);
+}
+!}
+
+We write to Lenin directly. [? if sys_outcome = 1 : Lenin replies in his own hand: the German comrades have made mistakes, but the Executive has made more. The worst of the punishment is quietly lifted. ?][? if sys_outcome = 2 : Lenin replies that he has every confidence in the Executive, and that the German comrades should have more. ?]

@@ -1,0 +1,48 @@
+title: The Chair and the Agenda
+subtitle: Whoever writes the agenda writes half the resolution.
+view-if: congress = 1 and congress_closing = 0 and congress_used_procedure = 0
+on-arrival: {!
+Q.month_actions += 1;
+Q.congress_used_procedure = 1;
+!}
+frequency: 100
+is-card: true
+new-page: true
+tags: congress
+
+= The Chair and the Agenda
+
+The presidium of the congress meets before breakfast to settle the order of business. Our people hold the chair. [? if congress_ahead = 1 : We are ahead, for now. ?][? if congress_ahead = 0 : We are behind, for now. ?]
+
+- @first: Put our motion first on the agenda.
+- @close: Move the closure of the debate.
+- @adjourn: Adjourn for a night of caucusing.
+
+@first
+subtitle: A small edge: the first motion sets the terms of the debate.
+on-arrival: {!
+RG.congress.sway(0.03);
+!}
+
+Our motion comes first. Every other speaker has to answer it. Our side now has [+ congress_votes_for +]% of the hall.
+
+@close
+subtitle: The vote comes after this session, while we are ahead. The losers will call it a manoeuvre.
+view-if: congress_ahead = 1
+on-arrival: {!
+RG.congress.closeEarly();
+RG.congress.bitter(2);
+!}
+
+The chair puts the closure to the vote, and carries it. There will be no more speeches: the congress votes when this session ends.
+
+@adjourn
+subtitle: Costs 1 fund. One more session before the vote.
+choose-if: resources >= 1 and congress_sessions < 6
+unavailable-subtitle: We have no funds to keep the delegates in Berlin.
+on-arrival: {!
+Q.resources -= 1;
+RG.congress.extend(1);
+!}
+
+The congress adjourns until tomorrow. The delegates' hotels are paid for one more night, and nobody sleeps much.

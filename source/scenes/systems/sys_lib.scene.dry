@@ -1,0 +1,1839 @@
+title: Systems library
+on-arrival: {!
+// The systems library (W2). This scene is never shown. Its code defines the
+// helpers every scene can call from inline JavaScript as RG.something(...).
+// root runs it when the page loads (before any save is loaded) and
+// post_event runs it again whenever RG is missing or belongs to an old
+// engine, so the helpers exist after a reload, a load or a language switch.
+// All state lives in Q (saved with the game); RG itself holds only code.
+var W = (typeof window !== 'undefined') ? window : this;
+var R = {};
+R.version = 1;
+R.engine = this;
+R.q = function () { return R.engine.state.qualities; };
+var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+var num = function (v) { return (typeof v === 'number' && !isNaN(v)) ? v : 0; };
+var copy = function (v) { return JSON.parse(JSON.stringify(v)); };
+R.clamp = clamp;
+R.num = num;
+R.MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+    'August', 'September', 'October', 'November', 'December'];
+R.dateText = function () {
+    var Q = R.q();
+    return R.MONTHS[clamp((Q.month || 1) - 1, 0, 11)] + ' ' + Q.year;
+};
+// numeric codes for Dendry conditions; the same as c_lead in the advisor roster
+R.CODE = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4};
+R.present = function () {
+    var Q = R.q();
+    return Q.factions.filter(function (f) { return !Q[f + '_gone']; });
+};
+R.fname = function (f) {
+    var Q = R.q();
+    return (Q.faction_names && Q.faction_names[f]) || 'the Zentrale';
+};
+R.dname = function (d) {
+    var Q = R.q();
+    return (Q.district_names && Q.district_names[d]) || d;
+};
+R.pick = function (arr) { return arr[Math.floor(Math.random() * arr.length)]; };
+R.sum = function (arr) { var s = 0; for (var i = 0; i < arr.length; i++) { s += arr[i]; } return s; };
+
+// During a congress the hand holds only congress cards: every other card
+// drops out of the hand and the decks, as crisis cards replace the decks in
+// a crisis. Done here once per engine, so no card file needs changing.
+var eng = this;
+if (eng && eng.__filterViewable && !eng.__rgCongressFilter) {
+    var origFilter = eng.__filterViewable;
+    eng.__filterViewable = function (map) {
+        var res = origFilter.call(this, map);
+        var Q = this.state.qualities;
+        if (Q.congress) {
+            for (var id in res) {
+                var sc = this.game.scenes[id];
+                if (sc && sc.isCard && !(sc.tags && sc.tags.indexOf('congress') >= 0)) {
+                    delete res[id];
+                }
+            }
+        }
+        return res;
+    };
+    eng.__rgCongressFilter = 1;
+}
+
+// ====================================================================== news
+// RG.news(text, priority): priority 1 (default) is an item, 2 an important
+// item, 3 or more asks for the headline. post_event rebuilds news_headline
+// and news_items after every action; the paper is cleared when the month turns.
+R.news = function (text, priority, fromEvent) {
+    var Q = R.q();
+    if (!text) { return; }
+    if (!Array.isArray(Q.news_pending)) { Q.news_pending = []; }
+    Q.news_seq = num(Q.news_seq) + 1;
+    Q.news_pending.push({t: String(text), p: priority || 1, i: Q.news_seq, e: fromEvent ? 1 : 0});
+};
+// Every historical event that fires becomes a news item by itself, from its
+// title and subtitle, and the month's first such event is the default
+// headline. Writers only call RG.news for extra items or a better headline.
+R.eventNews = function () {
+    var Q = R.q();
+    var eng = R.engine;
+    var visits = eng.state.visits || {};
+    var evs = (eng.game.tagLookup && eng.game.tagLookup.event) || {};
+    var first = !Q.news_seen_events || typeof Q.news_seen_events !== 'object';
+    if (first) { Q.news_seen_events = {}; }
+    for (var id in visits) {
+        if (!evs[id] || Q.news_seen_events[id]) { continue; }
+        Q.news_seen_events[id] = 1;
+        if (first || /^sys_|_init$|roster/.test(id)) { continue; }
+        var sc = eng.game.scenes[id];
+        var t = sc && sc.title;
+        if (!t || /[\[\{]/.test(t)) { continue; }
+        var st = sc.subtitle;
+        var text = (st && typeof st === 'string' && !/[\[\{]/.test(st)) ? t + ': ' + st.replace(/\.$/, '') : t;
+        R.news(text, 2, true);
+    }
+};
+R.newsUpdate = function (monthTurned) {
+    var Q = R.q();
+    if (!Array.isArray(Q.news_log) || monthTurned) { Q.news_log = []; }
+    var pend = Array.isArray(Q.news_pending) ? Q.news_pending : [];
+    for (var i = 0; i < pend.length; i++) {
+        var dup = Q.news_log.some(function (x) { return x.t == pend[i].t; });
+        if (!dup) { Q.news_log.push(pend[i]); }
+    }
+    Q.news_pending = [];
+    if (Q.news_log.length > 12) { Q.news_log = Q.news_log.slice(-12); }
+    var items = Q.news_log.slice().sort(function (a, b) { return (b.p - a.p) || (a.i - b.i); });
+    R.breadPrice();
+    var ev = items.filter(function (x) { return x.e; });
+    if (items.length && items[0].p >= 3) {
+        Q.news_headline = items[0].t;
+        items = items.slice(1);
+    } else if (ev.length && !Q.crisis && !Q.congress) {
+        Q.news_headline = ev[0].t;
+        items = items.filter(function (x) { return x !== ev[0]; });
+    } else {
+        Q.news_headline = R.defaultHeadline();
+    }
+    Q.news_items = items.slice(0, 4).map(function (x) { return x.t; });
+};
+// the price of a loaf of bread in Berlin, from the inflation meter
+R.breadPrice = function () {
+    var Q = R.q();
+    var inf = num(Q.inflation);
+    var lg = inf <= 60 ? -0.3 + 0.045 * inf : 2.4 + 0.21 * (inf - 60);
+    var p = Math.pow(10, lg);
+    var txt;
+    if (p < 10) { txt = p.toFixed(2).replace('.', ',') + ' marks'; }
+    else if (p < 1e3) { txt = Math.round(p) + ' marks'; }
+    else if (p < 1e6) { txt = Math.round(p / 1e3) + ' thousand marks'; }
+    else if (p < 1e9) { txt = Math.round(p / 1e6) + ' million marks'; }
+    else if (p < 1e12) { txt = Math.round(p / 1e9) + ' billion marks'; }
+    else { txt = Math.round(p / 1e12) + ' trillion marks'; }
+    Q.bread_price = txt;
+    return txt;
+};
+R.defaultHeadline = function () {
+    var Q = R.q();
+    var t = num(Q.time);
+    if (Q.crisis && Q.crisis_name) { return 'State of emergency: ' + Q.crisis_name; }
+    if (Q.congress && Q.congress_name) { return 'Party congress in session: ' + Q.congress_name; }
+    if (Q.kpd_banned == 1) { return 'The party is banned: this paper is printed in secret'; }
+    if (num(Q.inflation) >= 80) { return 'The mark in free fall: a loaf of bread costs ' + Q.bread_price; }
+    var strikes = Q.districts.filter(function (d) { return Q['district_' + d + '_strike']; });
+    if (strikes.length >= 2) {
+        return 'Strike wave: ' + strikes.slice(0, 3).map(R.dname).join(', ') + ' out';
+    }
+    if (strikes.length == 1) { return 'Strike in ' + R.dname(strikes[0]) + ' enters its ' + (num(Q['district_' + strikes[0] + '_strike_months']) >= 2 ? 'second month' : 'first weeks'); }
+    if (num(Q.repression) >= 65) {
+        var worst = Q.districts.slice().sort(function (a, b) {
+            return Q['district_' + b + '_repression'] - Q['district_' + a + '_repression'];
+        })[0];
+        return 'Police raids on party offices in ' + R.dname(worst);
+    }
+    if (num(Q.inflation) >= 50) { return 'Prices double again: a loaf of bread costs ' + Q.bread_price; }
+    if (num(Q.stability) < 20) { return 'Cabinet crisis in Berlin: can ' + (Q.chancellor || 'the government') + ' survive?'; }
+    if (num(Q.militancy) >= 70) { return 'Unrest in the factories: the workers will not wait'; }
+    if (Q.directive_active && Q.directive_title) { return 'The International calls: ' + Q.directive_title; }
+    if (num(Q.worker_support) >= 45) { return 'Communist meetings full in every industrial town'; }
+    var quiet = [
+        (Q.chancellor || 'The government') + ' promises order and bread',
+        'Quiet in the Reich, restless in the factories',
+        'Potatoes dearer again: a loaf of bread costs ' + Q.bread_price,
+        'The ' + (Q.parliament_name || 'Assembly') + ' debates the budget',
+        'Officers\' leagues hold their reunions undisturbed',
+        'Unemployment rises in ' + R.dname(Q.districts[t % Q.districts.length])
+    ];
+    return quiet[t % quiet.length];
+};
+
+// ==================================================================== ledger
+// RG.ledger(text, key): a notable outcome for the ending screen. With a key,
+// the entry is added only once per game.
+R.ledger = function (text, key) {
+    var Q = R.q();
+    if (!Array.isArray(Q.ledger)) { Q.ledger = []; }
+    if (!Q.ledger_keys || typeof Q.ledger_keys !== 'object') { Q.ledger_keys = {}; }
+    var k = key || text;
+    if (Q.ledger_keys[k]) { return false; }
+    Q.ledger_keys[k] = 1;
+    Q.ledger.push(R.dateText() + ': ' + text);
+    if (Q.ledger.length > 40) { Q.ledger = Q.ledger.slice(-40); }
+    Q.ledger_count = Q.ledger.length;
+    return true;
+};
+// outcomes the period writers already set as flags: recorded automatically
+R.LEDGER_WATCH = [
+    ['kapp_outcome', 2, 'Kapp\'s putsch succeeded: the generals took Berlin.'],
+    ['kapp_outcome', 3, 'The general strike against Kapp ended in a workers\' government.'],
+    ['bavaria_soviet', 2, 'The Bavarian council republic survived.'],
+    ['ruhr_red_army', 2, 'The Red Army of the Ruhr held the coalfield.'],
+    ['warsaw_outcome', 2, 'The Red Army took Warsaw.'],
+    ['march_action', 1, 'The March Action was fought and lost.'],
+    ['march_action', 2, 'The March Action won Central Germany.'],
+    ['levi_split', 1, 'Paul Levi left the party.'],
+    ['left_split', 1, 'The Left broke away from the party.'],
+    ['german_october', 1, 'The German October was called off; Hamburg rose alone.'],
+    ['german_october', 2, 'The national rising of October 1923 was defeated.'],
+    ['german_october', 3, 'The German October won.'],
+    ['kpd_banned', 1, 'The party was banned.']
+];
+R.ledgerWatch = function () {
+    var Q = R.q();
+    for (var i = 0; i < R.LEDGER_WATCH.length; i++) {
+        var w = R.LEDGER_WATCH[i];
+        if (Q[w[0]] === w[1]) { R.ledger(w[2], 'watch_' + w[0] + '_' + w[1]); }
+    }
+    if (Q.luxemburg_alive == 1 && num(Q.time) >= 13) {
+        R.ledger('Rosa Luxemburg lived to see 1920.', 'lux_1920');
+    }
+    if (Q.liebknecht_alive == 1 && num(Q.time) >= 13) {
+        R.ledger('Karl Liebknecht lived to see 1920.', 'lieb_1920');
+    }
+};
+
+// ================================================================== comrades
+// Q.comrades: [{id, name, faction, role, status, district, until}]
+// status: 'outside' (not yet in the party), 'free', 'prison', 'exile', 'dead',
+// 'expelled'. Each comrade also has comrade_<id> for Dendry conditions:
+// 0 outside, 1 free, 2 prison, 3 exile, 4 dead, 5 expelled.
+R.STATUS_CODE = {outside: 0, free: 1, prison: 2, exile: 3, dead: 4, expelled: 5};
+R.STATUS_TEXT = {outside: 'not in the party', free: 'free', prison: 'in prison', exile: 'in exile',
+    dead: 'dead', expelled: 'expelled'};
+// id, name, faction, role, home district, month (time) they join the party
+R.ROSTER = [
+    ['luxemburg', 'Rosa Luxemburg', 'luxemburgist', 'Zentrale; editor of Die Rote Fahne', 'berlin', 0],
+    ['liebknecht', 'Karl Liebknecht', 'luxemburgist', 'Zentrale', 'berlin', 0],
+    ['jogiches', 'Leo Jogiches', 'luxemburgist', 'Organiser of the Zentrale', 'berlin', 0],
+    ['levi', 'Paul Levi', 'luxemburgist', 'Zentrale', 'berlin', 0],
+    ['pieck', 'Wilhelm Pieck', 'luxemburgist', 'Zentrale', 'berlin', 0],
+    ['eberlein', 'Hugo Eberlein', 'luxemburgist', 'Treasurer', 'berlin', 0],
+    ['meyer', 'Ernst Meyer', 'luxemburgist', 'Zentrale', 'berlin', 0],
+    ['zetkin', 'Clara Zetkin', 'luxemburgist', 'Women\'s secretary', 0, 3],
+    ['levine', 'Eugen Leviné', 'luxemburgist', 'Emissary to Munich', 'bavaria', 0],
+    ['thalheimer', 'August Thalheimer', 'unionist', 'Theorist; editor', 'berlin', 0],
+    ['brandler', 'Heinrich Brandler', 'unionist', 'Chemnitz district secretary', 'saxony', 0],
+    ['walcher', 'Jacob Walcher', 'unionist', 'Trade union department', 'berlin', 0],
+    ['frolich', 'Paul Frölich', 'offensive', 'Editor', 'bremen', 0],
+    ['fischer', 'Ruth Fischer', 'offensive', 'Berlin organiser', 'berlin', 9],
+    ['maslow', 'Arkadi Maslow', 'offensive', 'Berlin organiser', 'berlin', 10],
+    ['thalmann', 'Ernst Thälmann', 'offensive', 'Hamburg leader', 'hamburg', 24],
+    ['hoelz', 'Max Hoelz', 'offensive', 'Leader of the Vogtland unemployed', 'saxony', 0],
+    ['munzenberg', 'Willi Münzenberg', 'offensive', 'Youth International', 'berlin', 0],
+    ['laufenberg', 'Heinrich Laufenberg', 'ultraleft', 'Hamburg leader', 'hamburg', 0],
+    ['wolffheim', 'Fritz Wolffheim', 'ultraleft', 'Hamburg leader', 'hamburg', 0],
+    ['ruhle', 'Otto Rühle', 'ultraleft', 'Dresden leader', 'saxony', 0],
+    ['schroder', 'Karl Schröder', 'ultraleft', 'Berlin leader', 'berlin', 0],
+    ['radek', 'Karl Radek', 'ecci', 'Envoy of the Executive', 'berlin', 0]
+];
+// legacy flags kept in sync both ways. kind: alive (0 = dead), member
+// (0 = out of the party), gone (1 = expelled), prison (1 = in prison).
+R.FLAGS = [
+    {id: 'luxemburg', flag: 'luxemburg_alive', kind: 'alive'},
+    {id: 'liebknecht', flag: 'liebknecht_alive', kind: 'alive'},
+    {id: 'jogiches', flag: 'jogiches_alive', kind: 'alive'},
+    {id: 'levine', flag: 'levine_alive', kind: 'alive'},
+    {id: 'levi', flag: 'levi_in_party', kind: 'member'},
+    {id: 'levi', flag: 'levi_split', kind: 'gone'},
+    {id: 'radek', flag: 'radek_prison', kind: 'prison', months: 11},
+    {id: 'hoelz', flag: 'hoelz_imprisoned', kind: 'prison', months: 0}
+];
+// the leading voices of each current, best speaker first
+R.SPEAKERS = {
+    luxemburgist: ['luxemburg', 'liebknecht', 'levi', 'zetkin', 'meyer', 'pieck', 'eberlein'],
+    offensive: ['fischer', 'thalmann', 'maslow', 'frolich', 'munzenberg', 'hoelz'],
+    unionist: ['brandler', 'thalheimer', 'walcher'],
+    ultraleft: ['ruhle', 'laufenberg', 'wolffheim', 'schroder']
+};
+R.STAR = {luxemburg: 1.6, liebknecht: 1.5, zetkin: 1.3, levi: 1.25, fischer: 1.3, thalmann: 1.2,
+    brandler: 1.1, ruhle: 1.15, laufenberg: 1.1, radek: 1.3};
+R.buildRoster = function () {
+    var Q = R.q();
+    Q.comrades = R.ROSTER.map(function (r) {
+        return {id: r[0], name: r[1], faction: r[2], role: r[3], status: (r[5] > num(Q.time)) ? 'outside' : 'free',
+            district: r[4] || 0, joins: r[5], until: 0};
+    });
+    Q.comrade_flag_seen = {};
+    Q.comrade_gone_seen = {};
+};
+R.comrade = function (id) {
+    var Q = R.q();
+    if (!Array.isArray(Q.comrades)) { return null; }
+    for (var i = 0; i < Q.comrades.length; i++) {
+        if (Q.comrades[i].id == id) { return Q.comrades[i]; }
+    }
+    return null;
+};
+R.status = function (id) { var c = R.comrade(id); return c ? c.status : 0; };
+R.isFree = function (id) { return R.status(id) == 'free'; };
+R.inParty = function (c) { return c && (c.status == 'free' || c.status == 'prison' || c.status == 'exile') && c.faction != 'ecci'; };
+R.comradeName = function (id) { var c = R.comrade(id); return c ? c.name : ''; };
+R.NEWS_STATUS = {
+    prison: function (c) { return c.name + ' arrested'; },
+    free: function (c, old) {
+        if (old == 'prison') { return c.name + ' released from prison'; }
+        if (old == 'exile') { return c.name + ' returns to Germany'; }
+        if (old == 'expelled') { return c.name + ' readmitted to the party'; }
+        return c.name + ' joins the party';
+    },
+    exile: function (c) { return c.name + ' flees abroad'; },
+    dead: function (c) { return c.name + ' is dead'; },
+    expelled: function (c) { return c.name + ' expelled from the party'; }
+};
+// write the legacy flags for one comrade
+R.comradeFlagsOut = function (c) {
+    var Q = R.q();
+    if (!Q.comrade_flag_seen) { Q.comrade_flag_seen = {}; }
+    for (var i = 0; i < R.FLAGS.length; i++) {
+        var f = R.FLAGS[i];
+        if (f.id != c.id) { continue; }
+        var v;
+        if (f.kind == 'alive') { v = c.status == 'dead' ? 0 : 1; }
+        else if (f.kind == 'member') { v = (c.status == 'free' || c.status == 'prison' || c.status == 'exile') ? 1 : 0; }
+        else if (f.kind == 'gone') { v = c.status == 'expelled' ? 1 : num(Q[f.flag]); }
+        else if (f.kind == 'prison') { v = c.status == 'prison' ? 1 : 0; }
+        Q[f.flag] = v;
+        Q.comrade_flag_seen[f.flag] = v;
+    }
+};
+// Change a comrade's status. opts: {months: prison sentence (0 = open-ended),
+// quiet: no news item, news: custom news text}
+R.setStatus = function (id, st, opts) {
+    var Q = R.q();
+    opts = opts || {};
+    var c = R.comrade(id);
+    if (!c || !R.STATUS_CODE.hasOwnProperty(st)) { return null; }
+    if (c.status == st) { return c; }
+    var old = c.status;
+    c.status = st;
+    c.until = (st == 'prison' && opts.months) ? num(Q.time) + opts.months : 0;
+    R.comradeFlagsOut(c);
+    if (!opts.quiet && !(old == 'outside' && st == 'free' && c.joins === 0)) {
+        R.news(opts.news || R.NEWS_STATUS[st](c, old), opts.priority || 1);
+    }
+    R.comradeCodes();
+    return c;
+};
+R.arrest = function (id, months, opts) { opts = opts || {}; opts.months = months || 0; return R.setStatus(id, 'prison', opts); };
+R.free = function (id, opts) { return R.setStatus(id, 'free', opts); };
+R.exile = function (id, opts) { return R.setStatus(id, 'exile', opts); };
+R.kill = function (id, opts) { return R.setStatus(id, 'dead', opts); };
+R.expel = function (id, opts) { return R.setStatus(id, 'expelled', opts); };
+R.setFaction = function (id, f) {
+    var c = R.comrade(id);
+    if (c && f) { c.faction = f; }
+    return c;
+};
+R.setRole = function (id, role) {
+    var c = R.comrade(id);
+    if (c && role) { c.role = String(role); }
+    return c;
+};
+// the best free speaker of a current, as {id, name, power}
+R.speaker = function (f) {
+    var list = R.SPEAKERS[f] || [];
+    for (var i = 0; i < list.length; i++) {
+        var c = R.comrade(list[i]);
+        if (c && c.status == 'free' && c.faction == f) { return {id: c.id, name: c.name, power: R.STAR[c.id] || 1}; }
+    }
+    var Q = R.q();
+    if (Array.isArray(Q.comrades)) {
+        for (var j = 0; j < Q.comrades.length; j++) {
+            var d = Q.comrades[j];
+            if (d.status == 'free' && d.faction == f) { return {id: d.id, name: d.name, power: R.STAR[d.id] || 1}; }
+        }
+    }
+    return {id: 0, name: 'a speaker of the ' + R.fname(f), power: 0.8};
+};
+R.comradeCodes = function () {
+    var Q = R.q();
+    var prison = 0, free = 0;
+    for (var i = 0; i < Q.comrades.length; i++) {
+        var c = Q.comrades[i];
+        Q['comrade_' + c.id] = R.STATUS_CODE[c.status] || 0;
+        if (c.status == 'prison') { prison++; }
+        if (c.status == 'free' && c.faction != 'ecci') { free++; }
+    }
+    Q.comrades_in_prison = prison;
+    Q.comrades_free = free;
+};
+// read the legacy flags: an event that changed one wins
+R.comradeSync = function () {
+    var Q = R.q();
+    if (!Array.isArray(Q.comrades)) { R.buildRoster(); }
+    if (!Q.comrade_flag_seen) { Q.comrade_flag_seen = {}; }
+    if (!Q.comrade_gone_seen) { Q.comrade_gone_seen = {}; }
+    // the first sync of a game (or of a test preset) reads the state silently
+    var quiet = !Q.comrade_synced;
+    Q.comrade_synced = 1;
+    var t = num(Q.time);
+    for (var i = 0; i < R.FLAGS.length; i++) {
+        var f = R.FLAGS[i];
+        var v = Q[f.flag];
+        if (typeof v !== 'number' || Q.comrade_flag_seen[f.flag] === v) { continue; }
+        var first = Q.comrade_flag_seen[f.flag] === undefined;
+        Q.comrade_flag_seen[f.flag] = v;
+        var c = R.comrade(f.id);
+        if (!c) { continue; }
+        var st = c.status;
+        if (f.kind == 'alive') { st = v == 0 ? 'dead' : (c.status == 'dead' ? 'free' : c.status); }
+        else if (f.kind == 'member') {
+            if (v == 0 && c.status != 'dead') { st = 'expelled'; }
+            if (v == 1 && (c.status == 'expelled' || c.status == 'outside')) { st = 'free'; }
+        }
+        else if (f.kind == 'gone') { if (v == 1 && c.status != 'dead') { st = 'expelled'; } }
+        else if (f.kind == 'prison') {
+            if (v == 1) { st = 'prison'; }
+            if (v == 0 && c.status == 'prison') { st = 'free'; }
+        }
+        if (st != c.status) {
+            var old = c.status;
+            c.status = st;
+            c.until = (st == 'prison' && f.months) ? t + f.months : 0;
+            if (!first && !quiet) { R.news(R.NEWS_STATUS[st](c, old)); }
+        }
+    }
+    // comrades join when their time comes; those of a current that left go with it
+    for (var j = 0; j < Q.comrades.length; j++) {
+        var cm = Q.comrades[j];
+        if (cm.status == 'outside' && cm.joins > 0 && (t >= cm.joins || (cm.id == 'thalmann' && Q.vkpd_formed == 1))) {
+            cm.status = 'free';
+        }
+    }
+    for (var k = 0; k < Q.factions.length; k++) {
+        var fa = Q.factions[k];
+        if (Q[fa + '_gone'] && !Q.comrade_gone_seen[fa]) {
+            Q.comrade_gone_seen[fa] = 1;
+            for (var m = 0; m < Q.comrades.length; m++) {
+                var cc = Q.comrades[m];
+                if (cc.faction == fa && (cc.status == 'free' || cc.status == 'prison')) {
+                    cc.status = 'expelled';
+                    cc.left_with_faction = 1;
+                }
+            }
+            if (!quiet) { R.news('The ' + R.fname(fa) + ' leave the party, and their leaders with them', 2); }
+        }
+    }
+    R.comradeCodes();
+};
+// monthly: sentences end, and repression puts comrades in prison
+R.comradeMonthly = function () {
+    var Q = R.q();
+    var t = num(Q.time);
+    for (var i = 0; i < Q.comrades.length; i++) {
+        var c = Q.comrades[i];
+        if (c.status == 'prison' && c.until > 0 && t >= c.until) { R.free(c.id); }
+    }
+    if (Q.crisis || Q.congress || t < 4) { return; }
+    // Luxemburg's and Liebknecht's fates belong to the story's events
+    var cands = Q.comrades.filter(function (c) {
+        return c.status == 'free' && c.faction != 'ecci' && c.id != 'luxemburg' && c.id != 'liebknecht';
+    });
+    if (!cands.length) { return; }
+    var rep = num(Q.repression) + (Q.kpd_banned == 1 ? 15 : 0);
+    var p = clamp((rep - 45) / 220, 0, 0.3);
+    if (Math.random() >= p) { return; }
+    var w = cands.map(function (c) {
+        var r = c.district ? num(Q['district_' + c.district + '_repression']) : rep;
+        return Math.max(1, r - 30);
+    });
+    var x = Math.random() * R.sum(w);
+    for (var j = 0; j < cands.length; j++) {
+        x -= w[j];
+        if (x <= 0) {
+            var dn = cands[j].district ? ' in ' + R.dname(cands[j].district) : '';
+            R.arrest(cands[j].id, 3 + Math.floor(Math.random() * 6),
+                {news: cands[j].name + ' arrested' + dn, priority: 2});
+            Q.sys_last_arrest = cands[j].id;
+            Q.sys_last_arrest_name = cands[j].name;
+            break;
+        }
+    }
+};
+
+// ================================================================= districts
+// district_<d>_militancy, _repression (0-100), _guards (thousands of red
+// guards), _strike (0/1), _strike_months. The national militancy, repression
+// and red_guards_strength are their summaries: an event that changes the
+// national value spreads the change over the districts.
+R.NEIGHBOURS = {
+    berlin: ['halle', 'saxony', 'hamburg'],
+    hamburg: ['bremen', 'berlin'],
+    bremen: ['hamburg', 'ruhr'],
+    ruhr: ['bremen'],
+    saxony: ['halle', 'thuringia', 'berlin', 'bavaria'],
+    thuringia: ['saxony', 'halle', 'bavaria'],
+    bavaria: ['thuringia', 'saxony'],
+    halle: ['berlin', 'saxony', 'thuringia']
+};
+// how much more militant, or more policed, than the country each district is
+R.MIL_OFFSET = {berlin: 5, hamburg: 6, bremen: 4, ruhr: 9, saxony: 0, thuringia: -2, bavaria: -10, halle: 10};
+R.REP_OFFSET = {berlin: 3, hamburg: 0, bremen: 0, ruhr: 4, saxony: -4, thuringia: -4, bavaria: 8, halle: 2};
+R.TRADES = {
+    berlin: 'the metalworkers of Siemens and AEG',
+    hamburg: 'the dockers and the shipyards',
+    bremen: 'the Weser yard',
+    ruhr: 'the miners of the Ruhr',
+    saxony: 'the textile mills of Chemnitz',
+    thuringia: 'the toy and porcelain workers',
+    bavaria: 'the Munich railway workshops',
+    halle: 'Leuna and the Mansfeld pits'
+};
+R.dweights = function () {
+    var Q = R.q();
+    var tot = 0, w = {};
+    for (var i = 0; i < Q.districts.length; i++) {
+        var d = Q.districts[i];
+        w[d] = Math.max(0.1, num(Q['district_' + d + '_members']));
+        tot += w[d];
+    }
+    for (var k in w) { w[k] /= tot; }
+    return w;
+};
+R.meanOffset = function (off) {
+    var w = R.dweights(), s = 0;
+    for (var d in w) { s += w[d] * (off[d] || 0); }
+    return s;
+};
+R.districtInit = function () {
+    var Q = R.q();
+    var mo = R.meanOffset(R.MIL_OFFSET), ro = R.meanOffset(R.REP_OFFSET);
+    var gw = {}, gt = 0;
+    for (var i = 0; i < Q.districts.length; i++) {
+        var d = Q.districts[i];
+        var p = 'district_' + d + '_';
+        if (Q[p + 'militancy'] === undefined) { Q[p + 'militancy'] = clamp(num(Q.militancy) + R.MIL_OFFSET[d] - mo, 0, 100); }
+        if (Q[p + 'repression'] === undefined) { Q[p + 'repression'] = clamp(num(Q.repression) + R.REP_OFFSET[d] - ro, 0, 100); }
+        if (Q[p + 'strike'] === undefined) { Q[p + 'strike'] = 0; }
+        if (Q[p + 'strike_months'] === undefined) { Q[p + 'strike_months'] = 0; }
+        if (Q[p + 'peak'] === undefined) { Q[p + 'peak'] = num(Q[p + 'members']); }
+        if (Q[p + 'broken'] === undefined) { Q[p + 'broken'] = 0; }
+        gw[d] = Math.max(0.1, num(Q[p + 'members'])) * (Q[p + 'militancy'] + 10);
+        gt += gw[d];
+    }
+    for (var j = 0; j < Q.districts.length; j++) {
+        var dd = Q.districts[j];
+        if (Q['district_' + dd + '_guards'] === undefined) {
+            Q['district_' + dd + '_guards'] = num(Q.red_guards_strength) * gw[dd] / gt;
+        }
+    }
+    if (Q.sys_nat_militancy === undefined) { R.districtSummary(); }
+};
+// recompute the national summaries and remember them
+R.districtSummary = function () {
+    var Q = R.q();
+    var w = R.dweights();
+    var mil = 0, rep = 0, g = 0, strikes = [];
+    for (var i = 0; i < Q.districts.length; i++) {
+        var d = Q.districts[i];
+        var p = 'district_' + d + '_';
+        Q[p + 'militancy'] = Math.round(10 * clamp(Q[p + 'militancy'], 0, 100)) / 10;
+        Q[p + 'repression'] = Math.round(10 * clamp(Q[p + 'repression'], 0, 100)) / 10;
+        Q[p + 'guards'] = Math.round(100 * Math.max(0, Q[p + 'guards'])) / 100;
+        mil += w[d] * Q[p + 'militancy'];
+        rep += w[d] * Q[p + 'repression'];
+        g += Q[p + 'guards'];
+        if (Q[p + 'strike']) { strikes.push(d); }
+        Q[p + 'militancy_display'] = Math.round(Q[p + 'militancy']);
+        Q[p + 'repression_display'] = Math.round(Q[p + 'repression']);
+        Q[p + 'guards_display'] = Q[p + 'guards'] < 10 ? Q[p + 'guards'].toFixed(1) : String(Math.round(Q[p + 'guards']));
+    }
+    Q.militancy = mil;
+    Q.repression = rep;
+    Q.red_guards_strength = g;
+    Q.sys_nat_militancy = mil;
+    Q.sys_nat_repression = rep;
+    Q.sys_nat_guards = g;
+    Q.strike_count = strikes.length;
+    Q.strike_districts = strikes.length ? strikes.map(R.dname).join(', ') : 0;
+};
+// spread changes made to the national meters by events over the districts
+R.districtSync = function () {
+    var Q = R.q();
+    var dm = num(Q.militancy) - num(Q.sys_nat_militancy);
+    var dr = num(Q.repression) - num(Q.sys_nat_repression);
+    var dg = num(Q.red_guards_strength) - num(Q.sys_nat_guards);
+    var i, d;
+    if (Math.abs(dm) > 1e-6 || Math.abs(dr) > 1e-6) {
+        for (i = 0; i < Q.districts.length; i++) {
+            d = Q.districts[i];
+            Q['district_' + d + '_militancy'] += dm;
+            Q['district_' + d + '_repression'] += dr;
+        }
+    }
+    if (Math.abs(dg) > 1e-6) {
+        var gw = {}, gt = 0;
+        for (i = 0; i < Q.districts.length; i++) {
+            d = Q.districts[i];
+            gw[d] = dg > 0 ? Math.max(0.1, num(Q['district_' + d + '_members'])) * (num(Q['district_' + d + '_militancy']) + 10)
+                : num(Q['district_' + d + '_guards']);
+            gt += gw[d];
+        }
+        for (i = 0; i < Q.districts.length; i++) {
+            d = Q.districts[i];
+            Q['district_' + d + '_guards'] += gt > 0 ? dg * gw[d] / gt : dg / Q.districts.length;
+        }
+    }
+    R.districtSummary();
+};
+R.startStrike = function (d, quiet) {
+    var Q = R.q();
+    if (Q['district_' + d + '_strike']) { return false; }
+    Q['district_' + d + '_strike'] = 1;
+    Q['district_' + d + '_strike_months'] = 0;
+    if (!quiet) { R.news('Strike: ' + R.TRADES[d] + ' walk out in ' + R.dname(d), 2); }
+    return true;
+};
+R.endStrike = function (d, how) {
+    var Q = R.q();
+    var p = 'district_' + d + '_';
+    if (!Q[p + 'strike']) { return false; }
+    Q[p + 'strike'] = 0;
+    Q[p + 'strike_months'] = 0;
+    if (how == 'crushed') {
+        Q[p + 'militancy'] -= 10;
+        Q[p + 'members'] *= 0.96;
+        R.news('Strike in ' + R.dname(d) + ' broken by the police', 2);
+    } else if (how == 'won') {
+        Q[p + 'militancy'] -= 4;
+        Q[p + 'loyalty'] += 4;
+        Q.worker_support += 1;
+        R.news('Strikers in ' + R.dname(d) + ' go back with their demands met');
+    } else if (how != 'quiet') {
+        Q[p + 'militancy'] -= 5;
+        R.news('Strike in ' + R.dname(d) + ' ends');
+    }
+    return true;
+};
+// spread a strike from d to its most militant neighbour that is not out yet
+R.spreadStrike = function (d) {
+    var Q = R.q();
+    var n = (R.NEIGHBOURS[d] || []).filter(function (x) { return !Q['district_' + x + '_strike']; });
+    if (!n.length) { return 0; }
+    n.sort(function (a, b) { return Q['district_' + b + '_militancy'] - Q['district_' + a + '_militancy']; });
+    R.startStrike(n[0], true);
+    R.news('The strike spreads from ' + R.dname(d) + ' to ' + R.dname(n[0]), 2);
+    return n[0];
+};
+R.districtMonthly = function () {
+    var Q = R.q();
+    var lead = Q.leading_faction;
+    var w = R.dweights();
+    var nat = 0;
+    for (var d0 in w) { nat += w[d0] * num(Q['district_' + d0 + '_militancy']); }
+    var mo = R.meanOffset(R.MIL_OFFSET);
+    var striking = Q.districts.filter(function (d) { return Q['district_' + d + '_strike']; });
+    var infl = num(Q.inflation);
+    for (var i = 0; i < Q.districts.length; i++) {
+        var d = Q.districts[i];
+        var p = 'district_' + d + '_';
+        var mil = Q[p + 'militancy'];
+        // districts keep their character around the national mood
+        mil += (nat + R.MIL_OFFSET[d] - mo - mil) * 0.1;
+        // the falling mark radicalises
+        if (infl > 50) { mil += Math.min(1, (infl - 50) / 50) * 0.3; }
+        // militancy draws repression, which slowly fades (was national in v1)
+        var rep = Q[p + 'repression'] + mil / 20 - 2 + (Q[p + 'strike'] ? 3 : 0) + (Q.kpd_banned == 1 ? 2 : 0);
+        // repression thins out the district
+        if (rep >= 60) { Q[p + 'members'] *= 0.98; }
+        // red guards grow where the workers are angry, and are hunted where the police are strong
+        if (mil > 55) { Q[p + 'guards'] += 0.002 * num(Q[p + 'members']) * (mil - 55) / 10; }
+        if (rep > 55) { Q[p + 'guards'] *= 0.96; }
+        // a district far from the Zentrale's temper drifts away from it
+        if (Q[p + 'faction'] != lead) {
+            if (mil >= 70 && (lead == 'unionist' || lead == 'luxemburgist')) { Q[p + 'loyalty'] -= 1; }
+            if (mil <= 30 && (lead == 'offensive' || lead == 'ultraleft')) { Q[p + 'loyalty'] -= 1; }
+        }
+        Q[p + 'militancy'] = mil;
+        Q[p + 'repression'] = rep;
+        // strikes
+        if (Q[p + 'strike']) {
+            Q[p + 'strike_months'] += 1;
+            Q[p + 'militancy'] += 1;
+            Q[p + 'members'] *= 1.015;
+            Q[p + 'loyalty'] += (Q[p + 'faction'] == lead || Q[p + 'loyalty'] >= 50) ? 2 : -2;
+            Q.worker_support += 0.4;
+            Q.stability -= 0.5;
+            var endp = 0.25 + 0.15 * Q[p + 'strike_months'];
+            if (rep > 70 && Math.random() < (rep - 70) / 60) { R.endStrike(d, 'crushed'); }
+            else if (Math.random() < endp) { R.endStrike(d, Math.random() < 0.4 ? 'won' : 'ended'); }
+        } else if (!Q.crisis) {
+            var sp = clamp((mil - 60) / 200, 0, 0.15) + (infl > 60 ? 0.02 : 0);
+            if (Math.random() < sp) { R.startStrike(d); }
+        }
+    }
+    // strikes spill over to the neighbours
+    for (var j = 0; j < striking.length; j++) {
+        var nb = R.NEIGHBOURS[striking[j]] || [];
+        for (var k = 0; k < nb.length; k++) {
+            var n = nb[k];
+            if (!Q['district_' + n + '_strike'] && Math.random() < 0.08 * Q['district_' + n + '_militancy'] / 60) {
+                R.startStrike(n, true);
+                R.news('The strike spreads from ' + R.dname(striking[j]) + ' to ' + R.dname(n), 2);
+            }
+        }
+    }
+    // a district the party once held and has now lost
+    Q.sys_any_loss = 0;
+    for (var m = 0; m < Q.districts.length; m++) {
+        var dd = Q.districts[m];
+        var pp = 'district_' + dd + '_';
+        Q[pp + 'peak'] = Math.max(num(Q[pp + 'peak']), num(Q[pp + 'members']));
+        if (!Q[pp + 'broken'] && Q[pp + 'peak'] >= 3 && Q[pp + 'members'] < 0.3 * Q[pp + 'peak']) {
+            Q[pp + 'broken'] = 1;
+            R.ledger('The party in ' + R.dname(dd) + ' was broken.', 'broken_' + dd);
+            R.news('Party organisation in ' + R.dname(dd) + ' in ruins', 2);
+        }
+        if (Q[pp + 'broken'] && Q[pp + 'members'] >= 0.6 * Q[pp + 'peak']) { Q[pp + 'broken'] = 0; }
+        if (Q[pp + 'members'] < 0.85 * Q[pp + 'peak']) { Q.sys_any_loss = 1; }
+    }
+};
+// pick a district for a card: by = 'strike', 'militancy', 'repression',
+// 'guards', 'loss' (furthest below its peak), 'loyalty' (least loyal).
+// Sets sys_target, sys_target_name and sys_target_* for the card text.
+R.target = function (by) {
+    var Q = R.q();
+    var ds = Q.districts.slice();
+    var key = function (d) {
+        var p = 'district_' + d + '_';
+        if (by == 'strike') { return (Q[p + 'strike'] ? 1000 : 0) + Q[p + 'militancy']; }
+        if (by == 'repression') { return Q[p + 'repression']; }
+        if (by == 'guards') { return Q[p + 'guards'] + Q[p + 'militancy'] / 100; }
+        if (by == 'loss') { return num(Q[p + 'peak']) > 0 ? 1 - Q[p + 'members'] / Q[p + 'peak'] + Q[p + 'repression'] / 1000 : 0; }
+        if (by == 'loyalty') { return -Q[p + 'loyalty']; }
+        return Q[p + 'militancy'];
+    };
+    ds.sort(function (a, b) { return key(b) - key(a); });
+    var d = ds[0];
+    var p = 'district_' + d + '_';
+    Q.sys_target = d;
+    Q.sys_target_name = R.dname(d);
+    Q.sys_target_trade = R.TRADES[d];
+    Q.sys_target_striking = Q[p + 'strike'] ? 1 : 0;
+    Q.sys_target_militancy = Math.round(Q[p + 'militancy']);
+    Q.sys_target_repression = Math.round(Q[p + 'repression']);
+    Q.sys_target_faction = Q[p + 'faction'];
+    Q.sys_target_faction_name = R.fname(Q[p + 'faction']);
+    Q.sys_target_ours = Q[p + 'faction'] == Q.leading_faction ? 1 : 0;
+    Q.sys_target_guards = Q[p + 'guards'] < 10 ? Q[p + 'guards'].toFixed(1) : String(Math.round(Q[p + 'guards']));
+    Q.sys_target_members = Q[p + 'members'].toFixed(1);
+    var nb = (R.NEIGHBOURS[d] || []).filter(function (x) { return !Q['district_' + x + '_strike']; });
+    Q.sys_target_neighbour_name = nb.length ? R.dname(nb[0]) : 0;
+    return d;
+};
+// change one district's meters: RG.district('ruhr', {militancy: 5, repression: -3, guards: 1, members: 0.05, loyalty: 4})
+// (members is a fraction: 0.05 = five per cent more members)
+R.district = function (d, ch) {
+    var Q = R.q();
+    var p = 'district_' + d + '_';
+    if (Q[p + 'members'] === undefined) { return; }
+    ch = ch || {};
+    if (ch.militancy) { Q[p + 'militancy'] = clamp(Q[p + 'militancy'] + ch.militancy, 0, 100); }
+    if (ch.repression) { Q[p + 'repression'] = clamp(Q[p + 'repression'] + ch.repression, 0, 100); }
+    if (ch.guards) { Q[p + 'guards'] = Math.max(0, Q[p + 'guards'] + ch.guards); }
+    if (ch.loyalty) { Q[p + 'loyalty'] = clamp(Q[p + 'loyalty'] + ch.loyalty, 0, 100); }
+    if (ch.members) { Q[p + 'members'] *= (1 + ch.members); }
+    if (ch.strike === 1) { R.startStrike(d); }
+    if (ch.strike === 0) { R.endStrike(d); }
+    R.districtSummary();
+};
+
+// ========================================================= Moscow's Executive
+// ecci_<p> is each man's favour (0-100). It drifts each month towards what
+// he wants to see: his current in the Zentrale, obedience, and his own
+// hobby-horses. RG.ecci(p, delta) is a lasting nudge (it fades slowly).
+R.ECCI = ['lenin', 'zinoviev', 'radek', 'trotsky', 'bukharin'];
+R.ECCI_NAMES = {lenin: 'Lenin', zinoviev: 'Zinoviev', radek: 'Radek', trotsky: 'Trotsky', bukharin: 'Bukharin'};
+R.ECCI_SENS = {lenin: 0.25, zinoviev: 0.5, radek: 0.3, trotsky: 0.25, bukharin: 0.3};
+// how much each man likes each current at month t (time)
+R.ecciPref = function (p, f, t) {
+    if (p == 'lenin') {
+        return {luxemburgist: t <= 26 ? 0.4 : 0.5, unionist: 0.8, offensive: t < 27 ? 0.2 : -0.4, ultraleft: -1}[f] || 0;
+    }
+    if (p == 'zinoviev') {
+        return {luxemburgist: -0.4, unionist: (t >= 31 && t <= 58) ? 0.3 : -0.2, offensive: 0.8, ultraleft: -0.3}[f] || 0;
+    }
+    if (p == 'radek') {
+        return {luxemburgist: t <= 26 ? 0.4 : -0.2, unionist: 0.9, offensive: (t >= 26 && t <= 28) ? 0.3 : -0.4, ultraleft: -1}[f] || 0;
+    }
+    if (p == 'trotsky') {
+        return {luxemburgist: 0, unionist: t >= 56 ? -0.2 : 0.5, offensive: t >= 52 ? 0.6 : -0.2, ultraleft: -0.8}[f] || 0;
+    }
+    if (p == 'bukharin') {
+        return {luxemburgist: -0.3, unionist: -0.2, offensive: 0.8, ultraleft: 0.3}[f] || 0;
+    }
+    return 0;
+};
+// each man's weight on the Executive: Lenin fades from 1922 (his illness),
+// Trotsky rises with the Red Army and with the plans for October 1923, then falls
+R.ecciWeight = function (p, t) {
+    var Q = R.q();
+    if (p == 'lenin') { return t < 37 ? 35 : (t < 51 ? 20 : 4); }
+    if (p == 'zinoviev') { return t < 51 ? 30 : 40; }
+    if (p == 'trotsky') { return t <= 24 ? 22 : (t <= 50 ? 15 : (t <= 59 ? 20 : 8)); }
+    if (p == 'radek') { return 15 + ((typeof Q.comintern_rep === 'string' && Q.comintern_rep.indexOf('Radek') >= 0) ? 5 : 0); }
+    if (p == 'bukharin') { return t < 51 ? 10 : 15; }
+    return 0;
+};
+R.ecci = function (p, delta) {
+    var Q = R.q();
+    var list = (p == 'all') ? R.ECCI : [p];
+    for (var i = 0; i < list.length; i++) {
+        var k = 'ecci_' + list[i];
+        if (Q[k] === undefined) { continue; }
+        Q[k] = Math.round(clamp(Q[k] + delta, 0, 100));
+        Q[k + '_memory'] = clamp(num(Q[k + '_memory']) + delta, -40, 40);
+    }
+    R.ecciCompute();
+};
+R.ecciTarget = function (p) {
+    var Q = R.q();
+    var t = num(Q.time);
+    var tgt = 50 + 30 * R.ecciPref(p, Q.leading_faction, t)
+        + (Q.junior_faction ? 10 * R.ecciPref(p, Q.junior_faction, t) : 0)
+        - R.ECCI_SENS[p] * (num(Q.independence) - 50);
+    if (p == 'bukharin' || (p == 'zinoviev' && (t <= 30 || t >= 50))) { tgt += (num(Q.militancy) - 50) * 0.15; }
+    if ((p == 'lenin' || p == 'radek') && t >= 30) { tgt += clamp((num(Q.spd_relation) + num(Q.uspd_relation) - 40) * 0.1, -8, 8); }
+    if (p == 'trotsky' && t >= 50) { tgt += (num(Q.red_guards_arms) - 40) * 0.15; }
+    return clamp(tgt + num(Q['ecci_' + p + '_memory']), 5, 95);
+};
+R.ecciMonthly = function () {
+    var Q = R.q();
+    for (var i = 0; i < R.ECCI.length; i++) {
+        var p = R.ECCI[i];
+        var k = 'ecci_' + p;
+        var step = (R.ecciTarget(p) - Q[k]) * 0.15;
+        Q[k] = Math.round(Q[k] + (Math.abs(step) < 1 && Math.abs(step) > 0.2 ? (step > 0 ? 1 : -1) : step));
+        Q[k + '_memory'] = num(Q[k + '_memory']) * 0.9;
+    }
+    // the Executive's mood reaches the party's bank account, rarely
+    if (Q.comintern_member == 1 && !Q.crisis) {
+        if (Q.moscow_favour < 22 && Q.moscow_subsidy > 0 && Math.random() < 0.1) {
+            Q.moscow_subsidy -= 1;
+            R.news('Moscow cuts its subsidy to the German party', 2);
+        } else if (Q.moscow_favour >= 75 && Q.moscow_subsidy < 2 && Math.random() < 0.05) {
+            Q.moscow_subsidy += 1;
+            R.news('The Executive increases its help to the German section');
+        }
+    }
+};
+R.ecciCompute = function () {
+    var Q = R.q();
+    var t = num(Q.time);
+    var tw = 0, fav = 0;
+    var best = null, bestv = -1;
+    for (var i = 0; i < R.ECCI.length; i++) {
+        var p = R.ECCI[i];
+        var k = 'ecci_' + p;
+        Q[k] = clamp(num(Q[k]), 0, 100);
+        var w = R.ecciWeight(p, t);
+        tw += w;
+        fav += w * Q[k];
+        Q[k + '_display'] = Math.round(Q[k]);
+        // our best friend in Moscow: never the author of the directive we are fighting
+        if (Q[k] > bestv && !(Q.directive_active && Q.directive_from == p)) { bestv = Q[k]; best = p; }
+    }
+    for (var j = 0; j < R.ECCI.length; j++) {
+        Q['ecci_' + R.ECCI[j] + '_weight'] = Math.round(100 * R.ecciWeight(R.ECCI[j], t) / tw);
+    }
+    Q.ecci_lenin_ill = t >= 41 ? 1 : 0;
+    Q.moscow_favour = Math.round(0.85 * fav / tw + 0.15 * (100 - num(Q.independence)));
+    Q.ecci_friend = best;
+    Q.ecci_friend_name = R.ECCI_NAMES[best];
+    Q.ecci_friend_favour = Math.round(bestv);
+    Q.ecci_friend_is_author = 0;
+    // the current the Executive as a whole would back today
+    var pres = R.present();
+    var mb = pres[0], mv = -99;
+    for (var f = 0; f < pres.length; f++) {
+        var s = 0;
+        for (var m = 0; m < R.ECCI.length; m++) { s += R.ecciWeight(R.ECCI[m], t) * R.ecciPref(R.ECCI[m], pres[f], t); }
+        if (s > mv) { mv = s; mb = pres[f]; }
+    }
+    Q.moscow_backs = mb;
+    Q.moscow_backs_code = R.CODE[mb] || 0;
+    Q.moscow_backs_name = R.fname(mb);
+};
+
+// ================================================================ directives
+// RG.directive({id, title, text, from, months, goals, reward, punish, announce})
+//   id       short word; directive_<id> is 1 while it runs, then 2 fulfilled,
+//            3 half done, 4 failed or defied, 5 withdrawn
+//   goals    [{q: 'spd_relation', op: '>=', v: 30}, ...] checked every turn
+//   reward   {subsidy: 1, funds: 2, favour: 15, faction: 'unionist'}
+//   punish   'rebuke', 'subsidy', 'envoy', 'rival' or 'auto' (the default)
+//   announce false: your own event tells the story, so the generic
+//            telegram event does not fire
+R.directive = function (o) {
+    var Q = R.q();
+    if (Q.directive_active) { R.directiveResolve('withdrawn'); }
+    o = o || {};
+    var id = o.id || 'directive';
+    Q.directive_active = 1;
+    Q.directive_id = id;
+    Q.directive_title = o.title || 'A directive from the Executive';
+    Q.directive_text = o.text || 'The Executive instructs the Zentrale.';
+    Q.directive_from = R.ECCI_NAMES[o.from] ? o.from : 'zinoviev';
+    Q.directive_from_name = R.ECCI_NAMES[Q.directive_from];
+    Q.directive_months = clamp(o.months || 3, 1, 12);
+    Q.directive_due = num(Q.time) + Q.directive_months;
+    Q.directive_deadline = Q.directive_months;
+    Q.directive_goals = copy(o.goals || []);
+    Q.directive_reward = copy(o.reward || {});
+    Q.directive_punish = o.punish || 'auto';
+    Q.directive_effort = 0;
+    Q.directive_compliance = 0;
+    Q.directive_stance = 0;
+    Q.directive_stalls = 0;
+    Q.directive_new = (o.announce === false) ? 0 : 1;
+    Q.directive_envoy_seen = 0;
+    Q.directive_reckoning = 0;
+    Q.directive_result = 0;
+    Q.directive_defied = 0;
+    Q['directive_' + id] = 1;
+    Q.directive_count = num(Q.directive_count) + 1;
+    R.news('Telegram from Moscow: ' + Q.directive_title, 2);
+    R.directiveUpdate();
+    return true;
+};
+R.goalMet = function (g) {
+    var Q = R.q();
+    var v = num(Q[g.q]);
+    if (g.op == '<=') { return v <= g.v; }
+    if (g.op == '<') { return v < g.v; }
+    if (g.op == '>') { return v > g.v; }
+    if (g.op == '=' || g.op == '==') { return v == g.v; }
+    if (g.op == '!=') { return v != g.v; }
+    return v >= g.v;
+};
+// record what the Zentrale does about the directive: 'comply' (+effort),
+// 'stall' (more time, irritation), 'defy' (fails now, with defiance)
+R.comply = function (effort) {
+    var Q = R.q();
+    if (!Q.directive_active) { return; }
+    Q.directive_stance = 1;
+    Q.directive_effort = clamp(num(Q.directive_effort) + (effort === undefined ? 30 : effort), 0, 100);
+    R.ecci(Q.directive_from, 3);
+    R.directiveUpdate();
+};
+R.stall = function (months) {
+    var Q = R.q();
+    if (!Q.directive_active) { return; }
+    Q.directive_stance = 2;
+    Q.directive_stalls += 1;
+    Q.directive_due += (months || 2);
+    R.ecci(Q.directive_from, -3 * Q.directive_stalls);
+    R.directiveUpdate();
+};
+R.defy = function () {
+    var Q = R.q();
+    if (!Q.directive_active) { return; }
+    Q.directive_stance = 3;
+    Q.directive_defied = 1;
+    R.directiveResolve('fail');
+};
+R.directiveUpdate = function () {
+    var Q = R.q();
+    if (!Q.directive_active) { return; }
+    var goals = Array.isArray(Q.directive_goals) ? Q.directive_goals : [];
+    var met = goals.filter(R.goalMet).length;
+    Q.directive_goals_met = met;
+    Q.directive_goals_total = goals.length;
+    Q.directive_compliance = Math.round(clamp(num(Q.directive_effort) + (goals.length ? 60 * met / goals.length : 0), 0, 100));
+    Q.directive_deadline = Math.max(0, Q.directive_due - num(Q.time));
+    if (Q.directive_compliance >= 100) { R.directiveResolve('success'); }
+};
+R.directiveMonthly = function () {
+    var Q = R.q();
+    if (Q.directive_active) {
+        R.directiveUpdate();
+        if (Q.directive_active && num(Q.time) >= Q.directive_due) {
+            var c = Q.directive_compliance;
+            R.directiveResolve(c >= 70 ? 'success' : (c >= 35 ? 'partial' : 'fail'));
+        }
+        return;
+    }
+    // the Executive sends a directive of its own now and then
+    if (Q.comintern_member != 1 || Q.crisis || Q.congress || num(Q.time) < 5) { return; }
+    if (num(Q.time) - num(Q.directive_last_time) < 7) { return; }
+    if (Math.random() < 0.22) { R.directiveGeneric(); }
+};
+// the generic directives: each returns a definition, or null when it does not fit the moment
+R.DIRECTIVES = [
+    function (Q, t) {
+        return {id: 'bolshevise', from: 'zinoviev', months: 4, title: 'Bolshevise the party',
+            text: 'The Executive demands an end to the factional quarrels in the German section: one line, one Zentrale, iron discipline in the districts.',
+            goals: [{q: 'unity', op: '>=', v: Math.round(clamp(num(Q.unity) + 10, 55, 75))}]};
+    },
+    function (Q, t) {
+        if (t < 30 && Q.leading_faction != 'unionist') { return null; }
+        return {id: 'united_front', from: 'radek', months: 4, title: 'The united front',
+            text: 'The Executive instructs the Zentrale to propose joint action to the social democratic workers and their organisations: on wages, on prices, and against the monarchist bands.',
+            goals: [{q: 'spd_relation', op: '>=', v: Math.round(Math.min(60, num(Q.spd_relation) + 10))}]};
+    },
+    function (Q, t) {
+        if (!((t >= 24 && t <= 28) || t >= 50 || num(Q.militancy) >= 60)) { return null; }
+        return {id: 'prepare', from: (t >= 50 ? 'trotsky' : 'bukharin'), months: 5, title: 'Prepare for decisive struggles',
+            text: 'The revolutionary situation in Germany is ripening. The Executive demands that the German section arm its vanguard and prepare the masses for decisive battles.',
+            goals: [{q: 'red_guards_arms', op: '>=', v: Math.round(Math.min(85, num(Q.red_guards_arms) + 12))}]};
+    },
+    function (Q, t) {
+        if (!(t <= 22 || (t >= 30 && t <= 42))) { return null; }
+        return {id: 'russia', from: 'lenin', months: 3, title: (t <= 22 ? 'Hands off Soviet Russia' : 'Bread for the Volga'),
+            text: (t <= 22 ? 'The Executive calls on the German workers to stop every train and every ship that carries arms against Soviet Russia.'
+                : 'The Executive calls on the German section to rouse the workers of Germany for the starving of the Volga, and to shame the governments that do nothing.'),
+            goals: [{q: 'world_revolution', op: '>=', v: Math.round(Math.min(90, num(Q.world_revolution) + 6))}]};
+    },
+    function (Q, t) {
+        return {id: 'factories', from: (t < 37 ? 'lenin' : 'radek'), months: 5, title: 'Into the factories',
+            text: 'The Executive asks the Zentrale to build a communist cell in every large works and to win the factory councils, one by one.',
+            goals: [{q: 'worker_support', op: '>=', v: Math.round(Math.min(80, num(Q.worker_support) + 6))}]};
+    },
+    function (Q, t) {
+        if (num(Q.independence) < 45) { return null; }
+        return {id: 'control', from: 'zinoviev', months: 3, title: 'The Executive\'s control',
+            text: 'The Executive requires that the German section place its press, its finances and its appointments under the supervision of the Executive\'s representatives.',
+            goals: [{q: 'independence', op: '<=', v: Math.round(Math.max(15, num(Q.independence) - 12))}]};
+    }
+];
+R.directiveGeneric = function () {
+    var Q = R.q();
+    var t = num(Q.time);
+    var defs = [];
+    for (var i = 0; i < R.DIRECTIVES.length; i++) {
+        var d = R.DIRECTIVES[i](Q, t);
+        if (d && d.id != Q.directive_last_id) { defs.push(d); }
+    }
+    if (!defs.length) { return false; }
+    // an unhappy man is the likeliest to draft one
+    var w = defs.map(function (d) { return 110 - num(Q['ecci_' + d.from]); });
+    var x = Math.random() * R.sum(w);
+    for (var j = 0; j < defs.length; j++) {
+        x -= w[j];
+        if (x <= 0) { return R.directive(defs[j]); }
+    }
+    return R.directive(defs[defs.length - 1]);
+};
+// how a directive ends: 'success', 'partial', 'fail', 'withdrawn'
+R.directiveResolve = function (how) {
+    var Q = R.q();
+    if (!Q.directive_active) { return; }
+    var from = Q.directive_from;
+    var id = Q.directive_id;
+    Q.directive_active = 0;
+    Q.directive_new = 0;
+    Q.directive_last_id = id;
+    Q.directive_last_time = num(Q.time);
+    Q.directive_last_title = Q.directive_title;
+    Q.directive_punishment = 0;
+    Q.directive_punishment_code = 0;
+    var rw = Q.directive_reward || {};
+    if (how == 'success') {
+        Q.directive_result = 1;
+        Q['directive_' + id] = 2;
+        R.ecci(from, rw.favour || 15);
+        R.ecci('all', 4);
+        Q.independence -= 4;
+        if (rw.subsidy) { Q.moscow_subsidy = Math.min(3, num(Q.moscow_subsidy) + rw.subsidy); }
+        Q.resources += (rw.funds !== undefined) ? rw.funds : (rw.subsidy ? 0 : 2);
+        var rf = rw.faction || Q.moscow_backs;
+        if (rf && Q[rf + '_satisfaction'] !== undefined) { Q[rf + '_satisfaction'] += 5; }
+        Q.directives_fulfilled = num(Q.directives_fulfilled) + 1;
+        R.news('The Executive praises the German section', 2);
+        if (Q.directives_fulfilled == 1) { R.ledger('Carried out a directive of the Executive: ' + Q.directive_title + '.', 'dir_first_ok'); }
+    } else if (how == 'partial') {
+        Q.directive_result = 2;
+        Q['directive_' + id] = 3;
+        R.ecci(from, -6);
+        R.news('Inprekorr criticises the "hesitations" of the German Zentrale');
+    } else if (how == 'withdrawn') {
+        Q.directive_result = 0;
+        Q['directive_' + id] = 5;
+        return;
+    } else {
+        Q.directive_result = 3;
+        Q['directive_' + id] = 4;
+        var pun = Q.directive_punish;
+        if (!pun || pun == 'auto') {
+            if (Q.moscow_favour < 30 && Q.moscow_backs != Q.leading_faction) { pun = 'rival'; }
+            else if (num(Q.moscow_subsidy) > 0) { pun = 'subsidy'; }
+            else if (!Q.comintern_rep) { pun = 'envoy'; }
+            else { pun = 'rebuke'; }
+        }
+        R.punish(pun);
+        R.ecci(from, -15);
+        R.ecci('all', -5);
+        if (Q.directive_defied) {
+            Q.independence += 6;
+            Q.directives_defied = num(Q.directives_defied) + 1;
+            R.ledger('Defied the Executive: ' + Q.directive_title + '.', 'defied_' + id);
+        }
+    }
+    Q.directive_reckoning = 1;
+};
+// RG.punish('rebuke' | 'subsidy' | 'envoy' | 'rival'): Moscow's answer
+R.punish = function (pun) {
+    var Q = R.q();
+    var codes = {rebuke: 1, subsidy: 2, envoy: 3, rival: 4};
+    Q.directive_punishment = pun;
+    Q.directive_punishment_code = codes[pun] || 1;
+    if (pun == 'subsidy') {
+        Q.moscow_subsidy = Math.max(0, num(Q.moscow_subsidy) - 1);
+        R.news('Moscow cuts its subsidy to the German party', 2);
+    } else if (pun == 'envoy') {
+        var envoys = ['Mátyás Rákosi', 'Béla Kun', 'August Guralski', 'Dmitri Manuilsky'];
+        Q.comintern_rep = envoys[num(Q.directive_count) % envoys.length];
+        Q.independence -= 6;
+        Q.unity -= 3;
+        R.news('The Executive sends ' + Q.comintern_rep + ' to Berlin', 2);
+    } else if (pun == 'rival') {
+        var rv = Q.moscow_backs;
+        if (rv == Q.leading_faction || Q[rv + '_gone']) {
+            var pres = R.present().filter(function (f) { return f != Q.leading_faction; });
+            rv = pres.length ? pres[0] : 0;
+        }
+        if (rv) {
+            Q[rv + '_satisfaction'] += 12;
+            Q['lean_' + rv] += 3;
+            var ds = Q.districts.filter(function (d) { return Q['district_' + d + '_faction'] != rv; });
+            ds.sort(function (a, b) { return Q['district_' + a + '_loyalty'] - Q['district_' + b + '_loyalty']; });
+            if (ds.length && Q['district_' + ds[0] + '_loyalty'] < 60) {
+                Q['district_' + ds[0] + '_faction'] = rv;
+                Q.directive_rival_district_name = R.dname(ds[0]);
+            } else {
+                Q.directive_rival_district_name = 0;
+            }
+            Q.directive_rival = rv;
+            Q.directive_rival_name = R.fname(rv);
+            R.news('Moscow receives a delegation of the ' + R.fname(rv), 2);
+        }
+    } else {
+        Q.unity -= 4;
+        Q[Q.leading_faction + '_satisfaction'] -= 6;
+        Q.independence += 3;
+        R.news('Open letter of the Executive condemns the German Zentrale', 2);
+    }
+};
+
+// ================================================================= congresses
+// RG.congressStart({id, name, stake, sessions, positions, backing, kind,
+//                   mandates, delegates, ownClose})  (see the writing guide)
+var C = {};
+R.congress = C;
+// how a current's delegates vote when its own motion is not on the table
+R.AFFINITY = {
+    luxemburgist: {unionist: 0.6, offensive: 0.3, ultraleft: 0.1},
+    offensive: {ultraleft: 0.5, luxemburgist: 0.3, unionist: 0.2},
+    unionist: {luxemburgist: 0.7, offensive: 0.2, ultraleft: 0.1},
+    ultraleft: {offensive: 0.7, luxemburgist: 0.2, unionist: 0.1}
+};
+C.CARDS = ['lobby', 'speech', 'trade', 'moscow', 'mandates', 'walkout', 'procedure', 'corridors'];
+C.start = function (o) {
+    var Q = R.q();
+    o = o || {};
+    if (Q.congress) { return false; }
+    if (Q.crisis) { Q.congress_pending = copy(o); return false; }
+    var pres = R.present();
+    var pos = (o.positions || pres).filter(function (f) { return pres.indexOf(f) >= 0; });
+    if (!pos.length) { pos = [Q.leading_faction]; }
+    Q.congress = 1;
+    Q.congress_pending = 0;
+    Q.congress_id = o.id || 'party';
+    Q['congress_' + Q.congress_id] = 1;
+    Q.congress_name = o.name || 'The Party Congress';
+    Q.congress_stake = o.stake || 'The line of the party';
+    Q.congress_sessions = clamp(o.sessions || 3, 1, 6);
+    Q.congress_session = 1;
+    Q.congress_kind = (o.kind == 'leadership') ? 'leadership' : 'motion';
+    Q.congress_kind_code = (o.kind == 'leadership') ? 2 : 1;
+    Q.congress_positions = pos;
+    var b = (o.backing && pres.indexOf(o.backing) >= 0) ? o.backing : (pos.indexOf(Q.leading_faction) >= 0 ? Q.leading_faction : pos[0]);
+    if (pos.indexOf(b) < 0) { pos.push(b); }
+    Q.congress_backing = b;
+    Q.congress_own_close = o.ownClose ? 1 : 0;
+    Q.congress_mandates = o.mandates || 'members';
+    Q.congress_size = o.delegates || 240;
+    Q.congress_deals = {};
+    Q.congress_bitterness = 0;
+    Q.congress_walkout = 0;
+    Q.congress_closing = 0;
+    Q.congress_result = 0;
+    Q.congress_result_code = 0;
+    Q.congress_result_name = 0;
+    Q.congress_won = 0;
+    Q.congress_old_leader = Q.leading_faction;
+    Q.congress_leadership_changed = 0;
+    for (var i = 0; i < C.CARDS.length; i++) { Q['congress_used_' + C.CARDS[i]] = 0; }
+    C.allocate();
+    C.tally();
+    R.news(Q.congress_name + ' opens', 2);
+    return true;
+};
+R.congressStart = C.start;
+C.split = function (d, size, pres) {
+    var Q = R.q();
+    var F = Q['district_' + d + '_faction'];
+    var lead = Q.leading_faction;
+    if (pres.indexOf(F) < 0) { F = pres.indexOf(lead) >= 0 ? lead : pres[0]; }
+    var L = clamp(num(Q['district_' + d + '_loyalty']), 0, 100) / 100;
+    var out = {};
+    pres.forEach(function (f) { out[f] = 0; });
+    var dom = (F == lead) ? 0.5 + 0.4 * L : 0.6 + 0.3 * (1 - L);
+    out[F] += size * dom;
+    var rest = size * (1 - dom);
+    if (F != lead && pres.indexOf(lead) >= 0) {
+        var toLead = rest * L * 0.5;
+        out[lead] += toLead;
+        rest -= toLead;
+    }
+    var others = pres.filter(function (f) { return f != F; });
+    var tot = R.sum(others.map(function (f) { return num(Q[f + '_strength']) + 1; }));
+    others.forEach(function (f) { out[f] += rest * (num(Q[f + '_strength']) + 1) / tot; });
+    return C.round(out, Math.max(1, Math.round(size)));
+};
+// round a {faction: delegates} row to whole delegates that add up to n
+C.round = function (row, n) {
+    var keys = Object.keys(row);
+    var tot = R.sum(keys.map(function (k) { return row[k]; }));
+    if (tot <= 0) { return row; }
+    var out = {}, rem = [], used = 0;
+    keys.forEach(function (k) {
+        var v = row[k] * n / tot;
+        out[k] = Math.floor(v);
+        used += out[k];
+        rem.push([k, v - out[k]]);
+    });
+    rem.sort(function (a, b) { return b[1] - a[1]; });
+    for (var i = 0; i < n - used && i < rem.length; i++) { out[rem[i][0]] += 1; }
+    return out;
+};
+C.sizes = function (rule) {
+    var Q = R.q();
+    var T = Q.congress_size || 240;
+    var M = R.sum(Q.districts.map(function (d) { return Math.max(0.1, num(Q['district_' + d + '_members'])); }));
+    var s = {};
+    Q.districts.forEach(function (d) {
+        var sh = Math.max(0.1, num(Q['district_' + d + '_members'])) / M;
+        s[d] = Math.max(1, Math.round(rule == 'districts' ? T * (0.5 * sh + 0.5 / Q.districts.length) : T * sh));
+    });
+    if (rule == 'zentrale') { s.zentrale = Math.round(T * 0.12); }
+    return s;
+};
+C.allocate = function () {
+    var Q = R.q();
+    var pres = R.present();
+    var sizes = C.sizes(Q.congress_mandates);
+    var table = {};
+    Q.districts.forEach(function (d) { table[d] = C.split(d, sizes[d], pres); });
+    if (sizes.zentrale) {
+        table.zentrale = {};
+        pres.forEach(function (f) { table.zentrale[f] = 0; });
+        table.zentrale[Q.leading_faction] = sizes.zentrale;
+    }
+    Q.congress_table = table;
+};
+// change the mandate rules in the middle of a congress: each delegation is
+// rescaled, and lobbying done so far is kept
+C.setMandates = function (rule) {
+    var Q = R.q();
+    var pres = R.present();
+    var sizes = C.sizes(rule);
+    var table = Q.congress_table;
+    Q.districts.forEach(function (d) {
+        var row = table[d];
+        if (!row) { return; }
+        table[d] = C.round(row, sizes[d]);
+    });
+    if (sizes.zentrale && !table.zentrale) {
+        table.zentrale = {};
+        pres.forEach(function (f) { table.zentrale[f] = 0; });
+        table.zentrale[Q.leading_faction] = sizes.zentrale;
+    }
+    if (!sizes.zentrale && table.zentrale) { delete table.zentrale; }
+    Q.congress_mandates = rule;
+    C.tally();
+};
+C.delegates = function () {
+    var Q = R.q();
+    var del = {};
+    Q.factions.forEach(function (f) { del[f] = 0; });
+    for (var d in Q.congress_table) {
+        for (var f in Q.congress_table[d]) { del[f] = (del[f] || 0) + Q.congress_table[d][f]; }
+    }
+    return del;
+};
+C.vote = function (del, pos) {
+    var Q = R.q();
+    var b = Q.congress_backing;
+    var votes = {};
+    pos.forEach(function (p) { votes[p] = 0; });
+    for (var f in del) {
+        var n = del[f];
+        if (!n) { continue; }
+        if (pos.indexOf(f) >= 0) { votes[f] += n; }
+        else if (Q.congress_deals[f] && pos.indexOf(b) >= 0) { votes[b] += n; }
+        else {
+            var aff = R.AFFINITY[f] || {};
+            var ws = pos.map(function (p) { return aff[p] || 0.05; });
+            var s = R.sum(ws);
+            pos.forEach(function (p, i) { votes[p] += n * ws[i] / s; });
+        }
+    }
+    return votes;
+};
+// the vote as it would go now: plurality, with run-offs while nobody has a majority
+C.result = function () {
+    var Q = R.q();
+    var del = C.delegates();
+    var total = R.sum(Object.keys(del).map(function (k) { return del[k]; })) || 1;
+    var pos = Q.congress_positions.slice();
+    var votes = C.vote(del, pos);
+    var order = function () { return pos.slice().sort(function (a, b) { return votes[b] - votes[a]; }); };
+    while (pos.length > 2 && votes[order()[0]] / total <= 0.5) {
+        var last = order()[pos.length - 1];
+        pos.splice(pos.indexOf(last), 1);
+        votes = C.vote(del, pos);
+    }
+    var o = order();
+    return {del: del, total: total, votes: votes, order: o, pos: pos};
+};
+// is current f's vote going against our motion?
+C.opposed = function (f) {
+    var Q = R.q();
+    var b = Q.congress_backing;
+    if (f == b || Q.congress_deals[f]) { return false; }
+    var pos = Q.congress_positions;
+    if (pos.indexOf(f) >= 0) { return true; }
+    var aff = R.AFFINITY[f] || {};
+    var ws = pos.map(function (p) { return aff[p] || 0.05; });
+    var s = R.sum(ws);
+    var wb = pos.indexOf(b) >= 0 ? (aff[b] || 0.05) / s : 0;
+    return wb < 0.5;
+};
+C.tally = function () {
+    var Q = R.q();
+    if (!Q.congress_table) { return; }
+    var r = C.result();
+    var b = Q.congress_backing;
+    Q.congress_delegates_total = r.total;
+    Q.factions.forEach(function (f) {
+        Q['congress_delegates_' + f] = r.del[f] || 0;
+        Q['congress_votes_' + f] = r.votes[f] !== undefined ? Math.round(100 * r.votes[f] / r.total) : 0;
+        Q['congress_share_' + f] = Q['congress_votes_' + f];
+    });
+    var lead = r.order[0];
+    Q.congress_leader = lead;
+    Q.congress_leader_name = R.fname(lead);
+    Q.congress_leader_votes = Q['congress_votes_' + lead];
+    Q.congress_votes_for = r.votes[b] !== undefined ? Math.round(100 * r.votes[b] / r.total) : 0;
+    Q.congress_ahead = lead == b ? 1 : 0;
+    var second = r.order[1];
+    Q.congress_margin = second ? Math.abs(Q['congress_votes_' + lead] - Q['congress_votes_' + second]) : 100;
+    Q.congress_close_call = Q.congress_margin < 6 ? 1 : 0;
+    Q.congress_backing_name = R.fname(b);
+    Q.congress_backing_code = R.CODE[b] || 0;
+    Q.congress_positions_text = Q.congress_positions.map(R.fname).join(', ');
+    // the rival we are fighting: the strongest other position, or failing that the biggest opposed bloc
+    var riv = r.order.filter(function (p) { return p != b; })[0];
+    Q.congress_rival = riv || 0;
+    Q.congress_rival_name = riv ? R.fname(riv) : 0;
+    // currents we could offer a seat to: present, not us, no deal yet, with delegates
+    var tr = Q.factions.filter(function (f) { return f != b && !Q[f + '_gone'] && !Q.congress_deals[f] && (r.del[f] || 0) >= 5; });
+    tr.sort(function (x, y) { return r.del[y] - r.del[x]; });
+    Q.congress_trade_a = tr[0] || 0;
+    Q.congress_trade_a_name = tr[0] ? R.fname(tr[0]) : 0;
+    Q.congress_trade_b = tr[1] || 0;
+    Q.congress_trade_b_name = tr[1] ? R.fname(tr[1]) : 0;
+    Q.congress_has_trade_a = tr[0] ? 1 : 0;
+    Q.congress_has_trade_b = tr[1] ? 1 : 0;
+    Q.congress_has_deal = Object.keys(Q.congress_deals).length ? 1 : 0;
+    Q.congress_mandates_code = {members: 1, districts: 2, zentrale: 3}[Q.congress_mandates] || 1;
+    Q.congress_backing_is_lead = (b == Q.leading_faction) ? 1 : 0;
+    Q.congress_moscow_on_table = Q.congress_positions.indexOf(Q.moscow_backs) >= 0 ? 1 : 0;
+    Q.congress_moscow_with_us = (Q.moscow_backs == b) ? 1 : 0;
+};
+// move a fraction of the delegates opposed to us in district d to our side
+C.convert = function (d, frac, only) {
+    var Q = R.q();
+    var row = Q.congress_table[d];
+    var b = Q.congress_backing;
+    if (!row) { return 0; }
+    var moved = 0;
+    for (var f in row) {
+        if ((only && f != only) || !C.opposed(f)) { continue; }
+        var n = Math.round(row[f] * frac);
+        if (n < 1 && row[f] >= 1 && frac >= 0.04) { n = 1; }
+        n = Math.min(n, row[f]);
+        row[f] -= n;
+        row[b] = (row[b] || 0) + n;
+        moved += n;
+    }
+    return moved;
+};
+// across every delegation
+C.sway = function (frac, only) {
+    var Q = R.q();
+    var moved = 0;
+    for (var d in Q.congress_table) { moved += C.convert(d, frac, only); }
+    C.tally();
+    Q.congress_last_moved = moved;
+    return moved;
+};
+// move a fraction of every other current's delegates to current f (Moscow's letter)
+C.swayTo = function (f, frac) {
+    var Q = R.q();
+    var moved = 0;
+    for (var d in Q.congress_table) {
+        var row = Q.congress_table[d];
+        for (var g in row) {
+            if (g == f) { continue; }
+            var n = Math.round(row[g] * frac);
+            row[g] -= n;
+            row[f] = (row[f] || 0) + n;
+            moved += n;
+        }
+    }
+    C.tally();
+    Q.congress_last_moved = moved;
+    return moved;
+};
+// we lose a fraction of our own delegates to the strongest rival position
+C.lose = function (frac) {
+    var Q = R.q();
+    var b = Q.congress_backing;
+    C.tally();
+    var to = Q.congress_rival;
+    if (!to) { return 0; }
+    var moved = 0;
+    for (var d in Q.congress_table) {
+        var row = Q.congress_table[d];
+        var n = Math.round((row[b] || 0) * frac);
+        row[b] -= n;
+        row[to] = (row[to] || 0) + n;
+        moved += n;
+    }
+    C.tally();
+    return moved;
+};
+// the district delegation most against us: sets congress_target and friends
+C.target = function () {
+    var Q = R.q();
+    var best = null, bv = -1, bf = null;
+    for (var d in Q.congress_table) {
+        if (d == 'zentrale') { continue; }
+        var row = Q.congress_table[d];
+        var opp = 0, top = null;
+        for (var f in row) {
+            if (C.opposed(f)) {
+                opp += row[f];
+                if (!top || row[f] > row[top]) { top = f; }
+            }
+        }
+        if (opp > bv) { bv = opp; best = d; bf = top; }
+    }
+    Q.congress_target = best || Q.districts[0];
+    Q.congress_target_name = R.dname(Q.congress_target);
+    Q.congress_target_opposed = Math.max(0, bv);
+    Q.congress_target_faction = bf || 0;
+    Q.congress_target_faction_name = bf ? R.fname(bf) : 'opposition';
+    var L = num(Q['district_' + Q.congress_target + '_loyalty']);
+    Q.congress_target_loyal = L >= 50 ? 1 : 0;
+    return Q.congress_target;
+};
+// offer current f a seat in the Zentrale: its delegates vote with us and its motion is withdrawn
+C.deal = function (f) {
+    var Q = R.q();
+    if (!f || f == Q.congress_backing) { return false; }
+    Q.congress_deals[f] = 1;
+    var i = Q.congress_positions.indexOf(f);
+    if (i >= 0) { Q.congress_positions.splice(i, 1); }
+    C.tally();
+    return true;
+};
+C.back = function (f) {
+    var Q = R.q();
+    if (!f || Q[f + '_gone']) { return; }
+    Q.congress_backing = f;
+    if (Q.congress_positions.indexOf(f) < 0) { Q.congress_positions.push(f); }
+    C.tally();
+};
+// annul most of the mandates of current f in district d
+C.annul = function (d, f, frac) {
+    var Q = R.q();
+    var row = Q.congress_table[d];
+    if (!row || !row[f]) { return 0; }
+    var n = Math.round(row[f] * (frac || 0.7));
+    row[f] -= n;
+    C.tally();
+    return n;
+};
+C.bitter = function (n) { var Q = R.q(); Q.congress_bitterness = clamp(num(Q.congress_bitterness) + n, 0, 30); };
+C.extend = function (n) { var Q = R.q(); Q.congress_sessions = Math.min(6, Q.congress_sessions + (n || 1)); };
+// close the debate: the vote follows this session
+C.closeEarly = function () { var Q = R.q(); Q.congress_sessions = Q.congress_session; };
+// count the final vote (post_event does this after the last session)
+C.count = function () {
+    var Q = R.q();
+    C.tally();
+    // a night of second thoughts: a few delegates change their minds
+    var r = C.result();
+    if (r.order.length >= 2) {
+        var a = r.order[0], z = r.order[1];
+        var swing = (Math.random() - 0.5) * 0.06 * r.total;
+        var moveFrom = swing > 0 ? a : z, moveTo = swing > 0 ? z : a;
+        var left = Math.abs(Math.round(swing));
+        for (var d in Q.congress_table) {
+            if (left <= 0) { break; }
+            var row = Q.congress_table[d];
+            var n = Math.min(left, row[moveFrom] || 0, 2);
+            if (n > 0) { row[moveFrom] -= n; row[moveTo] = (row[moveTo] || 0) + n; left -= n; }
+        }
+    }
+    C.tally();
+    r = C.result();
+    var win = r.order[0];
+    Q.congress_result = win;
+    Q.congress_result_code = R.CODE[win] || 0;
+    Q.congress_result_name = R.fname(win);
+    Q.congress_won = (win == Q.congress_backing) ? 1 : 0;
+    Q.congress_closing = 1;
+    Q.congress_close_wait = 0;
+    Q['congress_' + Q.congress_id] = 2;
+};
+// the closing event calls this once: the consequences, and the month ends
+C.end = function () {
+    var Q = R.q();
+    if (!Q.congress) { return; }
+    var win = Q.congress_result, b = Q.congress_backing;
+    var pos = Q.congress_positions;
+    var bit = num(Q.congress_bitterness);
+    if (win && Q[win + '_satisfaction'] !== undefined) { Q[win + '_satisfaction'] += 8; Q['lean_' + win] += 2; }
+    Q.factions.forEach(function (f) {
+        if (f != win && !Q[f + '_gone'] && (pos.indexOf(f) >= 0 || Q.congress_old_leader == f)) {
+            Q[f + '_satisfaction'] -= 6 + bit / 2;
+        }
+    });
+    Q.unity -= bit;
+    if (Q.congress_margin >= 30 && Q.congress_won) { Q.unity += 4; }
+    var deals = Object.keys(Q.congress_deals || {});
+    if (deals.length) {
+        if (Q.congress_won) {
+            var big = deals.sort(function (x, y) { return num(Q[y + '_strength']) - num(Q[x + '_strength']); })[0];
+            if (big != Q.leading_faction && !Q[big + '_gone']) { Q.junior_faction = big; }
+            deals.forEach(function (f) { Q[f + '_satisfaction'] += 10; });
+            Q[Q.leading_faction + '_satisfaction'] -= 6;
+        } else {
+            deals.forEach(function (f) { Q[f + '_satisfaction'] -= 5; });
+        }
+    }
+    if (Q.congress_walkout && !Q.congress_won) {
+        Q.unity -= 8;
+        Q[b + '_satisfaction'] -= 10;
+    }
+    Q.congress_leadership_changed = 0;
+    if (Q.congress_kind == 'leadership' && win && win != Q.leading_faction && !Q[win + '_gone']) {
+        var old = Q.leading_faction;
+        Q.leading_faction = win;
+        Q.junior_faction = (num(Q['congress_votes_' + old]) >= 30 && !Q[old + '_gone']) ? old : 0;
+        if (Q.junior_faction == win) { Q.junior_faction = 0; }
+        Q.congress_leadership_changed = 1;
+        R.ledger(Q.congress_name + ' handed the Zentrale to the ' + R.fname(win) + '.', 'cg_lead_' + Q.congress_id + '_' + Q.time);
+    }
+    if (Q.congress_won) {
+        Q.congress_wins = num(Q.congress_wins) + 1;
+        if (Q.congress_wins == 1) {
+            R.ledger('Won our first congress: ' + Q.congress_name + ', with ' + Q.congress_votes_for + ' per cent of the delegates.', 'cg_first_win');
+        }
+    } else {
+        Q.congress_losses = num(Q.congress_losses) + 1;
+        R.ledger('Lost ' + Q.congress_name + ' to the ' + R.fname(win) + '.', 'cg_lost_' + Q.congress_id + '_' + Q.time);
+    }
+    R.news(Q.congress_name + ': the ' + R.fname(win) + ' carry the vote', 3);
+    Q.congress = 0;
+    Q.congress_closing = 0;
+    Q['congress_' + Q.congress_id] = 3;
+    Q.congress_last_time = num(Q.time);
+    Q.congress_count = num(Q.congress_count) + 1;
+    Q.month_actions += 1;
+};
+R.congressEnd = C.end;
+// post_event: one session per action; the count after the last one
+C.turn = function (acted) {
+    var Q = R.q();
+    Q.congress_ready = (!Q.congress && !Q.crisis && num(Q.time) - num(Q.congress_last_time) >= 10) ? 1 : 0;
+    if (!Q.congress) {
+        if (Q.congress_pending && !Q.crisis) { C.start(Q.congress_pending); }
+        return;
+    }
+    if (acted && !Q.congress_closing) {
+        Q.congress_session += 1;
+        if (Q.congress_session > Q.congress_sessions) {
+            Q.congress_session = Q.congress_sessions;
+            C.count();
+            return;
+        }
+    }
+    C.tally();
+};
+
+// ================================================================= elections
+// RG.election(scope, opts) computes the KPD's share and seats, moves the
+// other parties' votes and (for the Reichstag) sets the seats. scope:
+// 'reichstag' or a state: 'prussia', 'saxony', 'thuringia', 'hamburg',
+// 'bremen', 'bavaria'. opts (all optional):
+//   base     historical result in seats, e.g. {spd: 102, uspd: 84, kpd: 4, ...}
+//   size     seats in the chamber
+//   bonus    extra points of vote share (a good campaign)
+//   apply    false: only compute (the Reichstag is updated by default)
+//   name     what to call it in the news
+R.CHAMBERS = {
+    reichstag: {name: 'the Reichstag', size: 459, pop: 1, districts: null},
+    prussia: {name: 'the Prussian Landtag', size: 428, pop: 0.62, districts: ['berlin', 'ruhr', 'halle']},
+    saxony: {name: 'the Saxon Landtag', size: 96, pop: 0.075, districts: ['saxony']},
+    thuringia: {name: 'the Thuringian Landtag', size: 54, pop: 0.025, districts: ['thuringia']},
+    hamburg: {name: 'the Hamburg Bürgerschaft', size: 160, pop: 0.017, districts: ['hamburg']},
+    bremen: {name: 'the Bremen Bürgerschaft', size: 120, pop: 0.005, districts: ['bremen']},
+    bavaria: {name: 'the Bavarian Landtag', size: 129, pop: 0.12, districts: ['bavaria']}
+};
+R.kpdShare = function (scope, o) {
+    var Q = R.q();
+    o = o || {};
+    if (Q.election_boycott == 1 || Q.lock_elections == 2 || o.boycott) { return 0; }
+    var s = 0.5 + 0.1 * num(Q.worker_support) + 3.5 * Math.min(1.3, num(Q.members) / 350);
+    s += (num(Q.unity) - 50) * 0.03;
+    s -= Math.max(0, num(Q.repression) - 35) * 0.04;
+    s += clamp((num(Q.spd_relation) - 25) * 0.03, -0.8, 1.2);
+    if (!Q.uspd_exists && num(Q.time) >= 20) { s += 1; }
+    var mil = num(Q.militancy);
+    if (mil > 65) { s -= (mil - 65) * 0.04; }
+    if (mil < 25) { s -= 0.5; }
+    if (num(Q.inflation) > 50) { s += (num(Q.inflation) - 50) * 0.04; }
+    s += num(Q.election_bonus) * 0.5 + num(o.bonus);
+    if (Q.kpd_banned == 1) { s *= 0.6; }
+    var ch = R.CHAMBERS[scope];
+    if (ch && ch.districts) {
+        var mem = R.sum(ch.districts.map(function (d) { return num(Q['district_' + d + '_members']); }));
+        var share = num(Q.members) > 0 ? mem / Q.members : ch.pop;
+        var localMil = R.sum(ch.districts.map(function (d) { return num(Q['district_' + d + '_militancy']); })) / ch.districts.length;
+        s *= clamp(Math.sqrt(share / ch.pop), 0.5, 2.2) * (1 + (localMil - mil) / 200);
+    }
+    s *= 1 + (Math.random() - 0.5) * 0.16;
+    return clamp(s, 0.3, 45);
+};
+R.election = function (scope, o) {
+    var Q = R.q();
+    o = o || {};
+    scope = scope || 'reichstag';
+    var ch = R.CHAMBERS[scope] || {name: o.name || 'the Landtag', size: o.size || 100, pop: 0.05, districts: null};
+    var size = o.size || ch.size;
+    var parties = ['spd', 'uspd', 'kapd', 'ddp', 'zentrum', 'bvp', 'dvp', 'dnvp', 'nsdap'];
+    // the result we start from, in vote shares
+    var base = {};
+    var src = o.base;
+    if (!src && scope == 'reichstag') {
+        src = {kpd: num(Q.kpd_seats)};
+        parties.forEach(function (p) { src[p] = num(Q[p + '_seats']); });
+    }
+    if (!src) { src = {spd: 30, uspd: 12, zentrum: 15, ddp: 8, dvp: 12, dnvp: 15, bvp: 0, kpd: 4}; }
+    src = copy(src);
+    var srcTot = R.sum(Object.keys(src).map(function (k) { return num(src[k]); })) || 1;
+    // seats the result does not name went to small parties
+    if (o.base && srcTot < size) { src.other = size - srcTot; srcTot = size; }
+    Object.keys(src).forEach(function (k) { base[k] = 100 * num(src[k]) / srcTot; });
+    // the KPD's historical vote share, when the writer knows it (seats under-count a small party)
+    if (o.kpdShare) {
+        var adj = o.kpdShare - num(base.kpd);
+        var others = Object.keys(base).filter(function (k) { return k != 'kpd'; });
+        var ot = R.sum(others.map(function (k) { return base[k]; })) || 1;
+        others.forEach(function (k) { base[k] = Math.max(0, base[k] - adj * base[k] / ot); });
+        base.kpd = o.kpdShare;
+    }
+    var baseKpd = num(base.kpd);
+    var kpd = R.kpdShare(scope, o);
+    var delta = kpd - baseKpd;
+    // our gains come mostly from the workers' parties
+    var from = o.from || (num(base.uspd) > 0 && Q.uspd_exists ? {uspd: 0.5, spd: 0.35} : {spd: 0.8});
+    var shares = {};
+    Object.keys(base).forEach(function (k) { shares[k] = base[k]; });
+    shares.kpd = kpd;
+    var fromTot = 0;
+    Object.keys(from).forEach(function (k) { fromTot += from[k]; });
+    var restParties = Object.keys(base).filter(function (k) { return k != 'kpd' && !from[k] && base[k] > 0; });
+    var restTot = R.sum(restParties.map(function (k) { return base[k]; })) || 1;
+    Object.keys(from).forEach(function (k) {
+        if (shares[k] !== undefined) { shares[k] = Math.max(0, shares[k] - delta * from[k]); }
+    });
+    restParties.forEach(function (k) { shares[k] = Math.max(0, shares[k] - delta * (1 - fromTot) * base[k] / restTot); });
+    // the falling mark feeds the far right
+    if (num(Q.inflation) > 60 && shares.dnvp !== undefined) {
+        var rs = Math.min(4, (num(Q.inflation) - 60) * 0.08);
+        var mid = ['ddp', 'dvp'].filter(function (k) { return shares[k] > rs / 2; });
+        if (mid.length == 2) {
+            shares.ddp -= rs / 2; shares.dvp -= rs / 2;
+            shares.dnvp += rs * 0.6;
+            shares.nsdap = num(shares.nsdap) + (Q.nsdap_exists ? rs * 0.4 : 0);
+            if (!Q.nsdap_exists) { shares.dnvp += rs * 0.4; }
+        }
+    }
+    // seats by largest remainder; a small party wins fewer seats than its share
+    var tot = R.sum(Object.keys(shares).map(function (k) { return shares[k]; }));
+    var seats = C.round(shares, size);
+    var prop = function (sh) { return size * sh / 100; };
+    if (baseKpd > 0 && num(src.kpd) > 0) {
+        var ratio = clamp(num(src.kpd) / Math.max(0.5, prop(baseKpd)), 0.3, 1);
+        var eff = ratio + (1 - ratio) * clamp((kpd - baseKpd) / 8, 0, 1);
+        var k2 = Math.round(prop(kpd * 100 / tot) * eff);
+        var diff = seats.kpd - k2;
+        if (diff > 0) {
+            seats.kpd = k2;
+            var big = Object.keys(seats).filter(function (k) { return k != 'kpd'; }).sort(function (a, b) { return seats[b] - seats[a]; });
+            for (var i = 0; i < diff; i++) { seats[big[i % Math.min(3, big.length)]] += 1; }
+        }
+    }
+    var left = num(seats.kpd) + num(seats.spd) + num(seats.uspd);
+    var res = {scope: scope, name: o.name || ch.name, size: size, shares: shares, seats: seats, kpd_share: kpd, kpd_seats: seats.kpd || 0};
+    var before = (scope == 'reichstag') ? num(Q.kpd_seats) : num(Q['landtag_' + scope + '_kpd_seats']);
+    Q.election_scope = scope;
+    Q.election_name = res.name;
+    Q.election_size = size;
+    Q.election_kpd_share = Math.round(kpd * 10) / 10;
+    Q.election_kpd_share_display = Q.election_kpd_share.toFixed(1);
+    Q.election_kpd_seats = res.kpd_seats;
+    Q.election_kpd_gain = res.kpd_seats - before;
+    Q.election_left_seats = left;
+    Q.election_left_majority = left * 2 > size ? 1 : 0;
+    Q.election_result = {scope: scope, size: size, seats: seats, shares: shares};
+    Q.election_count = num(Q.election_count) + 1;
+    if (scope == 'reichstag') {
+        if (o.apply !== false) {
+            parties.forEach(function (p) { if (seats[p] !== undefined) { Q[p + '_seats'] = seats[p]; } });
+            Q.kpd_seats = res.kpd_seats;
+            Q.parliament_name = 'Reichstag';
+            Q.parliament_size = size;
+        }
+    } else {
+        Q['landtag_' + scope + '_kpd_seats'] = res.kpd_seats;
+        Q['landtag_' + scope + '_kpd_share'] = Q.election_kpd_share;
+        Q['landtag_' + scope + '_size'] = size;
+        Q['landtag_' + scope + '_left_majority'] = Q.election_left_majority;
+    }
+    if (o.news !== false) {
+        R.news((kpd > 0 ? 'Communists win ' + Q.election_kpd_share_display + ' per cent in the vote for ' + res.name
+            : 'No communist list in the vote for ' + res.name), 2);
+    }
+    if (kpd >= 10) { R.ledger('Won ' + Q.election_kpd_share_display + ' per cent of the vote for ' + res.name + '.', 'vote10'); }
+    Q.election_best = Math.max(num(Q.election_best), Q.election_kpd_share);
+    return res;
+};
+
+// ================================================================ the hooks
+// Starting values; only sets what is missing, so presets and old saves work.
+R.ensureState = function () {
+    var Q = R.q();
+    if (!Q.factions || !Q.districts) { return; }
+    var def = {
+        news_headline: '', news_items: [], news_pending: [], news_log: [], news_seq: 0, bread_price: '',
+        ledger: [], ledger_keys: {}, ledger_count: 0,
+        congress: 0, congress_id: 0, congress_name: 0, congress_stake: 0, congress_session: 0, congress_sessions: 0,
+        congress_closing: 0, congress_close_wait: 0, congress_own_close: 0, congress_kind: 0, congress_kind_code: 0,
+        congress_positions: [], congress_positions_text: 0, congress_backing: 0, congress_backing_name: 0, congress_backing_code: 0,
+        congress_result: 0, congress_result_code: 0, congress_result_name: 0, congress_won: 0, congress_margin: 0,
+        congress_close_call: 0, congress_votes_for: 0, congress_leader: 0, congress_leader_name: 0, congress_leader_votes: 0,
+        congress_ahead: 0, congress_mandates: 'members', congress_size: 240, congress_table: {}, congress_deals: {},
+        congress_bitterness: 0, congress_walkout: 0, congress_delegates_total: 0, congress_last_time: -99,
+        congress_wins: 0, congress_losses: 0, congress_count: 0, congress_pending: 0, congress_has_deal: 0,
+        congress_rival: 0, congress_rival_name: 0, congress_trade_a: 0, congress_trade_a_name: 0,
+        congress_trade_b: 0, congress_trade_b_name: 0, congress_moscow_with_us: 0, congress_leadership_changed: 0,
+        congress_target: 0, congress_target_name: 0, congress_target_opposed: 0, congress_target_faction: 0,
+        congress_target_faction_name: 0, congress_target_loyal: 0, congress_last_moved: 0, congress_old_leader: 0,
+        congress_speaker_name: 0, congress_speaker_power: 1, congress_has_trade_a: 0, congress_has_trade_b: 0,
+        congress_mandates_code: 1, congress_backing_is_lead: 0, congress_moscow_on_table: 0, congress_kind_code: 0,
+        directive_active: 0, directive_id: 0, directive_title: 0, directive_text: 0, directive_from: 0, directive_from_name: 0,
+        directive_months: 0, directive_due: 0, directive_deadline: 0, directive_goals: [], directive_reward: {}, directive_punish: 0,
+        directive_effort: 0, directive_compliance: 0, directive_stance: 0, directive_stalls: 0, directive_new: 0,
+        directive_envoy_seen: 0, directive_reckoning: 0, directive_result: 0, directive_defied: 0, directive_last_id: 0,
+        directive_last_time: 0, directive_last_title: 0, directive_punishment: 0, directive_punishment_code: 0,
+        directive_rival: 0, directive_rival_name: 0, directive_rival_district_name: 0, directive_goals_met: 0,
+        directive_goals_total: 0, directive_count: 0, directives_fulfilled: 0, directives_defied: 0,
+        moscow_favour: 50, moscow_backs: 0, moscow_backs_code: 0, moscow_backs_name: 0, ecci_friend: 0, ecci_friend_name: 0,
+        ecci_lenin_ill: 0, ecci_friend_favour: 0, ecci_friend_is_author: 0,
+        strike_count: 0, strike_districts: 0,
+        sys_target: 0, sys_target_name: 0, sys_target_trade: 0, sys_target_striking: 0, sys_target_militancy: 0,
+        sys_target_repression: 0, sys_target_faction: 0, sys_target_faction_name: 0, sys_target_ours: 0,
+        sys_target_neighbour_name: 0, sys_target_guards: '0', sys_target_members: '0', sys_any_loss: 0, sys_last_arrest: 0, sys_last_arrest_name: 0, sys_outcome: 0,
+        sys_prisoner: 0, sys_prisoner_name: 0, sys_prisoner_role: 0,
+        election_scope: 0, election_name: 0, election_size: 0, election_kpd_share: 0, election_kpd_share_display: '0.0',
+        election_kpd_seats: 0, election_kpd_gain: 0, election_left_seats: 0, election_left_majority: 0,
+        election_result: 0, election_count: 0, election_best: 0,
+        comrades_in_prison: 0, comrades_free: 0, congress_ready: 0, sys_rival: 0, sys_rival_name: 0, sys_has_rival: 0
+    };
+    for (var k in def) {
+        if (Q[k] === undefined) { Q[k] = copy(def[k]); }
+    }
+    var start = {lenin: 55, zinoviev: 45, radek: 60, trotsky: 50, bukharin: 50};
+    for (var p in start) {
+        if (Q['ecci_' + p] === undefined) { Q['ecci_' + p] = start[p]; }
+        if (Q['ecci_' + p + '_memory'] === undefined) { Q['ecci_' + p + '_memory'] = 0; }
+    }
+    if (!Array.isArray(Q.comrades)) { R.buildRoster(); }
+    R.districtInit();
+    var timers = ['sys_strike', 'sys_guards', 'sys_raids', 'sys_rebuild', 'sys_prisoners', 'sys_directive', 'sys_appeal', 'sys_congress'];
+    if (Array.isArray(Q.timers)) {
+        timers.forEach(function (t) {
+            if (Q.timers.indexOf(t) < 0) { Q.timers.push(t); }
+            if (Q[t + '_timer'] === undefined) { Q[t + '_timer'] = 0; }
+        });
+    }
+};
+// every pass of post_event, before the party is recomputed
+R.everyTurn = function (monthTurned, congressActed) {
+    var Q = R.q();
+    R.ensureState();
+    if (monthTurned) {
+        R.districtSync();
+        R.districtMonthly();
+        R.ecciMonthly();
+        R.comradeMonthly();
+    }
+    R.districtSync();
+    R.comradeSync();
+    R.ecciCompute();
+    if (monthTurned) { R.directiveMonthly(); }
+    R.directiveUpdate();
+    C.turn(!!congressActed);
+    R.ledgerWatch();
+};
+// at the end of post_event, after the meters are clamped
+R.finishTurn = function (monthTurned) {
+    R.districtSummary();
+    R.eventNews();
+    R.newsUpdate(monthTurned);
+};
+
+W.RG = R;
+!}
+
+= Systems library
+
+This scene is never shown.

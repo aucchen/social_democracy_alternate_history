@@ -1,0 +1,57 @@
+title: Rebuilding a District
+subtitle: One district has lost many of its members.
+new-page: true
+view-if: crisis = 0 and congress = 0 and sys_rebuild_timer <= 0 and sys_any_loss = 1
+on-arrival: {!
+Q.sys_rebuild_timer = 4;
+Q.month_actions += 1;
+RG.target('loss');
+!}
+frequency: 150
+is-card: true
+tags: party_affairs
+
+= Rebuilding a District
+
+The party in **[+ sys_target_name +]** is a shadow of what it was: [+ sys_target_members +] thousand members, where there used to be many more. The district office is open two evenings a week. [? if sys_target_repression >= 60 : The police are the main reason. ?][? if sys_target_repression < 60 : Defeats, quarrels and unemployment have done the rest. ?]
+
+- @organisers: Send organisers from the Zentrale.
+- @gates: Recruit at the factory gates.
+- @paper: Start a district paper.
+- @easy_discard
+
+@organisers
+subtitle: Costs 1 fund. Members come back, and the district looks to the Zentrale.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+RG.district(Q.sys_target, {members: 0.12, loyalty: 6});
+Q['lean_' + Q.leading_faction] += 1;
+!}
+
+Three organisers from Berlin rent rooms in [+ sys_target_name +] and visit every member who has stopped paying dues. Many start again.
+
+@gates
+subtitle: New members from the works, if the workers are angry enough.
+choose-if: sys_target_militancy >= 40
+unavailable-subtitle: The workers of [+ sys_target_name +] are in no mood to join anything.
+on-arrival: {!
+RG.district(Q.sys_target, {members: 0.07, militancy: 3});
+Q.offensive_satisfaction += 2;
+!}
+
+At every shift change, our people are at the gates with leaflets and membership cards. The young workers sign.
+
+@paper
+subtitle: Costs 1 fund. A paper builds support slowly, and members follow.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.worker_support += 2;
+RG.district(Q.sys_target, {members: 0.04, militancy: 2});
+Q.unionist_satisfaction += 2;
+!}
+
+The district gets its own weekly paper, four pages, with the local news the bourgeois papers will not print: the accident at the pit, the foreman who hits apprentices, the price of coal.

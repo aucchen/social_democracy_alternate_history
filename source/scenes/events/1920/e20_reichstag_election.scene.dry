@@ -10,9 +10,18 @@ Q.e20_election_done = 1;
 var s = {spd: 102, uspd: 84, ddp: 39, zentrum: 64, bvp: 21, dvp: 65, dnvp: 71, nsdap: 0, kapd: 0};
 var kpd = 0;
 if (!Q.election_boycott) {
-    kpd = Math.round(0.5 + Q.worker_support / 10 + Q.election_bonus * 1.2
-        + (Q.kapp_outcome == 3 ? 3 : 0) + (Q.ruhr_red_army == 2 ? 2 : 0)
-        + (Q.kapp_statement == 1 ? -1 : 0));
+    if (typeof RG !== 'undefined' && RG.election) {
+        // the elections engine (sys_lib): our share from support, members,
+        // unity, repression and relations, around the historical 2.1 per cent
+        var bonus = (Q.kapp_outcome == 3 ? 1.5 : 0) + (Q.ruhr_red_army == 2 ? 1 : 0) + (Q.kapp_statement == 1 ? -0.5 : 0);
+        var res = RG.election('reichstag', {base: {spd: 102, uspd: 84, ddp: 39, zentrum: 64, bvp: 21, dvp: 65, dnvp: 71, kpd: 4},
+            size: 459, kpdShare: 2.1, bonus: bonus, apply: false});
+        kpd = res.kpd_seats;
+    } else {
+        kpd = Math.round(0.5 + Q.worker_support / 10 + Q.election_bonus * 1.2
+            + (Q.kapp_outcome == 3 ? 3 : 0) + (Q.ruhr_red_army == 2 ? 2 : 0)
+            + (Q.kapp_statement == 1 ? -1 : 0));
+    }
     kpd = Math.max(1, Math.min(30, kpd));
 }
 s.uspd -= (kpd - 4);

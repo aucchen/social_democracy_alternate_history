@@ -26,6 +26,7 @@ Scenes are `.scene.dry` files in `source/scenes/`. Each file id is its file name
 | 1921 | `source/scenes/events/1921/` | `e21_` |
 | 1922–23 | `source/scenes/events/1922/`, `source/scenes/events/1923/` | `e22_`, `e23_` |
 | Cards | `source/scenes/party/`, `movement/`, `germany/`, `international/`, `crisis/`, `advisors/` | `c_` for new cards, `adv_` for new advisors |
+| Systems (W2) | `source/scenes/systems/`, `source/qdisplays/` | `sys_` |
 
 Crisis cards for a specific crisis belong to the writer of that crisis, in their own folder, with their prefix (for example `e20_kapp_card_strike`).
 
@@ -197,6 +198,222 @@ Q.kapp_outcome = Q.crisis_momentum >= 65 ? 3 : 1;
 
 The month turns after every fourth week, so a long crisis can run into the next month. The page darkens slightly and a Crisis tab appears in the sidebar while it runs.
 
+## The systems: helpers you can call
+
+Seven systems run under the story: the news, the ledger, the comrades, the districts, Moscow's Executive with its directives, congresses and elections. They live in `source/scenes/systems/` (the code is in `sys_lib.scene.dry`) and are driven from `post_event`. You use them from any `{! !}` block through one global object, **`RG`**. It is always there: it loads when the page opens, again on every turn, and after a saved game is loaded. Never store `RG` or any function in `Q` (saves are JSON); keep only numbers, strings, arrays and plain objects in `Q`.
+
+Every system also sets **numeric flags** you can read in `view-if`, `choose-if` and `[? if ?]`, so you rarely need JavaScript to react to them. Strings (names) are for `[+ +]` only.
+
+### The news
+
+Each month the paper is rebuilt: `news_headline` (a string) and `news_items` (up to four strings). The interface prints them as a front page.
+
+- **Every event you write is already news.** When an event fires, its `title` and `subtitle` become an item ("The Kapp Putsch: The Ehrhardt Brigade marches on Berlin"), and the month's first event is the headline unless something more important happened. So write subtitles that read like a headline: short, concrete, no markup.
+- To add an item, or to claim the headline:
+
+```
+on-arrival: {!
+RG.news('Noske resigns');                       // an item
+RG.news('General strike: Kapp flees Berlin', 3); // 3 or more: the headline
+!}
+```
+
+Priority 1 is an ordinary item, 2 an important one, 3 the headline. Write news in the voice of a newspaper headline, in British spelling, without full stops or game terms. When nothing happened, a headline is made from the state of the country (the price of bread in `bread_price`, strikes, raids, cabinet crises).
+
+### The ledger
+
+`Q.ledger` is a list of the game's notable outcomes, each dated ("March 1920: ..."), for the ending screen. Add an entry when your event changes history:
+
+```
+RG.ledger('The workers\' government of Legien survived the Reichstag election.', 'e20_wg_survives');
+```
+
+The second argument is a key: an entry with a key is added only once per game. The systems add entries by themselves (a first congress won, a congress lost, a directive carried out or defied, a district broken by repression, Luxemburg alive in 1920) and so do these flags when they first take these values: `kapp_outcome` 2 and 3, `bavaria_soviet` 2, `ruhr_red_army` 2, `warsaw_outcome` 2, `march_action` 1 and 2, `levi_split` 1, `left_split` 1, `german_october` 1 to 3, `kpd_banned` 1. `ledger_count` is the number of entries.
+
+### The comrades
+
+`Q.comrades` is the roster of the party's leading figures: an array of `{id, name, faction, role, status, district}`. Status is one of `'free'`, `'prison'`, `'exile'`, `'dead'`, `'expelled'`, or `'outside'` before they join (Zetkin from March 1919, Fischer and Maslow from late 1919, Thälmann with the unification of December 1920). The ids:
+
+`luxemburg`, `liebknecht`, `jogiches`, `levi`, `pieck`, `eberlein`, `meyer`, `zetkin`, `levine`, `thalheimer`, `brandler`, `walcher`, `frolich`, `fischer`, `maslow`, `thalmann`, `hoelz`, `munzenberg`, `laufenberg`, `wolffheim`, `ruhle`, `schroder`, `radek` (Radek is Moscow's man, faction `'ecci'`).
+
+For conditions, each comrade has **`comrade_<id>`**: 0 not in the party, 1 free, 2 in prison, 3 in exile, 4 dead, 5 expelled (qdisplay `sys_comrade` turns it into words). `comrades_in_prison` counts the prisoners.
+
+```
+on-arrival: {!
+RG.arrest('brandler', 6);   // six months; RG.arrest('hoelz') with no number is open-ended
+RG.free('brandler');
+RG.exile('brandler');       // to Moscow, say
+RG.kill('levine');
+RG.expel('levi');
+RG.setFaction('frolich', 'unionist');
+RG.setRole('fischer', 'Chair of the Zentrale');
+!}
+view-if: comrade_brandler = 1
+```
+
+Each change makes a news item; pass `{quiet: true}` as the last argument to skip it, or `{news: 'Brandler escapes to Moscow'}` to word it yourself. RG.isFree(id) and RG.status(id) answer questions in JavaScript, and RG.speaker(faction) gives the best free speaker of a current, as `{id, name}`.
+
+**The old flags still work, both ways.** `luxemburg_alive`, `liebknecht_alive`, `jogiches_alive`, `levine_alive`, `levi_in_party`, `levi_split`, `radek_prison` and `hoelz_imprisoned` are kept in step with the roster: if your event sets `Q.luxemburg_alive = 0`, Luxemburg is dead in the roster from the next turn; if you call `RG.expel('levi')`, then `levi_in_party` is 0 and `levi_split` is 1 at once, and the Levi events react as before. When a current leaves the party (`<f>_gone = 1`), its comrades leave with it.
+
+The advisors read the roster: a comrade in prison, in exile, dead or expelled is not at the table. Repression puts comrades in prison by itself now and then (more where their home district is policed hardest), for a few months; the card "A Comrade in Prison" offers ways to get them out.
+
+### The districts
+
+Each district now has a life of its own:
+
+| Variable | Meaning |
+| --- | --- |
+| `district_<d>_militancy` | 0–100, the workers' mood in the district |
+| `district_<d>_repression` | 0–100, police, courts and Freikorps in the district |
+| `district_<d>_guards` | red guards in the district, in thousands |
+| `district_<d>_strike` | 1 while the district is on strike (`_strike_months` counts) |
+
+The national `militancy`, `repression` and `red_guards_strength` are now **summaries** of the districts (weighted by members, and a sum for the guards). You can keep changing the national values exactly as before: `militancy += 10` raises every district by ten. To act on one district:
+
+```
+RG.district('ruhr', {militancy: 8, repression: 5, guards: 2, loyalty: -4, members: 0.1});  // members: +10 per cent
+RG.startStrike('halle');    RG.endStrike('halle', 'won');   // or 'crushed', or no second argument
+RG.spreadStrike('halle');   // to its most militant neighbour
+```
+
+Every month each district drifts towards the national mood with its own character (the Ruhr and Halle hotter, Bavaria cooler), militancy draws local repression, repression above 60 costs members, angry districts grow red guards and policed ones lose them, and a district far from the Zentrale's temper loses loyalty. A militant district may strike; a strike raises members and support while it lasts and draws the police, may be broken by them, and can spread to the neighbouring districts (Berlin borders Halle, Saxony and Hamburg; Hamburg borders Bremen; Bremen the Ruhr; Saxony borders Halle, Thuringia, Berlin and Bavaria; Thuringia borders Halle and Bavaria). `strike_count` and `strike_districts` (names, for text) summarise.
+
+**Cards that act on a district** pick their target in their own `on-arrival` with `RG.target(by)`, where `by` is `'strike'`, `'militancy'`, `'repression'`, `'guards'`, `'loss'` (furthest below its best membership) or `'loyalty'`. It sets `sys_target` (the id), `sys_target_name`, `sys_target_trade` (who works there), `sys_target_striking`, `sys_target_militancy`, `sys_target_repression`, `sys_target_guards`, `sys_target_members`, `sys_target_faction_name`, `sys_target_ours` (1 if it follows the leading current) and `sys_target_neighbour_name`. See `systems/sys_card_strike` for the pattern.
+
+### Moscow's Executive
+
+Moscow is five men, each with a favour for the party from 0 to 100: **`ecci_lenin`, `ecci_zinoviev`, `ecci_radek`, `ecci_trotsky`, `ecci_bukharin`**. Each month each one drifts towards what he wants to see:
+
+- **Lenin** likes the Right and the Spartacists, hates the Left Radicals, and turns against the Left after the March Action. He fades from 1922 (his illness: `ecci_lenin_ill` = 1 from May 1922), and hardly counts after March 1923.
+- **Zinoviev**, the President, likes the Left and obedience above all; he tolerates the Right in 1921–23. He cares most about independence.
+- **Radek**, the German expert, likes the Right and the united front (the Spartacists until 1921); he weighs more while he is the envoy in Berlin.
+- **Trotsky** likes the united front in 1921–22, and arms and a date for the rising in 1923; he rises with the plans for October 1923 and falls after.
+- **Bukharin** likes the Left and militancy, the theory of the offensive.
+
+Each also dislikes independence, and Lenin and Radek like good relations with the SPD and USPD from mid-1921. The weight of each man on the Executive is `ecci_<p>_weight` (per cent). **`moscow_favour`** is their weighted favour, pulled down by our independence. `moscow_backs` (id), `moscow_backs_code` (1–4) and `moscow_backs_name` name the current the Executive would back today; `ecci_friend_name` is our best friend there. Very low favour can cost the subsidy, very high favour can raise it.
+
+To please or anger one of them, or all:
+
+```
+RG.ecci('zinoviev', 10);   // a lasting nudge: it fades over months
+RG.ecci('all', -5);
+```
+
+Use small numbers (3 to 15). The qdisplay `sys_favour` turns a favour into words.
+
+### Directives
+
+Moscow sends the Zentrale directives with a deadline. While one runs: `directive_active` = 1, `directive_title`, `directive_text`, `directive_from_name` (who drafted it), `directive_deadline` (months left), `directive_compliance` (0–100). Each directive also sets `directive_<id>`: 1 while it runs, then 2 carried out, 3 half done, 4 failed or defied, 5 withdrawn. The Executive sends generic directives by itself when the party is in the International (bolshevise the party, the united front, prepare for decisive struggles, defend Soviet Russia, into the factories, the Executive's control). To issue a historical one:
+
+```
+on-arrival: {!
+RG.directive({
+    id: 'conditions21',              // directive_conditions21 = 1, then 2-5
+    title: 'The Twenty-One Conditions',
+    text: 'Break with the reformists and the centrists, and accept the conditions of the International.',
+    from: 'zinoviev',                // lenin, zinoviev, radek, trotsky or bukharin
+    months: 3,
+    goals: [{q: 'independence', op: '<=', v: 40}],   // checked every turn; any number quality
+    reward: {subsidy: 1},            // or {funds: 2, favour: 15, faction: 'offensive'}
+    punish: 'rival',                 // 'rebuke', 'subsidy', 'envoy', 'rival', or 'auto' (default)
+    announce: false                  // your event tells the story: no generic telegram
+});
+!}
+```
+
+Compliance is the effort the Zentrale puts in plus 60 points shared between the goals that are met. At 100 the directive succeeds at once; at the deadline it succeeds from 70, is half done from 35, and fails below. Success pleases its author and the Executive, brings money or the subsidy, and pleases the current Moscow backs. Failure brings the punishment: a public rebuke (Unity and the leading current suffer), a cut in the subsidy, an envoy sent to Berlin (`comintern_rep` changes), or Moscow backing a rival current (it gains satisfaction and lean, and may win a wavering district). Defiance also raises independence and goes into the ledger.
+
+The player answers through the telegram event, the card "The Executive's Directive", the emissary's visit and the card "A Friend on the Executive". In your own events, record the answer with:
+
+```
+RG.comply(30);   // effort towards the directive (default 30)
+RG.stall(2);     // two more months; the author is irritated, more so each time
+RG.defy();       // refuse: it fails now, with defiance
+```
+
+The verdict event (`sys_dir_reckoning`) tells the player what Moscow decided. Follow-ups can read `directive_<id>`, or `directive_result` (1 success, 2 half, 3 failure) and `directive_punishment_code` (1 rebuke, 2 subsidy, 3 envoy, 4 rival).
+
+### Congresses
+
+A congress is a mode, like a crisis: for its sessions the hand holds only congress cards (`tags: congress`), the normal decks disappear, and each card played is one session. **The whole congress takes one month**: the month turns when it ends. Delegates are elected by the districts: each district sends delegates by its members (or by the mandate rule in force); most follow the district's current, the rest split by the currents' strength, and a loyal district sends more delegates for the Zentrale's current. Delegates whose own current has no motion on the table vote for the nearest one (Spartacists lean to the Right, the Right to the Spartacists, the Left and the Left Radicals to each other). If no motion has a majority, the weakest is dropped and its delegates vote again.
+
+**Start it** from your event (with an option, or in `on-arrival`):
+
+```
+on-arrival: {!
+RG.congressStart({
+    id: 'jena',                       // sets congress_jena: 1 in session, 2 votes counted, 3 over
+    name: 'The Jena Congress',
+    stake: 'Who leads the party after the March Action',
+    sessions: 3,                      // 2 to 4 cards
+    positions: ['unionist', 'offensive'],   // the currents whose motions are on the table
+    backing: 'unionist',              // the motion the Zentrale fights for (default: the leading current if on the table)
+    kind: 'leadership',               // 'leadership': the winner takes the Zentrale when it ends; 'motion': you apply the result
+    mandates: 'members',              // 'members', 'districts' (small districts weigh more) or 'zentrale' (the Zentrale votes)
+    ownClose: true                    // you write the closing event; without it a generic "The Vote" closes the congress
+});
+!}
+```
+
+A congress cannot start during a crisis; if you call it then, it opens when the crisis ends. While it runs: `congress` = 1, `congress_name`, `congress_stake`, `congress_session` and `congress_sessions`, `congress_backing_name`, `congress_delegates_<faction>` and `congress_delegates_total`, `congress_votes_<faction>` (per cent of the vote for that current's motion now), `congress_votes_for` (our motion), `congress_ahead` (1 if we lead), `congress_leader_name`, `congress_close_call` (1 if it is within six points). The main hand shows the count after every session.
+
+**Close it** with an event that fires when the votes are counted, reads the result and calls `RG.congressEnd()` once:
+
+```
+title: Jena Votes
+tags: event
+view-if: congress_jena = 2
+priority: 9
+on-arrival: {!
+RG.congressEnd();    // consequences, the leadership change for kind 'leadership', the month turns
+!}
+
+= Jena Votes
+
+The motion of the [+ congress_result_name +] is carried, with [+ congress_votes_for +]% for ours.
+
+[? if congress_won = 1 : ... ?][? if congress_result_code = 2 : The Left take the Zentrale. ?]
+```
+
+After the count: `congress_result` (the winning current's id), `congress_result_code` (1 Spartacists, 2 Left, 3 Right, 4 Left Radicals), `congress_result_name`, `congress_won` (1 if our motion won), `congress_share_<faction>` (final per cent for each motion), `congress_margin`, `congress_leadership_changed`. They stay readable after `RG.congressEnd()`, so options can use them. `congressEnd` gives the winners satisfaction and lean, costs the losers satisfaction and the party Unity in proportion to the congress's bitterness, makes a current that took a seat in the Zentrale the junior partner, and applies a failed walkout threat. If your closing event cannot fire, the generic one closes the congress.
+
+The congress cards (in `systems/`, `sys_cg_*`) are: Work a Delegation (lobby the delegation most against us), From the Platform (our best free speaker, from the roster), A Seat in the Zentrale (a deal with another current), Moscow's Letter (Moscow backs `moscow_backs`), The Mandate Commission (change the rules, or annul a delegation), Threats (walkout, resignation, expulsion), The Chair and the Agenda (closure, an extra session), The Corridors. To write a congress card for one congress, copy one of them, add `and congress_jena = 1` to its `view-if`, and move delegates with:
+
+```
+RG.congress.sway(0.05);                  // 5% of every delegation against us comes over
+RG.congress.convert('berlin', 0.3);      // 30% of the Berlin delegates against us
+RG.congress.swayTo('offensive', 0.05);   // 5% of everyone else goes over to the Left
+RG.congress.lose(0.04);                  // we lose 4% of ours to the strongest rival
+RG.congress.deal('unionist');            // the Right vote with us (and share the Zentrale if we win)
+RG.congress.setMandates('districts');
+RG.congress.bitter(3);                   // the losers will be angrier, and Unity pays
+RG.congress.closeEarly();  RG.congress.extend(1);
+```
+
+`congress_last_moved` holds the number of delegates the last move changed, for the result text. A player can also call an extraordinary congress on the leadership through the Party Affairs card "The Districts Want a Congress" (at most one every ten months; `congress_ready` = 1 when allowed).
+
+### Elections
+
+`RG.election(scope, opts)` computes the KPD's vote and seats, takes the votes we win from the other parties (mostly the USPD and SPD), lets the right gain in a hyperinflation, and returns the result. scope is `'reichstag'` or a state: `'prussia'`, `'saxony'`, `'thuringia'`, `'hamburg'`, `'bremen'`, `'bavaria'`.
+
+Our share grows with worker support and members, and with Unity and good relations with the SPD; it falls with repression, with militancy so high it frightens voters, and with a ban; hyperinflation and the end of the USPD help; a campaign adds `election_bonus` (and `opts.bonus`, in points). In a state, it is scaled by how strong the party's districts there are. With the boycott line (`election_boycott` = 1, or `lock_elections` = 2) the party stands no candidates and gets nothing.
+
+```
+on-arrival: {!
+var r = RG.election('reichstag', {
+    base: {spd: 102, uspd: 84, ddp: 39, zentrum: 64, bvp: 21, dvp: 65, dnvp: 71, kpd: 4},  // the historical seats
+    size: 459,
+    kpdShare: 2.1,   // the KPD's real share of the vote, if known (seats under-count a small party)
+    bonus: 1         // points for a good campaign (optional)
+});
+// r.kpd_share, r.kpd_seats, r.seats.spd ...
+!}
+
+Our party wins [+ election_kpd_share_display +] per cent and [+ election_kpd_seats +] seats.
+```
+
+Give `base` the historical result, including the KPD's real seats: the result stays close to it when our position is the historical one, and moves away from it as the player does better or worse. For the Reichstag it sets every party's `_seats`, `kpd_seats`, `parliament_name` and `parliament_size` (pass `apply: false` to only compute). For a state it sets `landtag_<state>_kpd_seats`, `_kpd_share`, `_size` and `_left_majority`. Every call also sets `election_name`, `election_kpd_share` (and `_display`, one decimal), `election_kpd_seats`, `election_kpd_gain`, `election_left_seats` (SPD, USPD and KPD), `election_left_majority` (0/1), and adds a news item (`news: false` to skip it). The 1920 Reichstag election event already uses it.
+
 ## Endings
 
 To end the game early (a decisive victory or defeat), set `Q.ending_id` to one of the ids below inside `{! !}` and add a choice `- @end: See how it ends.` with `@end` / `go-to: game_over`. The 1922–23 writer writes `game_over` with the text for every ending, and the end-of-1923 judgement.
@@ -237,7 +454,9 @@ node tools/playtest.js 4 3000 <your port> <start> <until>
 
 Ports: 1919 writer 8771, 1920 8772, 1921 8773, 1922–23 8774, cards 8775.
 
-`start`/`until` run only your period from its historical starting state, for example `1920-1 1920-12`. The playtest clicks random options and reports page errors, dead ends and text that shows `undefined`, `NaN` or unrendered markup. **Before you finish: the build must succeed with no errors, and the playtest must report OK on at least 6 runs of your period.** Also read through two or three of your events in the playtest's path to check they read well.
+`start`/`until` run only your period from its historical starting state, for example `1920-1 1920-12`. With `TRACE=1` in the environment, each run also prints the systems' state every three months (members, meters, strikes, Moscow, the directive, the headline) and the ledger at the end.
+
+`node tools/systems_test.js <your port>` runs scripted checks of the systems: the helpers survive a save, a reload and a load; congresses start, run on congress cards and close in one month; a directive is issued, answered and judged; the roster and the old flags stay in step; the elections engine adds up. The playtest clicks random options and reports page errors, dead ends and text that shows `undefined`, `NaN` or unrendered markup. **Before you finish: the build must succeed with no errors, and the playtest must report OK on at least 6 runs of your period.** Also read through two or three of your events in the playtest's path to check they read well.
 
 ## Committing
 

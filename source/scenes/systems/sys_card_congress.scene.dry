@@ -1,0 +1,74 @@
+title: The Districts Want a Congress
+subtitle: An extraordinary party congress could settle who leads.
+new-page: true
+view-if: crisis = 0 and congress = 0 and congress_ready = 1 and sys_congress_timer <= 0 and time >= 6
+on-arrival: {!
+Q.sys_congress_timer = 6;
+Q.month_actions += 1;
+var pres = RG.present().filter(function (f) { return f != Q.leading_faction; });
+pres.sort(function (a, b) { return Q[b + '_strength'] - Q[a + '_strength']; });
+Q.sys_rival = pres.length ? pres[0] : 0;
+Q.sys_rival_name = pres.length ? RG.fname(pres[0]) : 0;
+Q.sys_has_rival = (pres.length && Q[pres[0] + '_strength'] >= 10) ? 1 : 0;
+!}
+frequency: 60
+is-card: true
+tags: party_affairs
+
+= The Districts Want a Congress
+
+Letters from the districts pile up on the secretary's desk. The statutes allow an extraordinary congress when enough districts demand one, and enough of them are demanding it. [? if sys_has_rival = 1 : The [+ sys_rival_name +] say the party has lost its way under the [+ leading_faction_name +]. ?][? if sys_has_rival = 0 : Nobody seriously challenges the Zentrale, but the members want to be asked. ?]
+
+A congress is a month of nothing else, and a vote nobody can be sure of.
+
+- @renew: Call a congress to renew the Zentrale's mandate.
+- @rival: Call a congress, and back the [+ sys_rival_name +].
+- @quiet: Hold a conference of district secretaries instead.
+- @easy_discard
+
+@renew
+subtitle: If we win, the Zentrale is stronger for it. If we lose, the [+ sys_rival_name +] take the Zentrale.
+view-if: sys_has_rival = 1
+on-arrival: {!
+Q.month_actions -= 1;
+RG.congressStart({
+    id: 'extraordinary',
+    name: 'The Extraordinary Congress',
+    stake: 'Who leads the Zentrale',
+    sessions: 3,
+    positions: [Q.leading_faction, Q.sys_rival],
+    kind: 'leadership'
+});
+!}
+
+The Zentrale calls the congress for the end of the month. The districts elect their delegates in a hurry, and the [+ sys_rival_name +] start counting at once.
+
+@rival
+subtitle: The [+ sys_rival_name +] would lead the party, if the congress agrees. The [+ leading_faction_name +] will fight it.
+view-if: sys_has_rival = 1
+on-arrival: {!
+Q.month_actions -= 1;
+Q[Q.leading_faction + '_satisfaction'] -= 6;
+Q['lean_' + Q.sys_rival] += 2;
+RG.congressStart({
+    id: 'extraordinary',
+    name: 'The Extraordinary Congress',
+    stake: 'Whether the ' + Q.sys_rival_name + ' should lead the Zentrale',
+    sessions: 3,
+    positions: [Q.leading_faction, Q.sys_rival],
+    backing: Q.sys_rival,
+    kind: 'leadership'
+});
+!}
+
+The congress is called, and this time the Zentrale's own whips are working for the other side. The [+ leading_faction_name +] call it a betrayal.
+
+@quiet
+subtitle: Raises Unity: the members were asked, and they were heard.
+view-if: sys_has_rival = 0
+on-arrival: {!
+Q.unity += 4;
+Q.congress_last_time = Q.time;
+!}
+
+The Zentrale holds a conference of district secretaries instead, which talks for two days and changes nothing. Everyone feels better for it.

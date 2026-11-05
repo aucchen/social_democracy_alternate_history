@@ -12,6 +12,9 @@
 // Reports, per run: the date reached, the ending, page errors, and any page
 // that shows "undefined", "NaN" or unrendered [+ +] markup. At the end it lists
 // every event scene visited across all runs.
+//
+// With TRACE=1 in the environment, each run also prints a line every three
+// months with the systems' state (members, meters, strikes, Moscow, news).
 const { chromium } = require('playwright');
 
 const runs = parseInt(process.argv[2] || '3', 10);
@@ -35,7 +38,8 @@ const IGNORE = /d3 is not defined|toFixed|font_size/;
     await page.goto(`http://localhost:${port}/index.html`);
     await page.waitForTimeout(1000);
     await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
-    let ended = false, stuck = false, steps = 0, lastScene = '';
+    let ended = false, stuck = false, steps = 0, lastScene = '', lastTime = -1;
+    const trace = [];
     if (start) {
       // start the game, then overwrite the date and the historical flags
       await page.click('#content a:has-text("Start game")');
@@ -58,8 +62,16 @@ const IGNORE = /d3 is not defined|toFixed|font_size/;
         const side = document.querySelector('#qualities') ? document.querySelector('#qualities').innerText : '';
         return { scene: s.sceneId, q: { year: s.qualities.year, month: s.qualities.month, week: s.qualities.week,
           crisis: s.qualities.crisis, ending: s.qualities.ending_id, game_over: s.qualities.game_over,
-          lead: s.qualities.leading_faction }, text, side };
+          lead: s.qualities.leading_faction, time: s.qualities.time,
+          trace: [s.qualities.members, s.qualities.unity, s.qualities.militancy, s.qualities.repression,
+            s.qualities.worker_support, s.qualities.strike_count, s.qualities.moscow_favour, s.qualities.directive_active ? s.qualities.directive_id : '-',
+            s.qualities.congress ? 'CONGRESS' : '', s.qualities.comrades_in_prison, s.qualities.news_headline, s.qualities.comintern_member] }, text, side };
       });
+      if (process.env.TRACE && info.q.time !== lastTime && info.q.time % 3 === 0) {
+        const t = info.q.trace;
+        trace.push(`   ${info.q.month}/${info.q.year} mem ${Math.round(t[0])} uni ${Math.round(t[1])} mil ${Math.round(t[2])} rep ${Math.round(t[3])} ws ${Math.round(t[4])} strikes ${t[5]} msk ${t[6]} dir ${t[7]}${t[11] ? '' : ' (outside the CI)'} ${t[8]} prison ${t[9]} | ${t[10]}`);
+      }
+      lastTime = info.q.time;
       if (info.scene !== lastScene) {
         const sc = info.scene.split('.')[0];
         visitedAll[sc] = (visitedAll[sc] || 0) + 1;
@@ -99,6 +111,11 @@ const IGNORE = /d3 is not defined|toFixed|font_size/;
     console.log(`run ${run}: ${ok ? 'OK' : 'PROBLEM'} | reached ${q.month}/${q.year}${q.crisis ? ' (crisis week ' + q.week + ')' : ''} after ${steps} steps | ended=${ended} ending=${q.ending_id} stuck=${stuck} at ${lastScene} | Zentrale=${q.leading_faction}`);
     errors.slice(0, 10).forEach(e => console.log('   error: ' + e));
     [...badText].slice(0, 10).forEach(e => console.log('   text: ' + e));
+    trace.forEach(l => console.log(l));
+    if (process.env.TRACE) {
+      console.log(`   ledger: ${(q.ledger || []).join(' / ')}`);
+      console.log(`   congresses ${q.congress_count || 0} (won ${q.congress_wins || 0}), directives ${q.directive_count || 0} (fulfilled ${q.directives_fulfilled || 0}, defied ${q.directives_defied || 0})`);
+    }
     await page.close();
   }
   console.log('\nscenes visited (all runs): ' + Object.keys(visitedAll).sort().join(', '));

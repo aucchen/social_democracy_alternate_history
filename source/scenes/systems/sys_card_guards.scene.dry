@@ -1,0 +1,57 @@
+title: The District's Red Guards
+subtitle: Armed workers who answer to the party, more or less.
+new-page: true
+view-if: crisis = 0 and congress = 0 and sys_guards_timer <= 0 and red_guards_strength >= 1
+on-arrival: {!
+Q.sys_guards_timer = 4;
+Q.month_actions += 1;
+RG.target('guards');
+!}
+frequency: 150
+is-card: true
+tags: movement
+
+= The District's Red Guards
+
+**[+ sys_target_name +]** has the strongest red guard in the party, perhaps [+ sys_target_guards +] thousand workers with rifles hidden at home and a few machine guns in an allotment shed. They drill on Sunday mornings in the woods outside town. [? if sys_target_repression >= 50 : The police know where, and have started to watch. ?][? if sys_target_ours = 0 : Their commanders follow the [+ sys_target_faction_name +]. ?]
+
+- @drill: Drill them under party discipline.
+- @hide: Hide the arms and stand them down for now.
+- @march: March them through the town.
+- @easy_discard
+
+@drill
+subtitle: Costs 1 fund. The guards grow and answer to the Zentrale.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+Q.red_guards_loyalty += 8;
+RG.district(Q.sys_target, {guards: 0.5, loyalty: 3});
+Q.luxemburgist_satisfaction += 2;
+Q.lean_luxemburgist += 1;
+!}
+
+Officers who served in the war teach the guards to move in sections and to obey one voice. The voice is the district leadership's.
+
+@hide
+subtitle: The police lose interest in the district. The Left calls it cowardice.
+on-arrival: {!
+RG.district(Q.sys_target, {repression: -8});
+Q.red_guards_arms += 2;
+Q.offensive_satisfaction -= 3;
+Q.lean_unionist += 1;
+!}
+
+The rifles go into oilcloth and under the floorboards. The Sunday drills stop. The police informers have nothing to report.
+
+@march
+subtitle: The workers of the district are fired up. So are the police.
+on-arrival: {!
+RG.district(Q.sys_target, {militancy: 6, repression: 6});
+Q.worker_support += 1;
+Q.offensive_satisfaction += 4;
+Q.lean_offensive += 1;
+!}
+
+On Sunday the guards march through the town centre in columns of four, with red armbands and a band. The shopkeepers pull down their shutters. The workers line the pavements.

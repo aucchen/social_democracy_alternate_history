@@ -14,7 +14,10 @@ Q.c_lead = {luxemburgist: 1, offensive: 2, unionist: 3, ultraleft: 4}[lead] || 0
 var off = n('offensive_strength');
 var rep = (typeof Q.comintern_rep === 'string') ? Q.comintern_rep : '';
 var cand = [];
-var add = function(id, ok, prio) { if (ok) { cand.push([id, prio]); } };
+// the comrades roster (sys_lib): an advisor in prison, in exile, dead or
+// expelled is not at the table; comrade_<id> is 1 while they are free
+var free = function(id) { var v = Q['comrade_' + id]; return v === undefined || v == 1; };
+var add = function(id, ok, prio) { if (ok && free(id)) { cand.push([id, prio]); } };
 // historically Brandler was jailed after the March Action and spent 1922 in Moscow
 var brandler_away = n('march_action') == 1 && t >= 30 && t <= 43;
 add('luxemburg', n('luxemburg_alive') == 1 && n('luxemburg_advisor') == 1, 100);

@@ -7,6 +7,13 @@ on-arrival: {!
 Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 
+// The systems library (RG helpers): load it if this page has not, or if it
+// belongs to another engine (a reload, a loaded game, a language switch).
+if ((typeof RG === 'undefined' || RG.engine !== this) && this.game.scenes.sys_lib) {
+    this._runActions(this.game.scenes.sys_lib.onArrival);
+}
+var sys = (typeof RG !== 'undefined') ? RG : null;
+
 // Run every writer's setup scene (file id ending in _init) once, silently,
 // so the setup never shows up as an event the player has to click.
 for (var sid in this.game.scenes) {
@@ -22,12 +29,17 @@ var clamp = function(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
 // Normal play advances one month per action. During a crisis (crisis = 1)
 // each action is one week; after the 4th week the month turns as usual.
 var month_turns = false;
+var congress_acted = false;
 if (!Q.crisis) {
     Q.week = 0;
 }
 if (Q.month_actions >= 1) {
     Q.month_actions = 0;
-    if (Q.crisis) {
+    if (Q.congress) {
+        // A congress fills its month: each action is one session, and the
+        // month turns when the closing event ends the congress.
+        congress_acted = true;
+    } else if (Q.crisis) {
         Q.crisis_time += 1;
         Q.week += 1;
         if (Q.week > 4) {
@@ -56,13 +68,15 @@ if (month_turns) {
         Q.advisor_action_timer -= 1;
     }
     Q.resources += Q.moscow_subsidy;
-    // Monthly drift. Placeholder balance values: tune these in playtesting.
-    // Militancy draws repression; repression slowly fades.
-    Q.repression += Q.militancy / 20 - 2;
-    // Repression thins out the districts.
-    if (Q.repression >= 60) {
-        for (var d of Q.districts) {
-            Q['district_' + d + '_members'] *= 0.98;
+    // Monthly drift. Militancy draws repression, and repression thins out
+    // the districts: both now happen district by district (sys_lib,
+    // districtMonthly), and the national meters are their summaries.
+    if (!sys) {
+        Q.repression += Q.militancy / 20 - 2;
+        if (Q.repression >= 60) {
+            for (var d of Q.districts) {
+                Q['district_' + d + '_members'] *= 0.98;
+            }
         }
     }
     // Inflation: slow until 1922, then runaway.
@@ -104,6 +118,13 @@ if (month_turns) {
             break;
         }
     }
+}
+
+// ---------------------------------------------------------------- systems
+// districts' life, the comrades, Moscow's Executive and its directives,
+// congress sessions and the ledger (see sys_lib)
+if (sys) {
+    sys.everyTurn(month_turns, congress_acted);
 }
 
 // ---------------------------------------------------------------- districts
@@ -211,8 +232,13 @@ Q.unity_display = Math.round(Q.unity);
 // 1921 writer's Jena congress switches back to KPD
 Q.party_name = (Q.vkpd_formed && Q.e21_party != 'KPD' && Q.year <= 1921) ? 'VKPD' : 'KPD';
 
+if (sys) {
+    sys.finishTurn(month_turns);
+}
+
 if (typeof document !== 'undefined') {
     document.body.classList.toggle('crisis-mode', !!Q.crisis);
+    document.body.classList.toggle('congress-mode', !!Q.congress);
 }
 
 // ---------------------------------------------------------------- routing
@@ -221,6 +247,14 @@ var scene = this.game.scenes['post_event.events_choice'];
 var choices = this._compileChoices(scene);
 if (choices && choices[0].title != "Continue...") {
     Q.has_event = 1;
+}
+// A congress whose own closing event cannot fire is closed by the generic one.
+if (!Q.has_event && Q.congress && Q.congress_closing) {
+    Q.congress_own_close = 0;
+    choices = this._compileChoices(scene);
+    if (choices && choices[0].title != "Continue...") {
+        Q.has_event = 1;
+    }
 }
 !}
 go-to: events_choice if has_event = 1; main if has_event = 0

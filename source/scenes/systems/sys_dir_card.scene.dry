@@ -1,0 +1,65 @@
+title: The Executive's Directive
+subtitle: Moscow is waiting for results.
+new-page: true
+view-if: crisis = 0 and congress = 0 and directive_active = 1 and sys_directive_timer <= 0
+on-arrival: {!
+Q.sys_directive_timer = 2;
+Q.month_actions += 1;
+Q.sys_outcome = 0;
+!}
+frequency: 250
+is-card: true
+tags: international
+
+= The Executive's Directive
+
+The directive from Moscow lies on the table of the Zentrale: *[+ directive_title +]*. [+ directive_from_name +] drafted it. [? if directive_deadline > 1 : Moscow expects results within [+ directive_deadline +] months. ?][? if directive_deadline <= 1 : Moscow expects results this month. ?]
+
+[? if directive_compliance >= 70 : The Executive should be satisfied with what has been done so far. ?][? if directive_compliance >= 35 and directive_compliance < 70 : Something has been done, not enough. ?][? if directive_compliance < 35 : Almost nothing has been done. ?] [? if directive_stance = 2 : We have already asked for more time once. ?]
+
+- @carry: Carry it out, whatever the districts say.
+- @delegation: Send a delegation to Moscow to argue.
+- @ignore: Let it lie.
+- @easy_discard
+
+@carry
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] Costs 1 fund. The directive is carried out in earnest; the districts resent the orders.
+choose-if: resources >= 1 and lock_moscow_orders < 2
+unavailable-subtitle: [? if lock_moscow_orders = 2 : The [+ leading_faction_adj +] line forbids taking orders from Moscow. ?][? if lock_moscow_orders < 2 : We have no funds. ?]
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+Q.resources -= 1;
+RG.comply(35);
+Q.unity -= 3;
+Q.independence -= 2;
+Q.lean_offensive += 1;
+!}
+
+Instructors from the Zentrale go out to the districts with the Executive's text in their pockets, and a list of what each district must do by when.
+
+@delegation
+subtitle: Buys time. If someone on the Executive likes us, he may meet us halfway.
+on-arrival: {!
+RG.stall(3);
+if (Q.ecci_friend_favour >= 60 && Math.random() < 0.6) {
+    Q.sys_outcome = 1;
+    RG.comply(15);
+} else {
+    Q.sys_outcome = 2;
+}
+!}
+
+Two members of the Zentrale take the train to Moscow by way of Riga. [? if sys_outcome = 1 : [+ ecci_friend_name +] receives them, listens, and gets the Executive to accept a German version of the directive. ?][? if sys_outcome = 2 : They wait a week in the Hotel Lux to be received, and come back with the same directive and a later date. ?]
+
+@ignore
+subtitle: Our independence grows. Moscow notices.
+on-arrival: {!
+Q.independence += 2;
+RG.ecci(Q.directive_from, -4);
+Q.luxemburgist_satisfaction += 2;
+!}
+
+The Zentrale has a German revolution to make. The directive can wait.

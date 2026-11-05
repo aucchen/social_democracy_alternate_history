@@ -1,0 +1,8 @@
+# a comrade's status, comrade_<id>: 0 outside, 1 free, 2 prison, 3 exile, 4 dead, 5 expelled
+
+(..0.5) not in the party
+(0.5..1.5) free
+(1.5..2.5) in prison
+(2.5..3.5) in exile
+(3.5..4.5) dead
+(4.5..) expelled

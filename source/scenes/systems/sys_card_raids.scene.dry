@@ -1,0 +1,60 @@
+title: The Police Lists
+subtitle: One district is under heavy pressure.
+new-page: true
+view-if: crisis = 0 and congress = 0 and sys_raids_timer <= 0 and repression >= 25
+on-arrival: {!
+Q.sys_raids_timer = 4;
+Q.month_actions += 1;
+RG.target('repression');
+Q.sys_outcome = 0;
+!}
+frequency: 150
+is-card: true
+tags: germany
+
+= The Police Lists
+
+The political police in **[+ sys_target_name +]** have a list. Our district secretary has seen it, thanks to a clerk who used to be in the Spartacus League: names, addresses, places of work. [? if sys_target_repression >= 60 : Half the district committee is already in prison or in hiding. ?][? if sys_target_repression < 60 : The arrests have not started yet. ?]
+
+- @underground: Take the district organisation underground.
+- @protest: Call a protest strike against the raids.
+- @lawyers: Send the party's lawyers and the prisoners' aid.
+- @easy_discard
+
+@underground
+subtitle: The police lose track of us. The district loses some members on the way.
+on-arrival: {!
+RG.district(Q.sys_target, {repression: -12, members: -0.05, loyalty: 4});
+Q.lean_offensive += 1;
+!}
+
+The district committee stops meeting in the party office and starts meeting in kitchens, never the same one twice. Members who do not want that life drift away.
+
+@protest
+subtitle: If the workers come out, the police back off. If they do not, the police know they can go further.
+on-arrival: {!
+if (Q.sys_target_militancy >= 50 || Math.random() < 0.3) {
+    Q.sys_outcome = 1;
+    RG.district(Q.sys_target, {repression: -6, militancy: 4});
+    Q.worker_support += 1;
+} else {
+    Q.sys_outcome = 2;
+    RG.district(Q.sys_target, {repression: 6, members: -0.03});
+}
+Q.offensive_satisfaction += 2;
+!}
+
+[? if sys_outcome = 1 : The works stop for an afternoon. The police president gives an interview about his respect for the right to organise. ?][? if sys_outcome = 2 : A few hundred come out, and the police photograph every one of them. ?]
+
+@lawyers
+subtitle: Costs 1 fund. The courts slow the police down.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+RG.district(Q.sys_target, {repression: -8});
+Q.unionist_satisfaction += 2;
+Q.lean_unionist += 1;
+!}
+
+Our lawyers file complaints for every search without a warrant. The judges are no friends of ours, but even they do not like the police doing their work for them.

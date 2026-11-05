@@ -1,0 +1,78 @@
+title: A Comrade in Prison
+subtitle: One of the party's leaders is behind bars.
+new-page: true
+view-if: crisis = 0 and congress = 0 and sys_prisoners_timer <= 0 and comrades_in_prison >= 1
+on-arrival: {!
+Q.sys_prisoners_timer = 3;
+Q.month_actions += 1;
+var pr = Q.comrades.filter(function (c) { return c.status == 'prison'; });
+var c = pr[Math.floor(Math.random() * pr.length)];
+Q.sys_prisoner = c.id;
+Q.sys_prisoner_name = c.name;
+Q.sys_prisoner_role = c.role;
+Q.sys_outcome = 0;
+!}
+frequency: 150
+is-card: true
+tags: movement
+
+= A Comrade in Prison
+
+**[+ sys_prisoner_name +]** ([+ sys_prisoner_role +]) is in prison. The letters that get out are cheerful and heavily censored. The party needs [+ sys_prisoner_name +] outside, and so does the family.
+
+- @campaign: Campaign for the release.
+- @escape: Organise an escape.
+- @exchange: Ask Moscow to arrange an exchange.
+- @easy_discard
+
+@campaign
+subtitle: Worker support grows. The campaign may win the release.
+on-arrival: {!
+Q.worker_support += 2;
+Q.unionist_satisfaction += 1;
+if (Math.random() < 0.4 + Q.worker_support / 200) {
+    Q.sys_outcome = 1;
+    RG.free(Q.sys_prisoner);
+} else {
+    Q.sys_outcome = 2;
+}
+!}
+
+Meetings in every district, petitions in the factories, questions in parliament. [? if sys_outcome = 1 : The court finds a reason to release [+ sys_prisoner_name +] early. ?][? if sys_outcome = 2 : The prison stays shut, but the whole country knows the name. ?]
+
+@escape
+subtitle: Costs 1 fund. Bold, and the police will take revenge if it fails.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+if (Math.random() < 0.6) {
+    Q.sys_outcome = 1;
+    RG.free(Q.sys_prisoner, {news: Q.sys_prisoner_name + ' escapes from prison'});
+    Q.repression += 3;
+    Q.offensive_satisfaction += 3;
+} else {
+    Q.sys_outcome = 2;
+    Q.repression += 4;
+    var c = RG.comrade(Q.sys_prisoner);
+    if (c && c.until > 0) { c.until += 3; }
+}
+!}
+
+[? if sys_outcome = 1 : A sympathetic warder, a forged release order and a car waiting at the corner: [+ sys_prisoner_name +] is out, and underground. ?][? if sys_outcome = 2 : The warder we trusted talks. The attempt fails, and the sentence is longer for it. ?]
+
+@exchange
+subtitle: Moscow can trade prisoners with Berlin. The comrade goes into exile, and we owe Moscow.
+view-if: comintern_member = 1
+on-arrival: {!
+Q.independence -= 5;
+RG.ecci('all', -2);
+if (Math.random() < 0.7) {
+    Q.sys_outcome = 1;
+    RG.exile(Q.sys_prisoner, {news: Q.sys_prisoner_name + ' exchanged and sent to Moscow'});
+} else {
+    Q.sys_outcome = 2;
+}
+!}
+
+[? if sys_outcome = 1 : Soviet diplomats trade [+ sys_prisoner_name +] for two German officers held in Russia. The comrade is free, in Moscow, and a long way from the German party. ?][? if sys_outcome = 2 : Berlin refuses the exchange. ?]

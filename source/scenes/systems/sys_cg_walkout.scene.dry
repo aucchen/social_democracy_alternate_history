@@ -1,0 +1,68 @@
+title: Threats
+subtitle: There are other ways to win a vote.
+view-if: congress = 1 and congress_closing = 0 and congress_used_walkout = 0
+on-arrival: {!
+Q.month_actions += 1;
+Q.congress_used_walkout = 1;
+Q.sys_outcome = 0;
+!}
+frequency: 100
+is-card: true
+new-page: true
+tags: congress
+
+= Threats
+
+The [+ congress_rival_name +] are counting on the delegates who would rather lose a vote than split the party. That works both ways. A threat, made in time, can be worth a dozen speeches. A threat that fails has to be carried out, or swallowed.
+
+- @walkout: Threaten that our delegates will walk out.
+- @resign: Threaten to resign the Zentrale.
+- @expel: Warn that those who defy the congress will be expelled.
+- @none: No threats. Let the congress decide.
+
+@walkout
+subtitle: Many delegates will not risk a split. If we lose anyway, the party will pay for it.
+on-arrival: {!
+Q.congress_walkout = 1;
+RG.congress.sway(0.07 + Math.random() * 0.03);
+RG.congress.bitter(4);
+!}
+
+We let it be known that if the congress votes against us, our delegates will leave the hall and the party with it. [? if congress_last_moved > 0 : [+ congress_last_moved +] delegates decide that the party matters more than the motion. ?]
+
+@resign
+subtitle: The loyal districts rally round the Zentrale. Costs a little Unity.
+view-if: congress_backing_is_lead = 1
+on-arrival: {!
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_loyalty'] >= 50) {
+        RG.congress.convert(d, 0.15);
+    }
+}
+RG.congress.sway(0.02);
+Q.unity -= 3;
+!}
+
+The Zentrale will not carry out a policy it believes is wrong: if the motion falls, the Zentrale goes. The districts that trust it close ranks. Our side now has [+ congress_votes_for +]% of the hall.
+
+@expel
+subtitle: Frightens the weaker delegates. The rivals will hate us for it.
+on-arrival: {!
+RG.congress.sway(0.05);
+RG.congress.bitter(6);
+if (Q.congress_rival && Q[Q.congress_rival + '_satisfaction'] !== undefined) {
+    Q[Q.congress_rival + '_satisfaction'] -= 8;
+}
+Q.unity -= 4;
+!}
+
+The Zentrale reminds the congress what discipline means: the minority submits, or leaves. [? if congress_last_moved > 0 : [+ congress_last_moved +] delegates decide not to be the minority. ?]
+
+@none
+subtitle: Calms the hall. Raises Unity a little.
+on-arrival: {!
+RG.congress.bitter(-2);
+Q.unity += 2;
+!}
+
+We make no threats. Several delegates of the [+ congress_rival_name +] say, in the corridor, that this is the first decent thing the Zentrale has done all week.

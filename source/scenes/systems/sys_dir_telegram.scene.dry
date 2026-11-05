@@ -1,0 +1,67 @@
+title: A Telegram from Moscow
+subtitle: The Executive has issued a directive.
+new-page: true
+tags: event
+view-if: directive_new = 1 and directive_active = 1 and crisis = 0 and congress = 0
+priority: 4
+on-arrival: {!
+Q.directive_new = 0;
+!}
+
+= A Telegram from Moscow
+
+The telegram reaches the Zentrale in the Executive's cipher, over the name of **[+ directive_from_name +]**. Decoded, it reads:
+
+> *[+ directive_text +]*
+
+The Executive expects a report within [+ directive_deadline +] months. [? if comintern_rep : [+ comintern_rep +] will be watching how we answer. ?][? if moscow_favour < 35 : Nobody in Moscow is in a mood to be patient with the German section. ?][? if moscow_favour >= 65 : The tone is friendly. The instructions are not. ?]
+
+- @accept: Accept the directive, and say so in the Rote Fahne.
+- @clarify: Ask the Executive what exactly it means.
+- @refuse: Refuse: the German party decides its own tactics.
+- @file: Acknowledge it, and say nothing more.
+
+@accept
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] A good start in Moscow's eyes. The Spartacists dislike it.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+RG.comply(25);
+Q.independence -= 3;
+Q.offensive_satisfaction += 3;
+Q.luxemburgist_satisfaction -= 3;
+Q.lean_offensive += 1;
+!}
+
+The Rote Fahne prints the Executive's instruction on its front page, with a statement from the Zentrale welcoming it. Now it has to be done.
+
+@clarify
+subtitle: Buys a little time. Moscow is irritated.
+on-arrival: {!
+RG.stall(2);
+!}
+
+We cable back with questions: which organisations, which methods, which month. The answer will take weeks, and [+ directive_from_name +] will not enjoy writing it.
+
+@refuse
+subtitle: Our independence grows. Moscow will answer, and the Left will be angry.
+on-arrival: {!
+RG.defy();
+Q.luxemburgist_satisfaction += 6;
+Q.offensive_satisfaction -= 6;
+Q.lean_luxemburgist += 2;
+!}
+
+The Zentrale replies that it has read the Executive's views with interest, and that the German party will decide German tactics. It is the kind of letter that is read aloud in Moscow, slowly.
+
+@file
+subtitle: Nothing happens yet. The time Moscow gave us is running.
+on-arrival: {!
+Q.directive_stance = 0;
+!}
+
+The telegram goes into the file. Everybody in the Zentrale has read it, and nobody mentions it at the next meeting.

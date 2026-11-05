@@ -1,0 +1,47 @@
+title: A Friend on the Executive
+subtitle: Not everyone in Moscow agrees with the directive.
+new-page: true
+view-if: crisis = 0 and congress = 0 and directive_active = 1 and sys_appeal_timer <= 0 and ecci_friend_favour >= 60 and ecci_friend_is_author = 0
+on-arrival: {!
+Q.sys_appeal_timer = 4;
+Q.month_actions += 1;
+Q.sys_outcome = 0;
+!}
+frequency: 150
+is-card: true
+tags: international
+
+= A Friend on the Executive
+
+A private letter has come from Moscow, from **[+ ecci_friend_name +]**. He does not say so in as many words, but he thinks [+ directive_from_name +]'s directive on *[+ directive_title +]* is a mistake, and he is willing to say so in the Executive, for a price he does not need to name.
+
+- @withdraw: Ask him to have the directive withdrawn.
+- @soften: Ask him to have it softened.
+- @easy_discard
+
+@withdraw
+subtitle: It may work. Either way, we will owe him, and [+ directive_from_name +] will know.
+on-arrival: {!
+var p = 0.45 + (Q.ecci_friend_favour - 60) / 80;
+RG.ecci(Q.directive_from, -6);
+if (Math.random() < p) {
+    Q.sys_outcome = 1;
+    RG.ecci(Q.ecci_friend, -12);
+    RG.directiveResolve('withdrawn');
+    RG.news('The Executive withdraws its directive to the German section');
+} else {
+    Q.sys_outcome = 2;
+    RG.ecci(Q.ecci_friend, -5);
+}
+!}
+
+[? if sys_outcome = 1 : [+ ecci_friend_name +] raises the matter at the Executive, and wins. The directive is withdrawn "in view of the special conditions in Germany". ?][? if sys_outcome = 2 : [+ ecci_friend_name +] raises the matter and is outvoted. The directive stands. ?]
+
+@soften
+subtitle: The directive becomes easier to satisfy. He spends a little of his goodwill.
+on-arrival: {!
+RG.ecci(Q.ecci_friend, -5);
+RG.comply(20);
+!}
+
+The Executive issues a "clarification". Read carefully, it asks for rather less than the directive did.

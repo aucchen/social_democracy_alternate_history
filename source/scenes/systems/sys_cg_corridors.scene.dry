@@ -1,0 +1,61 @@
+title: The Corridors
+subtitle: Most votes are won outside the hall.
+view-if: congress = 1 and congress_closing = 0
+on-arrival: {!
+Q.month_actions += 1;
+Q.sys_outcome = 0;
+!}
+frequency: 100
+is-card: true
+new-page: true
+tags: congress
+
+= The Corridors
+
+In the corridors, the cloakroom and the beer hall next door, the delegates are doing what delegates do: counting each other. Our whips have a list of names with a question mark beside them.
+
+- @travel: Pay the fares of the poorer delegations.
+- @rumours: Spread what we know about the opposition's leaders.
+- @dinner: Dine with the waverers.
+
+@travel
+subtitle: Costs 1 fund. More delegates from the districts that trust us.
+choose-if: resources >= 1
+unavailable-subtitle: We have no funds.
+on-arrival: {!
+Q.resources -= 1;
+var moved = 0;
+for (var d of Q.districts) {
+    if (Q['district_' + d + '_loyalty'] >= 50) {
+        moved += RG.congress.convert(d, 0.15);
+    }
+}
+RG.congress.tally();
+Q.congress_last_moved = moved;
+!}
+
+Delegates who could not afford the train arrive on the night express, with their fares paid by the Zentrale. [? if congress_last_moved > 0 : [+ congress_last_moved +] more votes for us. ?][? if congress_last_moved = 0 : They are welcome, though they do not change much. ?]
+
+@rumours
+subtitle: Works on some delegates and disgusts others.
+on-arrival: {!
+RG.congress.sway(0.05);
+RG.congress.bitter(4);
+if (Math.random() < 0.3) {
+    Q.sys_outcome = 2;
+    RG.congress.lose(0.03);
+} else {
+    Q.sys_outcome = 1;
+}
+!}
+
+Stories go round about who drank with whom in 1918, and who signed what for the police. [? if sys_outcome = 1 : [+ congress_last_moved +] delegates decide they cannot vote for such people. ?][? if sys_outcome = 2 : One of the stories turns out to be false, and everyone knows who spread it. ?]
+
+@dinner
+subtitle: A few votes, safely.
+on-arrival: {!
+RG.congress.sway(0.025);
+Q.unity += 1;
+!}
+
+Over sausages and beer, the waverers explain their doubts and we listen. [? if congress_last_moved > 0 : [+ congress_last_moved +] of them leave the table on our side. ?][? if congress_last_moved = 0 : They enjoy the dinner. ?]

@@ -1,7 +1,7 @@
 title: Next month
 is-hand: true
 on-arrival: {!
-Q.turn_label = Q.crisis ? 'week' : 'month';
+Q.turn_label = Q.congress ? 'session' : (Q.crisis ? 'week' : 'month');
 if (Q.advisor_action_timer <= 0) {
     Q.pinnedCardsDescription = 'Advisors - an action is available.';
 } else if (Q.advisor_action_timer == 1) {
@@ -16,11 +16,16 @@ max-cards: 3
 
 [? if crisis : **[+ crisis_name +].** Each action now takes a week. [+ crisis_goal +] ?]
 
+[? if congress : **[+ congress_name +]**, session [+ congress_session +] of [+ congress_sessions +]. At stake: [+ congress_stake +]. We stand with the [+ congress_backing_name +]. ?][? if congress and congress_ahead = 1 : Our side has [+ congress_votes_for +]% of the delegates. ?][? if congress and congress_ahead = 0 : The [+ congress_leader_name +] lead with [+ congress_leader_votes +]% of the delegates; our side has [+ congress_votes_for +]%. ?][? if congress and congress_close_call = 1 : It is too close to call. ?]
+
+[? if directive_active and congress = 0 and directive_deadline > 1 : Moscow's directive, *[+ directive_title +]*: [+ directive_deadline +] months left. ?][? if directive_active and congress = 0 and directive_deadline <= 1 : Moscow's directive, *[+ directive_title +]*: due this month. ?]
+
 [? if faction_shift_note : [+ faction_shift_note +] ?]
 
 Party line: **[+ leading_faction_name +]**[? if junior_faction : , with the [+ junior_faction_name +] as junior partner?]. Members in loyal districts: [+ loyal_share_display +]%.
 
 - @crisis_deck
+- @congress_deck
 - @party
 - @movement
 - @germany
@@ -30,34 +35,41 @@ Party line: **[+ leading_faction_name +]**[? if junior_faction : , with the [+ j
 @crisis_deck
 title: The Crisis
 is-deck: true
-view-if: crisis = 1
+view-if: crisis = 1 and congress = 0
 
 - #crisis
+
+@congress_deck
+title: The Congress
+is-deck: true
+view-if: congress = 1
+
+- #congress
 
 @party
 title: Party Affairs
 is-deck: true
-view-if: crisis = 0
+view-if: crisis = 0 and congress = 0
 
 - #party_affairs
 
 @movement
 title: The Movement
 is-deck: true
-view-if: crisis = 0
+view-if: crisis = 0 and congress = 0
 
 - #movement
 
 @germany
 title: Germany
 is-deck: true
-view-if: crisis = 0
+view-if: crisis = 0 and congress = 0
 
 - #germany
 
 @international
 title: The International
 is-deck: true
-view-if: crisis = 0
+view-if: crisis = 0 and congress = 0
 
 - #international

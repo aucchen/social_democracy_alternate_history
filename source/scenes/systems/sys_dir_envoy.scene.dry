@@ -1,0 +1,59 @@
+title: The Emissary Asks Questions
+subtitle: Moscow wants to know what has been done.
+new-page: true
+tags: event
+view-if: directive_active = 1 and directive_envoy_seen = 0 and directive_deadline <= 1 and directive_compliance < 50 and crisis = 0 and congress = 0 and comintern_member = 1
+priority: 3
+on-arrival: {!
+Q.directive_envoy_seen = 1;
+Q.sys_outcome = 0;
+!}
+
+= The Emissary Asks Questions
+
+[? if comintern_rep : [+ comintern_rep +] ?][? if comintern_rep = 0 : An emissary of the Executive, travelling as a fur trader from Reval, ?] has asked to attend the next meeting of the Zentrale. He has one question, and he asks it twice: what has the German section done about *[+ directive_title +]*?
+
+The honest answer is: not much. The deadline is close.
+
+- @show: Show him what we have done.
+- @promise: Promise action before the deadline, and order it tonight.
+- @door: Show him the door.
+
+@show
+subtitle: Works if there is something to show.
+on-arrival: {!
+if (Q.directive_compliance >= 25) {
+    Q.sys_outcome = 1;
+    RG.comply(15);
+} else {
+    Q.sys_outcome = 2;
+    RG.ecci(Q.directive_from, -3);
+}
+!}
+
+[? if sys_outcome = 1 : We walk him through the reports from the districts. He writes a great deal down, and his telegram that evening is less severe than it might have been. ?][? if sys_outcome = 2 : There is very little to show, and he can count. ?]
+
+@promise
+subtitle: [? if lock_moscow_orders = 1 : Against the party line: costs Unity. ?] The districts get urgent orders. Moscow sees effort.
+choose-if: lock_moscow_orders < 2
+unavailable-subtitle: The [+ leading_faction_adj +] line forbids taking orders from Moscow.
+on-arrival: {!
+if (Q.lock_moscow_orders == 1) {
+    Q.unity -= 10;
+    Q[Q.leading_faction + '_satisfaction'] -= 10;
+}
+RG.comply(20);
+Q.unity -= 2;
+!}
+
+Circulars go out to every district that night, marked urgent. The district secretaries grumble that the Zentrale has discovered the directive a week before it is due.
+
+@door
+subtitle: Our independence grows. Moscow will hear exactly how it was done.
+on-arrival: {!
+Q.independence += 4;
+RG.ecci(Q.directive_from, -8);
+Q.luxemburgist_satisfaction += 3;
+!}
+
+The Zentrale thanks the emissary for his interest and asks him to leave the meeting, since he is not a member of it. He leaves.

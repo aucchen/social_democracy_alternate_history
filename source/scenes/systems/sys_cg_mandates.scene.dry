@@ -1,0 +1,69 @@
+title: The Mandate Commission
+subtitle: Who has the right to vote here?
+view-if: congress = 1 and congress_closing = 0 and congress_used_mandates = 0
+on-arrival: {!
+Q.month_actions += 1;
+Q.congress_used_mandates = 1;
+RG.congress.target();
+!}
+frequency: 100
+is-card: true
+new-page: true
+tags: congress
+
+= The Mandate Commission
+
+Before any vote, the mandate commission reports on the delegates' credentials. [? if congress_mandates_code = 1 : Each district sends delegates in proportion to its members, so the big districts carry the congress. ?][? if congress_mandates_code = 2 : The small districts have as much weight as the big ones. ?][? if congress_mandates_code = 3 : The members of the Zentrale sit with full votes. ?] The commission is chaired by one of ours. It can be persuaded to find irregularities.
+
+The [+ congress_target_name +] delegation, the strongest against us, was elected at meetings nobody from the Zentrale attended.
+
+- @members: Count every delegation by its membership.
+- @districts: Give the small districts an equal voice.
+- @zentrale: Seat the members of the Zentrale with a vote.
+- @challenge: Challenge the mandates from [+ congress_target_name +].
+
+@members
+subtitle: The big districts gain weight. Fair, and everyone knows it.
+view-if: congress_mandates_code != 1
+on-arrival: {!
+RG.congress.setMandates('members');
+RG.congress.bitter(1);
+!}
+
+The commission recounts: one delegate for so many paid-up members, everywhere. Our side now has [+ congress_votes_for +]% of the hall.
+
+@districts
+subtitle: The small districts gain weight. The big ones protest.
+view-if: congress_mandates_code != 2
+on-arrival: {!
+RG.congress.setMandates('districts');
+RG.congress.bitter(2);
+!}
+
+The commission rules that a district is a district, large or small. The big delegations walk out for an hour and come back. Our side now has [+ congress_votes_for +]% of the hall.
+
+@zentrale
+subtitle: Helps whoever holds the Zentrale. The congress will call it a fix.
+view-if: congress_mandates_code != 3
+on-arrival: {!
+RG.congress.setMandates('zentrale');
+RG.congress.bitter(3);
+Q.unity -= 3;
+!}
+
+The members of the Zentrale take their seats among the delegates, with votes. It is in the statutes, the commission says, more or less. Our side now has [+ congress_votes_for +]% of the hall.
+
+@challenge
+subtitle: Most of their delegates lose their votes. Their current will be furious.
+on-arrival: {!
+var n = RG.congress.annul(Q.congress_target, Q.congress_target_faction, 0.6);
+Q.congress_last_moved = n;
+RG.congress.bitter(5);
+if (Q.congress_target_faction && Q[Q.congress_target_faction + '_satisfaction'] !== undefined) {
+    Q[Q.congress_target_faction + '_satisfaction'] -= 10;
+}
+Q.unity -= 4;
+RG.district(Q.congress_target, {loyalty: -10});
+!}
+
+The commission finds that the [+ congress_target_name +] meetings were not properly called. [+ congress_last_moved +] delegates of the [+ congress_target_faction_name +] lose their votes and watch from the gallery. Our side now has [+ congress_votes_for +]% of the hall.
