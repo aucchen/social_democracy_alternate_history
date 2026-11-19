@@ -29,7 +29,7 @@ if (Q.ideology && Q.ideology != "left") {
 go-to: changed if changed = 1
 on-departure: ideology = "left"; left_strength += 10; communist_coalition += 1; left_dissent -= 5; z_relation -= 3; dvp_relation -= 5; nationalization_support += 1; kpd_relation += 3
 
-The radical left of the party supports a course of class struggle, and potentially a reconcilliation with the Communists.
+The radical left of the party supports a course of class struggle, and potentially a reconciliation with the Communists.
 
 @centrist
 on-arrival: {!
@@ -51,7 +51,7 @@ if (Q.ideology && Q.ideology != "labor") {
 go-to: changed if changed = 1
 on-departure: ideology = "labor"; labor_strength += 10; wtb_support += 1; labor_dissent -= 5; kpd_relation -= 3
 
-The labor wing of the party supports continued particpation in government in order to provide benefits to the workers, and the creation of public works programs for employment.
+The labor wing of the party supports continued participation in government in order to provide benefits to the workers, and the creation of public works programs for employment.
 
 @reform
 on-arrival: {!
