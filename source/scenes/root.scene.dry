@@ -222,6 +222,71 @@ Q.rural = 25; // agriculture and forestry employment... but many of those are pr
 Q.unemployed = 8.6;
 Q.catholics = 30;
 
+// State demographic proportions
+// We assume that unemployed is the same for every state (unrealistic but w/e)
+// Based on https://www.icpsr.umich.edu/web/ICPSR/studies/42 and extrapolating from state election results (and a lot of fudging tbh)
+// I wasn't sure how to count "trade and transportation" from ICPSR since that was a really vague category... I split it among workers, old middle, and new middle.
+Q.prussia_voters = {
+workers: 48,
+old_middle: 13,
+new_middle: 13,
+rural: 22,
+catholics: 33
+};
+Q.bavaria_voters = {
+workers: 37,
+old_middle: 13,
+new_middle: 13,
+rural: 35,
+catholics: 70
+};
+Q.saxony_voters = {
+workers: 61,
+old_middle: 12,
+new_middle: 12,
+rural: 9,
+catholics: 4
+};
+Q.thuringia_voters = {
+workers: 53,
+old_middle: 9,
+new_middle: 10,
+rural: 21,
+catholics: 3
+};
+Q.hesse_voters = {
+workers: 46,
+old_middle: 14,
+new_middle: 14,
+rural: 24,
+catholics: 31
+};
+Q.baden_voters = {
+workers: 44,
+old_middle: 13,
+new_middle: 13,
+rural: 28,
+catholics: 58
+};
+Q.wurttemberg_voters = {
+workers: 43,
+old_middle: 10,
+new_middle: 11,
+rural: 33,
+catholics: 33
+};
+Q.hamburg_voters = {
+workers: 43,
+new_middle: 20,
+old_middle: 25,
+rural: 2,
+catholics: 5
+};
+Q.bremen_voters = {
+};
+Q.brunswick_voters = {
+};
+
 // unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
 
 // income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year; 1931 = 1440 Reichsmarks/year; 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
